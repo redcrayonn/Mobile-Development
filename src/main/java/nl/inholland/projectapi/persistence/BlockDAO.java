@@ -14,9 +14,7 @@ import nl.inholland.projectapi.model.Block;
  */
 public class BlockDAO extends BaseDAO{
     public Block getBlockById(int id) {
-        Block block =  MockDB.getBlockById(id);
-        System.out.println(block);
-        return block;
+        return MockDB.getBlockById(id);
     }
     
     public List<Block> getAllBlocks() {
