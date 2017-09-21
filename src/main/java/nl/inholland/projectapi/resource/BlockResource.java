@@ -30,56 +30,55 @@ import nl.inholland.projectapi.service.BlockService;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlockResource extends BaseResource {
+
     private HttpServletResponse response;
     private final BlockService blockService;
     private final BlockPresenter blockPresenter;
     private final ErrorPresenter errorPresenter;
-    
 
-    
     @Inject
     public BlockResource(BlockService blockService, BlockPresenter blockPresenter, ErrorPresenter errorPresenter) {
         this.blockService = blockService;
         this.blockPresenter = blockPresenter;
         this.errorPresenter = errorPresenter;
     }
-    
+
     @GET
     @Produces("application/json")
     public Response getAll() {
         List<Block> blocks = blockService.getAllBlocks();
-        if(blocks.isEmpty())
-        {
+        if (blocks.isEmpty()) {
             ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
             String errorView = errorPresenter.present(error);
-            
+
             return Response.status(Response.Status.NOT_FOUND.getStatusCode()).entity(errorView).build();
         }
         List<BlockView> blockView = blockPresenter.present(blocks);
-        return Response.ok(blockView, MediaType.APPLICATION_JSON).build();      
+        return Response.ok(blockView, MediaType.APPLICATION_JSON).build();
     }
-    
+
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
     public Response getById(@PathParam("blockId") String id) {
         int blockId = 0;
-        try{
+        
+        try {
             blockId = Integer.parseInt(id);
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             ErrorResponse error = new ErrorResponse(Response.Status.BAD_REQUEST.getStatusCode(), Response.Status.BAD_REQUEST.getReasonPhrase(), "Id moet int zijn");
             String errorView = errorPresenter.present(error);
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).entity(errorView).build();
         }
+        
         Block block = blockService.getBlockById(blockId);
-        if(block == null)
-        {
+        if (block == null) {
             ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
             String errorView = errorPresenter.present(error);
-            
+
             return Response.status(Response.Status.NOT_FOUND.getStatusCode()).entity(errorView).build();
         }
+  
         String blockView = blockPresenter.present(block);
         return Response.ok(blockView, MediaType.APPLICATION_JSON).build();
     }
