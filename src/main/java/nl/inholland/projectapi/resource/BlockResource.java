@@ -5,6 +5,7 @@
  */
 package nl.inholland.projectapi.resource;
 
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -46,8 +47,16 @@ public class BlockResource extends BaseResource {
     @GET
     @Produces("application/json")
     public Response getAll() {
-        //TODO
-        return null;        
+        List<Block> blocks = blockService.getAllBlocks();
+        if(blocks.isEmpty())
+        {
+            ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
+            String errorView = errorPresenter.present(error);
+            
+            return Response.status(Response.Status.NOT_FOUND.getStatusCode()).entity(errorView).build();
+        }
+        List<BlockView> blockView = blockPresenter.present(blocks);
+        return Response.ok(blockView, MediaType.APPLICATION_JSON).build();      
     }
     
     @GET
