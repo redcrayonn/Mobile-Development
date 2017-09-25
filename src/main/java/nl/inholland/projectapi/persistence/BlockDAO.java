@@ -6,22 +6,34 @@
 package nl.inholland.projectapi.persistence;
 
 import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.List;
 import nl.inholland.projectapi.model.BuildingBlock;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author student
  */
 public class BlockDAO extends BaseDAO{
-    public BuildingBlock getBlockById(int id) {
-        return null;
+    
+    private MongoDB mongo = MongoDB.getInstance();
+    
+    public BuildingBlock getBlockById(String id) 
+    {
+        try
+        {
+            return mongo.getBuildingBlocks().find(eq("_id", new ObjectId(id))).first();           
+        }
+        catch(IllegalArgumentException ex)
+        {
+            return null;
+        }
     }
     
     public List<BuildingBlock> getAllBlocks() {
         List<BuildingBlock> blocks = new ArrayList<>();
-        MongoDB mongo = MongoDB.getInstance();
         MongoCursor<BuildingBlock> cursor = mongo.getBuildingBlocks().find().iterator();
         while(cursor.hasNext())
         {

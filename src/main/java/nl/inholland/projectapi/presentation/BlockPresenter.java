@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.model.BlockView;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -17,9 +18,10 @@ import nl.inholland.projectapi.presentation.model.BlockView;
 public class BlockPresenter extends BasePresenter {
     public String present(BuildingBlock block) {
         BlockView view = new BlockView();
-        
+        view.id = block.getId().toHexString();
         view.name = block.getName();
         view.description = block.getDescription();
+        view.activities = block.getActivities();
         return super.toJson(view);
     }
     
@@ -28,7 +30,7 @@ public class BlockPresenter extends BasePresenter {
         
         for(BuildingBlock block : blocks) {
             BlockView view = new BlockView();
-            
+            view.id = block.getId().toHexString();
             view.name = block.getName();
             view.description = block.getDescription();
             view.activities = block.getActivities();

@@ -1,73 +1,91 @@
 package nl.inholland.projectapi.persistence;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Properties;
 import javax.inject.Singleton;
-import nl.inholland.projectapi.model.Appointment;
-import nl.inholland.projectapi.model.Block;
+import nl.inholland.projectapi.model.BuildingBlock;
+import nl.inholland.projectapi.model.Caregiver;
+import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.Family;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 
 @Singleton
-public class MockDB
+public class MongoDB
 {
+    private final MongoCollection<BuildingBlock> buildingBlocks;
+    private final MongoCollection<Caregiver> caregivers;
+    private final MongoCollection<Client> clients;
+    private final MongoCollection<Family> family;
+    private InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
     
-    public final static Map<Integer, Block> blocks = new HashMap<>();
-    private static final Map<Integer, Appointment> appointments = new HashMap<>();
-    
-    public static void init()
+    private static MongoDB instance = null;
+    private MongoDB()
     {
-        addBlock(1, "surpal", "surpaaaal", "http://google.nl/logo");
-        addBlock(2, "lijstje", "blokkie","http://bla.nl");
+        String user = null;
+        String db = null;
+        char[] password = null;
         
-        appointments.put(1, new Appointment(1,"10-10-2017","Dinner with myself"));
-        appointments.put(2, new Appointment(2,"11-10-2017","Play Project Cars with my imaginary friend"));
-        appointments.put(3, new Appointment(3,"12-10-2017","Make Japanese Ramen"));
-    }
-
-   
-    private static void addBlock(int id, String name, String description, String imageURL) {
-        Block block = new Block();
-        block.setId(id);
-        block.setName(name);
-        block.setDescription(description);
-        block.setImageURL(imageURL);
+        Properties prop = new Properties();
+        try
+        {
+            if(input != null)
+            {
+                prop.load(input);
+            } 
+            user = prop.getProperty("USER");
+            db = prop.getProperty("DB");
+            password = prop.getProperty("PASSWORD").toCharArray();
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }        
         
-        blocks.put(id, block);
+        CodecRegistry codecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(), fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+      
+        MongoCredential credential = MongoCredential.createScramSha1Credential(user, db, password);
+        MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
+        
+        MongoClient mongoClient = new MongoClient(new ServerAddress("imready.ml", 27017), Arrays.asList(credential), options);
+        MongoDatabase database = mongoClient.getDatabase("imready");     
+        
+        buildingBlocks = database.getCollection("buildingBlocks", BuildingBlock.class);
+        caregivers = database.getCollection("caregivers", Caregiver.class);
+        clients = database.getCollection("clients", Client.class);
+        family = database.getCollection("family", Family.class);
     }
-    
-    public static List<Block> getAllBlocks() {
-        return new ArrayList<>(blocks.values());
-    }
-    
-    public static Block getBlockById(int id) {
-        for (Block block : blocks.values()) {
-            
-            if(block.getId() == id) {
-                return block;
-            }
-        }   
-        return null;
-    }
-
-    public static Appointment getAppointmentById(int id) {
-
-        for (Appointment appointment : appointments.values()) {
-
-            if (appointment.getId() != id) {
-                continue;
-            }
-            return appointment;
+    public static MongoDB getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new MongoDB();
         }
-        return null;
+        return instance;
+    }
+    public MongoCollection<BuildingBlock> getBuildingBlocks()
+    {
+        return buildingBlocks;
+    }
+    public MongoCollection<Caregiver> getCaregivers() {
+        return caregivers;
     }
 
-    public static List<Appointment> getAllAppointments() {
-        if (!appointments.isEmpty()) {
-            return new ArrayList<>(appointments.values());
-        }
-        return Collections.emptyList();
+    public MongoCollection<Client> getClients() {
+        return clients;
+    }
+
+    public MongoCollection<Family> getFamily() {
+        return family;
     }
 }

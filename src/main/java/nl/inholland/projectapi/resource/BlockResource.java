@@ -60,18 +60,8 @@ public class BlockResource extends BaseResource {
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
-    public Response getById(@PathParam("blockId") String id) {
-        int blockId = 0;
-        
-        try {
-            blockId = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            ErrorResponse error = new ErrorResponse(Response.Status.BAD_REQUEST.getStatusCode(), Response.Status.BAD_REQUEST.getReasonPhrase(), "Id moet int zijn");
-            String errorView = errorPresenter.present(error);
-            return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).entity(errorView).build();
-        }
-        
-        BuildingBlock block = blockService.getBlockById(blockId);
+    public Response getById(@PathParam("blockId") String id) {       
+        BuildingBlock block = blockService.getBlockById(id);
         if (block == null) {
             ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
             String errorView = errorPresenter.present(error);

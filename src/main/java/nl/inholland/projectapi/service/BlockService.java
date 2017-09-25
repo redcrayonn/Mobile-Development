@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.persistence.BlockDAO;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -26,7 +27,7 @@ public class BlockService extends BaseService {
         return dao.getAllBlocks();
     }
     
-    public BuildingBlock getBlockById(int id) {
+    public BuildingBlock getBlockById(String id) {
         return dao.getBlockById(id);
     }
 }
