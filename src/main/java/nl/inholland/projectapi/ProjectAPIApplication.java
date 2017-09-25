@@ -4,7 +4,7 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import nl.inholland.projectapi.persistence.MockDB;
+import nl.inholland.projectapi.persistence.MongoDB;
 
 public class ProjectAPIApplication extends Application<ProjectAPIConfiguration>
 {
@@ -35,7 +35,7 @@ public class ProjectAPIApplication extends Application<ProjectAPIConfiguration>
     public void run( final ProjectAPIConfiguration configuration, 
                      final Environment environment) throws Exception
     {
-        MockDB.init();
+        //MockDB.init();
         
 //        environment.jersey().register(new AuthDynamicFeature(
 //                    new BasicCredentialAuthFilter.Builder<OUD_user>()

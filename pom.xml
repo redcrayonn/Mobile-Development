@@ -26,6 +26,11 @@
             <artifactId>dropwizard-guice</artifactId>
             <version>${dropwizard.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.5.0</version>
+        </dependency>
     </dependencies>
     <name>ProjectAPI</name>
     

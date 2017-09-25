@@ -5,6 +5,9 @@
  */
 package nl.inholland.projectapi.presentation.model;
 
+import java.util.List;
+import nl.inholland.projectapi.model.Activity;
+
 /**
  *
  * @author student
@@ -12,4 +15,5 @@ package nl.inholland.projectapi.presentation.model;
 public class BlockView {
     public String name;
     public String description;
+    public List<Activity> activities;
 }

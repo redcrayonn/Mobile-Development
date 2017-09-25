@@ -7,7 +7,7 @@ package nl.inholland.projectapi.service;
 
 import java.util.List;
 import javax.inject.Inject;
-import nl.inholland.projectapi.model.Block;
+import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.persistence.BlockDAO;
 
 /**
@@ -22,11 +22,11 @@ public class BlockService extends BaseService {
         this.dao = dao;
     }
     
-    public List<Block> getAllBlocks() {
+    public List<BuildingBlock> getAllBlocks() {
         return dao.getAllBlocks();
     }
     
-    public Block getBlockById(int id) {
+    public BuildingBlock getBlockById(int id) {
         return dao.getBlockById(id);
     }
 }

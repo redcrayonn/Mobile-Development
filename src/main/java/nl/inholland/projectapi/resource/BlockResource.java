@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import nl.inholland.projectapi.model.Block;
+import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.ErrorResponse;
 import nl.inholland.projectapi.presentation.BlockPresenter;
 import nl.inholland.projectapi.presentation.ErrorPresenter;
@@ -46,7 +46,7 @@ public class BlockResource extends BaseResource {
     @GET
     @Produces("application/json")
     public Response getAll() {
-        List<Block> blocks = blockService.getAllBlocks();
+        List<BuildingBlock> blocks = blockService.getAllBlocks();
         if (blocks.isEmpty()) {
             ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
             String errorView = errorPresenter.present(error);
@@ -71,7 +71,7 @@ public class BlockResource extends BaseResource {
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).entity(errorView).build();
         }
         
-        Block block = blockService.getBlockById(blockId);
+        BuildingBlock block = blockService.getBlockById(blockId);
         if (block == null) {
             ErrorResponse error = new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), Response.Status.NOT_FOUND.getReasonPhrase(), "Sorry team");
             String errorView = errorPresenter.present(error);

@@ -1,24 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nl.inholland.projectapi.model;
 
-public class Appointment extends EntityModel {
+import org.joda.time.DateTime;
 
-    private String dateTime;
+/**
+ *
+ * @author Stefan
+ */
+public class Appointment {
+    private DateTime datetime;
     private String description;
-
-    public Appointment(int Id, String dateTime, String description) {
-        super.setId(Id);
-        this.dateTime = dateTime;
-        this.description = description;
-    }
 
     public Appointment() {
     }
-
-    public String getDateTime() {
-        return dateTime;
+    
+    public Appointment(DateTime datetime, String description) {
+        this.datetime = datetime;
+        this.description = description;
     }
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+
+    public DateTime getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(DateTime datetime) {
+        this.datetime = datetime;
     }
 
     public String getDescription() {

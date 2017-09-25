@@ -7,7 +7,7 @@ package nl.inholland.projectapi.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
-import nl.inholland.projectapi.model.Block;
+import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.model.BlockView;
 
 /**
@@ -15,7 +15,7 @@ import nl.inholland.projectapi.presentation.model.BlockView;
  * @author student
  */
 public class BlockPresenter extends BasePresenter {
-    public String present(Block block) {
+    public String present(BuildingBlock block) {
         BlockView view = new BlockView();
         
         view.name = block.getName();
@@ -23,14 +23,15 @@ public class BlockPresenter extends BasePresenter {
         return super.toJson(view);
     }
     
-    public List<BlockView> present(List<Block> blocks) {
+    public List<BlockView> present(List<BuildingBlock> blocks) {
         List<BlockView> views = new ArrayList<>();
         
-        for(Block block : blocks) {
+        for(BuildingBlock block : blocks) {
             BlockView view = new BlockView();
             
             view.name = block.getName();
             view.description = block.getDescription();
+            view.activities = block.getActivities();
         
             views.add(view);            
         }
