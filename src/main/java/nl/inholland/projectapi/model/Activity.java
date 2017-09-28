@@ -1,28 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.model;
 
-/**
- *
- * @author Stefan
- */
-public class Activity {
-    private String name;
-    private String description;
-    private Status status;
+import io.dropwizard.validation.OneOf;
+import org.hibernate.validator.constraints.NotEmpty;
 
-    public Activity(String name, String description, Status status) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
-    public Activity()
-    {
-        
-    }
+public class Activity {
+    @NotEmpty
+    private String name;
+    @NotEmpty
+    private String description;
+    @OneOf({"ongoing", "pending", "complete", "irrelevant"})
+    private Status status;
     
     public Status getStatus() {
         return status;

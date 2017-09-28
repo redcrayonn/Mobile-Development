@@ -1,33 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.model;
 
-import org.joda.time.DateTime;
+import java.util.Date;
+import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- *
- * @author Stefan
- */
 public class Appointment {
-    private DateTime datetime;
+    @NotEmpty
+    private Date datetime;
+    @NotEmpty
     private String description;
 
-    public Appointment() {
-    }
-    
-    public Appointment(DateTime datetime, String description) {
-        this.datetime = datetime;
-        this.description = description;
-    }
-
-    public DateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(DateTime datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

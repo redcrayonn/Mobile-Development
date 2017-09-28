@@ -1,43 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package nl.inholland.projectapi.model;
+    package nl.inholland.projectapi.model;
 
 import java.util.List;
-import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
 
-/**
- *
- * @author student
- */
-public class BuildingBlock {
-    private ObjectId id;
+@Entity(value = "buildingBlocks")
+public class BuildingBlock extends EntityModel{
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String imageURL;
+    @Embedded
     private List<Activity> activities;
-
-    public BuildingBlock(ObjectId id, String name, String description, String imageURL, List<Activity> activities) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.imageURL = imageURL;
-        this.activities = activities;
-    }
-    public BuildingBlock()
-    {
-        
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

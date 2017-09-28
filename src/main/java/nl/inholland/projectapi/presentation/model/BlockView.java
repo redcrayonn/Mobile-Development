@@ -7,7 +7,6 @@ package nl.inholland.projectapi.presentation.model;
 
 import java.util.List;
 import nl.inholland.projectapi.model.Activity;
-import org.bson.types.ObjectId;
 
 /**
  *

@@ -1,27 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.model;
 
 import java.util.List;
-import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
 
-/**
- *
- * @author Stefan
- */
+@Entity(value = "caregivers")
 public class Caregiver extends User{
+    @Embedded
     private List<Appointment> appointments;
-
-    public Caregiver() {
-    }
-
-    public Caregiver(ObjectId id, String username, List<Message> messages, List<Appointment> appointments) {
-        super(id, username, messages);
-        this.appointments = appointments;
-    }
 
     public List<Appointment> getAppointments() {
         return appointments;

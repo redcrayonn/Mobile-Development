@@ -1,42 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.model;
 
 import java.util.List;
-import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 
-/**
- *
- * @author Stefan
- */
+@Entity(value = "clients")
 public class Client extends User{
-    private int point;
+    @NotEmpty
+    private int points;
+    @Reference(idOnly = true)
     private List<Family> family;
-    private List<Appointment> appointment;
+    @Reference(idOnly = true)
     private List<Caregiver> caregivers;
-    private List<BuildingBlock> buildingBlocks; 
+    @Embedded
+    private List<Appointment> appointments;
+    @Embedded
+    private List<BuildingBlock> blocks; 
 
-    public Client() {
-    }  
-    
-    public Client(int point, List<Family> family, List<Appointment> appointment, List<Caregiver> caregivers, List<BuildingBlock> buildingBlocks, ObjectId id, String username, List<Message> messages) {
-        super(id, username, messages);
-        this.point = point;
-        this.family = family;
-        this.appointment = appointment;
-        this.caregivers = caregivers;
-        this.buildingBlocks = buildingBlocks;
+    public int getPoints() {
+        return points;
     }
 
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public List<Family> getFamily() {
@@ -47,12 +35,12 @@ public class Client extends User{
         this.family = family;
     }
 
-    public List<Appointment> getAppointment() {
-        return appointment;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(List<Appointment> appointment) {
-        this.appointment = appointment;
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     public List<Caregiver> getCaregivers() {
@@ -64,11 +52,11 @@ public class Client extends User{
     }
 
     public List<BuildingBlock> getBuildingBlocks() {
-        return buildingBlocks;
+        return blocks;
     }
 
     public void setBuildingBlocks(List<BuildingBlock> buildingBlocks) {
-        this.buildingBlocks = buildingBlocks;
+        this.blocks = buildingBlocks;
     }
     
 }

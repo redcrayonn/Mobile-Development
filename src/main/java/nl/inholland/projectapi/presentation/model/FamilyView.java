@@ -1,10 +1,12 @@
 package nl.inholland.projectapi.presentation.model;
 
 import java.util.List;
+import nl.inholland.projectapi.model.Message;
 
-public class GroupView
+
+public class FamilyView 
 {
     public String id;
     public String name;
-    public List<UserView> members;
+    public List<MessageView> messages;
 }

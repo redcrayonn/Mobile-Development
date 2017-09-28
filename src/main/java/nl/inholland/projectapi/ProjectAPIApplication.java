@@ -4,7 +4,6 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import nl.inholland.projectapi.persistence.MongoDB;
 
 public class ProjectAPIApplication extends Application<ProjectAPIConfiguration>
 {

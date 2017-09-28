@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.service;
 
 import java.util.List;
 import javax.inject.Inject;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.persistence.BlockDAO;
-import org.bson.types.ObjectId;
 
-/**
- *
- * @author student
- */
 public class BlockService extends BaseService {
-        private BlockDAO dao;
+    private BlockDAO dao;
    
     @Inject
     public BlockService(BlockDAO dao) {
@@ -24,10 +14,10 @@ public class BlockService extends BaseService {
     }
     
     public List<BuildingBlock> getAllBlocks() {
-        return dao.getAllBlocks();
+        return dao.getAll();
     }
     
     public BuildingBlock getBlockById(String id) {
-        return dao.getBlockById(id);
+        return dao.get(id);
     }
 }

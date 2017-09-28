@@ -1,28 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.model;
 
+import java.util.Date;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
+import org.mongodb.morphia.annotations.Reference;
 
-/**
- *
- * @author Stefan
- */
 public class Like {
+    @Reference
     private ObjectId senderId;
-    private DateTime dateTime;
-
-    public Like(ObjectId senderId, DateTime dateTime) {
-        this.senderId = senderId;
-        this.dateTime = dateTime;
-    }
-
-    public Like() {
-    }
+    @NotEmpty
+    private Date dateTime;
 
     public ObjectId getSenderId() {
         return senderId;
@@ -32,11 +20,11 @@ public class Like {
         this.senderId = senderId;
     }
 
-    public DateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(DateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
     
