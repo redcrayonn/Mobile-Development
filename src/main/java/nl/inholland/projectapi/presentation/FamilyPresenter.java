@@ -8,7 +8,7 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 
 public class FamilyPresenter extends BasePresenter
 {
-    private MessagePresenter messagePresenter;
+    private final MessagePresenter messagePresenter;
 
     @Inject
     public FamilyPresenter(MessagePresenter messagePresenter) {

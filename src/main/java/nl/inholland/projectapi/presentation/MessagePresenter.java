@@ -9,6 +9,7 @@ public class MessagePresenter extends BasePresenter
 {
     public MessageView present(Message message) {
         MessageView view = new MessageView();
+        view.id = message.getId().toHexString();
         view.receiverId = message.getReceiverId().toHexString();
         view.senderId = message.getSenderId().toHexString();
         view.message = message.getMessage();
@@ -21,6 +22,7 @@ public class MessagePresenter extends BasePresenter
         
         for(Message message : messages) {
             MessageView view = new MessageView();
+            view.id = message.getId().toHexString();
             view.receiverId = message.getReceiverId().toHexString();
             view.senderId = message.getSenderId().toHexString();
             view.message = message.getMessage();

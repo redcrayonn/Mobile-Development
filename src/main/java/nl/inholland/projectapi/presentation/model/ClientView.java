@@ -11,7 +11,7 @@ public class ClientView
     public int points;
     public List<MessageView> messages;
     public List<FamilyView> family;
-    public List<Appointment> appointments;
+    public List<AppointmentView> appointments;
     public List<CaregiverView> caregivers;
-    public List<BuildingBlock> blocks;
+    public List<BlockView> blocks;
 }

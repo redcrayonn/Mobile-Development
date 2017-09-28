@@ -5,13 +5,13 @@ import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
 
-public class Comment {
+public class Comment extends EntityModel{
     @Reference
     private ObjectId senderId;
     @NotEmpty
     private String message;
     @NotEmpty
-    private Date dateTime;
+    private Date datetime;
 
     public ObjectId getSenderId() {
         return senderId;
@@ -30,11 +30,11 @@ public class Comment {
     }
 
     public Date getDateTime() {
-        return dateTime;
+        return datetime;
     }
 
     public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+        this.datetime = dateTime;
     }
     
 }

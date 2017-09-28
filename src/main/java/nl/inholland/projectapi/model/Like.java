@@ -3,14 +3,13 @@ package nl.inholland.projectapi.model;
 import java.util.Date;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.DateTime;
 import org.mongodb.morphia.annotations.Reference;
 
-public class Like {
+public class Like extends EntityModel{
     @Reference
     private ObjectId senderId;
     @NotEmpty
-    private Date dateTime;
+    private Date datetime;
 
     public ObjectId getSenderId() {
         return senderId;
@@ -21,11 +20,11 @@ public class Like {
     }
 
     public Date getDateTime() {
-        return dateTime;
+        return datetime;
     }
 
     public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+        this.datetime = dateTime;
     }
     
 }

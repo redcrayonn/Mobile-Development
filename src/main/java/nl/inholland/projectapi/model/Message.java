@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
 
-public class Message {
+public class Message extends EntityModel{
     @Reference
     private ObjectId senderId;
     @Reference

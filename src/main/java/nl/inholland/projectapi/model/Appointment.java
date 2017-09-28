@@ -3,7 +3,7 @@ package nl.inholland.projectapi.model;
 import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Appointment {
+public class Appointment extends EntityModel{
     @NotEmpty
     private Date datetime;
     @NotEmpty

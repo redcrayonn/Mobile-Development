@@ -9,5 +9,5 @@ public class CaregiverView
     public String id;
     public String name;
     public List<MessageView> messages;
-    public List<Appointment> appointments;
+    public List<AppointmentView> appointments;
 }
