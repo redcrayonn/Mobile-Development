@@ -14,11 +14,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 public class ProjectAPIModule extends AbstractModule{
-    private InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
-    String user = null;
-    String db = null;
-    char[] password = null;
-    
+       
     @Override
     protected void configure() {
         
@@ -27,16 +23,18 @@ public class ProjectAPIModule extends AbstractModule{
     @Provides
     @Singleton
     Datastore providesDatastore()
-    {
-        getConfig();
-        MongoCredential credential = MongoCredential.createScramSha1Credential(user, db, password);
-        MongoClient mongoClient = new MongoClient(new ServerAddress("imready.ml", 27017), Arrays.asList(credential));//, options);    
+    {        
+        MongoClient mongoClient = new MongoClient(new ServerAddress("imready.ml", 27017), Arrays.asList(getCredentials()));    
         Morphia morphia = new Morphia();
         return morphia.createDatastore(mongoClient, "imready");
        
     }
-    private void getConfig()
+    private MongoCredential getCredentials()
     {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+        String user = null;
+        String db = null;
+        char[] password = null;
         Properties prop = new Properties();
         try
         {
@@ -52,5 +50,6 @@ public class ProjectAPIModule extends AbstractModule{
         {
             ex.printStackTrace();
         }  
+        return MongoCredential.createScramSha1Credential(user, db, password);
     }
 }
