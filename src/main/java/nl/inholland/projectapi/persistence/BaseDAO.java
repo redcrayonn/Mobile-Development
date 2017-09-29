@@ -15,7 +15,13 @@ public abstract class BaseDAO< T extends EntityModel> extends BasicDAO<T, Object
     }
 
     public T get(String id) {
-        return get(new ObjectId(id));
+        ObjectId oid = null;
+        try {
+            oid = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        return get(oid);
     }
 
     public List<T> getAll() {
