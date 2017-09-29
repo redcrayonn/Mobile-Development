@@ -6,8 +6,9 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
-@Entity(value = "clients")
-public class Client extends User{
+@Entity(value = "clients", noClassnameStored = true)
+public class Client extends User {
+
     @NotEmpty
     private int points;
     @Reference(idOnly = true)
@@ -17,7 +18,7 @@ public class Client extends User{
     @Embedded
     private List<Appointment> appointments;
     @Embedded
-    private List<BuildingBlock> blocks; 
+    private List<BuildingBlock> blocks;
 
     public int getPoints() {
         return points;
@@ -58,5 +59,5 @@ public class Client extends User{
     public void setBuildingBlocks(List<BuildingBlock> buildingBlocks) {
         this.blocks = buildingBlocks;
     }
-    
+
 }

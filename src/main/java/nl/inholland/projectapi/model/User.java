@@ -4,7 +4,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 
-public abstract class User extends EntityModel{
+public abstract class User extends EntityModel {
 
     @NotEmpty
     private String name;

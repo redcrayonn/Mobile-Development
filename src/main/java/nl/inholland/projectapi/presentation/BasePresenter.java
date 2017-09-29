@@ -1,24 +1,8 @@
 package nl.inholland.projectapi.presentation;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Singleton;
 
 @Singleton
-public class BasePresenter {
-    private final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+public abstract class BasePresenter {
 
-    protected String toJson(Object o)
-    {      
-        String s = null;
-        try {
-            s = ow.writeValueAsString(o);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(BasePresenter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s;
-    }
 }

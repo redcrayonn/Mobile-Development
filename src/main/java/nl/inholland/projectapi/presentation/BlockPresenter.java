@@ -6,16 +6,15 @@ import javax.inject.Inject;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.model.BlockView;
 
-
 public class BlockPresenter extends BasePresenter {
-    
+
     private ActivityPresenter activityPresenter;
-    
+
     @Inject
-    public BlockPresenter(ActivityPresenter activityPresenter)
-    {
+    public BlockPresenter(ActivityPresenter activityPresenter) {
         this.activityPresenter = activityPresenter;
     }
+
     public BlockView present(BuildingBlock block) {
         BlockView view = new BlockView();
         view.id = block.getId().toHexString();
@@ -24,19 +23,19 @@ public class BlockPresenter extends BasePresenter {
         view.activities = activityPresenter.present(block.getActivities());
         return view;
     }
-    
+
     public List<BlockView> present(List<BuildingBlock> blocks) {
         List<BlockView> views = new ArrayList<>();
-        
-        for(BuildingBlock block : blocks) {
+
+        for (BuildingBlock block : blocks) {
             BlockView view = new BlockView();
             view.id = block.getId().toHexString();
             view.name = block.getName();
             view.description = block.getDescription();
             view.activities = activityPresenter.present(block.getActivities());
-            views.add(view);            
+            views.add(view);
         }
-        
+
         return views;
     }
 }

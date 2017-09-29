@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 
 public class Activity extends EntityModel {
+
     @NotEmpty
     private String name;
     @NotEmpty
@@ -32,7 +33,7 @@ public class Activity extends EntityModel {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-    
+
     public Status getStatus() {
         return status;
     }
@@ -55,5 +56,5 @@ public class Activity extends EntityModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }    
+    }
 }

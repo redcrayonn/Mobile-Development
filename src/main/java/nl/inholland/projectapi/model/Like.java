@@ -5,7 +5,8 @@ import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
 
-public class Like extends EntityModel{
+public class Like extends EntityModel {
+
     @Reference
     private ObjectId senderId;
     @NotEmpty
@@ -26,5 +27,5 @@ public class Like extends EntityModel{
     public void setDateTime(Date dateTime) {
         this.datetime = dateTime;
     }
-    
+
 }

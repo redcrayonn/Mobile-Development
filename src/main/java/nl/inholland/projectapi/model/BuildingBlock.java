@@ -1,12 +1,13 @@
-    package nl.inholland.projectapi.model;
+package nl.inholland.projectapi.model;
 
 import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-@Entity(value = "buildingBlocks")
-public class BuildingBlock extends EntityModel{
+@Entity(value = "buildingBlocks", noClassnameStored = true)
+public class BuildingBlock extends EntityModel {
+
     @NotEmpty
     private String name;
     @NotEmpty
@@ -48,5 +49,3 @@ public class BuildingBlock extends EntityModel{
         this.activities = activities;
     }
 }
-
-

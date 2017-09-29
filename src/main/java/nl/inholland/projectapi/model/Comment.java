@@ -5,7 +5,8 @@ import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
 
-public class Comment extends EntityModel{
+public class Comment extends EntityModel {
+
     @Reference
     private ObjectId senderId;
     @NotEmpty
@@ -36,5 +37,5 @@ public class Comment extends EntityModel{
     public void setDateTime(Date dateTime) {
         this.datetime = dateTime;
     }
-    
+
 }

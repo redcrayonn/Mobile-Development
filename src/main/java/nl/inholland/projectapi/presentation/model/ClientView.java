@@ -1,11 +1,9 @@
 package nl.inholland.projectapi.presentation.model;
 
 import java.util.List;
-import nl.inholland.projectapi.model.Appointment;
-import nl.inholland.projectapi.model.BuildingBlock;
 
-public class ClientView
-{
+public class ClientView extends BaseView {
+
     public String id;
     public String name;
     public int points;
