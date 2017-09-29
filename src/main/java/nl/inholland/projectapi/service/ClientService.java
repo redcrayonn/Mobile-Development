@@ -21,4 +21,7 @@ public class ClientService extends BaseService {
     public Client getClientById(String id) {
         return dao.get(id);
     }
+    public void patch(Client client) {
+        dao.update(client);
+    }
 }

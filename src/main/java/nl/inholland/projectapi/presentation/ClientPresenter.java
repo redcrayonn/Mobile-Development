@@ -8,19 +8,9 @@ import nl.inholland.projectapi.presentation.model.ClientView;
 
 public class ClientPresenter extends BasePresenter {
 
-    private final CaregiverPresenter caregiverPresenter;
-    private final FamilyPresenter familyPresenter;
-    private final MessagePresenter messagePresenter;
-    private final BlockPresenter blockPresenter;
-    private final AppointmentPresenter appointmentPresenter;
-
     @Inject
-    public ClientPresenter(CaregiverPresenter caregiverPresenter, FamilyPresenter familyPresenter, MessagePresenter messagePresenter, BlockPresenter blockPresenter, AppointmentPresenter appointmentPresenter) {
-        this.caregiverPresenter = caregiverPresenter;
-        this.familyPresenter = familyPresenter;
-        this.messagePresenter = messagePresenter;
-        this.blockPresenter = blockPresenter;
-        this.appointmentPresenter = appointmentPresenter;
+    public ClientPresenter() {
+
     }
 
     public List<ClientView> present(List<Client> clients) {
@@ -29,14 +19,14 @@ public class ClientPresenter extends BasePresenter {
         for (Client client : clients) {
             ClientView view = new ClientView();
 
-            view.id = client.getId().toHexString();
+            view.id = client.getId();
             view.name = client.getName();
             view.points = client.getPoints();
-            view.messages = messagePresenter.present(client.getMessages());
-            view.family = familyPresenter.present(client.getFamily());
-            view.appointments = appointmentPresenter.present(client.getAppointments());
-            view.caregivers = caregiverPresenter.present(client.getCaregivers());
-            view.blocks = blockPresenter.present(client.getBuildingBlocks());
+            view.messages = client.getMessages();
+            view.family = client.getFamily();
+            view.appointments = client.getAppointments();
+            view.caregivers = client.getCaregivers();
+            view.blocks = client.getBuildingBlocks();
             views.add(view);
         }
         return views;
@@ -45,14 +35,14 @@ public class ClientPresenter extends BasePresenter {
     public ClientView present(Client client) {
         ClientView view = new ClientView();
 
-        view.id = client.getId().toHexString();
+        view.id = client.getId();
         view.name = client.getName();
         view.points = client.getPoints();
-        view.messages = messagePresenter.present(client.getMessages());
-        view.family = familyPresenter.present(client.getFamily());
-        view.appointments = appointmentPresenter.present(client.getAppointments());
-        view.caregivers = caregiverPresenter.present(client.getCaregivers());
-        view.blocks = blockPresenter.present(client.getBuildingBlocks());
+        view.messages = client.getMessages();
+        view.family = client.getFamily();
+        view.appointments = client.getAppointments();
+        view.caregivers = client.getCaregivers();
+        view.blocks = client.getBuildingBlocks();
 
         return view;
     }

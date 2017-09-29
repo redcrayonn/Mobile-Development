@@ -14,8 +14,8 @@ public class Comment extends EntityModel {
     @NotEmpty
     private Date datetime;
 
-    public ObjectId getSenderId() {
-        return senderId;
+    public String getSenderId() {
+        return senderId.toHexString();
     }
 
     public void setSenderId(ObjectId senderId) {

@@ -8,8 +8,8 @@ public class EntityModel {
     @Id
     protected ObjectId id;
 
-    public ObjectId getId() {
-        return id;
+    public String getId() {
+        return id.toHexString();
     }
 
     public void setId(ObjectId id) {

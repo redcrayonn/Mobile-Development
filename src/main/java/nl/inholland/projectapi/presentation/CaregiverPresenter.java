@@ -8,21 +8,16 @@ import nl.inholland.projectapi.presentation.model.CaregiverView;
 
 public class CaregiverPresenter extends BasePresenter {
 
-    private final MessagePresenter messagePresenter;
-    private final AppointmentPresenter appointmentPresenter;
-
     @Inject
-    public CaregiverPresenter(MessagePresenter messagePresenter, AppointmentPresenter appointmentPresenter) {
-        this.messagePresenter = messagePresenter;
-        this.appointmentPresenter = appointmentPresenter;
+    public CaregiverPresenter() {
     }
 
     public CaregiverView present(Caregiver caregiver) {
         CaregiverView view = new CaregiverView();
-        view.id = caregiver.getId().toHexString();
+        view.id = caregiver.getId();
         view.name = caregiver.getName();
-        view.messages = messagePresenter.present(caregiver.getMessages());
-        view.appointments = appointmentPresenter.present(caregiver.getAppointments());
+        view.messages = caregiver.getMessages();
+        view.appointments = caregiver.getAppointments();
         return view;
     }
 
@@ -31,10 +26,10 @@ public class CaregiverPresenter extends BasePresenter {
 
         for (Caregiver caregiver : caregivers) {
             CaregiverView view = new CaregiverView();
-            view.id = caregiver.getId().toHexString();
+            view.id = caregiver.getId();
             view.name = caregiver.getName();
-            view.messages = messagePresenter.present(caregiver.getMessages());
-            view.appointments = appointmentPresenter.present(caregiver.getAppointments());
+            view.messages = caregiver.getMessages();
+            view.appointments = caregiver.getAppointments();
             views.add(view);
         }
         return views;

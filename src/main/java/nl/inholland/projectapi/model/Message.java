@@ -16,16 +16,16 @@ public class Message extends EntityModel {
     @NotEmpty
     private Date datetime;
 
-    public ObjectId getSenderId() {
-        return senderId;
+    public String getSenderId() {
+        return senderId.toHexString();
     }
 
     public void setSenderId(ObjectId senderId) {
         this.senderId = senderId;
     }
 
-    public ObjectId getReceiverId() {
-        return receiverId;
+    public String getReceiverId() {
+        return receiverId.toHexString();
     }
 
     public void setReceiverId(ObjectId receiverId) {

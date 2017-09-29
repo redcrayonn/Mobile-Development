@@ -8,18 +8,15 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 
 public class FamilyPresenter extends BasePresenter {
 
-    private final MessagePresenter messagePresenter;
-
     @Inject
-    public FamilyPresenter(MessagePresenter messagePresenter) {
-        this.messagePresenter = messagePresenter;
+    public FamilyPresenter() {
     }
 
     public FamilyView present(Family family) {
         FamilyView view = new FamilyView();
-        view.id = family.getId().toHexString();
+        view.id = family.getId();
         view.name = family.getName();
-        view.messages = messagePresenter.present(family.getMessages());
+        view.messages = family.getMessages();
         return view;
     }
 
@@ -28,9 +25,9 @@ public class FamilyPresenter extends BasePresenter {
 
         for (Family f : family) {
             FamilyView view = new FamilyView();
-            view.id = f.getId().toHexString();
+            view.id = f.getId();
             view.name = f.getName();
-            view.messages = messagePresenter.present(f.getMessages());
+            view.messages = f.getMessages();
             views.add(view);
         }
 

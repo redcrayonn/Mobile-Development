@@ -20,7 +20,7 @@ import nl.inholland.projectapi.presentation.model.BlockView;
 import nl.inholland.projectapi.service.BlockService;
 import org.bson.types.ObjectId;
 
-@Path("/api/1.0/blocks")
+@Path("/api/v1/blocks")
 public class BlockResource extends BaseResource {
 
     private final BlockService blockService;
@@ -47,7 +47,7 @@ public class BlockResource extends BaseResource {
     public Response create(BuildingBlock newBlock, @Context UriInfo uriInfo) {
         blockService.create(newBlock);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)
-        builder.path(newBlock.getId().toString());//Add new block ID to base path (/api/1.0/blocks/{id})
+        builder.path(newBlock.getId());//Add new block ID to base path (/api/1.0/blocks/{id})
         return Response.created(builder.build()).entity(blockPresenter.present(newBlock)).build();//Return 201 response with the new object as json and new location in header
     }
     

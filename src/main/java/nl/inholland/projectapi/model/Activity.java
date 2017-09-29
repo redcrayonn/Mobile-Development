@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.model;
 
 import io.dropwizard.validation.OneOf;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
@@ -14,9 +15,9 @@ public class Activity extends EntityModel {
     @OneOf({"ongoing", "pending", "complete", "irrelevant"})
     private Status status;
     @Embedded
-    private List<Like> likes;
+    private List<Like> likes = new ArrayList<Like>();
     @Embedded
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<Comment>();
 
     public List<Like> getLikes() {
         return likes;

@@ -8,19 +8,16 @@ import nl.inholland.projectapi.presentation.model.BlockView;
 
 public class BlockPresenter extends BasePresenter {
 
-    private ActivityPresenter activityPresenter;
-
     @Inject
-    public BlockPresenter(ActivityPresenter activityPresenter) {
-        this.activityPresenter = activityPresenter;
+    public BlockPresenter() {
     }
 
     public BlockView present(BuildingBlock block) {
         BlockView view = new BlockView();
-        view.id = block.getId().toHexString();
+        view.id = block.getId();
         view.name = block.getName();
         view.description = block.getDescription();
-        view.activities = activityPresenter.present(block.getActivities());
+        view.activities = block.getActivities();
         return view;
     }
 
@@ -29,10 +26,10 @@ public class BlockPresenter extends BasePresenter {
 
         for (BuildingBlock block : blocks) {
             BlockView view = new BlockView();
-            view.id = block.getId().toHexString();
+            view.id = block.getId();
             view.name = block.getName();
             view.description = block.getDescription();
-            view.activities = activityPresenter.present(block.getActivities());
+            view.activities = block.getActivities();
             views.add(view);
         }
 
