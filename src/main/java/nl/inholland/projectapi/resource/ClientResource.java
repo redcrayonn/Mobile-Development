@@ -56,7 +56,6 @@ public class ClientResource extends BaseResource {
     @PATCH
     @Path("/{userId}")
     @Consumes("application/json")
-    @Produces("application/json")
     public Response patch(@PathParam("userId") String userId, JsonNode patchRequest) {
         JsonNode patched = null;
         try {

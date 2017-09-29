@@ -31,6 +31,10 @@ public class BlockService extends BaseService {
         dao.create(block);
     }
 
+    public void update(BuildingBlock block) {
+        dao.update(block);
+    }
+
     public void deleteById(ObjectId id) {
         dao.deleteById(id);
     }

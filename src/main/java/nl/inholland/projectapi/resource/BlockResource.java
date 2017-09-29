@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -41,6 +42,7 @@ public class BlockResource extends BaseResource {
         }
         return blockPresenter.present(blocks);
     }
+
     @POST
     @Consumes("application/json")
     @Produces("application/json")
@@ -49,6 +51,16 @@ public class BlockResource extends BaseResource {
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)
         builder.path(newBlock.getId());//Add new block ID to base path (/api/1.0/blocks/{id})
         return Response.created(builder.build()).entity(blockPresenter.present(newBlock)).build();//Return 201 response with the new object as json and new location in header
+    }
+
+    @PUT
+    @Path("/{blockId}")
+    @Consumes("application/json")
+    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock)
+    {
+        newBlock.setId(new ObjectId(id));
+        blockService.update(newBlock);
+        return Response.ok().build();
     }
     
     @GET
@@ -61,12 +73,11 @@ public class BlockResource extends BaseResource {
         }
         return blockPresenter.present(block);
     }
-    
+
     @DELETE
     @Path("/{blockId}")
     @Consumes("application/json")
-    public void delete(@PathParam("blockId") ObjectId id)
-    {
+    public void delete(@PathParam("blockId") ObjectId id) {
         blockService.deleteById(id);
     }
 }
