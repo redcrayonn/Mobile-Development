@@ -16,6 +16,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.Role;
+import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.ClientPresenter;
 import nl.inholland.projectapi.presentation.model.ClientView;
 import nl.inholland.projectapi.service.ClientService;
@@ -31,9 +33,10 @@ public class ClientResource extends BaseResource {
         this.clientService = clientService;
         this.clientPresenter = clientPresenter;
     }
-
+    
     @GET
     @Produces("application/json")
+    @Secured({Role.client})
     public List<ClientView> getAll() {
         List<Client> clients = clientService.getAllClients();
         if (clients.isEmpty()) {
@@ -69,6 +72,7 @@ public class ClientResource extends BaseResource {
         } catch (JsonPatchException | IOException | IllegalArgumentException ex) {
             throw new WebApplicationException("Bad patch request", 400);
         }
+        
         return Response.ok().build();//Return 200
     }  
 }

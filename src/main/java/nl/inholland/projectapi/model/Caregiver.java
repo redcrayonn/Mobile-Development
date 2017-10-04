@@ -4,7 +4,7 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-@Entity(value = "caregivers", noClassnameStored = true)
+@Entity(value = "users", noClassnameStored = false)
 public class Caregiver extends User {
 
     @Embedded

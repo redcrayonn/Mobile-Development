@@ -15,9 +15,11 @@ public class ClientService extends BaseService {
     }
 
     public List<Client> getAllClients() {
-        return dao.getAll();
+        return dao.getAllClients();
     }
-
+    public void create(Client client) {
+        dao.create(client);
+    }
     public Client getClientById(String id) {
         return dao.get(id);
     }

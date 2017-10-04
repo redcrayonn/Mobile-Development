@@ -2,13 +2,11 @@ package nl.inholland.projectapi.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.presentation.model.ClientView;
 
 public class ClientPresenter extends BasePresenter {
 
-    @Inject
     public ClientPresenter() {
 
     }
@@ -17,17 +15,7 @@ public class ClientPresenter extends BasePresenter {
         List<ClientView> views = new ArrayList<>();
 
         for (Client client : clients) {
-            ClientView view = new ClientView();
-
-            view.id = client.getId();
-            view.name = client.getName();
-            view.points = client.getPoints();
-            view.messages = client.getMessages();
-            view.family = client.getFamily();
-            view.appointments = client.getAppointments();
-            view.caregivers = client.getCaregivers();
-            view.blocks = client.getBuildingBlocks();
-            views.add(view);
+            views.add(present(client));
         }
         return views;
     }
@@ -38,6 +26,9 @@ public class ClientPresenter extends BasePresenter {
         view.id = client.getId();
         view.name = client.getName();
         view.points = client.getPoints();
+        view.password = client.getPassword();
+        view.role = client.getRole();
+        view.apiKey = client.getApiKey();        
         view.messages = client.getMessages();
         view.family = client.getFamily();
         view.appointments = client.getAppointments();

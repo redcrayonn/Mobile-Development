@@ -30,19 +30,6 @@ public class ProjectAPIApplication extends Application<ProjectAPIConfiguration> 
     @Override
     public void run(final ProjectAPIConfiguration configuration,
             final Environment environment) throws Exception {
-        //MockDB.init();
-
-//        environment.jersey().register(new AuthDynamicFeature(
-//                    new BasicCredentialAuthFilter.Builder<OUD_user>()
-//                    .setAuthenticator(guiceBundle.getInjector().getInstance(
-//                        AuthenticationService.class )
-//                    )
-//                    .setRealm("SUPER SECRET STUFF")
-//                    .buildAuthFilter()
-//            )
-//                
-//        );
-//        environment.jersey().register(new AuthValueFactoryProvider.Binder<>( OUD_user.class )
-//        );
+        
     }
 }
