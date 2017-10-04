@@ -1,0 +1,117 @@
+# First install: "git clone https://github.com/svanoort/pyresttest.git" &
+# >> "sudo python setup.py install"
+# Quickstart guide: "https://github.com/svanoort/pyresttest/blob/master/quickstart.md"
+# Run script: "resttest.py https://www.imready.ml test.yaml"
+
+---
+- config:
+    - testset: "Teste API application"
+
+# Inloggen username en password als JSON   username=client1  pass=client1
+# De enige call waar je dan op kan testen krijg je een Token terug (json object)
+# Dus in de header gooi ik de de key maar in het autorization object
+# - headers: {Authorization: "$token"}
+
+# BLOCK TESTEN
+- test:
+  - name: "Test with schema validations"
+  - url: {'template': "/api/v1/blocks/"}
+  - group: "Blocks"
+  - validators:
+     - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+- test:
+    - group: "Blocks"
+    - name: "Basic blocks smoketest"
+    - url: "/api/v1/blocks/"
+
+- test:
+    - group: "Blocks"
+    - name: "Make sure blocks are there"
+    - url: "/api/v1/blocks/"
+    - expected_status: [200]
+
+- test:
+    - group: "Blocks"
+    - name: "Make sure specific block isnt is there"
+    - url: "/api/v1/blocks/9999999/"
+    - expected_status: [404]
+
+- test:
+    - group: "Blocks"
+    - name: "Create a new block"
+    - url: "/api/v1/blocks/"
+    - method: "POST"
+    - body: '{"name":"test block","description":"dit is een test block", "activities":[]}'
+    - headers: {Content-Type: application/json}
+    - expected_status: [201]
+    - extract_binds:
+      - 'blockId': {'jsonpath_mini': 'id'}
+
+- test:
+    - group: "Blocks"
+    - name: "Get the block just created and check it"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - validators:
+      # ff deze controleren
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$blockId'}}
+        - extract_test: {jsonpath_mini: 'id', test: 'exists'}
+
+- test:
+    - group: "Blocks"
+    - name: "Make sure specific block is there"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - expected_status: [200]
+
+- test:
+    - group: "Blocks"
+    - name: "delete the block that is just created"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - method: 'DELETE'
+
+- test:
+    - group: "Blocks"
+    - name: "check if the block is deleted"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - expected_status: [404]
+
+# CLIENT TESTEN
+- test:
+    - group: "Clients"
+    - name: "Authentication using basic auth"
+    - url: "/api/v1/login/"
+    - method: 'POST'
+    - body: '{"username":"client1", "password":"client1"}'
+    - expected_status: [200]
+    - headers: {Content-Type: application/json}
+    - extract_binds:
+       - "auth_token": {"jsonpath_mini": "authtoken"}
+    - expected_status: [200]
+
+- test:
+    - name: "Test with schema validations"
+    - url: {'template': "/api/v1/clients/"}
+    - group: "Clients"
+    - headers: { template: {"Authorization": "$auth_token", "Content-Type": "application/json"}}
+    - validators:
+      - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients"
+    - name: "Basic clients smoketest"
+    - url: "/api/v1/clients/"
+    - headers: { template: {"Authorization": "$auth_token", "Content-Type": "application/json"}}
+
+- test:
+    - group: "Clients"
+    - name: "Make sure clients are there"
+    - url: "/api/v1/clients/"
+    - headers: { template: {"Authorization": "$auth_token", "Content-Type": "application/json"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients"
+    - name: "Make sure specific client isnt is there"
+    - url: "/api/v1/clients/9999999/"
+    - headers: { template: {"Authorization": "$auth_token", "Content-Type": "application/json"}}
+    - expected_status: [404]
