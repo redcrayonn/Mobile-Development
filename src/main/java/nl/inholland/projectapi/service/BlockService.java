@@ -2,6 +2,10 @@ package nl.inholland.projectapi.service;
 
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.persistence.BlockDAO;
@@ -16,26 +20,46 @@ public class BlockService extends BaseService {
         this.dao = dao;
     }
 
-    public List<BuildingBlock> getAllBlocks() {
-        return dao.getAll();
+    public List<BuildingBlock> getAll() {
+        List<BuildingBlock> blocks = dao.getAll();
+        if (blocks.isEmpty()) {
+            throw new NotFoundException("Not found");
+        }
+        return blocks;
     }
 
-    public BuildingBlock getBlockById(String id) {
-        return dao.get(id);
+    public BuildingBlock getById(String id) {
+        BuildingBlock block = dao.get(id);
+        if(block == null)
+            throw new NotFoundException();
+        return block;
     }
 
-    public void create(BuildingBlock block) {
+    public UriBuilder create(BuildingBlock block, UriInfo uriInfo) {
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)    
         for (Activity a : block.getActivities()) {
             a.setId(new ObjectId());
         }
-        dao.create(block);
+        try{
+            dao.create(block);            
+        }catch(Exception e) {
+            throw new BadRequestException();
+        }
+        return builder.path(block.getId());//Add new block ID to base path (/api/1.0/blocks/{id})    
     }
 
-    public void update(BuildingBlock block) {
-        dao.update(block);
+    public void update(String id, BuildingBlock newBlock) {
+        getById(id);
+        try{
+            
+            dao.update(newBlock);
+        }catch(IllegalArgumentException e){
+            throw new BadRequestException();
+        }
     }
 
     public void deleteById(ObjectId id) {
+        getById(id.toHexString());
         dao.deleteById(id);
     }
 }

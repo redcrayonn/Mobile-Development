@@ -10,7 +10,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -36,30 +35,22 @@ public class BlockResource extends BaseResource {
     @GET
     @Produces("application/json")
     public List<BlockView> getAll() {
-        List<BuildingBlock> blocks = blockService.getAllBlocks();
-        if (blocks.isEmpty()) {
-            throw new WebApplicationException("Niet gevonden", 404);
-        }
+        List<BuildingBlock> blocks = blockService.getAll();
         return blockPresenter.present(blocks);
     }
 
     @POST
     @Consumes("application/json")
-    @Produces("application/json")
     public Response create(BuildingBlock newBlock, @Context UriInfo uriInfo) {
-        blockService.create(newBlock);
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)
-        builder.path(newBlock.getId());//Add new block ID to base path (/api/1.0/blocks/{id})
-        return Response.created(builder.build()).entity(blockPresenter.present(newBlock)).build();//Return 201 response with the new object as json and new location in header
+        UriBuilder builder = blockService.create(newBlock, uriInfo);
+        return Response.created(builder.build()).build();//Return 201 response with the new location in header
     }
 
     @PUT
     @Path("/{blockId}")
     @Consumes("application/json")
-    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock)
-    {
-        newBlock.setId(new ObjectId(id));
-        blockService.update(newBlock);
+    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
+        blockService.update(id, newBlock);
         return Response.ok().build();
     }
     
@@ -67,16 +58,12 @@ public class BlockResource extends BaseResource {
     @Path("/{blockId}")
     @Produces("application/json")
     public BlockView getById(@PathParam("blockId") String id) {
-        BuildingBlock block = blockService.getBlockById(id);
-        if (block == null) {
-            throw new WebApplicationException("Niet gevonden", 404);
-        }
+        BuildingBlock block = blockService.getById(id);
         return blockPresenter.present(block);
     }
 
     @DELETE
     @Path("/{blockId}")
-    @Consumes("application/json")
     public void delete(@PathParam("blockId") ObjectId id) {
         blockService.deleteById(id);
     }
