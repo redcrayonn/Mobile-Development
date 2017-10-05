@@ -30,8 +30,9 @@ public class BlockService extends BaseService {
 
     public BuildingBlock getById(String id) {
         BuildingBlock block = dao.get(id);
-        if(block == null)
+        if (block == null) {
             throw new NotFoundException();
+        }
         return block;
     }
 
@@ -39,9 +40,9 @@ public class BlockService extends BaseService {
         for (Activity a : block.getActivities()) {
             a.setId(new ObjectId());
         }
-        try{
-            dao.create(block);            
-        }catch(Exception e) {
+        try {
+            dao.create(block);
+        } catch (Exception e) {
             throw new BadRequestException();
         }
         return buildUri(uriInfo, block.getId());
@@ -49,10 +50,9 @@ public class BlockService extends BaseService {
 
     public void update(String id, BuildingBlock newBlock) {
         getById(id);
-        try{
-            
+        try {
             dao.update(newBlock);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new BadRequestException();
         }
     }

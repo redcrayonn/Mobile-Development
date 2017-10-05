@@ -16,6 +16,7 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
+import org.bson.types.ObjectId;
 
 public class ClientService extends BaseService {
 
@@ -35,20 +36,22 @@ public class ClientService extends BaseService {
         }
         return clients;
     }
+
     public UriBuilder create(Credentials credentials, UriInfo uriInfo) {
-        if(userDAO.getByUsername(credentials.getUsername()) != null) {
+        if (userDAO.getByUsername(credentials.getUsername()) != null) {
             throw new ClientErrorException(409);
         }
-            
+
         Client client;
         try {
             client = new Client(credentials);
-        }catch(Exception e) {
+        } catch (Exception e) {
             throw new BadRequestException();
         }
         dao.create(client);
         return buildUri(uriInfo, client.getId());
     }
+
     public Client getById(String id) {
         Client client = dao.get(id);
         if (client == null) {
@@ -56,19 +59,29 @@ public class ClientService extends BaseService {
         }
         return client;
     }
+
     public void patch(String userId, JsonNode patchRequest) {
         JsonNode patched = null;
         try {
+            for (int i = 0; i < patchRequest.size(); i++) {
+                if (patchRequest.get(i).get("path").asText().equals("/password")) {
+                    throw new BadRequestException("Bad patch request");
+                }
+            }
             Client client = getById(userId);//Get client to be patched from userId
             ObjectMapper mapper = new ObjectMapper();//Map client to json
             JsonNode jsonClient = mapper.valueToTree(client);//map client to json
             JsonPatch patch = JsonPatch.fromJson(patchRequest);//Get patchrequest from body
             patched = patch.apply(jsonClient);//Patch client        
             dao.update(mapper.treeToValue(patched, Client.class));//Send patch to database as Client object
-            
-        } catch (JsonPatchException | IOException | IllegalArgumentException ex) {
-            ex.printStackTrace();
+
+        } catch (JsonPatchException | IOException | IllegalArgumentException | NullPointerException ex) {
             throw new BadRequestException("Bad patch request");
         }
+    }
+
+    public void deleteById(ObjectId id) {
+        getById(id.toHexString());
+        dao.deleteById(id);
     }
 }

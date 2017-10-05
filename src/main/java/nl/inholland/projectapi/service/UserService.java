@@ -42,7 +42,4 @@ public class UserService extends BaseService{
     private User getByUsername(String username) {
         return dao.getByUsername(username);
     }
-    
-
-    
 }
