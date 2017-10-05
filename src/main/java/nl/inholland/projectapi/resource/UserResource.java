@@ -6,7 +6,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import nl.inholland.projectapi.model.APIKeyResponse;
+import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.service.UserService;
 
@@ -22,7 +22,8 @@ public class UserResource extends BaseResource{
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public APIKeyResponse login(Credentials credentials) {    
+    public APIKey login(Credentials credentials) {    
         return userService.login(credentials);
+
     }    
 }

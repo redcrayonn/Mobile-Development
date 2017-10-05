@@ -2,6 +2,7 @@ package nl.inholland.projectapi.model;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
@@ -16,7 +17,7 @@ public abstract class User extends EntityModel implements Principal {
     @NotEmpty
     private String password;
     @NotEmpty
-    private String apiKey;
+    private APIKey apiKey;
     @NotEmpty
     private Role role;
     @Embedded
@@ -24,7 +25,7 @@ public abstract class User extends EntityModel implements Principal {
     public User(Credentials credentials) {
         this.name = credentials.getUsername();
         this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
-        this.apiKey = "";
+        this.apiKey = new APIKey("", new Date(0));
         this.messages = new ArrayList<Message>();
         this.role = Role.client;
     }
@@ -47,11 +48,11 @@ public abstract class User extends EntityModel implements Principal {
         this.password = password;
     }
 
-    public String getApiKey() {
+    public APIKey getApiKey() {
         return apiKey;
     }
 
-    public void setApiKey(String apiKey) {
+    public void setApiKey(APIKey apiKey) {
         this.apiKey = apiKey;
     }
 

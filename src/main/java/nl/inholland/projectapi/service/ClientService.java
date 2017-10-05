@@ -4,27 +4,28 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
-import static com.mongodb.AggregationOptions.builder;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Credentials;
-import static nl.inholland.projectapi.model.Role.client;
 import nl.inholland.projectapi.persistence.ClientDAO;
+import nl.inholland.projectapi.persistence.UserDAO;
 
 public class ClientService extends BaseService {
 
     private final ClientDAO dao;
+    private final UserDAO userDAO;
 
     @Inject
-    public ClientService(ClientDAO dao) {
+    public ClientService(ClientDAO dao, UserDAO userDAO) {
         this.dao = dao;
+        this.userDAO = userDAO;
     }
 
     public List<Client> getAll() {
@@ -35,6 +36,10 @@ public class ClientService extends BaseService {
         return clients;
     }
     public UriBuilder create(Credentials credentials, UriInfo uriInfo) {
+        if(userDAO.getByUsername(credentials.getUsername()) != null) {
+            throw new ClientErrorException(409);
+        }
+            
         Client client;
         try {
             client = new Client(credentials);

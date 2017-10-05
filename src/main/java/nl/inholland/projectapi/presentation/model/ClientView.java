@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.presentation.model;
 
 import java.util.List;
+import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Appointment;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Caregiver;
@@ -14,7 +15,7 @@ public class ClientView extends BaseView {
     public String name;
     public String password;
     public Role role;
-    public String apiKey;
+    public APIKey apiKey;
     public List<Message> messages;
     public int points;
     public List<Family> family;

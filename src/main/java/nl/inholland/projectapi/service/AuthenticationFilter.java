@@ -2,6 +2,7 @@ package nl.inholland.projectapi.service;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Date;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -32,10 +33,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-  
         User user = userDAO.getByAPIKey(token);
-        if(user == null) {
-            throw new NotAuthorizedException("API key invalid");    
+        if(user == null || user.getApiKey().getDatetime().before(new Date())) {
+            throw new NotAuthorizedException("API key invalid");
         }           
                 
         final SecurityContext currentSecurityContext = requestContext.getSecurityContext();

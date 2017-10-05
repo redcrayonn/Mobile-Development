@@ -36,7 +36,7 @@ public class ClientResource extends BaseResource {
     
     @GET
     @Produces("application/json")
-    @Secured({Role.client})
+    @Secured({Role.client, Role.family, Role.caregiver})
     public List<ClientView> getAll() {
         List<Client> clients = clientService.getAll();
         return clientPresenter.present(clients);
