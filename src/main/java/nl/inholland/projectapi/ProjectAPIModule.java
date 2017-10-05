@@ -25,8 +25,8 @@ public class ProjectAPIModule extends AbstractModule {
     Datastore providesDatastore() {
         MongoClient mongoClient = new MongoClient(new ServerAddress("imready.ml", 27017), Arrays.asList(getCredentials()));
         Morphia morphia = new Morphia();
+        morphia.getMapper().getOptions().setStoreEmpties(true);
         return morphia.createDatastore(mongoClient, "imready");
-
     }
 
     private MongoCredential getCredentials() {

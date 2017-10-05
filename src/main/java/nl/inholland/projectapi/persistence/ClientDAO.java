@@ -3,6 +3,7 @@ package nl.inholland.projectapi.persistence;
 import java.util.List;
 import javax.inject.Inject;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.Role;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
@@ -14,7 +15,7 @@ public class ClientDAO extends BaseDAO<Client> {
     }
     public List<Client> getAllClients()
     {
-        Query<Client> query = createQuery().field("role").equal("client");
+        Query<Client> query = createQuery().field("role").equal(Role.client);
         return query.asList();
     }
 }

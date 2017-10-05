@@ -6,11 +6,16 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.ClientPresenter;
@@ -36,7 +41,13 @@ public class ClientResource extends BaseResource {
         List<Client> clients = clientService.getAll();
         return clientPresenter.present(clients);
     }
-
+    @POST
+    @Consumes("application/json")
+    public Response create(Credentials credentials, @Context UriInfo uriInfo)
+    {
+        UriBuilder builder = clientService.create(credentials, uriInfo);
+        return Response.created(builder.build()).build();
+    }
     @GET
     @Path("/{userId}")
     @Produces("application/json")

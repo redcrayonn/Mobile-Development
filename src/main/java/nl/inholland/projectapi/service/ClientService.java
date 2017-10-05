@@ -4,12 +4,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
+import static com.mongodb.AggregationOptions.builder;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.Credentials;
+import static nl.inholland.projectapi.model.Role.client;
 import nl.inholland.projectapi.persistence.ClientDAO;
 
 public class ClientService extends BaseService {
@@ -28,8 +34,15 @@ public class ClientService extends BaseService {
         }
         return clients;
     }
-    public void create(Client client) {
+    public UriBuilder create(Credentials credentials, UriInfo uriInfo) {
+        Client client;
+        try {
+            client = new Client(credentials);
+        }catch(Exception e) {
+            throw new BadRequestException();
+        }
         dao.create(client);
+        return buildUri(uriInfo, client.getId());
     }
     public Client getById(String id) {
         Client client = dao.get(id);

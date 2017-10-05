@@ -21,29 +21,21 @@ public class UserService extends BaseService{
         this.dao = dao;
     }
     public APIKeyResponse login(Credentials credentials) {
-        User user = getByCredentials(credentials);       
+        User user = getByUsername(credentials.getUsername());       
         if(user == null) {
             throw new NotAuthorizedException("Wrong username or password");
         }
-
-        //
-        
-//        String hashed = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
-//        System.out.println(hashed);
-//        
-//        if(BCrypt.checkpw("client1", hashed))
-//            System.out.println("gj");
-//        
-        //
-        
+        if(!BCrypt.checkpw(credentials.getPassword(), user.getPassword())) {
+            throw new NotAuthorizedException("Wrong username or password");
+        }
         User newUser = assignKey(user);
         APIKeyResponse response = new APIKeyResponse();
         response.setAuthtoken(newUser.getApiKey());   
         return response;
     }
     
-    private User getByCredentials(Credentials credentials) {
-        return dao.getByCredentials(credentials);
+    private User getByUsername(String username) {
+        return dao.getByCredentials(username);
     }
     
     private User assignKey(User user) {

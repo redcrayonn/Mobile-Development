@@ -36,7 +36,6 @@ public class BlockService extends BaseService {
     }
 
     public UriBuilder create(BuildingBlock block, UriInfo uriInfo) {
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)    
         for (Activity a : block.getActivities()) {
             a.setId(new ObjectId());
         }
@@ -45,7 +44,7 @@ public class BlockService extends BaseService {
         }catch(Exception e) {
             throw new BadRequestException();
         }
-        return builder.path(block.getId());//Add new block ID to base path (/api/1.0/blocks/{id})    
+        return buildUri(uriInfo, block.getId());
     }
 
     public void update(String id, BuildingBlock newBlock) {

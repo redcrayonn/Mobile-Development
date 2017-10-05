@@ -30,11 +30,9 @@ public class UserDAO extends BaseDAO<User>
         
         return findOne(query);
     }
-    public User getByCredentials(Credentials credentials) {
+    public User getByCredentials(String username) {
         Query<User> query = createQuery()
-                .field("name").equal(credentials.getUsername())
-                .field("password").equal(credentials.getPassword());
-        
+                .field("name").equal(username);    
         return findOne(query);
     }
 }

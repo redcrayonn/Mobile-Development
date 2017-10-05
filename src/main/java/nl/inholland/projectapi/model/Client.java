@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
@@ -19,7 +20,17 @@ public class Client extends User {
     private List<Appointment> appointments;
     @Embedded
     private List<BuildingBlock> blocks;
-    
+    public Client(Credentials credentials) {
+        super(credentials);
+        this.points = 0;
+        this.family = new ArrayList<Family>();
+        this.caregivers = new ArrayList<Caregiver>();
+        this.appointments = new ArrayList<Appointment>();
+        this.blocks = new ArrayList<BuildingBlock>();
+    }
+    public Client() {
+        
+    }
     public int getPoints() {
         return points;
     }

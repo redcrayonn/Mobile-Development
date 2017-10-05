@@ -1,8 +1,10 @@
 package nl.inholland.projectapi.model;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.mindrot.jbcrypt.BCrypt;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -19,7 +21,16 @@ public abstract class User extends EntityModel implements Principal {
     private Role role;
     @Embedded
     private List<Message> messages;
-
+    public User(Credentials credentials) {
+        this.name = credentials.getUsername();
+        this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
+        this.apiKey = "";
+        this.messages = new ArrayList<Message>();
+        this.role = Role.client;
+    }
+    public User() {
+   
+    }
     public String getUserName() {
         return name;
     }
