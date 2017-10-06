@@ -14,6 +14,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import nl.inholland.projectapi.model.Role;
+import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.BlockPresenter;
 import nl.inholland.projectapi.presentation.model.BlockView;
@@ -33,6 +35,7 @@ public class BlockResource extends BaseResource {
     }
 
     @GET
+    @Secured({Role.client, Role.family, Role.caregiver})
     @Produces("application/json")
     public List<BlockView> getAll() {
         List<BuildingBlock> blocks = blockService.getAll();
