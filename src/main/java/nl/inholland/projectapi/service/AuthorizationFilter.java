@@ -36,11 +36,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private ResourceInfo resourceInfo;
     
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
-        if(resourceInfo == null) {
-            System.out.println("Dit wordt nooit geprint");
-        }
-        
+    public void filter(ContainerRequestContext requestContext) throws IOException {       
         Class<?> resourceClass = resourceInfo.getResourceClass();
         List<Role> classRoles = extractRoles(resourceClass);
         
