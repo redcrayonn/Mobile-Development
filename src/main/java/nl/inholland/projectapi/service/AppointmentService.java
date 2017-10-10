@@ -66,15 +66,14 @@ public class AppointmentService extends BaseService {
 
     /**
      * Update clients appointment
-     * 
+     *
      * @param appointmentFound
      * @param updatedAppointment
      * @param client
      * @param uriInfo
      * @return
      */
-    public UriBuilder update(Appointment appointmentFound, Appointment updatedAppointment, Client client, UriInfo uriInfo) {
-
+    public void update(Appointment appointmentFound, Appointment updatedAppointment, Client client) {
         try {
             List<Appointment> appointmentList = client.getAppointments();
             for (Iterator<Appointment> iterator = appointmentList.iterator(); iterator.hasNext();) {
@@ -85,7 +84,6 @@ public class AppointmentService extends BaseService {
                     DAO.update(client);
                 }
             }
-            return buildUri(uriInfo, appointmentFound.getId());
         } catch (Exception e) {
             throw new BadRequestException();
         }
@@ -99,7 +97,7 @@ public class AppointmentService extends BaseService {
      * @param uriInfo
      * @return UriBuilder
      */
-    public UriBuilder delete(Appointment appointment, Client client, UriInfo uriInfo) {
+    public void delete(Appointment appointment, Client client) {
         try {
             List<Appointment> appointmentList = client.getAppointments();
 
@@ -111,7 +109,6 @@ public class AppointmentService extends BaseService {
                     }
                 }
             }
-            return buildUri(uriInfo, appointment.getId());
         } catch (Exception e) {
             throw new BadRequestException();
         }

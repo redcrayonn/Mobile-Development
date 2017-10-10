@@ -132,22 +132,18 @@ public class ClientResource extends BaseResource {
     @Path("/{clientId}/appointments/{appointmentId}")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public Response updateAppointment(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, Appointment updatedAppointment, @Context UriInfo uriInfo, @Context SecurityContext context) {
-
         Client clientFound = clientService.getById(clientId, context.getUserPrincipal());
-        Appointment appointmentFound = appointmentService.getById(clientFound, appointmentId);
-        UriBuilder uriBuilder = appointmentService.update(appointmentFound, updatedAppointment, clientFound, uriInfo);
-        return Response.created(uriBuilder.build()).build();
+        appointmentService.update(appointmentService.getById(clientFound, appointmentId), updatedAppointment, clientFound);
+        return Response.ok().build();//Return 200
+
     }
 
     @DELETE
     @Consumes("application/json")
     @Path("/{clientId}/appointments/{appointmentId}")
     @Secured({Role.admin, Role.client, Role.caregiver})
-    public Response deleteAppointment(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, @Context UriInfo uriInfo, @Context SecurityContext context) {
-
+    public void deleteAppointment(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, @Context UriInfo uriInfo, @Context SecurityContext context) {
         Client clientFound = clientService.getById(clientId, context.getUserPrincipal());
-        Appointment appointmentFound = appointmentService.getById(clientFound, appointmentId);
-        UriBuilder uriBuilder = appointmentService.delete(appointmentFound, clientFound, uriInfo);
-        return Response.created(uriBuilder.build()).build();
+        appointmentService.delete(appointmentService.getById(clientFound, appointmentId), clientFound);
     }
 }
