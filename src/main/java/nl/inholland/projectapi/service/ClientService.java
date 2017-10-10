@@ -56,7 +56,7 @@ public class ClientService extends BaseService {
     }
     
     public Client getById(String id, Principal principal) {
-        Client client = dao.get(id);
+        Client client = dao.getById(id);
         requireResult(client, "Client not found");   
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
         return client;
@@ -76,7 +76,7 @@ public class ClientService extends BaseService {
                     throw new BadRequestException("Bad patch request, use PUT for password changes");
                 }
             }
-            Client client = dao.get(userId);
+            Client client = dao.getById(userId);
             requireResult(client, "Client not found");//Get client to be patched from userId
             checkPermissions(client, userDAO.getByUsername(principal.getName()));
             ObjectMapper mapper = new ObjectMapper();//Map client to json
@@ -91,7 +91,7 @@ public class ClientService extends BaseService {
     }
 
     public void deleteById(ObjectId id) {
-        Client client = dao.get(id);
+        Client client = dao.getById(id.toHexString());
         requireResult(client, "Client not found");
         dao.delete(client);
     }
