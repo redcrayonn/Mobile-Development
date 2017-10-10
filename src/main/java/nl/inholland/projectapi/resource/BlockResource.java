@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -23,6 +24,7 @@ import nl.inholland.projectapi.service.BlockService;
 import org.bson.types.ObjectId;
 
 @Path("/api/v1/blocks")
+@Secured({Role.admin})
 public class BlockResource extends BaseResource {
 
     private final BlockService blockService;
@@ -35,10 +37,13 @@ public class BlockResource extends BaseResource {
     }
 
     @GET
-    @Secured({Role.client, Role.family, Role.caregiver})
     @Produces("application/json")
-    public List<BlockView> getAll() {
+    public List<BlockView> getAll(@QueryParam("count") int count) {
         List<BuildingBlock> blocks = blockService.getAll();
+        if(count != 0) {
+            List<BuildingBlock> reducedList = blockService.reduceList(blocks, count);
+            return blockPresenter.present(reducedList);
+        }
         return blockPresenter.present(blocks);
     }
 

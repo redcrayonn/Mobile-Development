@@ -25,7 +25,7 @@ public abstract class User extends EntityModel implements Principal {
     public User(Credentials credentials) {
         this.name = credentials.getUsername();
         this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
-        this.apiKey = new APIKey("", new Date(0));
+        this.apiKey = new APIKey();
         this.messages = new ArrayList<Message>();
         this.role = Role.client;
     }

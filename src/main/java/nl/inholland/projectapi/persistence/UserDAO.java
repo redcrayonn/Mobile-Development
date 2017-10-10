@@ -5,20 +5,13 @@ import nl.inholland.projectapi.model.User;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
-/**
- *
- * @author student
- */
-
-
 public class UserDAO extends BaseDAO<User>
 { 
     @Inject
     public UserDAO(Datastore ds) {
         super(User.class, ds);
     } 
-    public User getByAPIKey(String token)
-    {
+    public User getByAPIKey(String token) {
         Query<User> query = createQuery().field("apiKey.authtoken").equal(token);
         return findOne(query);      
     }

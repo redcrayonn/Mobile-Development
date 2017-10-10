@@ -44,9 +44,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         List<Role> methodRoles = extractRoles(resourceMethod);
        
         Principal userPrincipal = requestContext.getSecurityContext().getUserPrincipal();
-        
         User user = userDAO.getByUsername(userPrincipal.getName());
-        
         try {
             if(methodRoles.isEmpty()) {
                 if(!classRoles.contains(user.getRole())) {

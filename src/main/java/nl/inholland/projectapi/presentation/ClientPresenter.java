@@ -26,14 +26,14 @@ public class ClientPresenter extends BasePresenter {
         view.id = client.getId();
         view.name = client.getName();
         view.points = client.getPoints();
-        view.password = client.getPassword();
-        view.role = client.getRole();
-        view.apiKey = client.getApiKey();        
-        view.messages = client.getMessages();
-        view.family = client.getFamily();
-        view.appointments = client.getAppointments();
-        view.caregivers = client.getCaregivers();
-        view.blocks = client.getBuildingBlocks();
+//        view.password = client.getPassword();
+//        view.role = client.getRole();
+//        view.apiKey = client.getApiKey();        
+//        view.messages = client.getMessages();
+//        view.family = client.getFamily();
+//        view.appointments = client.getAppointments();
+//        view.caregivers = client.getCaregivers();
+//        view.blocks = client.getBuildingBlocks();
 
         return view;
     }

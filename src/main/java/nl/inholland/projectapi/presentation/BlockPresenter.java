@@ -15,7 +15,6 @@ public class BlockPresenter extends BasePresenter {
         view.id = block.getId();
         view.name = block.getName();
         view.description = block.getDescription();
-        view.activities = block.getActivities();
         return view;
     }
 

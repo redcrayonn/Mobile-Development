@@ -18,11 +18,31 @@ public class Activity extends EntityModel {
     private List<Like> likes = new ArrayList<Like>();
     @Embedded
     private List<Comment> comments = new ArrayList<Comment>();
+    
+    public Activity() {
+        this.status = Status.pending;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public List<Like> getLikes() {
         return likes;
     }
-
+        
     public void setLikes(List<Like> likes) {
         this.likes = likes;
     }
@@ -41,21 +61,5 @@ public class Activity extends EntityModel {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    }    
 }

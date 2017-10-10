@@ -7,7 +7,8 @@ public class APIKey {
     private Date datetime;
     
     public APIKey() {
-        
+        this.authtoken = "";
+        this.datetime = new Date(0);
     }
 
     public APIKey(String authtoken, Date datetime) {
