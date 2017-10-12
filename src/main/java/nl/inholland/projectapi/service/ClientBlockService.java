@@ -21,12 +21,12 @@ public class ClientBlockService extends BaseService {
         this.userDAO = userDAO;
     }
 
-    public List<BuildingBlock> getAll(String clientId, Principal principal) {
+    public List<BuildingBlock> getAll(String clientId, Principal principal, int count) {
         Client client = clientDAO.get(clientId);
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
         List<BuildingBlock> blocks = client.getBuildingBlocks();
         requireResult(blocks, "Not Found");
-        return blocks;
+        return reduceList(blocks, count);
     }
 
     public BuildingBlock getById(String clientId, String blockId, Principal principal) {

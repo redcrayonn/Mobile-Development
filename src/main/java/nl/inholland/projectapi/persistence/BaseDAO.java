@@ -8,7 +8,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 
 @Singleton
-public abstract class BaseDAO< T extends EntityModel> extends BasicDAO<T, ObjectId> {
+public abstract class BaseDAO<T extends EntityModel> extends BasicDAO<T, ObjectId> {
 
     public BaseDAO(Class<T> entityClass, Datastore ds) {
         super(entityClass, ds);

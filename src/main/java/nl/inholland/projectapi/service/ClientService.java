@@ -5,14 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import java.io.IOException;
+import java.net.URI;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
+import nl.inholland.projectapi.model.Activity;
+import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.persistence.BlockDAO;
@@ -34,20 +37,28 @@ public class ClientService extends BaseService {
         this.blockDAO = blockDAO;
     }
 
-    public List<Client> getAll() {
+    public List<Client> getAll(int count) {
+
         List<Client> clients = dao.getAllClients();
         requireResult(clients, "Not Found");
-        return clients;
+        return reduceList(clients, count);
     }
 
-    public UriBuilder create(Credentials credentials, UriInfo uriInfo) {
+    public URI create(Credentials credentials, UriInfo uriInfo) {
         if (userDAO.getByUsername(credentials.getUsername()) != null) {
             throw new ClientErrorException(409);
         }
         Client client;
         try {
-            client = new Client(credentials);        
-            client.setBuildingBlocks(blockDAO.getAll());
+            client = new Client(credentials);
+            List<BuildingBlock> blocks = new ArrayList<BuildingBlock>(blockDAO.getAll());
+            for(BuildingBlock b : blocks) {
+                b.setId(new ObjectId());
+                for(Activity a : b.getActivities()) {
+                    a.setId(new ObjectId());
+                }
+            }
+            client.setBuildingBlocks(blocks);
         } catch (Exception e) {
             throw new BadRequestException();
         }

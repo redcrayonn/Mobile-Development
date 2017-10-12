@@ -1,11 +1,11 @@
 package nl.inholland.projectapi.service;
 
+import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Appointment;
 import nl.inholland.projectapi.model.Client;
@@ -51,7 +51,7 @@ public class AppointmentService extends BaseService {
      * @param uriInfo
      * @return UriBuilder
      */
-    public UriBuilder create(Appointment appointment, Client client, UriInfo uriInfo) {
+    public URI create(Appointment appointment, Client client, UriInfo uriInfo) {
 
         try {
             List<Appointment> appointmentList = client.getAppointments();

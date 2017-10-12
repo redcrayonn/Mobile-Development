@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -13,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -50,8 +50,8 @@ public class BlockResource extends BaseResource {
     @POST
     @Consumes("application/json")
     public Response create(BuildingBlock newBlock, @Context UriInfo uriInfo) {
-        UriBuilder builder = blockService.create(newBlock, uriInfo);
-        return Response.created(builder.build()).build();//Return 201 response with the new location in header
+        URI uri = blockService.create(newBlock, uriInfo);
+        return Response.created(uri).build();//Return 201 response with the new location in header
     }
 
     @PUT

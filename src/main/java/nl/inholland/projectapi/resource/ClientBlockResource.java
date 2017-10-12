@@ -39,11 +39,7 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
-        List<BuildingBlock> blocks = clientBlockService.getAll(clientId, context.getUserPrincipal());
-        if (count != 0) {
-            List<BuildingBlock> reducedList = clientBlockService.reduceList(blocks, count);
-            return blockPresenter.present(reducedList);
-        }
+        List<BuildingBlock> blocks = clientBlockService.getAll(clientId, context.getUserPrincipal(), count);
         return blockPresenter.present(blocks);
     }
 

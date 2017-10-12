@@ -1,10 +1,10 @@
 package nl.inholland.projectapi.service;
 
+import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
@@ -36,7 +36,7 @@ public class BlockService extends BaseService {
         return block;
     }
 
-    public UriBuilder create(BuildingBlock block, UriInfo uriInfo) {
+    public URI create(BuildingBlock block, UriInfo uriInfo) {
         for (Activity a : block.getActivities()) {
             a.setId(new ObjectId());
         }
