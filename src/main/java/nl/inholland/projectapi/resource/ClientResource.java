@@ -56,36 +56,37 @@ public class ClientResource extends BaseResource {
     }
 
     @GET
-    @Path("/{userId}")
+    @Path("/{clientId}")
     @Produces("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
-    public ClientView getById(@PathParam("userId") String userId, @Context SecurityContext context) {
-        Client client = clientService.getById(userId, context.getUserPrincipal());
+    public ClientView getById(@PathParam("clientId") String clientId, @Context SecurityContext context) {
+        System.out.println(clientId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
         return clientPresenter.present(client);
     }
 
     @PUT
-    @Path("/{userId}")
+    @Path("/{clientId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.client})
-    public Response update(@PathParam("userId") String userId, Credentials credentials, @Context SecurityContext context) {
-        clientService.update(userId, credentials, context.getUserPrincipal());
+    public Response update(@PathParam("clientId") String clientId, Credentials credentials, @Context SecurityContext context) {
+        clientService.update(clientId, credentials, context.getUserPrincipal());
         return Response.ok().build();
     }
 
     @PATCH
-    @Path("/{userId}")
+    @Path("/{clientId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
-    public Response patch(@PathParam("userId") String userId, JsonNode patchRequest, @Context SecurityContext context) {
-        clientService.patch(userId, patchRequest, context.getUserPrincipal());
+    public Response patch(@PathParam("clientId") String clientId, JsonNode patchRequest, @Context SecurityContext context) {
+        clientService.patch(clientId, patchRequest, context.getUserPrincipal());
         return Response.ok().build();
     }
 
     @DELETE
-    @Path("/{userId}")
+    @Path("/{clientId}")
     @Secured({Role.admin})
-    public void delete(@PathParam("userId") ObjectId id) {
-        clientService.deleteById(id);
+    public void delete(@PathParam("clientId") ObjectId clientId) {
+        clientService.deleteById(clientId);
     }
 }

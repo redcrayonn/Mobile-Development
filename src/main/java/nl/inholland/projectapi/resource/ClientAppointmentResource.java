@@ -24,7 +24,7 @@ import nl.inholland.projectapi.presentation.model.AppointmentView;
 import nl.inholland.projectapi.service.AppointmentService;
 import nl.inholland.projectapi.service.ClientService;
 
-@Path("/api/v1/clients/{clientId}")
+@Path("/api/v1/clients/{clientId}/appointments")
 public class ClientAppointmentResource extends BaseResource {
     
     private final ClientService clientService;
@@ -40,7 +40,6 @@ public class ClientAppointmentResource extends BaseResource {
     
     @GET
     @Produces("application/json")
-    @Path("/appointments/")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public List<AppointmentView> getAll(@PathParam("clientId") String clientId, @Context SecurityContext context) {
         return appointmentPresenter.present(clientService.getById(clientId, context.getUserPrincipal()).getAppointments());
@@ -48,7 +47,6 @@ public class ClientAppointmentResource extends BaseResource {
     
     @POST
     @Consumes("application/json")
-    @Path("/{clientId}/appointments/")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public Response createAppointment(@PathParam("clientId") String clientId, Appointment appointment, @Context UriInfo uriInfo, @Context SecurityContext context) {
         URI uri = appointmentService.create(appointment, clientService.getById(clientId, context.getUserPrincipal()), uriInfo);
@@ -57,7 +55,7 @@ public class ClientAppointmentResource extends BaseResource {
     
     @GET
     @Produces("application/json")
-    @Path("/appointments/{appointmentId}")
+    @Path("/{appointmentId}")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public AppointmentView getById(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, @Context SecurityContext context) {
         return appointmentPresenter.present(appointmentService.getById(clientService.getById(clientId, context.getUserPrincipal()), appointmentId));
@@ -65,7 +63,7 @@ public class ClientAppointmentResource extends BaseResource {
 
     @PUT
     @Consumes("application/json")
-    @Path("/{clientId}/appointments/{appointmentId}")
+    @Path("/{appointmentId}")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public Response updateAppointment(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, Appointment updatedAppointment, @Context UriInfo uriInfo, @Context SecurityContext context) {
         Client clientFound = clientService.getById(clientId, context.getUserPrincipal());
@@ -75,7 +73,7 @@ public class ClientAppointmentResource extends BaseResource {
 
     @DELETE
     @Consumes("application/json")
-    @Path("/{clientId}/appointments/{appointmentId}")
+    @Path("/{appointmentId}")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public void deleteAppointment(@PathParam("clientId") String clientId, @PathParam("appointmentId") String appointmentId, @Context UriInfo uriInfo, @Context SecurityContext context) {
         Client clientFound = clientService.getById(clientId, context.getUserPrincipal());

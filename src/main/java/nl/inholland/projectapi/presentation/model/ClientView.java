@@ -1,16 +1,17 @@
 package nl.inholland.projectapi.presentation.model;
 
+import java.util.List;
+import nl.inholland.projectapi.model.Role;
+
 public class ClientView extends BaseView {
 
     public String id;
     public String name;
     public int points;
-//    public String password;
-//    public Role role;
-//    public APIKey apiKey;
-//    public List<Message> messages;
-//    public List<Family> family;
-//    public List<Appointment> appointments;
-//    public List<Caregiver> caregivers;
-//    public List<BuildingBlock> blocks;
+    public Role role;
+    public List<MessageView> messages;
+    public List<FamilyView> family;
+    public List<AppointmentView> appointments;
+    public List<CaregiverView> caregivers;
+    public List<BlockView> blocks;
 }

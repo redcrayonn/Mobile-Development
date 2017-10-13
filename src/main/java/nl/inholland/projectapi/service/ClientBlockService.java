@@ -32,7 +32,7 @@ public class ClientBlockService extends BaseService {
     public BuildingBlock getById(String clientId, String blockId, Principal principal) {
         Client client = clientDAO.get(clientId);
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
-        for (BuildingBlock b : client.getBuildingBlocks()) { //Nog niet lekker
+        for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
                 return b;
             }
@@ -44,7 +44,7 @@ public class ClientBlockService extends BaseService {
     public List<Activity> getActivities(String clientId, String blockId, Principal principal) {
         Client client = clientDAO.get(clientId);
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
-        for (BuildingBlock b : client.getBuildingBlocks()) { //Nog niet lekker
+        for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
                 return b.getActivities();
             }

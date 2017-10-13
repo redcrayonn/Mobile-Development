@@ -15,6 +15,8 @@ public class Message extends EntityModel {
     private String message;
     @NotEmpty
     private Date datetime;
+    @NotEmpty
+    private boolean read;
 
     public String getSenderId() {
         return senderId.toHexString();
@@ -46,6 +48,14 @@ public class Message extends EntityModel {
 
     public void setDateTime(Date dateTime) {
         this.datetime = dateTime;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 
 }

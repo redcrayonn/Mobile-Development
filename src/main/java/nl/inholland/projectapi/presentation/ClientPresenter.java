@@ -2,13 +2,30 @@ package nl.inholland.projectapi.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.presentation.model.ClientView;
 
 public class ClientPresenter extends BasePresenter {
-
-    public ClientPresenter() {
-
+    
+    private final MessagePresenter messagePresenter;
+    private final FamilyPresenter familyPresenter;
+    private final AppointmentPresenter appointmentPresenter;
+    private final CaregiverPresenter caregiverPresenter;
+    private final BlockPresenter blockPresenter;
+    
+    @Inject
+    public ClientPresenter(
+            MessagePresenter messagePresenter,
+            FamilyPresenter familyPresenter,
+            AppointmentPresenter appointmentPresenter,
+            CaregiverPresenter caregiverPresenter,
+            BlockPresenter blockPresenter) {
+        this.messagePresenter = messagePresenter;
+        this.familyPresenter = familyPresenter;
+        this.appointmentPresenter = appointmentPresenter;
+        this.caregiverPresenter = caregiverPresenter;
+        this.blockPresenter = blockPresenter;
     }
 
     public List<ClientView> present(List<Client> clients) {
@@ -26,14 +43,12 @@ public class ClientPresenter extends BasePresenter {
         view.id = client.getId();
         view.name = client.getName();
         view.points = client.getPoints();
-//        view.password = client.getPassword();
-//        view.role = client.getRole();
-//        view.apiKey = client.getApiKey();        
-//        view.messages = client.getMessages();
-//        view.family = client.getFamily();
-//        view.appointments = client.getAppointments();
-//        view.caregivers = client.getCaregivers();
-//        view.blocks = client.getBuildingBlocks();
+        view.role = client.getRole();
+        view.messages = messagePresenter.present(client.getMessages());
+        view.family = familyPresenter.present(client.getFamily());
+        view.appointments = appointmentPresenter.present(client.getAppointments());
+        view.caregivers = caregiverPresenter.present(client.getCaregivers());
+        view.blocks = blockPresenter.present(client.getBuildingBlocks());
 
         return view;
     }

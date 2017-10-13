@@ -2,12 +2,17 @@ package nl.inholland.projectapi.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.model.BlockView;
 
 public class BlockPresenter extends BasePresenter {
 
-    public BlockPresenter() {
+    private final ActivityPresenter activityPresenter;
+    
+    @Inject
+    public BlockPresenter(ActivityPresenter activityPresenter) {
+        this.activityPresenter = activityPresenter;
     }
 
     public BlockView present(BuildingBlock block) {
@@ -15,6 +20,8 @@ public class BlockPresenter extends BasePresenter {
         view.id = block.getId();
         view.name = block.getName();
         view.description = block.getDescription();
+        view.imageURL = block.getImageURL();
+        view.activities = activityPresenter.present(block.getActivities());
         return view;
     }
 

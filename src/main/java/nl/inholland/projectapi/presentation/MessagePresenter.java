@@ -7,12 +7,15 @@ import nl.inholland.projectapi.presentation.model.MessageView;
 
 public class MessagePresenter extends BasePresenter
 {
+    
     public MessageView present(Message message) {
         MessageView view = new MessageView();
+        view.id = message.getId();
         view.receiverId = message.getReceiverId();
         view.senderId = message.getSenderId();
         view.message = message.getMessage();
         view.datetime = message.getDateTime();
+        view.read = message.isRead();
         return view;
     }
     
