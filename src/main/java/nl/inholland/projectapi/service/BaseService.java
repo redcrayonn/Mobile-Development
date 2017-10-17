@@ -36,22 +36,14 @@ public abstract class BaseService {
     protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
         if (user instanceof Client) {
             checkClientPermissions((Client) user, accesingUser);
-        } else if (user instanceof Caregiver) {
-            checkCaregiverPermissions((Caregiver) user, accesingUser);
-        } else if (user instanceof Family) {
-            checkFamilyPermissions((Family) user, accesingUser);
+        } else {
+            checkUserPermissions(user, accesingUser);
         }
 
     }
-
-    private void checkCaregiverPermissions(Caregiver caregiver, User accesingUser) throws ForbiddenException {
-        if (!caregiver.getId().equals(accesingUser.getId())) {
-            throw new ForbiddenException("User privileges not sufficient");
-        }
-    }
-
-    private void checkFamilyPermissions(Family family, User accesingUser) throws ForbiddenException {
-        if (!family.getId().equals(accesingUser.getId())) {
+    
+    private void checkUserPermissions(User user, User accesingUser) throws ForbiddenException {
+        if(!user.getId().equals(accesingUser.getId())) {
             throw new ForbiddenException("User privileges not sufficient");
         }
     }
