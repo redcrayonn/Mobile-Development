@@ -22,12 +22,12 @@ public abstract class User extends EntityModel implements Principal {
     private Role role;
     @Embedded
     private List<Message> messages;
-    public User(Credentials credentials) {
+    public User(Credentials credentials, Role role) {
         this.name = credentials.getUsername();
         this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
         this.apiKey = new APIKey();
         this.messages = new ArrayList<Message>();
-        this.role = Role.client;
+        this.role = role;
     }
     public User() {
    
@@ -45,7 +45,7 @@ public abstract class User extends EntityModel implements Principal {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public APIKey getApiKey() {

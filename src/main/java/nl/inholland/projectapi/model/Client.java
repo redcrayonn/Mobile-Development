@@ -21,7 +21,7 @@ public class Client extends User {
     @Embedded
     private List<BuildingBlock> blocks;
     public Client(Credentials credentials) {
-        super(credentials);
+        super(credentials, Role.client);
         this.points = 0;
         this.family = new ArrayList<Family>();
         this.caregivers = new ArrayList<Caregiver>();

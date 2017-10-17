@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 public class Caregiver extends User {
 
     public Caregiver(Credentials credentials) {
-        super(credentials);
+        super(credentials, Role.caregiver);
         this.appointments = new ArrayList<Appointment>();
     }
     public Caregiver() {
