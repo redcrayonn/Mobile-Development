@@ -12,12 +12,12 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import org.bson.types.ObjectId;
 
-public class AppointmentService extends BaseService {
+public class ClientAppointmentService extends BaseService {
 
     private ClientDAO DAO;
 
     @Inject
-    public AppointmentService(ClientDAO DAO) {
+    public ClientAppointmentService(ClientDAO DAO) {
         this.DAO = DAO;
     }
 

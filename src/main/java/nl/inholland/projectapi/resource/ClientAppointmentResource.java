@@ -21,18 +21,18 @@ import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.AppointmentPresenter;
 import nl.inholland.projectapi.presentation.model.AppointmentView;
-import nl.inholland.projectapi.service.AppointmentService;
+import nl.inholland.projectapi.service.ClientAppointmentService;
 import nl.inholland.projectapi.service.ClientService;
 
 @Path("/api/v1/clients/{clientId}/appointments")
 public class ClientAppointmentResource extends BaseResource {
     
     private final ClientService clientService;
-    private final AppointmentService appointmentService;
+    private final ClientAppointmentService appointmentService;
     private final AppointmentPresenter appointmentPresenter;
 
     @Inject
-    public ClientAppointmentResource(ClientService clientService, AppointmentService appointmentService, AppointmentPresenter appointmentPresenter) {
+    public ClientAppointmentResource(ClientService clientService, ClientAppointmentService appointmentService, AppointmentPresenter appointmentPresenter) {
         this.clientService = clientService;
         this.appointmentService = appointmentService;
         this.appointmentPresenter = appointmentPresenter;

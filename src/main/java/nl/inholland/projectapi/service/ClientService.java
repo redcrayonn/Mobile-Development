@@ -72,6 +72,7 @@ public class ClientService extends BaseService {
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
         return client;
     }
+    
     public void update(String userId, Credentials credentials, Principal principal) {
         Client client = getById(userId, principal);
         client.setUserName(credentials.getUsername());

@@ -1,22 +1,27 @@
 package nl.inholland.projectapi.resource;
 
+import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
-import nl.inholland.projectapi.presentation.ActivityPresenter;
 import nl.inholland.projectapi.presentation.BlockPresenter;
-import nl.inholland.projectapi.presentation.model.ActivityView;
 import nl.inholland.projectapi.presentation.model.BlockView;
 import nl.inholland.projectapi.service.ClientBlockService;
+import nl.inholland.projectapi.service.ClientService;
 
 @Path("/api/v1/clients/{clientId}/blocks")
 @Secured({Role.admin, Role.client, Role.caregiver})
@@ -24,13 +29,13 @@ public class ClientBlockResource extends BaseResource {
 
     private final ClientBlockService clientBlockService;
     private final BlockPresenter blockPresenter;
-    private final ActivityPresenter activityPresenter;
-
+    private final ClientService clientService;
+    
     @Inject
-    public ClientBlockResource(ClientBlockService clientBlockService, BlockPresenter blockPresenter, ActivityPresenter activityPresenter) {
+    public ClientBlockResource(ClientBlockService clientBlockService, ClientService clientService, BlockPresenter blockPresenter) {
         this.clientBlockService = clientBlockService;
         this.blockPresenter = blockPresenter;
-        this.activityPresenter = activityPresenter;
+        this.clientService = clientService;
     }
 
     @GET
@@ -39,10 +44,21 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
-        List<BuildingBlock> blocks = clientBlockService.getAll(clientId, context.getUserPrincipal(), count);
+        List<BuildingBlock> blocks = clientBlockService.getAll(clientService.getById(clientId, context.getUserPrincipal()), count);
         return blockPresenter.present(blocks);
     }
-
+    
+    @POST
+    @Consumes("application/json")
+    public Response create(
+            @PathParam("clientId") String clientId,
+            @QueryParam("blockId") String blockId,
+            @Context UriInfo uriInfo,
+            @Context SecurityContext context) {
+        URI uri = clientBlockService.create(clientService.getById(clientId, context.getUserPrincipal()), blockId, uriInfo);
+        return Response.created(uri).build();
+    }
+    
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
@@ -50,17 +66,16 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @Context SecurityContext context) {
-        return blockPresenter.present(clientBlockService.getById(clientId, blockId, context.getUserPrincipal()));
+        return blockPresenter.present(clientBlockService.getById(clientService.getById(clientId, context.getUserPrincipal()), blockId));
     }
     
-    //new file later
-    @GET
-    @Path("/{blockId}/activities")
+    @DELETE
+    @Path("/{blockId}")
     @Produces("application/json")
-    public List<ActivityView> getActivities(
+    public void delete(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @Context SecurityContext context) {
-        return activityPresenter.present(clientBlockService.getActivities(clientId, blockId, context.getUserPrincipal()));
-    }
+        clientBlockService.delete(clientService.getById(clientId, context.getUserPrincipal()), blockId);
+    }    
 }

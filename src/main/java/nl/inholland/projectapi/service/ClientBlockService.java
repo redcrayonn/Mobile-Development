@@ -1,55 +1,55 @@
 package nl.inholland.projectapi.service;
 
-import java.security.Principal;
+import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import nl.inholland.projectapi.model.Activity;
+import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.persistence.BlockDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
-import nl.inholland.projectapi.persistence.UserDAO;
+import org.bson.types.ObjectId;
 
 public class ClientBlockService extends BaseService {
 
     private final ClientDAO clientDAO;
-    private final UserDAO userDAO;
+    private final BlockDAO blockDAO;
 
     @Inject
-    public ClientBlockService(ClientDAO clientDAO, UserDAO userDAO) {
+    public ClientBlockService(ClientDAO clientDAO, BlockDAO blockDAO) {
         this.clientDAO = clientDAO;
-        this.userDAO = userDAO;
+        this.blockDAO = blockDAO;
     }
 
-    public List<BuildingBlock> getAll(String clientId, Principal principal, int count) {
-        Client client = clientDAO.get(clientId);
-        checkPermissions(client, userDAO.getByUsername(principal.getName()));
+    public List<BuildingBlock> getAll(Client client, int count) {
         List<BuildingBlock> blocks = client.getBuildingBlocks();
         requireResult(blocks, "Not Found");
         return reduceList(blocks, count);
     }
-
-    public BuildingBlock getById(String clientId, String blockId, Principal principal) {
-        Client client = clientDAO.get(clientId);
-        checkPermissions(client, userDAO.getByUsername(principal.getName()));
+    
+    public URI create(Client client, String blockId, UriInfo uriInfo) {
+        requireResult(client, "Client not found");
+        BuildingBlock block = blockDAO.get(blockId);
+        requireResult(block, "Block not found");
+        block.setId(new ObjectId());
+        block.getActivities().forEach(a -> a.setId(new ObjectId()));
+        client.getBuildingBlocks().add(block);
+        clientDAO.update(client);
+        return buildUri(uriInfo, block.getId()); 
+    }
+    
+    public BuildingBlock getById(Client client, String blockId) {
         for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
                 return b;
             }
         }
         throw new NotFoundException("Not found");
-    }
+    }   
     
-    //new file later
-    public List<Activity> getActivities(String clientId, String blockId, Principal principal) {
-        Client client = clientDAO.get(clientId);
-        checkPermissions(client, userDAO.getByUsername(principal.getName()));
-        for (BuildingBlock b : client.getBuildingBlocks()) {
-            if (b.getId().equals(blockId)) {
-                return b.getActivities();
-            }
-        }
-        throw new NotFoundException("Not found");        
+    public void delete(Client client, String blockId) {
+        client.getBuildingBlocks().removeIf(m -> m.getId().equals(blockId));
+        clientDAO.update(client);
     }
-    
 }

@@ -25,7 +25,7 @@ public abstract class BaseService {
             throw new NotFoundException(message);
         }
     }
-
+    
     public <T> List<T> reduceList(List<T> list, int count) {
         if (list.size() < count || count <= 0) {
             return list;

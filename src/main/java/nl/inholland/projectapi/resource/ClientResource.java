@@ -60,7 +60,6 @@ public class ClientResource extends BaseResource {
     @Produces("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
     public ClientView getById(@PathParam("clientId") String clientId, @Context SecurityContext context) {
-        System.out.println(clientId);
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         return clientPresenter.present(client);
     }
