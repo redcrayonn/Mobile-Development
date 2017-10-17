@@ -24,7 +24,6 @@ import nl.inholland.projectapi.service.ClientBlockService;
 import nl.inholland.projectapi.service.ClientService;
 
 @Path("/api/v1/clients/{clientId}/blocks")
-@Secured({Role.admin, Role.client, Role.caregiver})
 public class ClientBlockResource extends BaseResource {
 
     private final ClientBlockService clientBlockService;
@@ -39,6 +38,7 @@ public class ClientBlockResource extends BaseResource {
     }
 
     @GET
+    @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     @Produces("application/json")
     public List<BlockView> getAll(
             @PathParam("clientId") String clientId,
@@ -49,6 +49,7 @@ public class ClientBlockResource extends BaseResource {
     }
     
     @POST
+    @Secured({Role.admin, Role.client, Role.caregiver})
     @Consumes("application/json")
     public Response create(
             @PathParam("clientId") String clientId,
@@ -60,6 +61,7 @@ public class ClientBlockResource extends BaseResource {
     }
     
     @GET
+    @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     @Path("/{blockId}")
     @Produces("application/json")
     public BlockView get(
@@ -70,6 +72,7 @@ public class ClientBlockResource extends BaseResource {
     }
     
     @DELETE
+    @Secured({Role.admin, Role.client, Role.caregiver})
     @Path("/{blockId}")
     @Produces("application/json")
     public void delete(

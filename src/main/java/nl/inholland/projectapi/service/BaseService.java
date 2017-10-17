@@ -25,7 +25,7 @@ public abstract class BaseService {
             throw new NotFoundException(message);
         }
     }
-    
+
     public <T> List<T> reduceList(List<T> list, int count) {
         if (list.size() < count || count <= 0) {
             return list;
@@ -33,7 +33,22 @@ public abstract class BaseService {
         return list.subList(0, count);
     }
 
-    protected void checkPermissions(Client client, User accesingUser) throws ForbiddenException {
+    protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
+        if (user instanceof Client) {
+            checkClientPermissions((Client) user, accesingUser);
+        } else {
+            checkUserPermissions(user, accesingUser);
+        }
+
+    }
+    
+    private void checkUserPermissions(User user, User accesingUser) throws ForbiddenException {
+        if(!user.getId().equals(accesingUser.getId())) {
+            throw new ForbiddenException("User privileges not sufficient");
+        }
+    }
+
+    private void checkClientPermissions(Client client, User accesingUser) throws ForbiddenException {
         switch (accesingUser.getRole()) {
             case admin:
                 return;

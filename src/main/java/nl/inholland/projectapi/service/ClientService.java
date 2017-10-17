@@ -22,7 +22,6 @@ import nl.inholland.projectapi.persistence.BlockDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class ClientService extends BaseService {
 
@@ -76,7 +75,7 @@ public class ClientService extends BaseService {
     public void update(String userId, Credentials credentials, Principal principal) {
         Client client = getById(userId, principal);
         client.setUserName(credentials.getUsername());
-        client.setPassword(BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt()));
+        client.setPassword(credentials.getPassword());
         client.setApiKey(new APIKey());
         dao.update(client);
     }

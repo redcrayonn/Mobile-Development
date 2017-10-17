@@ -1,24 +1,26 @@
 package nl.inholland.projectapi.service;
 
-import java.security.Principal;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.persistence.ClientDAO;
-import nl.inholland.projectapi.persistence.UserDAO;
 
 public class ClientBlockActivityService extends BaseService {
     
     private final ClientDAO clientDAO;
-    private final UserDAO userDAO;
 
     @Inject
-    public ClientBlockActivityService(ClientDAO clientDAO, UserDAO userDAO) {
+    public ClientBlockActivityService(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
-        this.userDAO = userDAO;
     }    
     
     public List<Activity> getActivities(Client client, String blockId) {
@@ -37,5 +39,25 @@ public class ClientBlockActivityService extends BaseService {
             }
         }
         throw new NotFoundException("Not found");
+    }
+    
+    public void patch(Client client, String blockId, Activity activity, JsonNode patchRequest) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonActivity = mapper.valueToTree(activity);
+            JsonPatch patch = JsonPatch.fromJson(patchRequest);
+            JsonNode patched = patch.apply(jsonActivity);
+            Activity updatedActivity = mapper.treeToValue(patched, Activity.class);
+            for(BuildingBlock b : client.getBuildingBlocks()) {
+                if(b.getId().equals(blockId)) {
+                    b.getActivities().remove(activity);
+                    b.getActivities().add(updatedActivity);
+                }
+            }
+            clientDAO.update(client);
+
+        } catch (JsonPatchException | IOException | IllegalArgumentException | NullPointerException ex) {
+            throw new BadRequestException("Bad patch request");
+        }
     }
 }
