@@ -4,10 +4,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import nl.inholland.projectapi.model.Caregiver;
-import nl.inholland.projectapi.model.Client;
-import org.mongodb.morphia.Datastore;
 import nl.inholland.projectapi.model.Role;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
 public class CaregiverDAO extends BaseDAO<Caregiver> {

@@ -27,7 +27,7 @@ import org.bson.types.ObjectId;
 
 @Path("/api/v1/caregivers")
 @Secured({Role.admin, Role.caregiver})
-public class CaregiverResource {
+public class CaregiverResource extends BaseResource {
 
     private final CaregiverService caregiverService;
     private final CaregiverPresenter caregiverPresenter;
