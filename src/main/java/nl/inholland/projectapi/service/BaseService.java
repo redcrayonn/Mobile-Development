@@ -25,7 +25,7 @@ public abstract class BaseService {
             throw new NotFoundException(message);
         }
     }
-    
+
     public <T> List<T> reduceList(List<T> list, int count) {
         if (list.size() < count || count <= 0) {
             return list;
@@ -33,7 +33,30 @@ public abstract class BaseService {
         return list.subList(0, count);
     }
 
-    protected void checkPermissions(Client client, User accesingUser) throws ForbiddenException {
+    protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
+        if (user instanceof Client) {
+            checkClientPermissions((Client) user, accesingUser);
+        } else if (user instanceof Caregiver) {
+            checkCaregiverPermissions((Caregiver) user, accesingUser);
+        } else if (user instanceof Family) {
+            checkFamilyPermissions((Family) user, accesingUser);
+        }
+
+    }
+
+    private void checkCaregiverPermissions(Caregiver caregiver, User accesingUser) throws ForbiddenException {
+        if (!caregiver.getId().equals(accesingUser.getId())) {
+            throw new ForbiddenException("User privileges not sufficient");
+        }
+    }
+
+    private void checkFamilyPermissions(Family family, User accesingUser) throws ForbiddenException {
+        if (!family.getId().equals(accesingUser.getId())) {
+            throw new ForbiddenException("User privileges not sufficient");
+        }
+    }
+
+    private void checkClientPermissions(Client client, User accesingUser) throws ForbiddenException {
         switch (accesingUser.getRole()) {
             case admin:
                 return;
