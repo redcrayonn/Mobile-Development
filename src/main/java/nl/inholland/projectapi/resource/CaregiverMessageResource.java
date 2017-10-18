@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,22 +21,29 @@ import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.MessagePresenter;
 import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.CaregiverMessageService;
+import nl.inholland.projectapi.service.CaregiverService;
 
 @Path("/api/v1/caregivers/{caregiverId}/messages")
-@Secured({Role.admin, Role.caregiver})
 public class CaregiverMessageResource extends BaseResource {
 
+    private final CaregiverService caregiverService;
     private final CaregiverMessageService caregiverMessageService;
     private final MessagePresenter messagePresenter;
 
     @Inject
-    public CaregiverMessageResource(CaregiverMessageService caregiverMessageService, MessagePresenter messagePresenter) {
+    public CaregiverMessageResource(
+            CaregiverMessageService caregiverMessageService, 
+            CaregiverService caregiverService, 
+            MessagePresenter messagePresenter) {
+        
+        this.caregiverService = caregiverService;
         this.caregiverMessageService = caregiverMessageService;
         this.messagePresenter = messagePresenter;
     }
 
     @GET
     @Produces("application/json")
+    @Secured({Role.admin, Role.caregiver})
     public List<MessageView> getAll(
             @QueryParam("count") int count,
             @PathParam("caregiverId") String caregiverId) {
@@ -52,6 +60,7 @@ public class CaregiverMessageResource extends BaseResource {
     
     @POST
     @Consumes("application/json")
+    @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     public Response create(
             @PathParam("caregiverId") String caregiverId,
             Message message,
@@ -64,6 +73,7 @@ public class CaregiverMessageResource extends BaseResource {
     @GET
     @Path("/{messageId}")
     @Produces("application/json")
+    @Secured({Role.admin, Role.caregiver})
     public MessageView getById(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("messageId") String messageId,
@@ -72,4 +82,15 @@ public class CaregiverMessageResource extends BaseResource {
         Message message = caregiverMessageService.getById(caregiverId, messageId);
         return messagePresenter.present(message);
     }
+    
+    @DELETE
+    @Path("/{messageId}")
+    @Secured({Role.admin, Role.caregiver})
+    public void delete(
+            @PathParam("caregiverId") String caregiverId,
+            @PathParam("messageId") String messageId,
+            @Context SecurityContext context) {
+
+        caregiverMessageService.delete(caregiverService.getById(caregiverId, context.getUserPrincipal()), messageId);
+    }  
 }
