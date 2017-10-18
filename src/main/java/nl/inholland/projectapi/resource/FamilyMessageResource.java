@@ -23,7 +23,6 @@ import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.FamilyMessageService;
 
 @Path("/api/v1/families/{familyId}/messages")
-@Secured({Role.admin, Role.family}) // Declaring globally
 public class FamilyMessageResource extends BaseResource {
 
     private final FamilyMessageService familyMessageService;
@@ -37,6 +36,7 @@ public class FamilyMessageResource extends BaseResource {
 
     @GET
     @Produces("application/json")
+    @Secured({Role.admin, Role.family})
     public List<MessageView> getAll(@QueryParam("count") int count, @PathParam("familyId") String familyId) {
         List<Message> messages = familyMessageService.getAll(familyId, count);
 
@@ -49,6 +49,7 @@ public class FamilyMessageResource extends BaseResource {
 
     @POST
     @Consumes("application/json")
+    @Secured({Role.admin, Role.client, Role.family})
     public Response create(@PathParam("familyId") String familyId, Message message, @Context UriInfo uriInfo, @Context SecurityContext context) {
         URI uri = familyMessageService.create(message, familyId, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).build();
@@ -57,6 +58,7 @@ public class FamilyMessageResource extends BaseResource {
     @GET
     @Path("/{messageId}")
     @Produces("application/json")
+     @Secured({Role.admin, Role.family})
     public MessageView getById(@PathParam("familyId") String familyId, @PathParam("messageId") String messageId, @Context SecurityContext context) {
         Message message = familyMessageService.getById(familyId, messageId);
         return messagePresenter.present(message);
@@ -65,6 +67,7 @@ public class FamilyMessageResource extends BaseResource {
     @DELETE
     @Path("/{messageId}")
     @Produces("application/json")
+    @Secured({Role.admin, Role.family})
     public void deleteMessage(@PathParam("familyId") String familyId,@PathParam("messageId") String messageId, @Context SecurityContext context) {
        familyMessageService.delete(familyId, messageId);
     }    

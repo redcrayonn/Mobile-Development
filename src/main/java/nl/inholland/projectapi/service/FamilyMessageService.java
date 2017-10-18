@@ -56,19 +56,22 @@ public class FamilyMessageService extends BaseService {
         try {
             List<Message> senderMessageList = sender.getMessages();
             List<Message> receiverMessageList = receiver.getMessages();
-
+           
             message.setDateTime(new Date());
             message.setSenderId(new ObjectId(sender.getId()));
             message.setReceiverId(new ObjectId(receiver.getId()));
             message.setId(new ObjectId());
-
-            receiverMessageList.add(message);
-            userDAO.update(receiver);
-
-            message.setId(new ObjectId());
             message.setRead(true);
+            
             senderMessageList.add(message);
             userDAO.update(sender);
+           
+            message.setId(new ObjectId());
+            message.setRead(false);
+            
+            receiverMessageList.add(message);
+            userDAO.update(receiver);
+            
             return buildUri(uriInfo, message.getId());
         } catch (Exception e) {
             throw new BadRequestException();
