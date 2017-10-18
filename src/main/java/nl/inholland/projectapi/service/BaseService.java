@@ -10,6 +10,7 @@ import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Family;
+import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.User;
 
 @Singleton
@@ -36,17 +37,13 @@ public abstract class BaseService {
     protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
         if (user instanceof Client) {
             checkClientPermissions((Client) user, accesingUser);
-        } else {
-            checkUserPermissions(user, accesingUser);
-        }
-
-    }
-    
-    private void checkUserPermissions(User user, User accesingUser) throws ForbiddenException {
-        if(!user.getId().equals(accesingUser.getId())) {
+        } else if (user.getRole().equals(Role.admin)){
+            
+        } else if(!user.getId().equals(accesingUser.getId())) {
             throw new ForbiddenException("User privileges not sufficient");
         }
     }
+    
 
     private void checkClientPermissions(Client client, User accesingUser) throws ForbiddenException {
         switch (accesingUser.getRole()) {
