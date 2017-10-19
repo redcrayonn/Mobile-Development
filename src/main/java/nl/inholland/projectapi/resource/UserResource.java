@@ -38,7 +38,6 @@ public class UserResource extends BaseResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured({Role.admin, Role.family, Role.client, Role.caregiver})
     public APIKey logout(@Context SecurityContext context) {  
-        System.out.println(context.getUserPrincipal().getName());
         return userService.logout(context.getUserPrincipal().getName());
     } 
 }
