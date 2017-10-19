@@ -3,6 +3,7 @@ package nl.inholland.projectapi.service;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Singleton;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriBuilder;
@@ -24,6 +25,12 @@ public abstract class BaseService {
     protected void requireResult(Object o, String message) throws NotFoundException {
         if (o == null) {
             throw new NotFoundException(message);
+        }
+    }
+    
+    protected void requiredValue(Object o) throws BadRequestException{
+        if (o == null) {
+            throw new BadRequestException();
         }
     }
 
