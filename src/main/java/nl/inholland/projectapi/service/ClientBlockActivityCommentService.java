@@ -45,7 +45,7 @@ public class ClientBlockActivityCommentService extends BaseService{
         } catch (Exception e) {
             throw new BadRequestException("Invalid Comment object");
         }
-
+        
         getAll(client, blockId, activityId).add(comment);
         clientDAO.update(client);
         return buildUri(uriInfo, comment.getId());

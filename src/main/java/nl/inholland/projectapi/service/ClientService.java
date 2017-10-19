@@ -80,22 +80,14 @@ public class ClientService extends BaseService {
         dao.update(client);
     }
     public void patch(String userId, JsonNode patchRequest, Principal principal) {
-        JsonNode patched = null;
-        try {
-            for (int i = 0; i < patchRequest.size(); i++) {
-                if (patchRequest.get(i).get("path").asText().equals("/password")) {
-                    throw new BadRequestException("Bad patch request, use PUT for password changes");
-                }
-            }
-            Client client = dao.getById(userId);
-            requireResult(client, "Client not found");//Get client to be patched from userId
-            checkPermissions(client, userDAO.getByUsername(principal.getName()));
-            ObjectMapper mapper = new ObjectMapper();//Map client to json
-            JsonNode jsonClient = mapper.valueToTree(client);//map client to json
-            JsonPatch patch = JsonPatch.fromJson(patchRequest);//Get patchrequest from body
-            patched = patch.apply(jsonClient);//Patch client        
-            dao.update(mapper.treeToValue(patched, Client.class));//Send patch to database as Client object
-
+        ObjectMapper mapper = new ObjectMapper();
+        Client client = getById(userId, principal);
+        
+        try {            
+            JsonNode jsonClient = mapper.valueToTree(client);
+            JsonPatch patch = JsonPatch.fromJson(patchRequest);
+            JsonNode patched = patch.apply(jsonClient);      
+            dao.update(mapper.treeToValue(patched, Client.class));
         } catch (JsonPatchException | IOException | IllegalArgumentException | NullPointerException ex) {
             throw new BadRequestException("Bad patch request");
         }
