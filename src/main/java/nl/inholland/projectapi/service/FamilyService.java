@@ -67,6 +67,7 @@ public class FamilyService extends BaseService {
         Family family = dao.getById(id.toHexString());
         requireResult(family, "Family not found");
 
+         //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship
         try {
             for (Client client : clientDAO.getAllClients()) {
                 for (int j = 0; j < client.getFamily().size(); j++) {
