@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.inholland.projectapi.resource;
 
 import java.net.URI;
@@ -29,27 +24,20 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 import nl.inholland.projectapi.service.ClientFamilyService;
 import nl.inholland.projectapi.service.ClientService;
 
-/**
- *
- * @author kelvi
- */
+@Path("/api/v1/clients/{clientId}/families")
+public class ClientFamilyResource extends BaseResource {
 
-@Path("/api/v1/clients/{clientId}/familys")
-public class ClientFamilyResource extends BaseResource{
-    
-    
     private final ClientFamilyService clientFamilyService;
     private final FamilyPresenter familyPresenter;
     private final ClientService clientService;
-    
-    
+
     @Inject
     public ClientFamilyResource(ClientFamilyService clientFamilyService, FamilyPresenter familyPresenter, ClientService clientService) {
         this.clientFamilyService = clientFamilyService;
         this.familyPresenter = familyPresenter;
         this.clientService = clientService;
     }
-    
+
     @GET
     @Secured({Role.admin})
     @Produces("application/json")
@@ -60,8 +48,7 @@ public class ClientFamilyResource extends BaseResource{
         List<Family> family = clientFamilyService.getAll(clientService.getById(clientId, context.getUserPrincipal()), count);
         return familyPresenter.present(family);
     }
-    
-    
+
     @POST
     @Secured({Role.admin})
     @Consumes("application/json")
@@ -74,7 +61,7 @@ public class ClientFamilyResource extends BaseResource{
         URI uri = clientFamilyService.create(clientService.getById(clientId, context.getUserPrincipal()), family, uriInfo);
         return Response.created(uri).build();
     }
-    
+
     @GET
     @Secured({Role.admin})
     @Produces("application/json")
@@ -86,7 +73,7 @@ public class ClientFamilyResource extends BaseResource{
         Family family = clientFamilyService.get(clientService.getById(clientId, context.getUserPrincipal()), familyId);
         return familyPresenter.present(family);
     }
-    
+
     @PUT
     @Secured({Role.admin})
     @Consumes("application/json")
@@ -99,7 +86,7 @@ public class ClientFamilyResource extends BaseResource{
         clientFamilyService.update(clientService.getById(clientId, context.getUserPrincipal()), familyId, family);
         return Response.ok().build();
     }
-    
+
     @DELETE
     @Secured({Role.admin})
     @Path("/{familyId}")
@@ -109,7 +96,4 @@ public class ClientFamilyResource extends BaseResource{
             @Context SecurityContext context) {
         clientFamilyService.delete(clientService.getById(clientId, context.getUserPrincipal()), familyId);
     }
-    
-    
-    
 }

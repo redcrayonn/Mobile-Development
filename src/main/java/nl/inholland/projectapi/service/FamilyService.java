@@ -5,10 +5,13 @@ import java.security.Principal;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
+import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.model.Family;
+import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.FamilyDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
@@ -18,11 +21,13 @@ public class FamilyService extends BaseService {
 
     private final FamilyDAO dao;
     private final UserDAO userDAO;
+    private final ClientDAO clientDAO;
 
     @Inject
-    public FamilyService(FamilyDAO dao, UserDAO userDAO) {
+    public FamilyService(FamilyDAO dao, UserDAO userDAO, ClientDAO clientDAO) {
         this.dao = dao;
         this.userDAO = userDAO;
+        this.clientDAO = clientDAO;
     }
 
     public List<Family> getAll(int count) {
@@ -44,10 +49,9 @@ public class FamilyService extends BaseService {
     public Family getById(String id, Principal principal) {
         Family family = dao.getById(id);
         requireResult(family, "Family not found");
-        
-        
+
         //IF PERMISSION IS FIXED, UNDO COMMENT !!
-       // checkPermissions(family, userDAO.getByUsername(principal.getName()));
+        // checkPermissions(family, userDAO.getByUsername(principal.getName()));
         return family;
     }
 
@@ -62,7 +66,20 @@ public class FamilyService extends BaseService {
     public void deleteById(ObjectId id) {
         Family family = dao.getById(id.toHexString());
         requireResult(family, "Family not found");
-        dao.delete(family);
-    }
 
+        try {
+            for (Client client : clientDAO.getAllClients()) {
+                for (int j = 0; j < client.getFamily().size(); j++) {
+                    Family f = client.getFamily().get(j);
+                    if (f.getId().equals(family.getId())) {
+                        client.getFamily().remove(f);
+                        clientDAO.update(client);
+                    }
+                }
+            }
+            dao.delete(family);
+        } catch (ProcessingException e) {
+            throw new ProcessingException(e);
+        }
+    }
 }
