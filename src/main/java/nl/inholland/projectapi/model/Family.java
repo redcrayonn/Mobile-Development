@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.model;
 
+import java.util.List;
 import org.mongodb.morphia.annotations.Entity;
 
 @Entity(value = "users", noClassnameStored = false)
