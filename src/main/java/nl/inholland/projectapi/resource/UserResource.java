@@ -5,10 +5,15 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import nl.inholland.projectapi.model.APIKey;
+import javax.ws.rs.core.SecurityContext;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.service.UserService;
+import nl.inholland.projectapi.model.APIKey;
+import nl.inholland.projectapi.model.Role;
+import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.User;
 
 @Path("/api/v1/")
 public class UserResource extends BaseResource{
@@ -25,5 +30,15 @@ public class UserResource extends BaseResource{
     public APIKey login(Credentials credentials) {    
         return userService.login(credentials);
 
-    }    
+    }   
+    
+    @POST
+    @Path("/logout")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Secured({Role.admin, Role.family, Role.client, Role.caregiver})
+    public APIKey logout(@Context SecurityContext context) {  
+        System.out.println(context.getUserPrincipal().getName());
+        return userService.logout(context.getUserPrincipal().getName());
+    } 
 }

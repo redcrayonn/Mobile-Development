@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Random;
 import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.core.SecurityContext;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.model.User;
@@ -31,6 +32,12 @@ public class UserService extends BaseService{
         }
         return assignKey(user);
     }
+    
+    public APIKey logout(String username) {
+        User user = getByUsername(username);   
+        return removeKey(user);
+    }
+
     private APIKey assignKey(User user) {
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
@@ -39,6 +46,15 @@ public class UserService extends BaseService{
         dao.update(user);
         return user.getApiKey();
     }
+    
+    private APIKey removeKey(User user) {
+        APIKey key =  user.getApiKey();
+        key = new APIKey(key.getAuthtoken(), DateUtils.addHours(new Date(0), 168));
+        user.setApiKey(key);
+        dao.update(user);
+        return user.getApiKey();
+    }  
+    
     private User getByUsername(String username) {
         return dao.getByUsername(username);
     }
