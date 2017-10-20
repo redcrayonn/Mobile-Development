@@ -58,11 +58,11 @@ public class ClientBlockResource extends BaseResource {
     @Consumes("application/json")
     public Response create(
             @PathParam("clientId") String clientId,
-            @QueryParam("blockId") String blockId,
+            BuildingBlock block,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = clientBlockService.create(client, blockId, uriInfo);
+        URI uri = clientBlockService.create(client, block, uriInfo);
         return Response.created(uri).build();
     }
 

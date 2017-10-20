@@ -43,9 +43,13 @@ public class BlockService extends BaseService {
     }
 
     public void update(String id, BuildingBlock newBlock) {
-        getById(id);
+        BuildingBlock oldBlock = getById(id);
         try {
+            newBlock.setId(new ObjectId(oldBlock.getId()));
+            for (Activity a : newBlock.getActivities()) {
+            a.setId(new ObjectId());
             dao.update(newBlock);
+        }
         } catch (IllegalArgumentException e) {
             throw new BadRequestException();
         }

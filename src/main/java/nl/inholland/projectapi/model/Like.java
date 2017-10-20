@@ -12,6 +12,10 @@ public class Like extends EntityModel {
     @NotEmpty
     private Date datetime;
 
+    public Like() {
+        this.datetime = new Date();
+    }
+    
     public String getSenderId() {
         return senderId.toHexString();
     }

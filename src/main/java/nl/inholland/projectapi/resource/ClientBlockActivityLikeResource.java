@@ -54,17 +54,15 @@ public class ClientBlockActivityLikeResource extends BaseResource {
     }
 
     @POST
-    @Consumes("application/json")
     @Produces("application/json")
     public Response create(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
-            Like like,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, like, uriInfo);
+        URI uri = service.create(client, blockId, activityId, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).build();
     }
 

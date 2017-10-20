@@ -64,7 +64,7 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, comment, uriInfo);
+        URI uri = service.create(client, blockId, activityId, comment, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).build();
     }
 

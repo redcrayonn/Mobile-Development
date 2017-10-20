@@ -49,21 +49,21 @@ public class BlockResource extends BaseResource {
         URI uri = blockService.create(newBlock, uriInfo);
         return Response.created(uri).build();
     }
-
-    @PUT
-    @Path("/{blockId}")
-    @Consumes("application/json")
-    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
-        blockService.update(id, newBlock);
-        return Response.ok().build();
-    }
-
+    
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
     public BlockView getById(@PathParam("blockId") String id) {
         BuildingBlock block = blockService.getById(id);
         return blockPresenter.present(block);
+    }
+    
+    @PUT
+    @Path("/{blockId}")
+    @Consumes("application/json")
+    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
+        blockService.update(id, newBlock);
+        return Response.ok().build();
     }
 
     @DELETE

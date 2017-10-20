@@ -2,10 +2,6 @@ package nl.inholland.projectapi.model;
 
 import java.io.Serializable;
 
-/**
- *
- * @author student
- */
 public class Credentials implements Serializable {
 
     private String username;

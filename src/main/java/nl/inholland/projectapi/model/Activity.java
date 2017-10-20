@@ -20,7 +20,7 @@ public class Activity extends EntityModel {
     private List<Comment> comments = new ArrayList<Comment>();
 
     public Activity() {
-        this.status = Status.pending;
+
     }
 
     public String getName() {

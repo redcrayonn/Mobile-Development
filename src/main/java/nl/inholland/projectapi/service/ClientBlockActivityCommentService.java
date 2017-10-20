@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.service;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -11,16 +12,20 @@ import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
+import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
+import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
 
 public class ClientBlockActivityCommentService extends BaseService {
 
     private final ClientDAO clientDAO;
+    private final UserDAO userDAO;
 
     @Inject
-    public ClientBlockActivityCommentService(ClientDAO clientDAO) {
+    public ClientBlockActivityCommentService(ClientDAO clientDAO, UserDAO userDAO) {
         this.clientDAO = clientDAO;
+        this.userDAO = userDAO;
     }
 
     public List<Comment> getAll(Client client, String blockId, String activityId) {
@@ -36,16 +41,16 @@ public class ClientBlockActivityCommentService extends BaseService {
         throw new NotFoundException("Comments not found");
     }
 
-    public URI create(Client client, String blockId, String activityId, Comment comment, UriInfo uriInfo) {
-        comment.setId(new ObjectId());
-        comment.setDateTime(new Date());
-        try {
-            comment.getSenderId();
+    public URI create(Client client, String blockId, String activityId, Comment comment, Principal principal, UriInfo uriInfo) {
+        User sender = userDAO.getByUsername(principal.getName());
+         try {
+            comment.setId(new ObjectId());
+            comment.setDateTime(new Date());
+            comment.setSenderId(new ObjectId(sender.getId()));
             comment.getMessage();
         } catch (Exception e) {
             throw new BadRequestException("Invalid Comment object");
         }
-
         getAll(client, blockId, activityId).add(comment);
         clientDAO.update(client);
         return buildUri(uriInfo, comment.getId());

@@ -35,9 +35,8 @@ public class ClientAppointmentService extends BaseService {
 
     public URI create(Appointment appointment, Client client, UriInfo uriInfo) {
         try {
-            List<Appointment> appointmentList = client.getAppointments();
             appointment.setId(new ObjectId());
-            appointmentList.add(appointment);
+            client.getAppointments().add(appointment);
             dao.update(client);
             return buildUri(uriInfo, appointment.getId());
         } catch (Exception e) {
