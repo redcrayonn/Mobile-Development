@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.BuildingBlock;
+import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.BlockPresenter;
@@ -29,9 +30,12 @@ public class ClientBlockResource extends BaseResource {
     private final ClientBlockService clientBlockService;
     private final BlockPresenter blockPresenter;
     private final ClientService clientService;
-    
+
     @Inject
-    public ClientBlockResource(ClientBlockService clientBlockService, ClientService clientService, BlockPresenter blockPresenter) {
+    public ClientBlockResource(
+            ClientBlockService clientBlockService,
+            ClientService clientService,
+            BlockPresenter blockPresenter) {
         this.clientBlockService = clientBlockService;
         this.blockPresenter = blockPresenter;
         this.clientService = clientService;
@@ -44,10 +48,11 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
-        List<BuildingBlock> blocks = clientBlockService.getAll(clientService.getById(clientId, context.getUserPrincipal()), count);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        List<BuildingBlock> blocks = clientBlockService.getAll(client, count);
         return blockPresenter.present(blocks);
     }
-    
+
     @POST
     @Secured({Role.admin, Role.client, Role.caregiver})
     @Consumes("application/json")
@@ -56,10 +61,11 @@ public class ClientBlockResource extends BaseResource {
             @QueryParam("blockId") String blockId,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
-        URI uri = clientBlockService.create(clientService.getById(clientId, context.getUserPrincipal()), blockId, uriInfo);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        URI uri = clientBlockService.create(client, blockId, uriInfo);
         return Response.created(uri).build();
     }
-    
+
     @GET
     @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     @Path("/{blockId}")
@@ -68,9 +74,11 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @Context SecurityContext context) {
-        return blockPresenter.present(clientBlockService.getById(clientService.getById(clientId, context.getUserPrincipal()), blockId));
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        BuildingBlock block = clientBlockService.getById(client, blockId);
+        return blockPresenter.present(block);
     }
-    
+
     @DELETE
     @Secured({Role.admin, Role.client, Role.caregiver})
     @Path("/{blockId}")
@@ -79,6 +87,7 @@ public class ClientBlockResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @Context SecurityContext context) {
-        clientBlockService.delete(clientService.getById(clientId, context.getUserPrincipal()), blockId);
-    }    
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        clientBlockService.delete(client, blockId);
+    }
 }

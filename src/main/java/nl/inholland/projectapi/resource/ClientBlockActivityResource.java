@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -25,14 +26,17 @@ public class ClientBlockActivityResource extends BaseResource {
     private final ClientBlockActivityService service;
     private final PersonalActivityPresenter presenter;
     private final ClientService clientService;
-    
+
     @Inject
-    public ClientBlockActivityResource(ClientBlockActivityService service, PersonalActivityPresenter presenter, ClientService clientService) {
+    public ClientBlockActivityResource(
+            ClientBlockActivityService service,
+            PersonalActivityPresenter presenter,
+            ClientService clientService) {
         this.service = service;
         this.presenter = presenter;
         this.clientService = clientService;
     }
-    
+
     @GET
     @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     @Produces("application/json")
@@ -40,9 +44,11 @@ public class ClientBlockActivityResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @Context SecurityContext context) {
-        return presenter.present(service.getActivities(clientService.getById(clientId, context.getUserPrincipal()), blockId));
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        List<Activity> activities = service.getActivities(client, blockId);
+        return presenter.present(activities);
     }
-    
+
     @GET
     @Path("/{activityId}")
     @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
@@ -52,17 +58,19 @@ public class ClientBlockActivityResource extends BaseResource {
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
             @Context SecurityContext context) {
-        return presenter.present(service.getActivity(clientService.getById(clientId, context.getUserPrincipal()), blockId, activityId));
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        Activity activity = service.getActivity(client, blockId, activityId);
+        return presenter.present(activity);
     }
-    
+
     @PATCH
     @Secured({Role.admin, Role.client, Role.caregiver})
     @Path("/{activityId}")
     public Response patch(
-            @PathParam("clientId") String clientId, 
+            @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
-            JsonNode patchRequest, 
+            JsonNode patchRequest,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         service.patch(client, blockId, service.getActivity(client, blockId, activityId), patchRequest);

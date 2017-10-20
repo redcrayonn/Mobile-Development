@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Random;
 import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.core.SecurityContext;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Credentials;
 import nl.inholland.projectapi.model.User;
@@ -14,28 +13,30 @@ import nl.inholland.projectapi.persistence.UserDAO;
 import org.apache.commons.lang3.time.DateUtils;
 import org.mindrot.jbcrypt.BCrypt;
 
-public class UserService extends BaseService{
-    
+public class UserService extends BaseService {
+
     private final UserDAO dao;
 
     @Inject
     public UserService(UserDAO dao) {
         this.dao = dao;
     }
+
     public APIKey login(Credentials credentials) {
-        User user = getByUsername(credentials.getUsername());                  
-        if(user == null) {
+        User user = getByUsername(credentials.getUsername());
+        if (user == null) {
             throw new NotAuthorizedException("Wrong username or password");
         }
-        if(!BCrypt.checkpw(credentials.getPassword(), user.getPassword())) {
+        if (!BCrypt.checkpw(credentials.getPassword(), user.getPassword())) {
             throw new NotAuthorizedException("Wrong username or password");
         }
         return assignKey(user);
     }
-    
-    public APIKey logout(String username) {
-        User user = getByUsername(username);   
-        return removeKey(user);
+
+    public void logout(String username) {
+        User user = getByUsername(username);
+        user.getApiKey().expireKey();
+        dao.update(user);
     }
 
     private APIKey assignKey(User user) {
@@ -46,15 +47,7 @@ public class UserService extends BaseService{
         dao.update(user);
         return user.getApiKey();
     }
-    
-    private APIKey removeKey(User user) {
-        APIKey key =  user.getApiKey();
-        key = new APIKey(key.getAuthtoken(), DateUtils.addHours(new Date(0), 168));
-        user.setApiKey(key);
-        dao.update(user);
-        return user.getApiKey();
-    }  
-    
+
     private User getByUsername(String username) {
         return dao.getByUsername(username);
     }

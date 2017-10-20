@@ -16,7 +16,7 @@ public class BuildingBlock extends EntityModel {
     private String imageURL;
     @Embedded
     private List<Activity> activities;
-    
+
     public String getName() {
         return name;
     }

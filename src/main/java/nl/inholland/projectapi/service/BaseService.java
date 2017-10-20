@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.service;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Singleton;
 import javax.ws.rs.BadRequestException;
@@ -11,8 +12,11 @@ import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Family;
+import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.User;
+import nl.inholland.projectapi.persistence.UserDAO;
+import org.bson.types.ObjectId;
 
 @Singleton
 public abstract class BaseService {
@@ -27,8 +31,8 @@ public abstract class BaseService {
             throw new NotFoundException(message);
         }
     }
-    
-    protected void requiredValue(Object o) throws BadRequestException{
+
+    protected void requiredValue(Object o) throws BadRequestException {
         if (o == null) {
             throw new BadRequestException();
         }
@@ -44,13 +48,11 @@ public abstract class BaseService {
     protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
         if (user instanceof Client) {
             checkClientPermissions((Client) user, accesingUser);
-        } else if (user.getRole().equals(Role.admin)){
-            
-        } else if(!user.getId().equals(accesingUser.getId())) {
+        } else if (user.getRole().equals(Role.admin)) {
+        } else if (!user.getId().equals(accesingUser.getId())) {
             throw new ForbiddenException("User privileges not sufficient");
         }
     }
-    
 
     private void checkClientPermissions(Client client, User accesingUser) throws ForbiddenException {
         switch (accesingUser.getRole()) {
@@ -79,5 +81,27 @@ public abstract class BaseService {
                 break;
         }
         throw new ForbiddenException("User privileges not sufficient");
+    }
+
+    protected URI sendMessage(Message message, User sender, User receiver, UriInfo uriInfo, UserDAO userDAO) {
+        try {
+            message.setDateTime(new Date());
+            message.setSenderId(new ObjectId(sender.getId()));
+            message.setId(new ObjectId());
+            message.setRead(false);
+
+            receiver.getMessages().add(message);
+            userDAO.update(receiver);
+
+            message.setId(new ObjectId());
+            message.setRead(true);
+
+            sender.getMessages().add(message);
+            userDAO.update(sender);
+
+            return buildUri(uriInfo, message.getId());
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }
     }
 }

@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
@@ -26,48 +27,70 @@ import nl.inholland.projectapi.service.CaregiverService;
 
 @Path("/api/v1/caregivers/{caregiverId}/appointments")
 public class CaregiverAppointmentResource extends BaseResource {
-    
+
     private final CaregiverService caregiverService;
     private final CaregiverAppointmentService caregiverAppointmentService;
     private final AppointmentPresenter appointmentPresenter;
 
     @Inject
-    public CaregiverAppointmentResource(CaregiverService caregiverService, CaregiverAppointmentService caregiverAppointmentService, AppointmentPresenter appointmentPresenter) {
+    public CaregiverAppointmentResource(
+            CaregiverService caregiverService,
+            CaregiverAppointmentService caregiverAppointmentService,
+            AppointmentPresenter appointmentPresenter) {
         this.caregiverService = caregiverService;
         this.caregiverAppointmentService = caregiverAppointmentService;
         this.appointmentPresenter = appointmentPresenter;
     }
-    
+
     @GET
     @Produces("application/json")
     @Secured({Role.admin, Role.caregiver})
-    public List<AppointmentView> getAll(@PathParam("caregiverId") String caregiverId, @Context SecurityContext context) {
-        return appointmentPresenter.present(caregiverService.getById(caregiverId, context.getUserPrincipal()).getAppointments());
+    public List<AppointmentView> getAll(
+            @PathParam("caregiverId") String caregiverId,
+            @QueryParam("count") int count,
+            @Context SecurityContext context) {
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        List<Appointment> appointments = caregiverAppointmentService.getAll(caregiver, count);
+        return appointmentPresenter.present(appointments);
     }
-    
+
     @POST
     @Consumes("application/json")
     @Secured({Role.admin, Role.caregiver})
-    public Response createAppointment(@PathParam("caregiverId") String caregiverId, Appointment appointment, @Context UriInfo uriInfo, @Context SecurityContext context) {
-        URI uri = caregiverAppointmentService.create(appointment, caregiverService.getById(caregiverId, context.getUserPrincipal()), uriInfo);
+    public Response createAppointment(
+            @PathParam("caregiverId") String caregiverId,
+            Appointment appointment, @Context UriInfo uriInfo,
+            @Context SecurityContext context) {
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        URI uri = caregiverAppointmentService.create(appointment, caregiver, uriInfo);
         return Response.created(uri).build();
     }
-    
+
     @GET
     @Produces("application/json")
     @Path("/{appointmentId}")
     @Secured({Role.admin, Role.caregiver})
-    public AppointmentView getById(@PathParam("caregiverId") String caregiverId, @PathParam("appointmentId") String appointmentId, @Context SecurityContext context) {
-        return appointmentPresenter.present(caregiverAppointmentService.getById(caregiverService.getById(caregiverId, context.getUserPrincipal()), appointmentId));
+    public AppointmentView getById(
+            @PathParam("caregiverId") String caregiverId,
+            @PathParam("appointmentId") String appointmentId,
+            @Context SecurityContext context) {
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        Appointment appointment = caregiverAppointmentService.getById(caregiver, appointmentId);
+        return appointmentPresenter.present(appointment);
     }
 
     @PUT
     @Consumes("application/json")
     @Path("/{appointmentId}")
     @Secured({Role.admin, Role.caregiver})
-    public Response updateAppointment(@PathParam("caregiverId") String caregiverId, @PathParam("appointmentId") String appointmentId, Appointment updatedAppointment, @Context UriInfo uriInfo, @Context SecurityContext context) {
+    public Response updateAppointment(
+            @PathParam("caregiverId") String caregiverId,
+            @PathParam("appointmentId") String appointmentId,
+            Appointment updatedAppointment,
+            @Context UriInfo uriInfo,
+            @Context SecurityContext context) {
         Caregiver caregiverFound = caregiverService.getById(caregiverId, context.getUserPrincipal());
-        caregiverAppointmentService.update(caregiverAppointmentService.getById(caregiverFound, appointmentId), updatedAppointment, caregiverFound);
+        caregiverAppointmentService.update(appointmentId, updatedAppointment, caregiverFound);
         return Response.ok().build();
     }
 
@@ -75,8 +98,12 @@ public class CaregiverAppointmentResource extends BaseResource {
     @Consumes("application/json")
     @Path("/{appointmentId}")
     @Secured({Role.admin, Role.caregiver})
-    public void deleteAppointment(@PathParam("caregiverId") String caregiverId, @PathParam("appointmentId") String appointmentId, @Context UriInfo uriInfo, @Context SecurityContext context) {
+    public void deleteAppointment(
+            @PathParam("caregiverId") String caregiverId,
+            @PathParam("appointmentId") String appointmentId,
+            @Context UriInfo uriInfo,
+            @Context SecurityContext context) {
         Caregiver caregiverFound = caregiverService.getById(caregiverId, context.getUserPrincipal());
-        caregiverAppointmentService.delete(caregiverAppointmentService.getById(caregiverFound, appointmentId), caregiverFound);
-    }   
+        caregiverAppointmentService.delete(appointmentId, caregiverFound);
+    }
 }

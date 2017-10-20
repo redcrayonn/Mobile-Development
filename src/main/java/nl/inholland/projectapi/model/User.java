@@ -21,6 +21,7 @@ public abstract class User extends EntityModel implements Principal {
     private Role role;
     @Embedded
     private List<Message> messages;
+
     public User(Credentials credentials, Role role) {
         this.name = credentials.getUsername();
         this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt());
@@ -28,9 +29,11 @@ public abstract class User extends EntityModel implements Principal {
         this.messages = new ArrayList<Message>();
         this.role = role;
     }
+
     public User() {
-   
+
     }
+
     public String getUserName() {
         return name;
     }
@@ -70,6 +73,7 @@ public abstract class User extends EntityModel implements Principal {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
     @Override
     public String getName() {
         return this.name;

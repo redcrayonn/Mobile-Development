@@ -7,13 +7,13 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.presentation.model.ClientView;
 
 public class ClientPresenter extends BasePresenter {
-    
+
     private final MessagePresenter messagePresenter;
     private final FamilyPresenter familyPresenter;
     private final AppointmentPresenter appointmentPresenter;
     private final CaregiverPresenter caregiverPresenter;
     private final BlockPresenter blockPresenter;
-    
+
     @Inject
     public ClientPresenter(
             MessagePresenter messagePresenter,

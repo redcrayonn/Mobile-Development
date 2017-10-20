@@ -14,15 +14,15 @@ import nl.inholland.projectapi.model.Comment;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import org.bson.types.ObjectId;
 
-public class ClientBlockActivityCommentService extends BaseService{
-    
+public class ClientBlockActivityCommentService extends BaseService {
+
     private final ClientDAO clientDAO;
 
     @Inject
     public ClientBlockActivityCommentService(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
     }
-    
+
     public List<Comment> getAll(Client client, String blockId, String activityId) {
         for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
@@ -45,7 +45,7 @@ public class ClientBlockActivityCommentService extends BaseService{
         } catch (Exception e) {
             throw new BadRequestException("Invalid Comment object");
         }
-        
+
         getAll(client, blockId, activityId).add(comment);
         clientDAO.update(client);
         return buildUri(uriInfo, comment.getId());
@@ -63,5 +63,5 @@ public class ClientBlockActivityCommentService extends BaseService{
     public void delete(Client client, String blockId, String activityId, String commentId) {
         getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
         clientDAO.update(client);
-    }    
+    }
 }

@@ -15,15 +15,17 @@ public class ClientDAO extends BaseDAO<Client> {
     public ClientDAO(Datastore ds) {
         super(Client.class, ds);
     }
+
     public List<Client> getAllClients() {
         Query<Client> query = createQuery().field("role").equal(Role.client);
         return query.asList();
     }
+
     public Client getById(String id) {
         Query<Client> query;
         try {
-        query = createQuery().field("role").equal(Role.client).field("_id").equal(new ObjectId(id));
-        }catch(Exception e){
+            query = createQuery().field("role").equal(Role.client).field("_id").equal(new ObjectId(id));
+        } catch (Exception e) {
             throw new BadRequestException();
         }
         return findOne(query);

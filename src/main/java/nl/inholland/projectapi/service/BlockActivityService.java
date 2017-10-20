@@ -21,39 +21,24 @@ public class BlockActivityService extends BaseService {
         this.blockDAO = blockDAO;
     }
 
-    /**
-     * Search and return Activity from BuildingBlock
-     *
-     * @param blockFound
-     * @param activityId
-     * @return Activity
-     * @see Activity
-     */
-    public Activity getById(BuildingBlock blockFound, String activityId) {
-
-        List<Activity> activityList = blockFound.getActivities();
-        requireResult(activityList, "No Activities found");
-
-        if (!activityList.isEmpty()) {
-            for (Iterator<Activity> iterator = activityList.iterator(); iterator.hasNext();) {
-                Activity nextActivity = iterator.next();
-                if (nextActivity.getId().equals(activityId)) {
-                    return nextActivity;
-                }
-            }
-        }
-        throw new NotFoundException();
+    public List<Activity> getAll(String blockId, int count) {
+        return reduceList(blockDAO.get(blockId).getActivities(), count);
     }
 
-    /**
-     * Create an Activity for a BuildingBlock
-     *
-     * @param block
-     * @param activity
-     * @param uriInfo
-     * @return URI
-     */
-    public URI create(BuildingBlock block, Activity activity, UriInfo uriInfo) {
+    public Activity getById(String blockId, String activityId) {
+        BuildingBlock block = blockDAO.get(blockId);
+        requireResult(block, "BuildingBlock not found");
+        for (Activity a : block.getActivities()) {
+            if (a.getId().equals(activityId)) {
+                return a;
+            }
+        }
+        throw new NotFoundException("Activity not found");
+    }
+
+    public URI create(String blockId, Activity activity, UriInfo uriInfo) {
+        BuildingBlock block = blockDAO.get(blockId);
+        requireResult(block, "BuildingBlock not found");
         try {
             List<Activity> activitiesList = block.getActivities();
             activity.setId(new ObjectId());
@@ -65,54 +50,25 @@ public class BlockActivityService extends BaseService {
         }
     }
 
-    /**
-     * Update an Activity for a BuildingBlock
-     *
-     * @param activityFound
-     * @param updatedActivity
-     * @param blockFound
-     */
-    public void update(Activity activityFound, Activity updatedActivity, BuildingBlock blockFound) {
-        List<Activity> activitiesList = blockFound.getActivities();
-        try {
+    public void update(String blockId, String activityId, Activity updatedActivity) {
+        BuildingBlock block = blockDAO.get(blockId);
+        requireResult(block, "BuildingBlock not found");
 
-            requiredValue(updatedActivity.getLikes());
-            requiredValue(updatedActivity.getName());
-            requiredValue(updatedActivity.getDescription());
+        requiredValue(updatedActivity.getLikes());
+        requiredValue(updatedActivity.getName());
+        requiredValue(updatedActivity.getDescription());
 
-            for (int i = 0; i < activitiesList.size(); i++) {
-                Activity nextActivity = activitiesList.get(i);
-                if (nextActivity.getId().equals(activityFound.getId())) {
-                    updatedActivity.setId(new ObjectId(nextActivity.getId()));
-                    activitiesList.set(i, updatedActivity);
-                    blockDAO.update(blockFound);
-                }
+        for (Activity a : block.getActivities()) {
+            if (a.getId().equals(activityId)) {
+                a = updatedActivity;
+                blockDAO.update(block);
             }
-        } catch (Exception e) {
-            throw new BadRequestException();
         }
     }
 
-    /**
-     * Delete an Activity for a BuildingBlock
-     *
-     * @param activity
-     * @param blockFound
-     */
-    public void delete(Activity activity, BuildingBlock blockFound) {
-
-        List<Activity> activitiesList = blockFound.getActivities();
-        try {
-            for (int i = 0; i < activitiesList.size(); i++) {
-                Activity nextActivity = activitiesList.get(i);
-                if (nextActivity.getId().equals(activity.getId())) {
-                    activitiesList.remove(nextActivity);
-                    blockDAO.update(blockFound);
-                }
-            }
-        } catch (Exception e) {
-            throw new BadRequestException();
-        }
-
+    public void delete(String blockId, String activityId) {
+        BuildingBlock block = blockDAO.get(blockId);
+        requireResult(block, "BuildingBlock not found");
+        block.getActivities().removeIf(a -> a.getId().equals(activityId));
     }
 }

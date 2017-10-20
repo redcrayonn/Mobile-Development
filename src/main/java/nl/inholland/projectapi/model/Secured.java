@@ -11,10 +11,10 @@ import javax.ws.rs.NameBinding;
  *
  * @author student
  */
-
 @NameBinding
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 public @interface Secured {
+
     Role[] value() default {};
 }

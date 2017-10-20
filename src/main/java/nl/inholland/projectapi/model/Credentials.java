@@ -1,4 +1,4 @@
- package nl.inholland.projectapi.model;
+package nl.inholland.projectapi.model;
 
 import java.io.Serializable;
 
@@ -6,15 +6,14 @@ import java.io.Serializable;
  *
  * @author student
  */
-
-
 public class Credentials implements Serializable {
+
     private String username;
 
     public Credentials() {
-        
+
     }
-    
+
     public Credentials(String username, String password) {
         this.username = username;
         this.password = password;
@@ -36,6 +35,5 @@ public class Credentials implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
 }

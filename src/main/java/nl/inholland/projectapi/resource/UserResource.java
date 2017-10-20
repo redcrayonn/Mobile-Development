@@ -13,31 +13,30 @@ import nl.inholland.projectapi.service.UserService;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
-import nl.inholland.projectapi.model.User;
 
 @Path("/api/v1/")
-public class UserResource extends BaseResource{
+public class UserResource extends BaseResource {
+
     private final UserService userService;
 
     @Inject
     public UserResource(UserService userService) {
         this.userService = userService;
-    }    
+    }
+
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public APIKey login(Credentials credentials) {    
+    public APIKey login(Credentials credentials) {
         return userService.login(credentials);
+    }
 
-    }   
-    
     @POST
     @Path("/logout")
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured({Role.admin, Role.family, Role.client, Role.caregiver})
-    public APIKey logout(@Context SecurityContext context) {  
-        return userService.logout(context.getUserPrincipal().getName());
-    } 
+    public void logout(@Context SecurityContext context) {
+        userService.logout(context.getUserPrincipal().getName());
+    }
 }

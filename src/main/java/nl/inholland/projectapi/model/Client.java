@@ -20,6 +20,7 @@ public class Client extends User {
     private List<Appointment> appointments;
     @Embedded
     private List<BuildingBlock> blocks;
+
     public Client(Credentials credentials) {
         super(credentials, Role.client);
         this.points = 0;
@@ -28,9 +29,11 @@ public class Client extends User {
         this.appointments = new ArrayList<Appointment>();
         this.blocks = new ArrayList<BuildingBlock>();
     }
+
     public Client() {
-        
+
     }
+
     public int getPoints() {
         return points;
     }

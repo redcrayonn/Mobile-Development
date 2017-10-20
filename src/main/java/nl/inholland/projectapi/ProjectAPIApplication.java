@@ -30,6 +30,6 @@ public class ProjectAPIApplication extends Application<ProjectAPIConfiguration> 
     @Override
     public void run(final ProjectAPIConfiguration configuration,
             final Environment environment) throws Exception {
-        
+
     }
 }

@@ -51,9 +51,9 @@ public class ClientService extends BaseService {
         try {
             client = new Client(credentials);
             List<BuildingBlock> blocks = new ArrayList<BuildingBlock>(blockDAO.getAll());
-            for(BuildingBlock b : blocks) {
+            for (BuildingBlock b : blocks) {
                 b.setId(new ObjectId());
-                for(Activity a : b.getActivities()) {
+                for (Activity a : b.getActivities()) {
                     a.setId(new ObjectId());
                 }
             }
@@ -64,29 +64,27 @@ public class ClientService extends BaseService {
         dao.create(client);
         return buildUri(uriInfo, client.getId());
     }
-    
+
     public Client getById(String id, Principal principal) {
         Client client = dao.getById(id);
-        requireResult(client, "Client not found");   
+        requireResult(client, "Client not found");
         checkPermissions(client, userDAO.getByUsername(principal.getName()));
         return client;
     }
-    
-    public void update(String userId, Credentials credentials, Principal principal) {
-        Client client = getById(userId, principal);
+
+    public void update(Client client, Credentials credentials) {
         client.setUserName(credentials.getUsername());
         client.setPassword(credentials.getPassword());
         client.setApiKey(new APIKey());
         dao.update(client);
     }
-    public void patch(String userId, JsonNode patchRequest, Principal principal) {
+
+    public void patch(Client client, JsonNode patchRequest) {
         ObjectMapper mapper = new ObjectMapper();
-        Client client = getById(userId, principal);
-        
-        try {            
+        try {
             JsonNode jsonClient = mapper.valueToTree(client);
             JsonPatch patch = JsonPatch.fromJson(patchRequest);
-            JsonNode patched = patch.apply(jsonClient);      
+            JsonNode patched = patch.apply(jsonClient);
             dao.update(mapper.treeToValue(patched, Client.class));
         } catch (JsonPatchException | IOException | IllegalArgumentException | NullPointerException ex) {
             throw new BadRequestException("Bad patch request");

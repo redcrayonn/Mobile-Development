@@ -1,11 +1,8 @@
 package nl.inholland.projectapi.service;
 
 import java.net.URI;
-import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Family;
@@ -13,7 +10,6 @@ import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.FamilyDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
-import org.bson.types.ObjectId;
 
 public class FamilyMessageService extends BaseService {
 
@@ -26,60 +22,29 @@ public class FamilyMessageService extends BaseService {
         this.userDAO = userDAO;
     }
 
-    public List<Message> getAll(String familyId, int count) {
-        Family family = dao.getById(familyId);
+    public List<Message> getAll(Family family, int count) {
         requireResult(family, "FamilyId not found");
         List<Message> messages = family.getMessages();
         return reduceList(messages, count);
     }
 
-    public Message getById(String familyId, String messageId) {
-        try {
-            for (Message m : getAll(familyId, -1)) {
-                if (m.getId().equals(messageId)) {
-                    return m;
-                }
+    public Message getById(Family family, String messageId) {
+        for (Message m : family.getMessages()) {
+            if (m.getId().equals(messageId)) {
+                return m;
             }
-        } catch (Exception e) {
-            throw new NotFoundException();
         }
-        throw new NotFoundException();
+        throw new NotFoundException("Message not found");
     }
 
-    public URI create(Message message, String receiverId, Principal principal, UriInfo uriInfo) {
-        Family receiver = dao.get(receiverId);
-        User sender = userDAO.getByUsername(principal.getName());
-
-        requireResult(sender, "SenderId not found");
+    public URI create(Message message, Family sender, UriInfo uriInfo) {
+        User receiver = userDAO.get(message.getReceiverId());
         requireResult(receiver, "ReceivedId not found");
 
-        try {
-            List<Message> senderMessageList = sender.getMessages();
-            List<Message> receiverMessageList = receiver.getMessages();
-           
-            message.setDateTime(new Date());
-            message.setSenderId(new ObjectId(sender.getId()));
-            message.setReceiverId(new ObjectId(receiver.getId()));
-            message.setId(new ObjectId());
-            message.setRead(true);
-            
-            senderMessageList.add(message);
-            userDAO.update(sender);
-           
-            message.setId(new ObjectId());
-            message.setRead(false);
-            
-            receiverMessageList.add(message);
-            userDAO.update(receiver);
-            
-            return buildUri(uriInfo, message.getId());
-        } catch (Exception e) {
-            throw new BadRequestException();
-        }
+        return sendMessage(message, sender, receiver, uriInfo, userDAO);
     }
 
-    public void delete(String familyId, String messageId) {
-        Family family = dao.getById(familyId);
+    public void delete(Family family, String messageId) {
         requireResult(family, "FamilyID not found");
         List<Message> mList = family.getMessages();
 

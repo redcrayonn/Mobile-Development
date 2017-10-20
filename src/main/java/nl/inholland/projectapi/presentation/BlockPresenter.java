@@ -9,7 +9,7 @@ import nl.inholland.projectapi.presentation.model.BlockView;
 public class BlockPresenter extends BasePresenter {
 
     private final ActivityPresenter activityPresenter;
-    
+
     @Inject
     public BlockPresenter(ActivityPresenter activityPresenter) {
         this.activityPresenter = activityPresenter;

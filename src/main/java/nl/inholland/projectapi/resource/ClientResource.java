@@ -41,8 +41,9 @@ public class ClientResource extends BaseResource {
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.client})
-    public List<ClientView> getAll(@QueryParam("count") int count) {
+    @Secured({Role.admin})
+    public List<ClientView> getAll(
+            @QueryParam("count") int count) {
         List<Client> clients = clientService.getAll(count);
         return clientPresenter.present(clients);
     }
@@ -50,7 +51,9 @@ public class ClientResource extends BaseResource {
     @POST
     @Consumes("application/json")
     @Secured({Role.admin})
-    public Response create(Credentials credentials, @Context UriInfo uriInfo) {
+    public Response create(
+            Credentials credentials,
+            @Context UriInfo uriInfo) {
         URI uri = clientService.create(credentials, uriInfo);
         return Response.created(uri).build();
     }
@@ -59,7 +62,9 @@ public class ClientResource extends BaseResource {
     @Path("/{clientId}")
     @Produces("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
-    public ClientView getById(@PathParam("clientId") String clientId, @Context SecurityContext context) {
+    public ClientView getById(
+            @PathParam("clientId") String clientId,
+            @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         return clientPresenter.present(client);
     }
@@ -68,8 +73,12 @@ public class ClientResource extends BaseResource {
     @Path("/{clientId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.client})
-    public Response update(@PathParam("clientId") String clientId, Credentials credentials, @Context SecurityContext context) {
-        clientService.update(clientId, credentials, context.getUserPrincipal());
+    public Response update(
+            @PathParam("clientId") String clientId,
+            Credentials credentials,
+            @Context SecurityContext context) {
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        clientService.update(client, credentials);
         return Response.ok().build();
     }
 
@@ -77,8 +86,12 @@ public class ClientResource extends BaseResource {
     @Path("/{clientId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
-    public Response patch(@PathParam("clientId") String clientId, JsonNode patchRequest, @Context SecurityContext context) {
-        clientService.patch(clientId, patchRequest, context.getUserPrincipal());
+    public Response patch(
+            @PathParam("clientId") String clientId,
+            JsonNode patchRequest,
+            @Context SecurityContext context) {
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        clientService.patch(client, patchRequest);
         return Response.ok().build();
     }
 

@@ -15,60 +15,67 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.MessagePresenter;
 import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.FamilyMessageService;
+import nl.inholland.projectapi.service.FamilyService;
 
 @Path("/api/v1/families/{familyId}/messages")
+@Secured({Role.admin, Role.family})
 public class FamilyMessageResource extends BaseResource {
 
     private final FamilyMessageService familyMessageService;
     private final MessagePresenter messagePresenter;
+    private final FamilyService familyService;
 
     @Inject
-    public FamilyMessageResource(FamilyMessageService familyMessageService, MessagePresenter messagePresenter) {
+    public FamilyMessageResource(FamilyMessageService familyMessageService, MessagePresenter messagePresenter, FamilyService familyService) {
         this.familyMessageService = familyMessageService;
         this.messagePresenter = messagePresenter;
+        this.familyService = familyService;
     }
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.family})
-    public List<MessageView> getAll(@QueryParam("count") int count, @PathParam("familyId") String familyId) {
-        List<Message> messages = familyMessageService.getAll(familyId, count);
-
-        if (count != 0) {
-            List<Message> reducedList = familyMessageService.reduceList(messages, count);
-            return messagePresenter.present(reducedList);
-        }
+    public List<MessageView> getAll(
+            @QueryParam("count") int count,
+            @PathParam("familyId") String familyId,
+            @Context SecurityContext context) {
+        Family family = familyService.getById(familyId, context.getUserPrincipal());
+        List<Message> messages = familyMessageService.getAll(family, count);
         return messagePresenter.present(messages);
     }
 
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.client, Role.family})
-    public Response create(@PathParam("familyId") String familyId, Message message, @Context UriInfo uriInfo, @Context SecurityContext context) {
-        URI uri = familyMessageService.create(message, familyId, context.getUserPrincipal(), uriInfo);
+    public Response create(
+            @PathParam("familyId") String familyId,
+            Message message,
+            @Context UriInfo uriInfo,
+            @Context SecurityContext context) {
+        Family family = familyService.getById(familyId, context.getUserPrincipal());
+        URI uri = familyMessageService.create(message, family, uriInfo);
         return Response.created(uri).build();
     }
 
     @GET
     @Path("/{messageId}")
     @Produces("application/json")
-     @Secured({Role.admin, Role.family})
     public MessageView getById(@PathParam("familyId") String familyId, @PathParam("messageId") String messageId, @Context SecurityContext context) {
-        Message message = familyMessageService.getById(familyId, messageId);
+        Family family = familyService.getById(familyId, context.getUserPrincipal());
+        Message message = familyMessageService.getById(family, messageId);
         return messagePresenter.present(message);
     }
-    
+
     @DELETE
     @Path("/{messageId}")
     @Produces("application/json")
-    @Secured({Role.admin, Role.family})
-    public void deleteMessage(@PathParam("familyId") String familyId,@PathParam("messageId") String messageId, @Context SecurityContext context) {
-       familyMessageService.delete(familyId, messageId);
-    }    
+    public void deleteMessage(@PathParam("familyId") String familyId, @PathParam("messageId") String messageId, @Context SecurityContext context) {
+        Family family = familyService.getById(familyId, context.getUserPrincipal());
+        familyMessageService.delete(family, messageId);
+    }
 }
