@@ -19,7 +19,7 @@
     - url: "/api/v1/login/"
     - method: 'POST'
     - body: '{"username":"admin", "password":"admin"}'
-    - headers: {Content-Type: application/json}
+    - headers: {"Content-Type": "application/json"}
     - expected_status: [200]
     - extract_binds:
         - "authtoken": {"jsonpath_mini": "authtoken"}
@@ -58,7 +58,7 @@
     - name: "Create a new block"
     - url: "/api/v1/blocks/"
     - method: "POST"
-    - body: '{"name":"test block","description":"dit is een test block", "activities":[]}'
+    - body: '{"name": "Test","description": "Dit is een test","imageURL": "","activities": []}'
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - expected_status: [201]
     - extract_binds:
