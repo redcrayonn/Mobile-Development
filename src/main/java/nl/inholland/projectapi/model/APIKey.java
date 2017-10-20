@@ -31,4 +31,8 @@ public class APIKey {
     public void setAuthtoken(String authtoken) {
         this.authtoken = authtoken;
     }    
+    
+    public void expireKey() {
+        this.datetime = new Date(0);
+    }
 }

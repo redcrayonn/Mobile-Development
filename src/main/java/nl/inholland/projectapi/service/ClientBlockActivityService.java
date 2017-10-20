@@ -15,32 +15,32 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.persistence.ClientDAO;
 
 public class ClientBlockActivityService extends BaseService {
-    
+
     private final ClientDAO clientDAO;
 
     @Inject
     public ClientBlockActivityService(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
-    }    
-    
+    }
+
     public List<Activity> getActivities(Client client, String blockId) {
         for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
                 return b.getActivities();
             }
         }
-        throw new NotFoundException("Not found");        
+        throw new NotFoundException("Activities not found");
     }
-    
+
     public Activity getActivity(Client client, String blockId, String activityId) {
-        for(Activity a : getActivities(client, blockId)) {
-            if(a.getId().equals(activityId)) {
+        for (Activity a : getActivities(client, blockId)) {
+            if (a.getId().equals(activityId)) {
                 return a;
             }
         }
-        throw new NotFoundException("Not found");
+        throw new NotFoundException("Activity not found");
     }
-    
+
     public void patch(Client client, String blockId, Activity activity, JsonNode patchRequest) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -48,8 +48,8 @@ public class ClientBlockActivityService extends BaseService {
             JsonPatch patch = JsonPatch.fromJson(patchRequest);
             JsonNode patched = patch.apply(jsonActivity);
             Activity updatedActivity = mapper.treeToValue(patched, Activity.class);
-            for(BuildingBlock b : client.getBuildingBlocks()) {
-                if(b.getId().equals(blockId)) {
+            for (BuildingBlock b : client.getBuildingBlocks()) {
+                if (b.getId().equals(blockId)) {
                     b.getActivities().remove(activity);
                     b.getActivities().add(updatedActivity);
                 }

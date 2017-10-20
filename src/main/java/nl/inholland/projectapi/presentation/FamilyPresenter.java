@@ -9,7 +9,7 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 public class FamilyPresenter extends BasePresenter {
 
     private final MessagePresenter messagePresenter;
-    
+
     @Inject
     public FamilyPresenter(MessagePresenter messagePresenter) {
         this.messagePresenter = messagePresenter;

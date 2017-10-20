@@ -18,28 +18,28 @@ import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.UserDAO;
 
-
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
+
     private final UserDAO userDAO;
-    
+
     @Inject
     public AuthenticationFilter(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-    
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         User user = userDAO.getByAPIKey(token);
-        if(user == null || user.getApiKey().getDatetime().before(new Date())) {
+        if (user == null || user.getApiKey().getDatetime().before(new Date())) {
             throw new NotAuthorizedException("API key invalid");
-        }           
-                
+        }
+
         final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
-        
+
         requestContext.setSecurityContext(new SecurityContext() {
             @Override
             public Principal getUserPrincipal() {

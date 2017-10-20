@@ -12,8 +12,9 @@ public class Caregiver extends User {
         super(credentials, Role.caregiver);
         this.appointments = new ArrayList<Appointment>();
     }
+
     public Caregiver() {
-        
+
     }
     @Embedded
     private List<Appointment> appointments;

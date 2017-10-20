@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Caregiver;
@@ -41,9 +40,7 @@ public class CaregiverService extends BaseService {
     public Caregiver getById(String id, Principal principal) {
         Caregiver caregiver = caregiverDAO.getById(id);
         requireResult(caregiver, "Caregiver not found");
-        
-         //IF PERMISSION IS FIXED, UNDO COMMENT !!
-        // checkPermissions(caregiver, userDAO.getByUsername(principal.getName()));
+        checkPermissions(caregiver, userDAO.getByUsername(principal.getName()));
         return caregiver;
     }
 
@@ -61,8 +58,7 @@ public class CaregiverService extends BaseService {
         return buildUri(uriInfo, caregiver.getId());
     }
 
-    public void update(String userId, Credentials credentials, Principal principal) {
-        Caregiver caregiver = getById(userId, principal);
+    public void update(Caregiver caregiver, Credentials credentials) {
         caregiver.setUserName(credentials.getUsername());
         caregiver.setPassword(BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt()));
         caregiver.setApiKey(new APIKey());
@@ -74,19 +70,14 @@ public class CaregiverService extends BaseService {
         requireResult(caregiver, "Caregiver not found");
 
         //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship
-        try {
-            for (Client client : clientDAO.getAllClients()) {
-                for (int i = 0; i < client.getCaregivers().size(); i++) {
-                    Caregiver c = client.getCaregivers().get(i);
-                    if (c.getId().equals(caregiver.getId())) {
-                        client.getCaregivers().remove(c);
-                        clientDAO.update(client);
-                    }
+        for (Client client : clientDAO.getAllClients()) {
+            for (Caregiver c : client.getCaregivers()) {
+                if (c.getId().equals(caregiver.getId())) {
+                    client.getCaregivers().remove(c);
+                    clientDAO.update(client);
                 }
             }
-            caregiverDAO.delete(caregiver);
-        } catch (ProcessingException e) {
-            throw new ProcessingException(e);
         }
+        caregiverDAO.delete(caregiver);
     }
 }

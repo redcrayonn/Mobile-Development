@@ -47,7 +47,7 @@ public class FamilyResource extends BaseResource {
 
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.caregiver}) ///<-- CHECK IF THIS IS VALID
+    @Secured({Role.admin})
     public Response create(Credentials credentials, @Context UriInfo uriInfo) {
         URI uri = familyService.create(credentials, uriInfo);
         return Response.created(uri).build();
@@ -56,7 +56,7 @@ public class FamilyResource extends BaseResource {
     @GET
     @Path("/{familyId}")
     @Produces("application/json")
-    @Secured({Role.admin, Role.family, Role.client})
+    @Secured({Role.admin, Role.family})
     public FamilyView getById(@PathParam("familyId") String familyId, @Context SecurityContext context) {
         Family family = familyService.getById(familyId, context.getUserPrincipal());
         return familyPresenter.present(family);
@@ -65,7 +65,7 @@ public class FamilyResource extends BaseResource {
     @PUT
     @Path("/{familyId}")
     @Consumes("application/json")
-    @Secured({Role.admin, Role.client, Role.family})
+    @Secured({Role.admin, Role.family})
     public Response update(@PathParam("familyId") String familyId, Credentials credentials, @Context SecurityContext context) {
         familyService.update(familyId, credentials, context.getUserPrincipal());
         return Response.ok().build();

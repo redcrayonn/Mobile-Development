@@ -1,0 +1,3011 @@
+swagger: '2.0'
+info:
+  version: '2.0'
+  title: "API Project I'm Ready"
+  description: "API Project I'm Ready"
+# basePath: "/"
+# host: "imready.ml"
+
+tags:
+- name: "general"
+  description: "General object operations"
+- name: "connections"
+  description: "Client connections"
+- name: "gblocks"
+  description: "General building block operations"
+- name: "pblocks"
+  description: "Personal building block operations"
+- name: "appointments"
+  description: "Appointment operations"
+- name: "messages"
+  description: "Messages operations"
+  
+produces:
+  - "application/json"
+  
+schemes:
+ - "https"
+ 
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    
+responses:
+  500:
+    description: "Server error"
+    schema:
+      $ref: "#/definitions/ErrorResponses"
+    
+#documentatie: http://jsonpatch.com/ source: https://aaronsaray.com/2016/using-json-patch-in-swagger
+definitions:
+  PatchRequest:
+    type: "array"
+    items:
+      $ref: "#/definitions/PatchDocument"
+      
+  PatchDocument:
+    description: "A JSONPatch document as defined by RFC 6902"
+    required:
+    - "op"
+    - "path"
+    properties:
+     op:
+      type: "string"
+      description: "The operation to be performed"
+      enum:
+      - "increment"
+      - "replace"
+     path:
+      type: "string"
+      description: "The key to be used within the operations"
+     value:
+      type: "object"
+      description: "The value to be used within the operations"
+
+  Clients:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the user"
+        type: "string"
+      name:
+        description: "Name of the user"
+        type: "string"
+      points:
+        description: "Amount of points the user has"
+        type: "integer"
+        format: "int64"
+      role:
+        description: "Role of client"
+        type: "string"
+        enum:
+        - "admin"
+        - "client"
+        - "caregiver"
+        - "family"
+      messages:
+        description: "All messages this user has sent or received"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Messages"
+        }
+      family:
+        description: "All family members invited by this user"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Family"
+        }
+      appointments:
+        description: "All appointments of the user"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Appointments"
+        }
+      caregivers:
+        description: "Caregivers of the client"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Caregivers"
+        }
+      blocks:
+        description: "Personal building blocks"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Blocks"
+        }
+
+  Caregivers:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+        description: "Name of the user"
+      role:
+        description: "Role of client"
+        type: "string"
+        enum:
+        - "admin"
+        - "client"
+        - "caregiver"
+        - "family"
+      messages:
+        description: "All messages this user has sent or received"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Messages"
+        }        
+      appointments:
+        description: "All appointments of the user"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Appointments"
+        }
+
+  EntityModel:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+
+  Family:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+        description: "Name of the family member"
+      role:
+        description: "Role of client"
+        type: "string"
+        enum:
+        - "admin"
+        - "client"
+        - "caregiver"
+        - "family"        
+      messages:
+        description: "All messages this user has sent or received"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Messages"
+        }
+
+  InputBlocks:
+    type: "object"
+    properties:
+      name:
+        description: "Name of the block"
+        type: "string"
+      description:
+        description: "description of the block"
+        type: "string"
+      imageURL:
+        description: "Path to the image"
+        type: "string"
+      activities:
+        description: "Activities in the building block"
+        type: "array"
+        items: {
+          $ref: "#/definitions/InputActivities"
+        }
+
+  InputActivities:
+    type: "object"
+    properties:
+      name:
+        description: "Name of the activity"
+        type: "string"
+      description:
+        description: "Description of the activity"
+        type: "string"
+
+  Blocks:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        description: "Name of the block"
+        type: "string"
+      description:
+        description: "description of the block"
+        type: "string"
+      imageURL:
+        description: "Path to the image"
+        type: "string"
+      activities:
+        description: "Activities in the building block"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Activities"
+        }
+
+  Activities:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the activity"
+        type: "string"
+      name:
+        description: "Name of the activity"
+        type: "string"
+      description:
+        description: "Description of the activity"
+        type: "string"
+
+  PersonalActivities:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the activity"
+        type: "string"
+      name:
+        description: "Name of the activity"
+        type: "string"
+      description:
+        description: "Description of the activity"
+        type: "string"
+      status:
+        description: "Status of the activity"
+        type: "string"
+        enum:
+        - "complete"
+        - "ongoing"
+        - "pending"
+        - "irrelevant"         
+      likes:
+        description: "List of activity’s likes"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Likes"
+        }
+      comments:
+        description: "List of activity’s comments"
+        type: "array"
+        items: {
+          $ref: "#/definitions/Comments"
+        }
+ 
+  Appointments:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the appointment"
+        type: "string"
+      datetime:
+        description: "Deadline of the appointment"
+        type: "string"
+        format: "datetime"
+      description:
+        description: "Description of the appointment"
+        type: "string"
+
+  InputAppointments:
+    type: "object"
+    properties:
+      datetime:
+        description: "Deadline of the appointment(ISO DateTime format)"
+        type: "string"
+        format: "datetime"
+      description:
+        description: "Description of the appointment"
+        type: "string"    
+
+  InputMessages:
+    type: "object"
+    properties:
+      receiverId:
+        description: "Receiver ID of the message"
+        type: "string"
+      message:
+        description: "Content of the message"
+        type: "string"
+
+  Messages:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the message"
+        type: "string"
+      senderId:
+        description: "ID of the sender of the message"
+        type: "string"
+      receiverId:
+        description: "ID of the receiver of the message"
+        type: "string"
+      message:
+        description: "Content of the message"
+        type: "string"
+      datetime:
+        description: "Time the message was sent"
+        type: "string"
+        format: "datetime"
+      read:
+        description: "The read status of the message"
+        type: "boolean"
+
+  InputComments:
+    type: "object"
+    properties:
+      message:
+        description: "Content of the comment"
+        type: "string"    
+
+  Comments:
+    type: "object"
+    required:
+    - "message"
+    properties:
+      id:
+        description: "ID of the comment"
+        type: "string"
+      senderId:
+        description: "Id of the sender"
+        type: "integer"
+        format: "int64"
+      datetime:
+        description: "Time the message was sent"
+        type: "string"
+        format: "datetime"        
+      message:
+        description: "Message of the comment"
+        type: "string"
+
+  Likes:
+    type: "object"
+    properties:
+      id:
+        description: "ID of the like"
+        type: "string"
+      senderId:
+        description: "Id of the user that liked"
+        type: "integer"
+        format: "int64"
+      datetime:
+        description: "Time the item was liked"
+        type: "string"
+        format: "datetime"
+
+  Credentials:
+    type: "object"
+    properties:
+      username: 
+        description: "Username"
+        type: "string"
+      password:
+        description: "Password"
+        type: "string"
+
+  ApiKeyResponses:
+    type: "object"
+    properties:
+      authtoken:
+        description: "API key for consecutive requests"
+        type: "string"
+      datetime:
+        description: "API key is valid until this time"
+        type: "string"
+
+  ErrorResponses:
+    type: "object"
+    properties:
+      code:
+        description: "Error code"
+        type: "integer"
+        format: "int64"
+      message:
+        description: "Error message"
+        type: "string"        
+
+paths:
+  #GENERAL
+  /login:
+    post:
+      summary: "Login"
+      description: "Log user with username and password in"
+      tags:
+      - "general"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        200:
+          description: "Returns api-key"
+          schema:
+            $ref: "#/definitions/ApiKeyResponses"
+        400:
+          description: "Invalid username or password"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+            
+  /logout:
+    get:
+      summary: "Logout"
+      description: "Logout user"
+      tags:
+      - "general"
+      responses:
+        204:
+          description: "Logout succesful"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []            
+
+  /clients:
+    get:
+      summary: "Get clients"
+      description: "Returns a list of clients, starting with the newest client in the database that fits the specified arguments."
+      tags:
+      - "general"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "The maximum number of clients to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Clients"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+      
+    post:
+      summary: "Create a new client"
+      description: "Create a new client"
+      tags:
+      - "general"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        201:
+          description: "succesful created new client"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        409:
+          description: "Username already exists"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{id}:
+    get:
+      summary: "Find client by ID"
+      description: "Returns a single client"
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of client to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the client by ID"
+          schema:
+            $ref: "#/definitions/Clients"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update client"
+      description: "Update client with specified ID"
+      tags:
+      - "general"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"        
+      responses:
+        200:
+          description: "succesfully updated client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    patch:
+      summary: "Update field within client"
+      description: "Update a single field within a client, for example points" #{ "op": "replace", "path": "/points", "value": "2" }
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/PatchRequest"
+      responses:
+        200:
+          description: "succesfully updated client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete client"
+      description: "Delete client with specified ID"
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of client to be deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "succesfully deleted client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /family:
+    get:
+      summary: "Get family members"
+      description: "Returns a list of family members, starting with the newest family in the database that fits the specified arguments."
+      tags:
+      - "general"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "The maximum number of family members to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Family"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Create new family member"
+      description: "Create a new family member"
+      tags:
+      - "general"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials" 
+      responses:
+        201:
+          description: "succesful created new family member"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        409:
+          description: "Username already exists"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /family/{id}:
+    get:
+      summary: "Get a single family member"
+      description: "Returns a single family member"
+      tags:
+        - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of family to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the family by ID"
+          schema:
+            $ref: "#/definitions/Family"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update the family"
+      description: "Update family with specified ID"
+      tags:
+      - "general"
+      consumes: 
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the family to be updated"
+        required: true
+        type: "string"
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        200:
+          description: "succesfully updated family"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Family not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete family"
+      description: "Delete family with specified ID"
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the family to deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "succesfully deleted family member"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Family not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers:
+    get:
+      summary: "Get caregivers"
+      description: "Returns a list of caregivers, starting with the newest caregivers in the database that fits the specified arguments."
+      tags:
+      - "general"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "The maximum number of caregivers to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Caregivers"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Create a new caregiver"
+      description: "Create a new caregiver"
+      tags:
+      - "general"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials" 
+      responses:
+        201:
+          description: "succesful created new caregiver"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        409:
+          description: "Username already exists"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{id}:
+    get:
+      summary: "Get caregiver"
+      description: "Returns a caregiver that fits the specified arguments."
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of caregiver to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/Caregivers"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update caregiver"
+      description: "Update caregiver with specified ID"
+      tags:
+      - "general"
+      consumes: 
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of caregiver to be updated"
+        required: true
+        type: "string"
+      - name: "Credentials"
+        in: "body"
+        description: "Credentials of the user"
+        required: true
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        200:
+          description: "succesfully updated caregiver"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete caregiver"
+      description: "Delete caregiver with specified ID"
+      tags:
+      - "general"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the caregiver to deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "succesfully deleted caregiver"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  #CLIENT CONNECTIONS
+  /clients/{id}/caregivers:
+    get:
+      summary: "Get caregivers of a single client"
+      description: "Returns a list of caregivers from the database that fits the specified client ID."
+      tags:
+      - "connections"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The client's ID which caregivers to return"
+        required: true
+        type: "string"
+      - name: "count"
+        in: "query"
+        description: "The maximum number of caregivers to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Caregivers"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Bind caregiver to client"
+      description: "Bind new caregiver to client"
+      tags:
+      - "connections"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Client's ID to modify"
+        required: true
+        type: "string"
+      - name: "caregiver"
+        in: "body"
+        description: "ID of the caregiver"
+        required: true
+        schema:
+          $ref: "#/definitions/EntityModel"
+      responses:
+        201:
+          description: "Succesfully bound caregiver to client"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/caregivers/{caregiverId}:
+    get:
+      summary: "Get a single client's caregiver with ID"
+      description: "Returns a single caregiver with specified userID and caregiverID"
+      tags:
+        - "connections"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be returned"
+        required: true
+        type: "string"
+      - name: "caregiverId"
+        in: "path"
+        description: "ID of the client's caregiver to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the caregigver by ID"
+          schema:
+            $ref: "#/definitions/Caregivers"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update client's caregiver"
+      description: "Update caregiver with specified userID and caregiverID"
+      tags:
+      - "connections"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "caregiverId"
+        in: "path"
+        description: "ID of the client's caregiver to be updated"
+        required: true
+        type: "string"
+      - name: "caregiver"
+        in: "body"
+        description: "Updated caregiver object"
+        required: true
+        schema:
+          $ref: "#/definitions/EntityModel"
+      responses:
+        200:
+          description: "Succesfully updated client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete client's caregiver"
+      description: "Delete client's caregiver with specified ID"
+      tags:
+      - "connections"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "caregiverId"
+        in: "path"
+        description: "ID of the client's caregiver to be deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Succesfully updated client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{id}/family:
+    get:
+      summary: "Get family members of a single client"
+      description: "Returns a list of family members from the database that fits the specified client ID."
+      tags:
+      - "connections"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The client's ID which family members to return"
+        required: true
+        type: "string"
+      - name: "count"
+        in: "query"
+        description: "The maximum number of family members to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Family"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Bind family member to client"
+      description: "Bind new family member to client"
+      tags:
+      - "connections"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Client's ID to modify"
+        required: true
+        type: "string"
+      - name: "family"
+        in: "body"
+        description: "ID of family member"
+        required: true
+        schema:
+          $ref: "#/definitions/EntityModel"
+      responses:
+        201:
+          description: "Succesfully bound family member to client"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/family/{familyId}:
+    get:
+      summary: "Get a single client's family member with ID"
+      description: "Returns a single family member with specified userID and familyID"
+      tags:
+        - "connections"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be returned"
+        required: true
+        type: "string"
+      - name: "familyId"
+        in: "path"
+        description: "ID of the client's family member to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the family by ID"
+          schema:
+            $ref: "#/definitions/Family"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or family member not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update client's family member"
+      description: "Update family member with specified userID and familyID"
+      tags:
+      - "connections"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "familyId"
+        in: "path"
+        description: "ID of the client's family member to be updated"
+        required: true
+        type: "string"
+      - name: "family"
+        in: "body"
+        description: "Updated family member ID"
+        required: true
+        schema:
+          $ref: "#/definitions/EntityModel"
+      responses:
+        200:
+          description: "Succesfully updated family member"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete client's family member"
+      description: "Delete client's family member with specified ID"
+      tags:
+      - "connections"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "familyId"
+        in: "path"
+        description: "ID of the client's family member to be deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Succesfully updated client"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+
+  #BOUWSTENEN GENERAL
+  /blocks:
+    get:
+      summary: "Get all building blocks"
+      description: "Returns all building blocks"
+      tags:
+      - "gblocks"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "Amount of blocks to be returned"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Blocks"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Create a new building block"
+      description: "Creates a new building block"
+      tags:
+        - "gblocks"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "block"
+        in: "body"
+        description: "Create a new block"
+        required: true
+        schema:
+          $ref: "#/definitions/InputBlocks"
+      responses:
+        201:
+          description: "Succesfully created a building block"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /blocks/{id}:
+    get:
+      summary: "Get building block"
+      description: "Returns a building block."
+      tags:
+      - "gblocks"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The building blocks's ID to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully found the building block"
+          schema:
+            $ref: "#/definitions/Blocks"
+        400:
+          description: "Parameters invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update block"
+      description: "Update block with specified blockId"
+      tags:
+      - "gblocks"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of block to be updated"
+        required: true
+        type: "string"
+      - name: "block"
+        in: "body"
+        description: "Updated block"
+        required: true
+        schema:
+          $ref: "#/definitions/InputBlocks"
+      responses:
+        200:
+          description: "Succesfully updated family member"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Deletes the building block"
+      description: "Delete a building block"
+      tags:
+        - "gblocks"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The building block to delete"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted the building block"
+        400:
+          description: "Parameters invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /blocks/{id}/activities:
+    get:
+      summary: "Get all activities of a building block"
+      description: "Get all activities of a building block"
+      tags:
+      - "gblocks"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "Amount of blocks to be returned"
+        required: false
+        type: "integer"
+        format: "int64"        
+      - name: "id"
+        in: "path"
+        description: "ID of building block to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully found the activities"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Activities"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Create a new activity in the building block"
+      description: "Create a new activity"
+      tags:
+      - "gblocks"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the building block to add a activity to"
+        required: true
+        type: "string"
+      - name: "Activity"
+        in: "body"
+        description: "Create a new Activity"
+        required: true
+        schema:
+          $ref: "#/definitions/InputActivities"
+      responses:
+        201:
+          description: "Successfully created the activity in building block"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /blocks/{blockId}/activities/{activityId}:
+    get:
+      summary: "Returns an activity in a building block"
+      description: "Returns an activity in a building block"
+      tags:
+        - "gblocks"
+      parameters:
+      - name: "blockId"
+        in: "path"
+        description: "Id of the building block"
+        required: true
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "id of the activity to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully found activity in building block"
+          schema:
+            $ref: "#/definitions/Activities"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Updates an activity in a building block"
+      description: "Updates an activity in a building block"
+      tags:
+        - "gblocks"
+      consumes:
+        - "application/json"
+      parameters:
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "id of the activity to replace"
+        required: true
+        type: "string"
+      - name: "Activity"
+        in: "body"
+        description: "Create a new Activity"
+        required: true
+        schema:
+          $ref: "#/definitions/InputActivities"
+      responses:
+        200:
+          description: "Successfully updated the activity"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Deletes an activity of a building block"
+      description: "deletes an activity of a building block"
+      tags:
+        - "gblocks"
+      parameters:
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "id of the activity to delete"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted the activity"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  #PERSOONLIJKE BOUWSTENEN
+  /clients/{id}/blocks:
+    get:
+      summary: "Get building blocks of a single client"
+      description: "Returns a list of building blocks from the database that fits the specified client ID."
+      tags:
+      - "pblocks"
+      parameters:
+      - name: "count"
+        in: "query"
+        description: "Amount of blocks to be returned"
+        required: false
+        type: "integer"
+        format: "int64"        
+      - name: "id"
+        in: "path"
+        description: "The client's ID which building blocks to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Blocks"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Bind building block to client"
+      description: "Bind new building block to client"
+      tags:
+      - "pblocks"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Client's ID to modify"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "General block ID of new block to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/EntityModel"
+      responses:
+        201:
+          description: "Succesfully bound building block to client"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}:
+    get:
+      summary: "Get a single client's building blocks with ID"
+      description: "Returns a single building blocks with specified userID and blockID"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be returned"
+        required: true
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        description: "ID of the client's building block to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Succesfully found the building block by ID"
+          schema:
+            $ref: "#/definitions/Blocks"
+        400:
+          description: "Invalid clientID or blockID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or building blocks not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete client's building block"
+      description: "Delete client's building block with specified ID"
+      tags:
+      - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be updated"
+        required: true
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        description: "ID of the client's building block to be deleted"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Succesfully updated building block"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or building block not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities:
+    get:
+      summary: "Get a single client's activities in a single building block"
+      description: "Returns a list of a single client's activities in a a single building blocks with specified userID and blockID"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be returned"
+        required: true
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        description: "ID of the client's building block to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Succesfully found the activities by ID"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Activities"
+        400:
+          description: "Invalid clientID or blockID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client or building blocks not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities/{activityId}:
+    get:
+      summary: "Get a single client's activity in a single building block"
+      description: "Returns an activity of a single client's in a a single building blocks with specified userID and blockID"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of client to be returned"
+        required: true
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        description: "ID of the client's building block to be returned"
+        required: true
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "ID of the activity to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Succesfully found the activity by ID"
+          schema:
+            $ref: "#/definitions/Activities"
+        400:
+          description: "Invalid clientID or blockID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    patch:
+      summary: "Update field within personal activity"
+      description: "Update a single field within a personal activity, for example status" #{ "op": "replace", "path": "/status", "value": "complete" }
+      tags:
+      - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity to patch"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/PatchRequest"
+      responses:
+        200:
+          description: "succesfully patched client's activity"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities/{activityId}/likes:
+    get:
+      summary: "Gets all likes on a personal activity in a building block"
+      description: "Gets all likes on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned likes"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Likes"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Like a personal activity in a building block"
+      description: "Likes a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity to be liked"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Successfully liked the activity"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities/{activityId}/likes/{likeId}:
+    get:
+      summary: "Gets a like on a personal activity in a building block"
+      description: "Gets a like on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity"
+        required: true
+        type: "string"
+      - name: "likeId"
+        in: "path"
+        description: "Id of the like"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned like"
+          schema:
+            $ref: "#/definitions/Likes"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Deletes a like on a personal activity in a building block"
+      description: "Gets a like on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity"
+        required: true
+        type: "string"
+      - name: "likeId"
+        in: "path"
+        description: "Id of the commentsa"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted a like"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities/{activityId}/comments:
+    get:
+      summary: "Gets all comments on a personal activity in a building block"
+      description: "Gets all comment on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity to be commented on"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned comments"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comments"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Comments on a personal activity in a building block"
+      description: "Comment on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      consumes:
+        - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity to be commented on"
+        required: true
+        type: "string"
+      - name: "comment"
+        in: "body"
+        description: "Comment object"
+        required: true
+        schema:
+          $ref: "#/definitions/InputComments"
+      responses:
+        201:
+          description: "Successfully commented on the activity"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/blocks/{blockId}/activities/{activityId}/comments/{commentId}:
+    get:
+      summary: "Gets a comment on a personal activity in a building block"
+      description: "Gets a comment on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity"
+        required: true
+        type: "string"
+      - name: "commentId"
+        in: "path"
+        description: "Id of the commentsa"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned comment"
+          schema:
+            $ref: "#/definitions/Comments"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Deletes a comment on a personal activity in a building block"
+      description: "Gets a comment on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity"
+        required: true
+        type: "string"
+      - name: "commentId"
+        in: "path"
+        description: "Id of the commentsa"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted a comment with id"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/appointments:
+    get:
+      summary: "Get all the client appointments."
+      description: "Returns all appointments that are specific and tied to the client."
+      tags:
+      - "appointments"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs clients Id to identify."
+      - name: "count"
+        in: "query"
+        description: "The maximum number of appointments to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "All clients appointments are succesfully returned"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Appointments"
+        400:
+          description: "The input parameter is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Add a new appointment for the client"
+      description: "Add a new appointment for the client"
+      tags:
+      - "appointments"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"        
+      - name: "appointment"
+        in: "body"
+        description: "appointment object with ISO DateTime format"
+        required: true
+        schema:
+          $ref: "#/definitions/InputAppointments"
+      responses:
+        201:
+          description: "The appointment has been succesfully added"
+        400:
+          description: "The input parameter(s) are invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/appointments/{appointmentId}:
+    get:
+      summary: "Get the client specific appointment."
+      description: "Returns an appointments that is specific and tied to the client."
+      tags:
+      - "appointments"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs the clients Id to identify."
+      - name: "appointmentId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify an appointment."
+      responses:
+        200:
+          description: "Client specific appointment is succesfully returned"
+          schema:
+            $ref: "#/definitions/Appointments"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "Unauthorized request"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update the clients appointment"
+      description: "update a specfic appointment"
+      tags:
+      - "appointments"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "Needs a client ID to link the appointment to"
+        required: true
+        type: "string"
+      - name: "appointmentId"
+        in: "path"
+        description: "Needs a Id to update the appointment."
+        required: true
+        type: "string"
+      - name: "appointment"
+        in: "body"
+        description: "appointment object with ISO DateTime format to be replaced"
+        required: true
+        schema:
+          $ref: "#/definitions/InputAppointments"
+      responses:
+        200:
+          description: "The appointment has been succesfully updated"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "The clients appointment can be deleted"
+      description: "Deletes a clients appointment"
+      tags:
+      - "appointments"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Needs a client ID to link the appointment to"
+        type: "string"
+      - name: "appointmentId"
+        in: "path"
+        description: "Needs a Id to update the appointment."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "The appointment has been succesfully deleted"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{caregiverId}/appointments:
+    get:
+      summary: "Get all the caregiver's appointments."
+      description: "Returns all appointments that are specific and tied to the caregiver."
+      tags:
+      - "appointments"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the caregiver."
+      - name: "count"
+        in: "query"
+        description: "The maximum number of appointments to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "All caregiver's appointments are succesfully returned"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Appointments"
+        400:
+          description: "The input parameter is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Add a new appointment for the caregiver"
+      description: "Add an appointment"
+      tags:
+      - "appointments"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        description: "Needs a caregiver ID to link the appointment to"
+        required: true
+        type: "string"
+      - name: "appointment"
+        in: "body"
+        description: "Appointment object with ISO DateTime format"
+        required: true
+        schema:
+          $ref: "#/definitions/InputAppointments"
+      responses:
+        201:
+          description: "The appointment has been succesfully added"
+        400:
+          description: "The input parameter(s) are invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{caregiverId}/appointments/{appointmentId}:
+    get:
+      summary: "Get the caregiver specific appointment."
+      description: "Returns an appointment that is specific and tied to the caregiver."
+      tags:
+      - "appointments"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        description: "Needs a caregiver ID to link the appointment to"
+        type: "string"
+      - name: "appointmentId"
+        in: "path"
+        description: "Needs a Id to update the appointment."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Caregiver's specific appointment is succesfully returned"
+          schema:
+            $ref: "#/definitions/Appointments"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "Unauthorized request"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    put:
+      summary: "Update the caregiver's appointment"
+      description: "Update a specfic appointment"
+      tags:
+      - "appointments"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        description: "Needs a caregiver ID to link the appointment to"
+        type: "string"
+      - name: "appointmentId"
+        in: "path"
+        description: "Needs a Id to update the appointment."
+        required: true
+        type: "string"
+      - name: "appointment"
+        in: "body"
+        description: "appointment object with ISO DateTime to be replaced"
+        required: true
+        schema:
+          $ref: "#/definitions/InputAppointments"
+      responses:
+        200:
+          description: "The appointment has been succesfully updated"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "The caregiver's appointment can be deleted"
+      description: "Deletes a caregiver's appointment"
+      tags:
+      - "appointments"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        description: "Needs a caregiver ID to link the appointment to"
+        type: "string"
+      - name: "appointmentId"
+        in: "path"
+        description: "Needs a Id to update the appointment."
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "The appointment has been succesfully deleted"
+        400:
+          description: "The input parameter(s) is invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /family/{familyId}/messages/:
+    get:
+      summary: "Get all family messages"
+      description: "Get all family messages"
+      tags:
+      - "messages"
+      parameters:
+      - name: "familyId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the family member."
+      - name: "count"
+        in: "query"
+        description: "The maximum number of messages to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Send a new message to a family member"
+      description: "Add a new message"
+      tags:
+      - "messages"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "familyId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the family member."
+      - name: "message"
+        in: "body"
+        description: "Message object"
+        required: true
+        schema:
+          $ref: "#/definitions/InputMessages"
+      responses:
+        201:
+          description: "The message has been succesfully sent"
+        400:
+          description: "The input parameter(s) are invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /family/{familyId}/messages/{messageId}:
+    get:
+      summary: "Get specific family message"
+      description: "Get family message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "familyId"
+        in: "path"
+        description: "ID of the family"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete specific family message"
+      description: "delete family message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "familyId"
+        in: "path"
+        description: "ID of the family"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted the messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/messages/:
+    get:
+      summary: "Get all client messages"
+      description: "Get all client messages"
+      tags:
+      - "messages"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the client."
+      - name: "count"
+        in: "query"
+        description: "The maximum number of messages to return."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Send a new message to a client"
+      description: "Add a new message"
+      tags:
+      - "messages"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the client."
+      - name: "message"
+        in: "body"
+        description: "Message object"
+        required: true
+        schema:
+          $ref: "#/definitions/InputMessages"
+      responses:
+        201:
+          description: "The message has been succesfully sent"
+        400:
+          description: "The input parameter(s) are invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /clients/{clientId}/messages/{messageId}:
+    get:
+      summary: "Get specific client message"
+      description: "Get client message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of the client"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete specific client message"
+      description: "delete client message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "ID of the family"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted the messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{caregiverId}/messages/:
+    get:
+      summary: "Get all caregiver messages"
+      description: "Get all caregiver messages"
+      tags:
+      - "messages"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the caregiver."
+      - name: "count"
+        in: "query"
+        description: "The maximum number of messages to return."
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    post:
+      summary: "Send a new message to a caregivers"
+      description: "Add a new message"
+      tags:
+      - "messages"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        required: true
+        type: "string"
+        description: "Needs an Id to identify the caregiver."
+      - name: "message"
+        in: "body"
+        description: "Message object"
+        required: true
+        schema:
+          $ref: "#/definitions/InputMessages"
+      responses:
+        201:
+          description: "The message has been succesfully sent"
+        400:
+          description: "The input parameter(s) are invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "An unauthorized attempt"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{caregiverId}/messages/{messageId}:
+    get:
+      summary: "Get specific family message"
+      description: "Get family message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        description: "ID of the caregiver"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully returned the messages"
+          schema:
+            $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+    delete:
+      summary: "Delete specific caregiver message"
+      description: "delete caregiver message"
+      tags:
+      - "messages"
+      parameters:
+      - name: "caregiverId"
+        in: "path"
+        description: "ID of the caregiver"
+        required: true
+        type: "string"
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message to be returned"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted the messages"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /InhollandCloudAPI/ProjectAPI/2.0

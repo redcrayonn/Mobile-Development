@@ -5,12 +5,14 @@ import java.util.List;
 import nl.inholland.projectapi.model.Appointment;
 import nl.inholland.projectapi.presentation.model.AppointmentView;
 
-public class AppointmentPresenter extends BasePresenter{
+public class AppointmentPresenter extends BasePresenter {
 
-    public AppointmentPresenter() {}
-    
+    public AppointmentPresenter() {
+    }
+
     /**
      * Present list of Appointments
+     *
      * @param appointments
      * @return AppointmentView
      */
@@ -24,6 +26,7 @@ public class AppointmentPresenter extends BasePresenter{
 
     /**
      * Present an appointment
+     *
      * @param appointment
      * @return AppointmentView
      */

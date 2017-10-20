@@ -6,7 +6,8 @@ import javax.inject.Inject;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.presentation.model.PersonalActivityView;
 
-public class PersonalActivityPresenter extends BasePresenter{
+public class PersonalActivityPresenter extends BasePresenter {
+
     private final LikePresenter likePresenter;
     private final CommentPresenter commentPresenter;
 
@@ -16,8 +17,8 @@ public class PersonalActivityPresenter extends BasePresenter{
             CommentPresenter commentPresenter) {
         this.likePresenter = likePresenter;
         this.commentPresenter = commentPresenter;
-    }    
-    
+    }
+
     public PersonalActivityView present(Activity activity) {
         PersonalActivityView view = new PersonalActivityView();
         view.id = activity.getId();
@@ -26,15 +27,15 @@ public class PersonalActivityPresenter extends BasePresenter{
         view.status = activity.getStatus();
         view.likes = likePresenter.present(activity.getLikes());
         view.comments = commentPresenter.present(activity.getComments());
-       
+
         return view;
     }
-    
+
     public List<PersonalActivityView> present(List<Activity> activities) {
-        List<PersonalActivityView> views = new ArrayList<>();  
-        for(Activity activity : activities) {
-            views.add(present(activity));            
-        }      
+        List<PersonalActivityView> views = new ArrayList<>();
+        for (Activity activity : activities) {
+            views.add(present(activity));
+        }
         return views;
-    }      
+    }
 }

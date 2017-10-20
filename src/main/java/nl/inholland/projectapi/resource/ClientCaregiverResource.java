@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
+import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.CaregiverPresenter;
@@ -26,18 +27,21 @@ import nl.inholland.projectapi.service.ClientService;
 
 @Path("/api/v1/clients/{clientId}/caregivers")
 public class ClientCaregiverResource extends BaseResource {
-    
+
     private final ClientCaregiverService service;
     private final CaregiverPresenter presenter;
     private final ClientService clientService;
 
     @Inject
-    public ClientCaregiverResource(ClientCaregiverService service, CaregiverPresenter presenter, ClientService clientService) {
+    public ClientCaregiverResource(
+            ClientCaregiverService service,
+            CaregiverPresenter presenter,
+            ClientService clientService) {
         this.service = service;
         this.presenter = presenter;
         this.clientService = clientService;
     }
-    
+
     @GET
     @Secured({Role.admin})
     @Produces("application/json")
@@ -45,10 +49,11 @@ public class ClientCaregiverResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
-        List<Caregiver> caregivers = service.getAll(clientService.getById(clientId, context.getUserPrincipal()), count);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        List<Caregiver> caregivers = service.getAll(client, count);
         return presenter.present(caregivers);
     }
-    
+
     @POST
     @Secured({Role.admin})
     @Consumes("application/json")
@@ -58,10 +63,11 @@ public class ClientCaregiverResource extends BaseResource {
             Caregiver caregiver,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
-        URI uri = service.create(clientService.getById(clientId, context.getUserPrincipal()), caregiver, uriInfo);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        URI uri = service.create(client, caregiver, uriInfo);
         return Response.created(uri).build();
     }
-    
+
     @GET
     @Secured({Role.admin})
     @Produces("application/json")
@@ -70,10 +76,11 @@ public class ClientCaregiverResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("caregiverId") String caregiverId,
             @Context SecurityContext context) {
-        Caregiver caregiver = service.get(clientService.getById(clientId, context.getUserPrincipal()), caregiverId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        Caregiver caregiver = service.get(client, caregiverId);
         return presenter.present(caregiver);
     }
-    
+
     @PUT
     @Secured({Role.admin})
     @Consumes("application/json")
@@ -83,10 +90,11 @@ public class ClientCaregiverResource extends BaseResource {
             @PathParam("caregiverId") String caregiverId,
             Caregiver caregiver,
             @Context SecurityContext context) {
-        service.update(clientService.getById(clientId, context.getUserPrincipal()), caregiverId, caregiver);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        service.update(client, caregiverId, caregiver);
         return Response.ok().build();
     }
-    
+
     @DELETE
     @Secured({Role.admin})
     @Path("/{caregiverId}")
@@ -94,7 +102,7 @@ public class ClientCaregiverResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("caregiverId") String caregiverId,
             @Context SecurityContext context) {
-        service.delete(clientService.getById(clientId, context.getUserPrincipal()), caregiverId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        service.delete(client, caregiverId);
     }
-    
 }

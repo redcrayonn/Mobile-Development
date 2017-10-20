@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -32,7 +33,10 @@ public class ClientFamilyResource extends BaseResource {
     private final ClientService clientService;
 
     @Inject
-    public ClientFamilyResource(ClientFamilyService clientFamilyService, FamilyPresenter familyPresenter, ClientService clientService) {
+    public ClientFamilyResource(
+            ClientFamilyService clientFamilyService,
+            FamilyPresenter familyPresenter,
+            ClientService clientService) {
         this.clientFamilyService = clientFamilyService;
         this.familyPresenter = familyPresenter;
         this.clientService = clientService;
@@ -45,7 +49,8 @@ public class ClientFamilyResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
-        List<Family> family = clientFamilyService.getAll(clientService.getById(clientId, context.getUserPrincipal()), count);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        List<Family> family = clientFamilyService.getAll(client, count);
         return familyPresenter.present(family);
     }
 
@@ -58,7 +63,8 @@ public class ClientFamilyResource extends BaseResource {
             Family family,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
-        URI uri = clientFamilyService.create(clientService.getById(clientId, context.getUserPrincipal()), family, uriInfo);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        URI uri = clientFamilyService.create(client, family, uriInfo);
         return Response.created(uri).build();
     }
 
@@ -70,7 +76,8 @@ public class ClientFamilyResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("familyId") String familyId,
             @Context SecurityContext context) {
-        Family family = clientFamilyService.get(clientService.getById(clientId, context.getUserPrincipal()), familyId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        Family family = clientFamilyService.get(client, familyId);
         return familyPresenter.present(family);
     }
 
@@ -83,7 +90,8 @@ public class ClientFamilyResource extends BaseResource {
             @PathParam("familyId") String familyId,
             Family family,
             @Context SecurityContext context) {
-        clientFamilyService.update(clientService.getById(clientId, context.getUserPrincipal()), familyId, family);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        clientFamilyService.update(client, familyId, family);
         return Response.ok().build();
     }
 
@@ -94,6 +102,7 @@ public class ClientFamilyResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("familyId") String familyId,
             @Context SecurityContext context) {
-        clientFamilyService.delete(clientService.getById(clientId, context.getUserPrincipal()), familyId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        clientFamilyService.delete(client, familyId);
     }
 }

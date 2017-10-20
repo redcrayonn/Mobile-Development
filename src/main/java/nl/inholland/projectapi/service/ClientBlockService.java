@@ -27,18 +27,18 @@ public class ClientBlockService extends BaseService {
         requireResult(blocks, "Not Found");
         return reduceList(blocks, count);
     }
-    
-    public URI create(Client client, String blockId, UriInfo uriInfo) {
+
+    public URI create(Client client, BuildingBlock newBlock, UriInfo uriInfo) {
         requireResult(client, "Client not found");
-        BuildingBlock block = blockDAO.get(blockId);
+        BuildingBlock block = blockDAO.get(newBlock.getId());
         requireResult(block, "Block not found");
         block.setId(new ObjectId());
         block.getActivities().forEach(a -> a.setId(new ObjectId()));
         client.getBuildingBlocks().add(block);
         clientDAO.update(client);
-        return buildUri(uriInfo, block.getId()); 
+        return buildUri(uriInfo, block.getId());
     }
-    
+
     public BuildingBlock getById(Client client, String blockId) {
         for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
@@ -46,8 +46,8 @@ public class ClientBlockService extends BaseService {
             }
         }
         throw new NotFoundException("Not found");
-    }   
-    
+    }
+
     public void delete(Client client, String blockId) {
         client.getBuildingBlocks().removeIf(m -> m.getId().equals(blockId));
         clientDAO.update(client);

@@ -39,11 +39,7 @@ public class BlockResource extends BaseResource {
     @GET
     @Produces("application/json")
     public List<BlockView> getAll(@QueryParam("count") int count) {
-        List<BuildingBlock> blocks = blockService.getAll();
-        if(count != 0) {
-            List<BuildingBlock> reducedList = blockService.reduceList(blocks, count);
-            return blockPresenter.present(reducedList);
-        }
+        List<BuildingBlock> blocks = blockService.getAll(count);
         return blockPresenter.present(blocks);
     }
 
@@ -51,15 +47,7 @@ public class BlockResource extends BaseResource {
     @Consumes("application/json")
     public Response create(BuildingBlock newBlock, @Context UriInfo uriInfo) {
         URI uri = blockService.create(newBlock, uriInfo);
-        return Response.created(uri).build();//Return 201 response with the new location in header
-    }
-
-    @PUT
-    @Path("/{blockId}")
-    @Consumes("application/json")
-    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
-        blockService.update(id, newBlock);
-        return Response.ok().build();
+        return Response.created(uri).build();
     }
     
     @GET
@@ -68,6 +56,14 @@ public class BlockResource extends BaseResource {
     public BlockView getById(@PathParam("blockId") String id) {
         BuildingBlock block = blockService.getById(id);
         return blockPresenter.present(block);
+    }
+    
+    @PUT
+    @Path("/{blockId}")
+    @Consumes("application/json")
+    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
+        blockService.update(id, newBlock);
+        return Response.ok().build();
     }
 
     @DELETE

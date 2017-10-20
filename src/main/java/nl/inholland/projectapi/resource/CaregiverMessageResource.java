@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -24,6 +25,7 @@ import nl.inholland.projectapi.service.CaregiverMessageService;
 import nl.inholland.projectapi.service.CaregiverService;
 
 @Path("/api/v1/caregivers/{caregiverId}/messages")
+@Secured({Role.admin, Role.caregiver})
 public class CaregiverMessageResource extends BaseResource {
 
     private final CaregiverService caregiverService;
@@ -32,10 +34,10 @@ public class CaregiverMessageResource extends BaseResource {
 
     @Inject
     public CaregiverMessageResource(
-            CaregiverMessageService caregiverMessageService, 
-            CaregiverService caregiverService, 
+            CaregiverMessageService caregiverMessageService,
+            CaregiverService caregiverService,
             MessagePresenter messagePresenter) {
-        
+
         this.caregiverService = caregiverService;
         this.caregiverMessageService = caregiverMessageService;
         this.messagePresenter = messagePresenter;
@@ -43,54 +45,46 @@ public class CaregiverMessageResource extends BaseResource {
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.caregiver})
     public List<MessageView> getAll(
             @QueryParam("count") int count,
-            @PathParam("caregiverId") String caregiverId) {
-
-        List<Message> messages = caregiverMessageService.getAll(caregiverId, count);
-
-        if (count != 0) {
-            List<Message> reducedList = caregiverMessageService.reduceList(messages, count);
-            return messagePresenter.present(reducedList);
-        }
-
+            @PathParam("caregiverId") String caregiverId,
+            @Context SecurityContext context) {
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        List<Message> messages = caregiverMessageService.getAll(caregiver, count);
         return messagePresenter.present(messages);
     }
-    
+
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
     public Response create(
             @PathParam("caregiverId") String caregiverId,
             Message message,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
-        URI uri = caregiverMessageService.create(message, caregiverId, context.getUserPrincipal(), uriInfo);
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        URI uri = caregiverMessageService.create(message, caregiver, uriInfo);
         return Response.created(uri).build();
     }
 
     @GET
     @Path("/{messageId}")
     @Produces("application/json")
-    @Secured({Role.admin, Role.caregiver})
     public MessageView getById(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("messageId") String messageId,
             @Context SecurityContext context) {
-        
-        Message message = caregiverMessageService.getById(caregiverId, messageId);
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        Message message = caregiverMessageService.getById(caregiver, messageId);
         return messagePresenter.present(message);
     }
-    
+
     @DELETE
     @Path("/{messageId}")
-    @Secured({Role.admin, Role.caregiver})
     public void delete(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("messageId") String messageId,
             @Context SecurityContext context) {
-
-        caregiverMessageService.delete(caregiverService.getById(caregiverId, context.getUserPrincipal()), messageId);
-    }  
+        Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
+        caregiverMessageService.delete(caregiver, messageId);
+    }
 }

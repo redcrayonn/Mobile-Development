@@ -10,7 +10,7 @@ public class CaregiverPresenter extends BasePresenter {
 
     private final MessagePresenter messagePresenter;
     private final AppointmentPresenter appointmentPresenter;
-    
+
     @Inject
     public CaregiverPresenter(MessagePresenter messagePresenter, AppointmentPresenter appointmentPresenter) {
         this.messagePresenter = messagePresenter;

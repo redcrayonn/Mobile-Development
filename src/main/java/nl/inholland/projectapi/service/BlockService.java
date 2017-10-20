@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
@@ -20,19 +19,14 @@ public class BlockService extends BaseService {
         this.dao = dao;
     }
 
-    public List<BuildingBlock> getAll() {
+    public List<BuildingBlock> getAll(int count) {
         List<BuildingBlock> blocks = dao.getAll();
-        if (blocks.isEmpty()) {
-            throw new NotFoundException("Not found");
-        }
-        return blocks;
+        return reduceList(blocks, count);
     }
 
     public BuildingBlock getById(String id) {
         BuildingBlock block = dao.get(id);
-        if (block == null) {
-            throw new NotFoundException();
-        }
+        requireResult(block, "Block not found");
         return block;
     }
 
@@ -49,16 +43,20 @@ public class BlockService extends BaseService {
     }
 
     public void update(String id, BuildingBlock newBlock) {
-        getById(id);
+        BuildingBlock oldBlock = getById(id);
         try {
+            newBlock.setId(new ObjectId(oldBlock.getId()));
+            for (Activity a : newBlock.getActivities()) {
+            a.setId(new ObjectId());
             dao.update(newBlock);
+        }
         } catch (IllegalArgumentException e) {
             throw new BadRequestException();
         }
     }
 
     public void deleteById(ObjectId id) {
-        getById(id.toHexString());
+        getById(id.toString());
         dao.deleteById(id);
     }
 }

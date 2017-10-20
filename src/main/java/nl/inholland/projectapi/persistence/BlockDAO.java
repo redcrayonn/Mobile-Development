@@ -10,6 +10,5 @@ public class BlockDAO extends BaseDAO<BuildingBlock> {
     public BlockDAO(Datastore ds) {
         super(BuildingBlock.class, ds);
     }
-    
-    
+
 }

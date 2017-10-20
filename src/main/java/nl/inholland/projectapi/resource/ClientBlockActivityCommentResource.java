@@ -14,6 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -25,18 +26,21 @@ import nl.inholland.projectapi.service.ClientService;
 @Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities/{activityId}/comments")
 @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
 public class ClientBlockActivityCommentResource extends BaseResource {
-    
+
     private final ClientBlockActivityCommentService service;
     private final ClientService clientService;
     private final CommentPresenter presenter;
 
     @Inject
-    public ClientBlockActivityCommentResource(ClientBlockActivityCommentService service, ClientService clientService, CommentPresenter presenter) {
+    public ClientBlockActivityCommentResource(
+            ClientBlockActivityCommentService service,
+            ClientService clientService,
+            CommentPresenter presenter) {
         this.service = service;
         this.clientService = clientService;
         this.presenter = presenter;
     }
-    
+
     @GET
     @Produces("application/json")
     public List<CommentView> getAll(
@@ -44,9 +48,11 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
             @Context SecurityContext context) {
-        return presenter.present(service.getAll(clientService.getById(clientId, context.getUserPrincipal()), blockId, activityId));
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        List<Comment> comments = service.getAll(client, blockId, activityId);
+        return presenter.present(comments);
     }
-    
+
     @POST
     @Consumes("application/json")
     @Produces("application/json")
@@ -57,10 +63,11 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             Comment comment,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
-        URI uri = service.create(clientService.getById(clientId, context.getUserPrincipal()), blockId, activityId, comment, uriInfo);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        URI uri = service.create(client, blockId, activityId, comment, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).build();
     }
-    
+
     @GET
     @Path("/{commentId}")
     @Produces("application/json")
@@ -70,9 +77,11 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @PathParam("activityId") String activityId,
             @PathParam("commentId") String commentId,
             @Context SecurityContext context) {
-        return presenter.present(service.get(clientService.getById(clientId, context.getUserPrincipal()), blockId, activityId, commentId));
-    }    
-    
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        Comment comment = service.get(client, blockId, activityId, commentId);
+        return presenter.present(comment);
+    }
+
     @DELETE
     @Path("/{commentId}")
     public void delete(
@@ -81,7 +90,8 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @PathParam("activityId") String activityId,
             @PathParam("commentId") String commentId,
             @Context SecurityContext context) {
-        service.delete(clientService.getById(clientId, context.getUserPrincipal()), blockId, activityId, commentId);
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        service.delete(client, blockId, activityId, commentId);
     }
 
 }
