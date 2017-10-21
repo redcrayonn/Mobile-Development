@@ -72,12 +72,6 @@
     - validators:
         - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$blockId'}}
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
-
-- test:
-    - group: "Blocks"
-    - name: "Make sure specific block is there"
-    - url: {'template': "/api/v1/blocks/$blockId"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
@@ -122,7 +116,7 @@
     - name: "Create a new client"
     - url: "/api/v1/clients/"
     - method: "POST"
-    - body: '{"name": "Test", "points": 1, "role": "client", "messages": [], "family": [], "appointments": [], "caregivers": [], "blocks": []}'
+    - body: '{"username": "clienTest1", "password": "clientTest1"}'
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [201]
     - extract_binds:
@@ -136,13 +130,31 @@
     - validators:
         - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$clientId'}}
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
+    - expected_status: [200]
 
 - test:
     - group: "Clients"
-    - name: "Make sure specific client is there"
-    - url: {'template': "/api/v1/clients/$clientId"}
+    - name: "Patch the client that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - method: 'PATCH'
+    - body: '[{ "op": "replace", "path": "/username", "value": "clientTest2" }]'
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
+
+- test:
+    - group: "Clients"
+    - name: "Delete the client that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Clients"
+    - name: "Check if the client is deleted"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+
 
 # LOGOUT TEST
 - test:
