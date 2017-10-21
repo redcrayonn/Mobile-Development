@@ -29,13 +29,13 @@
     - group: "Blocks"
     - name: "Basic blocks smoketest"
     - url: "/api/v1/blocks/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
 
 - test:
     - group: "Blocks"
     - name: "Test with schema validations"
     - url: {'template': "/api/v1/blocks/"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - validators:
         - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
 
@@ -43,14 +43,14 @@
     - group: "Blocks"
     - name: "Make sure blocks are there"
     - url: "/api/v1/blocks/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
     - group: "Blocks"
     - name: "Make sure specific block isnt is there"
     - url: "/api/v1/blocks/9999999/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
 
 - test:
@@ -68,7 +68,7 @@
     - group: "Blocks"
     - name: "Get the block just created and check it"
     - url: {'template': "/api/v1/blocks/$Id/"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - validators:
       # ff deze controleren
         - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$Id'}}
@@ -78,21 +78,21 @@
     - group: "Blocks"
     - name: "Make sure specific block is there"
     - url: {'template': "/api/v1/blocks/$Id"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
     - group: "Blocks"
     - name: "delete the block that is just created"
     - url: {'template': "/api/v1/blocks/$Id/"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
 
 - test:
     - group: "Blocks"
     - name: "check if the block is deleted"
     - url: {'template': "/api/v1/blocks/$Id/"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
 
   # CLIENT TESTEN
@@ -101,13 +101,13 @@
     - group: "Clients"
     - name: "Basic clients smoketest"
     - url: "/api/v1/clients/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
 
 - test:
     - group: "Clients"
     - name: "Test with schema validations"
     - url: {'template': "/api/v1/clients/"}
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - validators:
         - compare: {header: "content-type", comparator: contains, expected: "application/json"}
     - expected_status: [200]
@@ -116,12 +116,12 @@
     - group: "Clients"
     - name: "Make sure clients are there"
     - url: "/api/v1/clients/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
     - group: "Clients"
     - name: "Make sure specific client isnt is there"
     - url: "/api/v1/clients/39eb5199795b487c05edc23c/"
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
