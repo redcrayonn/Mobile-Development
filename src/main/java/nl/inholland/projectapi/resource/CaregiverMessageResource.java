@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,11 +20,13 @@ import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.inputs.InputMessage;
 import nl.inholland.projectapi.presentation.MessagePresenter;
 import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.CaregiverMessageService;
 import nl.inholland.projectapi.service.CaregiverService;
 
+@Api("Caregiver messages")
 @Path("/api/v1/caregivers/{caregiverId}/messages")
 @Secured({Role.admin, Role.caregiver})
 public class CaregiverMessageResource extends BaseResource {
@@ -58,11 +61,12 @@ public class CaregiverMessageResource extends BaseResource {
     @Consumes("application/json")
     public Response create(
             @PathParam("caregiverId") String caregiverId,
-            Message message,
+            InputMessage input,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        caregiverService.requireResult(input, "Json object in body required");
         Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
-        URI uri = caregiverMessageService.create(message, caregiver, uriInfo);
+        URI uri = caregiverMessageService.create(new Message(input), caregiver, uriInfo);
         return Response.created(uri).build();
     }
 

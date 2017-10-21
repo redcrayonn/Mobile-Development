@@ -8,7 +8,7 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Client;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.FamilyDAO;
@@ -61,7 +61,7 @@ public class FamilyService extends BaseService {
     }
 
     public void deleteById(ObjectId id) {
-        Family family = dao.getById(id.toHexString());
+        Family family = dao.getById(id.toString());
         requireResult(family, "Family not found");
 
         //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship

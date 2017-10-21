@@ -7,6 +7,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.persistence.CaregiverDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
 
@@ -27,9 +28,9 @@ public class ClientCaregiverService extends BaseService {
         return reduceList(caregivers, count);
     }
 
-    public URI create(Client client, Caregiver caregiver, UriInfo uriInfo) {
+    public URI create(Client client, EntityModel caregiver, UriInfo uriInfo) {
         if (caregiverDAO.get(caregiver.getId()) != null) {
-            client.getCaregivers().add(caregiver);
+            client.getCaregivers().add(caregiverDAO.get(caregiver.getId()));
             clientDAO.update(client);
             return buildUri(uriInfo, caregiver.getId());
         }
@@ -45,11 +46,15 @@ public class ClientCaregiverService extends BaseService {
         throw new NotFoundException("Caregiver not found");
     }
 
-    public void update(Client client, String caregiverId, Caregiver newCaregiver) {
+    public void update(Client client, String caregiverId, EntityModel input) {
+        Caregiver newCaregiver = caregiverDAO.get(input.getId());
+        requireResult(newCaregiver, "Caregiver not found");
         for (Caregiver c : client.getCaregivers()) {
-            if (c.getId().equals(caregiverId)) {
-                c = newCaregiver;
+            if (c.getId().equals(caregiverId)) {  
+                client.getCaregivers().remove(c);
+                client.getCaregivers().add(newCaregiver);
                 clientDAO.update(client);
+                return;
             }
         }
         throw new NotFoundException("Caregiver not found");

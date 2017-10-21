@@ -1,7 +1,6 @@
 package nl.inholland.projectapi.service;
 
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
@@ -9,6 +8,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
+import nl.inholland.projectapi.model.inputs.InputActivity;
 import nl.inholland.projectapi.persistence.BlockDAO;
 import org.bson.types.ObjectId;
 
@@ -54,13 +54,13 @@ public class BlockActivityService extends BaseService {
         BuildingBlock block = blockDAO.get(blockId);
         requireResult(block, "BuildingBlock not found");
 
-        requiredValue(updatedActivity.getLikes());
         requiredValue(updatedActivity.getName());
         requiredValue(updatedActivity.getDescription());
 
         for (Activity a : block.getActivities()) {
             if (a.getId().equals(activityId)) {
-                a = updatedActivity;
+                a.setName(updatedActivity.getName());
+                a.setDescription(updatedActivity.getDescription());
                 blockDAO.update(block);
             }
         }

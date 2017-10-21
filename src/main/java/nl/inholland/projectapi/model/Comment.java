@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.model;
 
 import java.util.Date;
+import nl.inholland.projectapi.model.inputs.InputComment;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
@@ -14,8 +15,15 @@ public class Comment extends EntityModel {
     @NotEmpty
     private Date datetime;
 
+    public Comment(InputComment comment) {
+        this.message = comment.getMessage();
+    }
+
+    public Comment() {
+    }
+  
     public String getSenderId() {
-        return senderId.toHexString();
+        return senderId.toString();
     }
 
     public void setSenderId(ObjectId senderId) {

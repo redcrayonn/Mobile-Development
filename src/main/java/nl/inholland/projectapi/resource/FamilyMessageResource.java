@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,11 +20,13 @@ import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.inputs.InputMessage;
 import nl.inholland.projectapi.presentation.MessagePresenter;
 import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.FamilyMessageService;
 import nl.inholland.projectapi.service.FamilyService;
 
+@Api("Family members' messages")
 @Path("/api/v1/families/{familyId}/messages")
 @Secured({Role.admin, Role.family})
 public class FamilyMessageResource extends BaseResource {
@@ -54,11 +57,12 @@ public class FamilyMessageResource extends BaseResource {
     @Consumes("application/json")
     public Response create(
             @PathParam("familyId") String familyId,
-            Message message,
+            InputMessage input,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        familyService.requireResult(input, "Json object in body required");
         Family family = familyService.getById(familyId, context.getUserPrincipal());
-        URI uri = familyMessageService.create(message, family, uriInfo);
+        URI uri = familyMessageService.create(new Message(input), family, uriInfo);
         return Response.created(uri).build();
     }
 

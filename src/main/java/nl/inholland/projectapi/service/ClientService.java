@@ -17,7 +17,7 @@ import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.persistence.BlockDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
@@ -92,7 +92,7 @@ public class ClientService extends BaseService {
     }
 
     public void deleteById(ObjectId id) {
-        Client client = dao.getById(id.toHexString());
+        Client client = dao.getById(id.toString());
         requireResult(client, "Client not found");
         dao.delete(client);
     }

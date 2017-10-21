@@ -1,9 +1,9 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,6 +23,7 @@ import nl.inholland.projectapi.presentation.model.LikeView;
 import nl.inholland.projectapi.service.ClientBlockActivityLikeService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's likes on personal activities")
 @Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities/{activityId}/likes")
 @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
 public class ClientBlockActivityLikeResource extends BaseResource {

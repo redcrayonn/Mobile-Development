@@ -7,6 +7,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.persistence.BlockDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import org.bson.types.ObjectId;
@@ -28,9 +29,9 @@ public class ClientBlockService extends BaseService {
         return reduceList(blocks, count);
     }
 
-    public URI create(Client client, BuildingBlock newBlock, UriInfo uriInfo) {
+    public URI create(Client client, EntityModel input, UriInfo uriInfo) {
         requireResult(client, "Client not found");
-        BuildingBlock block = blockDAO.get(newBlock.getId());
+        BuildingBlock block = blockDAO.get(input.getId());
         requireResult(block, "Block not found");
         block.setId(new ObjectId());
         block.getActivities().forEach(a -> a.setId(new ObjectId()));

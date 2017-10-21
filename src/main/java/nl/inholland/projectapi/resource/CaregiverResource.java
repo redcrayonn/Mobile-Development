@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.CaregiverPresenter;
@@ -25,6 +26,7 @@ import nl.inholland.projectapi.presentation.model.CaregiverView;
 import nl.inholland.projectapi.service.CaregiverService;
 import org.bson.types.ObjectId;
 
+@Api("Caregivers")
 @Path("/api/v1/caregivers")
 @Secured({Role.admin, Role.caregiver})
 public class CaregiverResource extends BaseResource {
@@ -55,6 +57,7 @@ public class CaregiverResource extends BaseResource {
     public Response create(
             Credentials credentials,
             @Context UriInfo uriInfo) {
+        caregiverService.requireResult(credentials, "Json object in body required");
         URI uri = caregiverService.create(credentials, uriInfo);
         return Response.created(uri).build();
     }
@@ -78,6 +81,7 @@ public class CaregiverResource extends BaseResource {
             @PathParam("caregiverId") String caregiverId,
             Credentials credentials,
             @Context SecurityContext context) {
+        caregiverService.requireResult(credentials, "Json object in body required");
         Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
         caregiverService.update(caregiver, credentials);
         return Response.ok().build();

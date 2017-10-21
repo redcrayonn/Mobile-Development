@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,11 +20,13 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Message;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.inputs.InputMessage;
 import nl.inholland.projectapi.presentation.MessagePresenter;
 import nl.inholland.projectapi.presentation.model.MessageView;
 import nl.inholland.projectapi.service.ClientMessageService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's messages")
 @Path("/api/v1/clients/{clientId}/messages")
 public class ClientMessageResource extends BaseResource {
 
@@ -59,11 +62,12 @@ public class ClientMessageResource extends BaseResource {
     @Secured({Role.admin, Role.client})
     public Response create(
             @PathParam("clientId") String clientId,
-            Message message,
+            InputMessage input,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = clientMessageService.create(message, client, uriInfo);
+        URI uri = clientMessageService.create(new Message(input), client, uriInfo);
         return Response.created(uri).build();
     }
 

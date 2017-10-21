@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
+import nl.inholland.projectapi.model.inputs.InputComment;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.CommentPresenter;
@@ -23,6 +25,7 @@ import nl.inholland.projectapi.presentation.model.CommentView;
 import nl.inholland.projectapi.service.ClientBlockActivityCommentService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's comments on personal activities")
 @Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities/{activityId}/comments")
 @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
 public class ClientBlockActivityCommentResource extends BaseResource {
@@ -60,11 +63,12 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
-            Comment comment,
+            InputComment input,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, comment, context.getUserPrincipal(), uriInfo);
+        URI uri = service.create(client, blockId, activityId, new Comment(input), context.getUserPrincipal(), uriInfo);
         return Response.created(uri).build();
     }
 

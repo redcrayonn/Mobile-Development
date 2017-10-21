@@ -10,7 +10,7 @@ import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Client;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.persistence.BlockDAO;
 import nl.inholland.projectapi.persistence.CaregiverDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
@@ -66,7 +66,7 @@ public class CaregiverService extends BaseService {
     }
 
     public void deleteById(ObjectId id) {
-        Caregiver caregiver = caregiverDAO.getById(id.toHexString());
+        Caregiver caregiver = caregiverDAO.getById(id.toString());
         requireResult(caregiver, "Caregiver not found");
 
         //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship

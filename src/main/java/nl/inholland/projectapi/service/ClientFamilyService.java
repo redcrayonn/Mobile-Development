@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.persistence.FamilyDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
@@ -27,9 +28,9 @@ public class ClientFamilyService extends BaseService {
         return reduceList(family, count);
     }
 
-    public URI create(Client client, Family family, UriInfo uriInfo) {
+    public URI create(Client client, EntityModel family, UriInfo uriInfo) {
         if (familyDAO.get(family.getId()) != null) {
-            client.getFamily().add(family);
+            client.getFamily().add(familyDAO.get(family.getId()));
             clientDAO.update(client);
             return buildUri(uriInfo, family.getId());
         }
@@ -45,10 +46,13 @@ public class ClientFamilyService extends BaseService {
         throw new NotFoundException("Family not found");
     }
 
-    public void update(Client client, String familyId, Family newFamily) {
+    public void update(Client client, String familyId, EntityModel input) {
+        Family newFamily = familyDAO.get(input.getId());
+        requireResult(newFamily, "Caregiver not found");
         for (Family f : client.getFamily()) {
             if (f.getId().equals(familyId)) {
-                f = newFamily;
+                client.getFamily().remove(f);
+                client.getFamily().add(newFamily);
                 clientDAO.update(client);
             }
         }

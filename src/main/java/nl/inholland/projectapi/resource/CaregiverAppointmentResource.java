@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import nl.inholland.projectapi.presentation.model.AppointmentView;
 import nl.inholland.projectapi.service.CaregiverAppointmentService;
 import nl.inholland.projectapi.service.CaregiverService;
 
+@Api("Caregiver appointments")
 @Path("/api/v1/caregivers/{caregiverId}/appointments")
 public class CaregiverAppointmentResource extends BaseResource {
 
@@ -59,8 +61,10 @@ public class CaregiverAppointmentResource extends BaseResource {
     @Secured({Role.admin, Role.caregiver})
     public Response createAppointment(
             @PathParam("caregiverId") String caregiverId,
-            Appointment appointment, @Context UriInfo uriInfo,
+            Appointment appointment, 
+            @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        caregiverService.requireResult(appointment, "Json object in body required");
         Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
         URI uri = caregiverAppointmentService.create(appointment, caregiver, uriInfo);
         return Response.created(uri).build();
@@ -89,6 +93,7 @@ public class CaregiverAppointmentResource extends BaseResource {
             Appointment updatedAppointment,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        caregiverService.requireResult(updatedAppointment, "Json object in body required");
         Caregiver caregiverFound = caregiverService.getById(caregiverId, context.getUserPrincipal());
         caregiverAppointmentService.update(appointmentId, updatedAppointment, caregiverFound);
         return Response.ok().build();

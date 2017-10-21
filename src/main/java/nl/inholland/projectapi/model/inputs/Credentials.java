@@ -1,8 +1,6 @@
-package nl.inholland.projectapi.model;
+package nl.inholland.projectapi.model.inputs;
 
-import java.io.Serializable;
-
-public class Credentials implements Serializable {
+public class Credentials {
 
     private String username;
 

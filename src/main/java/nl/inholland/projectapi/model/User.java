@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.model;
 
+import nl.inholland.projectapi.model.inputs.Credentials;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -17,10 +18,12 @@ import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.inputs.InputActivity;
 import nl.inholland.projectapi.presentation.ActivityPresenter;
 import nl.inholland.projectapi.presentation.model.ActivityView;
 import nl.inholland.projectapi.service.BlockActivityService;
 
+@Api("General block activities")
 @Path("/api/v1/blocks/{blockId}/activities")
 @Secured({Role.admin})
 public class BlockActivitiesResource extends BaseResource {
@@ -49,9 +52,10 @@ public class BlockActivitiesResource extends BaseResource {
     @Consumes("application/json")
     public Response createActivity(
             @PathParam("blockId") String blockId,
-            Activity activity,
+            InputActivity input,
             @Context UriInfo uriInfo) {
-        return Response.created(activityService.create(blockId, activity, uriInfo)).build();
+        activityService.requireResult(input, "Json object in body required");
+        return Response.created(activityService.create(blockId, new Activity(input), uriInfo)).build();
     }
 
     @GET
@@ -69,8 +73,9 @@ public class BlockActivitiesResource extends BaseResource {
     public Response updateActivity(
             @PathParam("blockId") String blockId,
             @PathParam("activityId") String activityId,
-            Activity updatedActivity) {
-        activityService.update(blockId, activityId, updatedActivity);
+            InputActivity updatedActivity) {
+        activityService.requireResult(updatedActivity, "Json object required");
+        activityService.update(blockId, activityId, new Activity(updatedActivity));
         return Response.ok().build();
     }
 

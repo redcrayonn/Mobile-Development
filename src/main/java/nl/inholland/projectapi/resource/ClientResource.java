@@ -2,6 +2,8 @@ package nl.inholland.projectapi.resource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.dropwizard.jersey.PATCH;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,7 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.ClientPresenter;
@@ -27,6 +29,7 @@ import nl.inholland.projectapi.presentation.model.ClientView;
 import nl.inholland.projectapi.service.ClientService;
 import org.bson.types.ObjectId;
 
+@Api("Clients")
 @Path("/api/v1/clients")
 public class ClientResource extends BaseResource {
 
@@ -54,6 +57,7 @@ public class ClientResource extends BaseResource {
     public Response create(
             Credentials credentials,
             @Context UriInfo uriInfo) {
+        clientService.requireResult(credentials, "Json object in body required");
         URI uri = clientService.create(credentials, uriInfo);
         return Response.created(uri).build();
     }
@@ -77,12 +81,14 @@ public class ClientResource extends BaseResource {
             @PathParam("clientId") String clientId,
             Credentials credentials,
             @Context SecurityContext context) {
+        clientService.requireResult(credentials, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         clientService.update(client, credentials);
         return Response.ok().build();
     }
 
     @PATCH
+    @ApiOperation("http://jsonpatch.com")
     @Path("/{clientId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.client, Role.caregiver})
@@ -90,6 +96,7 @@ public class ClientResource extends BaseResource {
             @PathParam("clientId") String clientId,
             JsonNode patchRequest,
             @Context SecurityContext context) {
+        clientService.requireResult(patchRequest, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         clientService.patch(client, patchRequest);
         return Response.ok().build();

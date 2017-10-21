@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Caregiver;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.CaregiverPresenter;
@@ -25,6 +27,7 @@ import nl.inholland.projectapi.presentation.model.CaregiverView;
 import nl.inholland.projectapi.service.ClientCaregiverService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's caregiver(s)")
 @Path("/api/v1/clients/{clientId}/caregivers")
 public class ClientCaregiverResource extends BaseResource {
 
@@ -60,9 +63,10 @@ public class ClientCaregiverResource extends BaseResource {
     @Produces("application/json")
     public Response create(
             @PathParam("clientId") String clientId,
-            Caregiver caregiver,
+            EntityModel caregiver,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(caregiver, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = service.create(client, caregiver, uriInfo);
         return Response.created(uri).build();
@@ -88,8 +92,9 @@ public class ClientCaregiverResource extends BaseResource {
     public Response update(
             @PathParam("clientId") String clientId,
             @PathParam("caregiverId") String caregiverId,
-            Caregiver caregiver,
+            EntityModel caregiver,
             @Context SecurityContext context) {
+        clientService.requireResult(caregiver, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         service.update(client, caregiverId, caregiver);
         return Response.ok().build();

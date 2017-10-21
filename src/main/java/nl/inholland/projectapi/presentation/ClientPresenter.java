@@ -12,7 +12,7 @@ public class ClientPresenter extends BasePresenter {
     private final FamilyPresenter familyPresenter;
     private final AppointmentPresenter appointmentPresenter;
     private final CaregiverPresenter caregiverPresenter;
-    private final BlockPresenter blockPresenter;
+    private final PersonalBlockPresenter blockPresenter;
 
     @Inject
     public ClientPresenter(
@@ -20,7 +20,7 @@ public class ClientPresenter extends BasePresenter {
             FamilyPresenter familyPresenter,
             AppointmentPresenter appointmentPresenter,
             CaregiverPresenter caregiverPresenter,
-            BlockPresenter blockPresenter) {
+            PersonalBlockPresenter blockPresenter) {
         this.messagePresenter = messagePresenter;
         this.familyPresenter = familyPresenter;
         this.appointmentPresenter = appointmentPresenter;

@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -25,6 +27,7 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 import nl.inholland.projectapi.service.ClientFamilyService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's family members")
 @Path("/api/v1/clients/{clientId}/families")
 public class ClientFamilyResource extends BaseResource {
 
@@ -60,9 +63,10 @@ public class ClientFamilyResource extends BaseResource {
     @Produces("application/json")
     public Response create(
             @PathParam("clientId") String clientId,
-            Family family,
+            EntityModel family,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(family, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = clientFamilyService.create(client, family, uriInfo);
         return Response.created(uri).build();
@@ -88,8 +92,9 @@ public class ClientFamilyResource extends BaseResource {
     public Response update(
             @PathParam("clientId") String clientId,
             @PathParam("familyId") String familyId,
-            Family family,
+            EntityModel family,
             @Context SecurityContext context) {
+        clientService.requireResult(family, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         clientFamilyService.update(client, familyId, family);
         return Response.ok().build();

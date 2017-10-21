@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -8,12 +9,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.service.UserService;
 import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 
+@Api("General user operations")
 @Path("/api/v1/")
 public class UserResource extends BaseResource {
 
@@ -29,6 +31,7 @@ public class UserResource extends BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public APIKey login(Credentials credentials) {
+        userService.requireResult(credentials, "Json object in body required");
         return userService.login(credentials);
     }
 

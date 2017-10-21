@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.model;
 
+import nl.inholland.projectapi.model.inputs.Credentials;
 import org.mongodb.morphia.annotations.Entity;
 
 @Entity(value = "users", noClassnameStored = false)

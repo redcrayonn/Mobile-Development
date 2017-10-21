@@ -17,7 +17,7 @@ public class Like extends EntityModel {
     }
     
     public String getSenderId() {
-        return senderId.toHexString();
+        return senderId.toString();
     }
 
     public void setSenderId(ObjectId senderId) {

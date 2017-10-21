@@ -2,6 +2,8 @@ package nl.inholland.projectapi.resource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.dropwizard.jersey.PATCH;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -20,6 +22,7 @@ import nl.inholland.projectapi.presentation.model.PersonalActivityView;
 import nl.inholland.projectapi.service.ClientBlockActivityService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client's personal activities")
 @Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities")
 public class ClientBlockActivityResource extends BaseResource {
 
@@ -64,6 +67,7 @@ public class ClientBlockActivityResource extends BaseResource {
     }
 
     @PATCH
+    @ApiOperation("http://jsonpatch.com")
     @Secured({Role.admin, Role.client, Role.caregiver})
     @Path("/{activityId}")
     public Response patch(
@@ -72,6 +76,7 @@ public class ClientBlockActivityResource extends BaseResource {
             @PathParam("activityId") String activityId,
             JsonNode patchRequest,
             @Context SecurityContext context) {
+        clientService.requireResult(patchRequest, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         service.patch(client, blockId, service.getActivity(client, blockId, activityId), patchRequest);
         return Response.ok().build();

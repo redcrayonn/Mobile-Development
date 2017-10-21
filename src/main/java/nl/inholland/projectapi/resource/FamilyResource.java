@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
@@ -25,6 +26,7 @@ import nl.inholland.projectapi.presentation.model.FamilyView;
 import nl.inholland.projectapi.service.FamilyService;
 import org.bson.types.ObjectId;
 
+@Api("Family members")
 @Path("/api/v1/families")
 public class FamilyResource extends BaseResource {
 
@@ -32,7 +34,9 @@ public class FamilyResource extends BaseResource {
     private final FamilyPresenter familyPresenter;
 
     @Inject
-    public FamilyResource(FamilyService familyService, FamilyPresenter familyPresenter) {
+    public FamilyResource(
+            FamilyService familyService, 
+            FamilyPresenter familyPresenter) {
         this.familyService = familyService;
         this.familyPresenter = familyPresenter;
     }
@@ -40,7 +44,8 @@ public class FamilyResource extends BaseResource {
     @GET
     @Produces("application/json")
     @Secured({Role.admin})
-    public List<FamilyView> getAll(@QueryParam("count") int count) {
+    public List<FamilyView> getAll(
+            @QueryParam("count") int count) {
         List<Family> families = familyService.getAll(count);
         return familyPresenter.present(families);
     }
@@ -48,7 +53,10 @@ public class FamilyResource extends BaseResource {
     @POST
     @Consumes("application/json")
     @Secured({Role.admin})
-    public Response create(Credentials credentials, @Context UriInfo uriInfo) {
+    public Response create(
+            Credentials credentials, 
+            @Context UriInfo uriInfo) {
+        familyService.requireResult(credentials, "Json object in body required");
         URI uri = familyService.create(credentials, uriInfo);
         return Response.created(uri).build();
     }
@@ -57,7 +65,9 @@ public class FamilyResource extends BaseResource {
     @Path("/{familyId}")
     @Produces("application/json")
     @Secured({Role.admin, Role.family})
-    public FamilyView getById(@PathParam("familyId") String familyId, @Context SecurityContext context) {
+    public FamilyView getById(
+            @PathParam("familyId") String familyId, 
+            @Context SecurityContext context) {
         Family family = familyService.getById(familyId, context.getUserPrincipal());
         return familyPresenter.present(family);
     }
@@ -66,7 +76,11 @@ public class FamilyResource extends BaseResource {
     @Path("/{familyId}")
     @Consumes("application/json")
     @Secured({Role.admin, Role.family})
-    public Response update(@PathParam("familyId") String familyId, Credentials credentials, @Context SecurityContext context) {
+    public Response update(
+            @PathParam("familyId") String familyId, 
+            Credentials credentials, 
+            @Context SecurityContext context) {
+        familyService.requireResult(credentials, "Json object in body required");
         familyService.update(familyId, credentials, context.getUserPrincipal());
         return Response.ok().build();
     }
@@ -74,7 +88,8 @@ public class FamilyResource extends BaseResource {
     @DELETE
     @Path("/{familyId}")
     @Secured({Role.admin})
-    public void delete(@PathParam("familyId") ObjectId familyId) {
+    public void delete(
+            @PathParam("familyId") ObjectId familyId) {
         familyService.deleteById(familyId);
     }
 }

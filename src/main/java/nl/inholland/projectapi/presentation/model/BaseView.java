@@ -1,5 +1,5 @@
 package nl.inholland.projectapi.presentation.model;
 
-public abstract class BaseView {
-
+public class BaseView {
+    public String id;
 }

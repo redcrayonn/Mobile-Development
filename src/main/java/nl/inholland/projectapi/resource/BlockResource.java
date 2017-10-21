@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import nl.inholland.projectapi.presentation.model.BlockView;
 import nl.inholland.projectapi.service.BlockService;
 import org.bson.types.ObjectId;
 
+@Api("General blocks")
 @Path("/api/v1/blocks")
 @Secured({Role.admin})
 public class BlockResource extends BaseResource {
@@ -31,21 +33,27 @@ public class BlockResource extends BaseResource {
     private final BlockPresenter blockPresenter;
 
     @Inject
-    public BlockResource(BlockService blockService, BlockPresenter blockPresenter) {
+    public BlockResource(
+            BlockService blockService, 
+            BlockPresenter blockPresenter) {
         this.blockService = blockService;
         this.blockPresenter = blockPresenter;
     }
 
     @GET
     @Produces("application/json")
-    public List<BlockView> getAll(@QueryParam("count") int count) {
+    public List<BlockView> getAll(
+            @QueryParam("count") int count) {
         List<BuildingBlock> blocks = blockService.getAll(count);
         return blockPresenter.present(blocks);
     }
 
     @POST
     @Consumes("application/json")
-    public Response create(BuildingBlock newBlock, @Context UriInfo uriInfo) {
+    public Response create(
+            BuildingBlock newBlock, 
+            @Context UriInfo uriInfo) {
+        blockService.requireResult(newBlock, "Json object in body required");
         URI uri = blockService.create(newBlock, uriInfo);
         return Response.created(uri).build();
     }
@@ -53,7 +61,8 @@ public class BlockResource extends BaseResource {
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
-    public BlockView getById(@PathParam("blockId") String id) {
+    public BlockView getById(
+            @PathParam("blockId") String id) {
         BuildingBlock block = blockService.getById(id);
         return blockPresenter.present(block);
     }
@@ -61,14 +70,18 @@ public class BlockResource extends BaseResource {
     @PUT
     @Path("/{blockId}")
     @Consumes("application/json")
-    public Response put(@PathParam("blockId") String id, BuildingBlock newBlock) {
+    public Response put(
+            @PathParam("blockId") String id, 
+            BuildingBlock newBlock) {
+        blockService.requireResult(newBlock, "Json object in body required");
         blockService.update(id, newBlock);
         return Response.ok().build();
     }
 
     @DELETE
     @Path("/{blockId}")
-    public void delete(@PathParam("blockId") ObjectId id) {
+    public void delete(
+            @PathParam("blockId") ObjectId id) {
         blockService.deleteById(id);
     }
 }

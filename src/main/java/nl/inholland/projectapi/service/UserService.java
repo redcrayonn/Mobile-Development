@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;
 import nl.inholland.projectapi.model.APIKey;
-import nl.inholland.projectapi.model.Credentials;
+import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.apache.commons.lang3.time.DateUtils;

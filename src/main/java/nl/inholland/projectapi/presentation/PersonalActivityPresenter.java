@@ -25,6 +25,7 @@ public class PersonalActivityPresenter extends BasePresenter {
         view.description = activity.getDescription();
         view.name = activity.getName();
         view.status = activity.getStatus();
+        view.content = activity.getContent();
         view.likes = likePresenter.present(activity.getLikes());
         view.comments = commentPresenter.present(activity.getComments());
 

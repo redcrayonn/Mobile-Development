@@ -12,6 +12,7 @@ import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
+import nl.inholland.projectapi.model.inputs.InputComment;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;

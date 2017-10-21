@@ -1,5 +1,6 @@
 package nl.inholland.projectapi.resource;
 
+import io.swagger.annotations.Api;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import nl.inholland.projectapi.presentation.model.AppointmentView;
 import nl.inholland.projectapi.service.ClientAppointmentService;
 import nl.inholland.projectapi.service.ClientService;
 
+@Api("Client appointments")
 @Path("/api/v1/clients/{clientId}/appointments")
 public class ClientAppointmentResource extends BaseResource {
 
@@ -61,6 +63,7 @@ public class ClientAppointmentResource extends BaseResource {
             Appointment appointment,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(appointment, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = appointmentService.create(appointment, client, uriInfo);
         return Response.created(uri).build();
@@ -89,6 +92,7 @@ public class ClientAppointmentResource extends BaseResource {
             Appointment updatedAppointment,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
+        clientService.requireResult(updatedAppointment, "Json object in body required");
         Client clientFound = clientService.getById(clientId, context.getUserPrincipal());
         appointmentService.update(appointmentId, updatedAppointment, clientFound);
         return Response.ok().build();

@@ -9,7 +9,7 @@ public class EntityModel {
     protected ObjectId id;
 
     public String getId() {
-        return id.toHexString();
+        return id.toString();
     }
 
     public void setId(ObjectId id) {

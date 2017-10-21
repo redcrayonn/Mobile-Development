@@ -5,7 +5,6 @@ import nl.inholland.projectapi.model.Role;
 
 public class ClientView extends BaseView {
 
-    public String id;
     public String name;
     public int points;
     public Role role;
@@ -13,5 +12,5 @@ public class ClientView extends BaseView {
     public List<FamilyView> family;
     public List<AppointmentView> appointments;
     public List<CaregiverView> caregivers;
-    public List<BlockView> blocks;
+    public List<PersonalBlockView> blocks;
 }

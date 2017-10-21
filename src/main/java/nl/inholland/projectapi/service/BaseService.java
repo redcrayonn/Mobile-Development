@@ -26,7 +26,7 @@ public abstract class BaseService {
         return builder.path(id).build();//Add new block ID to base path (/api/1.0/blocks/{id}) 
     }
 
-    protected void requireResult(Object o, String message) throws NotFoundException {
+    public void requireResult(Object o, String message) throws NotFoundException {
         if (o == null) {
             throw new NotFoundException(message);
         }
@@ -48,7 +48,7 @@ public abstract class BaseService {
     protected void checkPermissions(User user, User accesingUser) throws ForbiddenException {
         if (user instanceof Client) {
             checkClientPermissions((Client) user, accesingUser);
-        } else if (user.getRole().equals(Role.admin)) {
+        } else if (accesingUser.getRole().equals(Role.admin)) {
         } else if (!user.getId().equals(accesingUser.getId())) {
             throw new ForbiddenException("User privileges not sufficient");
         }

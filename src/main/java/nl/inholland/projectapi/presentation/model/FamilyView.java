@@ -5,7 +5,6 @@ import nl.inholland.projectapi.model.Role;
 
 public class FamilyView extends BaseView {
 
-    public String id;
     public String name;
     public Role role;
     public List<MessageView> messages;

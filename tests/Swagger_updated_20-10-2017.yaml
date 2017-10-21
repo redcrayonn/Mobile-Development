@@ -174,25 +174,6 @@ definitions:
           $ref: "#/definitions/Messages"
         }
 
-  InputBlocks:
-    type: "object"
-    properties:
-      name:
-        description: "Name of the block"
-        type: "string"
-      description:
-        description: "description of the block"
-        type: "string"
-      imageURL:
-        description: "Path to the image"
-        type: "string"
-      activities:
-        description: "Activities in the building block"
-        type: "array"
-        items: {
-          $ref: "#/definitions/InputActivities"
-        }
-
   InputActivities:
     type: "object"
     properties:
@@ -278,17 +259,6 @@ definitions:
         type: "string"
       datetime:
         description: "Deadline of the appointment"
-        type: "string"
-        format: "datetime"
-      description:
-        description: "Description of the appointment"
-        type: "string"
-
-  InputAppointments:
-    type: "object"
-    properties:
-      datetime:
-        description: "Deadline of the appointment(ISO DateTime format)"
         type: "string"
         format: "datetime"
       description:
@@ -707,7 +677,7 @@ paths:
       summary: "Get a single family member"
       description: "Returns a single family member"
       tags:
-        - "general"
+      - "general"
       parameters:
       - name: "id"
         in: "path"
@@ -799,6 +769,40 @@ paths:
             $ref: "#/definitions/ErrorResponses"
       security:
       - api_key: []
+
+  /family/{id}/clients:
+    get:
+      summary: "Get all client's of family member"
+      description: "Returns a list of all family member's clients"
+      tags:
+      - general
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of family to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the clients by familyId"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EntityModel"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Family member not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []        
 
   /caregivers:
     get:
@@ -956,6 +960,40 @@ paths:
             $ref: "#/definitions/ErrorResponses"
         404:
           description: "Caregiver not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+
+  /caregivers/{id}/clients:
+    get:
+      summary: "Get all client's of caregivers"
+      description: "Returns a list of all caregiver's clients"
+      tags:
+      - general
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of caregiver to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfully found the clients by clientId"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EntityModel"
+        400:
+          description: "Invalid ID supplied"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Family member not found"
           schema:
             $ref: "#/definitions/ErrorResponses"
       security:
@@ -1372,7 +1410,7 @@ paths:
         description: "Create a new block"
         required: true
         schema:
-          $ref: "#/definitions/InputBlocks"
+          $ref: "#/definitions/Blocks"
       responses:
         201:
           description: "Succesfully created a building block"
@@ -1433,7 +1471,7 @@ paths:
         description: "Updated block"
         required: true
         schema:
-          $ref: "#/definitions/InputBlocks"
+          $ref: "#/definitions/Blocks"
       responses:
         200:
           description: "Succesfully updated family member"
@@ -1815,7 +1853,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Activities"
+              $ref: "#/definitions/PersonalActivities"
         400:
           description: "Invalid clientID or blockID supplied"
           schema:
@@ -1857,7 +1895,7 @@ paths:
         200:
           description: "Succesfully found the activity by ID"
           schema:
-            $ref: "#/definitions/Activities"
+            $ref: "#/definitions/PersonalActivities"
         400:
           description: "Invalid clientID or blockID supplied"
           schema:
@@ -2326,7 +2364,7 @@ paths:
         description: "appointment object with ISO DateTime format"
         required: true
         schema:
-          $ref: "#/definitions/InputAppointments"
+          $ref: "#/definitions/Appointments"
       responses:
         201:
           description: "The appointment has been succesfully added"
@@ -2397,7 +2435,7 @@ paths:
         description: "appointment object with ISO DateTime format to be replaced"
         required: true
         schema:
-          $ref: "#/definitions/InputAppointments"
+          $ref: "#/definitions/Appointments"
       responses:
         200:
           description: "The appointment has been succesfully updated"
@@ -2496,7 +2534,7 @@ paths:
         description: "Appointment object with ISO DateTime format"
         required: true
         schema:
-          $ref: "#/definitions/InputAppointments"
+          $ref: "#/definitions/Appointments"
       responses:
         201:
           description: "The appointment has been succesfully added"
@@ -2567,7 +2605,7 @@ paths:
         description: "appointment object with ISO DateTime to be replaced"
         required: true
         schema:
-          $ref: "#/definitions/InputAppointments"
+          $ref: "#/definitions/Appointments"
       responses:
         200:
           description: "The appointment has been succesfully updated"

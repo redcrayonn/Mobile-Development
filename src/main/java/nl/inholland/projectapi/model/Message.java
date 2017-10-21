@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.model;
 
 import java.util.Date;
+import nl.inholland.projectapi.model.inputs.InputMessage;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Reference;
@@ -18,8 +19,16 @@ public class Message extends EntityModel {
     @NotEmpty
     private boolean read;
 
+    public Message(InputMessage input) {
+        this.receiverId = input.getReceiverId();
+        this.message = input.getMessage();
+    }
+
+    public Message() {
+    }
+    
     public String getSenderId() {
-        return senderId.toHexString();
+        return senderId.toString();
     }
 
     public void setSenderId(ObjectId senderId) {
@@ -27,7 +36,7 @@ public class Message extends EntityModel {
     }
 
     public String getReceiverId() {
-        return receiverId.toHexString();
+        return receiverId.toString();
     }
 
     public void setReceiverId(ObjectId receiverId) {
