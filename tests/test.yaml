@@ -150,6 +150,49 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
+
+# DEZE MISSCHIEN PAS DOEN NA HET AANMAKEN VAN EEN NIEUWE FAMILIE?
+- test:
+    - group: "Clients > family"
+    - name: "Post client family"
+    - url: {'template': "/api/v1/clients/$clientId/families/"}
+    - method: "POST"
+    - body: '{"id":"59e7408fa7d93e1428711624"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > family"
+    - name: "Get client families"
+    - url: {'template': "/api/v1/clients/$clientId/families/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > family"
+    - name: "Get specific client family"
+    - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+    
+# DEZE WERKT NOG NIET
+# - test:
+#     - group: "Clients > family"
+#     - name: "PUT specific client family"
+#     - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+#     - method: "PUT"
+#     - body: '{"id":""}'
+#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+#     - expected_status: [200]
+
+- test:
+    - group: "Clients > family"
+    - name: "DELETE specific client family"
+    - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
 - test:
     - group: "Clients"
     - name: "Delete the client that is just created"
