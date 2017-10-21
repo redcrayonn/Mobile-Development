@@ -88,7 +88,7 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
 
-  # CLIENT TESTEN
+# CLIENT TESTEN
 - test:
     - group: "Clients"
     - name: "Basic clients smoketest"
@@ -174,7 +174,7 @@
     - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
-    
+
 # DEZE WERKT NOG NIET
 # - test:
 #     - group: "Clients > family"
@@ -192,6 +192,49 @@
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
+
+# DEZE MISSCHIEN PAS DOEN NA HET AANMAKEN VAN EEN NIEUWE CAREGIVER?
+- test:
+    - group: "Clients > caregiver"
+    - name: "Post client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
+    - method: "POST"
+    - body: '{"id":"59c8d1ba6f03f4349886526e"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "Get client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "Get specific client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/59c8d1ba6f03f4349886526e/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+# DEZE WERKT NOG NIET > eerst family fixen en dan overnemen
+# - test:
+#     - group: "Clients > caregiver"
+#     - name: "PUT specific client caregiver"
+#     - url: {'template': "/api/v1/clients/$clientId/caregiver/59c8d1ba6f03f4349886526e/"}
+#     - method: "PUT"
+#     - body: '{"id":""}'
+#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+#     - expected_status: [200]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "DELETE specific client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/59c8d1ba6f03f4349886526e/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
 
 - test:
     - group: "Clients"
