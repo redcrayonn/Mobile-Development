@@ -69,7 +69,7 @@ public class ClientCaregiverResource extends BaseResource {
         clientService.requireResult(caregiver, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = service.create(client, caregiver, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

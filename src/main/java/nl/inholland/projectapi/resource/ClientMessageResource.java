@@ -68,7 +68,7 @@ public class ClientMessageResource extends BaseResource {
         clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = clientMessageService.create(new Message(input), client, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

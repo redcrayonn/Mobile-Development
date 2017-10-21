@@ -66,7 +66,7 @@ public class ClientAppointmentResource extends BaseResource {
         clientService.requireResult(appointment, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = appointmentService.create(appointment, client, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

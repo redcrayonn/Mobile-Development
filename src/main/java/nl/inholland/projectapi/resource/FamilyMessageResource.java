@@ -63,7 +63,7 @@ public class FamilyMessageResource extends BaseResource {
         familyService.requireResult(input, "Json object in body required");
         Family family = familyService.getById(familyId, context.getUserPrincipal());
         URI uri = familyMessageService.create(new Message(input), family, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

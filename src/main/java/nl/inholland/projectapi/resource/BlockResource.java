@@ -55,7 +55,7 @@ public class BlockResource extends BaseResource {
             @Context UriInfo uriInfo) {
         blockService.requireResult(newBlock, "Json object in body required");
         URI uri = blockService.create(newBlock, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
     
     @GET

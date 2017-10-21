@@ -67,7 +67,7 @@ public class CaregiverAppointmentResource extends BaseResource {
         caregiverService.requireResult(appointment, "Json object in body required");
         Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
         URI uri = caregiverAppointmentService.create(appointment, caregiver, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

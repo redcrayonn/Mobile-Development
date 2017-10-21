@@ -66,8 +66,9 @@ public class CaregiverMessageResource extends BaseResource {
             @Context SecurityContext context) {
         caregiverService.requireResult(input, "Json object in body required");
         Caregiver caregiver = caregiverService.getById(caregiverId, context.getUserPrincipal());
-        URI uri = caregiverMessageService.create(new Message(input), caregiver, uriInfo);
-        return Response.created(uri).build();
+        Message message = new Message(input);
+        URI uri = caregiverMessageService.create(message, caregiver, uriInfo);
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

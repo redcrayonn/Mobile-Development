@@ -58,7 +58,7 @@ public class FamilyResource extends BaseResource {
             @Context UriInfo uriInfo) {
         familyService.requireResult(credentials, "Json object in body required");
         URI uri = familyService.create(credentials, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

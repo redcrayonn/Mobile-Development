@@ -69,7 +69,7 @@ public class ClientFamilyResource extends BaseResource {
         clientService.requireResult(family, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = clientFamilyService.create(client, family, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

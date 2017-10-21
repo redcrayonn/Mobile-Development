@@ -59,7 +59,7 @@ public class CaregiverResource extends BaseResource {
             @Context UriInfo uriInfo) {
         caregiverService.requireResult(credentials, "Json object in body required");
         URI uri = caregiverService.create(credentials, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

@@ -59,7 +59,7 @@ public class ClientResource extends BaseResource {
             @Context UriInfo uriInfo) {
         clientService.requireResult(credentials, "Json object in body required");
         URI uri = clientService.create(credentials, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

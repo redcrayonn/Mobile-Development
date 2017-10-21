@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.resource;
 
 import io.swagger.annotations.Api;
+import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -55,7 +56,9 @@ public class BlockActivitiesResource extends BaseResource {
             InputActivity input,
             @Context UriInfo uriInfo) {
         activityService.requireResult(input, "Json object in body required");
-        return Response.created(activityService.create(blockId, new Activity(input), uriInfo)).build();
+        Activity activity = new Activity(input);
+        URI uri = activityService.create(blockId, activity, uriInfo);
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

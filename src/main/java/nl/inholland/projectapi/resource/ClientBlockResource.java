@@ -22,7 +22,6 @@ import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.PersonalBlockPresenter;
-import nl.inholland.projectapi.presentation.model.BlockView;
 import nl.inholland.projectapi.presentation.model.PersonalBlockView;
 import nl.inholland.projectapi.service.ClientBlockService;
 import nl.inholland.projectapi.service.ClientService;
@@ -68,7 +67,7 @@ public class ClientBlockResource extends BaseResource {
         clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = clientBlockService.create(client, input, uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET

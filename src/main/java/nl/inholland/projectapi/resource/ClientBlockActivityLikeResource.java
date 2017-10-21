@@ -64,7 +64,7 @@ public class ClientBlockActivityLikeResource extends BaseResource {
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         URI uri = service.create(client, blockId, activityId, context.getUserPrincipal(), uriInfo);
-        return Response.created(uri).build();
+        return Response.created(uri).header("Id", getId(uri)).build();
     }
 
     @GET
