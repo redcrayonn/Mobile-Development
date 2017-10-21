@@ -14,8 +14,8 @@
 
 # LOGIN TEST
 - test:
-    - group: "Login"
-    - name: "Authentication using basic auth"
+    - group: "Authentication"
+    - name: "Login using basic auth"
     - url: "/api/v1/login/"
     - method: 'POST'
     - body: '{"username":"admin", "password":"admin"}'
@@ -62,41 +62,39 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [201]
     - extract_binds:
-        - 'Id': {header: 'Id'}
+        - 'blockId': {header: 'Id'}
 
 - test:
     - group: "Blocks"
     - name: "Get the block just created and check it"
-    - url: {'template': "/api/v1/blocks/$Id/"}
+    - url: {'template': "/api/v1/blocks/$blockId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - validators:
-      # ff deze controleren
-        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$Id'}}
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$blockId'}}
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
 
 - test:
     - group: "Blocks"
     - name: "Make sure specific block is there"
-    - url: {'template': "/api/v1/blocks/$Id"}
+    - url: {'template': "/api/v1/blocks/$blockId"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
     - group: "Blocks"
     - name: "delete the block that is just created"
-    - url: {'template': "/api/v1/blocks/$Id/"}
+    - url: {'template': "/api/v1/blocks/$blockId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
 
 - test:
     - group: "Blocks"
     - name: "check if the block is deleted"
-    - url: {'template': "/api/v1/blocks/$Id/"}
+    - url: {'template': "/api/v1/blocks/$blockId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
 
   # CLIENT TESTEN
-
 - test:
     - group: "Clients"
     - name: "Basic clients smoketest"
@@ -121,7 +119,42 @@
 
 - test:
     - group: "Clients"
-    - name: "Make sure specific client isnt is there"
-    - url: "/api/v1/clients/39eb5199795b487c05edc23c/"
+    - name: "Create a new client"
+    - url: "/api/v1/clients/"
+    - method: "POST"
+    - body: '{"name": "Test", "points": 1, "role": "client", "messages": [], "family": [], "appointments": [], "caregivers": [], "blocks": []}'
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]
+    - expected_status: [201]
+    - extract_binds:
+        - 'clientId': {header: 'Id'}
+
+- test:
+    - group: "Clients"
+    - name: "Get the client just created and check it"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$clientId'}}
+        - extract_test: {jsonpath_mini: 'id', test: 'exists'}
+
+- test:
+    - group: "Clients"
+    - name: "Make sure specific client is there"
+    - url: {'template': "/api/v1/clients/$clientId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+# LOGOUT TEST
+- test:
+    - group: "Authentication"
+    - name: "Logout"
+    - url: "/api/v1/logout/"
+    - method: 'POST'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+
+- test:
+    - group: "Authentication"
+    - name: "Check if logout was succesful"
+    - url: "/api/v1/blocks/"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [401]
