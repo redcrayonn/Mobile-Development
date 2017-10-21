@@ -29,7 +29,7 @@ public class ClientCaregiverService extends BaseService {
     }
 
     public URI create(Client client, EntityModel caregiver, UriInfo uriInfo) {
-        if (caregiverDAO.get(caregiver.getId()) != null) {
+        if (caregiverDAO.getById(caregiver.getId()) != null) {
             client.getCaregivers().add(caregiverDAO.get(caregiver.getId()));
             clientDAO.update(client);
             return buildUri(uriInfo, caregiver.getId());
@@ -47,7 +47,7 @@ public class ClientCaregiverService extends BaseService {
     }
 
     public void update(Client client, String caregiverId, EntityModel input) {
-        Caregiver newCaregiver = caregiverDAO.get(input.getId());
+        Caregiver newCaregiver = caregiverDAO.getById(input.getId());
         requireResult(newCaregiver, "Caregiver not found");
         for (Caregiver c : client.getCaregivers()) {
             if (c.getId().equals(caregiverId)) {  
