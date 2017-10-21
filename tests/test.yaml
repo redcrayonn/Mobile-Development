@@ -59,39 +59,39 @@
     - url: "/api/v1/blocks/"
     - method: "POST"
     - body: '{"name": "Test","description": "Dit is een test","imageURL": "","activities": []}'
-    - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [201]
     - extract_binds:
-        - 'blockId': {'jsonpath_mini': 'id'}
+        - 'Id': {header: 'Id'}
 
 - test:
     - group: "Blocks"
     - name: "Get the block just created and check it"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - url: {'template': "/api/v1/blocks/$Id/"}
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - validators:
       # ff deze controleren
-        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$blockId'}}
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$Id'}}
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
 
 - test:
     - group: "Blocks"
     - name: "Make sure specific block is there"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - url: {'template': "/api/v1/blocks/$Id"}
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - expected_status: [200]
 
 - test:
     - group: "Blocks"
     - name: "delete the block that is just created"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - url: {'template': "/api/v1/blocks/$Id/"}
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - method: 'DELETE'
 
 - test:
     - group: "Blocks"
     - name: "check if the block is deleted"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - url: {'template': "/api/v1/blocks/$Id/"}
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - expected_status: [404]
 
@@ -122,6 +122,6 @@
 - test:
     - group: "Clients"
     - name: "Make sure specific client isnt is there"
-    - url: "/api/v1/clients/9999999/"
+    - url: "/api/v1/clients/39eb5199795b487c05edc23c/"
     - headers: {template: {"Authorization": "$authtoken"}, "Content-Type": "application/json"}
     - expected_status: [404]
