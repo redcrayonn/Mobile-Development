@@ -1,0 +1,387 @@
+# NON-SSL Connection, check Pycurl implementation in resttest.py
+# RUN : python resttest.py http://www.imready.ml ClientAppointmentTestSuite.yaml
+
+- config:
+    - testset: "ClientAppointmentTestSuite"
+    - variable_binds: {'headername': 'Content-Type', 'headervalue': 'application/json'}
+
+# ________________Prerequistion // Begin____________
+- test:
+    - group: "Login"
+    - name: "Should return token when invoked with credentials"
+    - url: "/api/v1/login/"
+    - method: 'POST'
+    - body: '{"username":"admin", "password":"admin"}'
+    - headers: {"Content-Type": "application/json"}
+    - expected_status: [200]
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - extract_binds:
+        - "authtokenAdmin": {jsonpath_mini: "authtoken"}
+
+# client, caregiver and family creation
+- test:
+    - group: "Create_TestClient"
+    - name: "Should create a nieuw test client for testSuite"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/"}
+    - body: '{"username": "testclient47", "password": "testclient47"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'testClientId': {header: 'Id'}
+
+- test:
+    - group: "Create_TestFamily"
+    - name: "Should create a nieuw test family for testSuite"
+    - method: "POST"
+    - url: {template: "/api/v1/families/"}
+    - body: '{"username": "testFamily47", "password": "testFamily47"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'testFamilyId': {header: 'Id'}
+- test:
+    - group: "Create_TestCaregiver"
+    - name: "Should create a nieuw test caregiver for testSuite"
+    - method: "POST"
+    - url: {template: "/api/v1/caregivers/"}
+    - body: '{"username": "testCaregiver47", "password": "testCaregiver47"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'testCaregiverId': {header: 'Id'}
+
+
+# test created family, caregiver and client      
+- test:
+    - group: "Check_Created_TestClient"
+    - name: "Should return created test client"
+    - url: {"template":"/api/v1/clients/$testClientId"}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+
+- test:
+    - group: "Check_Created_TestFamily"
+    - name: "Should return created test family"
+    - url: {"template":"/api/v1/families/$testFamilyId"}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+
+- test:
+    - group: "Check_Created_TestCaregiver"
+    - name: "Should return created test caregiver"
+    - url: {"template":"/api/v1/caregivers/$testCaregiverId"}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+
+
+# Login caregiver, family and client
+
+- test:
+    - group: "Login_Client"
+    - name: "Should return token when invoked with testclient credentials"
+    - url: "/api/v1/login/"
+    - method: 'POST'
+    - body: '{"username":"testclient47", "password":"testclient47"}'
+    - headers: {"Content-Type": "application/json"}
+    - expected_status: [200]
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - extract_binds:
+        - "authtokenClient": {jsonpath_mini: "authtoken"}
+
+- test:
+    - group: "Login_Family"
+    - name: "Should return token when invoked with testfamily credentials"
+    - url: "/api/v1/login/"
+    - method: 'POST'
+    - body: '{"username":"testFamily47", "password":"testFamily47"}'
+    - headers: {"Content-Type": "application/json"}
+    - expected_status: [200]
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - extract_binds:
+        - "authtokenFamily": {jsonpath_mini: "authtoken"}
+
+- test:
+    - group: "Login_Caregiver"
+    - name: "Should return token when invoked with testcaregiver credentials"
+    - url: "/api/v1/login/"
+    - method: 'POST'
+    - body: '{"username":"testCaregiver47", "password":"testCaregiver47"}'
+    - headers: {"Content-Type": "application/json"}
+    - expected_status: [200]
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - extract_binds:
+        - "authtokenCaregiver": {jsonpath_mini: "authtoken"}
+# ________________Prerequistions // END______________
+
+
+
+
+#______TESTSUITE_______HTTP GET/POST/DELETE REQUESTS____________________________________________________________________________________________________
+- test:
+    - group: "POST_Client_Appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId': {header: 'Id'}
+- test:
+    - group: "GET_Client_Appointment"
+    - name: "Should return all appointment for client"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {raw_body: "", comparator: "regex", expected: '.*'}
+    - expected_status: [200]
+
+- test:
+    - group: "GET_Client_Appointment"
+    - name: "Should return 200 for fetching an appointment"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - assertTrue: {raw_body: content-type, test: exists}        
+    - expected_status: [200]
+
+- test:
+    - group: "UPDATE_Client_Appointment"
+    - name: "Should return 200 succes after updating an appointment"
+    - method: "PUT"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - body: {template: '{"description": "appointment 55 is called: Why You are an amazing Bastard" , "datetime": "20170202"}'}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [200]
+ 
+- test:
+    - group: "UPDATE_Client_Appointment"
+    - name: "Updated appointment should match provided values"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {jsonpath_mini: "description", comparator: "str_eq", expected: "appointment 55 is called: Why You are an amazing Bastard"}
+        - compare: {jsonpath_mini: "datetime", comparator: "str_eq", expected: "20170202"}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "DELETE_Client_Appointment"
+    - name: "Should return 204 succes after deleting an appointment"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "DELETE_Client_Appointment"
+    - name: "Should return 404 not found for requesting deleted appointment"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [404]
+
+#____PERMISSION_CHECK___With_NO_RELATIONSHIP_BETWEEN_CLIENT/CAREGIVER/FAMILY___HTTP_POST/GET/DELETE_______
+
+- test:
+    - group: "GET_Client_Appointment_Permission_With_CaregiverToken"
+    - name: "Should return 401 or 403 Unotherized for fetching client appointment with caregiver token"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}      
+    - expected_status: [401, 403]
+
+- test:
+    - group: "GET_Client_Appointment_Permission_With_FamilyToken"
+    - name: "Should return 401 or 403 Unotherized for fetching client appointment with Family token"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}    
+    - expected_status: [401, 403]
+
+- test:
+    - group: "GET_Client_Appointment_Permission_With_AdminToken"
+    - name: "Should return client appointment with admin token"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - assertTrue: {raw_body: content-type, test: exists}        
+    - expected_status: [200]
+
+- test:
+    - group: "POST_Client_Appointment_Permission_With_CaregiverToken"
+    - name: "Should return 401 or 403 Unotherized for posting client appointment with Caregiver token"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "POST_Client_Appointment_Permission_With_FamilyToken"
+    - name: "Should return 401 or 403 Unotherized for posting client appointment with Family token"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "POST_Client_Appointment_Permission_With_AdminToken"
+    - name: "Should return success for posting client appointment with Admin token"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [201]
+
+- test:
+    - group: "DELETE_Client_Appointment_Permission_With_CaregiverToken"
+    - name: "Should return 401 or 403 Unotherized for deleting client appointment with Caregiver token"
+    - method: "DELETE"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/$newAppointmentId/"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "DELETE_Client_Appointment_Permission_With_FamilyToken"
+    - name: "Should return 401 or 403 Unotherized for deleting client appointment with Family token"
+    - method: "DELETE"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "DELETE_Client_Appointment_Permission_With_AdminToken"
+    - name: "Should return success for deleting client appointment with Admin token"
+    - method: "DELETE"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [200]
+
+
+#________PERMISSION_CHECK_With_RelationSHIP__BEWTEEN_CAREGIVER/FAMILY/CLIENT_______HTTP__GET/POST/DELETE____
+
+#BEGIN_Prerequired
+- test:
+    - group: "CREATE_relationship_Between_Client_Caregiver"
+    - name: "Should return success for creating relationship with client and caregiver"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/caregivers/"}
+    - body: {template: '{"id": "$testCaregiverId"}'}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [201]
+
+- test:
+    - group: "CREATE_relationship_Between_Client_Family"
+    - name: "Should return success for creating relationship with client and family"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/families/"}
+    - body: {template: '{"id": "$testFamilyId"}'}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [201]
+
+- test:
+    - group: "POST_Client_Appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId2': {header: 'Id'}
+#END_Prerequired
+
+- test:
+    - group: "GET_Client_Appointment_Who_is_related_With_Caregiver"
+    - name: "Should return 200 for fetching client appointment"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId2"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}      
+    - expected_status: [200]
+
+- test:
+    - group: "GET_Client_Appointment_Who_is_related_With_Family"
+    - name: "Should return 200 for fetching client appointment"
+    - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId2"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}    
+    - expected_status: [200]
+
+- test:
+    - group: "POST_Client_Appointment_Who_is_related_With_Caregiver"
+    - name: "Should return unauthorized 401 or 403 for fetching client appointment with caregiver permission"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "POST_Client_Appointment_Who_is_related_With_Family"
+    - name: "Should return unauthorized 401 or 403 for fetching client appointment with family permission"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - expected_status: [401, 403]
+
+
+- test:
+    - group: "DELETE_Client_Appointment_Who_is_related_With_Caregiver"
+    - name: "Should return unauthorized 401 or 403 for deleting client appointment with caregiver permission"
+    - method: "DELETE"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/$newAppointmentId2/"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - expected_status: [401, 403]
+
+- test:
+    - group: "DELETE_Client_Appointment_Who_is_related_With_Family"
+    - name: "Should return unauthorized 401 or 403 for deleting client appointment with family permission"
+    - method: "DELETE"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/$newAppointmentId2/"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
+    - expected_status: [401, 403]
+
+# _______________END_TEST_CLEANUP_DB_OBJECTS___________________________________________________________________________________________________
+
+- test:
+    - group: "CLEANUP"
+    - name: "Should return 204 succes after deleting created testClient47"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/clients/$testClientId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "CLEANUP"
+    - name: "Should return 204 succes after deleting created testfamily47"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/families/$testFamilyId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "CLEANUP"
+    - name: "Should return 204 succes after deleting created testcaregiver47"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/caregivers/$testCaregiverId"}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
+    - expected_status: [200, 204]
