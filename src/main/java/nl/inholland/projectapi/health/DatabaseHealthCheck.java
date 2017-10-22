@@ -1,4 +1,4 @@
-package health;
+package nl.inholland.projectapi.health;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.mongodb.CommandResult;

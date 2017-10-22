@@ -73,5 +73,6 @@ public class FamilyService extends BaseService {
                 }
             }
         }
+        dao.delete(family);
     }
 }

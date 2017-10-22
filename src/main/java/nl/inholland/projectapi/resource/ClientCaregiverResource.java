@@ -46,7 +46,7 @@ public class ClientCaregiverResource extends BaseResource {
     }
 
     @GET
-    @Secured({Role.admin})
+    @Secured({Role.admin, Role.client})
     @Produces("application/json")
     public List<CaregiverView> getAll(
             @PathParam("clientId") String clientId,
@@ -73,7 +73,7 @@ public class ClientCaregiverResource extends BaseResource {
     }
 
     @GET
-    @Secured({Role.admin})
+    @Secured({Role.admin, Role.client})
     @Produces("application/json")
     @Path("/{caregiverId}")
     public CaregiverView get(

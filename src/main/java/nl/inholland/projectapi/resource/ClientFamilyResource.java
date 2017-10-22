@@ -46,7 +46,7 @@ public class ClientFamilyResource extends BaseResource {
     }
 
     @GET
-    @Secured({Role.admin})
+    @Secured({Role.admin, Role.client})
     @Produces("application/json")
     public List<FamilyView> getAll(
             @PathParam("clientId") String clientId,
@@ -73,7 +73,7 @@ public class ClientFamilyResource extends BaseResource {
     }
 
     @GET
-    @Secured({Role.admin})
+    @Secured({Role.admin, Role.client})
     @Produces("application/json")
     @Path("/{familyId}")
     public FamilyView get(

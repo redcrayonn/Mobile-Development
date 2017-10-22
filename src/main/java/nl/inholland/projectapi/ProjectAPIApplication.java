@@ -1,7 +1,7 @@
 package nl.inholland.projectapi;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import health.DatabaseHealthCheck;
+import nl.inholland.projectapi.health.DatabaseHealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
