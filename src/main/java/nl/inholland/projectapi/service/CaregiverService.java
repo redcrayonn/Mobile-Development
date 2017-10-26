@@ -16,7 +16,6 @@ import nl.inholland.projectapi.persistence.CaregiverDAO;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class CaregiverService extends BaseService {
 
@@ -60,7 +59,7 @@ public class CaregiverService extends BaseService {
 
     public void update(Caregiver caregiver, Credentials credentials) {
         caregiver.setUserName(credentials.getUsername());
-        caregiver.setPassword(BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt()));
+        caregiver.setPassword(credentials.getPassword());
         caregiver.setApiKey(new APIKey());
         caregiverDAO.update(caregiver);
     }

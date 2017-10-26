@@ -14,7 +14,6 @@ import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.FamilyDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class FamilyService extends BaseService {
 
@@ -55,7 +54,7 @@ public class FamilyService extends BaseService {
     public void update(String userId, Credentials credentials, Principal principal) {
         Family family = getById(userId, principal);
         family.setUserName(credentials.getUsername());
-        family.setPassword(BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt()));
+        family.setPassword(credentials.getPassword());
         family.setApiKey(new APIKey());
         dao.update(family);
     }
