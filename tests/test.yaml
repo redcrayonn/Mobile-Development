@@ -74,20 +74,6 @@
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
     - expected_status: [200]
 
-- test:
-    - group: "Blocks"
-    - name: "delete the block that is just created"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - method: 'DELETE'
-
-- test:
-    - group: "Blocks"
-    - name: "check if the block is deleted"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]
-
 # CLIENT TESTEN
 - test:
     - group: "Clients"
@@ -193,6 +179,7 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
 
+
 # DEZE MISSCHIEN PAS DOEN NA HET AANMAKEN VAN EEN NIEUWE CAREGIVER?
 - test:
     - group: "Clients > caregiver"
@@ -237,6 +224,62 @@
 
 
 - test:
+    - group: "Clients > blocks"
+    - name: "Post client blocks"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
+    - method: "POST"
+    - body: {'template':'{"id":"$blockId"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'clientBlockId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > blocks"
+    - name: "Get client blocks"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks"
+    - name: "Get specific client block"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities"
+    - name: "Get client block activities"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+
+- test:
+    - group: "Clients > blocks"
+    - name: "DELETE specific client block"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Blocks"
+    - name: "delete the block that was created"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Blocks"
+    - name: "check if the block is deleted"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+
+- test:
     - group: "Clients"
     - name: "Delete the client that is just created"
     - url: {'template': "/api/v1/clients/$clientId/"}
@@ -249,6 +292,60 @@
     - url: {'template': "/api/v1/clients/$clientId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
+
+
+# CAREGIVER TESTEN
+- test:
+    - group: "Caregiver"
+    - name: "Basic Caregiver smoketest"
+    - url: "/api/v1/caregivers/"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+
+- test:
+    - group: "Caregiver"
+    - name: "Test with schema validations"
+    - url: {'template': "/api/v1/caregivers/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: "application/json"}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver"
+    - name: "Make sure caregivers are there"
+    - url: "/api/v1/caregivers/"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver"
+    - name: "Create a new caregiver"
+    - url: "/api/v1/caregivers/"
+    - method: "POST"
+    - body: '{"username": "caregiverTest1", "password": "caregiverTest1"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'caregiverId': {header: 'Id'}
+
+- test:
+    - group: "Caregiver"
+    - name: "Get the caregiver just created and check it"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$caregiverId'}}
+        - extract_test: {jsonpath_mini: 'id', test: 'exists'}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver"
+    - name: "PUT client"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/"}
+    - method: "PUT"
+    - body: '{"username": "caregiverTest2", "password": "caregiverTest3"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
 
 
 
