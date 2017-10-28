@@ -48,12 +48,13 @@ public class ClientFamilyService extends BaseService {
 
     public void update(Client client, String familyId, EntityModel input) {
         Family newFamily = familyDAO.getById(input.getId());
-        requireResult(newFamily, "Caregiver not found");
+        requireResult(newFamily, "Family not found");
         for (Family f : client.getFamily()) {
             if (f.getId().equals(familyId)) {
                 client.getFamily().remove(f);
                 client.getFamily().add(newFamily);
                 clientDAO.update(client);
+                return;
             }
         }
         throw new NotFoundException("Family not found");
