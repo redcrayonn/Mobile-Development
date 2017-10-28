@@ -74,6 +74,42 @@
         - extract_test: {jsonpath_mini: 'id', test: 'exists'}
     - expected_status: [200]
 
+- test:
+    - group: "Blocks > activities"
+    - name: "Get the block activities"
+    - url: {'template': "/api/v1/blocks/$blockId/activities"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Blocks > activities"
+    - name: "Post blocks activity"
+    - url: {'template': "/api/v1/blocks/$blockId/activities"}
+    - method: "POST"
+    - body: '{"name": "Test","description": "Dit is een test"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'blockActivityId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Blocks > activities"
+    - name: "Get specific block activity"
+    - url: {'template': "/api/v1/blocks/$blockId/activities/$blockActivityId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Blocks > activities"
+    - name: "Put blocks activity"
+    - url: {'template': "/api/v1/blocks/$blockId/activities/$blockActivityId/"}
+    - method: "PUT"
+    - body: '{"name": "Test","description": "Dit is test 2"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+
+
 # CLIENT TESTEN
 - test:
     - group: "Clients"
@@ -137,14 +173,80 @@
     - expected_status: [200]
 
 
-# DEZE MISSCHIEN PAS DOEN NA HET AANMAKEN VAN EEN NIEUWE FAMILIE?
+# Family TESTEN
+- test:
+    - group: "Family"
+    - name: "Basic family smoketest"
+    - url: "/api/v1/families/"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+
+- test:
+    - group: "Family"
+    - name: "Test with schema validations"
+    - url: {'template': "/api/v1/families/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: "application/json"}
+    - expected_status: [200]
+
+- test:
+    - group: "Family"
+    - name: "Make sure family are there"
+    - url: "/api/v1/families/"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Family"
+    - name: "Create a new family"
+    - url: "/api/v1/families/"
+    - method: "POST"
+    - body: '{"username": "familyTest1", "password": "familyTest1"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'familyId': {header: 'Id'}
+
+- test:
+    - group: "Family"
+    - name: "Create a new family 2"
+    - url: "/api/v1/families/"
+    - method: "POST"
+    - body: '{"username": "family2Test11", "password": "family2Test11"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'familyId2': {header: 'Id'}
+
+- test:
+    - group: "Family"
+    - name: "Get the family just created and check it"
+    - url: {'template': "/api/v1/families/$familyId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {jsonpath_mini: 'id', comparator: 'str_eq', expected: {template: '$familyId'}}
+        - extract_test: {jsonpath_mini: 'id', test: 'exists'}
+    - expected_status: [200]
+
+- test:
+    - group: "Family"
+    - name: "PUT family"
+    - url: {'template': "/api/v1/families/$familyId/"}
+    - method: "PUT"
+    - body: '{"username": "familyTest2", "password": "familyTest2"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+
 - test:
     - group: "Clients > family"
     - name: "Post client family"
     - url: {'template': "/api/v1/clients/$clientId/families/"}
     - method: "POST"
-    - body: '{"id":"59e7408fa7d93e1428711624"}'
+    - body: {'template':'{"id":"$familyId"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'clientFamilyId': {header: 'Id'}
     - expected_status: [201]
 
 - test:
@@ -157,141 +259,29 @@
 - test:
     - group: "Clients > family"
     - name: "Get specific client family"
-    - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-# DEZE WERKT NOG NIET
+
 # - test:
 #     - group: "Clients > family"
 #     - name: "PUT specific client family"
-#     - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+#     - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
 #     - method: "PUT"
-#     - body: '{"id":""}'
+#     - body: {'template':'{"id":"$familyId2"}'}
 #     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+#     - extract_binds:
+#         - 'clientFamilyId2': {header: 'Id'}
 #     - expected_status: [200]
 
 - test:
     - group: "Clients > family"
     - name: "DELETE specific client family"
-    - url: {'template': "/api/v1/clients/$clientId/families/59e7408fa7d93e1428711624/"}
+    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
-
-
-# DEZE MISSCHIEN PAS DOEN NA HET AANMAKEN VAN EEN NIEUWE CAREGIVER?
-- test:
-    - group: "Clients > caregiver"
-    - name: "Post client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
-    - method: "POST"
-    - body: '{"id":"59c8d1ba6f03f4349886526e"}'
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [201]
-
-- test:
-    - group: "Clients > caregiver"
-    - name: "Get client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
-
-- test:
-    - group: "Clients > caregiver"
-    - name: "Get specific client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregivers/59c8d1ba6f03f4349886526e/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
-
-# DEZE WERKT NOG NIET > eerst family fixen en dan overnemen
-# - test:
-#     - group: "Clients > caregiver"
-#     - name: "PUT specific client caregiver"
-#     - url: {'template': "/api/v1/clients/$clientId/caregiver/59c8d1ba6f03f4349886526e/"}
-#     - method: "PUT"
-#     - body: '{"id":""}'
-#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-#     - expected_status: [200]
-
-- test:
-    - group: "Clients > caregiver"
-    - name: "DELETE specific client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregivers/59c8d1ba6f03f4349886526e/"}
-    - method: "DELETE"
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [204]
-
-
-- test:
-    - group: "Clients > blocks"
-    - name: "Post client blocks"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
-    - method: "POST"
-    - body: {'template':'{"id":"$blockId"}'}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - extract_binds:
-        - 'clientBlockId': {header: 'Id'}
-    - expected_status: [201]
-
-- test:
-    - group: "Clients > blocks"
-    - name: "Get client blocks"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
-
-- test:
-    - group: "Clients > blocks"
-    - name: "Get specific client block"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
-
-- test:
-    - group: "Clients > blocks > activities"
-    - name: "Get client block activities"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
-
-
-- test:
-    - group: "Clients > blocks"
-    - name: "DELETE specific client block"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
-    - method: "DELETE"
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [204]
-
-- test:
-    - group: "Blocks"
-    - name: "delete the block that was created"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - method: 'DELETE'
-
-- test:
-    - group: "Blocks"
-    - name: "check if the block is deleted"
-    - url: {'template': "/api/v1/blocks/$blockId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]
-
-
-- test:
-    - group: "Clients"
-    - name: "Delete the client that is just created"
-    - url: {'template': "/api/v1/clients/$clientId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - method: 'DELETE'
-
-- test:
-    - group: "Clients"
-    - name: "Check if the client is deleted"
-    - url: {'template': "/api/v1/clients/$clientId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]
 
 
 # CAREGIVER TESTEN
@@ -346,6 +336,176 @@
     - body: '{"username": "caregiverTest2", "password": "caregiverTest3"}'
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "Post client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
+    - method: "POST"
+    - body: {'template':'{"id":"$caregiverId"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "Get client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "Get specific client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/$caregiverId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+# DEZE WERKT NOG NIET > eerst family fixen en dan overnemen
+# - test:
+#     - group: "Clients > caregiver"
+#     - name: "PUT specific client caregiver"
+#     - url: {'template': "/api/v1/clients/$clientId/caregiver/59c8d1ba6f03f4349886526e/"}
+#     - method: "PUT"
+#     - body: '{"id":""}'
+#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+#     - expected_status: [200]
+
+- test:
+    - group: "Clients > caregiver"
+    - name: "DELETE specific client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/$caregiverId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+
+- test:
+    - group: "Clients > blocks"
+    - name: "Post client blocks"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
+    - method: "POST"
+    - body: {'template':'{"id":"$blockId"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'clientBlockId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > blocks"
+    - name: "Get client blocks"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks"
+    - name: "Get specific client block"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities"
+    - name: "Get client block activities"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities"
+    - name: "Get specific client block activities"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$blockActivityId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+# HIER ZIJN VEEL DELETES
+- test:
+    - group: "Caregiver"
+    - name: "Delete the caregivers that is just created"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Caregiver"
+    - name: "Check if the caregivers is deleted"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+- test:
+    - group: "Blocks > activities"
+    - name: "DELETE specific block activity"
+    - url: {'template': "/api/v1/blocks/$blockId/activities/$blockActivityId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Clients > blocks"
+    - name: "DELETE specific client block"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Blocks"
+    - name: "delete the block that was created"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Blocks"
+    - name: "check if the block is deleted"
+    - url: {'template': "/api/v1/blocks/$blockId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+
+- test:
+    - group: "Clients"
+    - name: "Delete the client that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Clients"
+    - name: "Check if the client is deleted"
+    - url: {'template': "/api/v1/clients/$clientId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+
+- test:
+    - group: "Family"
+    - name: "Delete the family that is just created"
+    - url: {'template': "/api/v1/families/$familyId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Family"
+    - name: "Check if the family is deleted"
+    - url: {'template': "/api/v1/families/$familyId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+- test:
+    - group: "Family"
+    - name: "Delete the second family that is just created"
+    - url: {'template': "/api/v1/families/$familyId2/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Family"
+    - name: "Check if the second family is deleted"
+    - url: {'template': "/api/v1/families/$familyId2/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
 
 
 
