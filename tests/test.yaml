@@ -243,7 +243,7 @@
     - name: "Post client family"
     - url: {'template': "/api/v1/clients/$clientId/families/"}
     - method: "POST"
-    - body: {'template':'{"id":"$familyId"}'}
+    - body: {template: '{"id":"$familyId"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - extract_binds:
         - 'clientFamilyId': {header: 'Id'}
@@ -263,22 +263,19 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-# DEZE IS NOG STUK
 - test:
     - group: "Clients > family"
     - name: "PUT specific client family"
-    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
+    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId"}
     - method: "PUT"
-    - body: {'template':'{"id":"$familyId2"}'}
+    - body: {template: '{"id":"$familyId2"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - extract_binds:
-        - 'clientFamilyId2': {header: 'Id'}
     - expected_status: [200]
 
 - test:
     - group: "Clients > family"
     - name: "DELETE specific client family"
-    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
+    - url: {'template': "/api/v1/clients/$clientId/families/$familyId2/"}
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
@@ -317,6 +314,16 @@
     - expected_status: [201]
     - extract_binds:
         - 'caregiverId': {header: 'Id'}
+- test:
+    - group: "Caregiver"
+    - name: "Create a new caregiver 2"
+    - url: "/api/v1/caregivers/"
+    - method: "POST"
+    - body: '{"username": "caregiver2Test11", "password": "caregiver2Test11"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'caregiverId2': {header: 'Id'}
 
 - test:
     - group: "Caregiver"
@@ -342,7 +349,7 @@
     - name: "Post client caregiver"
     - url: {'template': "/api/v1/clients/$clientId/caregivers/"}
     - method: "POST"
-    - body: {'template':'{"id":"$caregiverId"}'}
+    - body: {template: '{"id":"$caregiverId"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [201]
 
@@ -360,31 +367,29 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-# DEZE IS NOG STUK
 - test:
     - group: "Clients > caregiver"
     - name: "PUT specific client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregiver/$caregiverId/"}
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/$caregiverId/"}
     - method: "PUT"
-    - body: '{"id":""}'
+    - body: {template: '{"id":"$caregiverId2"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
 - test:
     - group: "Clients > caregiver"
     - name: "DELETE specific client caregiver"
-    - url: {'template': "/api/v1/clients/$clientId/caregivers/$caregiverId/"}
+    - url: {'template': "/api/v1/clients/$clientId/caregivers/$caregiverId2/"}
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
-
 
 - test:
     - group: "Clients > blocks"
     - name: "Post client blocks"
     - url: {'template': "/api/v1/clients/$clientId/blocks/"}
     - method: "POST"
-    - body: {'template':'{"id":"$blockId"}'}
+    - body: {template: '{"id":"$blockId"}'}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - extract_binds:
         - 'clientBlockId': {header: 'Id'}
@@ -411,18 +416,26 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-- test:
-    - group: "Clients > blocks > activities"
-    - name: "Get specific client block activities"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$blockActivityId/"}
-    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [200]
+#Het $blockActivityId dat gebruikt wordt komt uit /blocks/{id}/activities/{$blockActivityId}. Dit is een persoonlijke activiteit met een eigen ID
+# - test:
+#     - group: "Clients > blocks > activities"
+#     - name: "Get specific client block activities"
+#     - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$blockActivityId/"}
+#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+#     - expected_status: [200]
 
 # HIER ZIJN VEEL DELETES
 - test:
     - group: "Caregiver"
     - name: "Delete the caregivers that is just created"
     - url: {'template': "/api/v1/caregivers/$caregiverId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+
+- test:
+    - group: "Caregiver"
+    - name: "Delete the caregivers that is just created"
+    - url: {'template': "/api/v1/caregivers/$caregiverId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
 
