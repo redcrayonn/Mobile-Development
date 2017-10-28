@@ -263,17 +263,17 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-
-# - test:
-#     - group: "Clients > family"
-#     - name: "PUT specific client family"
-#     - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
-#     - method: "PUT"
-#     - body: {'template':'{"id":"$familyId2"}'}
-#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-#     - extract_binds:
-#         - 'clientFamilyId2': {header: 'Id'}
-#     - expected_status: [200]
+# DEZE IS NOG STUK
+- test:
+    - group: "Clients > family"
+    - name: "PUT specific client family"
+    - url: {'template': "/api/v1/clients/$clientId/families/$clientFamilyId/"}
+    - method: "PUT"
+    - body: {'template':'{"id":"$familyId2"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'clientFamilyId2': {header: 'Id'}
+    - expected_status: [200]
 
 - test:
     - group: "Clients > family"
@@ -360,15 +360,15 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-# DEZE WERKT NOG NIET > eerst family fixen en dan overnemen
-# - test:
-#     - group: "Clients > caregiver"
-#     - name: "PUT specific client caregiver"
-#     - url: {'template': "/api/v1/clients/$clientId/caregiver/59c8d1ba6f03f4349886526e/"}
-#     - method: "PUT"
-#     - body: '{"id":""}'
-#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-#     - expected_status: [200]
+# DEZE IS NOG STUK
+- test:
+    - group: "Clients > caregiver"
+    - name: "PUT specific client caregiver"
+    - url: {'template': "/api/v1/clients/$clientId/caregiver/$caregiverId/"}
+    - method: "PUT"
+    - body: '{"id":""}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
 
 - test:
     - group: "Clients > caregiver"
