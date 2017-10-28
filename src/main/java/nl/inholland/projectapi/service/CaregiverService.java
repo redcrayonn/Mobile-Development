@@ -68,14 +68,8 @@ public class CaregiverService extends BaseService {
         Caregiver caregiver = caregiverDAO.getById(id.toString());
         requireResult(caregiver, "Caregiver not found");
 
-        //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship
         for (Client client : clientDAO.getAllClients()) {
-            for (Caregiver c : client.getCaregivers()) {
-                if (c.getId().equals(caregiver.getId())) {
-                    client.getCaregivers().remove(c);
-                    clientDAO.update(client);
-                }
-            }
+            client.getCaregivers().removeIf(c -> c.getId().equals(caregiver.getId()));
         }
         caregiverDAO.delete(caregiver);
     }

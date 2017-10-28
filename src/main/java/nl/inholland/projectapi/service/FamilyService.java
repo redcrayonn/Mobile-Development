@@ -62,15 +62,9 @@ public class FamilyService extends BaseService {
     public void deleteById(ObjectId id) {
         Family family = dao.getById(id.toString());
         requireResult(family, "Family not found");
-
-        //TODO A non-ideal solution --> create qeury-based deletion of client/family relationship
+        
         for (Client client : clientDAO.getAllClients()) {
-            for (Family f : client.getFamily()) {
-                if (f.getId().equals(family.getId())) {
-                    client.getFamily().remove(f);
-                    clientDAO.update(client);
-                }
-            }
+            client.getFamily().removeIf(c -> c.getId().equals(family.getId()));
         }
         dao.delete(family);
     }
