@@ -407,7 +407,7 @@
 - test:
     - group: "Clients > blocks > activities"
     - name: "Get client block activities"
-    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities"}
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
