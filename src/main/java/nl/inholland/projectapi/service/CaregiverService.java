@@ -70,6 +70,7 @@ public class CaregiverService extends BaseService {
 
         for (Client client : clientDAO.getAllClients()) {
             client.getCaregivers().removeIf(c -> c.getId().equals(caregiver.getId()));
+            clientDAO.update(client);
         }
         caregiverDAO.delete(caregiver);
     }

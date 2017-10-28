@@ -65,7 +65,8 @@ public class FamilyService extends BaseService {
         
         for (Client client : clientDAO.getAllClients()) {
             client.getFamily().removeIf(c -> c.getId().equals(family.getId()));
-        }
+            clientDAO.update(client);
+        }  
         dao.delete(family);
     }
 }
