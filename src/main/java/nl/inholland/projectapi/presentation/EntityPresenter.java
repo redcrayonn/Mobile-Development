@@ -2,23 +2,23 @@ package nl.inholland.projectapi.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
-import nl.inholland.projectapi.model.Client;
+import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.presentation.model.BaseView;
 
 public class EntityPresenter extends BasePresenter {
     
-    public List<BaseView> present(List<Client> clients) {
+    public List<BaseView> present(List<? extends EntityModel> models) {
         List<BaseView> views = new ArrayList<>();
 
-        for (Client client : clients) {
-            views.add(present(client));
+        for (EntityModel model : models) {
+            views.add(present(model));
         }
         return views;        
     }
 
-    public BaseView present(Client client) {
+    public BaseView present(EntityModel model) {
         BaseView view = new BaseView();
-        view.id = client.getId();
+        view.id = model.getId();
         return view;
     }    
     

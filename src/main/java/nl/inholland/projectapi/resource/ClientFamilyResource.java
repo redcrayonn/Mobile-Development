@@ -22,7 +22,8 @@ import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Family;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
-import nl.inholland.projectapi.presentation.FamilyPresenter;
+import nl.inholland.projectapi.presentation.EntityPresenter;
+import nl.inholland.projectapi.presentation.model.BaseView;
 import nl.inholland.projectapi.presentation.model.FamilyView;
 import nl.inholland.projectapi.service.ClientFamilyService;
 import nl.inholland.projectapi.service.ClientService;
@@ -32,29 +33,29 @@ import nl.inholland.projectapi.service.ClientService;
 public class ClientFamilyResource extends BaseResource {
 
     private final ClientFamilyService clientFamilyService;
-    private final FamilyPresenter familyPresenter;
+    private final EntityPresenter presenter;
     private final ClientService clientService;
 
     @Inject
     public ClientFamilyResource(
             ClientFamilyService clientFamilyService,
-            FamilyPresenter familyPresenter,
+            EntityPresenter presenter,
             ClientService clientService) {
         this.clientFamilyService = clientFamilyService;
-        this.familyPresenter = familyPresenter;
+        this.presenter = presenter;
         this.clientService = clientService;
     }
 
     @GET
     @Secured({Role.admin, Role.client})
     @Produces("application/json")
-    public List<FamilyView> getAll(
+    public List<BaseView> getAll(
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         List<Family> family = clientFamilyService.getAll(client, count);
-        return familyPresenter.present(family);
+        return presenter.present(family);
     }
 
     @POST
@@ -76,13 +77,13 @@ public class ClientFamilyResource extends BaseResource {
     @Secured({Role.admin, Role.client})
     @Produces("application/json")
     @Path("/{familyId}")
-    public FamilyView get(
+    public BaseView get(
             @PathParam("clientId") String clientId,
             @PathParam("familyId") String familyId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
         Family family = clientFamilyService.get(client, familyId);
-        return familyPresenter.present(family);
+        return presenter.present(family);
     }
 
     @PUT

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Transient;
 
 @Entity(value = "users", noClassnameStored = false)
 public abstract class User extends EntityModel implements Principal {
@@ -22,7 +23,7 @@ public abstract class User extends EntityModel implements Principal {
     private Role role;
     @Embedded
     private List<Message> messages;
-    
+    @Transient
     private final int SALT_ROUNDS = 12;
     
     public User(Credentials credentials, Role role) {

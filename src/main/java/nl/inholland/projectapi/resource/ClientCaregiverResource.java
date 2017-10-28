@@ -22,7 +22,8 @@ import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.EntityModel;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
-import nl.inholland.projectapi.presentation.CaregiverPresenter;
+import nl.inholland.projectapi.presentation.EntityPresenter;
+import nl.inholland.projectapi.presentation.model.BaseView;
 import nl.inholland.projectapi.presentation.model.CaregiverView;
 import nl.inholland.projectapi.service.ClientCaregiverService;
 import nl.inholland.projectapi.service.ClientService;
@@ -32,13 +33,13 @@ import nl.inholland.projectapi.service.ClientService;
 public class ClientCaregiverResource extends BaseResource {
 
     private final ClientCaregiverService service;
-    private final CaregiverPresenter presenter;
+    private final EntityPresenter presenter;
     private final ClientService clientService;
 
     @Inject
     public ClientCaregiverResource(
             ClientCaregiverService service,
-            CaregiverPresenter presenter,
+            EntityPresenter presenter,
             ClientService clientService) {
         this.service = service;
         this.presenter = presenter;
@@ -48,7 +49,7 @@ public class ClientCaregiverResource extends BaseResource {
     @GET
     @Secured({Role.admin, Role.client})
     @Produces("application/json")
-    public List<CaregiverView> getAll(
+    public List<BaseView> getAll(
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
             @Context SecurityContext context) {
@@ -76,7 +77,7 @@ public class ClientCaregiverResource extends BaseResource {
     @Secured({Role.admin, Role.client})
     @Produces("application/json")
     @Path("/{caregiverId}")
-    public CaregiverView get(
+    public BaseView get(
             @PathParam("clientId") String clientId,
             @PathParam("caregiverId") String caregiverId,
             @Context SecurityContext context) {

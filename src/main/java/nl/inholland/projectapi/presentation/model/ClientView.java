@@ -9,8 +9,8 @@ public class ClientView extends BaseView {
     public int points;
     public Role role;
     public List<MessageView> messages;
-    public List<FamilyView> family;
+    public List<BaseView> family;
     public List<AppointmentView> appointments;
-    public List<CaregiverView> caregivers;
+    public List<BaseView> caregivers;
     public List<PersonalBlockView> blocks;
 }

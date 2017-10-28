@@ -95,7 +95,7 @@ definitions:
         description: "All family members invited by this user"
         type: "array"
         items: {
-          $ref: "#/definitions/Family"
+          $ref: "#/definitions/EntityModel"
         }
       appointments:
         description: "All appointments of the user"
@@ -107,7 +107,7 @@ definitions:
         description: "Caregivers of the client"
         type: "array"
         items: {
-          $ref: "#/definitions/Caregivers"
+          $ref: "#/definitions/EntityModel"
         }
       blocks:
         description: "Personal building blocks"
@@ -1024,7 +1024,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Caregivers"
+              $ref: "#/definitions/EntityModel"
         400:
           description: "Invalid parameters"
           schema:
@@ -1090,7 +1090,7 @@ paths:
         200:
           description: "succesfully found the caregigver by ID"
           schema:
-            $ref: "#/definitions/Caregivers"
+            $ref: "#/definitions/EntityModel"
         400:
           description: "Invalid ID supplied"
           schema:
@@ -1206,7 +1206,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Family"
+              $ref: "#/definitions/EntityModel"
         400:
           description: "Invalid parameters"
           schema:
@@ -1272,7 +1272,7 @@ paths:
         200:
           description: "succesfully found the family by ID"
           schema:
-            $ref: "#/definitions/Family"
+            $ref: "#/definitions/EntityModel"
         400:
           description: "Invalid ID supplied"
           schema:
