@@ -34,7 +34,11 @@ public class UserResource extends BaseResource {
     public Response login(Credentials credentials) {
         userService.requireResult(credentials, "Json object in body required");
         User user = userService.login(credentials);
-        return Response.ok().entity(user.getApiKey()).header("userId", user.getId()).build();
+        return Response.ok()
+                .entity(user.getApiKey())
+                .header("userId", user.getId())
+                .header("userRole", user.getRole())
+                .build();
     }
 
     @POST
