@@ -8,20 +8,14 @@ import nl.inholland.projectapi.presentation.model.ClientView;
 
 public class ClientPresenter extends BasePresenter {
 
-    private final MessagePresenter messagePresenter;
     private final EntityPresenter presenter;
-    private final AppointmentPresenter appointmentPresenter;
     private final PersonalBlockPresenter blockPresenter;
 
     @Inject
     public ClientPresenter(
-            MessagePresenter messagePresenter,
             EntityPresenter presenter,
-            AppointmentPresenter appointmentPresenter,
             PersonalBlockPresenter blockPresenter) {
-        this.messagePresenter = messagePresenter;
         this.presenter = presenter;
-        this.appointmentPresenter = appointmentPresenter;
         this.blockPresenter = blockPresenter;
     }
 
@@ -41,9 +35,7 @@ public class ClientPresenter extends BasePresenter {
         view.name = client.getName();
         view.points = client.getPoints();
         view.role = client.getRole();
-        view.messages = messagePresenter.present(client.getMessages());
         view.family = presenter.present(client.getFamily());
-        view.appointments = appointmentPresenter.present(client.getAppointments());
         view.caregivers = presenter.present(client.getCaregivers());
         view.blocks = blockPresenter.present(client.getBuildingBlocks());
 
