@@ -423,6 +423,15 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
+- test:
+    - group: "Clients > blocks > activities"
+    - name: "Patch the client that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/"}
+    - method: 'PATCH'
+    - body: '[{ "op": "replace", "path": "/status", "value": "ongoing" }]'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
 #COMMENTS
 - test:
     - group: "Clients > blocks > activities > comments"
@@ -601,8 +610,6 @@
     - url: {'template': "/api/v1/families/$familyId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [404]
-
-
 
 # LOGOUT TEST
 - test:
