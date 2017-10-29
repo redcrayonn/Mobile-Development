@@ -108,8 +108,6 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
-
-
 # CLIENT TESTEN
 - test:
     - group: "Clients"
@@ -415,14 +413,92 @@
     - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
+    - extract_binds:
+        - "personalActivityId": {"jmespath": "[0].id"}
 
-#Het $blockActivityId dat gebruikt wordt komt uit /blocks/{id}/activities/{$blockActivityId}. Dit is een persoonlijke activiteit met een eigen ID
-# - test:
-#     - group: "Clients > blocks > activities"
-#     - name: "Get specific client block activities"
-#     - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$blockActivityId/"}
-#     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-#     - expected_status: [200]
+- test:
+    - group: "Clients > blocks > activities"
+    - name: "Get specific client block activities"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+#COMMENTS
+- test:
+    - group: "Clients > blocks > activities > comments"
+    - name: "Create comment on activity"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments"}
+    - method: "POST"
+    - body: '{"message": "Testcomment"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'commentId': {header: 'Id'}
+
+- test:
+    - group: "Clients > blocks > activities > comments"
+    - name: "Get comment on activity"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments/$commentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities > comments"
+    - name: "PUT comment on activity"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments/$commentId"}
+    - method: "PUT"
+    - body: '{"message": "Testcomment2"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities > comments"
+    - name: "Delete the comment that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments/$commentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+    - expected_status: [204]
+
+- test:
+    - group: "Clients > blocks > activities > comments"
+    - name: "Check if comment is deleted"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments/$commentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]    
+
+#LIKES
+- test:
+    - group: "Clients > blocks > activities > likes"
+    - name: "Create like on activity"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/likes"}
+    - method: "POST"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'likeId': {header: 'Id'}
+
+- test:
+    - group: "Clients > blocks > activities > likes"
+    - name: "Get like on activity"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/likes/$likeId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > blocks > activities > likes"
+    - name: "Delete the like that is just created"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/likes/$likeId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - method: 'DELETE'
+    - expected_status: [204]
+
+- test:
+    - group: "Clients > blocks > activities > likes"
+    - name: "Check if like is deleted"
+    - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/likes/$likeId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]      
+    
 
 # HIER ZIJN VEEL DELETES
 - test:
@@ -431,6 +507,7 @@
     - url: {'template': "/api/v1/caregivers/$caregiverId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204]
 
 - test:
     - group: "Caregiver"
@@ -438,6 +515,7 @@
     - url: {'template': "/api/v1/caregivers/$caregiverId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204] 
 
 - test:
     - group: "Caregiver"
@@ -468,6 +546,7 @@
     - url: {'template': "/api/v1/blocks/$blockId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204] 
 
 - test:
     - group: "Blocks"
@@ -483,6 +562,7 @@
     - url: {'template': "/api/v1/clients/$clientId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204] 
 
 - test:
     - group: "Clients"
@@ -498,6 +578,7 @@
     - url: {'template': "/api/v1/families/$familyId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204] 
 
 - test:
     - group: "Family"
@@ -512,6 +593,7 @@
     - url: {'template': "/api/v1/families/$familyId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
+    - expected_status: [204] 
 
 - test:
     - group: "Family"
