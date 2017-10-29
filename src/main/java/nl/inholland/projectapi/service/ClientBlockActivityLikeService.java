@@ -63,11 +63,16 @@ public class ClientBlockActivityLikeService extends BaseService {
     public void delete(Client client, String blockId, String activityId, String likeId, Principal principal) {
         User deleter = userDAO.getByUsername(principal.getName());
         Like like = get(client, blockId, activityId, likeId);
-        if(like.getSenderId().equals(deleter.getId()) || deleter.getRole().equals(Role.admin)) {
-            getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
-            clientDAO.update(client); 
-            return;
+        if(!checkRoles(deleter, like)) {
+            throw new ForbiddenException("You can only delete your own likes");
         }
-        throw new ForbiddenException("You can only delete your own likes");
+        getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
+        clientDAO.update(client);        
+    }
+    private boolean checkRoles(User user, Like like) {
+        if(like.getSenderId().equals(user.getId()) || user.getRole().equals(Role.admin)) {
+            return true;
+        }
+        return false;
     }
 }

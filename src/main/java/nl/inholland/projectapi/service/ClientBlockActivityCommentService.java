@@ -71,22 +71,21 @@ public class ClientBlockActivityCommentService extends BaseService {
     public void update(Client client, String blockId, String activityId, String commentId, InputComment input, Principal principal) {
         User editor = userDAO.getByUsername(principal.getName());
         Comment comment = get(client, blockId, activityId, commentId);
-        if(checkRoles(editor, comment)) {
-            comment.setMessage(input.getMessage());
-            clientDAO.update(client);
+        if(!checkRoles(editor, comment)) {
+            throw new ForbiddenException("You can only edit your own comments");
         }
-        throw new ForbiddenException("You can only edit your own comments");
+        comment.setMessage(input.getMessage());
+        clientDAO.update(client);
     }
 
     public void delete(Client client, String blockId, String activityId, String commentId, Principal principal) {
         User deleter = userDAO.getByUsername(principal.getName());
         Comment comment = get(client, blockId, activityId, commentId);
-        if(checkRoles(deleter, comment)) {
-            getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
-            clientDAO.update(client);
-            return;
+        if(!checkRoles(deleter, comment)) {
+            throw new ForbiddenException("You can only delete your own comments");
         }
-        throw new ForbiddenException("You can only delete your own comments");
+        getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
+        clientDAO.update(client);        
     }
     
     private boolean checkRoles(User user, Comment comment) {
