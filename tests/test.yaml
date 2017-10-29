@@ -1,5 +1,6 @@
 # First install: "git clone https://github.com/svanoort/pyresttest.git" &
 # >> "sudo python setup.py install"
+# >> "sudo pip install jmespath" 
 # Quickstart guide: "https://github.com/svanoort/pyresttest/blob/master/quickstart.md"
 # Run script: "resttest.py https://www.imready.ml test.yaml"
 
@@ -473,7 +474,7 @@
     - name: "Check if comment is deleted"
     - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/comments/$commentId"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]    
+    - expected_status: [404]
 
 #LIKES
 - test:
@@ -506,8 +507,8 @@
     - name: "Check if like is deleted"
     - url: {'template': "/api/v1/clients/$clientId/blocks/$clientBlockId/activities/$personalActivityId/likes/$likeId"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
-    - expected_status: [404]      
-    
+    - expected_status: [404]
+
 
 # HIER ZIJN VEEL DELETES
 - test:
@@ -524,7 +525,7 @@
     - url: {'template': "/api/v1/caregivers/$caregiverId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
-    - expected_status: [204] 
+    - expected_status: [204]
 
 - test:
     - group: "Caregiver"
@@ -555,7 +556,7 @@
     - url: {'template': "/api/v1/blocks/$blockId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
-    - expected_status: [204] 
+    - expected_status: [204]
 
 - test:
     - group: "Blocks"
@@ -571,7 +572,7 @@
     - url: {'template': "/api/v1/clients/$clientId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
-    - expected_status: [204] 
+    - expected_status: [204]
 
 - test:
     - group: "Clients"
@@ -587,7 +588,7 @@
     - url: {'template': "/api/v1/families/$familyId/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
-    - expected_status: [204] 
+    - expected_status: [204]
 
 - test:
     - group: "Family"
@@ -602,7 +603,7 @@
     - url: {'template': "/api/v1/families/$familyId2/"}
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - method: 'DELETE'
-    - expected_status: [204] 
+    - expected_status: [204]
 
 - test:
     - group: "Family"
