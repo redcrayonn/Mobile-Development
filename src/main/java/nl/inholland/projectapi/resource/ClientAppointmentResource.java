@@ -28,6 +28,7 @@ import nl.inholland.projectapi.service.ClientService;
 
 @Api("Client appointments")
 @Path("/api/v1/clients/{clientId}/appointments")
+@Secured({Role.admin, Role.client, Role.caregiver})
 public class ClientAppointmentResource extends BaseResource {
 
     private final ClientService clientService;
@@ -46,7 +47,6 @@ public class ClientAppointmentResource extends BaseResource {
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.client, Role.caregiver})
     public List<AppointmentView> getAll(
             @PathParam("clientId") String clientId,
             @QueryParam("count") int count,
@@ -57,7 +57,6 @@ public class ClientAppointmentResource extends BaseResource {
 
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.client, Role.caregiver})
     public Response createAppointment(
             @PathParam("clientId") String clientId,
             Appointment appointment,
@@ -72,7 +71,6 @@ public class ClientAppointmentResource extends BaseResource {
     @GET
     @Produces("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.client, Role.caregiver})
     public AppointmentView getById(
             @PathParam("clientId") String clientId,
             @PathParam("appointmentId") String appointmentId,
@@ -85,7 +83,6 @@ public class ClientAppointmentResource extends BaseResource {
     @PUT
     @Consumes("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.client, Role.caregiver})
     public Response updateAppointment(
             @PathParam("clientId") String clientId,
             @PathParam("appointmentId") String appointmentId,
@@ -101,7 +98,6 @@ public class ClientAppointmentResource extends BaseResource {
     @DELETE
     @Consumes("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.client, Role.caregiver})
     public void deleteAppointment(
             @PathParam("clientId") String clientId,
             @PathParam("appointmentId") String appointmentId,

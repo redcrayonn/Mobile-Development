@@ -28,6 +28,7 @@ import nl.inholland.projectapi.service.CaregiverService;
 
 @Api("Caregiver appointments")
 @Path("/api/v1/caregivers/{caregiverId}/appointments")
+@Secured({Role.admin, Role.caregiver})
 public class CaregiverAppointmentResource extends BaseResource {
 
     private final CaregiverService caregiverService;
@@ -46,7 +47,6 @@ public class CaregiverAppointmentResource extends BaseResource {
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.caregiver})
     public List<AppointmentView> getAll(
             @PathParam("caregiverId") String caregiverId,
             @QueryParam("count") int count,
@@ -58,10 +58,9 @@ public class CaregiverAppointmentResource extends BaseResource {
 
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.caregiver})
     public Response createAppointment(
             @PathParam("caregiverId") String caregiverId,
-            Appointment appointment, 
+            Appointment appointment,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         caregiverService.requireResult(appointment, "Json object in body required");
@@ -73,7 +72,6 @@ public class CaregiverAppointmentResource extends BaseResource {
     @GET
     @Produces("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.caregiver})
     public AppointmentView getById(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("appointmentId") String appointmentId,
@@ -86,7 +84,6 @@ public class CaregiverAppointmentResource extends BaseResource {
     @PUT
     @Consumes("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.caregiver})
     public Response updateAppointment(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("appointmentId") String appointmentId,
@@ -102,7 +99,6 @@ public class CaregiverAppointmentResource extends BaseResource {
     @DELETE
     @Consumes("application/json")
     @Path("/{appointmentId}")
-    @Secured({Role.admin, Role.caregiver})
     public void deleteAppointment(
             @PathParam("caregiverId") String caregiverId,
             @PathParam("appointmentId") String appointmentId,

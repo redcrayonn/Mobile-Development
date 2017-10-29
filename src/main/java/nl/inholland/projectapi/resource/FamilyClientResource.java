@@ -20,8 +20,8 @@ import nl.inholland.projectapi.service.FamilyService;
 
 @Api("Family members' clients")
 @Path("/api/v1/families/{familyId}/clients")
-public class FamilyClientResource extends BaseResource{
-    
+public class FamilyClientResource extends BaseResource {
+
     private final FamilyService familyService;
     private final FamilyClientService familyClientService;
     private final EntityPresenter presenter;
@@ -35,7 +35,7 @@ public class FamilyClientResource extends BaseResource{
         this.familyService = caregiverService;
         this.presenter = presenter;
     }
-    
+
     @GET
     @Produces("application/json")
     @Secured({Role.admin, Role.family})
@@ -45,5 +45,5 @@ public class FamilyClientResource extends BaseResource{
         Family family = familyService.getById(familyId, context.getUserPrincipal());
         List<Client> clients = familyClientService.getAll(family);
         return presenter.present(clients);
-    }    
+    }
 }

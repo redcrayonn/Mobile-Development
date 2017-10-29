@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.model.inputs;
 
 public class InputComment {
+
     private String message;
 
     public InputComment() {
@@ -13,5 +14,5 @@ public class InputComment {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
 }

@@ -3,6 +3,7 @@ package nl.inholland.projectapi.model.inputs;
 import org.bson.types.ObjectId;
 
 public class InputMessage {
+
     private ObjectId receiverId;
     private String message;
 
@@ -24,5 +25,5 @@ public class InputMessage {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
 }

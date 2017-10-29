@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -86,6 +87,21 @@ public class ClientBlockActivityCommentResource extends BaseResource {
         return presenter.present(comment);
     }
 
+    @PUT
+    @Path("/{commentId}")
+    @Produces("application/json")
+    public Response update(
+            @PathParam("clientId") String clientId,
+            @PathParam("blockId") String blockId,
+            @PathParam("activityId") String activityId,
+            @PathParam("commentId") String commentId,
+            InputComment input,
+            @Context SecurityContext context) {
+        Client client = clientService.getById(clientId, context.getUserPrincipal());
+        service.update(client, blockId, activityId, commentId, input, context.getUserPrincipal());
+        return Response.ok().build();
+    }
+
     @DELETE
     @Path("/{commentId}")
     public void delete(
@@ -95,7 +111,7 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @PathParam("commentId") String commentId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.delete(client, blockId, activityId, commentId);
+        service.delete(client, blockId, activityId, commentId, context.getUserPrincipal());
     }
 
 }

@@ -34,7 +34,7 @@ public class BlockResource extends BaseResource {
 
     @Inject
     public BlockResource(
-            BlockService blockService, 
+            BlockService blockService,
             BlockPresenter blockPresenter) {
         this.blockService = blockService;
         this.blockPresenter = blockPresenter;
@@ -51,13 +51,13 @@ public class BlockResource extends BaseResource {
     @POST
     @Consumes("application/json")
     public Response create(
-            BuildingBlock newBlock, 
+            BuildingBlock newBlock,
             @Context UriInfo uriInfo) {
         blockService.requireResult(newBlock, "Json object in body required");
         URI uri = blockService.create(newBlock, uriInfo);
         return Response.created(uri).header("Id", getId(uri)).build();
     }
-    
+
     @GET
     @Path("/{blockId}")
     @Produces("application/json")
@@ -66,12 +66,12 @@ public class BlockResource extends BaseResource {
         BuildingBlock block = blockService.getById(id);
         return blockPresenter.present(block);
     }
-    
+
     @PUT
     @Path("/{blockId}")
     @Consumes("application/json")
     public Response put(
-            @PathParam("blockId") String id, 
+            @PathParam("blockId") String id,
             BuildingBlock newBlock) {
         blockService.requireResult(newBlock, "Json object in body required");
         blockService.update(id, newBlock);

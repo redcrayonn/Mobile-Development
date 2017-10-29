@@ -6,12 +6,14 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
+import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.inputs.InputComment;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
@@ -44,7 +46,7 @@ public class ClientBlockActivityCommentService extends BaseService {
 
     public URI create(Client client, String blockId, String activityId, Comment comment, Principal principal, UriInfo uriInfo) {
         User sender = userDAO.getByUsername(principal.getName());
-         try {
+        try {
             comment.setId(new ObjectId());
             comment.setDateTime(new Date());
             comment.setSenderId(new ObjectId(sender.getId()));
@@ -66,8 +68,30 @@ public class ClientBlockActivityCommentService extends BaseService {
         throw new NotFoundException("Comment not found");
     }
 
-    public void delete(Client client, String blockId, String activityId, String commentId) {
-        getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
-        clientDAO.update(client);
+    public void update(Client client, String blockId, String activityId, String commentId, InputComment input, Principal principal) {
+        User editor = userDAO.getByUsername(principal.getName());
+        Comment comment = get(client, blockId, activityId, commentId);
+        if(checkRoles(editor, comment)) {
+            comment.setMessage(input.getMessage());
+            clientDAO.update(client);
+        }
+        throw new ForbiddenException("You can only edit your own comments");
+    }
+
+    public void delete(Client client, String blockId, String activityId, String commentId, Principal principal) {
+        User deleter = userDAO.getByUsername(principal.getName());
+        Comment comment = get(client, blockId, activityId, commentId);
+        if(checkRoles(deleter, comment)) {
+            getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
+            clientDAO.update(client);
+        }
+        throw new ForbiddenException("You can only delete your own comments");
+    }
+    
+    private boolean checkRoles(User user, Comment comment) {
+        if(comment.getSenderId().equals(user.getId()) || user.getRole().equals(Role.admin)) {
+            return true;
+        }
+        return false;
     }
 }

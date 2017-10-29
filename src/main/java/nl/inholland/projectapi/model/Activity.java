@@ -24,12 +24,12 @@ public class Activity extends EntityModel {
     public Activity() {
 
     }
-    
+
     public Activity(InputActivity input) {
         this.name = input.getName();
         this.description = input.getDescription();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -77,5 +77,5 @@ public class Activity extends EntityModel {
     public void setContent(String content) {
         this.content = content;
     }
-    
+
 }

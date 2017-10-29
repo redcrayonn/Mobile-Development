@@ -90,7 +90,7 @@ public class ClientBlockActivityLikeResource extends BaseResource {
             @PathParam("likeId") String likeId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.delete(client, blockId, activityId, likeId);
+        service.delete(client, blockId, activityId, likeId, context.getUserPrincipal());
     }
 
 }

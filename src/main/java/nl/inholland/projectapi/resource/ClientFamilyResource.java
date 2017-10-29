@@ -24,7 +24,6 @@ import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.EntityPresenter;
 import nl.inholland.projectapi.presentation.model.BaseView;
-import nl.inholland.projectapi.presentation.model.FamilyView;
 import nl.inholland.projectapi.service.ClientFamilyService;
 import nl.inholland.projectapi.service.ClientService;
 

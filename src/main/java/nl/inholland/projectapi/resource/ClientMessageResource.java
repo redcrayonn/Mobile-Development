@@ -28,6 +28,7 @@ import nl.inholland.projectapi.service.ClientService;
 
 @Api("Client's messages")
 @Path("/api/v1/clients/{clientId}/messages")
+@Secured({Role.admin, Role.client})
 public class ClientMessageResource extends BaseResource {
 
     private final ClientService clientService;
@@ -47,7 +48,6 @@ public class ClientMessageResource extends BaseResource {
 
     @GET
     @Produces("application/json")
-    @Secured({Role.admin, Role.client})
     public List<MessageView> getAll(
             @QueryParam("count") int count,
             @PathParam("clientId") String clientId,
@@ -59,7 +59,6 @@ public class ClientMessageResource extends BaseResource {
 
     @POST
     @Consumes("application/json")
-    @Secured({Role.admin, Role.client})
     public Response create(
             @PathParam("clientId") String clientId,
             InputMessage input,
@@ -74,7 +73,6 @@ public class ClientMessageResource extends BaseResource {
     @GET
     @Path("/{messageId}")
     @Produces("application/json")
-    @Secured({Role.admin, Role.client})
     public MessageView getById(
             @PathParam("clientId") String clientId,
             @PathParam("messageId") String messageId,
@@ -86,7 +84,6 @@ public class ClientMessageResource extends BaseResource {
 
     @DELETE
     @Path("/{messageId}")
-    @Secured({Role.admin, Role.client})
     public void delete(
             @PathParam("clientId") String clientId,
             @PathParam("messageId") String messageId,

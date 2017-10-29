@@ -7,6 +7,7 @@ import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.presentation.model.PersonalBlockView;
 
 public class PersonalBlockPresenter extends BasePresenter {
+
     private final PersonalActivityPresenter activityPresenter;
 
     @Inject
@@ -32,5 +33,5 @@ public class PersonalBlockPresenter extends BasePresenter {
         }
 
         return views;
-    }    
+    }
 }

@@ -26,7 +26,7 @@ public class Message extends EntityModel {
 
     public Message() {
     }
-    
+
     public String getSenderId() {
         return senderId.toString();
     }

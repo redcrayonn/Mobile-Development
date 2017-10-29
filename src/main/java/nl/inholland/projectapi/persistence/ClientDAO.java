@@ -30,13 +30,14 @@ public class ClientDAO extends BaseDAO<Client> {
         }
         return findOne(query);
     }
-    
+
     public List<Client> getByCaregiverId(String id) {
         Query<Client> query = createQuery().field("caregivers").hasThisOne(new ObjectId(id));
         return query.asList();
     }
+
     public List<Client> getByFamilyId(String id) {
         Query<Client> query = createQuery().field("family").hasThisOne(new ObjectId(id));
         return query.asList();
-    }    
+    }
 }

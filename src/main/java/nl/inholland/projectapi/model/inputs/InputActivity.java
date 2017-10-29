@@ -1,6 +1,7 @@
 package nl.inholland.projectapi.model.inputs;
 
 public class InputActivity {
+
     private String name;
     private String description;
 
@@ -22,5 +23,5 @@ public class InputActivity {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
 }

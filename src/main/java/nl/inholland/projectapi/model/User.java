@@ -25,7 +25,7 @@ public abstract class User extends EntityModel implements Principal {
     private List<Message> messages;
     @Transient
     private final int SALT_ROUNDS = 12;
-    
+
     public User(Credentials credentials, Role role) {
         this.name = credentials.getUsername();
         this.password = BCrypt.hashpw(credentials.getPassword(), BCrypt.gensalt(SALT_ROUNDS));

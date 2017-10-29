@@ -4,13 +4,14 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 import javax.inject.Inject;
-import javax.ws.rs.BadRequestException;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Like;
+import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
@@ -59,8 +60,13 @@ public class ClientBlockActivityLikeService extends BaseService {
         throw new NotFoundException("Like not found");
     }
 
-    public void delete(Client client, String blockId, String activityId, String likeId) {
-        getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
-        clientDAO.update(client);
+    public void delete(Client client, String blockId, String activityId, String likeId, Principal principal) {
+        User deleter = userDAO.getByUsername(principal.getName());
+        Like like = get(client, blockId, activityId, likeId);
+        if(like.getSenderId().equals(deleter.getId()) || deleter.getRole().equals(Role.admin)) {
+            getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
+            clientDAO.update(client);       
+        }
+        throw new ForbiddenException("You can only delete your own likes");
     }
 }

@@ -3,8 +3,8 @@ info:
   version: '2.0'
   title: "API Project I'm Ready"
   description: "API Project I'm Ready"
-# basePath: "/"
-# host: "imready.ml"
+basePath: "/api/v1/"
+host: "www.imready.ml"
 
 tags:
 - name: "general"
@@ -229,6 +229,9 @@ definitions:
         type: "string"
       description:
         description: "Description of the activity"
+        type: "string"
+      conent:
+        description: "Content of the activity"
         type: "string"
       status:
         description: "Status of the activity"
@@ -609,7 +612,7 @@ paths:
       security:
       - api_key: []
 
-  /family:
+  /families:
     get:
       summary: "Get family members"
       description: "Returns a list of family members, starting with the newest family in the database that fits the specified arguments."
@@ -672,7 +675,7 @@ paths:
       security:
       - api_key: []
 
-  /family/{id}:
+  /families/{id}:
     get:
       summary: "Get a single family member"
       description: "Returns a single family member"
@@ -770,7 +773,7 @@ paths:
       security:
       - api_key: []
 
-  /family/{id}/clients:
+  /families/{id}/clients:
     get:
       summary: "Get all client's of family member"
       description: "Returns a list of all family member's clients"
@@ -1182,7 +1185,7 @@ paths:
       security:
       - api_key: []
 
-  /clients/{id}/family:
+  /clients/{id}/families:
     get:
       summary: "Get family members of a single client"
       description: "Returns a list of family members from the database that fits the specified client ID."
@@ -1251,7 +1254,7 @@ paths:
       security:
       - api_key: []
 
-  /clients/{clientId}/family/{familyId}:
+  /clients/{clientId}/families/{familyId}:
     get:
       summary: "Get a single client's family member with ID"
       description: "Returns a single family member with specified userID and familyID"
@@ -2267,6 +2270,58 @@ paths:
       security:
       - api_key: []
 
+    put:
+      summary: "Update comment on a personal activity in a building block"
+      description: "Update comment on a personal activity in a client's building block"
+      tags:
+        - "pblocks"
+      consumes:
+        - "application/json"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        required: true
+        description: "Id of the client"
+        type: "string"
+      - name: "blockId"
+        in: "path"
+        required: true
+        description: "Id of the building block"
+        type: "string"
+      - name: "activityId"
+        in: "path"
+        description: "Id of the activity to be commented on"
+        required: true
+        type: "string"
+      - name: "commentId"
+        in: "path"
+        description: "Id of the comment to be updated"
+        required: true
+        type: "string"
+      - name: "comment"
+        in: "body"
+        description: "Comment object"
+        required: true
+        schema:
+          $ref: "#/definitions/InputComments"
+      responses:
+        200:
+          description: "Successfully updated comment"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        401:
+          description: "User not authorized"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+        404:
+          description: "Client, building block or activity not found"
+          schema:
+            $ref: "#/definitions/ErrorResponses"
+      security:
+      - api_key: []
+      
     delete:
       summary: "Deletes a comment on a personal activity in a building block"
       description: "Gets a comment on a personal activity in a client's building block"
@@ -2650,7 +2705,7 @@ paths:
       security:
       - api_key: []
 
-  /family/{familyId}/messages/:
+  /families/{familyId}/messages/:
     get:
       summary: "Get all family messages"
       description: "Get all family messages"
@@ -2719,7 +2774,7 @@ paths:
       security:
       - api_key: []
 
-  /family/{familyId}/messages/{messageId}:
+  /families/{familyId}/messages/{messageId}:
     get:
       summary: "Get specific family message"
       description: "Get family message"
@@ -3044,6 +3099,3 @@ paths:
             $ref: "#/definitions/ErrorResponses"
       security:
       - api_key: []
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /InhollandCloudAPI/ProjectAPI/2.0

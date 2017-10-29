@@ -35,7 +35,7 @@ public class FamilyResource extends BaseResource {
 
     @Inject
     public FamilyResource(
-            FamilyService familyService, 
+            FamilyService familyService,
             FamilyPresenter familyPresenter) {
         this.familyService = familyService;
         this.familyPresenter = familyPresenter;
@@ -54,7 +54,7 @@ public class FamilyResource extends BaseResource {
     @Consumes("application/json")
     @Secured({Role.admin})
     public Response create(
-            Credentials credentials, 
+            Credentials credentials,
             @Context UriInfo uriInfo) {
         familyService.requireResult(credentials, "Json object in body required");
         URI uri = familyService.create(credentials, uriInfo);
@@ -66,7 +66,7 @@ public class FamilyResource extends BaseResource {
     @Produces("application/json")
     @Secured({Role.admin, Role.family})
     public FamilyView getById(
-            @PathParam("familyId") String familyId, 
+            @PathParam("familyId") String familyId,
             @Context SecurityContext context) {
         Family family = familyService.getById(familyId, context.getUserPrincipal());
         return familyPresenter.present(family);
@@ -77,8 +77,8 @@ public class FamilyResource extends BaseResource {
     @Consumes("application/json")
     @Secured({Role.admin, Role.family})
     public Response update(
-            @PathParam("familyId") String familyId, 
-            Credentials credentials, 
+            @PathParam("familyId") String familyId,
+            Credentials credentials,
             @Context SecurityContext context) {
         familyService.requireResult(credentials, "Json object in body required");
         familyService.update(familyId, credentials, context.getUserPrincipal());

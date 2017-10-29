@@ -21,7 +21,7 @@ public class Comment extends EntityModel {
 
     public Comment() {
     }
-  
+
     public String getSenderId() {
         return senderId.toString();
     }

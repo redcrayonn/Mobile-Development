@@ -32,16 +32,16 @@ public class ProjectAPIApplication extends Application<ProjectAPIConfiguration> 
                 .setConfigClass(ProjectAPIConfiguration.class)
                 .build();
     }
-    
+
     private void configureSwagger() {
         swaggerBundle = new SwaggerBundle<ProjectAPIConfiguration>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ProjectAPIConfiguration configuration) {
                 return configuration.swagger;
-            }      
+            }
         };
     }
-    
+
     @Override
     public void run(final ProjectAPIConfiguration configuration,
             final Environment environment) throws Exception {

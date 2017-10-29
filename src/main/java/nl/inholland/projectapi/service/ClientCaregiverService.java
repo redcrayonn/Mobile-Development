@@ -50,7 +50,7 @@ public class ClientCaregiverService extends BaseService {
         Caregiver newCaregiver = caregiverDAO.getById(input.getId());
         requireResult(newCaregiver, "Caregiver not found");
         for (Caregiver c : client.getCaregivers()) {
-            if (c.getId().equals(caregiverId)) {  
+            if (c.getId().equals(caregiverId)) {
                 client.getCaregivers().remove(c);
                 client.getCaregivers().add(newCaregiver);
                 clientDAO.update(client);

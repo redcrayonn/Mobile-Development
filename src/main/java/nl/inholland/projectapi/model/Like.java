@@ -15,7 +15,7 @@ public class Like extends EntityModel {
     public Like() {
         this.datetime = new Date();
     }
-    
+
     public String getSenderId() {
         return senderId.toString();
     }

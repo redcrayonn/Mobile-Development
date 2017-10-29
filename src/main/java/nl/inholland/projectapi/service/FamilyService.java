@@ -62,11 +62,11 @@ public class FamilyService extends BaseService {
     public void deleteById(ObjectId id) {
         Family family = dao.getById(id.toString());
         requireResult(family, "Family not found");
-        
+
         for (Client client : clientDAO.getAllClients()) {
-            if(client.getFamily().removeIf(c -> c.getId().equals(family.getId())));
-                clientDAO.update(client);
-        }  
+            if (client.getFamily().removeIf(c -> c.getId().equals(family.getId())));
+            clientDAO.update(client);
+        }
         dao.delete(family);
     }
 }
