@@ -84,6 +84,7 @@ public class ClientBlockActivityCommentService extends BaseService {
         if(checkRoles(deleter, comment)) {
             getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
             clientDAO.update(client);
+            return;
         }
         throw new ForbiddenException("You can only delete your own comments");
     }

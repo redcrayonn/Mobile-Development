@@ -65,7 +65,8 @@ public class ClientBlockActivityLikeService extends BaseService {
         Like like = get(client, blockId, activityId, likeId);
         if(like.getSenderId().equals(deleter.getId()) || deleter.getRole().equals(Role.admin)) {
             getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
-            clientDAO.update(client);       
+            clientDAO.update(client); 
+            return;
         }
         throw new ForbiddenException("You can only delete your own likes");
     }
