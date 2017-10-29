@@ -22,7 +22,7 @@ public class UserService extends BaseService {
         this.dao = dao;
     }
 
-    public APIKey login(Credentials credentials) {
+    public User login(Credentials credentials) {
         User user = getByUsername(credentials.getUsername());
         if (user == null) {
             throw new NotAuthorizedException("Wrong username or password");
@@ -39,13 +39,13 @@ public class UserService extends BaseService {
         dao.update(user);
     }
 
-    private APIKey assignKey(User user) {
+    private User assignKey(User user) {
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
         APIKey key = new APIKey(token, DateUtils.addHours(new Date(), 168));
         user.setApiKey(key);
         dao.update(user);
-        return user.getApiKey();
+        return user;
     }
 
     private User getByUsername(String username) {

@@ -8,12 +8,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import nl.inholland.projectapi.model.inputs.Credentials;
 import nl.inholland.projectapi.service.UserService;
-import nl.inholland.projectapi.model.APIKey;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
+import nl.inholland.projectapi.model.User;
 
 @Api("General user operations")
 @Path("/api/v1/")
@@ -30,9 +31,10 @@ public class UserResource extends BaseResource {
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public APIKey login(Credentials credentials) {
+    public Response login(Credentials credentials) {
         userService.requireResult(credentials, "Json object in body required");
-        return userService.login(credentials);
+        User user = userService.login(credentials);
+        return Response.ok().entity(user.getApiKey()).header("userId", user.getId()).build();
     }
 
     @POST
