@@ -25,6 +25,7 @@
     - extract_binds:
         - "authtoken": {"jsonpath_mini": "authtoken"}
 
+
   # BLOCK TESTEN
 - test:
     - group: "Blocks"
@@ -425,6 +426,82 @@
     - expected_status: [404]
 
 
+# test created family, caregiver and client
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return created test client"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/"}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/caregivers/$caregiverId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId': {header: 'Id'}
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return all appointment for client"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/appointments/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {raw_body: "", comparator: "regex", expected: '.*'}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return 200 for fetching an appointment"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - assertTrue: {raw_body: content-type, test: exists}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return 200 succes after updating an appointment"
+    - method: "PUT"
+    - url: {template: "/api/v1/caregivers/$caregiverId/appointments/$newAppointmentId"}
+    - body: {template: '{"description": "appointment 55 is called: Why You are an amazing Bastard" , "datetime": "20170202"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Updated appointment should match provided values"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {jsonpath_mini: "description", comparator: "str_eq", expected: "appointment 55 is called: Why You are an amazing Bastard"}
+        - compare: {jsonpath_mini: "datetime", comparator: "str_eq", expected: "20170202"}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return 204 succes after deleting an appointment"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "Caregiver > appointment"
+    - name: "Should return 404 not found for requesting deleted appointment"
+    - url: {"template":"/api/v1/caregivers/$caregiverId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
 - test:
     - group: "Clients > caregiver"
     - name: "Post client caregiver"
@@ -464,6 +541,73 @@
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$clientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId': {header: 'Id'}
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return all appointment for client"
+    - url: {"template":"/api/v1/clients/$clientId/appointments/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {raw_body: "", comparator: "regex", expected: '.*'}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return 200 for fetching an appointment"
+    - url: {"template":"/api/v1/clients/$clientId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - assertTrue: {raw_body: content-type, test: exists}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return 200 succes after updating an appointment"
+    - method: "PUT"
+    - url: {template: "/api/v1/clients/$clientId/appointments/$newAppointmentId"}
+    - body: {template: '{"description": "appointment 55 is called: Why You are an amazing Bastard" , "datetime": "20170202"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Updated appointment should match provided values"
+    - url: {"template":"/api/v1/clients/$clientId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - validators:
+        - assertTrue: {header: content-type, test: exists}
+        - compare: {header: "content-type", comparator: contains, expected: 'application/json'}
+        - compare: {jsonpath_mini: "description", comparator: "str_eq", expected: "appointment 55 is called: Why You are an amazing Bastard"}
+        - compare: {jsonpath_mini: "datetime", comparator: "str_eq", expected: "20170202"}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return 204 succes after deleting an appointment"
+    - method: "DELETE"
+    - url: {"template":"/api/v1/clients/$clientId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200, 204]
+
+- test:
+    - group: "Clients > appointment"
+    - name: "Should return 404 not found for requesting deleted appointment"
+    - url: {"template":"/api/v1/clients/$clientId/appointments/$newAppointmentId"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
 
 - test:
     - group: "Clients > messages"
