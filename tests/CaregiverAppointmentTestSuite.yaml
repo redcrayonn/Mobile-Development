@@ -2,7 +2,7 @@
 # RUN : python resttest.py http://www.imready.ml CaregiverAppointmentTestSuite.yaml
 
 - config:
-    - testset: "ClientAppointmentTestSuite"
+    - testset: "CaregiverAppointmentTestSuite"
     - variable_binds: {'headername': 'Content-Type', 'headervalue': 'application/json'}
 
 # ________________Prerequistion // Begin____________
@@ -186,7 +186,7 @@
     - expected_status: [200, 204]
 
 - test:
-    - group: "DELETE_Caregiver_Appointment"
+    - group: "Check_DELETED_Caregiver_Appointment"
     - name: "Should return 404 not found for requesting deleted appointment"
     - url: {"template":"/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
@@ -195,8 +195,19 @@
 #____PERMISSION_CHECK___With_NO_RELATIONSHIP_BETWEEN_CLIENT/CAREGIVER/FAMILY___HTTP_POST/GET/DELETE_______
 
 - test:
+    - group: "POST_Caregiver_Appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/caregivers/$testCaregiverId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId': {header: 'Id'}
+
+- test:
     - group: "GET_Caregiver_Appointment_Permission_With_ClientToken"
-    - name: "Should return 401 or 403 Unotherized for fetching caregiver appointment with client token"
+    - name: "Should return 401 or 403 Unauthorized for fetching caregiver appointment with client token"
     - url: {"template":"/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
     - validators:
@@ -205,7 +216,7 @@
 
 - test:
     - group: "GET_Caregiver_Appointment_Permission_With_FamilyToken"
-    - name: "Should return 401 or 403 Unotherized for fetching Caregiver appointment with Family token"
+    - name: "Should return 401 or 403 Unauthorized for fetching Caregiver appointment with Family token"
     - url: {"template":"/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
     - validators:
@@ -251,7 +262,7 @@
 
 - test:
     - group: "DELETE_Caregiver_Appointment_Permission_With_ClientToken"
-    - name: "Should return 401 or 403 Unotherized for deleting caregiver appointment with Caregiver token"
+    - name: "Should return 401 or 403 Unauthorized for deleting caregiver appointment with Caregiver token"
     - method: "DELETE"
     - url: {template: "/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId/"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
@@ -259,7 +270,7 @@
 
 - test:
     - group: "DELETE_Caregiver_Appointment_Permission_With_FamilyToken"
-    - name: "Should return 401 or 403 Unotherized for deleting caregiver appointment with Family token"
+    - name: "Should return 401 or 403 Unauthorized for deleting caregiver appointment with Family token"
     - method: "DELETE"
     - url: {template: "/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}
@@ -269,7 +280,7 @@
     - group: "DELETE_Caregiver_Appointment_Permission_With_AdminToken"
     - name: "Should return success for deleting caregiver appointment with Admin token"
     - method: "DELETE"
-    - url: {template: "/api/v1/caregivers/$testCaregiverId/appointments/"}
+    - url: {template: "/api/v1/caregivers/$testCaregiverId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
     - expected_status: [200]
 
@@ -283,7 +294,7 @@
     - method: "POST"
     - url: {template: "/api/v1/clients/$testClientId/caregivers/"}
     - body: {template: '{"id": "$testCaregiverId"}'}
-    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
     - expected_status: [201]
 
 - test:
@@ -292,7 +303,7 @@
     - method: "POST"
     - url: {template: "/api/v1/caregivers/$testCaregiverId/families/"}
     - body: {template: '{"id": "$testFamilyId"}'}
-    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
     - expected_status: [201]
 
 - test:

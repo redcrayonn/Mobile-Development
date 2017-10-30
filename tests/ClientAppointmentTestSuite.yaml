@@ -195,8 +195,18 @@
 #____PERMISSION_CHECK___With_NO_RELATIONSHIP_BETWEEN_CLIENT/CAREGIVER/FAMILY___HTTP_POST/GET/DELETE_______
 
 - test:
+    - group: "POST_Client_Appointment"
+    - name: "Should return 201 succes after posting an appointment"
+    - method: "POST"
+    - url: {template: "/api/v1/clients/$testClientId/appointments/"}
+    - body: '{"description": "This appointment comes from pyrestTest", "datetime": "20170101"}'
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}}
+    - expected_status: [201]
+    - extract_binds:
+        - 'newAppointmentId': {header: 'Id'}
+- test:
     - group: "GET_Client_Appointment_Permission_With_CaregiverToken"
-    - name: "Should return 401 or 403 Unotherized for fetching client appointment with caregiver token"
+    - name: "Should return 401 or 403 Unauthorized for fetching client appointment with caregiver token"
     - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenCaregiver"}}
     - validators:
@@ -205,9 +215,9 @@
 
 - test:
     - group: "GET_Client_Appointment_Permission_With_FamilyToken"
-    - name: "Should return 401 or 403 Unotherized for fetching client appointment with Family token"
+    - name: "Should return 401 or 403 Unauthorized for fetching client appointment with Family token"
     - url: {"template":"/api/v1/clients/$testClientId/appointments/$newAppointmentId"}
-    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}     #$newAppointmentId is verwijdert in test van regel 180, je krijgt dus 404 terug
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenFamily"}}    
     - validators:
         - compare: {header: "content-type", comparator: contains, expected: 'application/json'}    
     - expected_status: [401, 403]
@@ -269,7 +279,7 @@
     - group: "DELETE_Client_Appointment_Permission_With_AdminToken"
     - name: "Should return success for deleting client appointment with Admin token"
     - method: "DELETE"
-    - url: {template: "/api/v1/clients/$testClientId/appointments/"}                            #Je mag geen delete doen op een volledige collection appointments, zie swagger. Je krijgt dus 405 terug
+    - url: {template: "/api/v1/clients/$testClientId/appointments/newAppointmentId"}                          
     - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
     - expected_status: [200]
 
@@ -283,7 +293,7 @@
     - method: "POST"
     - url: {template: "/api/v1/clients/$testClientId/caregivers/"}
     - body: {template: '{"id": "$testCaregiverId"}'}
-    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}} #Client heeft geen permissie om client/caregiver connectie te maken - alleen admin, zie deployment guide bijlage 2
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}}
     - expected_status: [201]
 
 - test:
@@ -292,7 +302,7 @@
     - method: "POST"
     - url: {template: "/api/v1/clients/$testClientId/families/"}
     - body: {template: '{"id": "$testFamilyId"}'}
-    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenClient"}} #Zelfde verhaal hier als regel 285
+    - headers: {template: {"$headername": "$headervalue", "Authorization": "$authtokenAdmin"}} 
     - expected_status: [201]
 
 - test:
