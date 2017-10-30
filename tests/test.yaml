@@ -1,6 +1,6 @@
 # First install: "git clone https://github.com/svanoort/pyresttest.git" &
 # >> "sudo python setup.py install"
-# >> "sudo pip install jmespath" 
+# >> "sudo pip install jmespath"
 # Quickstart guide: "https://github.com/svanoort/pyresttest/blob/master/quickstart.md"
 # Run script: "resttest.py https://www.imready.ml test.yaml"
 
@@ -236,7 +236,47 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
+- test:
+    - group: "Family > messages"
+    - name: "Make sure family messages are there"
+    - url: {'template': "/api/v1/families/$familyId/messages"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
 
+- test:
+    - group: "Family > messages"
+    - name: "Post family messages"
+    - url: {'template': "/api/v1/families/$familyId/messages/"}
+    - method: "POST"
+    - body: {template: '{"receiverId":"$familyId2", "message":"dit is een test message"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'messageId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Family > messages"
+    - name: "Make sure specific family message is there"
+    - url: {'template': "/api/v1/families/$familyId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Family > messages"
+    - name: "Delete the family message"
+    - url: {'template': "/api/v1/families/$familyId/messages/$messageId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Family > messages"
+    - name: "Make specific family message is deleted"
+    - url: {'template': "/api/v1/families/$familyId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+#Clients > family
 - test:
     - group: "Clients > family"
     - name: "Post client family"
@@ -343,6 +383,48 @@
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
 
+
+- test:
+    - group: "Caregiver > messages"
+    - name: "Make sure caregiver messages are there"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/messages"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver > messages"
+    - name: "Post caregiver messages"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/messages/"}
+    - method: "POST"
+    - body: {template: '{"receiverId":"$familyId2", "message":"dit is een test message"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'messageId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Caregiver > messages"
+    - name: "Make sure specific caregiver message is there"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Caregiver > messages"
+    - name: "Delete the caregiver message"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/messages/$messageId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Caregiver > messages"
+    - name: "Make sure specific caregiver message is deleted"
+    - url: {'template': "/api/v1/caregivers/$caregiverId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
+
+
 - test:
     - group: "Clients > caregiver"
     - name: "Post client caregiver"
@@ -382,6 +464,46 @@
     - method: "DELETE"
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [204]
+
+- test:
+    - group: "Clients > messages"
+    - name: "Make sure client messages are there"
+    - url: {'template': "/api/v1/clients/$clientId/messages"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > messages"
+    - name: "Post client messages"
+    - url: {'template': "/api/v1/clients/$clientId/messages/"}
+    - method: "POST"
+    - body: {template: '{"receiverId":"$familyId2", "message":"dit is een test message"}'}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - extract_binds:
+        - 'messageId': {header: 'Id'}
+    - expected_status: [201]
+
+- test:
+    - group: "Clients > messages"
+    - name: "Make sure specific client message is there"
+    - url: {'template': "/api/v1/clients/$clientId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [200]
+
+- test:
+    - group: "Clients > messages"
+    - name: "Delete the client message"
+    - url: {'template': "/api/v1/clients/$clientId/messages/$messageId/"}
+    - method: "DELETE"
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [204]
+
+- test:
+    - group: "Clients > messages"
+    - name: "Make sure specific client message is deleted"
+    - url: {'template': "/api/v1/clients/$clientId/messages/$messageId/"}
+    - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
+    - expected_status: [404]
 
 - test:
     - group: "Clients > blocks"
@@ -432,6 +554,7 @@
     - body: '[{ "op": "replace", "path": "/status", "value": "ongoing" }]'
     - headers: {template: {"Content-Type": "application/json", "Authorization": "$authtoken"}}
     - expected_status: [200]
+
 
 #COMMENTS
 - test:
