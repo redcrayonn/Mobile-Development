@@ -12,11 +12,11 @@ public class Comment extends Social {
         super(senderId);
         this.message = comment.getMessage();
     }
-    
+
     public Comment() {
         super();
     }
-    
+
     public String getMessage() {
         return message;
     }
