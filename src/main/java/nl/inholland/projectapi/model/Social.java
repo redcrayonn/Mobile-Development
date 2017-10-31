@@ -17,6 +17,10 @@ public class Social extends EntityModel {
         this.senderId = new ObjectId(senderId);
         this.datetime = new Date();
     }
+    
+    public Social() {
+        
+    }
 
     public String getSenderId() {
         return senderId.toString();
