@@ -25,16 +25,15 @@ public class ClientBlockService extends BaseService {
 
     public List<BuildingBlock> getAll(Client client, int count) {
         List<BuildingBlock> blocks = client.getBuildingBlocks();
-        requireResult(blocks, "Not Found");
+        requireResult(blocks, "Building Blocks not found");
         return reduceList(blocks, count);
     }
 
     public URI create(Client client, EntityModel input, UriInfo uriInfo) {
-        requireResult(client, "Client not found");
         BuildingBlock block = blockDAO.get(input.getId());
-        requireResult(block, "Block not found");
+        requireResult(block, "Building Block not found");
         block.setId(new ObjectId());
-        block.getActivities().forEach(a -> a.setId(new ObjectId()));
+        block.getActivities().forEach(a -> a.createNewId());
         client.getBuildingBlocks().add(block);
         clientDAO.update(client);
         return buildUri(uriInfo, block.getId());
@@ -46,11 +45,14 @@ public class ClientBlockService extends BaseService {
                 return b;
             }
         }
-        throw new NotFoundException("Not found");
+        throw new NotFoundException("Building Block not found");
     }
 
     public void delete(Client client, String blockId) {
-        client.getBuildingBlocks().removeIf(m -> m.getId().equals(blockId));
-        clientDAO.update(client);
+        if(client.getBuildingBlocks().removeIf(m -> m.getId().equals(blockId))) {
+            clientDAO.update(client);
+            return;
+        }
+        throw new NotFoundException("Building Block not found");
     }
 }

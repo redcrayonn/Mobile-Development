@@ -41,9 +41,10 @@ public class ClientBlockActivityService extends BaseService {
         throw new NotFoundException("Activity not found");
     }
 
-    public void patch(Client client, String blockId, Activity activity, JsonNode patchRequest) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
+    public void patch(Client client, String blockId, String activityId, JsonNode patchRequest) {
+        ObjectMapper mapper = new ObjectMapper();
+        Activity activity = getActivity(client, blockId, activityId);
+        try {  
             JsonNode jsonActivity = mapper.valueToTree(activity);
             JsonPatch patch = JsonPatch.fromJson(patchRequest);
             JsonNode patched = patch.apply(jsonActivity);

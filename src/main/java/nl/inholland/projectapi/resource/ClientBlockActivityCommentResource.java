@@ -69,7 +69,7 @@ public class ClientBlockActivityCommentResource extends BaseResource {
             @Context SecurityContext context) {
         clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, new Comment(input), context.getUserPrincipal(), uriInfo);
+        URI uri = service.create(client, blockId, activityId, input, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).header("Id", getId(uri)).build();
     }
 

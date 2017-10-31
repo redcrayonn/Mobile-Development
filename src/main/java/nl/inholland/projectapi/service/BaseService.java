@@ -22,8 +22,8 @@ import org.bson.types.ObjectId;
 public abstract class BaseService {
 
     protected URI buildUri(UriInfo uriInfo, String id) {
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();//Get base path (/api/1.0/blocks/)
-        return builder.path(id).build();//Add new block ID to base path (/api/1.0/blocks/{id}) 
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+        return builder.path(id).build();
     }
 
     public void requireResult(Object o, String message) throws NotFoundException {

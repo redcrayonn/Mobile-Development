@@ -78,7 +78,7 @@ public class ClientBlockActivityResource extends BaseResource {
             @Context SecurityContext context) {
         clientService.requireResult(patchRequest, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.patch(client, blockId, service.getActivity(client, blockId, activityId), patchRequest);
+        service.patch(client, blockId, activityId, patchRequest);
         return Response.ok().build();
     }
 }

@@ -22,13 +22,18 @@ public class Client extends User {
     @Embedded
     private List<BuildingBlock> blocks;
 
-    public Client(Credentials credentials) {
+    public Client(Credentials credentials, List<BuildingBlock> blocks) {
         super(credentials, Role.client);
+        for (BuildingBlock b : blocks) {
+            b.createNewId();
+            b.getActivities().forEach(a -> a.createNewId());
+        }
+        this.blocks = blocks;
         this.points = 0;
-        this.family = new ArrayList<Family>();
-        this.caregivers = new ArrayList<Caregiver>();
-        this.appointments = new ArrayList<Appointment>();
-        this.blocks = new ArrayList<BuildingBlock>();
+        this.family = new ArrayList<>();
+        this.caregivers = new ArrayList<>();
+        this.appointments = new ArrayList<>();
+        this.blocks = new ArrayList<>();
     }
 
     public Client() {

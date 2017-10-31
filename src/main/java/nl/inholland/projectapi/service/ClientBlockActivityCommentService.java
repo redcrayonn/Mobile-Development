@@ -2,7 +2,6 @@ package nl.inholland.projectapi.service;
 
 import java.net.URI;
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
@@ -20,7 +19,7 @@ import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
 import org.bson.types.ObjectId;
 
-public class ClientBlockActivityCommentService extends BaseService {
+public class ClientBlockActivityCommentService extends ClientBlockActivitySocialService {
 
     private final ClientDAO clientDAO;
     private final UserDAO userDAO;
@@ -44,13 +43,11 @@ public class ClientBlockActivityCommentService extends BaseService {
         throw new NotFoundException("Comments not found");
     }
 
-    public URI create(Client client, String blockId, String activityId, Comment comment, Principal principal, UriInfo uriInfo) {
+    public URI create(Client client, String blockId, String activityId, InputComment input, Principal principal, UriInfo uriInfo) {
         User sender = userDAO.getByUsername(principal.getName());
+        Comment comment;
         try {
-            comment.setId(new ObjectId());
-            comment.setDateTime(new Date());
-            comment.setSenderId(new ObjectId(sender.getId()));
-            comment.getMessage();
+            comment = new Comment(input, sender.getId());
         } catch (Exception e) {
             throw new BadRequestException("Invalid Comment object");
         }
@@ -86,12 +83,5 @@ public class ClientBlockActivityCommentService extends BaseService {
         }
         getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
         clientDAO.update(client);        
-    }
-    
-    private boolean checkRoles(User user, Comment comment) {
-        if(comment.getSenderId().equals(user.getId()) || user.getRole().equals(Role.admin)) {
-            return true;
-        }
-        return false;
     }
 }

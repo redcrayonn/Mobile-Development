@@ -15,4 +15,8 @@ public class EntityModel {
     public void setId(ObjectId id) {
         this.id = id;
     }
+    
+    public void createNewId() {
+        this.id = new ObjectId();
+    }
 }

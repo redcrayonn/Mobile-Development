@@ -14,7 +14,6 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.APIKey;
-import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.inputs.Credentials;
@@ -37,30 +36,17 @@ public class ClientService extends BaseService {
     }
 
     public List<Client> getAll(int count) {
-
         List<Client> clients = dao.getAllClients();
-        requireResult(clients, "Not Found");
+        requireResult(clients, "Clients not found");
         return reduceList(clients, count);
     }
 
     public URI create(Credentials credentials, UriInfo uriInfo) {
         if (userDAO.getByUsername(credentials.getUsername()) != null) {
             throw new ClientErrorException(409);
-        }
-        Client client;
-        try {
-            client = new Client(credentials);
-            List<BuildingBlock> blocks = new ArrayList<BuildingBlock>(blockDAO.getAll());
-            for (BuildingBlock b : blocks) {
-                b.setId(new ObjectId());
-                for (Activity a : b.getActivities()) {
-                    a.setId(new ObjectId());
-                }
-            }
-            client.setBuildingBlocks(blocks);
-        } catch (Exception e) {
-            throw new BadRequestException();
-        }
+        }      
+        List<BuildingBlock> blocks = new ArrayList<>(blockDAO.getAll());
+        Client client = new Client(credentials, blocks);
         dao.create(client);
         return buildUri(uriInfo, client.getId());
     }

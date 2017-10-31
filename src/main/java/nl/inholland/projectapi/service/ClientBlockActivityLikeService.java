@@ -11,13 +11,11 @@ import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Like;
-import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
-import org.bson.types.ObjectId;
 
-public class ClientBlockActivityLikeService extends BaseService {
+public class ClientBlockActivityLikeService extends ClientBlockActivitySocialService {
 
     private final ClientDAO clientDAO;
     private final UserDAO userDAO;
@@ -43,9 +41,7 @@ public class ClientBlockActivityLikeService extends BaseService {
 
     public URI create(Client client, String blockId, String activityId, Principal principal, UriInfo uriInfo) {
         User sender = userDAO.getByUsername(principal.getName());
-        Like like = new Like();
-        like.setId(new ObjectId());
-        like.setSenderId(new ObjectId(sender.getId()));
+        Like like = new Like(sender.getId());
         getAll(client, blockId, activityId).add(like);
         clientDAO.update(client);
         return buildUri(uriInfo, like.getId());
@@ -68,11 +64,5 @@ public class ClientBlockActivityLikeService extends BaseService {
         }
         getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(likeId));
         clientDAO.update(client);        
-    }
-    private boolean checkRoles(User user, Like like) {
-        if(like.getSenderId().equals(user.getId()) || user.getRole().equals(Role.admin)) {
-            return true;
-        }
-        return false;
     }
 }
