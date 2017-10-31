@@ -37,5 +37,4 @@ public class Social extends EntityModel {
     public void setDateTime(Date dateTime) {
         this.datetime = dateTime;
     }
-
 }
