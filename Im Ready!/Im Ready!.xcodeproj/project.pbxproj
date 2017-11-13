@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
-		FAB235641FB990F60099B29D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235631FB990F60099B29D /* ViewController.swift */; };
+		FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235631FB990F60099B29D /* HomescreenViewController.swift */; };
 		FAB235671FB990F60099B29D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Main.storyboard */; };
 		FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB235681FB990F60099B29D /* Im_Ready_.xcdatamodeld */; };
 		FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB2356B1FB990F60099B29D /* Assets.xcassets */; };
@@ -17,6 +17,10 @@
 		FAB235851FB990F60099B29D /* Im_Ready_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235841FB990F60099B29D /* Im_Ready_UITests.swift */; };
 		FAB235941FB994380099B29D /* Roboto in Resources */ = {isa = PBXBuildFile; fileRef = FAB235931FB994380099B29D /* Roboto */; };
 		FAB235961FB9960E0099B29D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAB235701FB990F60099B29D /* Info.plist */; };
+		FAB2359C1FB99A970099B29D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359B1FB99A970099B29D /* Client.swift */; };
+		FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359D1FB99AA70099B29D /* Caregiver.swift */; };
+		FAB235A01FB99ABC0099B29D /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359F1FB99ABC0099B29D /* Family.swift */; };
+		FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235A11FB99B720099B29D /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +43,7 @@
 /* Begin PBXFileReference section */
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAB235631FB990F60099B29D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAB235631FB990F60099B29D /* HomescreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenViewController.swift; sourceTree = "<group>"; };
 		FAB235661FB990F60099B29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAB235691FB990F60099B29D /* Im_Ready_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Im_Ready_.xcdatamodel; sourceTree = "<group>"; };
 		FAB2356B1FB990F60099B29D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,6 +56,10 @@
 		FAB235841FB990F60099B29D /* Im_Ready_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Im_Ready_UITests.swift; sourceTree = "<group>"; };
 		FAB235861FB990F60099B29D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB235931FB994380099B29D /* Roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Roboto; sourceTree = "<group>"; };
+		FAB2359B1FB99A970099B29D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		FAB2359D1FB99AA70099B29D /* Caregiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caregiver.swift; sourceTree = "<group>"; };
+		FAB2359F1FB99ABC0099B29D /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
+		FAB235A11FB99B720099B29D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +110,12 @@
 		FAB235601FB990F60099B29D /* Im Ready! */ = {
 			isa = PBXGroup;
 			children = (
+				FAB2359A1FB99A210099B29D /* Models */,
+				FAB235991FB99A190099B29D /* ViewControllers */,
+				FAB235981FB999F40099B29D /* Views */,
+				FAB235971FB999E90099B29D /* Controllers */,
 				FAB235921FB993BC0099B29D /* Fonts */,
 				FAB235611FB990F60099B29D /* AppDelegate.swift */,
-				FAB235631FB990F60099B29D /* ViewController.swift */,
-				FAB235651FB990F60099B29D /* Main.storyboard */,
 				FAB2356B1FB990F60099B29D /* Assets.xcassets */,
 				FAB2356D1FB990F60099B29D /* LaunchScreen.storyboard */,
 				FAB235701FB990F60099B29D /* Info.plist */,
@@ -138,6 +148,40 @@
 				FAB235931FB994380099B29D /* Roboto */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FAB235971FB999E90099B29D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FAB235981FB999F40099B29D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FAB235651FB990F60099B29D /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FAB235991FB99A190099B29D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAB235631FB990F60099B29D /* HomescreenViewController.swift */,
+				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FAB2359A1FB99A210099B29D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAB2359B1FB99A970099B29D /* Client.swift */,
+				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
+				FAB2359F1FB99ABC0099B29D /* Family.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,9 +320,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB235641FB990F60099B29D /* ViewController.swift in Sources */,
+				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
+				FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */,
+				FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
+				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
+				FAB235A01FB99ABC0099B29D /* Family.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
