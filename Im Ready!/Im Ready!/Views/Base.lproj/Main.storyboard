@@ -89,56 +89,107 @@
             </objects>
             <point key="canvasLocation" x="-834" y="-566"/>
         </scene>
-        <!--Bouwstenen-->
-        <scene sceneID="Ph0-8M-D4O">
+        <!--View Controller-->
+        <scene sceneID="2O3-0i-pIW">
             <objects>
-                <viewController id="PHs-0M-hWt" customClass="HomescreenViewController" customModule="Im_Ready_" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u1v-rl-1cr">
+                <viewController id="VUj-Hi-DPo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HfE-8D-e5d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEc-gQ-JSb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-Mi-wPP">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Berichten" id="qPX-pK-9bs"/>
+                                    <navigationItem title="Title" id="U8l-Qk-KUT"/>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="EnI-jJ-Z2j"/>
+                        <viewLayoutGuide key="safeArea" id="3IZ-nN-WW8"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Berichten" id="bFO-Hk-Ekm"/>
-                    <navigationItem key="navigationItem" title="Bouwstenen" id="6hJ-6p-SNn"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYz-xb-kF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BwU-Ug-Cjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="-229"/>
+            <point key="canvasLocation" x="1668" y="-230"/>
+        </scene>
+        <!--Berichten-->
+        <scene sceneID="oHB-bb-9Lu">
+            <objects>
+                <tableViewController id="Shl-4L-v0B" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3WP-SP-3ir">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="MkY-Kx-2z9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textAttributes key="titleTextAttributes">
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                            </textAttributes>
+                            <items>
+                                <navigationItem title="Berichten" id="xoA-bx-gn3"/>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="QjD-UK-uCo">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QjD-UK-uCo" id="hgN-iS-u3T">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Shl-4L-v0B" id="L5Q-Ds-XYK"/>
+                            <outlet property="delegate" destination="Shl-4L-v0B" id="Hk2-8K-zNz"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Berichten" id="cYO-dY-GdF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WgN-eC-njB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="-231"/>
         </scene>
         <!--Meer-->
-        <scene sceneID="Qs8-Mx-lbN">
+        <scene sceneID="WCf-aK-cxH">
             <objects>
-                <viewController id="hmj-27-v4e" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="66M-EL-xHy">
+                <tableViewController id="3jN-7M-wue" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ulJ-nO-P4l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AW2-RD-sqO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Meer" id="Prx-fv-Gaj"/>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="4F9-Og-hVq"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Meer" id="9bb-Si-08m"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2sT-aV-adP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="tfe-by-5Cf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textAttributes key="titleTextAttributes">
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                            </textAttributes>
+                            <items>
+                                <navigationItem title="Meer" id="QAN-5P-aHd"/>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BoY-Xm-gZa">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BoY-Xm-gZa" id="Ymq-YS-7Gc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3jN-7M-wue" id="B4b-JW-vTQ"/>
+                            <outlet property="delegate" destination="3jN-7M-wue" id="LhL-lT-P50"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Meer" id="FPP-cN-Pxa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I2T-Dx-ug0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="455"/>
+            <point key="canvasLocation" x="902" y="468"/>
         </scene>
         <!--Kalender-->
         <scene sceneID="aVh-eS-9NJ">
@@ -149,8 +200,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akh-OF-l4Y">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Kalender" id="kGI-Ik-22q"/>
                                 </items>
@@ -168,14 +222,20 @@
         <!--Overzicht-->
         <scene sceneID="xHY-OO-wzA">
             <objects>
-                <viewController id="5bS-ik-Ui9" sceneMemberID="viewController">
+                <viewController id="5bS-ik-Ui9" customClass="HomescreenViewController" customModule="Im_Ready_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YQD-aW-agO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xS8-DF-FpP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                                </textAttributes>
+                                <textAttributes key="largeTitleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Bouwstenen" id="nJP-No-akI"/>
                                 </items>
@@ -190,6 +250,30 @@
             </objects>
             <point key="canvasLocation" x="902" y="-1587"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ayV-qN-JjP">
+            <objects>
+                <viewController id="DTV-7k-RmD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UDt-GP-N7t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Cz-8a-NZK">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="zMT-xY-yN8"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9mD-kO-eCp"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0T1-qD-aDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="-1587"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W0b-Xv-rv4">
             <objects>
@@ -202,9 +286,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="5bS-ik-Ui9" kind="relationship" relationship="viewControllers" id="NGV-H4-hrE"/>
+                        <segue destination="Shl-4L-v0B" kind="relationship" relationship="viewControllers" id="4YZ-zv-O72"/>
                         <segue destination="Q5u-E8-Zqj" kind="relationship" relationship="viewControllers" id="mLc-aV-eeG"/>
-                        <segue destination="PHs-0M-hWt" kind="relationship" relationship="viewControllers" id="Ymg-aK-L14"/>
-                        <segue destination="hmj-27-v4e" kind="relationship" relationship="viewControllers" id="5lT-b4-pOK"/>
+                        <segue destination="3jN-7M-wue" kind="relationship" relationship="viewControllers" id="9FD-gp-mFb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh0-Jy-Hpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
