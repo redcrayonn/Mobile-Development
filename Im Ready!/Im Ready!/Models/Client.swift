@@ -8,6 +8,11 @@
 
 import Foundation
 
-class Client {
+class Client : Person {
+    let clientId: Int
     
+    init(id: Int, firstName: String, lastName: String, birthDate: NSDate, email: String, phoneNumber: Int, clientId: Int) {
+        self.clientId = clientId
+        super.init(id: id, firstName: firstName, lastName: lastName, birthDate: birthDate, email: email, phoneNumber: phoneNumber)
+    }
 }

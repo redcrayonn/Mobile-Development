@@ -12,7 +12,12 @@ class HomescreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let date = NSDate()
+        print(date)
+//        var client: Client = Client(id: 1, firstName: "Wouter", lastName: "Vermeij", birthDate: , email: "woutervermeij@gmail.com", phoneNumber: 0612695505, clientId: 1)
+        
+//        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {

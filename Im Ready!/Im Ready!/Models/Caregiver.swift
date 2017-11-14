@@ -8,6 +8,11 @@
 
 import Foundation
 
-class Caregiver {
+class Caregiver : Person {
+    let caregiverId: Int
     
+    init(id: Int, firstName: String, lastName: String, birthDate: NSDate, email: String, phoneNumber: Int, caregiverId: Int) {
+        self.caregiverId = caregiverId
+        super.init(id: id, firstName: firstName, lastName: lastName, birthDate: birthDate, email: email, phoneNumber: phoneNumber)
+    }
 }
