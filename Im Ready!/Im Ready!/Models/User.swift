@@ -10,7 +10,8 @@ import Foundation
 
 class User {
     var id: Int
-    
+    var username: String
+    var password: String
     var isLoggedIn: Bool
     
     init(id: Int, isLoggedIn: Bool) {

@@ -8,11 +8,11 @@
 
 import Foundation
 
-class Family : Person {
-    let familyMemberId: Int
+class Relative : Person {
+    let relativeId: Int
     
-    init(id: Int, firstName: String, lastName: String, birthDate: NSDate, email: String, phoneNumber: Int, familyMemberId: Int) {
-        self.familyMemberId = familyMemberId
+    init(id: Int, firstName: String, lastName: String, birthDate: NSDate, email: String, phoneNumber: Int, relativeId: Int) {
+        self.relativeId = relativeId
         super.init(id: id, firstName: firstName, lastName: lastName, birthDate: birthDate, email: email, phoneNumber: phoneNumber)
     }
     
