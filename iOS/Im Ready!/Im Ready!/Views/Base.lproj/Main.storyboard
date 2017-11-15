@@ -76,7 +76,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_visibility" translatesAutoresizingMaskIntoConstraints="NO" id="whU-fM-tA7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye" translatesAutoresizingMaskIntoConstraints="NO" id="whU-fM-tA7">
                                 <rect key="frame" x="287" y="518" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="bDu-OI-Bp3"/>
@@ -210,7 +210,7 @@
         <scene sceneID="zvs-bg-qbd">
             <objects>
                 <navigationController id="tR9-99-piW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Meer" image="ic_more_horiz_48pt" selectedImage="ic_more_horiz_48pt" id="LyO-Tc-Sj2"/>
+                    <tabBarItem key="tabBarItem" title="Meer" image="dots-horizontal" selectedImage="dots-horizontal" id="LyO-Tc-Sj2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="THa-eV-4Zk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -227,7 +227,7 @@
         <scene sceneID="aLT-6i-4rO">
             <objects>
                 <navigationController id="fkv-gp-6MJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Berichten" image="ic_message_36pt" selectedImage="ic_message_36pt" id="uDY-5h-QYG"/>
+                    <tabBarItem key="tabBarItem" title="Berichten" image="message-text" selectedImage="message-text" id="uDY-5h-QYG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pLe-CQ-SbN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -244,7 +244,7 @@
         <scene sceneID="UfL-2q-RMX">
             <objects>
                 <navigationController id="nzE-Xa-xXB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Overzicht" image="ic_home_36pt" selectedImage="ic_home_36pt" id="Dgv-LO-ffA"/>
+                    <tabBarItem key="tabBarItem" title="Overzicht" image="home" id="Dgv-LO-ffA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3V2-V9-euY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -305,7 +305,7 @@
         <scene sceneID="Hit-FH-oEL">
             <objects>
                 <navigationController id="M6E-VA-VgR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Kalender" image="ic_event_note_36pt" selectedImage="ic_event_note_36pt" id="MaQ-hF-ThI"/>
+                    <tabBarItem key="tabBarItem" title="Kalender" image="calendar-today" selectedImage="calendar-today" id="MaQ-hF-ThI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aFn-GK-SQE">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -389,11 +389,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_event_note_36pt" width="36" height="36"/>
-        <image name="ic_home_36pt" width="36" height="36"/>
-        <image name="ic_message_36pt" width="36" height="36"/>
-        <image name="ic_more_horiz_48pt" width="48" height="48"/>
-        <image name="ic_visibility" width="24" height="24"/>
+        <image name="calendar-today" width="20" height="20"/>
+        <image name="dots-horizontal" width="20" height="20"/>
+        <image name="eye" width="20" height="20"/>
+        <image name="home" width="20" height="20"/>
+        <image name="message-text" width="47" height="47"/>
         <image name="pexels-photo-cropped" width="2194" height="3900"/>
     </resources>
 </document>

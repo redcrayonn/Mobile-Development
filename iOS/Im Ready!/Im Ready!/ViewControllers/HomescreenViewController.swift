@@ -14,8 +14,7 @@ class HomescreenViewController: UIViewController {
         super.viewDidLoad()
         
         let date = NSDate()
-        print(date)
-        
+        print(date)        
         
 //        // Do any additional setup after loading the view, typically from a nib.
     }

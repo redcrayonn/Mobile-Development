@@ -9,8 +9,10 @@
 import Foundation
 
 class Relative : Person {
-    
+    var relativeRole: Roles
     override init(id: String, name: String, role: Roles) {
-        super.init(id: id, name: name, role: Roles.family)
+        self.relativeRole = Roles.family
+        
+        super.init(id: id, name: name, role: self.relativeRole)
     }    
 }

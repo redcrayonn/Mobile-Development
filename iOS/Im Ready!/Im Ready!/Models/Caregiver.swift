@@ -9,10 +9,12 @@
 import Foundation
 
 class Caregiver : Person {
+    var cargiverRole: Roles
     
     override init(id: String, name: String, role: Roles) {
-        role = Roles.caregiver
-        super.init(id: id, name: name, role: Roles.caregiver)
+        self.cargiverRole = Roles.caregiver
+        
+        super.init(id: id, name: name, role: self.cargiverRole)
     }
     
 }

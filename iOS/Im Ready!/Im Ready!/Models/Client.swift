@@ -10,11 +10,12 @@ import Foundation
 
 class Client : Person {
     var points: Int
+    var clientRole: Roles
     
     init(id: String, name: String, role: Roles, points: Int) {
         self.points = points
-//        role = Roles.client
+        self.clientRole = Roles.client
         
-        super.init(id: id, name: name, role: role)
+        super.init(id: id, name: name, role: self.clientRole)
     }
 }
