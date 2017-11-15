@@ -210,7 +210,7 @@
         <scene sceneID="zvs-bg-qbd">
             <objects>
                 <navigationController id="tR9-99-piW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Meer" image="dots-horizontal" selectedImage="dots-horizontal" id="LyO-Tc-Sj2"/>
+                    <tabBarItem key="tabBarItem" title="Meer" image="dots-horizontal" id="LyO-Tc-Sj2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="THa-eV-4Zk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -227,7 +227,7 @@
         <scene sceneID="aLT-6i-4rO">
             <objects>
                 <navigationController id="fkv-gp-6MJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Berichten" image="message-text" selectedImage="message-text" id="uDY-5h-QYG"/>
+                    <tabBarItem key="tabBarItem" title="Berichten" image="message-text" id="uDY-5h-QYG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pLe-CQ-SbN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -305,7 +305,7 @@
         <scene sceneID="Hit-FH-oEL">
             <objects>
                 <navigationController id="M6E-VA-VgR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Kalender" image="calendar-today" selectedImage="calendar-today" id="MaQ-hF-ThI"/>
+                    <tabBarItem key="tabBarItem" title="Kalender" image="calendar-today" id="MaQ-hF-ThI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aFn-GK-SQE">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -389,11 +389,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="calendar-today" width="20" height="20"/>
-        <image name="dots-horizontal" width="20" height="20"/>
-        <image name="eye" width="20" height="20"/>
-        <image name="home" width="20" height="20"/>
-        <image name="message-text" width="47" height="47"/>
-        <image name="pexels-photo-cropped" width="2194" height="3900"/>
+        <image name="calendar-today" width="34" height="38"/>
+        <image name="dots-horizontal" width="38" height="10"/>
+        <image name="eye" width="38" height="27"/>
+        <image name="home" width="38" height="32"/>
+        <image name="message-text" width="38" height="38"/>
+        <image name="pexels-photo-cropped" width="375" height="667"/>
     </resources>
 </document>
