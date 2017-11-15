@@ -9,7 +9,13 @@
 import Foundation
 
 class Task {
-    let id: Int
+    let id: String
     let name: String
     let message: String
+    
+    init(id: String, name: String, message: String) {
+        self.id = id
+        self.name = name
+        self.message = message
+    }
 }

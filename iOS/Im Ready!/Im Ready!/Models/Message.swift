@@ -9,15 +9,16 @@
 import Foundation
 
 class Message {
-    var id: Int
-    var dateTime: Date
+    let id: String
+    let chat: Chat
+    let dateTime: Date
 //    var time
-    var message: String
+    let message: String
     
-    init(id: Int, dateTime: Date, message: String) {
+    init(id: String, dateTime: Date, message: String, chat: Chat) {
         self.id = id
         self.dateTime = dateTime
         self.message = message
+        self.chat = chat
     }
-
 }

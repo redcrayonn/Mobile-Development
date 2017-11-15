@@ -9,11 +9,11 @@
 import Foundation
 
 class BuildingblockComponent {
-    let id: Int!
+    let id: String!
     let name: String!
     var tasks: [Int]
     
-    init(id: Int, name: String, tasks: [Int]) {
+    init(id: String, name: String, tasks: [Int]) {
         self.id = id
         self.name = name
         self.tasks = tasks

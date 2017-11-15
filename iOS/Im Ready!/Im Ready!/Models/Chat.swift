@@ -9,13 +9,13 @@
 import Foundation
 
 class Chat {
-    var id: Int
-    var senderId: Person
-    var receiverId: Person
+    let id: String
+    let sender: Person
+    let receiver: Person
     
-    init(id: Int, senderId: Person, receiverId: Person) {
+    init(id: String, sender: Person, receiver: Person) {
         self.id = id
-        self.senderId = senderId
-        self.receiverId = receiverId
+        self.sender = sender
+        self.receiver = receiver
     }
 }
