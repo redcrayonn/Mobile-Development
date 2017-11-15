@@ -5,8 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.UriInfo;
-import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
+import nl.inholland.projectapi.model.Component;
 import nl.inholland.projectapi.persistence.BlockDAO;
 import org.bson.types.ObjectId;
 
@@ -31,8 +31,9 @@ public class BlockService extends BaseService {
     }
 
     public URI create(BuildingBlock block, UriInfo uriInfo) {
-        for (Activity a : block.getActivities()) {
-            a.setId(new ObjectId());
+        for (Component c : block.getComponents()) {
+            c.createNewId();
+            c.getActivities().forEach(a -> a.createNewId());
         }
         try {
             dao.create(block);
@@ -46,8 +47,8 @@ public class BlockService extends BaseService {
         BuildingBlock oldBlock = getById(id);
         try {
             newBlock.setId(new ObjectId(oldBlock.getId()));
-            for (Activity a : newBlock.getActivities()) {
-                a.setId(new ObjectId());   
+            for (Component c : newBlock.getComponents()) {
+                c.setId(new ObjectId());   
             }
             dao.update(newBlock);
         } catch (IllegalArgumentException e) {

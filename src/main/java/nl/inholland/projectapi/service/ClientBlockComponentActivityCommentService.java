@@ -12,30 +12,33 @@ import nl.inholland.projectapi.model.Activity;
 import nl.inholland.projectapi.model.BuildingBlock;
 import nl.inholland.projectapi.model.Client;
 import nl.inholland.projectapi.model.Comment;
-import nl.inholland.projectapi.model.Role;
+import nl.inholland.projectapi.model.Component;
 import nl.inholland.projectapi.model.inputs.InputComment;
 import nl.inholland.projectapi.model.User;
 import nl.inholland.projectapi.persistence.ClientDAO;
 import nl.inholland.projectapi.persistence.UserDAO;
-import org.bson.types.ObjectId;
 
-public class ClientBlockActivityCommentService extends ClientBlockActivitySocialService {
+public class ClientBlockComponentActivityCommentService extends ClientBlockActivitySocialService {
 
     private final ClientDAO clientDAO;
     private final UserDAO userDAO;
 
     @Inject
-    public ClientBlockActivityCommentService(ClientDAO clientDAO, UserDAO userDAO) {
+    public ClientBlockComponentActivityCommentService(ClientDAO clientDAO, UserDAO userDAO) {
         this.clientDAO = clientDAO;
         this.userDAO = userDAO;
     }
 
-    public List<Comment> getAll(Client client, String blockId, String activityId) {
+    public List<Comment> getAll(Client client, String blockId, String componentId, String activityId) {
         for (BuildingBlock b : client.getBuildingBlocks()) {
             if (b.getId().equals(blockId)) {
-                for (Activity a : b.getActivities()) {
-                    if (a.getId().equals(activityId)) {
-                        return a.getComments();
+                for (Component c : b.getComponents()) {
+                    if (c.getId().equals(componentId)) {
+                        for (Activity a : c.getActivities()) {
+                            if (a.getId().equals(activityId)) {
+                                return a.getComments();
+                            }
+                        }
                     }
                 }
             }
@@ -43,7 +46,7 @@ public class ClientBlockActivityCommentService extends ClientBlockActivitySocial
         throw new NotFoundException("Comments not found");
     }
 
-    public URI create(Client client, String blockId, String activityId, InputComment input, Principal principal, UriInfo uriInfo) {
+    public URI create(Client client, String blockId, String componentId, String activityId, InputComment input, Principal principal, UriInfo uriInfo) {
         User sender = userDAO.getByUsername(principal.getName());
         Comment comment;
         try {
@@ -51,13 +54,13 @@ public class ClientBlockActivityCommentService extends ClientBlockActivitySocial
         } catch (Exception e) {
             throw new BadRequestException("Invalid Comment object");
         }
-        getAll(client, blockId, activityId).add(comment);
+        getAll(client, blockId, componentId, activityId).add(comment);
         clientDAO.update(client);
         return buildUri(uriInfo, comment.getId());
     }
 
-    public Comment get(Client client, String blockId, String activityId, String commentId) {
-        for (Comment c : getAll(client, blockId, activityId)) {
+    public Comment get(Client client, String blockId, String componentId, String activityId, String commentId) {
+        for (Comment c : getAll(client, blockId, componentId, activityId)) {
             if (c.getId().equals(commentId)) {
                 return c;
             }
@@ -65,9 +68,9 @@ public class ClientBlockActivityCommentService extends ClientBlockActivitySocial
         throw new NotFoundException("Comment not found");
     }
 
-    public void update(Client client, String blockId, String activityId, String commentId, InputComment input, Principal principal) {
+    public void update(Client client, String blockId, String componentId, String activityId, String commentId, InputComment input, Principal principal) {
         User editor = userDAO.getByUsername(principal.getName());
-        Comment comment = get(client, blockId, activityId, commentId);
+        Comment comment = get(client, blockId, componentId, activityId, commentId);
         if(!checkRoles(editor, comment)) {
             throw new ForbiddenException("You can only edit your own comments");
         }
@@ -75,13 +78,13 @@ public class ClientBlockActivityCommentService extends ClientBlockActivitySocial
         clientDAO.update(client);
     }
 
-    public void delete(Client client, String blockId, String activityId, String commentId, Principal principal) {
+    public void delete(Client client, String blockId, String componentId, String activityId, String commentId, Principal principal) {
         User deleter = userDAO.getByUsername(principal.getName());
-        Comment comment = get(client, blockId, activityId, commentId);
+        Comment comment = get(client, blockId, componentId, activityId, commentId);
         if(!checkRoles(deleter, comment)) {
             throw new ForbiddenException("You can only delete your own comments");
         }
-        getAll(client, blockId, activityId).removeIf(i -> i.getId().equals(commentId));
+        getAll(client, blockId, componentId, activityId).removeIf(i -> i.getId().equals(commentId));
         clientDAO.update(client);        
     }
 }

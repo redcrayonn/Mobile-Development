@@ -23,21 +23,21 @@ import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.CommentPresenter;
 import nl.inholland.projectapi.presentation.model.CommentView;
-import nl.inholland.projectapi.service.ClientBlockActivityCommentService;
+import nl.inholland.projectapi.service.ClientBlockComponentActivityCommentService;
 import nl.inholland.projectapi.service.ClientService;
 
 @Api("Client's comments on personal activities")
-@Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities/{activityId}/comments")
+@Path("/api/v1/clients/{clientId}/blocks/{blockId}/components/{componentId}/activities/{activityId}/comments")
 @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
-public class ClientBlockActivityCommentResource extends BaseResource {
+public class ClientBlockComponentActivityCommentResource extends BaseResource {
 
-    private final ClientBlockActivityCommentService service;
+    private final ClientBlockComponentActivityCommentService service;
     private final ClientService clientService;
     private final CommentPresenter presenter;
 
     @Inject
-    public ClientBlockActivityCommentResource(
-            ClientBlockActivityCommentService service,
+    public ClientBlockComponentActivityCommentResource(
+            ClientBlockComponentActivityCommentService service,
             ClientService clientService,
             CommentPresenter presenter) {
         this.service = service;
@@ -50,10 +50,11 @@ public class ClientBlockActivityCommentResource extends BaseResource {
     public List<CommentView> getAll(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        List<Comment> comments = service.getAll(client, blockId, activityId);
+        List<Comment> comments = service.getAll(client, blockId, componentId, activityId);
         return presenter.present(comments);
     }
 
@@ -63,13 +64,14 @@ public class ClientBlockActivityCommentResource extends BaseResource {
     public Response create(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             InputComment input,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         clientService.requireResult(input, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, input, context.getUserPrincipal(), uriInfo);
+        URI uri = service.create(client, blockId, componentId, activityId, input, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).header("Id", getId(uri)).build();
     }
 
@@ -79,11 +81,12 @@ public class ClientBlockActivityCommentResource extends BaseResource {
     public CommentView get(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @PathParam("commentId") String commentId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        Comment comment = service.get(client, blockId, activityId, commentId);
+        Comment comment = service.get(client, blockId, componentId, activityId, commentId);
         return presenter.present(comment);
     }
 
@@ -93,12 +96,13 @@ public class ClientBlockActivityCommentResource extends BaseResource {
     public Response update(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @PathParam("commentId") String commentId,
             InputComment input,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.update(client, blockId, activityId, commentId, input, context.getUserPrincipal());
+        service.update(client, blockId, componentId, activityId, commentId, input, context.getUserPrincipal());
         return Response.ok().build();
     }
 
@@ -107,11 +111,12 @@ public class ClientBlockActivityCommentResource extends BaseResource {
     public void delete(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @PathParam("commentId") String commentId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.delete(client, blockId, activityId, commentId, context.getUserPrincipal());
+        service.delete(client, blockId, componentId, activityId, commentId, context.getUserPrincipal());
     }
 
 }

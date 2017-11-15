@@ -4,8 +4,18 @@ public class InputActivity {
 
     private String name;
     private String description;
+    private String assignment;
+    private int points;
 
     public InputActivity() {
+    }
+
+    public String getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(String assignment) {
+        this.assignment = assignment;
     }
 
     public String getName() {
@@ -24,4 +34,13 @@ public class InputActivity {
         this.description = description;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    
 }

@@ -8,11 +8,11 @@ import nl.inholland.projectapi.presentation.model.PersonalBlockView;
 
 public class PersonalBlockPresenter extends BasePresenter {
 
-    private final PersonalActivityPresenter activityPresenter;
+    private final PersonalComponentPresenter componentPresenter;
 
     @Inject
-    public PersonalBlockPresenter(PersonalActivityPresenter activityPresenter) {
-        this.activityPresenter = activityPresenter;
+    public PersonalBlockPresenter(PersonalComponentPresenter componentPresenter) {
+        this.componentPresenter = componentPresenter;
     }
 
     public PersonalBlockView present(BuildingBlock block) {
@@ -21,7 +21,7 @@ public class PersonalBlockPresenter extends BasePresenter {
         view.name = block.getName();
         view.description = block.getDescription();
         view.imageURL = block.getImageURL();
-        view.activities = activityPresenter.present(block.getActivities());
+        view.components = componentPresenter.present(block.getComponents());
         return view;
     }
 

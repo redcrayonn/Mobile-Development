@@ -15,6 +15,8 @@ public class ActivityPresenter extends BasePresenter {
         view.id = activity.getId();
         view.name = activity.getName();
         view.description = activity.getDescription();
+        view.points = activity.getPoints();
+        view.assignment = activity.getAssignment();
         return view;
     }
 

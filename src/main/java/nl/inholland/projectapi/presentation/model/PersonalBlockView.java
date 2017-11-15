@@ -7,6 +7,6 @@ public class PersonalBlockView extends BaseView {
     public String name;
     public String description;
     public String imageURL;
-    public List<PersonalActivityView> activities;
+    public List<PersonalComponentView> components;
 
 }

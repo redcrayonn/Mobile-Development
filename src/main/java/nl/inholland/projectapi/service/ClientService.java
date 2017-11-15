@@ -45,8 +45,7 @@ public class ClientService extends BaseService {
         if (userDAO.getByUsername(credentials.getUsername()) != null) {
             throw new ClientErrorException(409);
         }      
-        List<BuildingBlock> blocks = new ArrayList<>(blockDAO.getAll());
-        Client client = new Client(credentials, blocks);
+        Client client = new Client(credentials);
         dao.create(client);
         return buildUri(uriInfo, client.getId());
     }

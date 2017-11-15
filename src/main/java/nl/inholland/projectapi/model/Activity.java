@@ -20,6 +20,8 @@ public class Activity extends EntityModel {
     @Embedded
     private List<Comment> comments = new ArrayList<Comment>();
     private String content;
+    private int points;
+    private String assignment;
 
     public Activity() {
 
@@ -28,6 +30,16 @@ public class Activity extends EntityModel {
     public Activity(InputActivity input) {
         this.name = input.getName();
         this.description = input.getDescription();
+        this.assignment = input.getAssignment();
+        this.points = input.getPoints();
+    }
+
+    public String getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(String assignment) {
+        this.assignment = assignment;
     }
 
     public String getName() {
@@ -78,4 +90,12 @@ public class Activity extends EntityModel {
         this.content = content;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+    
 }

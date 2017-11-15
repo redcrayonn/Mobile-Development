@@ -7,5 +7,5 @@ public class BlockView extends BaseView {
     public String name;
     public String description;
     public String imageURL;
-    public List<ActivityView> activities;
+    public List<ComponentView> components;
 }

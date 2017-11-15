@@ -19,20 +19,20 @@ import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.PersonalActivityPresenter;
 import nl.inholland.projectapi.presentation.model.PersonalActivityView;
-import nl.inholland.projectapi.service.ClientBlockActivityService;
+import nl.inholland.projectapi.service.ClientBlockComponentActivityService;
 import nl.inholland.projectapi.service.ClientService;
 
 @Api("Client's personal activities")
-@Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities")
-public class ClientBlockActivityResource extends BaseResource {
+@Path("/api/v1/clients/{clientId}/blocks/{blockId}/components/{componentId}/activities")
+public class ClientBlockComponentActivityResource extends BaseResource {
 
-    private final ClientBlockActivityService service;
+    private final ClientBlockComponentActivityService service;
     private final PersonalActivityPresenter presenter;
     private final ClientService clientService;
 
     @Inject
-    public ClientBlockActivityResource(
-            ClientBlockActivityService service,
+    public ClientBlockComponentActivityResource(
+            ClientBlockComponentActivityService service,
             PersonalActivityPresenter presenter,
             ClientService clientService) {
         this.service = service;
@@ -46,9 +46,10 @@ public class ClientBlockActivityResource extends BaseResource {
     public List<PersonalActivityView> getActivities(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        List<Activity> activities = service.getActivities(client, blockId);
+        List<Activity> activities = service.getActivities(client, blockId, componentId);
         return presenter.present(activities);
     }
 
@@ -59,10 +60,11 @@ public class ClientBlockActivityResource extends BaseResource {
     public PersonalActivityView getActivity(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        Activity activity = service.getActivity(client, blockId, activityId);
+        Activity activity = service.getActivity(client, blockId, componentId, activityId);
         return presenter.present(activity);
     }
 
@@ -73,12 +75,13 @@ public class ClientBlockActivityResource extends BaseResource {
     public Response patch(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             JsonNode patchRequest,
             @Context SecurityContext context) {
         clientService.requireResult(patchRequest, "Json object in body required");
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.patch(client, blockId, activityId, patchRequest);
+        service.patch(client, blockId, componentId, activityId, patchRequest);
         return Response.ok().build();
     }
 }

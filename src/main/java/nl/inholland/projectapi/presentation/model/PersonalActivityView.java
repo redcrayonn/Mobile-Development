@@ -7,8 +7,10 @@ public class PersonalActivityView extends BaseView {
 
     public String name;
     public String description;
+    public int points;
     public Status status;
     public String content;
+    public String assignment;
     public List<LikeView> likes;
     public List<CommentView> comments;
 

@@ -1,6 +1,8 @@
 package nl.inholland.projectapi.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import nl.inholland.projectapi.model.inputs.InputBlock;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -15,8 +17,18 @@ public class BuildingBlock extends EntityModel {
     @NotEmpty
     private String imageURL;
     @Embedded
-    private List<Activity> activities;
+    private List<Component> components;
 
+    public BuildingBlock() {
+    }
+    
+    public BuildingBlock(InputBlock input) {
+        this.name = input.getName();
+        this.description = input.getDescription();
+        this.imageURL = input.getImageURL();
+        this.components = new ArrayList<>();
+    }
+    
     public String getName() {
         return name;
     }
@@ -41,11 +53,12 @@ public class BuildingBlock extends EntityModel {
         this.imageURL = imageURL;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Component> getComponents() {
+        return components;
     }
 
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setComponents(List<Component> components) {
+        this.components = components;
     }
+
 }

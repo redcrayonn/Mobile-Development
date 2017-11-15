@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.model.BuildingBlock;
+import nl.inholland.projectapi.model.inputs.InputBlock;
 import nl.inholland.projectapi.presentation.BlockPresenter;
 import nl.inholland.projectapi.presentation.model.BlockView;
 import nl.inholland.projectapi.service.BlockService;
@@ -51,10 +52,10 @@ public class BlockResource extends BaseResource {
     @POST
     @Consumes("application/json")
     public Response create(
-            BuildingBlock newBlock,
+            InputBlock input,
             @Context UriInfo uriInfo) {
-        blockService.requireResult(newBlock, "Json object in body required");
-        URI uri = blockService.create(newBlock, uriInfo);
+        blockService.requireResult(input, "Json object in body required");
+        URI uri = blockService.create(new BuildingBlock(input), uriInfo);
         return Response.created(uri).header("Id", getId(uri)).build();
     }
 
@@ -72,9 +73,9 @@ public class BlockResource extends BaseResource {
     @Consumes("application/json")
     public Response put(
             @PathParam("blockId") String id,
-            BuildingBlock newBlock) {
-        blockService.requireResult(newBlock, "Json object in body required");
-        blockService.update(id, newBlock);
+            InputBlock input) {
+        blockService.requireResult(input, "Json object in body required");
+        blockService.update(id, new BuildingBlock(input));
         return Response.ok().build();
     }
 

@@ -20,21 +20,21 @@ import nl.inholland.projectapi.model.Role;
 import nl.inholland.projectapi.model.Secured;
 import nl.inholland.projectapi.presentation.LikePresenter;
 import nl.inholland.projectapi.presentation.model.LikeView;
-import nl.inholland.projectapi.service.ClientBlockActivityLikeService;
+import nl.inholland.projectapi.service.ClientBlockComponentActivityLikeService;
 import nl.inholland.projectapi.service.ClientService;
 
 @Api("Client's likes on personal activities")
-@Path("/api/v1/clients/{clientId}/blocks/{blockId}/activities/{activityId}/likes")
+@Path("/api/v1/clients/{clientId}/blocks/{blockId}/components/{componentId}/activities/{activityId}/likes")
 @Secured({Role.admin, Role.client, Role.caregiver, Role.family})
-public class ClientBlockActivityLikeResource extends BaseResource {
+public class ClientBlockComponentActivityLikeResource extends BaseResource {
 
-    private final ClientBlockActivityLikeService service;
+    private final ClientBlockComponentActivityLikeService service;
     private final ClientService clientService;
     private final LikePresenter presenter;
 
     @Inject
-    public ClientBlockActivityLikeResource(
-            ClientBlockActivityLikeService service,
+    public ClientBlockComponentActivityLikeResource(
+            ClientBlockComponentActivityLikeService service,
             ClientService clientService,
             LikePresenter presenter) {
         this.service = service;
@@ -47,10 +47,11 @@ public class ClientBlockActivityLikeResource extends BaseResource {
     public List<LikeView> getAll(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        List<Like> likes = service.getAll(client, blockId, activityId);
+        List<Like> likes = service.getAll(client, blockId, componentId, activityId);
         return presenter.present(likes);
     }
 
@@ -59,11 +60,12 @@ public class ClientBlockActivityLikeResource extends BaseResource {
     public Response create(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @Context UriInfo uriInfo,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        URI uri = service.create(client, blockId, activityId, context.getUserPrincipal(), uriInfo);
+        URI uri = service.create(client, blockId, componentId, activityId, context.getUserPrincipal(), uriInfo);
         return Response.created(uri).header("Id", getId(uri)).build();
     }
 
@@ -73,11 +75,12 @@ public class ClientBlockActivityLikeResource extends BaseResource {
     public LikeView get(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @PathParam("likeId") String likeId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        Like like = service.get(client, blockId, activityId, likeId);
+        Like like = service.get(client, blockId, componentId, activityId, likeId);
         return presenter.present(like);
     }
 
@@ -86,11 +89,12 @@ public class ClientBlockActivityLikeResource extends BaseResource {
     public void delete(
             @PathParam("clientId") String clientId,
             @PathParam("blockId") String blockId,
+            @PathParam("componentId") String componentId,
             @PathParam("activityId") String activityId,
             @PathParam("likeId") String likeId,
             @Context SecurityContext context) {
         Client client = clientService.getById(clientId, context.getUserPrincipal());
-        service.delete(client, blockId, activityId, likeId, context.getUserPrincipal());
+        service.delete(client, blockId, componentId, activityId, likeId, context.getUserPrincipal());
     }
 
 }
