@@ -1,0 +1,6 @@
+framework module Pods_Im_Ready_ {
+  umbrella header "Pods-Im Ready!-umbrella.h"
+
+  export *
+  module * { export * }
+}
