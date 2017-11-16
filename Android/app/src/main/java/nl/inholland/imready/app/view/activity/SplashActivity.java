@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
-import nl.inholland.imready.data.service.AuthenticationService;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -20,7 +19,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         // on load instantly go to login activity or home if user data is saved on phone
-        // if (User.isLoggedIn)
         Intent intent = new Intent(this, LoginActivity.class);
 
         // setup view(s) for animation

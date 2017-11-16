@@ -9,6 +9,17 @@ public class Block extends NamedEntityModel {
     private String imageURL;
     private List<Component> components;
 
+    public Block() {
+    }
+
+    public Block(String name) {
+        super(name);
+    }
+
+    public Block(String id, String name) {
+        super(id, name);
+    }
+
     public String getDescription() {
         return description;
     }
