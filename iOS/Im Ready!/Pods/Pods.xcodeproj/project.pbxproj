@@ -7,122 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00BC16B2F67911106A4B89E657A78237 /* ic_eye_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31BF818DBD50F86855471B0C9E427C49 /* ic_eye_closed@2x.png */; };
-		010D59B519DAB2EDA221F143BBEAA5B8 /* PasswordToggleVisibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0D685E73C7BB12EDCADC0BE65528 /* PasswordToggleVisibilityView.swift */; };
-		049BEAA069A63D45A7B474585551F290 /* ic_eye_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E24370987A3ABE0EA1332DE02A9FE89 /* ic_eye_open.png */; };
-		06F0E191968A155473CA641142078001 /* ic_password_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E03BF09E38C8FB5353B87D5B9C5913 /* ic_password_checkmark@3x.png */; };
-		28D344D3D60D82EAE5CFB52AF5A24FD1 /* Pods-Im Ready!-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB6F24E8A90A06A1D7360374CA729109 /* Pods-Im Ready!-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32F3D1E7803342371120D5A61A48052B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
-		39DFB274C445AD79EBCAF8BFCD7D0405 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
-		616C4B240A9E57D4D95D4C42697D63A8 /* ic_eye_closed.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D215A22333A7E0F3F2FCCB7F1EBBDE /* ic_eye_closed.png */; };
-		6B520C74B3F87E505C9372D4C385B179 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
-		707C098F5320670751CBD4B2EB5086E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */; };
+		529DE679B5CFA4345936B6AC07106125 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		6B520C74B3F87E505C9372D4C385B179 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		7C3E96F8AD0F7907D15FFC3272F09959 /* Pods-Im Ready!UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 253D71E29E397FAE691E5B350AFE0B53 /* Pods-Im Ready!UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		876020BAE4410AE8C51F00E65491F7F4 /* Pods-Im Ready!-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC14910D1DB7EE0FD2CDB69B5AEB0D7 /* Pods-Im Ready!-dummy.m */; };
 		8F07292CC627C5D5CCB63844B2901DB9 /* Pods-Im Ready!Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9393F75226B0A0A679681A67924F63 /* Pods-Im Ready!Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8FCDF5A7AFD262F3AD0D6B86F5A731DF /* HideShowPasswordTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E473EF08BEB6248C59A6266D8590553 /* HideShowPasswordTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93A9BC7A63B0D4098C8A79B6B2BBEB01 /* ic_password_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A31EA53947AFD6C3185075E7591AFE6 /* ic_password_checkmark@2x.png */; };
-		9A4D74696A8A26601F0348FE89F1FE7E /* HideShowPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B725C2C7CBA5916821A53D65AF91E3 /* HideShowPasswordTextField.swift */; };
 		A1E4D2C25FE735A5DC15BCC2002269A9 /* Pods-Im Ready!UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 306EE9F1C9DC0444890D0D7C2669E4F6 /* Pods-Im Ready!UITests-dummy.m */; };
-		AF1FE21D9CD48B54387D2990D04B9B63 /* ic_eye_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 629542CFD3DED06A90127FF6BE17E056 /* ic_eye_open@3x.png */; };
 		B21AF34FC111775F30BD16279129383B /* Pods-Im Ready!Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F13A7112F2A7DBD5612BC546A3B2E /* Pods-Im Ready!Tests-dummy.m */; };
-		B3EC2AA174BC179EA08EFD52AFBBBA39 /* ic_eye_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D71F241677BC40E1C3B0F46B244FD49 /* ic_eye_closed@3x.png */; };
-		B84BEDD9845F47BFD47C22098FD5BB82 /* ic_eye_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DACBA6DA6B2B57681D38F4FAACC /* ic_eye_open@2x.png */; };
-		BC22887709829F0DEE6A73FA0155172E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
-		CAB7162EBC135515B5072400BE5BE3E1 /* ic_password_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = CCB4F41EECD87E0672ABFD7CF13932E0 /* ic_password_checkmark.png */; };
-		E462782407855F5CAEA73CB8AB541174 /* HideShowPasswordTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A9D843A47F231C3A9071538F39C7E /* HideShowPasswordTextField-dummy.m */; };
+		BC22887709829F0DEE6A73FA0155172E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		CDFCFA831BA341BB65985CCBDF30A00E /* Pods-Im Ready!-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB6F24E8A90A06A1D7360374CA729109 /* Pods-Im Ready!-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4F3C03003055617AB67CBA1E58616C0 /* Pods-Im Ready!-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC14910D1DB7EE0FD2CDB69B5AEB0D7 /* Pods-Im Ready!-dummy.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		61FC17E8BD53BB8EBC97D623FECB6697 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 60FB72E12786B886AA4D3337AAB88D5D;
-			remoteInfo = HideShowPasswordTextField;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		076FE67714299BD2DEB11283CD5EA14C /* Pods-Im Ready!UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Im Ready!UITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		08922580E1B61175E87C1AF0CC0DDD36 /* Pods_Im_Ready_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_.framework; path = "Pods-Im Ready!.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B2676A1E904474CF3A504893980D84D /* Pods-Im Ready!UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		0E473EF08BEB6248C59A6266D8590553 /* HideShowPasswordTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HideShowPasswordTextField-umbrella.h"; sourceTree = "<group>"; };
 		0F8A4BEA32E62DA5208E0E15DE4FA78F /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D172473731FE8FE926579DC77D78558 /* Pods-Im Ready!-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!-resources.sh"; sourceTree = "<group>"; };
 		253D71E29E397FAE691E5B350AFE0B53 /* Pods-Im Ready!UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Im Ready!UITests-umbrella.h"; sourceTree = "<group>"; };
 		2613C56ADECDA0EE083261D042C9676E /* Pods-Im Ready!UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Im Ready!UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		29E03BF09E38C8FB5353B87D5B9C5913 /* ic_password_checkmark@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_password_checkmark@3x.png"; path = "HideShowPasswordTextField/ic_password_checkmark@3x.png"; sourceTree = "<group>"; };
-		2A56CFBA31868069236B2A7BBBEF3D81 /* Pods_Im_Ready_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_UITests.framework; path = "Pods-Im Ready!UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BA9F9457B9014D32A756D9D8CD40292 /* HideShowPasswordTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = HideShowPasswordTextField.modulemap; sourceTree = "<group>"; };
-		2D71F241677BC40E1C3B0F46B244FD49 /* ic_eye_closed@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_eye_closed@3x.png"; path = "HideShowPasswordTextField/ic_eye_closed@3x.png"; sourceTree = "<group>"; };
 		306EE9F1C9DC0444890D0D7C2669E4F6 /* Pods-Im Ready!UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Im Ready!UITests-dummy.m"; sourceTree = "<group>"; };
-		30FE0D685E73C7BB12EDCADC0BE65528 /* PasswordToggleVisibilityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PasswordToggleVisibilityView.swift; path = HideShowPasswordTextField/PasswordToggleVisibilityView.swift; sourceTree = "<group>"; };
-		310B91956AA693FBDF25C1D45EA84DD7 /* HideShowPasswordTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HideShowPasswordTextField.xcconfig; sourceTree = "<group>"; };
-		31BF818DBD50F86855471B0C9E427C49 /* ic_eye_closed@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_eye_closed@2x.png"; path = "HideShowPasswordTextField/ic_eye_closed@2x.png"; sourceTree = "<group>"; };
 		38F993B5F7430E37E6990A444059923C /* Pods-Im Ready!Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!Tests.release.xcconfig"; sourceTree = "<group>"; };
 		3955E32516F5E8491DA454C06DD6CD01 /* Pods-Im Ready!-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!-frameworks.sh"; sourceTree = "<group>"; };
 		3966786A31D92793B3DE8C6C8468C7BB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A252B425924C24C8FA52F99A3B515C6 /* Pods-Im Ready!Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Im Ready!Tests.modulemap"; sourceTree = "<group>"; };
-		3A31EA53947AFD6C3185075E7591AFE6 /* ic_password_checkmark@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_password_checkmark@2x.png"; path = "HideShowPasswordTextField/ic_password_checkmark@2x.png"; sourceTree = "<group>"; };
 		3CE0D15889FAA17AB9D13170C2FF7193 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EC14910D1DB7EE0FD2CDB69B5AEB0D7 /* Pods-Im Ready!-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Im Ready!-dummy.m"; sourceTree = "<group>"; };
 		3F433E116815453B42B9B194520C71EE /* Pods-Im Ready!-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Im Ready!-acknowledgements.plist"; sourceTree = "<group>"; };
-		4E24370987A3ABE0EA1332DE02A9FE89 /* ic_eye_open.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ic_eye_open.png; path = HideShowPasswordTextField/ic_eye_open.png; sourceTree = "<group>"; };
 		564C14A215493365F60B8258ED632C7C /* Pods-Im Ready!Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!Tests-frameworks.sh"; sourceTree = "<group>"; };
-		629542CFD3DED06A90127FF6BE17E056 /* ic_eye_open@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_eye_open@3x.png"; path = "HideShowPasswordTextField/ic_eye_open@3x.png"; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		683F13A7112F2A7DBD5612BC546A3B2E /* Pods-Im Ready!Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Im Ready!Tests-dummy.m"; sourceTree = "<group>"; };
 		6B07C212E81C510333FA265D3EE0602D /* Pods-Im Ready!Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!Tests-resources.sh"; sourceTree = "<group>"; };
 		7B9FF216134E6F7DE530057C5A56F3C2 /* Pods-Im Ready!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!.debug.xcconfig"; sourceTree = "<group>"; };
 		8202834E663B128217AF8D4C23474467 /* Pods-Im Ready!UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!UITests.release.xcconfig"; sourceTree = "<group>"; };
 		838B2FCE9316AFEEC55760FE28663291 /* Pods-Im Ready!UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Im Ready!UITests.modulemap"; sourceTree = "<group>"; };
-		8B81C4AA6C5FC671E4D3E023C41F49A3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2D5C29D6867E188FFD1AC434384422 /* Pods-Im Ready!Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Im Ready!Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8F38CF208680784ADC09EFFA3F783BFE /* Pods-Im Ready!UITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!UITests-resources.sh"; sourceTree = "<group>"; };
-		9020DD4DAA75DD452817F8094A01B4E2 /* Pods_Im_Ready_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_.framework; path = "Pods-Im Ready!.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94C4CE8EBEBAAD4ACCC13082F4D09BAE /* Pods-Im Ready!Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Im Ready!Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9F128651768028604051EA24BBB2C1E9 /* HideShowPasswordTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HideShowPasswordTextField-prefix.pch"; sourceTree = "<group>"; };
 		A0092033C81616395DB4F593B2E4077E /* Pods-Im Ready!UITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Im Ready!UITests-frameworks.sh"; sourceTree = "<group>"; };
 		A9DA104C1DF1F3642973E5E696DA1067 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		C74D63B042F0ED24076AA94291FFE3B2 /* HideShowPasswordTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HideShowPasswordTextField.framework; path = HideShowPasswordTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8D215A22333A7E0F3F2FCCB7F1EBBDE /* ic_eye_closed.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ic_eye_closed.png; path = HideShowPasswordTextField/ic_eye_closed.png; sourceTree = "<group>"; };
 		CA0B8C9DE9830F2E59E3919F490D2490 /* Pods-Im Ready!-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Im Ready!-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CCB4F41EECD87E0672ABFD7CF13932E0 /* ic_password_checkmark.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = ic_password_checkmark.png; path = HideShowPasswordTextField/ic_password_checkmark.png; sourceTree = "<group>"; };
-		D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D8B725C2C7CBA5916821A53D65AF91E3 /* HideShowPasswordTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HideShowPasswordTextField.swift; path = HideShowPasswordTextField/HideShowPasswordTextField.swift; sourceTree = "<group>"; };
-		D8F1C708C18B7E1630B2D48B498C4949 /* Pods_Im_Ready_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_Tests.framework; path = "Pods-Im Ready!Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC0A9D843A47F231C3A9071538F39C7E /* HideShowPasswordTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HideShowPasswordTextField-dummy.m"; sourceTree = "<group>"; };
+		CB614B848AAF6FA25DD5C814FC61EA66 /* Pods_Im_Ready_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_UITests.framework; path = "Pods-Im Ready!UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BC121A0A41347438C5001170DF1D96 /* Pods-Im Ready!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Im Ready!.release.xcconfig"; sourceTree = "<group>"; };
 		EA9393F75226B0A0A679681A67924F63 /* Pods-Im Ready!Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Im Ready!Tests-umbrella.h"; sourceTree = "<group>"; };
 		EB6F24E8A90A06A1D7360374CA729109 /* Pods-Im Ready!-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Im Ready!-umbrella.h"; sourceTree = "<group>"; };
-		F4F09DACBA6DA6B2B57681D38F4FAACC /* ic_eye_open@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_eye_open@2x.png"; path = "HideShowPasswordTextField/ic_eye_open@2x.png"; sourceTree = "<group>"; };
 		FA9F9E63FB15434C36F0D65E25F89B62 /* Pods-Im Ready!.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Im Ready!.modulemap"; sourceTree = "<group>"; };
+		FFFAF2B6EC020C1596AE50EA91E7A541 /* Pods_Im_Ready_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Im_Ready_Tests.framework; path = "Pods-Im Ready!Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6173A279CD84B04FAD3FD7485DE3A5EE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				32F3D1E7803342371120D5A61A48052B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6C8D3DEC79446470F2E3566034640DA1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				39DFB274C445AD79EBCAF8BFCD7D0405 /* Foundation.framework in Frameworks */,
-				707C098F5320670751CBD4B2EB5086E9 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C5D0AC338792D02CAE1E77335AEEB47E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6B520C74B3F87E505C9372D4C385B179 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D650C36EE852CE8A1A9672FED1838906 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529DE679B5CFA4345936B6AC07106125 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,79 +102,32 @@
 			path = "Target Support Files/Pods-Im Ready!Tests";
 			sourceTree = "<group>";
 		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				438B396F6B4147076630CAEFE34282C1 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		438B396F6B4147076630CAEFE34282C1 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */,
-				B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				B052A3FB27CDC812BE486A6ECB8B9AB5 /* Pods */,
-				A1152FD1F370E5185D88C4856C5E63D3 /* Products */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				99742E040F13916C6FBCC00F10B52FC7 /* Products */,
 				D7888452093F9360649A5070DC372C6E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		86D8411DA64354C7F11EFD9595611665 /* HideShowPasswordTextField */ = {
+		99742E040F13916C6FBCC00F10B52FC7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8B725C2C7CBA5916821A53D65AF91E3 /* HideShowPasswordTextField.swift */,
-				30FE0D685E73C7BB12EDCADC0BE65528 /* PasswordToggleVisibilityView.swift */,
-				874FD7DF5B6627C7FE0A6E489369CD48 /* Resources */,
-				E00801DB7D1608E5E0FBF9D723F0D579 /* Support Files */,
-			);
-			name = HideShowPasswordTextField;
-			path = HideShowPasswordTextField;
-			sourceTree = "<group>";
-		};
-		874FD7DF5B6627C7FE0A6E489369CD48 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C8D215A22333A7E0F3F2FCCB7F1EBBDE /* ic_eye_closed.png */,
-				31BF818DBD50F86855471B0C9E427C49 /* ic_eye_closed@2x.png */,
-				2D71F241677BC40E1C3B0F46B244FD49 /* ic_eye_closed@3x.png */,
-				4E24370987A3ABE0EA1332DE02A9FE89 /* ic_eye_open.png */,
-				F4F09DACBA6DA6B2B57681D38F4FAACC /* ic_eye_open@2x.png */,
-				629542CFD3DED06A90127FF6BE17E056 /* ic_eye_open@3x.png */,
-				CCB4F41EECD87E0672ABFD7CF13932E0 /* ic_password_checkmark.png */,
-				3A31EA53947AFD6C3185075E7591AFE6 /* ic_password_checkmark@2x.png */,
-				29E03BF09E38C8FB5353B87D5B9C5913 /* ic_password_checkmark@3x.png */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		A1152FD1F370E5185D88C4856C5E63D3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C74D63B042F0ED24076AA94291FFE3B2 /* HideShowPasswordTextField.framework */,
-				9020DD4DAA75DD452817F8094A01B4E2 /* Pods_Im_Ready_.framework */,
-				D8F1C708C18B7E1630B2D48B498C4949 /* Pods_Im_Ready_Tests.framework */,
-				2A56CFBA31868069236B2A7BBBEF3D81 /* Pods_Im_Ready_UITests.framework */,
+				08922580E1B61175E87C1AF0CC0DDD36 /* Pods_Im_Ready_.framework */,
+				FFFAF2B6EC020C1596AE50EA91E7A541 /* Pods_Im_Ready_Tests.framework */,
+				CB614B848AAF6FA25DD5C814FC61EA66 /* Pods_Im_Ready_UITests.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B052A3FB27CDC812BE486A6ECB8B9AB5 /* Pods */ = {
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				86D8411DA64354C7F11EFD9595611665 /* HideShowPasswordTextField */,
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C585F3382DB4DF12AF17FD57525ADE0B /* Pods-Im Ready!UITests */ = {
@@ -248,6 +148,14 @@
 			path = "Target Support Files/Pods-Im Ready!UITests";
 			sourceTree = "<group>";
 		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		D7888452093F9360649A5070DC372C6E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,20 +164,6 @@
 				C585F3382DB4DF12AF17FD57525ADE0B /* Pods-Im Ready!UITests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		E00801DB7D1608E5E0FBF9D723F0D579 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				2BA9F9457B9014D32A756D9D8CD40292 /* HideShowPasswordTextField.modulemap */,
-				310B91956AA693FBDF25C1D45EA84DD7 /* HideShowPasswordTextField.xcconfig */,
-				DC0A9D843A47F231C3A9071538F39C7E /* HideShowPasswordTextField-dummy.m */,
-				9F128651768028604051EA24BBB2C1E9 /* HideShowPasswordTextField-prefix.pch */,
-				0E473EF08BEB6248C59A6266D8590553 /* HideShowPasswordTextField-umbrella.h */,
-				8B81C4AA6C5FC671E4D3E023C41F49A3 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/HideShowPasswordTextField";
 			sourceTree = "<group>";
 		};
 		E152C405DCF7D7BF0BD17E2F69B2C34E /* Pods-Im Ready! */ = {
@@ -293,22 +187,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2DB20A352C1453C739273967861E3FA3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8FCDF5A7AFD262F3AD0D6B86F5A731DF /* HideShowPasswordTextField-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		748CB3C66B30104FD95D0B21A4F1F7D1 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D344D3D60D82EAE5CFB52AF5A24FD1 /* Pods-Im Ready!-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		783166AC220A9F828699561E03428836 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +200,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F07292CC627C5D5CCB63844B2901DB9 /* Pods-Im Ready!Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9208A72F338408B5492E2E8D82211F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDFCFA831BA341BB65985CCBDF30A00E /* Pods-Im Ready!-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,43 +228,24 @@
 			);
 			name = "Pods-Im Ready!UITests";
 			productName = "Pods-Im Ready!UITests";
-			productReference = 2A56CFBA31868069236B2A7BBBEF3D81 /* Pods_Im_Ready_UITests.framework */;
+			productReference = CB614B848AAF6FA25DD5C814FC61EA66 /* Pods_Im_Ready_UITests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		60FB72E12786B886AA4D3337AAB88D5D /* HideShowPasswordTextField */ = {
+		84283FFECA2171707BEB8759B07DDF98 /* Pods-Im Ready! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0B24D2BF1813713E50317796A38D5115 /* Build configuration list for PBXNativeTarget "HideShowPasswordTextField" */;
+			buildConfigurationList = 11DD807534DE397C8FC7D373BC0EF3F2 /* Build configuration list for PBXNativeTarget "Pods-Im Ready!" */;
 			buildPhases = (
-				E6F36961956836CE29B332E75498A04C /* Sources */,
-				6C8D3DEC79446470F2E3566034640DA1 /* Frameworks */,
-				8DBC0608E1B32C25DBB12B4D61914653 /* Resources */,
-				2DB20A352C1453C739273967861E3FA3 /* Headers */,
+				FBECD37DDA47C42BAD00FD9B6FB36729 /* Sources */,
+				D650C36EE852CE8A1A9672FED1838906 /* Frameworks */,
+				F9208A72F338408B5492E2E8D82211F2 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = HideShowPasswordTextField;
-			productName = HideShowPasswordTextField;
-			productReference = C74D63B042F0ED24076AA94291FFE3B2 /* HideShowPasswordTextField.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		A36FC564F95068056ADC318012161E7C /* Pods-Im Ready! */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8F576D03576E7004DB94DB539C5F9AED /* Build configuration list for PBXNativeTarget "Pods-Im Ready!" */;
-			buildPhases = (
-				A98B4A8313E6A4E0816FAEAA367508B9 /* Sources */,
-				6173A279CD84B04FAD3FD7485DE3A5EE /* Frameworks */,
-				748CB3C66B30104FD95D0B21A4F1F7D1 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				03A00F6E14066C7045BD32AE7E7E3FDE /* PBXTargetDependency */,
 			);
 			name = "Pods-Im Ready!";
 			productName = "Pods-Im Ready!";
-			productReference = 9020DD4DAA75DD452817F8094A01B4E2 /* Pods_Im_Ready_.framework */;
+			productReference = 08922580E1B61175E87C1AF0CC0DDD36 /* Pods_Im_Ready_.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CAAAE09F9245BD8A567DB8D0F8C05C27 /* Pods-Im Ready!Tests */ = {
@@ -395,7 +262,7 @@
 			);
 			name = "Pods-Im Ready!Tests";
 			productName = "Pods-Im Ready!Tests";
-			productReference = D8F1C708C18B7E1630B2D48B498C4949 /* Pods_Im_Ready_Tests.framework */;
+			productReference = FFFAF2B6EC020C1596AE50EA91E7A541 /* Pods_Im_Ready_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -415,36 +282,16 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = A1152FD1F370E5185D88C4856C5E63D3 /* Products */;
+			productRefGroup = 99742E040F13916C6FBCC00F10B52FC7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60FB72E12786B886AA4D3337AAB88D5D /* HideShowPasswordTextField */,
-				A36FC564F95068056ADC318012161E7C /* Pods-Im Ready! */,
+				84283FFECA2171707BEB8759B07DDF98 /* Pods-Im Ready! */,
 				CAAAE09F9245BD8A567DB8D0F8C05C27 /* Pods-Im Ready!Tests */,
 				44495DF321885B5060725A7037F6591F /* Pods-Im Ready!UITests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		8DBC0608E1B32C25DBB12B4D61914653 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				616C4B240A9E57D4D95D4C42697D63A8 /* ic_eye_closed.png in Resources */,
-				00BC16B2F67911106A4B89E657A78237 /* ic_eye_closed@2x.png in Resources */,
-				B3EC2AA174BC179EA08EFD52AFBBBA39 /* ic_eye_closed@3x.png in Resources */,
-				049BEAA069A63D45A7B474585551F290 /* ic_eye_open.png in Resources */,
-				B84BEDD9845F47BFD47C22098FD5BB82 /* ic_eye_open@2x.png in Resources */,
-				AF1FE21D9CD48B54387D2990D04B9B63 /* ic_eye_open@3x.png in Resources */,
-				CAB7162EBC135515B5072400BE5BE3E1 /* ic_password_checkmark.png in Resources */,
-				93A9BC7A63B0D4098C8A79B6B2BBEB01 /* ic_password_checkmark@2x.png in Resources */,
-				06F0E191968A155473CA641142078001 /* ic_password_checkmark@3x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06AA72BF0BEC1F28F3328C7025103900 /* Sources */ = {
@@ -452,24 +299,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B21AF34FC111775F30BD16279129383B /* Pods-Im Ready!Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A98B4A8313E6A4E0816FAEAA367508B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				876020BAE4410AE8C51F00E65491F7F4 /* Pods-Im Ready!-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6F36961956836CE29B332E75498A04C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E462782407855F5CAEA73CB8AB541174 /* HideShowPasswordTextField-dummy.m in Sources */,
-				9A4D74696A8A26601F0348FE89F1FE7E /* HideShowPasswordTextField.swift in Sources */,
-				010D59B519DAB2EDA221F143BBEAA5B8 /* PasswordToggleVisibilityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,50 +310,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBECD37DDA47C42BAD00FD9B6FB36729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F3C03003055617AB67CBA1E58616C0 /* Pods-Im Ready!-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		03A00F6E14066C7045BD32AE7E7E3FDE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HideShowPasswordTextField;
-			target = 60FB72E12786B886AA4D3337AAB88D5D /* HideShowPasswordTextField */;
-			targetProxy = 61FC17E8BD53BB8EBC97D623FECB6697 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		0DF80ED28E2D0EB916B0DAB52D1CD743 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 310B91956AA693FBDF25C1D45EA84DD7 /* HideShowPasswordTextField.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/HideShowPasswordTextField/HideShowPasswordTextField-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/HideShowPasswordTextField/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/HideShowPasswordTextField/HideShowPasswordTextField.modulemap";
-				PRODUCT_NAME = HideShowPasswordTextField;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		1D23278938ADF334174C5BF2A4B6B1B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -678,40 +474,6 @@
 			};
 			name = Release;
 		};
-		5FEE3161970C0C5C52AD520C0842BCB6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B9FF216134E6F7DE530057C5A56F3C2 /* Pods-Im Ready!.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Im Ready!/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Im Ready!/Pods-Im Ready!.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Im_Ready_;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		995C3A53DEAA96B47E756185345E180D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -772,6 +534,39 @@
 			};
 			name = Debug;
 		};
+		B0DFF4F908D7C398FF95612283780A73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2BC121A0A41347438C5001170DF1D96 /* Pods-Im Ready!.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Im Ready!/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Im Ready!/Pods-Im Ready!.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Im_Ready_;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		C1BD64411094CA3180E96C30A0ED0BE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0B2676A1E904474CF3A504893980D84D /* Pods-Im Ready!UITests.debug.xcconfig */;
@@ -804,9 +599,9 @@
 			};
 			name = Debug;
 		};
-		D4D4D57BF3FFF9480BAED9CC914EF546 /* Release */ = {
+		E02836CF09AD34629A654C7176466C02 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2BC121A0A41347438C5001170DF1D96 /* Pods-Im Ready!.release.xcconfig */;
+			baseConfigurationReference = 7B9FF216134E6F7DE530057C5A56F3C2 /* Pods-Im Ready!.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -830,39 +625,6 @@
 				PRODUCT_NAME = Pods_Im_Ready_;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DEB362A5153640293AF43465AB6B21A8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 310B91956AA693FBDF25C1D45EA84DD7 /* HideShowPasswordTextField.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/HideShowPasswordTextField/HideShowPasswordTextField-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/HideShowPasswordTextField/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/HideShowPasswordTextField/HideShowPasswordTextField.modulemap";
-				PRODUCT_NAME = HideShowPasswordTextField;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -872,11 +634,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0B24D2BF1813713E50317796A38D5115 /* Build configuration list for PBXNativeTarget "HideShowPasswordTextField" */ = {
+		11DD807534DE397C8FC7D373BC0EF3F2 /* Build configuration list for PBXNativeTarget "Pods-Im Ready!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DEB362A5153640293AF43465AB6B21A8 /* Debug */,
-				0DF80ED28E2D0EB916B0DAB52D1CD743 /* Release */,
+				E02836CF09AD34629A654C7176466C02 /* Debug */,
+				B0DFF4F908D7C398FF95612283780A73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -904,15 +666,6 @@
 			buildConfigurations = (
 				C1BD64411094CA3180E96C30A0ED0BE3 /* Debug */,
 				5FD11F2EE23CA6741B8B398E6D1664D5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8F576D03576E7004DB94DB539C5F9AED /* Build configuration list for PBXNativeTarget "Pods-Im Ready!" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5FEE3161970C0C5C52AD520C0842BCB6 /* Debug */,
-				D4D4D57BF3FFF9480BAED9CC914EF546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

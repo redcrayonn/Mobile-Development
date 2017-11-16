@@ -19,8 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        passwordField.isSecureTextEntry = true
-        passwordField.secureTextEnty = true
         self.hideKeyboardWhenTappedAround()
     }
 
@@ -40,12 +38,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onPasswordVisibilityClick(_ sender: Any) {
-        var passwordInvisible = passwordField.isSecureTextEntry
-        if passwordInvisible {
-            passwordInvisible = false
-        } else {
-            passwordInvisible = true
-        }
+        passwordField.isSecureTextEntry = !passwordField.isSecureTextEntry
     }
     
     @IBAction func onRegisterFamilyClick(_ sender: Any) {

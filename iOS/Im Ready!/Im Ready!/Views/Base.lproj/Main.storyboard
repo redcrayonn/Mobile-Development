@@ -54,14 +54,14 @@
                                     <outlet property="delegate" destination="MLC-6D-TI5" id="UMU-T2-0t4"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wachtwoord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hsq-eW-IbG">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wachtwoord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hsq-eW-IbG" customClass="HideShowPasswordTextField" customModule="HideShowPasswordTextField">
                                 <rect key="frame" x="53" y="605" width="268" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2b7-zY-beC"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="passwordField:" destination="CsM-EA-1kt" eventType="editingDidEnd" id="1tQ-Y5-Ziv"/>
                                     <outlet property="delegate" destination="MLC-6D-TI5" id="lIE-bl-wLj"/>

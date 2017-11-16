@@ -6,7 +6,7 @@ target 'Im Ready!' do
   use_frameworks!
 
   # Pods for Im Ready!
-  pod 'HideShowPasswordTextField', :git => 'https://github.com/Guidebook/HideShowPasswordTextField'
+#  pod 'HideShowPasswordTextField', :git => 'https://github.com/Guidebook/HideShowPasswordTextField'
 
   target 'Im Ready!Tests' do
     inherit! :search_paths
