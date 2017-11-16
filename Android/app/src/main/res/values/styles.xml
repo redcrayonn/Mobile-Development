@@ -7,34 +7,40 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:textColor">@android:color/white</item>
+
         <item name="android:windowBackground">@color/colorPrimary</item>
 
-        <item name="android:iconTint">@color/white</item>
+        <item name="android:tint">@android:color/white</item>
+    </style>
+
+    <style name="AppToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
     <style name="App.Button" parent="AppTheme">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:colorButtonNormal">@color/colorAccent</item>
     </style>
 
     <style name="App.Splash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
-        <item name="android:colorPrimary">@color/white</item>
-        <item name="android:colorPrimaryDark">@color/white</item>
-        <item name="android:colorAccent">@color/white</item>
+        <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@android:color/white</item>
+        <item name="android:colorAccent">@android:color/white</item>
     </style>
 
-    <style name="App.Text.White" parent="TextAppearance.Design.Hint">
+    <style name="App.Text.White" parent="AppTheme">
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
         <item name="android:textSize">20sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="android:colorPrimary">@color/white</item>
-        <item name="android:colorPrimaryDark">@color/white</item>
-        <item name="android:colorAccent">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
-        <item name="android:tint">@color/white</item>
+        <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@android:color/white</item>
+        <item name="android:colorAccent">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="android:tint">@android:color/white</item>
     </style>
 </resources>

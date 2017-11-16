@@ -21,7 +21,7 @@ public class MockBlockService implements BlockService {
 
     private void init() {
         blocks = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 20; i++) {
             Block block = new Block("Block #" + i);
             blocks.add(block);
         }
@@ -35,7 +35,7 @@ public class MockBlockService implements BlockService {
     @Override
     public Call<Block> getBlock(String blockId) {
         Iterator<Block> iterator = blocks.iterator();
-        Block block = null;
+        Block block = new Block();
         while (iterator.hasNext()) {
             Block b = iterator.next();
             if (b.getId().equals(blockId)) {

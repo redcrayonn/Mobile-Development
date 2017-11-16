@@ -1,5 +1,6 @@
 package nl.inholland.imready.app.view.holder;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,11 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
 
     @Override
     public void fill(Block data) {
+        if (data == null) {
+            blockTitleView.setText(null);
+            return;
+        }
 
+        blockTitleView.setText(data.getName());
     }
 }

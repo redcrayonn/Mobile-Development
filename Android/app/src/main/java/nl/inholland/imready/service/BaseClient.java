@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class BaseClient implements ApiClient {
 
-    protected final String API_URL = "https://www.imready.ml/api/v1";
+    protected final String API_URL = "https://www.imready.ml/api/v1/";
 
     protected final Retrofit retrofit;
 

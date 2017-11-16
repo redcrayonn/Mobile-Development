@@ -10,6 +10,9 @@ import android.widget.ImageView;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
+import nl.inholland.imready.service.ApiClient;
+import nl.inholland.imready.service.mock.MockClient;
+import nl.inholland.imready.service.rest.AuthenticationService;
 
 public class SplashActivity extends AppCompatActivity {
 

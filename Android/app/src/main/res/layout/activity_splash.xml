@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/vector_logo"
-        android:tint="@color/white"/>
+        android:tint="@android:color/white"/>
     <!-- Loading icon -->
     <ProgressBar
         android:id="@+id/progressbar"

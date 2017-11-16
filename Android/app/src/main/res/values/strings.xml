@@ -3,4 +3,6 @@
     <string name="messages">berichten</string>
     <string name="drawerOpen">open</string>
     <string name="drawerClosed">sluit</string>
+    <string name="password_hint">wachtwoord</string>
+    <string name="username_hint">email</string>
 </resources>

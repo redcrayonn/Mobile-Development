@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nl.inholland.imready.app.view.custom.SquareLayout
+<RelativeLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:theme="@style/App.Text.White">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark">
 
-    <ImageView
+    <nl.inholland.imready.app.view.layout.SquareImageView
         android:id="@+id/block_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/ic_event"/>
 
     <TextView
@@ -18,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/block_image"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="4dp"
         android:text="test text"/>
 
-</nl.inholland.imready.app.view.custom.SquareLayout>
+</RelativeLayout>
