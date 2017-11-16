@@ -13,13 +13,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var loginButton: UIButton!    
-    @IBOutlet var registerFamilyButton: UIButton!
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var registerFamilyButton: UIButton!//
     let textFieldMoveDistance: Int = -250
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        var username = User.current().username = "wouter"
+        var password = User.current().password = "wouter"
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,21 +29,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
-//        goToNextView(withIdentifier: "SBTabbarcontroller", asUIController: "UITabBarController")
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(
-            withIdentifier: "SBTabbarcontroller") as! UITabBarController
-        self.present(nextViewController, animated:true, completion:nil)
-        
+        self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
     }
     
+    //Show or hide the passwordinput
     @IBAction func onPasswordVisibilityClick(_ sender: Any) {
         passwordField.isSecureTextEntry = !passwordField.isSecureTextEntry
     }
     
     @IBAction func onRegisterFamilyClick(_ sender: Any) {
-        
+        self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
     }
     
     // When keyboard shows, move textfields up

@@ -10,11 +10,11 @@ import Foundation
 
 // Singleton User
 class User {
-    let id: String? = nil
-    let username: String? = nil
-    let password: String? = nil
-    let authToken: String? = nil
-    let datetime: String? = nil
+    var id: String? = nil
+    var username: String? = nil
+    var password: String? = nil
+    var authToken: String? = nil
+    var datetime: String? = nil
     
     var isLoggedIn: Bool {
         get {

@@ -21,4 +21,12 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func goToTabBarView(inStoryboard storyboard: String, withIdentifier identifier: String) {        
+        let storyBoard : UIStoryboard = UIStoryboard(name: storyboard, bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(
+            withIdentifier: identifier) as! UITabBarController
+        self.present(nextViewController, animated:true, completion:nil)
+    }
+
 }

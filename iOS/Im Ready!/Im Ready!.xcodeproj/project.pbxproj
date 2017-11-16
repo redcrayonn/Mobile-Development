@@ -20,11 +20,10 @@
 		FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE431FBC1C5E00945B2A /* Relative.swift */; };
 		FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE461FBC205100945B2A /* LoginResult.swift */; };
 		FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE481FBC33E000945B2A /* EntityModel.swift */; };
-		FAA7B9621FBDA19B00134C5B /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7B9611FBDA19B00134C5B /* KeyboardSettings.swift */; };
-		FAA7B9671FBDAC8900134C5B /* HideKeyboardInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7B9661FBDAC8900134C5B /* HideKeyboardInVC.swift */; };
+		FAA7B9671FBDAC8900134C5B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
 		FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235631FB990F60099B29D /* HomescreenViewController.swift */; };
-		FAB235671FB990F60099B29D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Main.storyboard */; };
+		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
 		FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB235681FB990F60099B29D /* Im_Ready_.xcdatamodeld */; };
 		FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB2356B1FB990F60099B29D /* Assets.xcassets */; };
 		FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB2356D1FB990F60099B29D /* LaunchScreen.storyboard */; };
@@ -35,6 +34,12 @@
 		FAB2359C1FB99A970099B29D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359B1FB99A970099B29D /* Client.swift */; };
 		FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359D1FB99AA70099B29D /* Caregiver.swift */; };
 		FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235A11FB99B720099B29D /* LoginViewController.swift */; };
+		FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */; };
+		FADAB44B1FBDED320069E290 /* HomescreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */; };
+		FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */; };
+		FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4521FBDF0350069E290 /* AuthenticationService.swift */; };
+		FADAB4551FBDF0D20069E290 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4541FBDF0D20069E290 /* WebClient.swift */; };
+		FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4561FBDF2D60069E290 /* ClientService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,12 +79,11 @@
 		FA4DFE431FBC1C5E00945B2A /* Relative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relative.swift; sourceTree = "<group>"; };
 		FA4DFE461FBC205100945B2A /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		FA4DFE481FBC33E000945B2A /* EntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModel.swift; sourceTree = "<group>"; };
-		FAA7B9611FBDA19B00134C5B /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
-		FAA7B9661FBDAC8900134C5B /* HideKeyboardInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardInVC.swift; sourceTree = "<group>"; };
+		FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB235631FB990F60099B29D /* HomescreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenViewController.swift; sourceTree = "<group>"; };
-		FAB235661FB990F60099B29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FAB235661FB990F60099B29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Client.storyboard; sourceTree = "<group>"; };
 		FAB235691FB990F60099B29D /* Im_Ready_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Im_Ready_.xcdatamodel; sourceTree = "<group>"; };
 		FAB2356B1FB990F60099B29D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAB2356E1FB990F60099B29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +98,12 @@
 		FAB2359B1FB99A970099B29D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		FAB2359D1FB99AA70099B29D /* Caregiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caregiver.swift; sourceTree = "<group>"; };
 		FAB235A11FB99B720099B29D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Caregiver.storyboard; sourceTree = "<group>"; };
+		FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenCollectionViewController.swift; sourceTree = "<group>"; };
+		FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		FADAB4521FBDF0350069E290 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		FADAB4541FBDF0D20069E290 /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
+		FADAB4561FBDF2D60069E290 /* ClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,18 +157,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		FA4DFE451FBC204700945B2A /* Results */ = {
+		FA4DFE451FBC204700945B2A /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				FA4DFE461FBC205100945B2A /* LoginResult.swift */,
 			);
-			path = Results;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FAA7B9601FBD9CC700134C5B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FAA7B9611FBDA19B00134C5B /* KeyboardSettings.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -166,7 +175,7 @@
 		FAA7B9631FBDA97C00134C5B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FAA7B9661FBDAC8900134C5B /* HideKeyboardInVC.swift */,
+				FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -197,6 +206,7 @@
 		FAB235601FB990F60099B29D /* Im Ready! */ = {
 			isa = PBXGroup;
 			children = (
+				FADAB4511FBDF01A0069E290 /* Rest */,
 				FAA7B9631FBDA97C00134C5B /* Extensions */,
 				FAA7B9601FBD9CC700134C5B /* Helpers */,
 				FAB2359A1FB99A210099B29D /* Models */,
@@ -248,7 +258,8 @@
 		FAB235981FB999F40099B29D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FAB235651FB990F60099B29D /* Main.storyboard */,
+				FAB235651FB990F60099B29D /* Client.storyboard */,
+				FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +269,7 @@
 			children = (
 				FAB235631FB990F60099B29D /* HomescreenViewController.swift */,
 				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
+				FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -265,7 +277,6 @@
 		FAB2359A1FB99A210099B29D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FA4DFE451FBC204700945B2A /* Results */,
 				FA4DFE391FBB177800945B2A /* Person.swift */,
 				FAB2359B1FB99A970099B29D /* Client.swift */,
 				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
@@ -279,6 +290,26 @@
 				FA4DFE481FBC33E000945B2A /* EntityModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FADAB44C1FBDEF610069E290 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FADAB4521FBDF0350069E290 /* AuthenticationService.swift */,
+				FADAB4561FBDF2D60069E290 /* ClientService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FADAB4511FBDF01A0069E290 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */,
+				FA4DFE451FBC204700945B2A /* Models */,
+				FADAB44C1FBDEF610069E290 /* Services */,
+				FADAB4541FBDF0D20069E290 /* WebClient.swift */,
+			);
+			path = Rest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,8 +429,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */,
+				FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */,
 				FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */,
-				FAB235671FB990F60099B29D /* Main.storyboard in Resources */,
+				FAB235671FB990F60099B29D /* Client.storyboard in Resources */,
 				FAB235961FB9960E0099B29D /* Info.plist in Resources */,
 				FAB235941FB994380099B29D /* Roboto in Resources */,
 			);
@@ -575,22 +607,26 @@
 			files = (
 				FA4DFE421FBC1B7C00945B2A /* Task.swift in Sources */,
 				FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */,
-				FAA7B9671FBDAC8900134C5B /* HideKeyboardInVC.swift in Sources */,
+				FAA7B9671FBDAC8900134C5B /* UIViewControllerExtension.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
 				FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */,
 				FA4DFE401FBC1AF500945B2A /* BuildingblockComponent.swift in Sources */,
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
+				FADAB44B1FBDED320069E290 /* HomescreenCollectionViewController.swift in Sources */,
 				FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
-				FAA7B9621FBDA19B00134C5B /* KeyboardSettings.swift in Sources */,
+				FADAB4551FBDF0D20069E290 /* WebClient.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
+				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
 				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
+				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
+				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,12 +662,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FAB235651FB990F60099B29D /* Main.storyboard */ = {
+		FAB235651FB990F60099B29D /* Client.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FAB235661FB990F60099B29D /* Base */,
 			);
-			name = Main.storyboard;
+			name = Client.storyboard;
 			sourceTree = "<group>";
 		};
 		FAB2356D1FB990F60099B29D /* LaunchScreen.storyboard */ = {
