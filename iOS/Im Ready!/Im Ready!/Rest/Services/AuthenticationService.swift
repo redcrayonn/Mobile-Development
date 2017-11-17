@@ -28,36 +28,37 @@ public class AuthenticationService {
      */
     public func login(withUsername username: String,
                       password: String,
-                      onSucces: @escaping () -> (),
-                      onFailure: @escaping () -> ()) -> URLSessionTask? {
+                      onSuccess: @escaping () -> (),
+                      onFailure: @escaping () -> ()) -> () {
         // setup http params
         var params = [String : Any]()
         params["username"] = username
         params["password"] = password
         
+        onSuccess()
         // call to network layer
-        return apiClient.send(toRelativePath: "/api/users/login/",
-                              withHttpMethod: HttpMethod.POST,
-                              withParameters: params,
-                              onSuccesParser: { (_ data : Data) in
-                                
-                                // business logic after succesfull network layer request
-                                // Parses the data gotten from the login call
-                                do {
-                                    let result = try JSONDecoder().decode(LoginResult.self, from: data)
-                                    
-                                    // get the user defaults database and save the auth token to it
-                                    let preferences = UserDefaults.standard
-                                    preferences.set(result.authtoken, forKey: "session")
-                                    
-                                    // call caller succes closure
-                                    onSucces()
-                                } catch {
-                                    // soemthing went wrong, call caller failure closure
-                                    onFailure()
-                                }
-                                
-        }, onFailure: onFailure)
+//        return apiClient.send(toRelativePath: "/api/users/login/",
+//                              withHttpMethod: HttpMethod.POST,
+//                              withParameters: params,
+//                              onSuccesParser: { (_ data : Data) in
+//
+//                                // business logic after succesfull network layer request
+//                                // Parses the data gotten from the login call
+//                                do {
+//                                    let result = try JSONDecoder().decode(LoginResult.self, from: data)
+//
+//                                    // get the user defaults database and save the auth token to it
+//                                    let preferences = UserDefaults.standard
+//                                    preferences.set(result.authtoken, forKey: "session")
+//
+//                                    // call caller succes closure
+//                                    onSucces()
+//                                } catch {
+//                                    // soemthing went wrong, call caller failure closure
+//                                    onFailure()
+//                                }
+//
+//        }, onFailure: onFailure)
     }
     
     public func logOut() -> Bool {

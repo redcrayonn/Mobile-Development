@@ -17,12 +17,12 @@
 		FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */; };
 		FA4DFE401FBC1AF500945B2A /* BuildingblockComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3F1FBC1AF500945B2A /* BuildingblockComponent.swift */; };
 		FA4DFE421FBC1B7C00945B2A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE411FBC1B7C00945B2A /* Task.swift */; };
-		FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE431FBC1C5E00945B2A /* Relative.swift */; };
+		FA4DFE441FBC1C5E00945B2A /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE431FBC1C5E00945B2A /* Family.swift */; };
 		FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE461FBC205100945B2A /* LoginResult.swift */; };
 		FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE481FBC33E000945B2A /* EntityModel.swift */; };
-		FAA7B9671FBDAC8900134C5B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */; };
+		FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */; };
+		FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4BB8A1FBF0421006B845D /* Services.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
-		FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235631FB990F60099B29D /* HomescreenViewController.swift */; };
 		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
 		FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB235681FB990F60099B29D /* Im_Ready_.xcdatamodeld */; };
 		FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB2356B1FB990F60099B29D /* Assets.xcassets */; };
@@ -35,11 +35,12 @@
 		FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359D1FB99AA70099B29D /* Caregiver.swift */; };
 		FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235A11FB99B720099B29D /* LoginViewController.swift */; };
 		FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */; };
-		FADAB44B1FBDED320069E290 /* HomescreenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */; };
 		FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */; };
 		FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4521FBDF0350069E290 /* AuthenticationService.swift */; };
 		FADAB4551FBDF0D20069E290 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4541FBDF0D20069E290 /* WebClient.swift */; };
 		FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4561FBDF2D60069E290 /* ClientService.swift */; };
+		FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4581FBECEAC0069E290 /* Extensions.swift */; };
+		FADAB45B1FBECF710069E290 /* BuildingBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB45A1FBECF710069E290 /* BuildingBlockCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,13 +77,13 @@
 		FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildingblock.swift; sourceTree = "<group>"; };
 		FA4DFE3F1FBC1AF500945B2A /* BuildingblockComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockComponent.swift; sourceTree = "<group>"; };
 		FA4DFE411FBC1B7C00945B2A /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		FA4DFE431FBC1C5E00945B2A /* Relative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relative.swift; sourceTree = "<group>"; };
+		FA4DFE431FBC1C5E00945B2A /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
 		FA4DFE461FBC205100945B2A /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		FA4DFE481FBC33E000945B2A /* EntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModel.swift; sourceTree = "<group>"; };
-		FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenViewController.swift; sourceTree = "<group>"; };
+		FAA4BB8A1FBF0421006B845D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAB235631FB990F60099B29D /* HomescreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenViewController.swift; sourceTree = "<group>"; };
 		FAB235661FB990F60099B29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Client.storyboard; sourceTree = "<group>"; };
 		FAB235691FB990F60099B29D /* Im_Ready_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Im_Ready_.xcdatamodel; sourceTree = "<group>"; };
 		FAB2356B1FB990F60099B29D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,11 +100,12 @@
 		FAB2359D1FB99AA70099B29D /* Caregiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caregiver.swift; sourceTree = "<group>"; };
 		FAB235A11FB99B720099B29D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Caregiver.storyboard; sourceTree = "<group>"; };
-		FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenCollectionViewController.swift; sourceTree = "<group>"; };
 		FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		FADAB4521FBDF0350069E290 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		FADAB4541FBDF0D20069E290 /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		FADAB4561FBDF2D60069E290 /* ClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientService.swift; sourceTree = "<group>"; };
+		FADAB4581FBECEAC0069E290 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FADAB45A1FBECF710069E290 /* BuildingBlockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingBlockCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +177,7 @@
 		FAA7B9631FBDA97C00134C5B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FAA7B9661FBDAC8900134C5B /* UIViewControllerExtension.swift */,
+				FADAB4581FBECEAC0069E290 /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,9 +269,9 @@
 		FAB235991FB99A190099B29D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FAB235631FB990F60099B29D /* HomescreenViewController.swift */,
 				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
-				FADAB44A1FBDED310069E290 /* HomescreenCollectionViewController.swift */,
+				FADAB45A1FBECF710069E290 /* BuildingBlockCell.swift */,
+				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -277,17 +279,17 @@
 		FAB2359A1FB99A210099B29D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA4DFE481FBC33E000945B2A /* EntityModel.swift */,
 				FA4DFE391FBB177800945B2A /* Person.swift */,
 				FAB2359B1FB99A970099B29D /* Client.swift */,
 				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
-				FA4DFE431FBC1C5E00945B2A /* Relative.swift */,
+				FA4DFE431FBC1C5E00945B2A /* Family.swift */,
 				FA4DFE351FBADB7700945B2A /* Chat.swift */,
 				FA4DFE371FBADB8500945B2A /* Message.swift */,
 				FA4DFE3B1FBB198C00945B2A /* User.swift */,
 				FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */,
 				FA4DFE3F1FBC1AF500945B2A /* BuildingblockComponent.swift */,
 				FA4DFE411FBC1B7C00945B2A /* Task.swift */,
-				FA4DFE481FBC33E000945B2A /* EntityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +299,7 @@
 			children = (
 				FADAB4521FBDF0350069E290 /* AuthenticationService.swift */,
 				FADAB4561FBDF2D60069E290 /* ClientService.swift */,
+				FAA4BB8A1FBF0421006B845D /* Services.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -605,18 +608,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */,
+				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
+				FADAB45B1FBECF710069E290 /* BuildingBlockCell.swift in Sources */,
 				FA4DFE421FBC1B7C00945B2A /* Task.swift in Sources */,
 				FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */,
-				FAA7B9671FBDAC8900134C5B /* UIViewControllerExtension.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
 				FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */,
 				FA4DFE401FBC1AF500945B2A /* BuildingblockComponent.swift in Sources */,
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
-				FADAB44B1FBDED320069E290 /* HomescreenCollectionViewController.swift in Sources */,
-				FAB235641FB990F60099B29D /* HomescreenViewController.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
 				FADAB4551FBDF0D20069E290 /* WebClient.swift in Sources */,
+				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
@@ -624,7 +628,7 @@
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
-				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
+				FA4DFE441FBC1C5E00945B2A /* Family.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,
 			);

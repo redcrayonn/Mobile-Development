@@ -10,12 +10,20 @@ import Foundation
 
 class Client : Person {
     var points: Int
-    var clientRole: Roles
+    var clientRole: Roles = Roles.client
     
-    init(id: String, name: String, role: Roles, points: Int) {
+    var family: [Family] = []
+    var caregivers: [Caregiver] = []
+    var buildingblocks: [Buildingblock] = []
+    
+    //Override the generic role
+    override var role: Roles {
+        get {
+            return clientRole
+        }
+    }
+    
+    init(id: String, name: String, points: Int){
         self.points = points
-        self.clientRole = Roles.client
-        
-        super.init(id: id, name: name, role: self.clientRole)
     }
 }

@@ -9,17 +9,14 @@
 import Foundation
 
 class Person : EntityModel {
-    let name: String
-    var role: Roles
-    
-    init(id: String, name: String, role: Roles) {
-        self.name = name
-        self.role = role
-        
-        super.init(id: id)
+    var name: String?
+    var role: Roles? {
+        get {
+            return nil
+        }
     }
     
-    enum Roles {
+    enum Roles {        
         case admin
         case client
         case caregiver

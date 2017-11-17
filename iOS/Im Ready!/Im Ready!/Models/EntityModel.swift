@@ -9,9 +9,5 @@
 import Foundation
 
 class EntityModel {
-    let id: String
-    
-    init(id: String) {
-        self.id = id
-    }    
+    var id: String?
 }

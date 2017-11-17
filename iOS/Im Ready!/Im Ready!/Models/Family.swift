@@ -1,19 +1,24 @@
 //
-//  Family.swift
+//  Relative.swift
 //  Im Ready!
 //
-//  Created by Wouter Vermeij on 13/11/2017.
+//  Created by Wouter Vermeij on 15/11/2017.
 //  Copyright © 2017 Wouter Vermeij. All rights reserved.
 //
 
 import Foundation
 
-class Relative : Person {
-    let relativeId: Int
+class Family : Person {
+    var familyRole: Roles = Roles.family
     
-    init(id: Int, firstName: String, lastName: String, birthDate: NSDate, email: String, phoneNumber: Int, relativeId: Int) {
-        self.relativeId = relativeId
-        super.init(id: id, firstName: firstName, lastName: lastName, birthDate: birthDate, email: email, phoneNumber: phoneNumber)
+    //Override the generic role
+    override var role: Roles {
+        get {
+            return familyRole
+        }
+    }
+    
+    init(id: String, name: String){
     }
     
 }

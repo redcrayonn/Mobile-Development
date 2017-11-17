@@ -9,12 +9,16 @@
 import Foundation
 
 class Caregiver : Person {
-    var cargiverRole: Roles
+    var caregiverRole: Roles = Roles.caregiver
     
-    override init(id: String, name: String, role: Roles) {
-        self.cargiverRole = Roles.caregiver
-        
-        super.init(id: id, name: name, role: self.cargiverRole)
+    //Override the generic role
+    override var role: Roles {
+        get {
+            return caregiverRole
+        }
     }
     
+    init(id: String, name: String){
+
+    }
 }
