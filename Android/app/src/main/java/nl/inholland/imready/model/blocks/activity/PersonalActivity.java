@@ -3,10 +3,11 @@ package nl.inholland.imready.model.blocks.activity;
 import java.util.List;
 
 import nl.inholland.imready.model.blocks.Activity;
+import nl.inholland.imready.model.blocks.BlockPartStatus;
 
 public class PersonalActivity extends Activity {
     private String content;
-    private ActivityStatus status;
+    private BlockPartStatus status;
     private List<Likes> likes;
     private List<Comments> comments;
 
@@ -18,11 +19,11 @@ public class PersonalActivity extends Activity {
         this.content = content;
     }
 
-    public ActivityStatus getStatus() {
+    public BlockPartStatus getStatus() {
         return status;
     }
 
-    public void setStatus(ActivityStatus status) {
+    public void setStatus(BlockPartStatus status) {
         this.status = status;
     }
 

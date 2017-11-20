@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">ImReady</string>
-    <string name="messages">berichten</string>
-    <string name="drawerOpen">open</string>
-    <string name="drawerClosed">sluit</string>
-    <string name="password_hint">wachtwoord</string>
-    <string name="username_hint">email</string>
+    <string name="app_name">I\'m Ready</string>
+    <string name="messages">Berichten</string>
+    <string name="drawerOpen">Open</string>
+    <string name="drawerClosed">Sluit</string>
+    <string name="password_hint">Wachtwoord</string>
+    <string name="username_hint">Email</string>
+    <string name="login">Log in</string>
+    <string name="logo">Logo</string>
+    <string name="logout">Uitloggen</string>
+    <string name="info">Informatie</string>
+    <string name="family">Familie</string>
+    <string name="input_message_hint">Voer hier een bericht in</string>
+    <string name="send">Verstuur</string>
 </resources>

@@ -1,30 +1,73 @@
 package nl.inholland.imready.app.view.holder;
 
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+import java.util.Random;
+
 import nl.inholland.imready.R;
+import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Block;
+import nl.inholland.imready.model.blocks.BlockPartStatus;
+
+import static br.com.zbra.androidlinq.Linq.stream;
 
 public class BlockViewHolder extends RecyclerView.ViewHolder implements FillableViewHolder<Block> {
-    ImageView blockImageView;
-    TextView blockTitleView;
+    private ImageView blockImageView;
+    private TextView blockTitleView;
+    private TextView blockNotification;
     public BlockViewHolder(View view) {
         super(view);
         blockImageView = view.findViewById(R.id.block_image);
         blockTitleView = view.findViewById(R.id.block_title);
+        blockNotification = view.findViewById(R.id.block_notification);
     }
 
     @Override
-    public void fill(Block data) {
+    public void fill(Context context, Block data) {
         if (data == null) {
             blockTitleView.setText(null);
+            blockTitleView.setVisibility(View.GONE);
+            blockImageView.setImageDrawable(context.getDrawable(R.drawable.ic_add));
+            blockNotification.setVisibility(View.INVISIBLE);
             return;
         }
 
         blockTitleView.setText(data.getName());
+        blockTitleView.setVisibility(View.VISIBLE);
+        blockImageView.setImageDrawable(context.getDrawable(R.drawable.ic_home));
+
+        // NOTIFICATION LABEL
+        fillNotificationCounter(data);
+    }
+
+    private void fillNotificationCounter(Block data) {
+        // activities in block components that have an ongoing or pending assignment
+        List<Activity> activities = stream(data.getComponents())
+                .where(c -> c != null)
+                .selectMany(c -> c.getActivities())
+                .where(a -> a != null)
+                .where(a -> a.getStatus() != BlockPartStatus.COMPLETE ||
+                        a.getStatus() != BlockPartStatus.IRRELEVANT )
+                .toList();
+        // if there are any in above list, show/hide the counter
+        int notificationCount = activities.size();
+        boolean showCounter = notificationCount != 0;
+
+        // testing, remove later
+        Random rnd = new Random();
+        showCounter = rnd.nextBoolean();
+        notificationCount = rnd.nextInt(20);
+
+        blockNotification.setText(String.valueOf(notificationCount));
+        if (showCounter) {
+            blockNotification.setVisibility(View.VISIBLE);
+        } else {
+            blockNotification.setVisibility(View.INVISIBLE);
+        }
     }
 }

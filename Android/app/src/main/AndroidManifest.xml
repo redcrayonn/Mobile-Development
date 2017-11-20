@@ -11,16 +11,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".app.view.activity.SplashActivity"
-            android:theme="@style/App.Splash"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/App.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
-        <activity android:name=".app.view.activity.client.ClientHomeActivity"/>
+        <activity
+            android:name=".app.view.activity.LoginActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity android:name=".app.view.activity.client.ClientHomeActivity" />
+        <activity android:name=".app.view.activity.shared.MessagesActivity"></activity>
     </application>
 
 </manifest>

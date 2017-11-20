@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/drawerPanel"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#eee"
+    android:choiceMode="singleChoice"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:id="@+id/drawer_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/appname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="4dp"
+            style="?android:textAppearanceMedium"/>
+
+        <LinearLayout
+            android:id="@+id/loggedin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appname"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingelogd als:"
+                android:layout_marginEnd="4dp"
+                style="?android:textAppearanceSmall"/>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                style="?android:textAppearanceSmall"/>
+        </LinearLayout>
+
+
+        <View
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@+id/loggedin"/>
+
+    </RelativeLayout>
+
+    <!-- CONTENT -->
+    <ScrollView
+        android:id="@+id/drawer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:layout_below="@+id/drawer_header"
+        android:layout_above="@+id/drawer_footer">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/drawer_messages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_message"
+                style="?android:attr/borderlessButtonStyle"
+                android:theme="@style/App.Button.Drawer"
+                android:text="@string/messages"
+                android:textAlignment="textStart"
+                android:drawablePadding="20dp"/>
+
+            <Button
+                android:id="@+id/drawer_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_group"
+                style="?android:attr/borderlessButtonStyle"
+                android:theme="@style/App.Button.Drawer"
+                android:text="@string/family"
+                android:textAlignment="textStart"
+                android:drawablePadding="20dp"/>
+
+            <Button
+                android:id="@+id/drawer_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_info"
+                style="?android:attr/borderlessButtonStyle"
+                android:theme="@style/App.Button.Drawer"
+                android:text="@string/info"
+                android:textAlignment="textStart"
+                android:drawablePadding="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FOOTER -->
+    <RelativeLayout
+        android:id="@+id/drawer_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:theme="@style/App.Button.Tertiary"/>
+    </RelativeLayout>
+
+</RelativeLayout>

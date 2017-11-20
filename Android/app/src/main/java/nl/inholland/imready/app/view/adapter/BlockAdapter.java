@@ -38,7 +38,6 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
         blockService = client.getBlockService();
 
         blocks = new ArrayList<>();
-        loadMore();
     }
 
     @Override
@@ -71,15 +70,15 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
             int type = getItemViewType(position);
             switch (type) {
                 case BUILDING_BLOCK_TYPE:
-                    viewHolder.fill(blocks.get(position));
+                    viewHolder.fill(context, blocks.get(position));
                     break;
                 case ADD_BLOCK_TYPE:
-                    viewHolder.fill(null);
+                    viewHolder.fill(context, null);
                     break;
             }
         } else {
             viewHolder = (BlockViewHolder) convertView.getTag();
-            viewHolder.fill(blocks.get(position));
+            viewHolder.fill(context, blocks.get(position));
         }
         return convertView;
     }

@@ -1,5 +1,6 @@
 package nl.inholland.imready.model.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
@@ -7,7 +8,7 @@ import nl.inholland.imready.model.NamedEntityModel;
 public class Block extends NamedEntityModel {
     private String description;
     private String imageURL;
-    private List<Component> components;
+    private List<Component> components = new ArrayList<>();
 
     public Block() {
     }

@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context="nl.inholland.imready.app.view.activity.client.ClientHomeActivity">
 
+    <!-- Background image -->
+    <include layout="@layout/background_image"/>
+
     <!-- Container for view and toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +21,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@android:color/transparent"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
         <!-- Main content -->
@@ -34,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="32dp"
-                android:paddingEnd="32dp">
+                android:paddingEnd="32dp"
+                android:paddingTop="16dp">
 
                 <!-- Blocks -->
                 <nl.inholland.imready.app.view.layout.GridViewScrollable
@@ -42,8 +46,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:numColumns="3"
-                    android:verticalSpacing="24dp"
-                    android:horizontalSpacing="24dp"
+                    android:verticalSpacing="12dp"
+                    android:horizontalSpacing="8dp"
                     android:stretchMode="columnWidth"
                     android:gravity="top|center_horizontal"
                     tools:listitem="@layout/block" />
@@ -53,14 +57,6 @@
     </LinearLayout>
 
     <!-- Side panel -->
-    <RelativeLayout
-        android:id="@+id/drawerPanel"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#eee"
-        android:choiceMode="singleChoice"
-        android:orientation="vertical">
-    </RelativeLayout>
+    <include layout="@layout/drawer_client_home"/>
 
 </android.support.v4.widget.DrawerLayout>
