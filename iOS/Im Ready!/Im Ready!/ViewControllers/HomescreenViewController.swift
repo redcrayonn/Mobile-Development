@@ -9,20 +9,15 @@
 import UIKit
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    @IBOutlet weak var HomeCollectionView: UICollectionView!
     
-    var buildingBlocks: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-                                    "1", "2", "3", "4", "5", "6"]
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+    var buildingBlocks: [Buildingblock] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let itemSize = UIScreen.main.bounds.width/3 - 2
-//        let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-//        //        layout.minimumInteritemSpacing = 8
-//        //        layout.minimumLineSpacing = 8
-//        HomeCollectionView.collectionViewLayout = layout
+        self.collectionView.backgroundColor = UIColor.clear
+//        self.collectionView.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        buildingBlocks = buildingblockService.getBuildingblocks()
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,40 +31,41 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingBlockCell", for: indexPath) as! BuildingBlockCell
-        cell.BuildingBlockImage.image = UIImage(named: buildingBlocks[indexPath.row] + ".JPG")
+        cell.buildingBlockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
+        cell.title.text = buildingBlocks[indexPath.row].name!
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-
+        
         let cellCount = CGFloat(buildingBlocks.count)
         
         //If the cell count is zero, there is no point in calculating anything.
         if cellCount > 0 {
-//            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-//            let cellWidth = flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing
-//
-//            let totalCellWidth = cellWidth*cellCount + 20.00 * (cellCount-1)
-//            let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-//
-//            if (totalCellWidth < contentWidth) {
-//                //If the number of cells that exists take up less room than the
-//                //collection view width... then there is an actual point to centering them.
-//
-//                //Calculate the right amount of padding to center the cells.
-//                let padding = (contentWidth - totalCellWidth) / 2.0
-//                return UIEdgeInsetsMake(0, padding, 0, padding)
-//            } else {
-//                //Pretty much if the number of cells that exist take up
-//                //more room than the actual collectionView width, there is no
-//                // point in trying to center them. So we leave the default behavior.
-//                return UIEdgeInsetsMake(0, 40, 0, 40)
-//            }
+            //            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+            //            let cellWidth = flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing
+            //
+            //            let totalCellWidth = cellWidth*cellCount + 20.00 * (cellCount-1)
+            //            let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+            //
+            //            if (totalCellWidth < contentWidth) {
+            //                //If the number of cells that exists take up less room than the
+            //                //collection view width... then there is an actual point to centering them.
+            //
+            //                //Calculate the right amount of padding to center the cells.
+            //                let padding = (contentWidth - totalCellWidth) / 2.0
+            //                return UIEdgeInsetsMake(0, padding, 0, padding)
+            //            } else {
+            //                //Pretty much if the number of cells that exist take up
+            //                //more room than the actual collectionView width, there is no
+            //                // point in trying to center them. So we leave the default behavior.
+            //                return UIEdgeInsetsMake(0, 40, 0, 40)
+            //            }
         }
-//        return UIEdgeInsets.zero
+        //        return UIEdgeInsets.zero
         return UIEdgeInsetsMake(0, 100, 0, 0);
-
+        
     }
     
     

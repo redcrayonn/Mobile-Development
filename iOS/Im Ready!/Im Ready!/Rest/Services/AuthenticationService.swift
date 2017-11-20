@@ -8,13 +8,8 @@
 
 import Foundation
 
-public class AuthenticationService {
-    private let apiClient : ApiClient
-    
-    init(){
-        apiClient = ApiClient()
-    }
-    
+public class AuthenticationService : Service {
+        
     /**
      Makes a http call to /api/users/login and parses the incoming data
      
@@ -30,7 +25,7 @@ public class AuthenticationService {
                       password: String,
                       onSuccess: @escaping () -> (),
                       onFailure: @escaping () -> ()) -> () {
-        // setup http params
+        // setup http params        
         var params = [String : Any]()
         params["username"] = username
         params["password"] = password

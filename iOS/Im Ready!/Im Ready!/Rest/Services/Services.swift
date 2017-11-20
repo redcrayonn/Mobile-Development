@@ -9,3 +9,14 @@
 import Foundation
 
 public let authenticationService: AuthenticationService = AuthenticationService()
+public let clientService: ClientService = ClientService()
+public let buildingblockService: BuildingblockService = BuildingblockService()
+
+public class Service {
+    let apiClient : ApiClient
+    
+    init(){
+        apiClient = ApiClient()
+    }
+}
+

@@ -31,7 +31,7 @@ public class ApiClient {
                      onFailure: @escaping () -> ()) -> URLSessionTask? {
         
         // relative urlpath for this apiclient
-        let baseUrl = URL(string: "https://inhollandbackend.azurewebsites.net")
+        let baseUrl = URL(string: "www.imready.ml/api/v1/")
         
         // authtoken header as defined by api
         var requestHeaders = headers

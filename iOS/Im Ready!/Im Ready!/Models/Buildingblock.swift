@@ -8,14 +8,18 @@
 
 import Foundation
 
-class Buildingblock {
-    let id: String!
-    let name: String!
-    var Components: [Int] = []
+struct Buildingblock : Decodable {
+    let id : String?
+    let name : String?
+    let description : String?
+    let imageURL : String?
+    let components : [Component]?
     
-    init(id: String, name: String, Components: [Int]) {
-        self.id = id
-        self.name = name
-        self.Components = Components
+    enum CodingKeys: String, CodingKey {        
+        case id = "id"
+        case name = "name"
+        case description = "description"
+        case imageURL = "imageURL"
+        case components = "components"
     }
 }
