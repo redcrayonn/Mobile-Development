@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="smallRadius">2dp</dimen>
+    <dimen name="largeRadius">8dp</dimen>
+
+    <dimen name="padding_xxs">2dp</dimen>
+    <dimen name="padding_xs">4dp</dimen>
+    <dimen name="padding_sm">8dp</dimen>
+    <dimen name="padding_md">16dp</dimen>
+    <dimen name="padding_lg">20dp</dimen>
+    <dimen name="padding_xl">24dp</dimen>
+    <dimen name="padding_xxl">32dp</dimen>
+</resources>

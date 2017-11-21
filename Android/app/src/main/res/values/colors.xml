@@ -6,4 +6,5 @@
     <color name="colorTertiary">#CC003F</color>
 
     <color name="colorOverlay">#b88ec4</color>
+    <color name="colorNeutral">#f2f2f2</color>
 </resources>

@@ -1,7 +1,6 @@
 package nl.inholland.imready.app.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
-import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.service.ApiClient;
@@ -60,7 +58,7 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
         BlockViewHolder viewHolder;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.block, parent, false);
+            convertView = inflater.inflate(R.layout.list_item_block, parent, false);
 
             // init viewholder
             viewHolder = new BlockViewHolder(convertView);
@@ -86,9 +84,9 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
     @Override
     public int getItemViewType(int position) {
         if (position == blocks.size() - 1) {
-            return ADD_BLOCK_TYPE; // special ADD block type
+            return ADD_BLOCK_TYPE; // special ADD list_item_block type
         }
-        return BUILDING_BLOCK_TYPE; // default block type
+        return BUILDING_BLOCK_TYPE; // default list_item_block type
     }
 
     @Override
