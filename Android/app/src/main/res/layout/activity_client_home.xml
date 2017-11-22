@@ -36,17 +36,17 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:paddingTop="16dp">
+                android:paddingStart="@dimen/padding_xxl"
+                android:paddingEnd="@dimen/padding_xxl"
+                android:paddingTop="@dimen/padding_md">
 
                 <!-- Blocks -->
                 <nl.inholland.imready.app.view.layout.GridViewScrollable
                     android:id="@+id/blocks"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:numColumns="3"
-                    android:verticalSpacing="12dp"
+                    android:numColumns="@integer/gridColumn"
+                    android:verticalSpacing="6dp"
                     android:horizontalSpacing="8dp"
                     android:stretchMode="columnWidth"
                     android:gravity="top|center_horizontal"

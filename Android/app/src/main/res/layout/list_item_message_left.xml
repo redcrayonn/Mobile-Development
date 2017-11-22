@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_shape_bubble_incoming"
-    android:paddingStart="@dimen/padding_md"
-    android:paddingEnd="0dp"
     android:layout_marginTop="@dimen/padding_xs"
     android:layout_marginBottom="@dimen/padding_xs"
-    android:theme="@style/TextAppearance.AppCompat"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/message_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/padding_md"
-        android:paddingEnd="@dimen/padding_md"
-        android:paddingTop="@dimen/padding_sm"
-        android:paddingBottom="@dimen/padding_sm">
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="@dimen/padding_xxl"
+        android:background="@drawable/bg_shape_bubble_incoming"
+        android:orientation="vertical"
+        android:paddingEnd="0dp"
+        android:paddingStart="@dimen/padding_md">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="incoming message"/>
-
-        <TextView
-            android:id="@+id/time_sent"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/message"
-            style="@style/TextAppearance.AppCompat.Small"
-            tools:text="16:23"/>
-    </RelativeLayout>
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_sm"
+            android:paddingEnd="@dimen/padding_md"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingTop="@dimen/padding_sm">
 
-
-</LinearLayout>
+            <TextView
+                android:id="@+id/message"
+                style="@style/TextAppearance.AppCompat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="incoming message" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

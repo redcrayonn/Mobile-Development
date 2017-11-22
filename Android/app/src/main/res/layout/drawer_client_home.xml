@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_message"
                 style="?android:attr/borderlessButtonStyle"
-                android:theme="@style/App.Button.Borderless"
+                android:theme="@style/App.Button.Borderless.Primary"
                 android:text="@string/messages"
                 android:textAlignment="textStart"
                 android:drawablePadding="20dp"/>
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_group"
                 style="?android:attr/borderlessButtonStyle"
-                android:theme="@style/App.Button.Borderless"
+                android:theme="@style/App.Button.Borderless.Primary"
                 android:text="@string/family"
                 android:textAlignment="textStart"
                 android:drawablePadding="20dp"/>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_info"
                 style="?android:attr/borderlessButtonStyle"
-                android:theme="@style/App.Button.Borderless"
+                android:theme="@style/App.Button.Borderless.Primary"
                 android:text="@string/info"
                 android:textAlignment="textStart"
                 android:drawablePadding="20dp"/>

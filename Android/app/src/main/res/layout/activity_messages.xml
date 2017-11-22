@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme.Alt"
     tools:context="nl.inholland.imready.app.view.activity.shared.MessagesActivity">
 
     <RelativeLayout
@@ -17,7 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/message_input_container"
-            tools:listitem="@layout/list_item_message_left">
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md"
+            android:paddingTop="@dimen/padding_sm"
+            android:paddingBottom="@dimen/padding_sm"
+            tools:listitem="@layout/list_item_message_right">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -49,8 +52,8 @@
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_send"
-                style="@style/App.Button.Round.Primary"
                 android:padding="12dp"
+                style="@style/App.Button.Round.Primary"
                 android:contentDescription="@string/send" />
 
         </RelativeLayout>

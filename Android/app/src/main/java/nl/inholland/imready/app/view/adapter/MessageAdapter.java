@@ -20,7 +20,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     private Context context;
 
     public MessageAdapter(Context context) {
-        layoutInflator = LayoutInflater.from(context);
+        this.layoutInflator = LayoutInflater.from(context);
         this.context = context;
     }
 
@@ -29,9 +29,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         View view;
         switch (viewType) {
             case 0:
+            case 1:
                 view = layoutInflator.inflate(R.layout.list_item_message_left, parent, false);
                 return new MessageViewHolder(view);
-            case 1:
+            case 2:
                 view = layoutInflator.inflate(R.layout.list_item_message_right, parent, false);
                 return new MessageViewHolder(view);
         }
@@ -41,7 +42,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public void onBindViewHolder(final MessageViewHolder holder, int position) {
         Message message = new Message();
-        message.setMessage("test");
+        message.setMessage("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.");
         message.setDatetime(new Date());
 
         holder.fill(context, message);
@@ -49,11 +50,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 20;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position % 2;
+        return position % 3;
     }
 }

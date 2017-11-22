@@ -37,15 +37,17 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="App.Button.Round" parent="AppTheme">
+    <style name="App.Button.Round">
         <item name="android:background">@drawable/bg_button_round</item>
     </style>
 
     <style name="App.Button.Round.Primary">
+        <item name="android:tint">@android:color/white</item>
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
     <style name="App.Button.Round.Accent">
+        <item name="android:tint">@android:color/white</item>
         <item name="colorPrimary">@color/colorAccent</item>
     </style>
 

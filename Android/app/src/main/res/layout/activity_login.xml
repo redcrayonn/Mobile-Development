@@ -73,7 +73,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/login"
-            android:theme="@style/App.Button" />
+            android:theme="@style/App.Button.Accent" />
 
         <!-- Loading icon -->
         <ProgressBar
