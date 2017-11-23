@@ -11,6 +11,8 @@ import Foundation
 public let authenticationService: AuthenticationService = AuthenticationService()
 public let clientService: ClientService = ClientService()
 public let buildingblockService: BuildingblockService = BuildingblockService()
+public let componentService: ComponentService = ComponentService()
+public let activityService: ActivityService = ActivityService()
 
 public class Service {
     let apiClient : ApiClient
@@ -19,4 +21,3 @@ public class Service {
         apiClient = ApiClient()
     }
 }
-

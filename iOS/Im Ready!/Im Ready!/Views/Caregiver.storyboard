@@ -33,7 +33,6 @@
         <!--Cliënten-->
         <scene sceneID="hsc-l5-mIE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="azb-AE-zsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="iQd-Xm-XtA" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nFw-85-S5Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -59,6 +58,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Cliënten" id="J4S-9R-d1L"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="azb-AE-zsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1425" y="-687"/>
         </scene>

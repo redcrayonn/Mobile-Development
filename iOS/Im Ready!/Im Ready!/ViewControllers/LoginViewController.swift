@@ -28,11 +28,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onLoginClick(_ sender: Any) {
         authenticationService.login(withUsername: usernameField.text!,
-                                    password: passwordField.text!,
+                                    andPassword: passwordField.text!,
                                     onSuccess: {
             self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
         }) {
             print("failed to log in")
+
+            // Remove for production
+            self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
         }
         
     }

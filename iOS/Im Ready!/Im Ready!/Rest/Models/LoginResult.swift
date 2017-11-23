@@ -9,7 +9,7 @@
 import Foundation
 class LoginResult : Decodable {
     let authtoken : String?
-    let datetime : String?
+    let datetime : Int
     
     enum CodingKeys: String, CodingKey {        
         case authtoken = "authtoken"

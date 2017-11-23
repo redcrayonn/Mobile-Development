@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Activities : Decodable {
+public struct Activity : Decodable {
     let id : String?
     let name : String?
     let description : String?

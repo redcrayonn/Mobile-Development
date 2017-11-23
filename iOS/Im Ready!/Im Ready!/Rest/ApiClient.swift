@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 public class ApiClient {
     /**
@@ -22,34 +24,31 @@ public class ApiClient {
      
      - returns: The URLSessionTask object that makes the request. By capturing this object, a request can be cancelled at any time by calling .cancel()
      */
+    
+    let baseUrl: String = "https://www.imready.ml/api/v1/"
+    
     public func send(toRelativePath url: String,
-                     withHttpMethod httpMethod: HttpMethod = HttpMethod.GET,
-                     withParameters parameters: [String : Any] = [:],
-                     encodedAs encoding: String.Encoding = .utf8,
+                     withHttpMethod httpMethod: HTTPMethod,
+                     withParameters parameters: [String: Any] = [:],
                      withHeaders headers: [String : String] = [:],
-                     onSuccesParser onSucces: @escaping (_ data: Data) -> (),
-                     onFailure: @escaping () -> ()) -> URLSessionTask? {
+                     onSuccessParser onSuccess: @escaping (_ data: Data) -> (),
+                     onFailure: @escaping () -> ()) -> () {
         
-        // relative urlpath for this apiclient
-        let baseUrl = URL(string: "www.imready.ml/api/v1/")
-        
-        // authtoken header as defined by api
-        var requestHeaders = headers
-        requestHeaders["x-authtoken"] = UserDefaults.standard.string(forKey: "session")
-        
-        // create url for passing to webclient
-        if let url = URL(string: url, relativeTo: baseUrl) {
-            // make web call
-            return WebClient.send( withUrl: url,
-                                   withHttpMethod: httpMethod,
-                                   withParameters: parameters,
-                                   encodedAs: encoding,
-                                   withHeaders: requestHeaders,
-                                   onSucces: onSucces,
-                                   onFailure: onFailure)
+        Alamofire.request(baseUrl + url,
+                          method: httpMethod,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers).responseData { response in
+                            if response.error != nil {
+                                print("Error: \(String(describing: response.error))")
+                                onFailure()
+                            }
+                            
+                            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                                print("Response data: \(response.data)")
+                                print("Data: \(utf8Text)")
+                                onSuccess(data)
+                            }
         }
-        
-        // the url was malformed, so return nil
-        return nil
     }
 }

@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var buildingBlocks: [Buildingblock] = []
-
+    var components: [Component] = []
+    var activities: [Activity] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = UIColor.clear
-//        self.collectionView.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-        buildingBlocks = buildingblockService.getBuildingblocks()
+        
+        buildingBlocks = buildingblockService.getMockBuildingblocks()
+        components = componentService.getMockComponents()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,44 +35,26 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingBlockCell", for: indexPath) as! BuildingBlockCell
-        cell.buildingBlockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
+        cell.buildingblockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
         cell.title.text = buildingBlocks[indexPath.row].name!
+        cell.buildingblock = buildingBlocks[indexPath.row]
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    // Set collectionviewcell layout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Compute the dimension of a cell for an NxN layout with space S between
+        // cells.  Take the collection view's width, subtract (N-1)*S points for
+        // the spaces between the cells, and then divide by N to find the final
+        // dimension for the cell's width and height.
         
-        let cellCount = CGFloat(buildingBlocks.count)
-        
-        //If the cell count is zero, there is no point in calculating anything.
-        if cellCount > 0 {
-            //            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-            //            let cellWidth = flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing
-            //
-            //            let totalCellWidth = cellWidth*cellCount + 20.00 * (cellCount-1)
-            //            let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-            //
-            //            if (totalCellWidth < contentWidth) {
-            //                //If the number of cells that exists take up less room than the
-            //                //collection view width... then there is an actual point to centering them.
-            //
-            //                //Calculate the right amount of padding to center the cells.
-            //                let padding = (contentWidth - totalCellWidth) / 2.0
-            //                return UIEdgeInsetsMake(0, padding, 0, padding)
-            //            } else {
-            //                //Pretty much if the number of cells that exist take up
-            //                //more room than the actual collectionView width, there is no
-            //                // point in trying to center them. So we leave the default behavior.
-            //                return UIEdgeInsetsMake(0, 40, 0, 40)
-            //            }
-        }
-        //        return UIEdgeInsets.zero
-        return UIEdgeInsetsMake(0, 100, 0, 0);
-        
+        let cellsAcross: CGFloat = 3
+        let spaceBetweenCells: CGFloat = 1
+        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        return CGSize(width: dim, height: dim)
     }
-    
     
     @IBAction func logoutButton(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Client", bundle:nil)
@@ -76,14 +63,12 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         self.present(nextViewController, animated:true, completion:nil)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    // Prepare navigation segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? BuildingblockDetailViewController {
+            if let cell = sender as? BuildingblockCell {
+               destinationViewController.buildingblock = cell.buildingblock
+            }
+        }
+    }
 }

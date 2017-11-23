@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct Component : Decodable {
+public struct Component : Decodable {
     let id : String?
     let name : String?
-    let activities : [Activities]?
+    let activities : [Activity]?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
