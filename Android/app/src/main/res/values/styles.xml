@@ -69,6 +69,10 @@
         <item name="android:padding">@dimen/padding_sm</item>
         <item name="android:background">@drawable/bg_border_curved_large_neutral</item>
     </style>
+ pare
+    <style name="TextAppearance.AppCompat.Tiny" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
 
 
 </resources>

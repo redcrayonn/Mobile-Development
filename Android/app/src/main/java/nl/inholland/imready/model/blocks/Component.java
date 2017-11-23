@@ -1,6 +1,9 @@
 package nl.inholland.imready.model.blocks;
 
+import android.os.Parcel;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
@@ -20,6 +23,25 @@ public class Component extends NamedEntityModel {
         super(id, name);
     }
 
+    public Component(Parcel in) {
+        super(in);
+        status = (BlockPartStatus) in.readSerializable();
+        activities = new ArrayList<>();
+        in.readTypedList(activities, Activity.CREATOR);
+    }
+
+    public static final Creator<Component> CREATOR = new Creator<Component>() {
+        @Override
+        public Component createFromParcel(Parcel in) {
+            return new Component(in);
+        }
+
+        @Override
+        public Component[] newArray(int size) {
+            return new Component[size];
+        }
+    };
+
     public List<Activity> getActivities() {
         return activities;
     }
@@ -34,5 +56,12 @@ public class Component extends NamedEntityModel {
 
     public void setStatus(BlockPartStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeSerializable(status);
+        parcel.writeTypedList(activities);
     }
 }

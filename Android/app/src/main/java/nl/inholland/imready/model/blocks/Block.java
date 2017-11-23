@@ -1,5 +1,8 @@
 package nl.inholland.imready.model.blocks;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +46,33 @@ public class Block extends NamedEntityModel {
 
     public void setComponents(List<Component> components) {
         this.components = components;
+    }
+
+    public Block(Parcel in) {
+        super(in);
+        description = in.readString();
+        imageURL = in.readString();
+        components = new ArrayList<>();
+        in.readTypedList(components, Component.CREATOR);
+    }
+
+    public static final Creator<Block> CREATOR = new Creator<Block>() {
+        @Override
+        public Block createFromParcel(Parcel in) {
+            return new Block(in);
+        }
+
+        @Override
+        public Block[] newArray(int size) {
+            return new Block[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeString(description);
+        parcel.writeString(imageURL);
+        parcel.writeTypedList(components);
     }
 }

@@ -1,5 +1,7 @@
 package nl.inholland.imready.model;
 
+import android.os.Parcel;
+
 public class NamedEntityModel extends EntityModel {
     private String name;
 
@@ -15,11 +17,34 @@ public class NamedEntityModel extends EntityModel {
         this.name = name;
     }
 
+    protected NamedEntityModel(Parcel in) {
+        super(in);
+        name = in.readString();
+    }
+
+    public static final Creator<NamedEntityModel> CREATOR = new Creator<NamedEntityModel>() {
+        @Override
+        public NamedEntityModel createFromParcel(Parcel in) {
+            return new NamedEntityModel(in);
+        }
+
+        @Override
+        public NamedEntityModel[] newArray(int size) {
+            return new NamedEntityModel[size];
+        }
+    };
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeString(name);
     }
 }

@@ -23,9 +23,11 @@
             android:name=".app.view.activity.LoginActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".app.view.activity.client.ClientHomeActivity" />
-        <activity android:name=".app.view.activity.shared.MessagesActivity"
+        <activity
+            android:name=".app.view.activity.shared.MessagesActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
-            android:theme="@style/AppTheme.Alt"/>
+            android:theme="@style/AppTheme.Alt" />
+        <activity android:name=".app.view.activity.client.ClientBlockDetailsActivity"></activity>
     </application>
 
 </manifest>

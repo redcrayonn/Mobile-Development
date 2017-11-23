@@ -19,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.BlockAdapter;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.model.blocks.Block;
 
 public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -146,6 +148,9 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, "clicked on item #" + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
+        Block block = (Block) adapterView.getItemAtPosition(position);
+        intent.putExtra(ParcelableConstants.BLOCK, block);
+        startActivity(intent);
     }
 }
