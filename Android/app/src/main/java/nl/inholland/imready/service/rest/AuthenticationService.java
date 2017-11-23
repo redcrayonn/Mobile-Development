@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 
 public interface AuthenticationService {
 
-    @POST("")
+    @POST("login")
     @FormUrlEncoded
     Call<ApiKeyResponse> login(@Field("username") String username,
                                @Field("password") String password);

@@ -1,12 +1,18 @@
 package nl.inholland.imready.service.mock;
 
+import java.security.InvalidParameterException;
+
+import nl.inholland.imready.model.user.Caregiver;
+import nl.inholland.imready.model.user.Client;
+import nl.inholland.imready.model.user.User;
 import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.rest.AuthenticationService;
 import nl.inholland.imready.service.rest.BlockService;
 import nl.inholland.imready.service.rest.CaregiverService;
 import nl.inholland.imready.service.rest.ClientService;
 import nl.inholland.imready.service.rest.FamilyService;
-import nl.inholland.imready.service.rest.MessageService;
+import nl.inholland.imready.service.rest.MessageBaseService;
+import nl.inholland.imready.service.rest.MessageClientService;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
@@ -57,8 +63,8 @@ public class MockClient extends BaseClient {
     }
 
     @Override
-    public MessageService getMessageService() {
-        BehaviorDelegate<MessageService> delegate = mockRetrofit.create(MessageService.class);
+    public MessageBaseService getMessageService() {
+        BehaviorDelegate<MessageBaseService> delegate = mockRetrofit.create(MessageBaseService.class);
         return new MockMessageService(delegate);
     }
 }
