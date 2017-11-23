@@ -6,9 +6,11 @@ public class NamedEntityModel extends EntityModel {
     private String name;
 
     public NamedEntityModel() {
+        super();
     }
 
     public NamedEntityModel(String name) {
+        super();
         this.name = name;
     }
 

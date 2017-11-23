@@ -23,6 +23,12 @@ public class Component extends NamedEntityModel {
         super(id, name);
     }
 
+    public Component(String id, String name, BlockPartStatus status, List<Activity> activities) {
+        super(id, name);
+        this.status = status;
+        this.activities = activities;
+    }
+
     public Component(Parcel in) {
         super(in);
         status = (BlockPartStatus) in.readSerializable();

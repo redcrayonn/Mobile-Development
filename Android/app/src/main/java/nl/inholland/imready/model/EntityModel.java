@@ -3,13 +3,20 @@ package nl.inholland.imready.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.UUID;
+
 public class EntityModel implements Parcelable {
     private String id;
 
     public EntityModel() {
+        this.id = UUID.randomUUID().toString().replace("-", "");
     }
 
     public EntityModel(String id) {
+        super();
+        if (id == null || id.isEmpty()) {
+            return;
+        }
         this.id = id;
     }
 

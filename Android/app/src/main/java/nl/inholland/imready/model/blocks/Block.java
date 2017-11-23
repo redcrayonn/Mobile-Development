@@ -14,6 +14,7 @@ public class Block extends NamedEntityModel {
     private List<Component> components = new ArrayList<>();
 
     public Block() {
+        super();
     }
 
     public Block(String name) {
@@ -22,6 +23,13 @@ public class Block extends NamedEntityModel {
 
     public Block(String id, String name) {
         super(id, name);
+    }
+
+    public Block(String id, String name, String description, String imageURL, List<Component> components) {
+        super(id, name);
+        this.description = description;
+        this.imageURL = imageURL;
+        this.components = components;
     }
 
     public String getDescription() {

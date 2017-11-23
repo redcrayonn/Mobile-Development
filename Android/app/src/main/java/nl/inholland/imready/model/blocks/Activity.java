@@ -24,6 +24,16 @@ public class Activity extends NamedEntityModel {
     public Activity(String id, String name) {
         super(id, name);
     }
+
+    public Activity(String id, String name, String description, int points, BlockPartStatus status, String content, String assignment) {
+        super(id, name);
+        this.description = description;
+        this.points = points;
+        this.status = status;
+        this.content = content;
+        this.assignment = assignment;
+    }
+
     //endregion
 
     //region Getters/Setters
