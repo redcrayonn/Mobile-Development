@@ -13,6 +13,8 @@ import nl.inholland.imready.model.blocks.BlockPartStatus;
 
 public class ActivityViewHolder implements FillableViewHolder<Activity> {
 
+    private Activity activity;
+
     private final TextView titleView;
     private final TextView descriptionView;
     private final EditText assignmentInput;
@@ -38,6 +40,8 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
 
     @Override
     public void fill(Context context, Activity data) {
+        activity = data;
+
         boolean isComplete = data.getStatus() == BlockPartStatus.COMPLETE;
         boolean isPending = data.getStatus() == BlockPartStatus.PENDING;
         int visibility = isComplete ? View.GONE : View.VISIBLE;
@@ -58,7 +62,8 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
         handInButton.setEnabled(!isComplete || !isPending);
         handInButton.setVisibility(isComplete || isPending ? View.GONE : View.VISIBLE);
         handInButton.setOnClickListener(view -> {
-
+            activity.setContent(assignmentInput.getText().toString());
+            activity.setStatus(BlockPartStatus.COMPLETE);
         });
 
         actionContainer.setVisibility(visibility);

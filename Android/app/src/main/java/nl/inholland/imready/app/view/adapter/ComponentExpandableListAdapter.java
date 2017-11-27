@@ -15,6 +15,7 @@ import nl.inholland.imready.app.view.holder.ComponentViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.util.ColorUtil;
 
 public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -22,10 +23,17 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
     private List<Component> components;
     private LayoutInflater inflater;
 
+    private List<Integer> blendedComponentColors;
+
     public ComponentExpandableListAdapter(Context context, List<Component> components) {
         this.context = context;
         this.components = components;
         inflater = LayoutInflater.from(context);
+
+        int accentColor = context.getResources().getColor(R.color.colorAccent);
+        int mainColor = context.getResources().getColor(R.color.colorPrimary);
+
+        blendedComponentColors = ColorUtil.between(accentColor, mainColor, components.size());
     }
 
     /* Groups */
@@ -61,6 +69,8 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
 
         // fill view from data here
         viewHolder.fill(context, component);
+
+        convertView.setBackgroundColor(blendedComponentColors.get(groupPosition));
         return convertView;
     }
 

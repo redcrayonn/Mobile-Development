@@ -39,6 +39,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
         initGridView();
         initToolbarAndDrawer();
+        loadMoreListener.loadMore();
     }
 
     @Override
@@ -46,7 +47,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
-        loadMoreListener.loadMore();
     }
 
     @Override

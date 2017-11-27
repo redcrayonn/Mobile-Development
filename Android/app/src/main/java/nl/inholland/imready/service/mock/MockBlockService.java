@@ -85,6 +85,10 @@ public class MockBlockService implements BlockService {
 
                         add(living_space);
                         add(social_rent);
+                        add(living_space);
+                        add(social_rent);
+                        add(living_space);
+                        add(social_rent);
                     }}
             );
 

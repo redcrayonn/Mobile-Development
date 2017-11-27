@@ -58,11 +58,6 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
         int notificationCount = activities.size();
         boolean showCounter = notificationCount != 0;
 
-        // testing, remove later
-        Random rnd = new Random();
-        showCounter = rnd.nextBoolean();
-        notificationCount = rnd.nextInt(20);
-
         blockNotification.setText(String.valueOf(notificationCount));
         if (showCounter) {
             blockNotification.setVisibility(View.VISIBLE);
