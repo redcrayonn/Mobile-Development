@@ -34,7 +34,7 @@ public class BuildingblockService : Service {
         apiClient.send(toRelativePath: "/clients/\(clientId)/blocks/",
             withHttpMethod: .get,
             onSuccessParser: { (response) in
-                var buildingblocks: [Buildingblock] = []                
+                var buildingblocks: [Buildingblock] = []
                 print(response)
                 onSuccess(buildingblocks)
         }) {

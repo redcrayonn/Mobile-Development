@@ -14,7 +14,6 @@
 		FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87471FC3091D008CB427 /* BuildingblockService.swift */; };
 		FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */; };
 		FA4B874C1FC3148C008CB427 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B874B1FC3148C008CB427 /* UIImageViewExtension.swift */; };
-		FA4B874E1FC34315008CB427 /* BuildingblockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B874D1FC34315008CB427 /* BuildingblockDetailViewController.swift */; };
 		FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE351FBADB7700945B2A /* Chat.swift */; };
 		FA4DFE381FBADB8500945B2A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE371FBADB8500945B2A /* Message.swift */; };
 		FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE391FBB177800945B2A /* Person.swift */; };
@@ -31,6 +30,9 @@
 		FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */; };
 		FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471F91FC722A200D0D9D8 /* ComponentResult.swift */; };
 		FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */; };
+		FA7471FE1FCA0B2900D0D9D8 /* ComponentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471FD1FCA0B2900D0D9D8 /* ComponentTableViewCell.swift */; };
+		FA7472001FCC088300D0D9D8 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */; };
+		FA7472021FCC63D500D0D9D8 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7472011FCC63D500D0D9D8 /* ActivityViewController.swift */; };
 		FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4BB8A1FBF0421006B845D /* Services.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
 		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
@@ -84,7 +86,6 @@
 		FA4B87471FC3091D008CB427 /* BuildingblockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockService.swift; sourceTree = "<group>"; };
 		FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FA4B874B1FC3148C008CB427 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		FA4B874D1FC34315008CB427 /* BuildingblockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockDetailViewController.swift; sourceTree = "<group>"; };
 		FA4DFE351FBADB7700945B2A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FA4DFE371FBADB8500945B2A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA4DFE391FBB177800945B2A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -101,6 +102,9 @@
 		FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenViewController.swift; sourceTree = "<group>"; };
 		FA7471F91FC722A200D0D9D8 /* ComponentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentResult.swift; sourceTree = "<group>"; };
 		FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
+		FA7471FD1FCA0B2900D0D9D8 /* ComponentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTableViewCell.swift; sourceTree = "<group>"; };
+		FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
+		FA7472011FCC63D500D0D9D8 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		FAA4BB8A1FBF0421006B845D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -299,7 +303,9 @@
 				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
 				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
-				FA4B874D1FC34315008CB427 /* BuildingblockDetailViewController.swift */,
+				FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */,
+				FA7471FD1FCA0B2900D0D9D8 /* ComponentTableViewCell.swift */,
+				FA7472011FCC63D500D0D9D8 /* ActivityViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -663,14 +669,15 @@
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
+				FA7472001FCC088300D0D9D8 /* ComponentViewController.swift in Sources */,
 				FADAB4551FBDF0D20069E290 /* WebClient.swift in Sources */,
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
+				FA7472021FCC63D500D0D9D8 /* ActivityViewController.swift in Sources */,
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
-				FA4B874E1FC34315008CB427 /* BuildingblockDetailViewController.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
@@ -679,6 +686,7 @@
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,
+				FA7471FE1FCA0B2900D0D9D8 /* ComponentTableViewCell.swift in Sources */,
 				FA7265DC1FC6104200E7FBC4 /* ComponentService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

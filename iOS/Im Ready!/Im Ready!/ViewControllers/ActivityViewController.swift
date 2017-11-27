@@ -1,20 +1,19 @@
 //
-//  BuildingblockDetailViewController.swift
+//  ActivityViewController.swift
 //  Im Ready!
 //
-//  Created by Wouter Vermeij on 20/11/2017.
+//  Created by Wouter Vermeij on 27/11/2017.
 //  Copyright © 2017 Wouter Vermeij. All rights reserved.
 //
 
 import UIKit
 
-class BuildingblockDetailViewController: UIViewController {
-    var buildingblock: Buildingblock?
-    
+class ActivityViewController: UIViewController {
+    var component: Component?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = buildingblock?.name
-        
+        self.title = component?.name
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,11 +18,18 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Make collectionView background clear, otherwise it's black
         self.collectionView.backgroundColor = UIColor.clear
         
+        // Get the client's buildingblocks, components and activities
+        getClientDevelopmentPlan()
+    }
+    
+    // Get all buildingblocks, components and activites a client is working on
+    func getClientDevelopmentPlan() {
         buildingBlocks = buildingblockService.getMockBuildingblocks()
         components = componentService.getMockComponents()
-        
+        activities = activityService.getMockActivities()
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,6 +41,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         return buildingBlocks.count
     }
     
+    // Load the buildingblocks in a collectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
         cell.buildingblockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
@@ -63,11 +71,13 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         self.present(nextViewController, animated:true, completion:nil)
     }
     
-    // Prepare navigation segue
+    // Prepare navigation segue to ComponentViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? BuildingblockDetailViewController {
+        if let destinationViewController = segue.destination as? ComponentViewController {
             if let cell = sender as? BuildingblockCell {
-               destinationViewController.buildingblock = cell.buildingblock
+                destinationViewController.buildingblock = cell.buildingblock
+                destinationViewController.components = self.components
+                destinationViewController.activities = self.activities
             }
         }
     }

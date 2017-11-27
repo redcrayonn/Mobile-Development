@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -30,14 +30,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         authenticationService.login(withUsername: usernameField.text!,
                                     andPassword: passwordField.text!,
                                     onSuccess: {
-            self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
+                                        self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
         }) {
             print("failed to log in")
-
+            
             // Remove for production
             self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
         }
-        
     }
     
     //Show or hide the passwordinput
@@ -48,6 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onRegisterFamilyClick(_ sender: Any) {
+        
         self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
     }
     
