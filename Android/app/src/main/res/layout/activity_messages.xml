@@ -16,10 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/message_input_container"
-            android:paddingStart="@dimen/padding_md"
-            android:paddingEnd="@dimen/padding_md"
-            android:paddingTop="@dimen/padding_sm"
-            android:paddingBottom="@dimen/padding_sm"
+            android:paddingStart="@dimen/md"
+            android:paddingEnd="@dimen/md"
+            android:paddingTop="@dimen/sm"
+            android:paddingBottom="@dimen/sm"
             tools:listitem="@layout/list_item_message_right">
 
         </android.support.v7.widget.RecyclerView>

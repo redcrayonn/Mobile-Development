@@ -16,8 +16,9 @@
 
     <style name="App" parent="AppTheme"/>
 
-    <style name="AppTheme.Alt" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Alt" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="android:windowBackground">@color/colorNeutral</item>
+        <item name="android:textColor">@color/colorDark</item>
     </style>
 
     <style name="AppToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -66,7 +67,7 @@
     </style>
 
     <style name="App.Text.Input.Rounded">
-        <item name="android:padding">@dimen/padding_sm</item>
+        <item name="android:padding">@dimen/sm</item>
         <item name="android:background">@drawable/bg_border_curved_large_neutral</item>
     </style>
  pare
@@ -74,5 +75,14 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="Tinted">
 
+    </style>
+
+    <style name="Tinted.Accent">
+        <item name="android:tint">@color/colorAccent</item>
+    </style>
+
+
+    <color name="colorDark">#363333</color>
 </resources>

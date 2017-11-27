@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 
 import java.util.List;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.holder.ActivityViewHolder;
 import nl.inholland.imready.app.view.holder.ComponentViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.model.blocks.Activity;
@@ -53,6 +55,10 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             viewHolder = (FillableViewHolder<Component>) convertView.getTag();
         }
+
+        ImageView groupIndicator = convertView.findViewById(R.id.group_indicator);
+        groupIndicator.setSelected(isExpanded);
+
         // fill view from data here
         viewHolder.fill(context, component);
         return convertView;
@@ -61,7 +67,9 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
     /* Child */
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.components.get(groupPosition).getActivities().size();
+        Component component = this.components.get(groupPosition);
+        List<Activity> activities = component.getActivities();
+        return activities.size();
     }
 
     @Override
@@ -78,10 +86,16 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Activity activity = (Activity) getChild(groupPosition, childPosition);
+        FillableViewHolder<Activity> viewHolder = null;
         if (convertView == null) {
-            inflater.inflate(R.layout.list_item_component, parent, false);
+            convertView = inflater.inflate(R.layout.list_item_activity, parent, false);
+            viewHolder = new ActivityViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ActivityViewHolder) convertView.getTag();
         }
-        // fill view from data here
+
+        viewHolder.fill(context, activity);
 
         return convertView;
     }

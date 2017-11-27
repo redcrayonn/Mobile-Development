@@ -31,19 +31,19 @@ public class ComponentViewHolder implements FillableViewHolder<Component> {
 
         Random rng = new Random();
         long msDay = 1000 * 60 * 60 * 24;
-        long daysInFuture = (rng.nextInt(40) + 1) * msDay; // between 1 and 10 (inclusive) days in the future
+        long daysInFuture = (rng.nextInt(40) + 1); // between 1 and 10 (inclusive) days in the future
 
         // future date is at least 1 month away
         if (daysInFuture / 30 >= 1) {
-            deadlineText = "Nog" + daysInFuture / 30 + " maanden";
+            deadlineText = "Nog " + daysInFuture / 30 + " maanden";
         }
         // future date is week(s) away
         else if (daysInFuture / 7 >= 1) {
-            deadlineText = "Nog" + daysInFuture / 30 + "weken";
+            deadlineText = "Nog " + daysInFuture / 7 + " weken";
         }
         // future date is day(s) away
         else {
-            deadlineText = "Nog" + daysInFuture / 30 + "dagen";
+            deadlineText = "Nog " + daysInFuture + " dagen";
         }
 
         deadlineView.setText(deadlineText);

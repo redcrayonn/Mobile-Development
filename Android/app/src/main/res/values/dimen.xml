@@ -3,11 +3,12 @@
     <dimen name="smallRadius">2dp</dimen>
     <dimen name="largeRadius">8dp</dimen>
 
-    <dimen name="padding_xxs">2dp</dimen>
-    <dimen name="padding_xs">4dp</dimen>
-    <dimen name="padding_sm">8dp</dimen>
-    <dimen name="padding_md">16dp</dimen>
-    <dimen name="padding_lg">20dp</dimen>
-    <dimen name="padding_xl">24dp</dimen>
-    <dimen name="padding_xxl">32dp</dimen>
+    <dimen name="xxs">2dp</dimen>
+    <dimen name="xs">4dp</dimen>
+    <dimen name="sm">8dp</dimen>
+    <dimen name="md">16dp</dimen>
+    <dimen name="lg">20dp</dimen>
+    <dimen name="xl">24dp</dimen>
+    <dimen name="xxl">32dp</dimen>
+    <dimen name="xxxl">64dp</dimen>
 </resources>

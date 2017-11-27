@@ -2,6 +2,8 @@
 <resources>
     <style name="App.Button" parent="Base.Widget.AppCompat.Button">
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:paddingStart">@dimen/lg</item>
+        <item name="android:paddingEnd">@dimen/lg</item>
     </style>
 
     <!-- Base Button Styles -->

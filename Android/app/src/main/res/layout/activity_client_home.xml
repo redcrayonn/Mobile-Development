@@ -36,9 +36,9 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/padding_xxl"
-                android:paddingEnd="@dimen/padding_xxl"
-                android:paddingTop="@dimen/padding_md">
+                android:paddingStart="@dimen/xxl"
+                android:paddingEnd="@dimen/xxl"
+                android:paddingTop="@dimen/md">
 
                 <!-- Blocks -->
                 <nl.inholland.imready.app.view.layout.GridViewScrollable
