@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -89,7 +90,7 @@ namespace ImReady.Views
 
         async void DismissExtendedSplash()
         {
-            await Task.Delay(TimeSpan.FromSeconds(3)); // set your desired delay  
+            await Task.Delay(TimeSpan.FromSeconds(5)); // set your desired delay  
             rootFrame = new Frame();
             LoginMain mainPage = new LoginMain();
             rootFrame.Content = mainPage;
@@ -99,15 +100,12 @@ namespace ImReady.Views
 
         private async void ExtendedSplash_Loaded(object sender, RoutedEventArgs e)
         {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
-
-            await SvgControl.LoadFileAsync(file);
-            SvgControl.Foreground = new SolidColorBrush(Colors.White);
+            LogoSvg.Source = new SvgImageSource(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            this.SvgControl.SafeUnload();
+
         }
     }
 }

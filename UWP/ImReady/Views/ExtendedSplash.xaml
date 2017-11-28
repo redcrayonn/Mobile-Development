@@ -19,14 +19,12 @@
         </TransitionCollection>
     </Page.Transitions>
     <Grid>
-        <Canvas>
-            <Image x:Name="extendedSplashImage" Source="Assets/pexels-photo-547116-edited.png" />
-        </Canvas>
-        <svg:SvgImage x:Name="SvgControl"
-                      Width="200"
+        <Image x:Name="LogoSvg"
+                      Width="300"
                       VerticalAlignment="Top"
-                      Height="200"
-                      Foreground="White"
+                      HorizontalAlignment="Center"
+                      Height="300"  
+                      Margin="0 50 0 0"
                       />
         <ProgressRing 
             x:Name="progress1" 

@@ -12,9 +12,18 @@
                     Stretch="UniformToFill">
         </ImageBrush>
     </Page.Background>
-
-    <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-        <TextBox Name="LoginName" MinWidth="300" Margin="0 20"></TextBox>
-        <TextBox MinWidth="300" RelativePanel.Below="LoginName"></TextBox>
-    </RelativePanel>
+    <Grid>
+        <Image x:Name="LogoSvg"
+                      Width="300"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Center"
+                      Height="300"  
+                      Margin="0 50 0 0"
+                      />
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBox Name="LoginName" MinWidth="300" Margin="0 20"></TextBox>
+            <TextBox MinWidth="300" RelativePanel.Below="LoginName"></TextBox>
+        </RelativePanel>
+    </Grid>
+    
 </Page>
