@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,9 +28,17 @@ namespace ImReady.Views
         public Landing()
         {
             this.InitializeComponent();
+            //NavigateToLogin();
+            this.Loaded += Landing_Loaded;
             progress1.IsActive = true;
             progress1.Visibility = Visibility.Visible;
-            //NavigateToLogin();
+        }
+
+        private async void Landing_Loaded(object sender, RoutedEventArgs e)
+        {
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
+
+            await SvgControl.LoadFileAsync(file);
         }
 
         public async void NavigateToLogin()
@@ -42,5 +51,11 @@ namespace ImReady.Views
                 Frame.Navigate(typeof(LoginMain));
             });
         }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            this.SvgControl.SafeUnload();
+        }
+
     }
 }

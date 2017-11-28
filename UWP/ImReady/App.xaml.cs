@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImReady.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -50,13 +51,15 @@ namespace ImReady
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                //  Display an extended splash screen if app was not previously running.  
+                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
-                    //TODO: Load state from previously suspended application
+                    bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                    ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
+                    rootFrame.Content = extendedSplash;
+                    Window.Current.Content = rootFrame;
                 }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                //Window.Current.Content = rootFrame;  
             }
 
             if (e.PrelaunchActivated == false)
@@ -66,7 +69,7 @@ namespace ImReady
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(Views.Landing), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.Login.LoginMain), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -90,10 +93,10 @@ namespace ImReady
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        async private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }
