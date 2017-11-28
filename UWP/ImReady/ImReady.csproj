@@ -111,6 +111,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="ImReady_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,9 @@
     </PackageReference>
     <PackageReference Include="Mntone.SvgForXaml">
       <Version>0.9.1</Version>
+    </PackageReference>
+    <PackageReference Include="WinUX.UWP.Xaml">
+      <Version>2.4.17005.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

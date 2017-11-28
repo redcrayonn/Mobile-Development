@@ -98,7 +98,7 @@ namespace ImReady.Views
             rootFrame.Navigate(typeof(LoginMain)); // call MainPage  
         }
 
-        private async void ExtendedSplash_Loaded(object sender, RoutedEventArgs e)
+        private void ExtendedSplash_Loaded(object sender, RoutedEventArgs e)
         {
             LogoSvg.Source = new SvgImageSource(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
         }

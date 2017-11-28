@@ -20,10 +20,40 @@
                       Height="300"  
                       Margin="0 50 0 0"
                       />
-        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <TextBox Name="LoginName" MinWidth="300" Margin="0 20"></TextBox>
-            <TextBox MinWidth="300" RelativePanel.Below="LoginName"></TextBox>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox 
+                Name="LoginName" 
+                MinWidth="300"
+                FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
+                PlaceholderText="Email"
+                Background="Transparent"
+                Foreground="White"
+                BorderThickness="0, 0, 0, 2"
+                BorderBrush="White"
+                Padding="0" Style="{StaticResource MinimalTextbox}"></TextBox>
+            <PasswordBox 
+                Name="LoginPassword" 
+                MinWidth="300" 
+                RelativePanel.Below="LoginName" 
+                Margin="0 20"
+                FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
+                PlaceholderText="Wachtwoord"
+                Background="Transparent"
+                Foreground="White"
+                BorderThickness="0, 0, 0, 2"
+                BorderBrush="White"
+                Padding="0" Style="{StaticResource MinimalPasswordBox}"
+                ></PasswordBox>
+            <Button 
+                Name="LoginSubmit" 
+                MinWidth="300" 
+                RelativePanel.Below="LoginPassword" 
+                HorizontalAlignment="Stretch" 
+                Content="LOGIN"
+                Background="#F16122"
+                FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
+                Foreground="White"
+                ></Button>
         </RelativePanel>
     </Grid>
-    
 </Page>
