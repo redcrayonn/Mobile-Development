@@ -28,5 +28,10 @@ namespace ImReady.Views.Login
             this.InitializeComponent();
             LogoSvg.Source = new SvgImageSource(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
         }
+
+        private void LoginSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Home.HomeMain));
+        }
     }
 }

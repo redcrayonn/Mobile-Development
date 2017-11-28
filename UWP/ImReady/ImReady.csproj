@@ -103,6 +103,9 @@
     <Compile Include="Views\ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\HomeMain.xaml.cs">
+      <DependentUpon>HomeMain.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\LoginMain.xaml.cs">
       <DependentUpon>LoginMain.xaml</DependentUpon>
     </Compile>
@@ -115,9 +118,10 @@
     <None Include="ImReady_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\620splash.png" />
+    <Content Include="Assets\SharedResources\620splash.png" />
     <Content Include="Assets\pexels-photo-547116-edited.png" />
     <Content Include="Assets\pexels-photo-547116.jpeg" />
+    <Content Include="Assets\SharedResources\homescreen.png" />
     <Content Include="Assets\SharedResources\Logo.svg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -138,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ExtendedSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home\HomeMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

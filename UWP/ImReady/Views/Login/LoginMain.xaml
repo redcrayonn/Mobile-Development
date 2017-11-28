@@ -52,7 +52,7 @@
                 Content="LOGIN"
                 Background="#F16122"
                 FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
-                Foreground="White"
+                Foreground="White" Click="LoginSubmit_Click"
                 ></Button>
         </RelativePanel>
     </Grid>
