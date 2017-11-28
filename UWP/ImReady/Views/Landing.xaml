@@ -7,11 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Background>
-        <ImageBrush ImageSource="/Assets/pexels-photo-547116.jpeg"
+        <ImageBrush ImageSource="/Assets/pexels-photo-547116-edited.png"
                     Stretch="UniformToFill">
         </ImageBrush>
     </Page.Background>
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Left" />
+            <EdgeUIThemeTransition Edge="Left" />
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Grid>
-        
+        <ProgressRing 
+            x:Name="progress1" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Margin="0 0 0 120" 
+            Foreground="White" 
+            Height="50"
+            Width="50"
+            />
     </Grid>
 </Page>

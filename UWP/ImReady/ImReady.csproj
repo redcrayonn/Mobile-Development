@@ -102,8 +102,8 @@
     <Compile Include="Views\Landing.xaml.cs">
       <DependentUpon>Landing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Views\Login\LoginMain.xaml.cs">
+      <DependentUpon>LoginMain.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login\Login.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\Login\LoginMain.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

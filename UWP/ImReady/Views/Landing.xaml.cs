@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ImReady.Views.Login;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +27,20 @@ namespace ImReady.Views
         public Landing()
         {
             this.InitializeComponent();
+            progress1.IsActive = true;
+            progress1.Visibility = Visibility.Visible;
+            //NavigateToLogin();
+        }
+
+        public async void NavigateToLogin()
+        {
+            progress1.IsActive = true;
+            progress1.Visibility = Visibility.Visible;
+            await Task.Delay(2000);
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                Frame.Navigate(typeof(LoginMain));
+            });
         }
     }
 }
