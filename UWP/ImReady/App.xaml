@@ -5,6 +5,9 @@
     xmlns:local="using:ImReady"
     RequestedTheme="Light">
     <Application.Resources>
+        <Style x:Key="EllipsisButton" TargetType="Button">
+            <Setter Property="MaxWidth" Value="0"/>
+        </Style>
         <Style x:Key="MinimalTextbox" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
             <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
