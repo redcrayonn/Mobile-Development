@@ -15,4 +15,5 @@
     <string name="activity_saved_info">Uitwerkingen worden tussentijds opgeslagen</string>
     <string name="hand_in">Inleveren</string>
     <string name="activity_input">Uitwerking van de opdracht</string>
+    <string name="label">I\'m Ready</string>
 </resources>

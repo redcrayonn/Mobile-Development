@@ -3,14 +3,14 @@ package nl.inholland.imready.service.mock;
 import java.util.Date;
 
 import nl.inholland.imready.service.model.ApiKeyResponse;
-import nl.inholland.imready.service.rest.AuthenticationService;
+import nl.inholland.imready.service.rest.ServerAuthenticationService;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
-public class MockAuthenticationService implements AuthenticationService {
-    private final BehaviorDelegate<AuthenticationService> delegate;
+public class MockServerAuthenticationService implements ServerAuthenticationService {
+    private final BehaviorDelegate<ServerAuthenticationService> delegate;
 
-    public MockAuthenticationService(BehaviorDelegate<AuthenticationService> delegate) {
+    public MockServerAuthenticationService(BehaviorDelegate<ServerAuthenticationService> delegate) {
         this.delegate = delegate;
     }
 

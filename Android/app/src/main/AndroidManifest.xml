@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nl.inholland.imready">
 
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
@@ -31,6 +34,14 @@
             android:name=".app.view.activity.client.ClientBlockDetailsActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt"/>
+
+        <service android:name=".app.logic.ImReadyAuthenticationService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
     </application>
 
 </manifest>
