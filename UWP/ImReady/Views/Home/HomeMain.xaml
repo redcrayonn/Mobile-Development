@@ -60,8 +60,8 @@
                             <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
                         </StackPanel>
                     </CommandBar.Content>
-                    <AppBarButton Icon="Back" Click="AppBarButton_Click" Foreground="White"/>
-                    <AppBarButton Icon="Stop" Click="AppBarButton_Click" Foreground="White"/>
+                    <AppBarButton Icon="Message" Click="AppBarButton_Click" Foreground="White"/>
+                    <AppBarButton Icon="" Click="AppBarButton_Click" Foreground="White"/>
                 </CommandBar>
             </Grid>
         </SplitView.Content>

@@ -118,6 +118,8 @@
     <None Include="ImReady_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Material\ic_comment_24px.svg" />
+    <Content Include="Assets\Material\ic_notifications_24px.svg" />
     <Content Include="Assets\SharedResources\620splash.png" />
     <Content Include="Assets\pexels-photo-547116-edited.png" />
     <Content Include="Assets\pexels-photo-547116.jpeg" />
