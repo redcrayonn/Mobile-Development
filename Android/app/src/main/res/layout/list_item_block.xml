@@ -22,6 +22,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_event"
+            android:backgroundTint="@color/colorPrimary"
+            android:tint="@android:color/white"
             style="@style/App.Rounded"/>
 
         <TextView

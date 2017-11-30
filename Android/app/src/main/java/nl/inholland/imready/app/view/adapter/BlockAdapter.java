@@ -28,6 +28,7 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
     private final Context context;
     private final BlockService blockService;
     private List<Block> blocks;
+    private final LayoutInflater layoutInflater;
 
     public BlockAdapter(Context context) {
         this.context = context;
@@ -36,6 +37,8 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
         blockService = client.getBlockService();
 
         blocks = new ArrayList<>();
+
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -57,21 +60,20 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
     public View getView(int position, View convertView, ViewGroup parent) {
         BlockViewHolder viewHolder;
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.list_item_block, parent, false);
-
-            // init viewholder
-            viewHolder = new BlockViewHolder(convertView);
-            convertView.setTag(viewHolder);
-
-            // fill based on type
             int type = getItemViewType(position);
+
             switch (type) {
                 case BUILDING_BLOCK_TYPE:
+                    convertView = layoutInflater.inflate(R.layout.list_item_block, parent, false);
+                    viewHolder = new BlockViewHolder(convertView);
                     viewHolder.fill(context, blocks.get(position));
+                    convertView.setTag(viewHolder);
                     break;
                 case ADD_BLOCK_TYPE:
+                    convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
+                    viewHolder = new BlockViewHolder(convertView);
                     viewHolder.fill(context, null);
+                    convertView.setTag(viewHolder);
                     break;
             }
         } else {

@@ -30,15 +30,10 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
     @Override
     public void fill(Context context, Block data) {
         if (data == null) {
-            blockTitleView.setText(null);
-            blockTitleView.setVisibility(View.GONE);
-            blockImageView.setImageDrawable(context.getDrawable(R.drawable.ic_add));
-            blockNotification.setVisibility(View.INVISIBLE);
             return;
         }
 
         blockTitleView.setText(data.getName());
-        blockTitleView.setVisibility(View.VISIBLE);
         blockImageView.setImageDrawable(context.getDrawable(R.drawable.ic_home));
 
         // NOTIFICATION LABEL

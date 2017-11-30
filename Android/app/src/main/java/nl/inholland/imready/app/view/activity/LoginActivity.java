@@ -43,18 +43,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void setupHandlers() {
         loginBtn.setOnClickListener(this);
-
-        passwordInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    // simulate login button click
-                    onClick(loginBtn);
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     /* Main button handler (service locator) */

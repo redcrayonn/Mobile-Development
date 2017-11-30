@@ -14,11 +14,10 @@
         <item name="android:popupMenuStyle">@style/AppToolBar</item>
     </style>
 
-    <style name="App" parent="AppTheme"/>
+    <style name="App" parent="AppTheme.Alt"/>
 
     <style name="AppTheme.Alt" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="android:windowBackground">@color/colorNeutral</item>
-        <item name="android:textColor">@color/colorDark</item>
     </style>
 
     <style name="AppToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -34,7 +33,7 @@
 
     <style name="App.Text"></style>
 
-    <style name="App.Text.White" parent="AppTheme">
+    <style name="App.Text.White">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:textSize">20sp</item>
@@ -70,8 +69,12 @@
         <item name="android:padding">@dimen/sm</item>
         <item name="android:background">@drawable/bg_border_curved_large_neutral</item>
     </style>
- pare
+
     <style name="TextAppearance.AppCompat.Tiny" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Tiny.Inverse" parent="Base.TextAppearance.AppCompat.Small.Inverse">
         <item name="android:textSize">10sp</item>
     </style>
 

@@ -1,6 +1,7 @@
 package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -56,6 +57,9 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
 
         assignmentInput.setText(data.getContent());
         assignmentInput.setEnabled(!isComplete || !isPending);
+        assignmentInput.setFocusable(!isComplete || !isPending);
+        int inputType = isComplete || isPending ? InputType.TYPE_NULL : InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+        assignmentInput.setInputType(inputType);
 
         deadlineText.setText("over 2 dagen");
 

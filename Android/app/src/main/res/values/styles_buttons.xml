@@ -41,6 +41,8 @@
 
     <style name="App.Button.Round">
         <item name="android:background">@drawable/bg_button_round</item>
+        <item name="android:paddingStart">@null</item>
+        <item name="android:paddingEnd">@null</item>
     </style>
 
     <style name="App.Button.Round.Primary">

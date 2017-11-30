@@ -77,6 +77,9 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
     /* Child */
     @Override
     public int getChildrenCount(int groupPosition) {
+        if (this.components.size() == 0) {
+            return 0;
+        }
         Component component = this.components.get(groupPosition);
         List<Activity> activities = component.getActivities();
         return activities.size();
@@ -89,7 +92,10 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Component component = components.get(groupPosition);
+        if (this.components.size() == 0) {
+            return 0;
+        }
+        Component component = this.components.get(groupPosition);
         return component.getActivities().get(childPosition);
     }
 

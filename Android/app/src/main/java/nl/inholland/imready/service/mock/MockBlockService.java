@@ -75,7 +75,7 @@ public class MockBlockService implements BlockService {
                                             "Dit is een beschrijving van de taak.\nHierin staan tips en verdere informatie voor de gebruiker/client",
                                             1,
                                             BlockPartStatus.PENDING,
-                                            "",
+                                            "Dit is de ingevulde content door de gebruiker",
                                             ""
                                     );
 
@@ -94,7 +94,7 @@ public class MockBlockService implements BlockService {
 
             add(block_living);
         }};
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             Block b = new Block("Block #" + i);
             blocks.add(b);
         }
