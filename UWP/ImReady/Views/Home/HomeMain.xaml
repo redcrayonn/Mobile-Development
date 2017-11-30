@@ -23,11 +23,13 @@
     <Grid>
         <CommandBar
             IsOpen="True"
-            Background="Transparent">
-            <AppBarButton Icon="Shuffle" Click="AppBarButton_Click" />
-            <AppBarButton Label="Bouwstenen" Click="AppBarButton_Click" />
-            <AppBarButton Icon="Back" Click="AppBarButton_Click"/>
-            <AppBarButton Icon="Stop" Click="AppBarButton_Click"/>
+            Background="Transparent"
+            Foreground="White"
+            >
+            <AppBarButton Content="Bouwstenen" Foreground="White" HorizontalAlignment="Left"/>
+            <AppBarButton Label="Bouwstenen" Click="AppBarButton_Click" Foreground="White"/>
+            <AppBarButton Icon="Back" Click="AppBarButton_Click" Foreground="White"/>
+            <AppBarButton Icon="Stop" Click="AppBarButton_Click" Foreground="White"/>
         </CommandBar>
     </Grid>
 </Page>
