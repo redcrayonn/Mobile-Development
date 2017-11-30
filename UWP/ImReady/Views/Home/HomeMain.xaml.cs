@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImReady.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -22,14 +24,17 @@ namespace ImReady.Views.Home
     /// </summary>
     public sealed partial class HomeMain : Page
     {
+        private HomeMainViewModel ViewModel => HomeMainViewModel.SingleInstance;
+
         public HomeMain()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
