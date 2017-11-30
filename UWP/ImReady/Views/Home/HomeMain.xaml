@@ -19,17 +19,51 @@
             <EdgeUIThemeTransition Edge="Left" />
         </TransitionCollection>
     </Page.Transitions>
-    
-    <Grid>
-        <CommandBar
-            IsOpen="True"
-            Background="Transparent"
-            Foreground="White"
-            >
-            <AppBarButton Content="Bouwstenen" Foreground="White" HorizontalAlignment="Left"/>
-            <AppBarButton Label="Bouwstenen" Click="AppBarButton_Click" Foreground="White"/>
-            <AppBarButton Icon="Back" Click="AppBarButton_Click" Foreground="White"/>
-            <AppBarButton Icon="Stop" Click="AppBarButton_Click" Foreground="White"/>
-        </CommandBar>
-    </Grid>
+    <SplitView 
+        Name="MySplitView"
+        DisplayMode="Overlay"
+        IsPaneOpen="False"
+        CompactPaneLength="50"
+        OpenPaneLength="150">
+        <SplitView.Pane>
+            <StackPanel Background="Gray">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <CommandBar
+                    IsOpen="True"
+                    Background="Transparent"
+                    Foreground="White"
+                    >
+                    <CommandBar.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                            Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"
+                            Margin="20 0"
+                            />
+                            <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
+                        </StackPanel>
+                    </CommandBar.Content>
+                    <AppBarButton Icon="Back" Click="AppBarButton_Click" Foreground="White"/>
+                    <AppBarButton Icon="Stop" Click="AppBarButton_Click" Foreground="White"/>
+                </CommandBar>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
