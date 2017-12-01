@@ -12,8 +12,8 @@ public class BuildingblockService : Service {
     func getMockBuildingblocks() -> [Buildingblock] {
         var buildingblocks: [Buildingblock] = []
         
-        buildingblocks.append(Buildingblock(id: "1", name: "Wonen", description: "lekker wonen", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
+        buildingblocks.append(Buildingblock(id: "1", name: "Wonen", description: "lekker wonen", imageURL: "wonen.png", components: componentService.getMockHomeComponents()))
+        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: componentService.getMockWorkComponents()))
         buildingblocks.append(Buildingblock(id: "3", name: "Financien", description: "financiele dingen", imageURL: "wonen.png", components: []))
         buildingblocks.append(Buildingblock(id: "4", name: "Verzekering", description: "verzekeren", imageURL: "wonen.png", components: []))
         buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
@@ -21,7 +21,7 @@ public class BuildingblockService : Service {
         buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
         buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
         buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Gezin", description: "werken", imageURL: "wonen.png", components: []))
+        buildingblocks.append(Buildingblock(id: "2", name: "Rechten en plichten", description: "werken", imageURL: "wonen.png", components: []))
         buildingblocks.append(Buildingblock(id: "2", name: "Behandelplan", description: "werken", imageURL: "wonen.png", components: []))
         
         return buildingblocks

@@ -25,7 +25,7 @@ public class ApiClient {
      - returns: The URLSessionTask object that makes the request. By capturing this object, a request can be cancelled at any time by calling .cancel()
      */
     
-    let baseUrl: String = "https://www.imready.ml/api/v1/"
+    let baseUrl: String = "https://www.imready.ml/api/v1"
     
     public func send(toRelativePath url: String,
                      withHttpMethod httpMethod: HTTPMethod,

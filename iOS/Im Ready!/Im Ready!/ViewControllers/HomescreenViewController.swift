@@ -28,13 +28,8 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     // Get all buildingblocks, components and activites a client is working on
     func getClientDevelopmentPlan() {
         buildingBlocks = buildingblockService.getMockBuildingblocks()
-        components = componentService.getMockComponents()
-        activities = activityService.getMockActivities()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //        components = componentService.getMockComponents()
+        //        activities = activityService.getMockActivities()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,25 +41,22 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
         cell.buildingblockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
         cell.title.text = buildingBlocks[indexPath.row].name!
+        cell.title.numberOfLines = 2;
+        cell.title.adjustsFontSizeToFitWidth = true;
         cell.buildingblock = buildingBlocks[indexPath.row]
+        
+        // Style the cell with cornerradius
+        cell.mainBackground.layer.cornerRadius = 6
+        cell.mainBackground.layer.masksToBounds = true
+        
+        cell.shadowLayer.layer.backgroundColor = UIColor.clear.cgColor
         
         return cell
     }
     
-    // Set collectionviewcell layout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Compute the dimension of a cell for an NxN layout with space S between
-        // cells.  Take the collection view's width, subtract (N-1)*S points for
-        // the spaces between the cells, and then divide by N to find the final
-        // dimension for the cell's width and height.
-        
-        let cellsAcross: CGFloat = 3
-        let spaceBetweenCells: CGFloat = 1
-        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
-        return CGSize(width: dim, height: dim)
-    }
-    
     @IBAction func logoutButton(_ sender: Any) {
+        // Do some logout actions
+        
         let storyBoard : UIStoryboard = UIStoryboard(name: "Client", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(
             withIdentifier: "SBLogin") as UIViewController
@@ -76,8 +68,9 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         if let destinationViewController = segue.destination as? ComponentViewController {
             if let cell = sender as? BuildingblockCell {
                 destinationViewController.buildingblock = cell.buildingblock
+                destinationViewController.buildingblockImage = cell.buildingblockImage
                 destinationViewController.components = self.components
-                destinationViewController.activities = self.activities
+//                destinationViewController.activities = self.activities
             }
         }
     }

@@ -31,7 +31,7 @@ public class AuthenticationService : Service {
         params["username"] = username
         params["password"] = password
         
-        apiClient.send(toRelativePath: "login",
+        apiClient.send(toRelativePath: "/login",
                        withHttpMethod: .post,
                        withParameters: params,
                        onSuccessParser: { (_ data) in
