@@ -3,6 +3,7 @@ package nl.inholland.imready.app.view.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
@@ -60,6 +62,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /* Button Handlers */
     // Login button
     private void onLoginBtnClicked() {
+        String username = usernameInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        /*
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(this, getString(R.string.empty_username), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, getString(R.string.empty_password), Toast.LENGTH_SHORT).show();
+            return;
+        }*/
+
         // Setup intent to the home screen
         Intent intent = new Intent(this, ClientHomeActivity.class);
 

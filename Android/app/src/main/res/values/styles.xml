@@ -24,6 +24,10 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="App.Dialog" parent="Theme.AppCompat.Dialog">
+
+    </style>
+
     <style name="App.Splash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:colorPrimary">@android:color/white</item>

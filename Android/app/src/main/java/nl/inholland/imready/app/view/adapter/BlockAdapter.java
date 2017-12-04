@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.mock.MockClient;
@@ -30,8 +32,11 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
     private List<Block> blocks;
     private final LayoutInflater layoutInflater;
 
-    public BlockAdapter(Context context) {
+    private final List<OnLoadedListener<Block>> onLoadedListeners;
+
+    public BlockAdapter(Context context, List<OnLoadedListener<Block>> onLoadedListeners) {
         this.context = context;
+        this.onLoadedListeners = onLoadedListeners;
 
         ApiClient client = new MockClient();
         blockService = client.getBlockService();
@@ -100,6 +105,9 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
     public void onResponse(Call<List<Block>> call, Response<List<Block>> response) {
         if (response.isSuccessful() && response.body() != null) {
             this.blocks = response.body();
+            for (OnLoadedListener<Block> listener : onLoadedListeners) {
+                listener.onLoaded(response.body());
+            }
             this.blocks.add(new Block("ADD"));
             notifyDataSetChanged();
         }

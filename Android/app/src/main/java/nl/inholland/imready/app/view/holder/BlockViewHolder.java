@@ -13,6 +13,7 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.BlockPartStatus;
+import nl.inholland.imready.model.blocks.Component;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -44,7 +45,7 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
         // activities in block components that have an ongoing or pending assignment
         List<Activity> activities = stream(data.getComponents())
                 .where(c -> c != null)
-                .selectMany(c -> c.getActivities())
+                .selectMany(Component::getActivities)
                 .where(a -> a != null)
                 .where(a -> a.getStatus() != BlockPartStatus.COMPLETE ||
                         a.getStatus() != BlockPartStatus.IRRELEVANT )

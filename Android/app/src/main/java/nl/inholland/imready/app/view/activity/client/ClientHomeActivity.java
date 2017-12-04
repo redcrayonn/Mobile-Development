@@ -2,6 +2,7 @@ package nl.inholland.imready.app.view.activity.client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,14 +19,19 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.BlockAdapter;
+import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.Block;
 
-public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnLoadedListener<Block> {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
@@ -89,7 +95,9 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void initGridView() {
         GridView gridView = findViewById(R.id.blocks);
-        gridAdapter = new BlockAdapter(this);
+        List<OnLoadedListener<Block>> listeners = new ArrayList<>();
+        listeners.add(this);
+        gridAdapter = new BlockAdapter(this, listeners);
         loadMoreListener = (LoadMoreListener) gridAdapter;
         gridView.setAdapter(gridAdapter);
         gridView.setOnItemClickListener(this);
@@ -152,5 +160,14 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         Block block = (Block) adapterView.getItemAtPosition(position);
         intent.putExtra(ParcelableConstants.BLOCK, block);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLoaded(List<Block> body) {
+        WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(ParcelableConstants.BLOCKS, (ArrayList<? extends Parcelable>) body);
+        dialogWelcome.setArguments(bundle);
+        dialogWelcome.show(getSupportFragmentManager(), "welcome");
     }
 }
