@@ -31,12 +31,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jog-I6-wyl">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-KZ-4gd">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-KZ-4gd">
                                         <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="q7Q-vr-YZl"/>
+                                        </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsL-6s-y34">
-                                        <rect key="frame" x="63" y="10" width="224" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsL-6s-y34">
+                                        <rect key="frame" x="63" y="4" width="287" height="43"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Click to open">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,56 +48,34 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.68555252170000003" blue="0.079185989849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="gsL-6s-y34" firstAttribute="leading" secondItem="jog-I6-wyl" secondAttribute="leading" id="08t-v2-go3"/>
-                                    <constraint firstAttribute="trailing" secondItem="gsL-6s-y34" secondAttribute="trailing" id="9py-27-uEJ"/>
-                                    <constraint firstItem="gsL-6s-y34" firstAttribute="top" secondItem="jog-I6-wyl" secondAttribute="top" constant="4" id="C5e-vQ-hPm"/>
-                                    <constraint firstItem="gsL-6s-y34" firstAttribute="centerY" secondItem="jog-I6-wyl" secondAttribute="centerY" id="MTV-yP-7WP"/>
+                                    <constraint firstAttribute="trailing" secondItem="gsL-6s-y34" secondAttribute="trailing" id="5nK-S6-bbF"/>
+                                    <constraint firstItem="6kF-KZ-4gd" firstAttribute="top" secondItem="jog-I6-wyl" secondAttribute="top" id="5qM-vc-b7s"/>
+                                    <constraint firstAttribute="bottom" secondItem="6kF-KZ-4gd" secondAttribute="bottom" id="6FG-cn-6dr"/>
+                                    <constraint firstItem="gsL-6s-y34" firstAttribute="top" secondItem="jog-I6-wyl" secondAttribute="top" constant="4" id="8Nj-Fc-Riv"/>
+                                    <constraint firstItem="6kF-KZ-4gd" firstAttribute="leading" secondItem="jog-I6-wyl" secondAttribute="leading" id="92O-Un-yjd"/>
+                                    <constraint firstItem="6kF-KZ-4gd" firstAttribute="centerY" secondItem="gsL-6s-y34" secondAttribute="centerY" id="Q9l-dX-KU3"/>
+                                    <constraint firstItem="gsL-6s-y34" firstAttribute="leading" secondItem="6kF-KZ-4gd" secondAttribute="trailing" constant="8" symbolic="YES" id="jJ2-Bw-Bhq"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="av7-gp-M5r" customClass="ActivityView" customModule="Im_Ready_" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="350" height="260"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="46Q-S9-SwT">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="260"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableView>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" translatesAutoresizingMaskIntoConstraints="NO" id="qv1-Yx-79L">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qv1-Yx-79L" id="eGh-09-qAk">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-9W-wco">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.68555252170000003" blue="0.079185989849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="av7-gp-M5r" firstAttribute="top" secondItem="TDA-hh-1nI" secondAttribute="top" constant="50" id="sUF-4F-pwu"/>
+                            <constraint firstItem="av7-gp-M5r" firstAttribute="top" secondItem="TDA-hh-1nI" secondAttribute="top" constant="50" id="VM6-32-fGR"/>
                         </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="TDA-hh-1nI" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="5D1-Lf-haG"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="TDA-hh-1nI" secondAttribute="bottom" constant="-12" id="9lx-Ki-kzK"/>
-                    <constraint firstItem="TDA-hh-1nI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ny2-2g-Bt0"/>
-                    <constraint firstItem="TDA-hh-1nI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="m6O-fp-q9n"/>
+                    <constraint firstItem="TDA-hh-1nI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="6Gf-Op-iGR"/>
+                    <constraint firstItem="TDA-hh-1nI" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="S4d-RR-gw9"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="TDA-hh-1nI" secondAttribute="bottom" constant="-12" id="bEy-JO-wwo"/>
+                    <constraint firstItem="TDA-hh-1nI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eTD-Rf-HDW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="activityName" destination="MSu-9W-wco" id="y2V-o4-8Mv"/>
                 <outlet property="buildingblockImageView" destination="6kF-KZ-4gd" id="4rI-Kc-KWj"/>
                 <outlet property="detailView" destination="av7-gp-M5r" id="9pu-dW-isU"/>
                 <outlet property="openDetailViewBtn" destination="gsL-6s-y34" id="x5i-nh-jb2"/>

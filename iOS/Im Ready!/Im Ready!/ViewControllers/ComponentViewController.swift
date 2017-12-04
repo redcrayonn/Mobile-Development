@@ -10,10 +10,8 @@ import UIKit
 
 class ComponentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var componentTableView: UITableView!
-    
     var buildingblock: Buildingblock?
     var components: [Component]?
-    var activities: [Activity]?
     var buildingblockImage: UIImageView?
     var activityView: ActivityView?
     var t_count: Int = 0
@@ -25,7 +23,7 @@ class ComponentViewController: UIViewController, UITableViewDelegate, UITableVie
         self.title = buildingblock?.name
         components = buildingblock?.components
         
-        componentTableView = UITableView(frame: view.frame)
+        componentTableView = UITableView(frame: view.frame)        
         componentTableView.separatorStyle = .none
         componentTableView.allowsSelection = false
         componentTableView.layer.frame.size.height = view.frame.height * 1.5
@@ -55,7 +53,6 @@ class ComponentViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentStackViewCell", for: indexPath) as! ComponentStackViewCell
-        cell.fill(withActivities: self.components![indexPath.row].activities!)
         activityView?.activities = self.components![indexPath.row].activities!
         
         // If the cell does not exist yet, create a new one
@@ -70,17 +67,7 @@ class ComponentViewController: UIViewController, UITableViewDelegate, UITableVie
         UIView.animate(withDuration:  0) {
             cell.contentView.layoutIfNeeded()
         }
-        // Style the cell with cornerradius and a shadow
-        //        cell.mainBackground.layer.cornerRadius = 5
-        //        cell.mainBackground.layer.masksToBounds = true
-        //
-        //        cell.shadowLayer.layer.masksToBounds = false
-        //        cell.shadowLayer.layer.shadowOffset = CGSize(width: 2, height: 2)
-        //        cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
-        //        cell.shadowLayer.layer.backgroundColor = UIColor.clear.cgColor
-        //        cell.shadowLayer.layer.shadowOpacity = 0.23
-        //        cell.shadowLayer.layer.shadowRadius = 4
-        
+
         return cell
     }
     

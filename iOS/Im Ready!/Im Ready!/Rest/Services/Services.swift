@@ -13,6 +13,7 @@ public let clientService: ClientService = ClientService()
 public let buildingblockService: BuildingblockService = BuildingblockService()
 public let componentService: ComponentService = ComponentService()
 public let activityService: ActivityService = ActivityService()
+public let messagesService: MessagesService = MessagesService()
 
 public class Service {
     let apiClient : ApiClient

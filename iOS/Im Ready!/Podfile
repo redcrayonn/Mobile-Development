@@ -8,6 +8,7 @@ target 'Im Ready!' do
   pod 'AlamofireImage', '~> 3.3'
   pod 'SwiftyJSON'
   pod 'Alamofire-SwiftyJSON'
+  pod 'SwiftKeychainWrapper'
 
   target 'Im Ready!Tests' do
     inherit! :search_paths

@@ -11,12 +11,15 @@
 		55B7494C0208B9E357CA77AF /* Pods_Im_Ready_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */; };
 		E398416CB00FC82F09388693 /* Pods_Im_Ready_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */; };
 		FA29EBC51FCEF1F50078F1A1 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29EBC41FCEF1F50078F1A1 /* ActivityView.swift */; };
-		FA3383EF1FD05C6C00847C05 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ActivityTableViewCell.swift */; };
-		FA3383F01FD05C6C00847C05 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3383EE1FD05C6C00847C05 /* ActivityTableViewCell.xib */; };
+		FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */; };
+		FA3383F01FD05C6C00847C05 /* ActivityStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */; };
+		FA3CB3FF1FD56F3200142CCF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB3FE1FD56F3200142CCF /* MessagesViewController.swift */; };
+		FA3CB4021FD57AD100142CCF /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* ChatTableViewCell.swift */; };
+		FA3CB4041FD5D22400142CCF /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4031FD5D22400142CCF /* MessagesService.swift */; };
+		FA3CB4061FD5D2CB00142CCF /* MessageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */; };
 		FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */; };
 		FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87471FC3091D008CB427 /* BuildingblockService.swift */; };
 		FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */; };
-		FA4B874C1FC3148C008CB427 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B874B1FC3148C008CB427 /* UIImageViewExtension.swift */; };
 		FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE351FBADB7700945B2A /* Chat.swift */; };
 		FA4DFE381FBADB8500945B2A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE371FBADB8500945B2A /* Message.swift */; };
 		FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE391FBB177800945B2A /* Person.swift */; };
@@ -85,12 +88,15 @@
 		C218B82C4D603095F850F4D3 /* Pods-Im Ready!UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!UITests/Pods-Im Ready!UITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA22577E3139BDD4A7B335DE /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!Tests/Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA29EBC41FCEF1F50078F1A1 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		FA3383ED1FD05C6C00847C05 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		FA3383EE1FD05C6C00847C05 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
+		FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStackViewCell.swift; sourceTree = "<group>"; };
+		FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityStackViewCell.xib; sourceTree = "<group>"; };
+		FA3CB3FE1FD56F3200142CCF /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		FA3CB4011FD57AD100142CCF /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		FA3CB4031FD5D22400142CCF /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
+		FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResult.swift; sourceTree = "<group>"; };
 		FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockResult.swift; sourceTree = "<group>"; };
 		FA4B87471FC3091D008CB427 /* BuildingblockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockService.swift; sourceTree = "<group>"; };
 		FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		FA4B874B1FC3148C008CB427 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		FA4DFE351FBADB7700945B2A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FA4DFE371FBADB8500945B2A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA4DFE391FBB177800945B2A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -189,6 +195,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FA3CB4001FD57A5400142CCF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
+				FA7472071FCD711800D0D9D8 /* ComponentStackViewCell.swift */,
+				FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */,
+				FA3CB4011FD57AD100142CCF /* ChatTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		FA4DFE451FBC204700945B2A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +213,7 @@
 				FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */,
 				FA7471F91FC722A200D0D9D8 /* ComponentResult.swift */,
 				FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */,
+				FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,7 +230,6 @@
 			children = (
 				FADAB4581FBECEAC0069E290 /* Extensions.swift */,
 				FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */,
-				FA4B874B1FC3148C008CB427 /* UIImageViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,9 +264,8 @@
 				FAA7B9631FBDA97C00134C5B /* Extensions */,
 				FAA7B9601FBD9CC700134C5B /* Helpers */,
 				FAB2359A1FB99A210099B29D /* Models */,
-				FAB235991FB99A190099B29D /* ViewControllers */,
+				FAB235991FB99A190099B29D /* Controllers */,
 				FAB235981FB999F40099B29D /* Views */,
-				FAB235971FB999E90099B29D /* Controllers */,
 				FAB235921FB993BC0099B29D /* Fonts */,
 				FAB235611FB990F60099B29D /* AppDelegate.swift */,
 				FAB2356B1FB990F60099B29D /* Assets.xcassets */,
@@ -285,17 +301,10 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		FAB235971FB999E90099B29D /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		FAB235981FB999F40099B29D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA3383EE1FD05C6C00847C05 /* ActivityTableViewCell.xib */,
+				FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */,
 				FA7472081FCD711800D0D9D8 /* ComponentStackViewCell.xib */,
 				FAB235651FB990F60099B29D /* Client.storyboard */,
 				FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */,
@@ -303,17 +312,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		FAB235991FB99A190099B29D /* ViewControllers */ = {
+		FAB235991FB99A190099B29D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA3CB4001FD57A5400142CCF /* Cells */,
 				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
-				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
 				FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */,
-				FA7472071FCD711800D0D9D8 /* ComponentStackViewCell.swift */,
 				FA29EBC41FCEF1F50078F1A1 /* ActivityView.swift */,
-				FA3383ED1FD05C6C00847C05 /* ActivityTableViewCell.swift */,
+				FA3CB3FE1FD56F3200142CCF /* MessagesViewController.swift */,
 			);
+			name = Controllers;
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
@@ -344,6 +353,7 @@
 				FA4B87471FC3091D008CB427 /* BuildingblockService.swift */,
 				FA7265DB1FC6104200E7FBC4 /* ComponentService.swift */,
 				FA7265DD1FC6CA2D00E7FBC4 /* ActivityService.swift */,
+				FA3CB4031FD5D22400142CCF /* MessagesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -476,7 +486,7 @@
 			files = (
 				FA74720A1FCD711800D0D9D8 /* ComponentStackViewCell.xib in Resources */,
 				FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */,
-				FA3383F01FD05C6C00847C05 /* ActivityTableViewCell.xib in Resources */,
+				FA3383F01FD05C6C00847C05 /* ActivityStackViewCell.xib in Resources */,
 				FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */,
 				FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */,
 				FAB235671FB990F60099B29D /* Client.storyboard in Resources */,
@@ -563,6 +573,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -570,6 +581,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,9 +677,9 @@
 				FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */,
 				FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */,
 				FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */,
+				FA3CB3FF1FD56F3200142CCF /* MessagesViewController.swift in Sources */,
 				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
 				FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */,
-				FA4B874C1FC3148C008CB427 /* UIImageViewExtension.swift in Sources */,
 				FA4DFE421FBC1B7C00945B2A /* Activity.swift in Sources */,
 				FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
@@ -678,10 +690,12 @@
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
+				FA3CB4061FD5D2CB00142CCF /* MessageResult.swift in Sources */,
 				FA7472001FCC088300D0D9D8 /* ComponentViewController.swift in Sources */,
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
+				FA3CB4021FD57AD100142CCF /* ChatTableViewCell.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
@@ -690,10 +704,11 @@
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
 				FA4DFE441FBC1C5E00945B2A /* Family.swift in Sources */,
 				FA7472091FCD711800D0D9D8 /* ComponentStackViewCell.swift in Sources */,
-				FA3383EF1FD05C6C00847C05 /* ActivityTableViewCell.swift in Sources */,
+				FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */,
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
+				FA3CB4041FD5D22400142CCF /* MessagesService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,
 				FA7265DC1FC6104200E7FBC4 /* ComponentService.swift in Sources */,
 			);

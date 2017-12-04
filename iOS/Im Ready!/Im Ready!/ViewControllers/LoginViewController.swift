@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var usernameField: UITextField!
@@ -27,16 +28,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
-        authenticationService.login(withUsername: usernameField.text!,
-                                    andPassword: passwordField.text!,
-                                    onSuccess: {
-                                        self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
-        }) {
-            print("failed to log in")
-            
-            // Remove for production
-            self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
-        }
+        let username = usernameField.text!
+        let password = passwordField.text!
+//        if let username = usernameField.text, let password = passwordField.text {
+            authenticationService.login(withUsername: username,
+                                        andPassword: password,
+                                        onSuccess: {
+                                            KeychainWrapper.standard.set(username, forKey: "user")
+                                            self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
+            }) {
+                print("failed to log in")
+                
+                // Remove for production
+                self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
+            }
+//        }
+        
     }
     
     //Show or hide the passwordinput

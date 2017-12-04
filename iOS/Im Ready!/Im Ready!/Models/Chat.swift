@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class Chat {
     let id: String

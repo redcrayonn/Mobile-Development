@@ -18,30 +18,15 @@ class ComponentStackViewCell: UITableViewCell {
     }
     @IBOutlet weak var buildingblockImageView: UIImageView!
     @IBOutlet weak var openDetailViewBtn: UIButton!
-    @IBOutlet weak var activityName: UILabel!
-    @IBOutlet weak var activityPoints: UILabel!
     
     var cellExists: Bool = false
-    var componentActivities: [Activity]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // do things here
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
-    // Fill the activity with sensible data
-    func fill(withActivities activities: [Activity]) {
-        self.componentActivities = activities
-        for activity in componentActivities! {
-            self.activityName.text = activity.name
-        }
-        
     }
     
     // Animation for the dropdown of activities

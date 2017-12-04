@@ -1,15 +1,18 @@
 //
-//  ActivityTableViewCell.swift
+//  ChatTableViewCell.swift
 //  Im Ready!
 //
-//  Created by Wouter Vermeij on 30/11/2017.
+//  Created by Wouter Vermeij on 04/12/2017.
 //  Copyright © 2017 Wouter Vermeij. All rights reserved.
 //
 
 import UIKit
 
-class ActivityTableViewCell: UITableViewCell {
-
+class ChatTableViewCell: UITableViewCell {
+    @IBOutlet weak var recipientImage: UIImageView!
+    @IBOutlet weak var recipientName: UILabel!
+    @IBOutlet weak var recentMessage: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +23,5 @@ class ActivityTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

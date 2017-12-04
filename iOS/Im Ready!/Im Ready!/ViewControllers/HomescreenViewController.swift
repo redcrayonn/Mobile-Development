@@ -70,7 +70,6 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
                 destinationViewController.buildingblock = cell.buildingblock
                 destinationViewController.buildingblockImage = cell.buildingblockImage
                 destinationViewController.components = self.components
-//                destinationViewController.activities = self.activities
             }
         }
     }
