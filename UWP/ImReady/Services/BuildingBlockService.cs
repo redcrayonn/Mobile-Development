@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace ImReady.Services
 {
@@ -19,16 +20,19 @@ namespace ImReady.Services
                     {
                         BuildingBlockType = BuildingBlockType.Geld,
                         Naam = "Geld",
+                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
                     },
                     new BuildingBlock()
                     {
                         BuildingBlockType = BuildingBlockType.Huis,
-                        Naam = "Huis"
+                        Naam = "Huis",
+                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
                     },
                     new BuildingBlock()
                     {
                         BuildingBlockType = BuildingBlockType.Werk,
-                        Naam = "Werk"
+                        Naam = "Werk",
+                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
                     }
                 };
             }

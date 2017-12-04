@@ -130,6 +130,9 @@
     <Content Include="Assets\pexels-photo-547116.jpeg" />
     <Content Include="Assets\SharedResources\homescreen.png" />
     <Content Include="Assets\SharedResources\Logo.svg" />
+    <Content Include="Assets\Material\ic_home_white_18dp.png" />
+    <Content Include="Assets\Material\ic_home_white_48dp.png" />
+    <Content Include="ic_add_white_48dp.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
