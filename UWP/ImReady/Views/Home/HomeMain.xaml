@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:viewmodel="using:ImReady.Models">
+    xmlns:viewmodel="using:ImReady.Models"
+    xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors">
     <Page.Background>
         <ImageBrush ImageSource="/Assets/SharedResources/homescreen.png"
                     Stretch="UniformToFill"
@@ -20,6 +21,23 @@
             <EdgeUIThemeTransition Edge="Left" />
         </TransitionCollection>
     </Page.Transitions>
+    <Page.Resources>
+        <DataTemplate x:Key="BuildingBlocksDefault" x:DataType="viewmodel:BuildingBlock">
+            <RelativePanel HorizontalAlignment="Center" Background="#40185E" Padding="10" CornerRadius="5" Margin="4">
+                <Image x:Name="blockImage" Source="{x:Bind Image}" Width="100" Height="80" HorizontalAlignment="Center"></Image>
+                <TextBlock x:Name="blockLabel" Text="{x:Bind Name}" TextAlignment="Center" Foreground="White" RelativePanel.Below="blockImage" Width="100"></TextBlock>
+            </RelativePanel>
+        </DataTemplate>
+        <DataTemplate x:Key="AddBuildingBlock" x:DataType="viewmodel:BuildingBlock">
+            <RelativePanel HorizontalAlignment="Center" Background="#F16122" Padding="10" CornerRadius="5">
+                <Image x:Name="addBlockImage" Source="{x:Bind Image}" Width="100" Height="100" HorizontalAlignment="Center" Stretch="Fill"></Image>
+            </RelativePanel>
+        </DataTemplate>
+        <templateSelectors:HomeTemplateSelector x:Name="MyTemplateSelector"
+                                     DefaultBlockTemplate ="{StaticResource BuildingBlocksDefault}"
+                                     AddBlockTemplate="{StaticResource AddBuildingBlock}">
+        </templateSelectors:HomeTemplateSelector>
+    </Page.Resources>
     <SplitView 
         Name="MySplitView"
         DisplayMode="Overlay"
@@ -64,19 +82,13 @@
                     <AppBarButton Icon="Message" Click="AppBarButton_Click" Foreground="White"/>
                     <AppBarButton Icon="Placeholder" Click="AppBarButton_Click" Foreground="White"/>
                 </CommandBar>
-                <GridView ItemsSource="{x:Bind ViewModel.Blocks }" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodel:BuildingBlock">
-                            <RelativePanel HorizontalAlignment="Center" Background="#40185E" Padding="10" CornerRadius="5">
-                                <Image x:Name="blockImage" Source="{x:Bind Img}" Width="100" Height="80" HorizontalAlignment="Center"></Image>
-                                <TextBlock x:Name="blockLabel" Text="{x:Bind Naam}" TextAlignment="Center" Foreground="White" RelativePanel.Below="blockImage" Width="100"></TextBlock>
-                            </RelativePanel>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <RelativePanel HorizontalAlignment="Center" Background="#40185E" Padding="10" CornerRadius="5">
-                        <Image x:Name="blockImage" Source="{x:Bind Img}" Width="100" Height="80" HorizontalAlignment="Center"></Image>
-                        <TextBlock x:Name="blockLabel" Text="{x:Bind Naam}" TextAlignment="Center" Foreground="White" RelativePanel.Below="blockImage" Width="100"></TextBlock>
-                    </RelativePanel>
+                <GridView 
+                    ItemsSource="{x:Bind ViewModel.Blocks }" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    ItemTemplateSelector="{StaticResource MyTemplateSelector}"
+                    Margin="50"
+                    >
                 </GridView>
             </Grid>
         </SplitView.Content>

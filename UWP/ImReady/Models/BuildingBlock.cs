@@ -9,8 +9,8 @@ namespace ImReady.Models
 {
     public class BuildingBlock
     {
-        public string Img { get; set; }
-        public string Naam { get; set; }
+        public string Image { get; set; }
+        public string Name { get; set; }
         public BuildingBlockType BuildingBlockType { get; set; }
     }
 
@@ -18,6 +18,7 @@ namespace ImReady.Models
     {
         Werk,
         Huis,
-        Geld
+        Geld,
+        Add
     }
 }

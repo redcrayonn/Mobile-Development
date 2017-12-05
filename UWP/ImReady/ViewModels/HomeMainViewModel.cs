@@ -14,9 +14,17 @@ namespace ImReady.ViewModels
 
         public List<BuildingBlock> Blocks { get; set; }
 
+        public BuildingBlock AddBlock = new BuildingBlock()
+        {
+            Image = "ms-appx:///Assets/Material/ic_add_white_48dp.png",
+            Name = "",
+            BuildingBlockType = BuildingBlockType.Add,
+        };
+
         public HomeMainViewModel()
         {
-            Blocks = new BuildingBlockMockService().GetBlocks();
+            Blocks = new BuildingBlockMockService().GetAllBlocks();
+            Blocks.Add(AddBlock);
         }
     }
 }

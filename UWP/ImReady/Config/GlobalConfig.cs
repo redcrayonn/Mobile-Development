@@ -8,6 +8,6 @@ namespace ImReady.Config
 {
     public static class GlobalConfig
     {
-        public static bool MockServices = true;
+        public const bool MockServices = true;
     }
 }

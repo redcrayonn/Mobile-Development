@@ -1,4 +1,7 @@
-﻿using ImReady.Models;
+﻿using ImReady.Config;
+using ImReady.Models;
+using ImReady.Services.Interfaces;
+using ImReady.Services.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +11,16 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace ImReady.Services
 {
-    public class BuildingBlockMockService
+    public class BuildingBlockMockService : IBuildingBlockService
     {
-        public List<BuildingBlock> GetBlocks(bool mock = true)
+        private IBuildingBlockService MockService => new MockBuildingBlockService();
+        private bool Mock = GlobalConfig.MockServices;
+
+        public List<BuildingBlock> GetAllBlocks()
         {
-            if(mock)
+            if(Mock)
             {
-                return new List<BuildingBlock>()
-                {
-                    new BuildingBlock()
-                    {
-                        BuildingBlockType = BuildingBlockType.Geld,
-                        Naam = "Geld",
-                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    },
-                    new BuildingBlock()
-                    {
-                        BuildingBlockType = BuildingBlockType.Huis,
-                        Naam = "Huis",
-                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    },
-                    new BuildingBlock()
-                    {
-                        BuildingBlockType = BuildingBlockType.Werk,
-                        Naam = "Werk",
-                        Img = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    }
-                };
+                return MockService.GetAllBlocks();
             }
             else
             {
