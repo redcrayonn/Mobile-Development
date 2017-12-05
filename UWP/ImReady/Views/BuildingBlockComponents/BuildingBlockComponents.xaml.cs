@@ -1,10 +1,13 @@
-﻿using System;
+﻿using ImReady.Models;
+using ImReady.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +25,29 @@ namespace ImReady.Views.BlockComponents
     /// </summary>
     public sealed partial class BuildingBlockComponents : Page
     {
+        private BuildingBlockComponentsViewModel ViewModel = BuildingBlockComponentsViewModel.SingleInstance;
+
         public BuildingBlockComponents()
         {
             this.InitializeComponent();
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var article = e.Parameter as BuildingBlock;
+            if (e.Parameter != null && e.Parameter is BuildingBlock)
+            {
+                ViewModel = new BuildingBlockComponentsViewModel()
+                {
+                    BuildingBlock = e.Parameter as BuildingBlock
+                };
+            }
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

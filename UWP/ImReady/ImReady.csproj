@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
+    <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -107,6 +108,7 @@
     <Compile Include="Services\BuildingBlockService.cs" />
     <Compile Include="Services\Interfaces\IBuildingBlockService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
+    <Compile Include="ViewModels\BuildingBlockComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
     <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">
       <DependentUpon>BuildingBlockComponents.xaml</DependentUpon>

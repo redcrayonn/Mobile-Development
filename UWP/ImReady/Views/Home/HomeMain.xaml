@@ -88,7 +88,9 @@
                     VerticalAlignment="Center" 
                     ItemTemplateSelector="{StaticResource MyTemplateSelector}"
                     Margin="50"
-                    MaxWidth="1024"
+                    MaxWidth="1024" 
+                    ItemClick="GridView_ItemClick"
+                    IsItemClickEnabled="True"
                     >
                 </GridView>
             </Grid>

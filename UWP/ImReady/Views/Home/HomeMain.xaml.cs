@@ -1,4 +1,5 @@
-﻿using ImReady.ViewModels;
+﻿using ImReady.Models;
+using ImReady.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,6 +41,11 @@ namespace ImReady.Views.Home
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+             ViewModel.NavigateToBuildingBlockComponents.Execute((e.ClickedItem as BuildingBlock));
         }
     }
 }
