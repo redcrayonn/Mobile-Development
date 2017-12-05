@@ -99,9 +99,6 @@
     <Compile Include="Config\GlobalConfig.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\BuildingBlock.cs" />
     <Compile Include="Models\BuildingBlockComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +138,10 @@
     <Content Include="Assets\Material\ic_home_white_18dp.png" />
     <Content Include="Assets\Material\ic_home_white_48dp.png" />
     <Content Include="Assets\Material\ic_add_white_48dp.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -155,10 +156,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
