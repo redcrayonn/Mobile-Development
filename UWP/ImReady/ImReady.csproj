@@ -108,6 +108,9 @@
     <Compile Include="Services\Interfaces\IBuildingBlockService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
+    <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">
+      <DependentUpon>BuildingBlockComponents.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExtendedSplash.xaml">
       <SubType>Designer</SubType>

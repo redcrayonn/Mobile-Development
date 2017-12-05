@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="ImReady.Views.BlockComponents.BuildingBlockComponents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImReady.Views.BlockComponents"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <CommandBar
+                IsOpen="True"
+                Background="#303030"
+                Foreground="White"
+                >
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                            Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"
+                            Margin="20 0"
+                            />
+                    <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
+                </StackPanel>
+            </CommandBar.Content>
+            <AppBarButton Icon="Message" Click="AppBarButton_Click" Foreground="White"/>
+            <AppBarButton Icon="Placeholder" Click="AppBarButton_Click" Foreground="White"/>
+        </CommandBar>
+    </Grid>
+</Page>
