@@ -6,19 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import inholland.tabletapplication.Models.LoginUser;
 import inholland.tabletapplication.R;
-
-import static inholland.tabletapplication.R.id.username;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
+    private LoginUser loginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
+
+        loginUser = new LoginUser();
 
          username = (EditText) findViewById(R.id.username);
          password = (EditText) findViewById(R.id.password);
@@ -27,12 +29,14 @@ public class AdminLoginActivity extends AppCompatActivity {
 
 
     public void login(View view) {
-        if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+        loginUser.Username = username.getText().toString();
+        loginUser.Password = password.getText().toString();
+
+        if (loginUser.CheckCredentials()){
             Intent myIntent = new Intent(this, AdminMainActivity.class);
             startActivity(myIntent);
-            //correct password
         } else {
-            //wrong password
+            //throw error
         }
     }
 }

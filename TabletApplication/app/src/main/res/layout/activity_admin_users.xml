@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorOffWhite"
     android:orientation="vertical"
-    tools:context="inholland.tabletapplication.Activities.AdminMainActivity"
+    tools:context="inholland.tabletapplication.Activities.AdminUsersActivity"
     android:baselineAligned="false">
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,16 +34,15 @@
                 android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
                 android:textColor="@color/colorTextLight"
-                android:text="@string/accounts_label"
-                android:onClick = "navigateToUsers"/>
+                android:text="@string/accounts_label"/>
             <Button
                 android:layout_below="@id/navigationUsers"
                 android:id="@+id/navigationGblocks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextLight"
-
                 android:text="@string/gblocks_label"/>
         </RelativeLayout>
         <LinearLayout
@@ -63,3 +62,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">TabletApplication</string>
-    <string name="Login">Inloggen</string>
+    <string name="app_name">Admin Ready</string>
+    <string name="login_label">Inloggen</string>
+    <string name="accounts_label">Gebruikers</string>
+    <string name="gblocks_label">Bouwstenen</string>
 </resources>
