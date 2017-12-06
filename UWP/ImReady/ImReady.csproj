@@ -97,6 +97,9 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
+    <Compile Include="Controls\MyItem.xaml.cs">
+      <DependentUpon>MyItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
     <Compile Include="Models\BuildingBlock.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
     <Compile Include="ViewModels\BuildingBlockComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
+    <Compile Include="ViewModels\MyItemViewModel.cs" />
     <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">
       <DependentUpon>BuildingBlockComponents.xaml</DependentUpon>
     </Compile>
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\MyItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,7 +220,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
     <Folder Include="Helpers\Converters\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
