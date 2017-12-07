@@ -43,10 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\BlockType.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\Buildingblock.cs" />
+    <Compile Include="Models\ClientBuildingBlock.cs" />
+    <Compile Include="Models\ClientComponent.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\EntityModel.cs" />
+    <Compile Include="Enums\Role.cs" />
+    <Compile Include="Models\Users\Caregiver.cs" />
+    <Compile Include="Models\Users\Client.cs" />
+    <Compile Include="Models\Users\Relative.cs" />
+    <Compile Include="Models\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Models\Users\Connections\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
