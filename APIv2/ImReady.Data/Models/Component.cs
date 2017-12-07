@@ -10,7 +10,7 @@ namespace ImReady.Data.Models
     [Table("Component")]
     public class Component : EntityModel
     {
-        public string BuildingblockId { get; set; }
+        public Guid BuildingblockId { get; set; }
 
         public string Name { get; set; }
 

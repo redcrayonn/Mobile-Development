@@ -10,9 +10,9 @@ namespace ImReady.Data.Models.Users
     [Table("Relative")]
     public class Relative : User
     {
-        public Guid RelativeId { get; set; }
+        public string ClientId { get; set; }
 
-        [ForeignKey("RelativeId")]
-        public Relative Relative { get; set; }
+        [ForeignKey("ClientId")]
+        public Client Client { get; set; }
     }
 }

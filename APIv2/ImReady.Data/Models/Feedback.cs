@@ -11,7 +11,7 @@ namespace ImReady.Data.Models
     [Table("Feedback")]
     public class Feedback : EntityModel
     {
-        public Guid CaregiverId { get; set; }
+        public string CaregiverId { get; set; }
         public Guid ClientActivityId { get; set; }
 
         public string Content { get; set; }

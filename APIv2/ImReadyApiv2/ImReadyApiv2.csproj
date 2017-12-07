@@ -232,6 +232,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context\ImReadyDbContext.cs" />
+    <Compile Include="Migrations\201712071422345_initialCreate.cs" />
+    <Compile Include="Migrations\201712071422345_initialCreate.Designer.cs">
+      <DependentUpon>201712071422345_initialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,6 +273,11 @@
       <Project>{12508124-a9e7-4d54-879d-5a6e06f86c63}</Project>
       <Name>ImReady.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712071422345_initialCreate.resx">
+      <DependentUpon>201712071422345_initialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

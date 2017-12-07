@@ -11,8 +11,8 @@ namespace ImReady.Data.Models
     [Table("Chat")]
     public class Chat : EntityModel
     {
-        public Guid SenderId { get; set; }
-        public Guid ReceiverId { get; set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
 
         [ForeignKey("SenderId")]
         public virtual User Sender { get; set; }

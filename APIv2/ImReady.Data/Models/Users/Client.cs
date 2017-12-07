@@ -12,7 +12,7 @@ namespace ImReady.Data.Models.Users
     {
         public int Points { get; set; }
 
-        public Guid CaregiverId { get; set; }
+        public string CaregiverId { get; set; }
 
         [ForeignKey("CaregiverId")]
         public virtual Caregiver caregiver { get; set; }

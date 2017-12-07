@@ -13,7 +13,7 @@ namespace ImReady.Data.Models
     {
         public Guid BuildingblockId { get; set; }
 
-        public Guid ClientId { get; set; }
+        public string ClientId { get; set; }
 
         [ForeignKey("BuildingblockId")]
         public virtual Buildingblock Block { get; set; }
