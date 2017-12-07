@@ -1,6 +1,7 @@
 ﻿using ImReady.Config;
 using ImReady.Models;
 using ImReady.Services.Interfaces;
+using ImReady.Services.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace ImReady.Services
 {
     public class BuildingBlockComponentService : BaseService, IBuildingBlockComponentService
     {
-        private IBuildingBlockComponentService MockService => new BuildingBlockComponentService();
+        private IBuildingBlockComponentService MockService => new MockBuildingBlockComponentService();
 
         public BuildingBlockComponent GetComponent(int blockId)
         {
