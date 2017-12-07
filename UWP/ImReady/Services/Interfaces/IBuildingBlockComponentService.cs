@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ImReady.Services.Interfaces
 {
-    interface IBuildingBlockService : IBaseService
+    public interface IBuildingBlockComponentService : IBaseService
     {
-        List<BuildingBlock> GetAllBlocks();
+        BuildingBlockComponent GetComponent(int blockId);
     }
 }

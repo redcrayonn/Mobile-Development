@@ -12,6 +12,8 @@ namespace ImReady.Models
         public string Image { get; set; }
         public string Name { get; set; }
         public BuildingBlockType BuildingBlockType { get; set; }
+
+        public List<BuildingBlockComponent> Components { get; set; }
     }
 
     public enum BuildingBlockType

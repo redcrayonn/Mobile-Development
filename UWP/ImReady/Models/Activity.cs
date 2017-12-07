@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ImReady.Models
 {
-    public class BuildingBlockComponent
+    public class Activity
     {
         public string Name { get; set; }
-        public List<Activity> Activities { get; set; }
+        public DateTime? Deadline { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -1,25 +1,23 @@
 ﻿using ImReady.Config;
 using ImReady.Models;
 using ImReady.Services.Interfaces;
-using ImReady.Services.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace ImReady.Services
 {
-    public class BuildingBlockMockService : BaseService, IBuildingBlockService
+    public class BuildingBlockComponentService : BaseService, IBuildingBlockComponentService
     {
-        private IBuildingBlockService MockService => new MockBuildingBlockService();
+        private IBuildingBlockComponentService MockService => new BuildingBlockComponentService();
 
-        public List<BuildingBlock> GetAllBlocks()
+        public BuildingBlockComponent GetComponent(int blockId)
         {
-            if(Mock)
+            if (Mock)
             {
-                return MockService.GetAllBlocks();
+                return MockService.GetComponent(-1);
             }
             else
             {

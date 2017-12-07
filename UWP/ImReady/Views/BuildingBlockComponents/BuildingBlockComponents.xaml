@@ -13,23 +13,29 @@
         <Grid.Resources>
             
         </Grid.Resources>
+        <RelativePanel>
             <CommandBar
                     IsOpen="True"
                     Background="#303030"
                     Foreground="White"
                     >
-            <CommandBar.Content>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{x:Bind ViewModel.BuildingBlock.Name}" Foreground="White" Margin="40 0" FontSize="25" FontWeight="Light"/>
-                </StackPanel>
-            </CommandBar.Content>
-        </CommandBar>
-        <ScrollViewer>
-            <ItemsControl>
-                <controls1:HomeExpander>
-                    
-                </controls1:HomeExpander>
-            </ItemsControl>
-        </ScrollViewer>
+                <CommandBar.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind ViewModel.BuildingBlock.Name}" Foreground="White" Margin="40 0" FontSize="25" FontWeight="Light"/>
+                    </StackPanel>
+                </CommandBar.Content>
+            </CommandBar>
+            <ScrollViewer>
+                <ItemsControl>
+                    <controls1:HomeExpander>
+                        <controls1:HomeExpander.Content>
+                            <controls1:HomeExpander>
+                                
+                            </controls1:HomeExpander>
+                        </controls1:HomeExpander.Content>
+                    </controls1:HomeExpander>
+                </ItemsControl>
+            </ScrollViewer>
+        </RelativePanel>
     </Grid>
 </Page>
