@@ -13,6 +13,6 @@ namespace ImReady.Data.Models.Users
         public Guid RelativeId { get; set; }
 
         [ForeignKey("RelativeId")]
-        public Relative relative { get; set; }
+        public Relative Relative { get; set; }
     }
 }

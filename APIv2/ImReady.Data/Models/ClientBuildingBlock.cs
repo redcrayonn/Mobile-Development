@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace ImReady.Data.Models
 {
-    public class ClientBuildingBlock
+    [Table("ClientBuildingBlock")]
+    public class ClientBuildingBlock : EntityModel
     {
         public Guid BuildingblockId { get; set; }
 
         public Guid ClientId { get; set; }
 
         [ForeignKey("BuildingblockId")]
-        public Buildingblock Block { get; set; }
+        public virtual Buildingblock Block { get; set; }
 
         [ForeignKey("ClientId")]
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
     }
 }
