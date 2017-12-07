@@ -13,7 +13,7 @@ class ComponentStackViewCell: UITableViewCell {
     @IBOutlet weak var detailView: UIView! {
         didSet {
             detailView.isHidden = true
-            detailView.alpha = 0
+            detailView.alpha = 1
         }
     }
     @IBOutlet weak var buildingblockImageView: UIImageView!

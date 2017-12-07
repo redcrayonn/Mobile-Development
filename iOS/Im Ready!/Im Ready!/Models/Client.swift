@@ -11,7 +11,6 @@ import Foundation
 class Client : Person {
     var points: Int
     var clientRole: Roles = Roles.client
-    
     var family: [Family] = []
     var caregivers: [Caregiver] = []
     var buildingblocks: [Buildingblock] = []

@@ -10,11 +10,11 @@ import Foundation
 
 // Singleton User
 class User {
-    var id: String? = nil
-    var username: String? = nil
-    var password: String? = nil
-    var authToken: String? = nil
-    var datetime: String? = nil
+    var id: String?
+    var username: String?
+    var password: String?
+    var authToken: String?
+    var datetime: String?
     
     var isLoggedIn: Bool {
         get {
@@ -30,6 +30,7 @@ class User {
         if instance == nil {
             instance = User()
         }
+        
         return instance!
     }
     

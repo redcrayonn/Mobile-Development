@@ -20,6 +20,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+//        usernameField.resignFirstResponder()
+//        passwordField.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +56,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onRegisterFamilyClick(_ sender: Any) {
-        
+        // Change for production
         self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
     }
     

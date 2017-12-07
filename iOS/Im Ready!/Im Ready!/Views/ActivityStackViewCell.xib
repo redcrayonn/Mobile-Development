@@ -76,12 +76,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="activityDescription" destination="LoO-Cc-zcG" id="RCJ-ik-Uee"/>
-                <outlet property="description" destination="LoO-Cc-zcG" id="8Im-KO-dqI"/>
-                <outlet property="detailView" destination="CM9-s1-9fc" id="GdI-t6-TeH"/>
-                <outlet property="name" destination="LoO-Cc-zcG" id="Tv6-pc-Mo7"/>
-                <outlet property="openDetailViewBtn" destination="HLz-Ci-dQs" id="nUm-Td-5tx"/>
-                <outlet property="openView" destination="KLW-0k-c20" id="QPW-Hg-aqH"/>
+                <outlet property="activityDescription" destination="LoO-Cc-zcG" id="cBK-Y1-x0X"/>
+                <outlet property="detailView" destination="CM9-s1-9fc" id="ziX-5g-CGz"/>
+                <outlet property="openView" destination="KLW-0k-c20" id="IaV-u0-6rY"/>
             </connections>
             <point key="canvasLocation" x="25" y="-12.5"/>
         </tableViewCell>

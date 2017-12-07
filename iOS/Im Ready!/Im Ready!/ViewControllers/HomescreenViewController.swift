@@ -14,7 +14,6 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     var buildingBlocks: [Buildingblock] = []
     var components: [Component] = []
-    var activities: [Activity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
