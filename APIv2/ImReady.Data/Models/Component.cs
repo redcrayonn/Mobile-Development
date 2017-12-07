@@ -16,7 +16,11 @@ namespace ImReady.Data.Models
 
         public string Description { get; set; }
 
+        public string YoutubeURL { get; set; }
+
+        public virtual ICollection<UsefulLink> UsefulLinks { get; set; }
+
         [ForeignKey("BuildingblockId")]
-        public Buildingblock Block { get; set; }
+        public virtual Buildingblock Block { get; set; }
     }
 }
