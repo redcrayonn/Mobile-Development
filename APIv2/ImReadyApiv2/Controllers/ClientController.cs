@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace ImReadyApiv2.Controllers
 {
+    [Authorize]
     public class ClientController : ApiController
     {
         private readonly IClientService _clientService;
