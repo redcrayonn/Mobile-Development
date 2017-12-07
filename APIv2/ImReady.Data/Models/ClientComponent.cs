@@ -23,7 +23,7 @@ namespace ImReady.Data.Models
         public Guid TaskId { get; set; }
 
         [ForeignKey("TaskId")]
-        public virtual ClientTask Task { get; set; }
+        public virtual Task Task { get; set; }
 
     }
 }
