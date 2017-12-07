@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using ImReadyApiv2.DI;
+using System.Net.Http.Headers;
 
 namespace ImReadyApiv2
 {
@@ -14,6 +15,10 @@ namespace ImReadyApiv2
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            // Web API dependency injection
             ServiceResolver.Register(config);
 
             // Web API routes
@@ -24,6 +29,9 @@ namespace ImReadyApiv2
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { controller = "home", id = RouteParameter.Optional }
             );
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes
+                .Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }
