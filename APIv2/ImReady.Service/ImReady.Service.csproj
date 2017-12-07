@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\Interfaces\IClientService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImReady.Data\ImReady.Data.csproj">
@@ -48,8 +50,6 @@
       <Name>ImReady.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
