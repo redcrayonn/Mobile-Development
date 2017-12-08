@@ -9,7 +9,7 @@ namespace ImReadyApiv2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ImReadyApiv2.Context.ImReadyDbContext context)

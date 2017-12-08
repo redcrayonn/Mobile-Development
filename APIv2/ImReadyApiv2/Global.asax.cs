@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ImReadyApiv2.Context;
+using ImReadyApiv2.Migrations;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -18,6 +21,9 @@ namespace ImReadyApiv2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ImReadyDbContext, Configuration>());
+            new ImReadyDbContext().Database.Initialize(false);
         }
     }
 }
