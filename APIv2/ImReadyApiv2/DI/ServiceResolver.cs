@@ -17,7 +17,8 @@ namespace ImReadyApiv2.DI
         {
             var container = new UnityContainer();
             container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
-            
+            container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
+
             config.DependencyResolver = new UnityResolver(container);
         }
     }

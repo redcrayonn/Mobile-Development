@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace ImReady.Data.Models.Users
 {
@@ -13,6 +14,7 @@ namespace ImReady.Data.Models.Users
     {
         public string Firstname { get; set; }
 
+        [Required]
         public string Lastname { get; set; }
 
         public Role Role { get; set; }
