@@ -266,7 +266,9 @@
     <Folder Include="Areas\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="connectionstrings.config" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\ImReadyApiv2 - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImReady.Data\ImReady.Data.csproj">
