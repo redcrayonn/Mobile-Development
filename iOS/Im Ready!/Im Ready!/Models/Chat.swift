@@ -9,14 +9,12 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class Chat {
-    let id: String
-    let sender: Person
-    let receiver: Person
+class Chat : EntityModel {
+    var senderId: String?
+    var receiverId: String?
     
-    init(id: String, sender: Person, receiver: Person) {
-        self.id = id
-        self.sender = sender
-        self.receiver = receiver
+    enum CodingKeys: String, CodingKey {
+        case senderId = "senderId"
+        case receiverId = "receiverId"
     }
 }

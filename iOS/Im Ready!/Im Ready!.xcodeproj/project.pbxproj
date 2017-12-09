@@ -11,7 +11,6 @@
 		55B7494C0208B9E357CA77AF /* Pods_Im_Ready_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */; };
 		E398416CB00FC82F09388693 /* Pods_Im_Ready_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */; };
 		FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */; };
-		FA3383F01FD05C6C00847C05 /* ActivityStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */; };
 		FA3CB3FF1FD56F3200142CCF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB3FE1FD56F3200142CCF /* MessagesViewController.swift */; };
 		FA3CB4021FD57AD100142CCF /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* MessageTableViewCell.swift */; };
 		FA3CB4041FD5D22400142CCF /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4031FD5D22400142CCF /* MessagesService.swift */; };
@@ -21,16 +20,23 @@
 		FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */; };
 		FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE351FBADB7700945B2A /* Chat.swift */; };
 		FA4DFE381FBADB8500945B2A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE371FBADB8500945B2A /* Message.swift */; };
-		FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE391FBB177800945B2A /* Person.swift */; };
 		FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3B1FBB198C00945B2A /* User.swift */; };
 		FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */; };
 		FA4DFE401FBC1AF500945B2A /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3F1FBC1AF500945B2A /* Component.swift */; };
 		FA4DFE421FBC1B7C00945B2A /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE411FBC1B7C00945B2A /* Activity.swift */; };
-		FA4DFE441FBC1C5E00945B2A /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE431FBC1C5E00945B2A /* Family.swift */; };
+		FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE431FBC1C5E00945B2A /* Relative.swift */; };
 		FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE461FBC205100945B2A /* LoginResult.swift */; };
 		FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE481FBC33E000945B2A /* EntityModel.swift */; };
 		FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D871FD9642000052647 /* ActivityViewController.swift */; };
 		FA528D8A1FD9693C00052647 /* ComponentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */; };
+		FA528D901FD98A9700052647 /* ActivityStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */; };
+		FA528D921FDB154100052647 /* ClientActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D911FDB154100052647 /* ClientActivity.swift */; };
+		FA528D941FDB160900052647 /* ClientBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D931FDB160900052647 /* ClientBuildingblock.swift */; };
+		FA528D961FDB16B200052647 /* ClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D951FDB16B200052647 /* ClientComponent.swift */; };
+		FA528D981FDB185C00052647 /* ClientTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D971FDB185C00052647 /* ClientTask.swift */; };
+		FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D991FDB1A2100052647 /* Feedback.swift */; };
+		FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */; };
+		FA528D9E1FDC397F00052647 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D9D1FDC397F00052647 /* Enums.swift */; };
 		FA7265DC1FC6104200E7FBC4 /* ComponentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7265DB1FC6104200E7FBC4 /* ComponentService.swift */; };
 		FA7265DE1FC6CA2D00E7FBC4 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7265DD1FC6CA2D00E7FBC4 /* ActivityService.swift */; };
 		FA7265DF1FC6ECF800E7FBC4 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7265E01FC6ECF800E7FBC4 /* SwiftyJSON.framework */; };
@@ -38,8 +44,6 @@
 		FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471F91FC722A200D0D9D8 /* ComponentResult.swift */; };
 		FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */; };
 		FA7472001FCC088300D0D9D8 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */; };
-		FA7472091FCD711800D0D9D8 /* ComponentStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7472071FCD711800D0D9D8 /* ComponentStackViewCell.swift */; };
-		FA74720A1FCD711800D0D9D8 /* ComponentStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7472081FCD711800D0D9D8 /* ComponentStackViewCell.xib */; };
 		FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4BB8A1FBF0421006B845D /* Services.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
 		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
@@ -89,7 +93,6 @@
 		C218B82C4D603095F850F4D3 /* Pods-Im Ready!UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!UITests/Pods-Im Ready!UITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA22577E3139BDD4A7B335DE /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!Tests/Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStackViewCell.swift; sourceTree = "<group>"; };
-		FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityStackViewCell.xib; sourceTree = "<group>"; };
 		FA3CB3FE1FD56F3200142CCF /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		FA3CB4011FD57AD100142CCF /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FA3CB4031FD5D22400142CCF /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
@@ -99,16 +102,23 @@
 		FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FA4DFE351FBADB7700945B2A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FA4DFE371FBADB8500945B2A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		FA4DFE391FBB177800945B2A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		FA4DFE3B1FBB198C00945B2A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildingblock.swift; sourceTree = "<group>"; };
 		FA4DFE3F1FBC1AF500945B2A /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		FA4DFE411FBC1B7C00945B2A /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		FA4DFE431FBC1C5E00945B2A /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
+		FA4DFE431FBC1C5E00945B2A /* Relative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relative.swift; sourceTree = "<group>"; };
 		FA4DFE461FBC205100945B2A /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		FA4DFE481FBC33E000945B2A /* EntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModel.swift; sourceTree = "<group>"; };
 		FA528D871FD9642000052647 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityStackViewCell.xib; sourceTree = "<group>"; };
+		FA528D911FDB154100052647 /* ClientActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivity.swift; sourceTree = "<group>"; };
+		FA528D931FDB160900052647 /* ClientBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildingblock.swift; sourceTree = "<group>"; };
+		FA528D951FDB16B200052647 /* ClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientComponent.swift; sourceTree = "<group>"; };
+		FA528D971FDB185C00052647 /* ClientTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTask.swift; sourceTree = "<group>"; };
+		FA528D991FDB1A2100052647 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulLinks.swift; sourceTree = "<group>"; };
+		FA528D9D1FDC397F00052647 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		FA7265DB1FC6104200E7FBC4 /* ComponentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentService.swift; sourceTree = "<group>"; };
 		FA7265DD1FC6CA2D00E7FBC4 /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		FA7265E01FC6ECF800E7FBC4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,8 +126,6 @@
 		FA7471F91FC722A200D0D9D8 /* ComponentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentResult.swift; sourceTree = "<group>"; };
 		FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
 		FA7471FF1FCC088300D0D9D8 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
-		FA7472071FCD711800D0D9D8 /* ComponentStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStackViewCell.swift; sourceTree = "<group>"; };
-		FA7472081FCD711800D0D9D8 /* ComponentStackViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComponentStackViewCell.xib; sourceTree = "<group>"; };
 		FAA4BB8A1FBF0421006B845D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -201,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
-				FA7472071FCD711800D0D9D8 /* ComponentStackViewCell.swift */,
 				FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */,
 				FA3CB4011FD57AD100142CCF /* MessageTableViewCell.swift */,
 				FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */,
@@ -219,6 +226,17 @@
 				FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FA528D9F1FDC3B8300052647 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				FA4DFE3B1FBB198C00945B2A /* User.swift */,
+				FAB2359B1FB99A970099B29D /* Client.swift */,
+				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
+				FA4DFE431FBC1C5E00945B2A /* Relative.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 		FAA7B9601FBD9CC700134C5B /* Helpers */ = {
@@ -307,8 +325,7 @@
 		FAB235981FB999F40099B29D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA3383EE1FD05C6C00847C05 /* ActivityStackViewCell.xib */,
-				FA7472081FCD711800D0D9D8 /* ComponentStackViewCell.xib */,
+				FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */,
 				FAB235651FB990F60099B29D /* Client.storyboard */,
 				FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */,
 			);
@@ -332,17 +349,20 @@
 		FAB2359A1FB99A210099B29D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA528D9F1FDC3B8300052647 /* Users */,
 				FA4DFE481FBC33E000945B2A /* EntityModel.swift */,
-				FA4DFE391FBB177800945B2A /* Person.swift */,
-				FAB2359B1FB99A970099B29D /* Client.swift */,
-				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
-				FA4DFE431FBC1C5E00945B2A /* Family.swift */,
 				FA4DFE351FBADB7700945B2A /* Chat.swift */,
 				FA4DFE371FBADB8500945B2A /* Message.swift */,
-				FA4DFE3B1FBB198C00945B2A /* User.swift */,
 				FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */,
 				FA4DFE3F1FBC1AF500945B2A /* Component.swift */,
 				FA4DFE411FBC1B7C00945B2A /* Activity.swift */,
+				FA528D911FDB154100052647 /* ClientActivity.swift */,
+				FA528D931FDB160900052647 /* ClientBuildingblock.swift */,
+				FA528D951FDB16B200052647 /* ClientComponent.swift */,
+				FA528D971FDB185C00052647 /* ClientTask.swift */,
+				FA528D991FDB1A2100052647 /* Feedback.swift */,
+				FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */,
+				FA528D9D1FDC397F00052647 /* Enums.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,14 +507,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA74720A1FCD711800D0D9D8 /* ComponentStackViewCell.xib in Resources */,
 				FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */,
-				FA3383F01FD05C6C00847C05 /* ActivityStackViewCell.xib in Resources */,
 				FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */,
 				FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */,
 				FAB235671FB990F60099B29D /* Client.storyboard in Resources */,
 				FAB235961FB9960E0099B29D /* Info.plist in Resources */,
 				FAB235941FB994380099B29D /* Roboto in Resources */,
+				FA528D901FD98A9700052647 /* ActivityStackViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,12 +698,14 @@
 			files = (
 				FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */,
 				FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */,
+				FA528D961FDB16B200052647 /* ClientComponent.swift in Sources */,
 				FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */,
 				FA3CB3FF1FD56F3200142CCF /* MessagesViewController.swift in Sources */,
 				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
 				FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */,
 				FA4DFE421FBC1B7C00945B2A /* Activity.swift in Sources */,
-				FA4DFE3A1FBB177800945B2A /* Person.swift in Sources */,
+				FA528D981FDB185C00052647 /* ClientTask.swift in Sources */,
+				FA528D9E1FDC397F00052647 /* Enums.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
 				FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */,
 				FA7265DE1FC6CA2D00E7FBC4 /* ActivityService.swift in Sources */,
@@ -701,12 +722,15 @@
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
+				FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */,
+				FA528D941FDB160900052647 /* ClientBuildingblock.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
-				FA4DFE441FBC1C5E00945B2A /* Family.swift in Sources */,
+				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
 				FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */,
-				FA7472091FCD711800D0D9D8 /* ComponentStackViewCell.swift in Sources */,
+				FA528D921FDB154100052647 /* ClientActivity.swift in Sources */,
+				FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */,
 				FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */,
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,

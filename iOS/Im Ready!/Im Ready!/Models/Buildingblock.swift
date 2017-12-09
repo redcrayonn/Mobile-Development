@@ -8,18 +8,14 @@
 
 import Foundation
 
-struct Buildingblock : Decodable {
-    let id : String?
-    let name : String?
-    let description : String?
-    let imageURL : String?
-    let components : [Component]?
+class Buildingblock :  EntityModel, Decodable {
+    var name : String?
+    var description: String?
+    var blockType: Blocktype?
     
-    enum CodingKeys: String, CodingKey {        
-        case id = "id"
+    enum CodingKeys: String, CodingKey {
         case name = "name"
         case description = "description"
-        case imageURL = "imageURL"
-        case components = "components"
+        case blockType = "blockType"
     }
 }

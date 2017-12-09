@@ -8,24 +8,20 @@
 
 import Foundation
 
-public struct Component : Decodable {
-    let id : String?
-    let name : String?
-//    let status: String?
-    let activities : [Activity]?
+public class Component : EntityModel, Decodable {
+    var buildingblockId : String?
+    var name : String?
+    var description : String?
+    var youtubeUrl : String?
+    var usefulLinks : [UsefulLinks]
     
+
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case buildingblockId = "buildingblockId"
         case name = "name"
-//        case status = "status"
-        case activities = "activities"
-    }
-    
-    enum status {
-        case complete
-        case pending
-        case ongoing
-        case irrelevant
+        case description = "description"
+        case youtubeUrl = "youtubeUrl"
+        case usefulLinks = "usefulLinks"
     }
 }
 

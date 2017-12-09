@@ -9,6 +9,6 @@
 import UIKit
 
 class ComponentCollectionViewCell: UICollectionViewCell {
-    var name: String!
-    
+    @IBOutlet weak var name: UILabel!
+    var component: Component?
 }

@@ -9,18 +9,16 @@
 import Foundation
 
 public struct Activity : Decodable {
-    let id : String?
+    let componentId : String?
     let name : String?
     let description : String?
     let points : Int?
-    let assignment : String?
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case componentId = "componentId"
         case name = "name"
         case description = "description"
         case points = "points"
-        case assignment = "assignment"
     }    
 }
 

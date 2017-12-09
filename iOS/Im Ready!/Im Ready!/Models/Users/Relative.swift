@@ -1,5 +1,5 @@
 //
-//  EntityModel.swift
+//  Relative.swift
 //  Im Ready!
 //
 //  Created by Wouter Vermeij on 15/11/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EntityModel {
-    var id : String?
-    var deleted : Bool?
+class Relative : EntityModel, User {
+    var clientId : String?
+    var relativeRole : Role = Role.RELATIVE
 }

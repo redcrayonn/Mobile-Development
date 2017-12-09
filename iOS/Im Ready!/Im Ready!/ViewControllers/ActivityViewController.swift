@@ -11,12 +11,17 @@ import UIKit
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
     var activities: [Activity] = []
+    var component: Component!
+        
     var t_count:Int = 0
     var lastCell: ActivityStackViewCell = ActivityStackViewCell()
     var button_tag:Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = component.name
+        
+        //        activities = activityService.getMockActivities()
         
         tableView = UITableView(frame: view.frame)
         tableView.separatorStyle = .none
@@ -28,11 +33,18 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == button_tag {
+            return 320
+        } else {
+            return 60
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return activities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

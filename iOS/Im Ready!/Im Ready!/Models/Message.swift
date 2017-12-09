@@ -8,20 +8,18 @@
 
 import Foundation
 
-class Message {
-    var id: String?
-    var senderId: String?
-    var receiverId: String?
-    var datetime: String?
-    var message: String?
-    var read: Bool?
+class Message : EntityModel {
+    var chatId : String?
+    var content : String?
+    var sentDate : Date?
+    var read : Bool?
+    var userId : String?
     
-    init(id: String, senderId: String, receiverId: String, datetime: String, message: String, read: Bool) {
-        self.id = id
-        self.senderId = senderId
-        self.receiverId = receiverId
-        self.datetime = datetime
-        self.message = message
-        self.read = read
+    enum CodingKeys: String, CodingKey {
+        case chatId = "chatId"
+        case content = "content"
+        case sentDate = "sentDate"
+        case read = "read"
+        case userId = "userId"
     }
 }
