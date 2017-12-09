@@ -14,5 +14,23 @@ namespace ImReady.Data.Enums
         MONEY,
         HEALTH,
         SOCIAL,
+        WORK,
+        EDUCATION,
+        FAMILY,
+        RIGHTS AND OBLIGATIONS,
+        TREATMENT PLAN        
     }
 }
+/*
+Dit zijn de Buildingblocks uit het document van Sophie
+wonen
+verzekering
+financien
+gezond
+sociaal
+werk
+studie
+gezin
+rechten en plichten
+behandelplan
+*/
