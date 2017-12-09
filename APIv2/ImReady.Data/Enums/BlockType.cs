@@ -17,8 +17,8 @@ namespace ImReady.Data.Enums
         WORK,
         EDUCATION,
         FAMILY,
-        RIGHTS AND OBLIGATIONS,
-        TREATMENT PLAN        
+        RIGHTSANDOBLIGATIONS,
+        TREATMENTPLAN        
     }
 }
 /*
