@@ -12,11 +12,9 @@ namespace ImReady.Data.Models.Users
     [Table("User")]
     public abstract class User : IdentityUser
     {
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
-        public string Lastname { get; set; }
-
-        public Role Role { get; set; }
+        public string LastName { get; set; }
     }
 }

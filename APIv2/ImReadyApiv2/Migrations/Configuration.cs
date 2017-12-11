@@ -1,7 +1,8 @@
 namespace ImReadyApiv2.Migrations
 {
+    using ImReadyApiv2.Models;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -10,6 +11,7 @@ namespace ImReadyApiv2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ImReadyApiv2.Context.ImReadyDbContext context)

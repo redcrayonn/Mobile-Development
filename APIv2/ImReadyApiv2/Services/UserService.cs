@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ImReady.Data.Models.Users;
 using ImReadyApiv2.Context;
+using ImReadyApiv2.Models;
 
 namespace ImReadyApiv2.Services
 {
@@ -21,7 +22,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                _dbContext.ApplicationUsers.Add(user);
+                _dbContext.Users.Add(user as ApplicationUser);
             }
             catch (Exception)
             {
@@ -39,7 +40,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                User user = _dbContext.ApplicationUsers.SingleOrDefault(s => s.Id == id);
+                var user = _dbContext.Users.SingleOrDefault(s => s.Id == id);
                 return user;
             }
             catch (Exception)
@@ -52,7 +53,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                return _dbContext.ApplicationUsers.ToList();
+                return _dbContext.Users.Select(u => u as User).ToList();
             }
             catch (Exception)
             {
@@ -64,8 +65,8 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                User user = _dbContext.ApplicationUsers.SingleOrDefault(s => s.Id == userId);
-                _dbContext.ApplicationUsers.Remove(user);
+                var user = _dbContext.Users.SingleOrDefault(s => s.Id == userId);
+                _dbContext.Users.Remove(user);
             }
             catch (Exception)
             {

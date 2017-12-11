@@ -15,6 +15,7 @@ namespace ImReady.Data.Models
         public Guid ClientComponentId { get; set; }
         public Status Status { get; set; }
         public string Content { get; set; }
+        public DateTime Deadline { get; set; }
 
         public virtual ICollection<Feedback> Feedback { get; set; }
 

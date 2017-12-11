@@ -12,9 +12,8 @@ namespace ImReady.Data.Models
     public class ClientComponent : EntityModel
     {
         public string Description { get; set; }
-
         public Guid ClientBuildingBlockId { get; set; }
-
+        public DateTime Deadline { get; set; }
         public Status Status { get; set; }
 
         [ForeignKey("ClientBuildingBlockId")]

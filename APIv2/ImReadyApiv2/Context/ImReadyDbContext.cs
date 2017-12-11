@@ -19,7 +19,6 @@ namespace ImReadyApiv2.Context
         }
 
         // Users
-        public virtual DbSet<User> ApplicationUsers { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Caregiver> Caregivers { get; set; }
         public virtual DbSet<Relative> Relatives { get; set; }
