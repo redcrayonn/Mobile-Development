@@ -31,7 +31,7 @@ namespace ImReadyApiv2.Context
         // Block data (personal)
         public virtual DbSet<ClientBuildingBlock> ClientBuildingblocks { get; set; }
         public virtual DbSet<ClientComponent> ClientComponents { get; set; }
-        //public virtual DbSet<ClientActivity> ClientActivities { get; set; }
+        public virtual DbSet<ClientActivity> ClientActivities { get; set; }
 
         // Chats
         //public virtual DbSet<Chat> Chats { get; set; }

@@ -5,22 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ImReadyApiv2.Results
+namespace ImReadyApiv2.Results.FutureplanResult
 {
-    public class ComponentViewModel : BaseResult
+    public class ComponentResult : BaseResult
     {
-        public ComponentViewModel(ClientComponent component) : base(component)
+        public ComponentResult(ClientComponent component) : base(component)
         {
             Name = component.Component.Name;
             Description = component.Component.Description;
             Status = component.Status;
+            Deadline = component.Deadline;
 
-            Activities = new List<ActivityViewModel>();
+            Activities = new List<ActivityResult>();
             foreach (var activity in component.Activities)
             {
-                Activities.Add(new ActivityViewModel(activity));
+                Activities.Add(new ActivityResult(activity));
             }
-            //TODO DEADLINE
         }
 
         public string Name { get; set; }
@@ -29,7 +29,7 @@ namespace ImReadyApiv2.Results
 
         public Status Status { get; set; }
 
-        public List<ActivityViewModel> Activities { get; set; }
+        public List<ActivityResult> Activities { get; set; }
 
         public DateTime Deadline { get; set; }
     }

@@ -1,10 +1,6 @@
-﻿using ImReadyApiv2.Services;
-using ImReadyApiv2.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ImReady.Service.Services.Interfaces;
+using ImReadyApiv2.Results.FutureplanResult;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -20,10 +16,27 @@ namespace ImReadyApiv2.Controllers
         }
 
         //Todo Authorisation
-        // GET: api/User/5
+        // GET: api/Futureplan/5
         public IHttpActionResult Get(string clientId)
         {
-            FutureplanViewModel futureplan = _planService.GetPlan(clientId);
+            FutureplanResult futureplan = new FutureplanResult(_planService.GetPlan(clientId));
+
+            if (futureplan != null)
+            {
+                return Ok(futureplan);
+            }
+            else
+            {
+                return new StatusCodeResult(HttpStatusCode.InternalServerError, this);
+            }
+        }
+
+        // GET: api/Futureplan/5
+        public IHttpActionResult Get()
+        {
+            //Get Id of logged in client
+
+            FutureplanResult futureplan = new FutureplanResult(_planService.GetPlan("1"));
 
             if (futureplan != null)
             {

@@ -1,10 +1,14 @@
 ﻿using ImReady.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace ImReadyApiv2.Results
+namespace ImReadyApiv2.Results.FutureplanResult
 {
-    public class FeedbackViewModel : BaseResult
+    public class FeedbackResult : BaseResult
     {
-        public FeedbackViewModel(Feedback feedback) : base(feedback)
+        public FeedbackResult(Feedback feedback) : base(feedback)
         {
             Content = feedback.Content;
             CaregiverName = feedback.Caregiver.FirstName;

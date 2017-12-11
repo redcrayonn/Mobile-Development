@@ -1,4 +1,5 @@
-﻿using ImReady.Data.Models.Users;
+﻿using ImReady.Data.Models;
+using ImReady.Data.Models.Users;
 using Patterns.Repository;
 using Patterns.UnitOfWork;
 using System;
@@ -13,5 +14,6 @@ namespace ImReady.Service
     {
         IRepository<Client> ClientRepository { get; }
         IRepository<User> UserRepository { get; }
+        IRepository<ClientBuildingBlock> ClientBuildingblockRepository { get; }
     }
 }

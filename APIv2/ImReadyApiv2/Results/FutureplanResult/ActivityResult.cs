@@ -2,25 +2,27 @@
 using ImReady.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace ImReadyApiv2.Results
+namespace ImReadyApiv2.Results.FutureplanResult
 {
-    public class ActivityViewModel : BaseResult
+    public class ActivityResult : BaseResult
     {
-        public ActivityViewModel(ClientActivity activity) : base(activity)
+        public ActivityResult(ClientActivity activity) : base(activity)
         {
             Name = activity.Activity.Name;
             Description = activity.Activity.Description;
             Points = activity.Activity.Points;
             Status = activity.Status;
             Content = activity.Content;
+            Deadline = activity.Deadline;
 
-            Feedback = new List<FeedbackViewModel>();
+            Feedback = new List<FeedbackResult>();
             foreach (var feedback in activity.Feedback)
             {
-                Feedback.Add(new FeedbackViewModel(feedback));
+                Feedback.Add(new FeedbackResult(feedback));
             }
-            //Deadline = activity.Deadline;
         }
         public string Name { get; set; }
 
@@ -34,6 +36,6 @@ namespace ImReadyApiv2.Results
 
         public DateTime Deadline { get; set; }
 
-        public List<FeedbackViewModel> Feedback { get; set; }
+        public List<FeedbackResult> Feedback { get; set; }
     }
 }

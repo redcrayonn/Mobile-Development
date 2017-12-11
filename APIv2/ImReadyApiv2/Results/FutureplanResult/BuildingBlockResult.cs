@@ -5,20 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ImReadyApiv2.Results
+namespace ImReadyApiv2.Results.FutureplanResult
 {
-    public class BuildingBlockViewModel : BaseResult
+    public class BuildingBlockResult : BaseResult
     {
-        public BuildingBlockViewModel(ClientBuildingBlock block) : base(block)
+        public BuildingBlockResult(ClientBuildingBlock block) : base(block)
         {
             Name = block.Block.Name;
             Description = block.Block.Description;
             Type = block.Block.Type;
 
-            Components = new List<ComponentViewModel>();
+            Components = new List<ComponentResult>();
             foreach (var component in block.Components)
             {
-                Components.Add(new ComponentViewModel(component));
+                Components.Add(new ComponentResult(component));
             }
         }
 
@@ -28,7 +28,6 @@ namespace ImReadyApiv2.Results
 
         public BlockType Type { get; set; }
 
-        public List<ComponentViewModel> Components { get; set; }
-
+        public List<ComponentResult> Components { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ImReady.Service;
 using ImReady.Service.Services;
+using ImReady.Service.Services.Interfaces;
 using ImReadyApiv2.Context;
 using ImReadyApiv2.Services;
 using ImReadyApiv2.Services.Interfaces;
@@ -24,6 +25,7 @@ namespace ImReadyApiv2.DI
             // Register services
             container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
             container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IFutureplanService, FutureplanService>(new HierarchicalLifetimeManager());
 
             // Set dependency resolver to the Unity resolver
             var resolver = new UnityResolver(container);

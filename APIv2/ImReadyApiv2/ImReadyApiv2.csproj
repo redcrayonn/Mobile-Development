@@ -255,16 +255,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Results\FutureplanResult\ActivityResult.cs" />
+    <Compile Include="Results\FutureplanResult\BuildingBlockResult.cs" />
+    <Compile Include="Results\FutureplanResult\ComponentResult.cs" />
+    <Compile Include="Results\FutureplanResult\FeedbackResult.cs" />
+    <Compile Include="Results\FutureplanResult\FutureplanResult.cs" />
     <Compile Include="Results\UserResult.cs" />
-    <Compile Include="Services\FutureplanService.cs" />
-    <Compile Include="Services\Interfaces\IFutureplanService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Results\BaseResult.cs" />
-    <Compile Include="ViewModels\Futureplan\ActivityViewModel.cs" />
-    <Compile Include="ViewModels\Futureplan\BuildingBlockViewModel.cs" />
-    <Compile Include="ViewModels\Futureplan\ComponentViewModel.cs" />
-    <Compile Include="ViewModels\Futureplan\FeedbackViewModel.cs" />
-    <Compile Include="ViewModels\Futureplan\FutureplanViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

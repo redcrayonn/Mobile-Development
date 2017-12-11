@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ImReady.Data.Models.Users;
 using Patterns.Repository;
 using Patterns.UnitOfWork;
+using ImReady.Data.Models;
 
 namespace ImReady.Service
 {
@@ -19,5 +20,6 @@ namespace ImReady.Service
 
         public IRepository<Client> ClientRepository => new EntityFrameworkGenericRepository<Client>(_context);
         public IRepository<User> UserRepository => new EntityFrameworkGenericRepository<User>(_context);
+        public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
     }
 }
