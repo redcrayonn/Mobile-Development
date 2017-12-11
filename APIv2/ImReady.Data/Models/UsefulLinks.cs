@@ -6,7 +6,7 @@ namespace ImReady.Data.Models
     [Table("UsefulLink")]
     public class UsefulLink : EntityModel
     {
-        public Guid ComponentId { get; set; }
+        public string ComponentId { get; set; }
 
         public string Url { get; set; }
 

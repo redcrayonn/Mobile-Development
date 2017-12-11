@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\FuturePlanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -245,14 +246,26 @@
     <Compile Include="Migrations\201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.Designer.cs">
       <DependentUpon>201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712111548310_ForeignKeys.cs" />
+    <Compile Include="Migrations\201712111548310_ForeignKeys.Designer.cs">
+      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\FutureplanService.cs" />
+    <Compile Include="Services\Interfaces\IFutureplanService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Viewmodels\BaseViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\ActivityViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\BuildingBlockViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\ComponentViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\FeedbackViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\FutureplanViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -301,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.resx">
       <DependentUpon>201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712111548310_ForeignKeys.resx">
+      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

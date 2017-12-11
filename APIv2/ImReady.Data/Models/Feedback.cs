@@ -12,7 +12,7 @@ namespace ImReady.Data.Models
     public class Feedback : EntityModel
     {
         public string CaregiverId { get; set; }
-        public Guid ClientActivityId { get; set; }
+        public string ClientActivityId { get; set; }
 
         public string Content { get; set; }
 

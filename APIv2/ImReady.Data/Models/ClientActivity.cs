@@ -12,8 +12,12 @@ namespace ImReady.Data.Models
     [Table("ClientActivity")]
     public class ClientActivity : EntityModel
     {
-        public Guid ClientComponentId { get; set; }
+        public string ClientComponentId { get; set; }
+
+        public string ActivityId { get; set; }
+
         public Status Status { get; set; }
+
         public string Content { get; set; }
         public DateTime Deadline { get; set; }
 
@@ -21,5 +25,8 @@ namespace ImReady.Data.Models
 
         [ForeignKey("ClientComponentId")]
         public virtual ClientComponent ClientComponent { get; set; }
+
+        [ForeignKey("ActivityId")]
+        public virtual Activity Activity { get; set; }
     }
 }

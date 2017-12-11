@@ -12,17 +12,26 @@ namespace ImReady.Data.Models
     public class ClientComponent : EntityModel
     {
         public string Description { get; set; }
-        public Guid ClientBuildingBlockId { get; set; }
         public DateTime Deadline { get; set; }
+
+        public string ClientBuildingBlockId { get; set; }
+
         public Status Status { get; set; }
 
         [ForeignKey("ClientBuildingBlockId")]
         public virtual ClientBuildingBlock ClientBuildingBlock { get; set; }
 
-        public Guid TaskId { get; set; }
+        public string ComponentId { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual Component Component { get; set; }
+
+        public string TaskId { get; set; }
 
         [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
+
+        public virtual ICollection<ClientActivity> Activities { get; set; }
 
     }
 }

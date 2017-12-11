@@ -1,10 +1,12 @@
-﻿using ImReadyApiv2.Services;
+﻿using ImReady.Data.Models.Users;
+using ImReadyApiv2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace ImReadyApiv2.Controllers
 {
@@ -14,21 +16,37 @@ namespace ImReadyApiv2.Controllers
 
         public UserController(IUserService userService)
         {
-            this._userService = userService;
+            _userService = userService;
         }
 
         // GET: api/User
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
+            List<User> users = _userService.GetUsers();
 
-            return new string[] { "value1", "value2" };
+            if (users != null)
+            {
+                return Ok(_userService.GetUsers());
+            }
+            else
+            {
+                return new StatusCodeResult(HttpStatusCode.InternalServerError, this);
+            }
         }
 
         // GET: api/User/5
-        public string Get(int id)
+        public IHttpActionResult Get(string id)
         {
-            _userService.GetUser(id.ToString());
-            return "value";
+            User user = _userService.GetUser(id);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: api/User
