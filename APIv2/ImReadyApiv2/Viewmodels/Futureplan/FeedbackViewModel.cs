@@ -1,13 +1,13 @@
 ﻿using ImReady.Data.Models;
 
-namespace ImReadyApiv2.Viewmodels
+namespace ImReadyApiv2.Results
 {
-    public class FeedbackViewModel : BaseEntityViewModel
+    public class FeedbackViewModel : BaseResult
     {
         public FeedbackViewModel(Feedback feedback) : base(feedback)
         {
             Content = feedback.Content;
-            CaregiverName = feedback.Caregiver.Firstname;
+            CaregiverName = feedback.Caregiver.FirstName;
         }
         public string Content { get; set; }
 

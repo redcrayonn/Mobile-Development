@@ -1,19 +1,10 @@
-﻿using ImReady.Data;
-using ImReady.Service;
+﻿using ImReady.Service;
 using ImReady.Service.Services;
 using ImReadyApiv2.Context;
-using ImReadyApiv2.Controllers;
 using ImReadyApiv2.Services;
-using Patterns.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using ImReadyApiv2.Services.Interfaces;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Dependencies;
 using Unity;
 using Unity.Lifetime;
 

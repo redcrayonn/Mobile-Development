@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ImReadyApiv2.Viewmodels
+namespace ImReadyApiv2.Results
 {
     public class FutureplanViewModel
     {

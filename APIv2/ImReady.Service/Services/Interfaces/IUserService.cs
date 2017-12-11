@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImReadyApiv2.Services
+namespace ImReadyApiv2.Services.Interfaces
 {
     public interface IUserService
     {

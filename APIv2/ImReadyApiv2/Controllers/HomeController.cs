@@ -10,13 +10,6 @@ namespace ImReadyApiv2.Controllers
 {
     public class HomeController : ApiController
     {
-        private readonly IClientService clientService;
-
-        public HomeController(IClientService clientService)
-        {
-            this.clientService = clientService;
-        }
-
         public IHttpActionResult Get()
         {
             return Ok("hello world");

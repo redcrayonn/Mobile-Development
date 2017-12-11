@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ImReadyApiv2.Viewmodels
+namespace ImReadyApiv2.Results
 {
-    public class BuildingBlockViewModel : BaseEntityViewModel
+    public class BuildingBlockViewModel : BaseResult
     {
         public BuildingBlockViewModel(ClientBuildingBlock block) : base(block)
         {

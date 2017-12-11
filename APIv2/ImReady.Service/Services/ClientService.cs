@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImReady.Data.Models.Users;
+using Patterns.Repository;
 
 namespace ImReady.Service.Services
 {
     public class ClientService : IClientService
     {
-        private readonly IImReadyUnitOfWork unitOfWork;
+        private readonly IImReadyUnitOfWork _unitOfWork;
+        private readonly IRepository<Client> _clientRepository;
 
         public ClientService(IImReadyUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
+
+            _clientRepository = _unitOfWork.ClientRepository;
         }
 
-        public List<object> GetClients()
+        public List<Client> GetClients()
         {
-            throw new NotImplementedException();
+            return _clientRepository.Entities.ToList();
+        }
+
+        public Client GetClient(string id)
+        {
+            var client = _clientRepository.Entities.FirstOrDefault(c => c.Id == id);
+            return client;
         }
     }
 }

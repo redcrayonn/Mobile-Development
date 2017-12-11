@@ -1,5 +1,5 @@
 ﻿using ImReadyApiv2.Services;
-using ImReadyApiv2.Viewmodels;
+using ImReadyApiv2.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;

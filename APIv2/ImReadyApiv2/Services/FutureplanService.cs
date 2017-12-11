@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ImReady.Data.Models;
 using ImReadyApiv2.Context;
-using ImReadyApiv2.Viewmodels;
+using ImReadyApiv2.Results;
 
 namespace ImReadyApiv2.Services
 {

@@ -1,4 +1,5 @@
 ﻿using ImReady.Service.Services;
+using ImReadyApiv2.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,19 @@ namespace ImReadyApiv2.Controllers
 
         public ClientController(IClientService clientService)
         {
-            this._clientService = clientService;
+            _clientService = clientService;
         }
 
         // GET: api/Client/5
-        public string Get(int id)
+        public IHttpActionResult Get(string id)
         {
-            return "value";
+            var client = _clientService.GetClient(id);
+            if (client == null)
+            {
+                NotFound();
+            }
+            var clientResult = new UserResult(client);
+            return Ok(clientResult);
         }
 
         // POST: api/Client

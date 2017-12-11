@@ -3,9 +3,9 @@ using ImReady.Data.Models;
 using System;
 using System.Collections.Generic;
 
-namespace ImReadyApiv2.Viewmodels
+namespace ImReadyApiv2.Results
 {
-    public class ActivityViewModel : BaseEntityViewModel
+    public class ActivityViewModel : BaseResult
     {
         public ActivityViewModel(ClientActivity activity) : base(activity)
         {

@@ -12,5 +12,6 @@ namespace ImReady.Service
     public interface IImReadyUnitOfWork : IUnitOfWork
     {
         IRepository<Client> ClientRepository { get; }
+        IRepository<User> UserRepository { get; }
     }
 }
