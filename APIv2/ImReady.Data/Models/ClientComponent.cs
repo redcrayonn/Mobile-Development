@@ -25,5 +25,7 @@ namespace ImReady.Data.Models
         [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }
 
+        public virtual ICollection<ClientActivity> Activities { get; set; }
+
     }
 }

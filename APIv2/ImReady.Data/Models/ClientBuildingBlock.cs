@@ -20,5 +20,7 @@ namespace ImReady.Data.Models
 
         [ForeignKey("ClientId")]
         public virtual Client Client { get; set; }
+
+        public virtual ICollection<ClientComponent> Components { get; set; }
     }
 }

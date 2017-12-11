@@ -1,4 +1,4 @@
-﻿using ImReady.Service.Services;
+﻿using ImReadyApiv2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace ImReadyApiv2.DI
         public static void Register(HttpConfiguration config)
         {
             var container = new UnityContainer();
-            container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
 
             config.DependencyResolver = new UnityResolver(container);
