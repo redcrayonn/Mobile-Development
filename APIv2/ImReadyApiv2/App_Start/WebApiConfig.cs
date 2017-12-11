@@ -19,7 +19,7 @@ namespace ImReadyApiv2
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Web API dependency injection
-            ServiceResolver.Register(config);
+            UnityConfig.Register(config);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

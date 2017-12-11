@@ -227,8 +227,8 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DI\ServiceResolver.cs" />
-    <Compile Include="DI\UnityResolver.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="IoC\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -260,7 +260,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -284,6 +286,10 @@
     <ProjectReference Include="..\ImReady.Service\ImReady.Service.csproj">
       <Project>{12508124-a9e7-4d54-879d-5a6e06f86c63}</Project>
       <Name>ImReady.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Patterns\Patterns.csproj">
+      <Project>{E2EF1389-5EFA-4D0D-AC4D-D8B64D2CB4F3}</Project>
+      <Name>Patterns</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

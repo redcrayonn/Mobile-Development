@@ -12,6 +12,10 @@ namespace ImReadyApiv2.DI
 
         public UnityResolver(IUnityContainer container)
         {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
             this.container = container;
         }
 

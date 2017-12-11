@@ -22,6 +22,7 @@ namespace ImReadyApiv2
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ImReadyDbContext, Configuration>());
             new ImReadyDbContext().Database.Initialize(false);
         }
