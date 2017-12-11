@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\FuturePlanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DI\ServiceResolver.cs" />
@@ -241,6 +242,10 @@
     <Compile Include="Migrations\201712071435364_identityFix.Designer.cs">
       <DependentUpon>201712071435364_identityFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712111548310_ForeignKeys.cs" />
+    <Compile Include="Migrations\201712111548310_ForeignKeys.Designer.cs">
+      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,6 +258,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Viewmodels\BaseViewModel.cs" />
     <Compile Include="Viewmodels\Futureplan\ActivityViewModel.cs" />
+    <Compile Include="Viewmodels\Futureplan\BuildingBlockViewModel.cs" />
     <Compile Include="Viewmodels\Futureplan\ComponentViewModel.cs" />
     <Compile Include="Viewmodels\Futureplan\FeedbackViewModel.cs" />
     <Compile Include="Viewmodels\Futureplan\FutureplanViewModel.cs" />
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712071435364_identityFix.resx">
       <DependentUpon>201712071435364_identityFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712111548310_ForeignKeys.resx">
+      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,7 @@ namespace ImReadyApiv2.Controllers
 
         public UserController(IUserService userService)
         {
-            this._userService = userService;
+            _userService = userService;
         }
 
         // GET: api/User

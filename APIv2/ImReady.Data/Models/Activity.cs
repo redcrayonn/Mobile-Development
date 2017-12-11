@@ -16,7 +16,7 @@ namespace ImReady.Data.Models
 
         public int Points { get; set; }
 
-        public Guid ComponentId { get; set; }
+        public string ComponentId { get; set; }
 
         [ForeignKey("ComponentId")]
         public virtual Component Component { get; set; }

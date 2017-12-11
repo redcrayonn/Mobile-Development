@@ -9,8 +9,18 @@ namespace ImReadyApiv2.Viewmodels
 {
     public class ComponentViewModel : BaseEntityViewModel
     {
-        public ComponentViewModel(EntityModel entity) : base(entity)
+        public ComponentViewModel(ClientComponent component) : base(component)
         {
+            Name = component.Component.Name;
+            Description = component.Component.Description;
+            Status = component.Status;
+
+            Activities = new List<ActivityViewModel>();
+            foreach (var activity in component.Activities)
+            {
+                Activities.Add(new ActivityViewModel(activity));
+            }
+            //TODO DEADLINE
         }
 
         public string Name { get; set; }

@@ -11,15 +11,13 @@ namespace ImReadyApiv2.Viewmodels
     {
         public FutureplanViewModel(List<ClientBuildingBlock> blocks)
         {
-
+            Blocks = new List<BuildingBlockViewModel>();
+            foreach (var block in blocks)
+            {
+                Blocks.Add(new BuildingBlockViewModel(block));
+            }
         }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public BlockType Type { get; set; }
-
-        public List<ComponentViewModel> Components { get; set; }
+        public List<BuildingBlockViewModel> Blocks { get; set; }
+        
     }
 }

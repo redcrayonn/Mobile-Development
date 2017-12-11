@@ -1,4 +1,5 @@
 ﻿using ImReady.Data.Models;
+using ImReadyApiv2.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace ImReadyApiv2.Services
 {
     public interface IFutureplanService
     {
-        List<ClientBuildingBlock> GetPlan(string id);
+        FutureplanViewModel GetPlan(string clientId);
     }
 }

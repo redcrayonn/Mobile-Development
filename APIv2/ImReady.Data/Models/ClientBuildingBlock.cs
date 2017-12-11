@@ -11,7 +11,7 @@ namespace ImReady.Data.Models
     [Table("ClientBuildingBlock")]
     public class ClientBuildingBlock : EntityModel
     {
-        public Guid BuildingblockId { get; set; }
+        public string BuildingblockId { get; set; }
 
         public string ClientId { get; set; }
 

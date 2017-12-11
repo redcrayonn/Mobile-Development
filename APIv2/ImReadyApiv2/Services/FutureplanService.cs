@@ -17,12 +17,11 @@ namespace ImReadyApiv2.Services
             _dbContext = new ImReadyDbContext();
         }
 
-        public List<ClientBuildingBlock> GetPlan(string clientId)
+        public FutureplanViewModel GetPlan(string clientId)
         {
             var blocks = _dbContext.ClientBuildingblocks
-                .Where(w => w.ClientId == clientId && !w.Deleted).ToList();
-            new FutureplanViewModel(blocks);
-            throw new NotImplementedException();
+                            .Where(w => w.ClientId == clientId && !w.Deleted).ToList();
+            return new FutureplanViewModel(blocks);
         }
     }
 }

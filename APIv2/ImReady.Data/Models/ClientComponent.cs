@@ -13,14 +13,19 @@ namespace ImReady.Data.Models
     {
         public string Description { get; set; }
 
-        public Guid ClientBuildingBlockId { get; set; }
+        public string ClientBuildingBlockId { get; set; }
 
         public Status Status { get; set; }
 
         [ForeignKey("ClientBuildingBlockId")]
         public virtual ClientBuildingBlock ClientBuildingBlock { get; set; }
 
-        public Guid TaskId { get; set; }
+        public string ComponentId { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual Component Component { get; set; }
+
+        public string TaskId { get; set; }
 
         [ForeignKey("TaskId")]
         public virtual Task Task { get; set; }

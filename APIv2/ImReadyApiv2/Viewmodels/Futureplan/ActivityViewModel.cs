@@ -5,8 +5,23 @@ using System.Collections.Generic;
 
 namespace ImReadyApiv2.Viewmodels
 {
-    public class ActivityViewModel : EntityModel
+    public class ActivityViewModel : BaseEntityViewModel
     {
+        public ActivityViewModel(ClientActivity activity) : base(activity)
+        {
+            Name = activity.Activity.Name;
+            Description = activity.Activity.Description;
+            Points = activity.Activity.Points;
+            Status = activity.Status;
+            Content = activity.Content;
+
+            Feedback = new List<FeedbackViewModel>();
+            foreach (var feedback in activity.Feedback)
+            {
+                Feedback.Add(new FeedbackViewModel(feedback));
+            }
+            //Deadline = activity.Deadline;
+        }
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -19,6 +34,6 @@ namespace ImReadyApiv2.Viewmodels
 
         public DateTime Deadline { get; set; }
 
-        public virtual ICollection<FeedbackViewModel> Feedback { get; set; }
+        public List<FeedbackViewModel> Feedback { get; set; }
     }
 }

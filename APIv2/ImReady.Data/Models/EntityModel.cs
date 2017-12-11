@@ -10,7 +10,7 @@ namespace ImReady.Data.Models
     public abstract class EntityModel
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public bool Deleted { get; set; }
     }

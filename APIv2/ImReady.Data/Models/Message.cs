@@ -11,7 +11,7 @@ namespace ImReady.Data.Models
     [Table("Message")]
     public class Message : EntityModel
     {
-        public Guid ChatId { get; set; }
+        public string ChatId { get; set; }
         public String Content { get; set; }
         public DateTime SentDate { get; set; }
         public bool Read { get; set; }
