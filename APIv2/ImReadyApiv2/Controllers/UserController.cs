@@ -27,7 +27,7 @@ namespace ImReadyApiv2.Controllers
         // GET: api/User/5
         public string Get(int id)
         {
-            _userService.GetUser(id)
+            _userService.GetUser(id.ToString());
             return "value";
         }
 
