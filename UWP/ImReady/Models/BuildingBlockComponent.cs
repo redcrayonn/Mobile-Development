@@ -8,7 +8,7 @@ namespace ImReady.Models
 {
     public class BuildingBlockComponent
     {
-        public string Name { get; set; }
+        public string ComponentName { get; set; }
         public List<Activity> Activities { get; set; }
     }
 }

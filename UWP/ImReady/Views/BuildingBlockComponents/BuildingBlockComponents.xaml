@@ -31,7 +31,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local1:BuildingBlockComponent">
                         <StackPanel>
-                            <controls1:HomeExpander ComponentName="testmofo">
+                            <controls1:HomeExpander ComponentName="{x:Bind ComponentName}">
 
                             </controls1:HomeExpander>
                         </StackPanel>

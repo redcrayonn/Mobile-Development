@@ -28,21 +28,20 @@ namespace ImReady.Controls
         public string ComponentName
         {
             get { return (string)GetValue(ComponentNameProperty); }
-            set { SetValueDp(ComponentNameProperty, value); }
+            set { SetValue(ComponentNameProperty, value); }
         }
 
-        public object ECustomMapControlMode { get; private set; }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ComponentNameProperty =
-            DependencyProperty.Register("ComponentName", typeof(string), typeof(HomeExpander), new PropertyMetadata(""));
+            DependencyProperty.Register(
+                nameof(ComponentName),
+                typeof(string),
+                typeof(HomeExpander),
+                new PropertyMetadata(null, PresentationSlidePropertyChanged));
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void SetValueDp(DependencyProperty property, object value, [System.Runtime.CompilerServices.CallerMemberName] String p = null)
+        private static void PresentationSlidePropertyChanged(
+            DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            SetValue(property, value);
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(p));
+            //((PresentationViewer)o).ShowSlideContent();
         }
     }
 }

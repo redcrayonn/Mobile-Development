@@ -16,7 +16,7 @@ namespace ImReady.Services.Mock
         {
             return new BuildingBlockComponent()
             {
-                Name = "Woonruimte zoeken",
+                ComponentName = "Woonruimte zoeken",
                 Activities = new List<Activity>()
                 {
                     new ActivityService().GetActivity(-1),
