@@ -97,8 +97,8 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
-    <Compile Include="Controls\HomeExpander.xaml.cs">
-      <DependentUpon>HomeExpander.xaml</DependentUpon>
+    <Compile Include="Controls\BuildingBlockComponentExpander.xaml.cs">
+      <DependentUpon>BuildingBlockComponentExpander.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyItem.xaml.cs">
       <DependentUpon>MyItem.xaml</DependentUpon>
@@ -173,7 +173,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\HomeExpander.xaml">
+    <Page Include="Controls\BuildingBlockComponentExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

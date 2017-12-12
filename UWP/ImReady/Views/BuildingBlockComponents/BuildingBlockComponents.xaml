@@ -31,9 +31,9 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local1:BuildingBlockComponent">
                         <StackPanel>
-                            <controls1:HomeExpander ComponentName="{x:Bind ComponentName}">
+                            <controls1:BuildingBlockComponentExpander BuildingBlockComponent="{Binding}">
 
-                            </controls1:HomeExpander>
+                            </controls1:BuildingBlockComponentExpander>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
