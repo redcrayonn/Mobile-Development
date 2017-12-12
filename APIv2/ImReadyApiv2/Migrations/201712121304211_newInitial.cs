@@ -46,11 +46,8 @@ namespace ImReadyApiv2.Migrations
                         Description = c.String(),
                         Type = c.Int(nullable: false),
                         Deleted = c.Boolean(nullable: false),
-                        Client_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Client", t => t.Client_Id)
-                .Index(t => t.Client_Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.UsefulLink",
@@ -101,47 +98,19 @@ namespace ImReadyApiv2.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.ClientActivity",
+                "dbo.ClientBuildingBlock",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        ClientComponentId = c.String(maxLength: 128),
-                        ActivityId = c.String(maxLength: 128),
-                        Status = c.Int(nullable: false),
-                        Content = c.String(),
-                        Deadline = c.DateTime(nullable: false),
+                        BuildingblockId = c.String(maxLength: 128),
+                        ClientId = c.String(maxLength: 128),
                         Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Activity", t => t.ActivityId)
-                .ForeignKey("dbo.ClientComponent", t => t.ClientComponentId)
-                .Index(t => t.ClientComponentId)
-                .Index(t => t.ActivityId);
+                .ForeignKey("dbo.Buildingblock", t => t.BuildingblockId)
+                .ForeignKey("dbo.Client", t => t.ClientId)
+                .Index(t => t.BuildingblockId)
+                .Index(t => t.ClientId);
             
             CreateTable(
                 "dbo.ClientComponent",
@@ -165,33 +134,22 @@ namespace ImReadyApiv2.Migrations
                 .Index(t => t.TaskId);
             
             CreateTable(
-                "dbo.ClientBuildingBlock",
+                "dbo.ClientActivity",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        BuildingblockId = c.String(maxLength: 128),
-                        ClientId = c.String(maxLength: 128),
+                        ClientComponentId = c.String(maxLength: 128),
+                        ActivityId = c.String(maxLength: 128),
+                        Status = c.Int(nullable: false),
+                        Content = c.String(),
+                        Deadline = c.DateTime(nullable: false),
                         Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Buildingblock", t => t.BuildingblockId)
-                .ForeignKey("dbo.Client", t => t.ClientId)
-                .Index(t => t.BuildingblockId)
-                .Index(t => t.ClientId);
-            
-            CreateTable(
-                "dbo.ClientTask",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                        DeadlineDate = c.DateTime(nullable: false),
-                        Content = c.String(),
-                        Status = c.Int(nullable: false),
-                        Feedback = c.String(),
-                        Deleted = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
+                .ForeignKey("dbo.Activity", t => t.ActivityId)
+                .ForeignKey("dbo.ClientComponent", t => t.ClientComponentId)
+                .Index(t => t.ClientComponentId)
+                .Index(t => t.ActivityId);
             
             CreateTable(
                 "dbo.Feedback",
@@ -208,6 +166,45 @@ namespace ImReadyApiv2.Migrations
                 .ForeignKey("dbo.ClientActivity", t => t.ClientActivityId)
                 .Index(t => t.CaregiverId)
                 .Index(t => t.ClientActivityId);
+            
+            CreateTable(
+                "dbo.ClientTask",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                        DeadlineDate = c.DateTime(nullable: false),
+                        Content = c.String(),
+                        Status = c.Int(nullable: false),
+                        Feedback = c.String(),
+                        Deleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -269,54 +266,52 @@ namespace ImReadyApiv2.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Feedback", "ClientActivityId", "dbo.ClientActivity");
-            DropForeignKey("dbo.Feedback", "CaregiverId", "dbo.Caregiver");
             DropForeignKey("dbo.ClientComponent", "TaskId", "dbo.ClientTask");
             DropForeignKey("dbo.ClientComponent", "ComponentId", "dbo.Component");
             DropForeignKey("dbo.ClientComponent", "ClientBuildingBlockId", "dbo.ClientBuildingBlock");
-            DropForeignKey("dbo.ClientBuildingBlock", "ClientId", "dbo.Client");
-            DropForeignKey("dbo.ClientBuildingBlock", "BuildingblockId", "dbo.Buildingblock");
+            DropForeignKey("dbo.Feedback", "ClientActivityId", "dbo.ClientActivity");
+            DropForeignKey("dbo.Feedback", "CaregiverId", "dbo.Caregiver");
             DropForeignKey("dbo.ClientActivity", "ClientComponentId", "dbo.ClientComponent");
             DropForeignKey("dbo.ClientActivity", "ActivityId", "dbo.Activity");
-            DropForeignKey("dbo.Buildingblock", "Client_Id", "dbo.Client");
-            DropForeignKey("dbo.Activity", "ComponentId", "dbo.Component");
+            DropForeignKey("dbo.ClientBuildingBlock", "ClientId", "dbo.Client");
+            DropForeignKey("dbo.ClientBuildingBlock", "BuildingblockId", "dbo.Buildingblock");
             DropForeignKey("dbo.UsefulLink", "ComponentId", "dbo.Component");
             DropForeignKey("dbo.Component", "BuildingblockId", "dbo.Buildingblock");
+            DropForeignKey("dbo.Activity", "ComponentId", "dbo.Component");
             DropIndex("dbo.Relative", new[] { "ClientId" });
             DropIndex("dbo.Relative", new[] { "Id" });
             DropIndex("dbo.Client", new[] { "CaregiverId" });
             DropIndex("dbo.Client", new[] { "Id" });
             DropIndex("dbo.Caregiver", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Feedback", new[] { "ClientActivityId" });
-            DropIndex("dbo.Feedback", new[] { "CaregiverId" });
-            DropIndex("dbo.ClientBuildingBlock", new[] { "ClientId" });
-            DropIndex("dbo.ClientBuildingBlock", new[] { "BuildingblockId" });
-            DropIndex("dbo.ClientComponent", new[] { "TaskId" });
-            DropIndex("dbo.ClientComponent", new[] { "ComponentId" });
-            DropIndex("dbo.ClientComponent", new[] { "ClientBuildingBlockId" });
-            DropIndex("dbo.ClientActivity", new[] { "ActivityId" });
-            DropIndex("dbo.ClientActivity", new[] { "ClientComponentId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.Feedback", new[] { "ClientActivityId" });
+            DropIndex("dbo.Feedback", new[] { "CaregiverId" });
+            DropIndex("dbo.ClientActivity", new[] { "ActivityId" });
+            DropIndex("dbo.ClientActivity", new[] { "ClientComponentId" });
+            DropIndex("dbo.ClientComponent", new[] { "TaskId" });
+            DropIndex("dbo.ClientComponent", new[] { "ComponentId" });
+            DropIndex("dbo.ClientComponent", new[] { "ClientBuildingBlockId" });
+            DropIndex("dbo.ClientBuildingBlock", new[] { "ClientId" });
+            DropIndex("dbo.ClientBuildingBlock", new[] { "BuildingblockId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.UsefulLink", new[] { "ComponentId" });
-            DropIndex("dbo.Buildingblock", new[] { "Client_Id" });
             DropIndex("dbo.Component", new[] { "BuildingblockId" });
             DropIndex("dbo.Activity", new[] { "ComponentId" });
             DropTable("dbo.Relative");
             DropTable("dbo.Client");
             DropTable("dbo.Caregiver");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Feedback");
-            DropTable("dbo.ClientTask");
-            DropTable("dbo.ClientBuildingBlock");
-            DropTable("dbo.ClientComponent");
-            DropTable("dbo.ClientActivity");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.ClientTask");
+            DropTable("dbo.Feedback");
+            DropTable("dbo.ClientActivity");
+            DropTable("dbo.ClientComponent");
+            DropTable("dbo.ClientBuildingBlock");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.UsefulLink");

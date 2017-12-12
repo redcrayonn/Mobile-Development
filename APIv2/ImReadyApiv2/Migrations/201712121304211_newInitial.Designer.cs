@@ -13,7 +13,7 @@ namespace ImReadyApiv2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712121146468_newInitial"; }
+            get { return "201712121304211_newInitial"; }
         }
         
         string IMigrationMetadata.Source

@@ -234,13 +234,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context\ImReadyDbContext.cs" />
-    <Compile Include="Migrations\201712121146468_newInitial.cs" />
-    <Compile Include="Migrations\201712121146468_newInitial.Designer.cs">
-      <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712121109490_buildingblockFix.cs" />
-    <Compile Include="Migrations\201712121109490_buildingblockFix.Designer.cs">
-      <DependentUpon>201712121109490_buildingblockFix.cs</DependentUpon>
+    <Compile Include="Migrations\201712121304211_newInitial.cs" />
+    <Compile Include="Migrations\201712121304211_newInitial.Designer.cs">
+      <DependentUpon>201712121304211_newInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Input\PostUserInputModel.cs" />
@@ -295,11 +291,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712121146468_newInitial.resx">
-      <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712121109490_buildingblockFix.resx">
-      <DependentUpon>201712121109490_buildingblockFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712121304211_newInitial.resx">
+      <DependentUpon>201712121304211_newInitial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
