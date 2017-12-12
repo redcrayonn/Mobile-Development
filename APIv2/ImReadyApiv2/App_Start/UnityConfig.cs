@@ -27,6 +27,7 @@ namespace ImReadyApiv2.DI
             container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
             container.RegisterType<IFutureplanService, FutureplanService>(new HierarchicalLifetimeManager());
             container.RegisterType<IBuildingblockService, BuildingblockService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IClientActivityService, ClientActivityService>(new HierarchicalLifetimeManager());
 
             // Set dependency resolver to the Unity resolver
             var resolver = new UnityResolver(container);

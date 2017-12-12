@@ -65,6 +65,22 @@ namespace ImReadyApiv2.Migrations
             {
                 result = await userManager.AddToRoleAsync(admin.Id, Role.ADMIN.ToString());
             }
+
+            var client = new Client()
+            {
+                UserName = "Jantje@client.nl",
+                FirstName = "Jantje",
+                LastName = "Bakker",
+                Email = "Jantje@client.nl",
+                EmailConfirmed = true,
+                Points = 0,
+            };
+
+            var result2 = await userManager.CreateAsync(client, "test123");
+            if (result2.Succeeded)
+            {
+                result2 = await userManager.AddToRoleAsync(client.Id, Role.CLIENT.ToString());
+            }
         }
 
         private async System.Threading.Tasks.Task SeedData(ImReadyDbContext context)

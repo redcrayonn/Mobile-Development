@@ -1,4 +1,5 @@
-﻿using ImReady.Data.Models;
+﻿using ImReady.Data.Enums;
+using ImReady.Data.Models;
 using ImReady.Data.Models.Users;
 using ImReady.Service.Services;
 using ImReadyApiv2.Context;
@@ -21,10 +22,12 @@ namespace ImReadyApiv2.Controllers
     public class ClientController : BaseApiController
     {
         private readonly IClientService _clientService;
+        private readonly IClientActivityService _clientActivityService;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService clientService, IClientActivityService clientActivityService)
         {
             _clientService = clientService;
+            _clientActivityService = clientActivityService;
         }
 
         // GET: api/Client/5
@@ -68,8 +71,20 @@ namespace ImReadyApiv2.Controllers
 
         // PUT: api/Client/1/activity/2
         [Route("{id}/activity/{activityId}")]
-        public void Put(int id, int activityId, [FromBody]Client value)
+        public void Put(string id, string activityId, [FromBody]PostClientActivityInputModel value)
         {
+            ClientActivity activity = _clientActivityService.getById(activityId);
+
+            if (activity.ClientComponent.ClientBuildingBlock.ClientId == id)
+            {
+                activity.Content = value.Content;
+                activity.Status = value.Status;
+
+                if (value.Status != Status.DONE)
+                {
+                    _clientActivityService.EditActivity(activity);
+                }
+            }
         }
 
         // DELETE: api/Client/5

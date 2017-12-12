@@ -17,9 +17,9 @@ namespace ImReadyApiv2.Controllers
 
         //Todo Authorisation
         // GET: api/Futureplan/5
-        public IHttpActionResult Get(string clientId)
+        public IHttpActionResult Get(string id)
         {
-            FutureplanResult futureplan = new FutureplanResult(_planService.GetPlan(clientId));
+            FutureplanResult futureplan = new FutureplanResult(_planService.GetPlan(id));
 
             if (futureplan != null)
             {
