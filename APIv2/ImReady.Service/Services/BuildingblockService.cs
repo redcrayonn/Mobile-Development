@@ -22,6 +22,7 @@ namespace ImReady.Service.Services
         public bool AddBlock(Buildingblock block)
         {
             _buildingBlockRepository.Add(block);
+            _unitOfWork.CommitAsync();
             return true;
         }
 

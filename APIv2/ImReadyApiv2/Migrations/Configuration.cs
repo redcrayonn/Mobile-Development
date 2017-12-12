@@ -8,6 +8,7 @@ namespace ImReadyApiv2.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Threading.Tasks;
+    using ImReadyApiv2.Context;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ImReadyApiv2.Context.ImReadyDbContext>
     {
@@ -56,6 +57,23 @@ namespace ImReadyApiv2.Migrations
             {
                 result = await userManager.AddToRoleAsync(admin.Id, Role.ADMIN.ToString());
             }
+
+            SeedBuildingBlocks(context);
+            SeedComponents(context);
+        }
+
+        private void SeedComponents(ImReadyDbContext context)
+        {
+            context.Components.AddOrUpdate(new Component { BuildingblockId = "1", Deleted = false, Description = "Bij een huis huren komt heel wat kijken...", Name = "Huis huren", Id = "1" });
+            context.Components.AddOrUpdate(new Component { BuildingblockId = "2", Deleted = false, Description = "Heel wat spullen zijn wat waard in je huis. Handig om dit te verzekeren.", Name = "Inboedelverzekering regelen", Id = "2" });
+            context.SaveChanges();
+        }
+
+        private void SeedBuildingBlocks(ImReadyDbContext context)
+        {
+            context.Buildingblocks.AddOrUpdate(new Buildingblock { Name = "Wonen", Deleted = false, Description = "Alles om wonen te regelen", Id = "1", Type = ImReady.Data.Enums.BlockType.LIVING });
+            context.Buildingblocks.AddOrUpdate(new Buildingblock { Name = "Verzekering", Deleted = false, Description = "Alles om verzekeringen te regelen", Id = "2", Type = ImReady.Data.Enums.BlockType.INSURANCE });
+            context.SaveChanges();
         }
     }
 }
