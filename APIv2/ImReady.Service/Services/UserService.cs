@@ -63,7 +63,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                return _usersRepository.Entities.Select(u => u as User).ToList();
+                return _usersRepository.Entities.ToList();
             }
             catch (Exception)
             {

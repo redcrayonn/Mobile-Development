@@ -17,9 +17,12 @@ namespace ImReady.Service
         {
             
         }
-
+        //Users
         public IRepository<Client> ClientRepository => new EntityFrameworkGenericRepository<Client>(_context);
         public IRepository<User> UserRepository => new EntityFrameworkGenericRepository<User>(_context);
+
+        //Futureplan
         public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
+        public IRepository<Buildingblock> BuildingblockRepository => new EntityFrameworkGenericRepository<Buildingblock>(_context);
     }
 }
