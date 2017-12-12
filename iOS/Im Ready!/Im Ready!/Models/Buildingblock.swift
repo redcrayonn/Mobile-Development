@@ -11,11 +11,19 @@ import Foundation
 class Buildingblock :  EntityModel, Decodable {
     var name : String?
     var description: String?
-    var blockType: Blocktype?
+    var blockType: BlockType?
     
     enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case description = "description"
-        case blockType = "blockType"
+        case name = "Name"
+        case description = "Description"
+        case blockType = "BlockType"
+    }
+    
+    init(id: String, name: String, description: String, blockType: BlockType) {
+        super.init()
+        self.id = id
+        self.name = name
+        self.description = description
+        self.blockType = blockType
     }
 }

@@ -9,23 +9,18 @@
 import Foundation
 
 public class ComponentService : Service {
-    func getMockHomeComponents() -> [Component] {
-        var homeComponents: [Component] = []
-        homeComponents.append(Component(id: "1", name: "Woning zoeken", activities: activityService.getMockSearchHomeActivities()))
-        homeComponents.append(Component(id: "2", name: "Zoek witgoed uit", activities: activityService.getMockBuyStuffActivities()))
-        homeComponents.append(Component(id: "2", name: "Zoek witgoed uit", activities: activityService.getMockBuyStuffActivities()))
+    func getMockComponents() -> [Component] {
+        var components: [Component] = []
 
-        return homeComponents
-    }
-    
-    func getMockWorkComponents() -> [Component] {
-        var workComponents: [Component] = []
-        workComponents.append(Component(id: "3", name: "Zoek drie baantjes", activities: []))
-        workComponents.append(Component(id: "4", name: "Maak een CV", activities: []))
-        workComponents.append(Component(id: "4", name: "Maak een CV", activities: []))
-        workComponents.append(Component(id: "4", name: "Maak een CV", activities: []))
+        components.append(Component(id: "HomeComponent", buildingblockId: "Wonen", name: "Zoek een woning", description: "Zoek een woning", youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+        components.append(Component(id: "HomeComponent", buildingblockId: "Wonen", name: "Zoek witgoed uit", description: "Zoek witgoed uit", youtubeUrl: "nein"))
+        
+        components.append(Component(id: "WorkComponent", buildingblockId: "Werk", name: "Zoek 3 baantjes", description: "werk", youtubeUrl: "kein youtubeurl"))
+        components.append(Component(id: "WorkComponent", buildingblockId: "Werk", name: "Solliciteer voor een baan", description: "Solliciteer", youtubeUrl: "youtubeurl hier"))
+        
+        components.append(Component(id: "FinanceComponent", buildingblockId: "Financien", name: "Check je money, swa", description: "controller geld", youtubeUrl: ""))
 
-        return workComponents
+        return components
     }
     
     func getComponents(forClient clientId: Int, ofBuildingblock blockId: Int) -> () {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class ComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var collectionView: UICollectionView!
@@ -18,8 +19,8 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarStyle(UIStatusBarStyleContrast)
         self.title = buildingblock?.name
-        components = buildingblock?.components
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -29,6 +30,7 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComponentCell", for: indexPath) as! ComponentCollectionViewCell
         
+//        cell.backgroundColor = UIColor(gradientStyle:UIGradientStyle, withFrame:CGRect, andColors:[UIColor])
         cell.name?.text = components[indexPath.row].name
         cell.component = components[indexPath.row]
         
@@ -39,7 +41,6 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
         if let destinationViewController = segue.destination as? ActivityViewController {
             if let cell = sender as? ComponentCollectionViewCell {
                 destinationViewController.component = cell.component
-                destinationViewController.activities = (cell.component?.activities)!
             }
         }
     }

@@ -8,20 +8,28 @@
 
 import Foundation
 
-public class Component : EntityModel, Decodable {
+class Component : EntityModel, Decodable {
     var buildingblockId : String?
     var name : String?
     var description : String?
     var youtubeUrl : String?
-    var usefulLinks : [UsefulLinks]
+    var usefulLinks : [UsefulLinks]?
     
-
-    enum CodingKeys: String, CodingKey {
-        case buildingblockId = "buildingblockId"
-        case name = "name"
-        case description = "description"
-        case youtubeUrl = "youtubeUrl"
-        case usefulLinks = "usefulLinks"
+    private enum CodingKeys: String, CodingKey {
+        case buildingblockId = "BuildingblockId"
+        case name = "Name"
+        case description = "Description"
+        case youtubeUrl = "YoutubeURL"
+        case usefulLinks = "UsefulLink"
+    }
+    
+    init (id: String, buildingblockId: String, name: String, description: String, youtubeUrl : String) {
+        super.init()
+        self.id = id
+        self.buildingblockId = buildingblockId
+        self.name = name
+        self.description = description
+        self.youtubeUrl = youtubeUrl
     }
 }
 

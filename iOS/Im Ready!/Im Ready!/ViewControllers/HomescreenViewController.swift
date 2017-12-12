@@ -12,8 +12,9 @@ import Alamofire
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var buildingBlocks: [Buildingblock] = []
+    var buildingblocks: [Buildingblock] = []
     var components: [Component] = []
+    var activities: [Activity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +27,32 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Get all buildingblocks, components and activites a client is working on
     func getClientDevelopmentPlan() {
-        buildingBlocks = buildingblockService.getMockBuildingblocks()
-        //        components = componentService.getMockComponents()
-        //        activities = activityService.getMockActivities()
+        buildingblocks = buildingblockService.getMockBuildingblocks()
+        components = componentService.getMockComponents()
+        activities = activityService.getMockActivities()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return buildingBlocks.count
+        return buildingblocks.count
     }
     
     // Load the buildingblocks in a collectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
-        cell.buildingblockImage.image = UIImage(named: buildingBlocks[indexPath.row].imageURL!)
-        cell.title.text = buildingBlocks[indexPath.row].name!
+        
+        cell.title.text = buildingblocks[indexPath.row].name!
         cell.title.numberOfLines = 2;
         cell.title.adjustsFontSizeToFitWidth = true;
-        cell.buildingblock = buildingBlocks[indexPath.row]
+        cell.buildingblock = buildingblocks[indexPath.row]
+        
+        // Hide cell unless there is a component for it.
+        cell.isHidden = true
+        for component in components {
+            if cell.buildingblock?.name == component.buildingblockId {
+                cell.isHidden = false
+                break
+            }
+        }
         
         // Style the cell with cornerradius
         cell.mainBackground.layer.cornerRadius = 6
@@ -64,11 +74,20 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Prepare navigation segue to ComponentViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var buildingblockComponents: [Component] = []
+        
         if let destinationViewController = segue.destination as? ComponentViewController {
             if let cell = sender as? BuildingblockCell {
+                
+                // Only send the components for the clicked buildingblock
+                for component in components {
+                    if cell.buildingblock?.name == component.buildingblockId {
+                        buildingblockComponents.append(component)
+                    }
+                }
+                destinationViewController.components = buildingblockComponents
                 destinationViewController.buildingblock = cell.buildingblock
                 destinationViewController.buildingblockImage = cell.buildingblockImage
-                destinationViewController.components = self.components
             }
         }
     }

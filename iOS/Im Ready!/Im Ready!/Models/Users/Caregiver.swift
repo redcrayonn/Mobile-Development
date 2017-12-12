@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Caregiver : EntityModel, User {
+class Caregiver : User {
     var clients : [Client]?
-    var caregiverRole : Role = Role.CAREGIVER
+    var caregiverRole : Role?
+    
 }

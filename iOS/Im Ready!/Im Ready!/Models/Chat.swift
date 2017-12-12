@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftKeychainWrapper
 
 class Chat : EntityModel {
     var senderId: String?
@@ -16,5 +15,12 @@ class Chat : EntityModel {
     enum CodingKeys: String, CodingKey {
         case senderId = "senderId"
         case receiverId = "receiverId"
+    }
+    
+    init(id: String, senderId: String, receiverId: String) {
+        super.init()
+        self.id = id
+        self.senderId = senderId
+        self.receiverId = receiverId
     }
 }

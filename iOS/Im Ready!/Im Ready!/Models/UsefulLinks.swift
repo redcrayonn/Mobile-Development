@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UsefulLinks : EntityModel {
+class UsefulLinks : EntityModel, Codable {
     var componentId : String?
     var url : String?
 }

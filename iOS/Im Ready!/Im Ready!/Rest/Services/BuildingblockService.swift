@@ -12,18 +12,13 @@ public class BuildingblockService : Service {
     func getMockBuildingblocks() -> [Buildingblock] {
         var buildingblocks: [Buildingblock] = []
         
-        buildingblocks.append(Buildingblock(id: "1", name: "Wonen", description: "lekker wonen", imageURL: "wonen.png", components: componentService.getMockHomeComponents()))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: componentService.getMockWorkComponents()))
-        buildingblocks.append(Buildingblock(id: "3", name: "Financien", description: "financiele dingen", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "4", name: "Verzekering", description: "verzekeren", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Gezondheid", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Werk", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Rechten en plichten", description: "werken", imageURL: "wonen.png", components: []))
-        buildingblocks.append(Buildingblock(id: "2", name: "Behandelplan", description: "werken", imageURL: "wonen.png", components: []))
-        
+        buildingblocks.append(Buildingblock(id: "Wonen", name: "Wonen", description: "lekker wonen", blockType: BlockType.LIVING))
+        buildingblocks.append(Buildingblock(id: "Werk", name: "Werk", description: "werken", blockType: BlockType.LIVING))
+        buildingblocks.append(Buildingblock(id: "Verzekering", name: "Verzekering", description: "verzekering", blockType: BlockType.LIVING))
+        buildingblocks.append(Buildingblock(id: "Gezondheid", name: "Gezondheid", description: "gezondheid", blockType: BlockType.LIVING))
+        buildingblocks.append(Buildingblock(id: "Financien", name: "Financien", description: "financien", blockType: BlockType.LIVING))
+        buildingblocks.append(Buildingblock(id: "Sociaal", name: "Sociaal", description: "sociaal", blockType: BlockType.LIVING))
+                        
         return buildingblocks
     }
     

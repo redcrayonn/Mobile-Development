@@ -11,5 +11,5 @@ import Foundation
 class User {
     var firstname : String?
     var lastname : String?
-    var Role : Role?
+    var role : Role?
 }

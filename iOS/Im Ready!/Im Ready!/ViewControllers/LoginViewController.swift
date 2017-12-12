@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var usernameField: UITextField!
@@ -36,7 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             authenticationService.login(withUsername: username,
                                         andPassword: password,
                                         onSuccess: {
-                                            KeychainWrapper.standard.set(username, forKey: "user")
                                             self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
             }) {
                 print("failed to log in")
@@ -61,23 +59,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // When keyboard shows, move textfields up
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField: textField,
-                      moveDistance: self.textFieldMoveDistance,
-                      up: true)
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        moveTextField(textField: textField,
+//                      moveDistance: self.textFieldMoveDistance,
+//                      up: true)
+//    }
     
     //When keyboard hides, move textfields back down
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField: textField,
-                      moveDistance: self.textFieldMoveDistance,
-                      up: false)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        moveTextField(textField: textField,
+//                      moveDistance: self.textFieldMoveDistance,
+//                      up: false)
+//    }
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
     
     //Function on how the textfields should move up
     func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {

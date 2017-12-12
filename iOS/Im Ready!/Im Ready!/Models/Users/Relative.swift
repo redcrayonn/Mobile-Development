@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Relative : EntityModel, User {
+class Relative : User {
     var clientId : String?
-    var relativeRole : Role = Role.RELATIVE
+    var relativeRole : Role?
 }

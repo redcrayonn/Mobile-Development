@@ -6,9 +6,34 @@ target 'Im Ready!' do
   # Pods for Im Ready!
   pod 'Alamofire', '~> 4.5'
   pod 'AlamofireImage', '~> 3.3'
-  pod 'SwiftyJSON'
   pod 'Alamofire-SwiftyJSON'
-  pod 'SwiftKeychainWrapper'
+  pod 'SwiftyJSON'
+  # Keychain pod
+  pod 'KeychainAccess'
+  
+  # Make a nice background for empty TableViews or CollectionViews
+  pod 'DZNEmptyDataSet'
+  
+  # Create beautiful colors
+  pod 'ChameleonFramework'
+  
+  # Create textfields with effects
+  pod 'TextFieldEffects'
+  
+  # Powerful data driven content manager for UITableView.
+  pod 'RETableViewManager'
+  
+  # Make tableviewcells swipeable
+  pod 'MGSwipeTableCell'
+  
+  # Add animations
+  # pod 'Spring'
+  
+  # Set a custom font
+  pod 'FontBlaster'
+  
+  # Awesome icons
+  pod 'FontAwesomeIconFactory'
 
   target 'Im Ready!Tests' do
     inherit! :search_paths

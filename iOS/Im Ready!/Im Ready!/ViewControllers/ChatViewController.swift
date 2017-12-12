@@ -7,33 +7,39 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 
-class MessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
+class ChatViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBOutlet weak var collectionView: UICollectionView!
     
+    var chats: [Chat] = []
+    let cellSpacingHeight: CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        // Do any additional setup after loading the view.
+        chats = chatsService.getMockChats()
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return chats.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatCell", for: indexPath) as! ChatCollectionViewCell
+        
+        cell.recipientName.text = chats[indexPath.row].receiverId
         
         return cell
     }
- 
+    
+    // Prepare navigation segue to ComponentViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
+//        if let destinationViewController = segue.destination as? ComponentViewController {
+//            if let cell = sender as? BuildingblockCell {
+//                
+//            }
+//        }
+    }
 }
