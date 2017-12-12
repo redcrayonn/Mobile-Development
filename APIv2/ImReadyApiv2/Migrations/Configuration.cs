@@ -9,6 +9,8 @@ namespace ImReadyApiv2.Migrations
     using System.Linq;
     using System.Threading.Tasks;
     using ImReadyApiv2.Context;
+    using ImReady.Data.Enums;
+    using System.Collections.Generic;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ImReadyApiv2.Context.ImReadyDbContext>
     {
@@ -29,6 +31,12 @@ namespace ImReadyApiv2.Migrations
         }
 
         private async System.Threading.Tasks.Task SeedDatabase(ImReadyApiv2.Context.ImReadyDbContext context)
+        {
+            await SeedUsers(context);
+            await SeedData(context);
+        }
+
+        private async System.Threading.Tasks.Task SeedUsers(ImReadyDbContext context)
         {
             var roles = Enum.GetNames(typeof(Role));
 
@@ -57,23 +65,144 @@ namespace ImReadyApiv2.Migrations
             {
                 result = await userManager.AddToRoleAsync(admin.Id, Role.ADMIN.ToString());
             }
-
-            SeedBuildingBlocks(context);
-            SeedComponents(context);
         }
 
-        private void SeedComponents(ImReadyDbContext context)
+        private async System.Threading.Tasks.Task SeedData(ImReadyDbContext context)
         {
-            context.Components.AddOrUpdate(new Component { BuildingblockId = "1", Deleted = false, Description = "Bij een huis huren komt heel wat kijken...", Name = "Huis huren", Id = "1" });
-            context.Components.AddOrUpdate(new Component { BuildingblockId = "2", Deleted = false, Description = "Heel wat spullen zijn wat waard in je huis. Handig om dit te verzekeren.", Name = "Inboedelverzekering regelen", Id = "2" });
-            context.SaveChanges();
-        }
+            #region WORK BLOCK
+            var workBlock = new Buildingblock
+            {
+                Name = "Werk",
+                Description = "Alles om werk te regelen",
+                Id = BlockType.WORK.ToString(),
+                Type = BlockType.WORK
+            };
+            #endregion
 
-        private void SeedBuildingBlocks(ImReadyDbContext context)
-        {
-            context.Buildingblocks.AddOrUpdate(new Buildingblock { Name = "Wonen", Deleted = false, Description = "Alles om wonen te regelen", Id = "1", Type = ImReady.Data.Enums.BlockType.LIVING });
-            context.Buildingblocks.AddOrUpdate(new Buildingblock { Name = "Verzekering", Deleted = false, Description = "Alles om verzekeringen te regelen", Id = "2", Type = ImReady.Data.Enums.BlockType.INSURANCE });
-            context.SaveChanges();
+            #region STUDY BLOCK
+            var studyBlock = new Buildingblock
+            {
+                Name = "Verzekering",
+                Description = "Alles om je studie te regelen",
+                Id = BlockType.EDUCATION.ToString(),
+                Type = BlockType.EDUCATION
+            };
+            #endregion
+
+            #region LIVING BLOCK
+            var rent = new Component
+            {
+                Id = BlockType.LIVING.ToString() + "_rent",
+                Description = "Bij een huis huren komt heel wat kijken...",
+                Name = "Huis huren"
+            };
+
+            var insurance = new Component
+            {
+                Id = BlockType.LIVING.ToString() + "_insurance",
+                Description = "Heel wat spullen zijn wat waard in je huis. Handig om dit te verzekeren.",
+                Name = "Inboedelverzekering regelen"
+            };
+
+            var livingBlockComponents = new List<Component>()
+            {
+                rent,
+                insurance
+            };
+
+            var livingBlock = new Buildingblock
+            {
+                Name = "Wonen",
+                Description = "Alles om wonen te regelen",
+                Id = BlockType.LIVING.ToString(),
+                Type = BlockType.LIVING,
+                Components = livingBlockComponents
+            };
+            #endregion
+
+            #region FINANCE BLOCK
+            var financeBlock = new Buildingblock
+            {
+                Name = "Financien",
+                Description = "Alles om geldzaken te regelen",
+                Id = BlockType.MONEY.ToString(),
+                Type = BlockType.MONEY
+            };
+            #endregion
+
+            #region INSURANCE BLOCK
+            var insuranceBlock = new Buildingblock
+            {
+                Name = "Verzekering",
+                Description = "Alles om verzekeringen te regelen",
+                Id = BlockType.INSURANCE.ToString(),
+                Type = BlockType.INSURANCE
+            };
+            #endregion
+
+            #region TREATMENT BLOCK
+            var treatmentBlock = new Buildingblock
+            {
+                Name = "Behandelplan",
+                Description = "Alles om je behandelplan te regelen",
+                Id = BlockType.TREATMENTPLAN.ToString(),
+                Type = BlockType.TREATMENTPLAN
+            };
+            #endregion
+
+            #region SOCIAL BLOCK
+            var socialBlock = new Buildingblock
+            {
+                Name = "Sociaal",
+                Description = "Alles om sociale zaken te regelen",
+                Id = BlockType.SOCIAL.ToString(),
+                Type = BlockType.SOCIAL
+            };
+            #endregion
+
+            #region HEALTH BLOCK
+            var healthBlock = new Buildingblock
+            {
+                Name = "Gezondheid",
+                Description = "Alles om je gezondheid te regelen",
+                Id = BlockType.HEALTH.ToString(),
+                Type = BlockType.HEALTH
+            };
+            #endregion
+
+            #region FAMILY BLOCK
+            var familyBlock = new Buildingblock
+            {
+                Name = "Gezin",
+                Description = "Alles om gezinszaken te regelen",
+                Id = BlockType.FAMILY.ToString(),
+                Type = BlockType.FAMILY
+            };
+            #endregion
+
+            #region RIGHTS BLOCK
+            var rightsBlock = new Buildingblock
+            {
+                Name = "Rechten & Plichten",
+                Description = "Alles om verzekeringen te regelen",
+                Id = BlockType.RIGHTSANDOBLIGATIONS.ToString(),
+                Type = BlockType.RIGHTSANDOBLIGATIONS
+            };
+            #endregion
+
+
+            context.Buildingblocks.AddOrUpdate(workBlock);
+            context.Buildingblocks.AddOrUpdate(studyBlock);
+            context.Buildingblocks.AddOrUpdate(livingBlock);
+            context.Buildingblocks.AddOrUpdate(financeBlock);
+            context.Buildingblocks.AddOrUpdate(insuranceBlock);
+            context.Buildingblocks.AddOrUpdate(treatmentBlock);
+            context.Buildingblocks.AddOrUpdate(socialBlock);
+            context.Buildingblocks.AddOrUpdate(healthBlock);
+            context.Buildingblocks.AddOrUpdate(familyBlock);
+            context.Buildingblocks.AddOrUpdate(rightsBlock);
+
+            await context.SaveChangesAsync();
         }
     }
 }
