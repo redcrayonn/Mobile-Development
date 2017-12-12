@@ -17,7 +17,7 @@ using System.Web.Http;
 
 namespace ImReadyApiv2.Controllers
 {
-    public class ClientController : ApiController
+    public class ClientController : BaseApiController
     {
         private readonly IClientService _clientService;
 
@@ -34,29 +34,39 @@ namespace ImReadyApiv2.Controllers
             {
                 return NotFound();
             }
-            var clientResult = new UserResult(client);
+            var clientResult = new ClientUserResult(client);
+            clientResult.Roles = await _userManager.GetRolesAsync(client.Id);
             return Ok(clientResult);
         }
 
         // POST: api/Client
-        public async void Post([FromBody]PostUserInputModel model)
+        public async Task<IHttpActionResult> Post([FromBody]PostUserInputModel model)
         {
             var user = model.GetUser<Client>();
-            // sanitize user role (prevents overposting roles)
-            user.Roles.Clear();
 
-            var context = Request.GetOwinContext().Get<ImReadyDbContext>();
-            var store = new UserStore<User>();
-            var userManager = new ApplicationUserManager(store);
-            var result = await userManager.CreateAsync(user, model.Password);
+            Validate<User>(user);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                result = await userManager.AddToRoleAsync(user.Id, Role.CLIENT.ToString());
+                result = await _userManager.AddToRoleAsync(user.Id, Role.CLIENT.ToString());
+                if (result.Succeeded)
+                {
+                    user = _clientService.GetClient(user.Id);
+                    return Ok(user);
+                }
             }
+
+            return BadRequest("could not create the user or assign the role");
         }
 
         // PUT: api/Client/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Client value)
         {
         }
 
