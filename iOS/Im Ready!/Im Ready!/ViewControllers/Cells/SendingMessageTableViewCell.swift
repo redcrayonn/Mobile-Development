@@ -8,7 +8,11 @@
 
 import UIKit
 
-class MessageCollectionViewCell: UICollectionViewCell {
+class SendingMessageTableViewCell: UITableViewCell {
+    @IBOutlet var name: UILabel?
     @IBOutlet var message: UILabel?
     @IBOutlet var datetime: UILabel?
+    
+    var chat: Chat?
+    var receiver: User?
 }

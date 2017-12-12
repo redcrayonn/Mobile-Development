@@ -10,12 +10,16 @@ import UIKit
 
 class MessageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView?
+    var recipient: User?
+    
     
     var messages: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = recipient?.firstname
+        messages = messageService.getMockMessages()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -24,7 +28,7 @@ class MessageViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! SendingMessageTableViewCell
         
         return cell
     }

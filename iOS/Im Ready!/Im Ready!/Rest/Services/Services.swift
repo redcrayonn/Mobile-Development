@@ -14,6 +14,8 @@ public let buildingblockService: BuildingblockService = BuildingblockService()
 public let componentService: ComponentService = ComponentService()
 public let activityService: ActivityService = ActivityService()
 public let chatsService: ChatsService = ChatsService()
+public let messageService: MessageService = MessageService()
+public let userService: UserService = UserService()
 
 public class Service {
     let apiClient : ApiClient

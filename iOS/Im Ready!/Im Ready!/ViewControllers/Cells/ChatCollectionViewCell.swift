@@ -14,6 +14,8 @@ class ChatCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var recentMessage: UILabel!
     @IBOutlet weak var cellView: UIView!
     
+    var recipient: User!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -11,15 +11,14 @@ import ChameleonFramework
 
 class ComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var collectionView: UICollectionView!
-    var buildingblock: Buildingblock?
+    var buildingblock: Buildingblock!
     var components: [Component]!
-    var buildingblockImage: UIImageView?
+    var buildingblockImage: UIImageView!
     
     let screenWidth = UIScreen.main.bounds.width
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setStatusBarStyle(UIStatusBarStyleContrast)
         self.title = buildingblock?.name
     }
     

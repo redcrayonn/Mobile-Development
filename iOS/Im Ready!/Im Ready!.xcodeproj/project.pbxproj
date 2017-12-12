@@ -48,7 +48,7 @@
 		FA8306C21FDE932500BC225F /* TriggerLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C11FDE932500BC225F /* TriggerLevel.swift */; };
 		FA8306C41FDE932F00BC225F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C31FDE932F00BC225F /* Status.swift */; };
 		FA8306C81FDEC23B00BC225F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C71FDEC23B00BC225F /* MessageViewController.swift */; };
-		FA8306CA1FDEC34200BC225F /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C91FDEC34200BC225F /* MessageCollectionViewCell.swift */; };
+		FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */; };
 		FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4BB8A1FBF0421006B845D /* Services.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
 		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
@@ -68,6 +68,9 @@
 		FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4561FBDF2D60069E290 /* ClientService.swift */; };
 		FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4581FBECEAC0069E290 /* Extensions.swift */; };
 		FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */; };
+		FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCB1FE003A300EECB8B /* MessageService.swift */; };
+		FADB8FCE1FE006CE00EECB8B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCD1FE006CE00EECB8B /* UserService.swift */; };
+		FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +138,7 @@
 		FA8306C11FDE932500BC225F /* TriggerLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerLevel.swift; sourceTree = "<group>"; };
 		FA8306C31FDE932F00BC225F /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		FA8306C71FDEC23B00BC225F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		FA8306C91FDEC34200BC225F /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FAA4BB8A1FBF0421006B845D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +163,9 @@
 		FADAB4561FBDF2D60069E290 /* ClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientService.swift; sourceTree = "<group>"; };
 		FADAB4581FBECEAC0069E290 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockCell.swift; sourceTree = "<group>"; };
+		FADB8FCB1FE003A300EECB8B /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		FADB8FCD1FE006CE00EECB8B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +228,8 @@
 				FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */,
 				FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */,
 				FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */,
-				FA8306C91FDEC34200BC225F /* MessageCollectionViewCell.swift */,
+				FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */,
+				FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -400,6 +407,8 @@
 				FA7265DB1FC6104200E7FBC4 /* ComponentService.swift */,
 				FA7265DD1FC6CA2D00E7FBC4 /* ActivityService.swift */,
 				FA3CB4031FD5D22400142CCF /* ChatsService.swift */,
+				FADB8FCB1FE003A300EECB8B /* MessageService.swift */,
+				FADB8FCD1FE006CE00EECB8B /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -751,6 +760,7 @@
 				FA7265DE1FC6CA2D00E7FBC4 /* ActivityService.swift in Sources */,
 				FA4DFE401FBC1AF500945B2A /* Component.swift in Sources */,
 				FA8306C01FDE931900BC225F /* Role.swift in Sources */,
+				FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */,
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
@@ -759,9 +769,10 @@
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
-				FA8306CA1FDEC34200BC225F /* MessageCollectionViewCell.swift in Sources */,
+				FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */,
 				FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
+				FADB8FCE1FE006CE00EECB8B /* UserService.swift in Sources */,
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
 				FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */,
@@ -779,6 +790,7 @@
 				FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */,
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
+				FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
 				FA3CB4041FD5D22400142CCF /* ChatsService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,

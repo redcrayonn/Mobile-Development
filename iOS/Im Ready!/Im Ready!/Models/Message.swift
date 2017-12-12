@@ -22,4 +22,14 @@ class Message : EntityModel {
         case read = "read"
         case userId = "userId"
     }
+    
+    init(id: String, chatId: String, content: String, sentDate: Date, read: Bool, userId: String){
+        super.init()
+        self.id = id
+        self.chatId = chatId
+        self.content = content
+        self.sentDate = sentDate
+        self.read = read
+        self.userId = userId
+    }
 }

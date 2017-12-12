@@ -13,13 +13,13 @@ public class ChatsService : Service {
         var chats: [Chat] = []
         
         chats.append(Chat(id: "test", senderId: "Wouter", receiverId: "Bob"))
+        chats.append(Chat(id: "test", senderId: "Wouter", receiverId: "Harry"))
         
         return chats
     }
     
-    func getChats() {
-        let clientId = "5a16a1710f39e85531f0494f"
-        apiClient.send(toRelativePath: "/clients/\(clientId)/messages", withHttpMethod: .get, onSuccessParser: { (_ data: Data) in
+    func getChats(forUser id: String) {
+        apiClient.send(toRelativePath: "/clients/\(id)/messages", withHttpMethod: .get, onSuccessParser: { (_ data: Data) in
             print("success")
             print(data)
         }) {
