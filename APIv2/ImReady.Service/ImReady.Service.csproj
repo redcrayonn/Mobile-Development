@@ -66,7 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\BuildingblockService.cs" />
     <Compile Include="Services\FutureplanService.cs" />
+    <Compile Include="Services\Interfaces\IBuildingblockService.cs" />
     <Compile Include="Services\Interfaces\IFutureplanService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\UserService.cs" />

@@ -238,6 +238,10 @@
     <Compile Include="Migrations\201712121146468_newInitial.Designer.cs">
       <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712121109490_buildingblockFix.cs" />
+    <Compile Include="Migrations\201712121109490_buildingblockFix.Designer.cs">
+      <DependentUpon>201712121109490_buildingblockFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Input\PostUserInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,6 +297,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712121146468_newInitial.resx">
       <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121109490_buildingblockFix.resx">
+      <DependentUpon>201712121109490_buildingblockFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

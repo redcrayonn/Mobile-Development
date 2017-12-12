@@ -16,9 +16,9 @@ namespace ImReady.Data.Models.Users
         public string CaregiverId { get; set; }
 
         [ForeignKey("CaregiverId")]
-        public virtual Caregiver caregiver { get; set; }
+        public virtual Caregiver Caregiver { get; set; }
 
-        public virtual ICollection<Buildingblock> Blocks {get;set;}
+        public virtual ICollection<ClientBuildingBlock> Blocks {get;set;}
         public virtual ICollection<Relative> Relatives { get; set; }
     }
 }
