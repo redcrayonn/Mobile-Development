@@ -9,6 +9,10 @@ namespace ImReady.Data.Models
 {
     public abstract class EntityModel
     {
+        public EntityModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         [Key]
         public string Id { get; set; }
 
