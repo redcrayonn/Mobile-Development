@@ -84,8 +84,8 @@ namespace ImReadyApiv2.Migrations
             {
                 Name = "Verzekering",
                 Description = "Alles om je studie te regelen",
-                Id = BlockType.INSURANCE.ToString(),
-                Type = BlockType.INSURANCE
+                Id = BlockType.EDUCATION.ToString(),
+                Type = BlockType.EDUCATION
             };
             #endregion
 
