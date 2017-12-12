@@ -17,6 +17,7 @@ using System.Web.Http;
 
 namespace ImReadyApiv2.Controllers
 {
+    [RoutePrefix("api/client")]
     public class ClientController : BaseApiController
     {
         private readonly IClientService _clientService;
@@ -65,8 +66,9 @@ namespace ImReadyApiv2.Controllers
             return BadRequest("could not create the user or assign the role");
         }
 
-        // PUT: api/Client/5
-        public void Put(int id, [FromBody]Client value)
+        // PUT: api/Client/1/activity/2
+        [Route("{id}/activity/{activityId}")]
+        public void Put(int id, int activityId, [FromBody]Client value)
         {
         }
 
