@@ -20,6 +20,8 @@ namespace ImReady.Data.Models
 
         public virtual ICollection<UsefulLink> UsefulLinks { get; set; }
 
+        public virtual ICollection<Activity> Activities { get; set; }
+
         [ForeignKey("BuildingblockId")]
         public virtual Buildingblock Block { get; set; }
     }

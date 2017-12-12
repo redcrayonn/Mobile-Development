@@ -16,5 +16,7 @@ namespace ImReady.Data.Models
         public string Description { get; set; }
 
         public BlockType Type { get; set; }
+
+        public virtual ICollection<Component> Components { get; set; }
     }
 }
