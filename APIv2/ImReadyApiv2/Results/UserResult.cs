@@ -8,13 +8,15 @@ namespace ImReadyApiv2.Results
 {
     public class UserResult : BaseResult
     {
+        public string Email { get; }
         public string FirstName { get; }
         public string LastName { get; }
+        public IEnumerable<string> Roles { get; set; }
 
-        public UserResult(Client client) : base(client)
+        public UserResult(User user) : base(user)
         {
-            FirstName = client.FirstName;
-            LastName = client.LastName;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
         }
     }
 }
