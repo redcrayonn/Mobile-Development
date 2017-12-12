@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using ImReadyApiv2.Models;
 using ImReady.Data.Models.Users;
+using System.Linq;
 
 namespace ImReadyApiv2.Providers
 {
@@ -37,12 +38,14 @@ namespace ImReadyApiv2.Providers
                 return;
             }
 
+            var roles = await userManager.GetRolesAsync(user.Id);
+
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user, roles);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -84,11 +87,13 @@ namespace ImReadyApiv2.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(User user, IEnumerable<string> roles)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "user_type", roles.FirstOrDefault() },
+                { "user_id", user.Id },
+                { "firstname", user.FirstName }
             };
             return new AuthenticationProperties(data);
         }
