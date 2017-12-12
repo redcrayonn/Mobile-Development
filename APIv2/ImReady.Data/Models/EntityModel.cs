@@ -11,7 +11,7 @@ namespace ImReady.Data.Models
     {
         public EntityModel()
         {
-            Id = Guid.NewGuid.ToString();
+            Id = Guid.NewGuid().ToString();
         }
 
         [Key]
