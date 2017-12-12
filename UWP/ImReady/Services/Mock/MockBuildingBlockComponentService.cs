@@ -20,6 +20,7 @@ namespace ImReady.Services.Mock
                 Activities = new List<Activity>()
                 {
                     new ActivityService().GetActivity(-1),
+                    new ActivityService().GetActivity(-1),
                 }
             };
         }

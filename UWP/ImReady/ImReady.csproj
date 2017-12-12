@@ -97,6 +97,9 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
+    <Compile Include="Controls\BuildingBlockComponentActivityExpander.xaml.cs">
+      <DependentUpon>BuildingBlockComponentActivityExpander.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuildingBlockComponentExpander.xaml.cs">
       <DependentUpon>BuildingBlockComponentExpander.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\BuildingBlockComponentActivityExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\BuildingBlockComponentExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
