@@ -60,7 +60,7 @@ namespace ImReadyApiv2.Controllers
         }
 
         // POST: api/
-        public async void Post([FromBody]PostBuildingblockInputModel model)
+        public void Post([FromBody]PostBuildingblockInputModel model)
         {
             Buildingblock block = model.GetBlock();
             var result = _blockService.AddBlock(block);

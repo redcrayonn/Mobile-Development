@@ -32,6 +32,5 @@ namespace ImReady.Data.Models
         public virtual Task Task { get; set; }
 
         public virtual ICollection<ClientActivity> Activities { get; set; }
-
     }
 }
