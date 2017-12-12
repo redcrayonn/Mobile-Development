@@ -556,7 +556,7 @@
             <Grid Height="250">
                 <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
-                      Text="This is the expanded content without a content overlay"
+                      Text="{Binding ComponentName, Mode=TwoWay}"
                       VerticalAlignment="Center"
                        />
             </Grid>

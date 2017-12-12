@@ -8,16 +8,17 @@
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     
-    xmlns:controls1="using:ImReady.Controls">
+    xmlns:controls1="using:ImReady.Controls"
+    xmlns:local1="using:ImReady.Models">
     <Grid>
         <Grid.Resources>
-            
+
         </Grid.Resources>
-        <RelativePanel>
-            <CommandBar
+        <CommandBar
                     IsOpen="True"
                     Background="#303030"
                     Foreground="White"
+                x:Name="commandbar"
                     >
                 <CommandBar.Content>
                     <StackPanel Orientation="Horizontal">
@@ -25,17 +26,18 @@
                     </StackPanel>
                 </CommandBar.Content>
             </CommandBar>
-            <ScrollViewer>
-                <ItemsControl>
-                    <controls1:HomeExpander>
-                        <controls1:HomeExpander.Content>
-                            <controls1:HomeExpander>
-                                
+        <ScrollViewer RelativePanel.Below="commandbar" Margin="0 40 0 0 ">
+            <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local1:BuildingBlockComponent">
+                        <StackPanel>
+                            <controls1:HomeExpander ComponentName="testmofo">
+
                             </controls1:HomeExpander>
-                        </controls1:HomeExpander.Content>
-                    </controls1:HomeExpander>
-                </ItemsControl>
-            </ScrollViewer>
-        </RelativePanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

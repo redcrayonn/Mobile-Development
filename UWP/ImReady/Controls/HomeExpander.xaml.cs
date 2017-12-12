@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,6 +23,26 @@ namespace ImReady.Controls
         public HomeExpander()
         {
             this.InitializeComponent();
+        }
+
+        public string ComponentName
+        {
+            get { return (string)GetValue(ComponentNameProperty); }
+            set { SetValueDp(ComponentNameProperty, value); }
+        }
+
+        public object ECustomMapControlMode { get; private set; }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ComponentNameProperty =
+            DependencyProperty.Register("ComponentName", typeof(string), typeof(HomeExpander), new PropertyMetadata(""));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        void SetValueDp(DependencyProperty property, object value, [System.Runtime.CompilerServices.CallerMemberName] String p = null)
+        {
+            SetValue(property, value);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(p));
         }
     }
 }

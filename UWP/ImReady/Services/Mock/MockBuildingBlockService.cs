@@ -23,6 +23,9 @@ namespace ImReady.Services.Mock
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
                     Components = new List<BuildingBlockComponent>(){
                         new BuildingBlockComponentService().GetComponent(-1),
+                        new BuildingBlockComponentService().GetComponent(-1),
+                        new BuildingBlockComponentService().GetComponent(-1),
+                        new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()

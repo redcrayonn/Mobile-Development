@@ -103,6 +103,7 @@
     <Compile Include="Controls\MyItem.xaml.cs">
       <DependentUpon>MyItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
     <Compile Include="Models\Activity.cs" />
