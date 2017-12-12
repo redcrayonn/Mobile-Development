@@ -7,6 +7,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using ImReadyApiv2.Models;
+using ImReady.Data.Models.Users;
 
 namespace ImReadyApiv2.Providers
 {
@@ -28,7 +29,7 @@ namespace ImReadyApiv2.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

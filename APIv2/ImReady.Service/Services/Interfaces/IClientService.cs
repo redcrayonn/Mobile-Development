@@ -11,5 +11,6 @@ namespace ImReady.Service.Services
     {
         List<Client> GetClients();
         Client GetClient(string id);
+        void CreateUser(User user);
     }
 }

@@ -30,5 +30,10 @@ namespace ImReady.Service.Services
             var client = _clientRepository.Entities.FirstOrDefault(c => c.Id == id);
             return client;
         }
+
+        public void CreateUser(User user)
+        {
+            
+        }
     }
 }

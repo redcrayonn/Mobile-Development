@@ -7,13 +7,13 @@ namespace ImReadyApiv2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class initialCreate : IMigrationMetadata
+    public sealed partial class newInitial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newInitial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712071422345_initialCreate"; }
+            get { return "201712121146468_newInitial"; }
         }
         
         string IMigrationMetadata.Source

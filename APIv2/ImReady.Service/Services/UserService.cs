@@ -18,9 +18,7 @@ namespace ImReadyApiv2.Services
         public UserService(IImReadyUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
-            // save property reference to reduce code duplication. 
-            // Could also be used as just unitOfWork.UserRepisotory.MethodName() instead...
+            
             _usersRepository = unitOfWork.UserRepository;
         }
 
@@ -30,8 +28,6 @@ namespace ImReadyApiv2.Services
             try
             {
                 _usersRepository.Add(user);
-                // MUST BE CALLED after all entity changes/additions/removals. Otherwise data does NOT persist between sessions.
-                // Can also use CommitAsync() if you want to have the save action run asynchronously
                 _unitOfWork.Commit();
                 return true;
             }

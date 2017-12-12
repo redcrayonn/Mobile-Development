@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace ImReadyApiv2.Context
 {
-    public class ImReadyDbContext : IdentityDbContext<ApplicationUser>
+    public class ImReadyDbContext : IdentityDbContext<User>
     {
         public ImReadyDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

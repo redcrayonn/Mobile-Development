@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using ImReadyApiv2.Providers;
 using ImReadyApiv2.Context;
+using ImReady.Data.Models.Users;
 
 namespace ImReadyApiv2
 {
@@ -22,7 +23,7 @@ namespace ImReadyApiv2
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
+            // Configure the db context and user manager(s) to use a single instance per request
             app.CreatePerOwinContext(ImReadyDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 

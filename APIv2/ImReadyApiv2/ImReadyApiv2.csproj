@@ -234,24 +234,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context\ImReadyDbContext.cs" />
-    <Compile Include="Migrations\201712071422345_initialCreate.cs" />
-    <Compile Include="Migrations\201712071422345_initialCreate.Designer.cs">
-      <DependentUpon>201712071422345_initialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712071435364_identityFix.cs" />
-    <Compile Include="Migrations\201712071435364_identityFix.Designer.cs">
-      <DependentUpon>201712071435364_identityFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.cs" />
-    <Compile Include="Migrations\201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.Designer.cs">
-      <DependentUpon>201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712111548310_ForeignKeys.cs" />
-    <Compile Include="Migrations\201712111548310_ForeignKeys.Designer.cs">
-      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
+    <Compile Include="Migrations\201712121146468_newInitial.cs" />
+    <Compile Include="Migrations\201712121146468_newInitial.Designer.cs">
+      <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Input\PostUserInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -303,17 +291,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712071422345_initialCreate.resx">
-      <DependentUpon>201712071422345_initialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712071435364_identityFix.resx">
-      <DependentUpon>201712071435364_identityFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.resx">
-      <DependentUpon>201712111014015_Added_Deadline_ClientBlock_And_ClientComponent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712111548310_ForeignKeys.resx">
-      <DependentUpon>201712111548310_ForeignKeys.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712121146468_newInitial.resx">
+      <DependentUpon>201712121146468_newInitial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

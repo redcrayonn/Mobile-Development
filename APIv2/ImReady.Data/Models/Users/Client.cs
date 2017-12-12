@@ -10,6 +10,7 @@ namespace ImReady.Data.Models.Users
     [Table("Client")]
     public class Client : User
     {
+
         public int Points { get; set; }
 
         public string CaregiverId { get; set; }
