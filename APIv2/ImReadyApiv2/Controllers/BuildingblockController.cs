@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 
 namespace ImReadyApiv2.Controllers
@@ -22,6 +23,12 @@ namespace ImReadyApiv2.Controllers
         }
 
         // GET: api/Buildingblock/
+        /// <summary>
+        /// Gets all the generic building blocks with its components.
+        /// </summary>
+        /// <response code="200">OK</response>
+        /// <response code="500">InternalServerError</response>
+        [ResponseType(typeof(List<BuildingblockResult>))]
         public IHttpActionResult Get()
         {
             //Get Id of logged in client
@@ -43,7 +50,13 @@ namespace ImReadyApiv2.Controllers
             }
         }
 
-        // GET: api/Buildingblock/1
+        /// <summary>
+        /// Gets a single buildingblock with its components
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">OK</response>
+        /// <response code="500">InternalServerError</response>
+        [ResponseType(typeof(BuildingblockResult))]
         public IHttpActionResult Get(string id)
         {
             //Get Id of logged in client
@@ -59,7 +72,10 @@ namespace ImReadyApiv2.Controllers
             }
         }
 
-        // POST: api/
+        /// <summary>
+        /// Add a new building block
+        /// </summary>
+        /// <param name="model"></param>
         public void Post([FromBody]PostBuildingblockInputModel model)
         {
             Buildingblock block = model.GetBlock();

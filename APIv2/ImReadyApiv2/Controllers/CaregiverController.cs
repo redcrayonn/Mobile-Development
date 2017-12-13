@@ -100,5 +100,7 @@ namespace ImReadyApiv2.Controllers
             }
             return BadRequest($"caregiver with id {caregiverId} or client with id {clientId} could not be found or has already been assigned");
         }
+
+
     }
 }
