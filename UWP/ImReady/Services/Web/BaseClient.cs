@@ -21,9 +21,9 @@ namespace ImReady.Services.Web
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://inhollandbackend.azurewebsites.net/");
-                if (EnableAuthentication && User.SingleInstance.IsLoggedIn)
+                if (EnableAuthentication && CurrentUser.SingleInstance.IsLoggedIn)
                 {
-                    var token = User.SingleInstance.AuthToken;
+                    var token = CurrentUser.SingleInstance.AuthToken;
                     client.DefaultRequestHeaders.Add("x-authtoken", token);
                 }
                 try

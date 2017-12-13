@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ImReady.Models
 {
-    public class User
+    public class CurrentUser
     {
-        private static User user { get; set; }
-        public static User SingleInstance
+        private static CurrentUser user { get; set; }
+        public static CurrentUser SingleInstance
         {
             get
             {
                 if (user == null)
-                    user = new User();
+                    user = new CurrentUser();
                 return user;
             }
             set
@@ -23,7 +23,7 @@ namespace ImReady.Models
             }
         }
 
-        private User()
+        private CurrentUser()
         {
 
         }
