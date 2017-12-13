@@ -568,15 +568,29 @@
                       VerticalAlignment="Top"
                            Foreground="Black"
                        />
-            <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 ">
-                <ItemsControl ItemsSource="{x:Bind BuildingBlockComponent.Activities}">
+            <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 " HorizontalAlignment="Stretch" Padding="40">
+                <ItemsControl ItemsSource="{x:Bind BuildingBlockComponent.Activities}" Foreground="Black">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:Activity">
-                            <StackPanel>
-                                <local:ComponentActivityExpander Activity="{Binding}">
-
-                                </local:ComponentActivityExpander>
-                            </StackPanel>
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <CheckBox VerticalAlignment="Top"></CheckBox>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock Text="Reager op 5 woningen"></TextBlock>
+                                    <TextBlock Text="Dit is een beschrijving"></TextBlock>
+                                    <TextBox MinHeight="150" AcceptsReturn="True" Text="Ik heb gereageerd op dingen. Veel dingen. Te veel dingen."></TextBox>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
+                                        <Button Content="INLEVEREN"></Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
