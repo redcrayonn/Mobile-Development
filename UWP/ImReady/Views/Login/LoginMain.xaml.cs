@@ -31,7 +31,12 @@ namespace ImReady.Views.Login
 
         private void LoginSubmit_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Home.HomeMain));
+            //Check if user has stored credentials, if so login.
+
+            //If not --> show Login UI.
+
+
+            //Frame.Navigate(typeof(Home.HomeMain));
         }
     }
 }
