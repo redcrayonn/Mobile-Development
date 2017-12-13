@@ -255,7 +255,6 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="Left"
                                           RenderTransformOrigin="0.5,0.5" />
-
                             <SymbolIcon 
                                     x:Name="Arrow" 
                                      Grid.Column="1"
@@ -474,7 +473,8 @@
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            VerticalContentAlignment="Stretch">
+                                            VerticalContentAlignment="Stretch"
+                                                >
                                     <ContentControl.RenderTransform>
                                         <ScaleTransform />
                                     </ContentControl.RenderTransform>
@@ -518,21 +518,27 @@
                                     <controls:LayoutTransformControl.Transform>
                                         <RotateTransform x:Name="RotateLayoutTransform" Angle="0" />
                                     </controls:LayoutTransformControl.Transform>
-
-                                    <ToggleButton x:Name="PART_ExpanderToggleButton" 
-                                              Height="40"
+                                    <controls:DropShadowPanel 
+                                                    HorizontalContentAlignment="Stretch"
+                                                    VerticalContentAlignment="Stretch">
+                                        <ToggleButton x:Name="PART_ExpanderToggleButton" 
+                                              Height="80"
                                               TabIndex="0"
+                                              Padding="60 0 0 0"
                                               AutomationProperties.Name="Expand"
                                               Style="{StaticResource HeaderToggleButtonStyle}" 
                                               VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                                               Foreground="{TemplateBinding Foreground}"
                                               ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}"
-                                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  >
+                                        </ToggleButton>
+                                    </controls:DropShadowPanel>
+                                    
                                     <animations:Implicit.Animations>
                                         <animations:OffsetAnimation Duration="0:0:0.3"></animations:OffsetAnimation>
                                     </animations:Implicit.Animations>
                                 </controls:LayoutTransformControl>
-
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -544,7 +550,7 @@
                         x:Name="Expander2" 
                         VerticalAlignment="Top" 
                         Margin="0"
-                        Header="This is the header - expander 2"
+                        Header="{x:Bind BuildingBlockComponent.ComponentName}"
                         HorizontalContentAlignment="Stretch"
                         Foreground="White"
                         Background="Black"
@@ -555,11 +561,12 @@
             <controls:Expander.Resources>
 
             </controls:Expander.Resources>
-            <Grid>
+            <Grid Background="White">
                 <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
                       Text="{x:Bind BuildingBlockComponent.ComponentName}"
                       VerticalAlignment="Top"
+                           Foreground="Black"
                        />
             <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 ">
                 <ItemsControl ItemsSource="{x:Bind BuildingBlockComponent.Activities}">
