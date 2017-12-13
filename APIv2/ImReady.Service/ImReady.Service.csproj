@@ -76,7 +76,9 @@
     <Compile Include="Services\Interfaces\IClientActivityService.cs" />
     <Compile Include="Services\Interfaces\IClientComponentService.cs" />
     <Compile Include="Services\Interfaces\IFutureplanService.cs" />
+    <Compile Include="Services\Interfaces\INotificationService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UoW\IImReadyUnitOfWork.cs" />
     <Compile Include="UoW\ImReadyUnitOfWork.cs" />

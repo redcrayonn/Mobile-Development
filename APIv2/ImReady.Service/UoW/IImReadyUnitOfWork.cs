@@ -20,5 +20,6 @@ namespace ImReady.Service
         IRepository<Buildingblock> BuildingblockRepository { get; }
         IRepository<ClientComponent> ClientComponentRepository { get; }
         IRepository<Component> ComponentRepository { get; }
+        IRepository<Notification> NotificationRepository { get; }
     }
 }
