@@ -18,6 +18,8 @@ namespace ImReady.Data.Models.Users
         [Required]
         public string LastName { get; set; }
 
+        public ICollection<Notification> Notifications { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
