@@ -24,5 +24,6 @@ namespace ImReady.Service
         //Futureplan
         public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
         public IRepository<Buildingblock> BuildingblockRepository => new EntityFrameworkGenericRepository<Buildingblock>(_context);
+        public IRepository<ClientActivity> ClientActivityRepository => new EntityFrameworkGenericRepository<ClientActivity>(_context);
     }
 }

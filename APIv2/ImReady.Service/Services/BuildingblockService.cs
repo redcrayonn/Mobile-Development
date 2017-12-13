@@ -33,7 +33,7 @@ namespace ImReady.Service.Services
             buildingblock.Name = block.Name;
             buildingblock.Type = block.Type;
 
-            _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
             return true;
         }
 
@@ -51,7 +51,7 @@ namespace ImReady.Service.Services
         {
             var block = _buildingBlockRepository.Entities.SingleOrDefault(s => s.Id == Id);
             _buildingBlockRepository.Remove(block);
-
+            _unitOfWork.Commit();
             return true;
         }
     }
