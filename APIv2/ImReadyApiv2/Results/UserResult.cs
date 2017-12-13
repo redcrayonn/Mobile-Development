@@ -17,6 +17,7 @@ namespace ImReadyApiv2.Results
         {
             FirstName = user.FirstName;
             LastName = user.LastName;
+            Email = user.Email;
         }
     }
 }

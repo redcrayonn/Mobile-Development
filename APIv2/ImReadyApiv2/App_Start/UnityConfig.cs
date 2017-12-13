@@ -25,6 +25,7 @@ namespace ImReadyApiv2.DI
             // Register services
             container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
             container.RegisterType<IClientService, ClientService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICaregiverService, CaregiverService>(new HierarchicalLifetimeManager());
             container.RegisterType<IFutureplanService, FutureplanService>(new HierarchicalLifetimeManager());
             container.RegisterType<IBuildingblockService, BuildingblockService>(new HierarchicalLifetimeManager());
             container.RegisterType<IClientActivityService, ClientActivityService>(new HierarchicalLifetimeManager());

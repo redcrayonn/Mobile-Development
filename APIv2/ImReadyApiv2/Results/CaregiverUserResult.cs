@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ImReady.Data.Models.Users;
+using System.Linq;
 
 namespace ImReadyApiv2.Results
 {
@@ -9,10 +10,10 @@ namespace ImReadyApiv2.Results
         {
             if (fullModel)
             {
-                Clients = caregiver.Clients;
+                Clients = caregiver.Clients.Select(x => new ClientUserResult(x));
             }
         }
 
-        public ICollection<Client> Clients { get; }
+        public IEnumerable<ClientUserResult> Clients { get; }
     }
 }

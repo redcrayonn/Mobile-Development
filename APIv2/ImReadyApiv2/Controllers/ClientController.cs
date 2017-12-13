@@ -49,6 +49,7 @@ namespace ImReadyApiv2.Controllers
         {
             var user = model.GetUser<Client>();
 
+            // Call to asp net identity service layer
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -81,9 +82,6 @@ namespace ImReadyApiv2.Controllers
             }
         }
 
-        // DELETE: api/Client/5
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

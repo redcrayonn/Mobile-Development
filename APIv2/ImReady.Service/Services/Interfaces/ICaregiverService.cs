@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ImReady.Data.Models.Users;
+
+namespace ImReady.Service.Services.Interfaces
+{
+    public interface ICaregiverService
+    {
+        Caregiver GetCaregiver(string id);
+        bool AssignToCaregiver(string caregiverId, string clientId);
+    }
+}
