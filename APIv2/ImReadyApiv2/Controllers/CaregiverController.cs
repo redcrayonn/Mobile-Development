@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ImReadyApiv2.Controllers
 {
@@ -23,7 +24,16 @@ namespace ImReadyApiv2.Controllers
             _caregiverService = userService;
         }
 
-        // GET: api/Caregiver/5
+        /// <summary>
+        /// Gets the information of a caregiver
+        /// </summary>
+        /// <param name="id">Id of the caregiver</param>
+        /// <remarks>Gets the information of a caregiver</remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad request</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("{id}")]
+        [ResponseType(typeof(CaregiverUserResult))]
         public async Task<IHttpActionResult> Get(string id)
         {
             var caregiver = _caregiverService.GetCaregiver(id);
