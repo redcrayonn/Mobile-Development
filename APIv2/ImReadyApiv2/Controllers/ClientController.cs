@@ -96,6 +96,12 @@ namespace ImReadyApiv2.Controllers
             }
         }
 
+        /// <summary>
+        /// Post action for enrolling a client into a new component. Only needs Id's, no InputModel
+        /// </summary>
+        /// <param name="id">ClientId</param>
+        /// <param name="componentId">ComponentId</param>
+        /// <returns></returns>
         [Route("{id}/component/{componentId}")]
         public async Task<IHttpActionResult> Post(string id, string componentId)
         {

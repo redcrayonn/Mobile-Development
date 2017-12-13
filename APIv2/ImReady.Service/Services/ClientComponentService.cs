@@ -24,6 +24,7 @@ namespace ImReady.Service.Services
 
             _clientComponentRepository = _unitOfWork.ClientComponentRepository;
             _clientBuildingblockRepository = _unitOfWork.ClientBuildingblockRepository;
+            _clientRepository = _unitOfWork.ClientRepository;
             _componentRepository = _unitOfWork.ComponentRepository;
         }
 
@@ -53,11 +54,12 @@ namespace ImReady.Service.Services
                 Component = component,
                 Status = Status.ONGOING,
                 ClientBuildingBlock = clientBuildingBlock,
+                Deadline = DateTime.Today.AddDays(20),
                 Activities = component.Activities.Select(a => new ClientActivity
                 {
                     Status = Status.ONGOING,
                     Activity = a,
-                    Deadline = DateTime.MaxValue
+                    Deadline = DateTime.Today.AddDays(14)
                 }).ToList()
             };
 
