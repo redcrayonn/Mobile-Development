@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ImReadyApiv2.Controllers
 {
@@ -33,7 +34,14 @@ namespace ImReadyApiv2.Controllers
             _clientComponentService = clientComponentService;
         }
 
-        // GET: api/Client/5
+        /// <summary>
+        /// Get the client
+        /// </summary>
+        /// <param name="id">Client Id</param>
+        /// <response code="200">OK</response>
+        /// <response code="400">NotFound</response>
+        /// <returns></returns>
+        [ResponseType(typeof(ClientUserResult))]
         public async Task<IHttpActionResult> Get(string id)
         {
             var client = _clientService.GetClient(id);
@@ -46,7 +54,12 @@ namespace ImReadyApiv2.Controllers
             return Ok(clientResult);
         }
 
-        // POST: api/Client
+        /// <summary>
+        /// Post a new client
+        /// </summary>
+        /// <param name="model"></param>
+        /// <response code="200">OK</response>
+        /// <response code="400">Badrequest</response>
         public async Task<IHttpActionResult> Post([FromBody]PostUserInputModel model)
         {
             var user = model.GetUser<Client>();
@@ -115,9 +128,9 @@ namespace ImReadyApiv2.Controllers
         }
 
 
-        // DELETE: api/Client/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/Client/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

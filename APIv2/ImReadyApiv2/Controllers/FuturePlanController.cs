@@ -11,6 +11,10 @@ namespace ImReadyApiv2.Controllers
     {
         private readonly IFutureplanService _planService;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="planService"></param>
         public FuturePlanController(IFutureplanService planService)
         {
             _planService = planService;
