@@ -25,5 +25,7 @@ namespace ImReady.Service
         public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
         public IRepository<Buildingblock> BuildingblockRepository => new EntityFrameworkGenericRepository<Buildingblock>(_context);
         public IRepository<ClientActivity> ClientActivityRepository => new EntityFrameworkGenericRepository<ClientActivity>(_context);
+        public IRepository<ClientComponent> ClientComponentRepository => new EntityFrameworkGenericRepository<ClientComponent>(_context);
+        public IRepository<Component> ComponentRepository => new EntityFrameworkGenericRepository<Component>(_context);
     }
 }

@@ -23,11 +23,13 @@ namespace ImReadyApiv2.Controllers
     {
         private readonly IClientService _clientService;
         private readonly IClientActivityService _clientActivityService;
+        private readonly IClientComponentService _clientComponentService;
 
-        public ClientController(IClientService clientService, IClientActivityService clientActivityService)
+        public ClientController(IClientService clientService, IClientActivityService clientActivityService, IClientComponentService clientComponentService)
         {
             _clientService = clientService;
             _clientActivityService = clientActivityService;
+            _clientComponentService = clientComponentService;
         }
 
         // GET: api/Client/5
@@ -54,7 +56,7 @@ namespace ImReadyApiv2.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -69,6 +71,12 @@ namespace ImReadyApiv2.Controllers
             return BadRequest("could not create the user or assign the role");
         }
 
+        /// <summary>
+        /// Put to upload content of the clientActivity
+        /// </summary>
+        /// <param name="id">ClientId</param>
+        /// <param name="activityId">ClientActivityId</param>
+        /// <param name="value">PostClientActivityInputModel</param>
         // PUT: api/Client/1/activity/2
         [Route("{id}/activity/{activityId}")]
         public void Put(string id, string activityId, [FromBody]PostClientActivityInputModel value)
@@ -86,6 +94,19 @@ namespace ImReadyApiv2.Controllers
                 }
             }
         }
+
+        [Route("{id}/component/{componentId}")]
+        public async Task<IHttpActionResult> Post(string id, string componentId)
+        {
+            var result = _clientComponentService.Enroll(id, componentId);
+
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest($"Could not enroll the client {id} at component {componentId}");
+        }
+
 
         // DELETE: api/Client/5
         public void Delete(int id)

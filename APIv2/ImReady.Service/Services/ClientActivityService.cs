@@ -28,14 +28,14 @@ namespace ImReady.Service.Services
 
         public void ChangeStatus(string Id, Status status)
         {
-            ClientActivity activity = _clientActivityRepository.Entities.SingleOrDefault(s => s.Id == Id);
+            ClientActivity activity = _clientActivityRepository.Entities.FirstOrDefault(s => s.Id == Id);
             activity.Status = status;
             _unitOfWork.Commit();
         }
 
         public bool EditActivity(ClientActivity activity)
         {
-            ClientActivity dbActivity = _clientActivityRepository.Entities.SingleOrDefault(x => x.Id == activity.Id);
+            ClientActivity dbActivity = _clientActivityRepository.Entities.FirstOrDefault(x => x.Id == activity.Id);
 
             dbActivity.Content = activity.Content;
             dbActivity.Deadline = activity.Deadline;
@@ -59,12 +59,12 @@ namespace ImReady.Service.Services
 
         public ClientActivity getById(string Id)
         {
-            return _clientActivityRepository.Entities.SingleOrDefault(s => s.Id == Id);
+            return _clientActivityRepository.Entities.FirstOrDefault(s => s.Id == Id);
         }
 
         public bool RemoveActivity(string Id)
         {
-            var activity = _clientActivityRepository.Entities.SingleOrDefault(s => s.Id == Id);
+            var activity = _clientActivityRepository.Entities.FirstOrDefault(s => s.Id == Id);
 
             if (activity != null)
             {

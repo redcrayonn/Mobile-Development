@@ -28,7 +28,7 @@ namespace ImReady.Service.Services
 
         public bool EditBlock(Buildingblock block)
         {
-            Buildingblock buildingblock = _buildingBlockRepository.Entities.SingleOrDefault(s => s.Id == block.Id);
+            Buildingblock buildingblock = _buildingBlockRepository.Entities.FirstOrDefault(s => s.Id == block.Id);
             buildingblock.Description = block.Description;
             buildingblock.Name = block.Name;
             buildingblock.Type = block.Type;
@@ -44,12 +44,12 @@ namespace ImReady.Service.Services
 
         public Buildingblock getById(string Id)
         {
-            return _buildingBlockRepository.Entities.SingleOrDefault(s => s.Id == Id);
+            return _buildingBlockRepository.Entities.FirstOrDefault(s => s.Id == Id);
         }
 
         public bool RemoveBlock(string Id)
         {
-            var block = _buildingBlockRepository.Entities.SingleOrDefault(s => s.Id == Id);
+            var block = _buildingBlockRepository.Entities.FirstOrDefault(s => s.Id == Id);
             _buildingBlockRepository.Remove(block);
             _unitOfWork.Commit();
             return true;
