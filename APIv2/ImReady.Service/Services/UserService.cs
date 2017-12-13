@@ -46,7 +46,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                var user = _usersRepository.Entities.SingleOrDefault(s => s.Id == id);
+                var user = _usersRepository.Entities.FirstOrDefault(s => s.Id == id);
                 return user;
             }
             catch (Exception)
@@ -71,7 +71,7 @@ namespace ImReadyApiv2.Services
         {
             try
             {
-                var user = _usersRepository.Entities.SingleOrDefault(s => s.Id == userId);
+                var user = _usersRepository.Entities.FirstOrDefault(s => s.Id == userId);
                 _usersRepository.Remove(user);
                 _unitOfWork.Commit();
                 return true;
