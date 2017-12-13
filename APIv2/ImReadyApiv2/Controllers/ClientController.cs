@@ -2,6 +2,7 @@
 using ImReady.Data.Models.Users;
 using ImReady.Service.Services;
 using ImReadyApiv2.Context;
+using ImReadyApiv2.Filters;
 using ImReadyApiv2.Models;
 using ImReadyApiv2.Models.Input;
 using ImReadyApiv2.Results;
@@ -44,13 +45,6 @@ namespace ImReadyApiv2.Controllers
         {
             var user = model.GetUser<Client>();
 
-            Validate<User>(user);
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

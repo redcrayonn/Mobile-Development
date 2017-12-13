@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using ImReadyApiv2.DI;
 using System.Net.Http.Headers;
+using ImReadyApiv2.Filters;
 
 namespace ImReadyApiv2
 {
@@ -17,6 +18,7 @@ namespace ImReadyApiv2
             // Web API configuration and services
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            config.Filters.Add(new ValidateModelAttribute());
 
             // Web API dependency injection
             UnityConfig.Register(config);

@@ -231,6 +231,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Filters\ValidateModelAttribute.cs" />
     <Compile Include="IoC\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
