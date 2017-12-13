@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ImReady.Controls.BuildingBlockComponentActivityExpander"
+    x:Class="ImReady.Controls.ComponentExpander"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ImReady.Controls"
@@ -552,15 +552,29 @@
                         ExpandDirection="Down"
                         Style="{StaticResource myExpander}"
                         >
-        <controls:Expander.Resources>
+            <controls:Expander.Resources>
 
-        </controls:Expander.Resources>
-        <Grid Height="50">
-            <TextBlock HorizontalAlignment="Center"
+            </controls:Expander.Resources>
+            <Grid>
+                <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
-                      Text="{x:Bind Activity.Name}"
-                      VerticalAlignment="Center"
+                      Text="{x:Bind BuildingBlockComponent.ComponentName}"
+                      VerticalAlignment="Top"
                        />
+            <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 ">
+                <ItemsControl ItemsSource="{x:Bind BuildingBlockComponent.Activities}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Activity">
+                            <StackPanel>
+                                <local:ComponentActivityExpander Activity="{Binding}">
+
+                                </local:ComponentActivityExpander>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
         </Grid>
-    </controls:Expander>
+        </controls:Expander>
 </UserControl>

@@ -19,9 +19,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImReady.Controls
 {
-    public sealed partial class BuildingBlockComponentExpander : UserControl
+    public sealed partial class ComponentExpander : UserControl
     {
-        public BuildingBlockComponentExpander()
+        public ComponentExpander()
         {
             this.InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace ImReady.Controls
             DependencyProperty.Register(
                 nameof(BuildingBlockComponent),
                 typeof(BuildingBlockComponent),
-                typeof(BuildingBlockComponentExpander),
+                typeof(ComponentExpander),
                 new PropertyMetadata(null));
     }
 }
