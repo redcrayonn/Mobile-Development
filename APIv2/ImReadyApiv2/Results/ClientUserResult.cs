@@ -14,14 +14,13 @@ namespace ImReadyApiv2.Results
         public ClientUserResult(Client client, bool fullModel = false) : base(client)
         {
             Points = client.Points;
-
-            if (client.Caregiver != null)
-            {
-                Caregiver = new CaregiverUserResult(client.Caregiver, false);
-            }
-
+            
             if (fullModel)
             {
+                if (client.Caregiver != null)
+                {
+                    Caregiver = new CaregiverUserResult(client.Caregiver, false);
+                }
                 // futureplan here
             }
             

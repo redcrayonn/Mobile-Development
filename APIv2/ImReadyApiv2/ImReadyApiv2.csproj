@@ -226,11 +226,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BuildingblockController.cs" />
+    <Compile Include="Controllers\CaregiverController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FuturePlanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Filters\ValidateModelAttribute.cs" />
     <Compile Include="IoC\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
