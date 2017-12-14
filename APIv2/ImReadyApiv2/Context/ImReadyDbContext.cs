@@ -34,7 +34,7 @@ namespace ImReadyApiv2.Context
         public virtual DbSet<ClientActivity> ClientActivities { get; set; }
 
         // Chats
-        //public virtual DbSet<Chat> Chats { get; set; }
-        //public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Chat> Chats { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

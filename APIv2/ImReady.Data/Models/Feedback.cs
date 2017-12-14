@@ -13,7 +13,7 @@ namespace ImReady.Data.Models
     {
         public string CaregiverId { get; set; }
         public string ClientActivityId { get; set; }
-
+        public DateTime Sent { get; set; }
         public string Content { get; set; }
 
         [ForeignKey("CaregiverId")]

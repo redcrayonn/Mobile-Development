@@ -12,6 +12,9 @@ namespace ImReady.Data.Models
     public class Message : EntityModel
     {
         public string ChatId { get; set; }
+        [ForeignKey("ChatId")]
+        public Chat Chat { get; set; }
+
         public String Content { get; set; }
         public DateTime SentDate { get; set; }
         public bool Read { get; set; }
