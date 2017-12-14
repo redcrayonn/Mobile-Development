@@ -30,5 +30,14 @@ namespace ImReady.Service.Services
             var client = _clientRepository.Entities.FirstOrDefault(c => c.Id == id);
             return client;
         }
+
+        /// <summary>
+        /// Gets all the clients of the caregiver
+        /// </summary>
+        /// <param name="id">Id of caregiver</param>
+        public List<Client> GetClients(string id)
+        {
+            return _clientRepository.Entities.Where(x=>x.CaregiverId==id).ToList();
+        }
     }
 }

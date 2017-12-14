@@ -10,6 +10,7 @@ namespace ImReady.Service.Services
     public interface IClientService
     {
         List<Client> GetClients();
+        List<Client> GetClients(string id);
         Client GetClient(string id);
     }
 }

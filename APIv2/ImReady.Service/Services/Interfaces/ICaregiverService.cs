@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImReady.Data.Models.Users;
 
-namespace ImReady.Service.Services.Interfaces
+namespace ImReady.Service.Services
 {
     public interface ICaregiverService
     {
