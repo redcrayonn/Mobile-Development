@@ -236,6 +236,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BuildingblockController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CaregiverController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FuturePlanController.cs" />

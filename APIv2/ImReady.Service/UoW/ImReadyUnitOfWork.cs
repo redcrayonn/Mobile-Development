@@ -22,14 +22,19 @@ namespace ImReady.Service
         public IRepository<Client> ClientRepository => new EntityFrameworkGenericRepository<Client>(_context);
         public IRepository<User> UserRepository => new EntityFrameworkGenericRepository<User>(_context);
         public IRepository<Caregiver> CaregiverRepository => new EntityFrameworkGenericRepository<Caregiver>(_context);
+		public IRepository<Calendar> CalendarRepository => new EntityFrameworkGenericRepository<Calendar>(_context);
 
-        //Futureplan
-        public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
+		//Futureplan
+		public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
         public IRepository<Buildingblock> BuildingblockRepository => new EntityFrameworkGenericRepository<Buildingblock>(_context);
         public IRepository<ClientActivity> ClientActivityRepository => new EntityFrameworkGenericRepository<ClientActivity>(_context);
         public IRepository<ClientComponent> ClientComponentRepository => new EntityFrameworkGenericRepository<ClientComponent>(_context);
         public IRepository<Component> ComponentRepository => new EntityFrameworkGenericRepository<Component>(_context);
+<<<<<<< Updated upstream
 
         public IRepository<Notification> NotificationRepository => new EntityFrameworkGenericRepository<Notification>(_context);
     }
+=======
+	}
+>>>>>>> Stashed changes
 }

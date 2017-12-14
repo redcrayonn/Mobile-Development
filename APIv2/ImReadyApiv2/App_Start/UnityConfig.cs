@@ -30,10 +30,14 @@ namespace ImReadyApiv2.DI
             container.RegisterType<IBuildingblockService, BuildingblockService>(new HierarchicalLifetimeManager());
             container.RegisterType<IClientActivityService, ClientActivityService>(new HierarchicalLifetimeManager());
             container.RegisterType<IClientComponentService, ClientComponentService>(new HierarchicalLifetimeManager());
+<<<<<<< Updated upstream
             container.RegisterType<INotificationService, NotificationService>(new HierarchicalLifetimeManager());
+=======
+			container.RegisterType<ICalendarService, CalendarService>(new HierarchicalLifetimeManager());
+>>>>>>> Stashed changes
 
-            // Set dependency resolver to the Unity resolver
-            var resolver = new UnityResolver(container);
+			// Set dependency resolver to the Unity resolver
+			var resolver = new UnityResolver(container);
             config.DependencyResolver = resolver;
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
         }
