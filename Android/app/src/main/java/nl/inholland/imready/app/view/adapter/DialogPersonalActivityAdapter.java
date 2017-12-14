@@ -14,13 +14,13 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.DialogActivityViewHolder;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 
-public class DialogActivityAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class DialogPersonalActivityAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     private final Context context;
     private final List<PersonalActivity> activities;
     private final LayoutInflater layoutInflater;
 
-    public DialogActivityAdapter(Context context, List<PersonalActivity> activities) {
+    public DialogPersonalActivityAdapter(Context context, List<PersonalActivity> activities) {
         this.context = context;
         this.activities = activities;
         layoutInflater = LayoutInflater.from(context);

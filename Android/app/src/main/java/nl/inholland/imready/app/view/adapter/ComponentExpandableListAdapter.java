@@ -18,7 +18,7 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.util.ColorUtil;
 
-public class ComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<nl.inholland.imready.model.blocks.PersonalActivity> {
+public class ComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<PersonalActivity> {
 
     private Context context;
     private List<PersonalComponent> components;

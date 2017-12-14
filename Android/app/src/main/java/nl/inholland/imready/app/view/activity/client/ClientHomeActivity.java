@@ -1,6 +1,7 @@
 package nl.inholland.imready.app.view.activity.client;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
@@ -66,7 +68,10 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_bar_home, menu);
         TextView userText = findViewById(R.id.username);
-        userText.setText("test name");
+
+        SharedPreferences settings = getSharedPreferences(PreferenceConstants.FILE, MODE_PRIVATE);
+        String username = settings.getString(PreferenceConstants.USER_NAME, getString(R.string.default_username));
+        userText.setText(username);
         return super.onCreateOptionsMenu(menu);
     }
 

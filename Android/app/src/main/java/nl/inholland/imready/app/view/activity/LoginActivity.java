@@ -1,6 +1,7 @@
 package nl.inholland.imready.app.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
 import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
 import nl.inholland.imready.service.ApiClient;
@@ -53,6 +55,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar = findViewById(R.id.progressbar);
 
+        // Restore email from last time a user used this app
+        SharedPreferences settings = getSharedPreferences(PreferenceConstants.FILE, MODE_PRIVATE);
+        String lastUsedEmail = settings.getString(PreferenceConstants.LAST_USED_EMAIL, null);
+        if (!TextUtils.isEmpty(lastUsedEmail)) {
+            usernameInput.setText(lastUsedEmail);
+        }
+
         setupHandlers();
     }
 
@@ -75,9 +84,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /* Button Handlers */
     // Login button
     private void onLoginBtnClicked() {
+        // for testing purpose only
+        usernameInput.setText("geoffreyarkenbout@gmail.com");
+        passwordInput.setText("password");
+
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
-
 
         /*
         if (TextUtils.isEmpty(username)) {
@@ -88,9 +100,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         */
-
-        username = "geoffreyarkenbout@gmail.com";
-        password = "password";
 
         authService.login(username, password, "password").enqueue(this);
 
@@ -107,6 +116,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (keyResponse.getUser_type() == null) {
                 onFailure(call, new Throwable("User type is null"));
             }
+
+            // Save the username for next time the app is opened
+            SharedPreferences settings = getSharedPreferences(PreferenceConstants.FILE, MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString(PreferenceConstants.LAST_USED_EMAIL, usernameInput.getText().toString());
+            editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstname());
+            editor.apply();
+
             Intent intent = null;
             switch(keyResponse.getUser_type()){
                 case CLIENT:

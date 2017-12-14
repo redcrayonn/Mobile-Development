@@ -13,14 +13,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.ParcelableConstants;
-import nl.inholland.imready.app.view.adapter.DialogActivityAdapter;
+import nl.inholland.imready.app.view.adapter.DialogPersonalActivityAdapter;
 import nl.inholland.imready.model.blocks.PersonalActivity;
-import nl.inholland.imready.model.blocks.PersonalBlock;
-import nl.inholland.imready.model.blocks.PersonalComponent;
-import nl.inholland.imready.model.enums.BlockPartStatus;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -44,7 +40,7 @@ public class WelcomeDialogFragment extends DialogFragment {
 
             // fill dialog data
             ListView tasks = dialogView.findViewById(R.id.dialog_tasks);
-            DialogActivityAdapter adapter = new DialogActivityAdapter(getActivity(), activities);
+            DialogPersonalActivityAdapter adapter = new DialogPersonalActivityAdapter(getActivity(), activities);
             tasks.setAdapter(adapter);
             tasks.setOnItemClickListener(adapter);
         }
