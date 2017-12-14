@@ -122,7 +122,7 @@ namespace ImReadyApiv2.Controllers
 
             if (result)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest($"Could not enroll the client {id} at component {componentId}");
         }
