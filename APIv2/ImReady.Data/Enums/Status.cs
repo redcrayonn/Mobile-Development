@@ -8,8 +8,8 @@ namespace ImReady.Data.Enums
 {
     public enum Status
     {
-        ONGOING,
-        PENDING,
-        DONE,
+        ONGOING = 0,
+        PENDING = 1,
+        DONE = 2,
     }
 }

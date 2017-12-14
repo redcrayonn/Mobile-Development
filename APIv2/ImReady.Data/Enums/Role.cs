@@ -8,9 +8,9 @@ namespace ImReady.Data.Models
 {
     public enum Role
     {
-        CLIENT,
-        CAREGIVER,
-        ADMIN,
-        RELATIVE
+        CLIENT = 0,
+        CAREGIVER = 1,
+        ADMIN = 2,
+        RELATIVE = 3
     }
 }
