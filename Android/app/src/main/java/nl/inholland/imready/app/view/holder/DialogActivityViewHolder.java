@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
-import nl.inholland.imready.model.blocks.Activity;
+import nl.inholland.imready.model.blocks.PersonalActivity;
 
-public class DialogActivityViewHolder implements FillableViewHolder<Activity> {
+public class DialogActivityViewHolder implements FillableViewHolder<PersonalActivity> {
     private final TextView titleView;
     private final TextView deadlineView;
 
@@ -20,7 +20,7 @@ public class DialogActivityViewHolder implements FillableViewHolder<Activity> {
     }
 
     @Override
-    public void fill(@Nullable Context context, @NonNull Activity data, @Nullable OnChangeListener<Activity> changeListener) {
+    public void fill(@NonNull Context context, @NonNull PersonalActivity data, @Nullable OnChangeListener<PersonalActivity> changeListener) {
         titleView.setText(data.getName());
         deadlineView.setText(context.getString(R.string.deadline_days, 1));
     }

@@ -10,36 +10,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
+import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.app.view.listener.OnLoadedListener;
-import nl.inholland.imready.model.blocks.Block;
+import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.mock.MockClient;
-import nl.inholland.imready.service.rest.BlockService;
+import nl.inholland.imready.service.model.FutureplanResponse;
+import nl.inholland.imready.service.rest.ClientService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callback<List<Block>> {
+public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListener, Callback<FutureplanResponse> {
 
     private final int BUILDING_BLOCK_TYPE = 0;
     private final int ADD_BLOCK_TYPE = 1;
 
     private final Context context;
-    private final BlockService blockService;
-    private List<Block> blocks;
+    private final ClientService clientService;
     private final LayoutInflater layoutInflater;
+    private final List<OnLoadedListener<PersonalBlock>> onLoadedListeners;
+    private List<PersonalBlock> blocks;
 
-    private final List<OnLoadedListener<Block>> onLoadedListeners;
-
-    public BlockAdapter(Context context, List<OnLoadedListener<Block>> onLoadedListeners) {
+    public PersonalBlockAdapter(Context context, List<OnLoadedListener<PersonalBlock>> onLoadedListeners) {
         this.context = context;
         this.onLoadedListeners = onLoadedListeners;
 
-        ApiClient client = new MockClient();
-        blockService = client.getBlockService();
+        ApiClient client = ApiManager.getClient();
+        clientService = client.getClientService();
 
         blocks = new ArrayList<>();
 
@@ -70,17 +70,15 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
             switch (type) {
                 case BUILDING_BLOCK_TYPE:
                     convertView = layoutInflater.inflate(R.layout.list_item_block, parent, false);
-                    viewHolder = new BlockViewHolder(convertView);
-                    viewHolder.fill(context, blocks.get(position), null);
-                    convertView.setTag(viewHolder);
                     break;
                 case ADD_BLOCK_TYPE:
+                default:
                     convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
-                    viewHolder = new BlockViewHolder(convertView);
-                    viewHolder.fill(context, null, null);
-                    convertView.setTag(viewHolder);
                     break;
             }
+            viewHolder = new BlockViewHolder(convertView);
+            viewHolder.fill(context, blocks.get(position), null);
+            convertView.setTag(viewHolder);
         } else {
             viewHolder = (BlockViewHolder) convertView.getTag();
             viewHolder.fill(context, blocks.get(position), null);
@@ -98,23 +96,28 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
 
     @Override
     public void loadMore() {
-        blockService.getBlocks().enqueue(this);
+        String clientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
+        clientService.getFuturePlan(clientId).enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<List<Block>> call, Response<List<Block>> response) {
-        if (response.isSuccessful() && response.body() != null) {
-            this.blocks = response.body();
-            for (OnLoadedListener<Block> listener : onLoadedListeners) {
-                listener.onLoaded(response.body());
+    public void onResponse(Call<FutureplanResponse> call, Response<FutureplanResponse> response) {
+        FutureplanResponse futureplanResponse = response.body();
+        if (response.isSuccessful() && futureplanResponse != null) {
+            this.blocks = futureplanResponse.getBlocks();
+            for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
+                listener.onLoaded(this.blocks);
             }
-            this.blocks.add(new Block("ADD"));
+            if (this.blocks == null) {
+                this.blocks = new ArrayList<>();
+            }
+            this.blocks.add(new PersonalBlock("ADD"));
             notifyDataSetChanged();
         }
     }
 
     @Override
-    public void onFailure(Call<List<Block>> call, Throwable t) {
+    public void onFailure(Call<FutureplanResponse> call, Throwable t) {
 
     }
 }

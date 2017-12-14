@@ -3,39 +3,11 @@ package nl.inholland.imready.model.blocks;
 import android.os.Parcel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
 
 public class Component extends NamedEntityModel {
-    private BlockPartStatus status = BlockPartStatus.IRRELEVANT;
-    private List<Activity> activities = new ArrayList<>();
-
-    public Component() {
-    }
-
-    public Component(String name) {
-        super(name);
-    }
-
-    public Component(String id, String name) {
-        super(id, name);
-    }
-
-    public Component(String id, String name, BlockPartStatus status, List<Activity> activities) {
-        super(id, name);
-        this.status = status;
-        this.activities = activities;
-    }
-
-    public Component(Parcel in) {
-        super(in);
-        status = (BlockPartStatus) in.readSerializable();
-        activities = new ArrayList<>();
-        in.readTypedList(activities, Activity.CREATOR);
-    }
-
     public static final Creator<Component> CREATOR = new Creator<Component>() {
         @Override
         public Component createFromParcel(Parcel in) {
@@ -47,6 +19,24 @@ public class Component extends NamedEntityModel {
             return new Component[size];
         }
     };
+    private String description;
+    private Block block;
+    private List<Activity> activities = new ArrayList<>();
+
+    public Component(Parcel in) {
+        super(in);
+        description = in.readString();
+        block = in.readParcelable(Block.class.getClassLoader());
+        activities = new ArrayList<>();
+        in.readTypedList(activities, Activity.CREATOR);
+    }
+
+    public Component(Block block, String name, ArrayList<Activity> activities) {
+
+        this.block = block;
+        this.name = name;
+        this.activities = activities;
+    }
 
     public List<Activity> getActivities() {
         return activities;
@@ -56,18 +46,27 @@ public class Component extends NamedEntityModel {
         this.activities = activities;
     }
 
-    public BlockPartStatus getStatus() {
-        return status;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStatus(BlockPartStatus status) {
-        this.status = status;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
-        parcel.writeSerializable(status);
+        parcel.writeString(description);
+        parcel.writeParcelable(block, 0);
         parcel.writeTypedList(activities);
     }
 }

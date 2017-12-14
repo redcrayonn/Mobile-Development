@@ -1,10 +1,5 @@
 package nl.inholland.imready.service.rest;
 
-import java.security.InvalidParameterException;
-
-import nl.inholland.imready.model.user.Caregiver;
-import nl.inholland.imready.model.user.Client;
-import nl.inholland.imready.model.user.User;
 import nl.inholland.imready.service.BaseClient;
 
 public class RestClient extends BaseClient {
@@ -41,5 +36,10 @@ public class RestClient extends BaseClient {
     @Override
     public MessageBaseService getMessageService() {
         return retrofit.create(MessageClientService.class);
+    }
+
+    @Override
+    public PersonalBlockService getPersonalBlockService() {
+        return retrofit.create(PersonalBlockService.class);
     }
 }

@@ -16,9 +16,10 @@
     <string name="hand_in">Inleveren</string>
     <string name="activity_input">Uitwerking van de opdracht</string>
     <string name="empty_username">Het email veld is leeg. Vul aub een email adres is</string>
-    <string name="empty_password">Wachtwoord vel is leeg. Vul aub jouw wachtwoord in</string>
+    <string name="empty_password">Wachtwoord veld is leeg. Vul aub jouw wachtwoord in</string>
     <string name="close">sluit</string>
     <string name="welcome">Welkom %1$s</string>
     <string name="welcome_subtext">Er staan nog %1$s taken open die binnenkort af moeten zijn</string>
     <string name="deadline_days">Over %1$d dagen</string>
+    <string name="unknown_error">Er is iets misgegaan. Probeer nog eens op een later moment.</string>
 </resources>

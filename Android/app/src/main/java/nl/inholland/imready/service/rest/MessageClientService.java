@@ -24,10 +24,10 @@ public interface MessageClientService extends MessageBaseService {
     @Override
     @GET("clients/{clientId}/messages")
     Call<EmptyResponse> postMessage(@Path("clientId") String clientId,
-                           @Field("body") Message body);
+                                    @Field("body") Message body);
 
     @Override
     @GET("clients/{clientId}/messages")
     Call<EmptyResponse> deleteMessage(@Path("clientId") String clientId,
-                             @Path("messageId") String messageId);
+                                      @Path("messageId") String messageId);
 }

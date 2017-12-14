@@ -5,38 +5,37 @@ import android.os.Parcel;
 import nl.inholland.imready.model.NamedEntityModel;
 
 public class Activity extends NamedEntityModel {
-    //region Fields
+    public static final Creator<Activity> CREATOR = new Creator<Activity>() {
+        @Override
+        public Activity createFromParcel(Parcel in) {
+            return new Activity(in);
+        }
+
+        @Override
+        public Activity[] newArray(int size) {
+            return new Activity[size];
+        }
+    };
     private String description;
     private int points;
-    private BlockPartStatus status = BlockPartStatus.IRRELEVANT;
-    private String content;
-    private String assignment;
-    //endregion
+    private Component component;
 
-    //region Constructors
     public Activity() {
     }
 
-    public Activity(String name) {
-        super(name);
+    public Activity(Parcel in) {
+        super(in);
+        description = in.readString();
+        points = in.readInt();
     }
 
-    public Activity(String id, String name) {
-        super(id, name);
-    }
-
-    public Activity(String id, String name, String description, int points, BlockPartStatus status, String content, String assignment) {
-        super(id, name);
+    public Activity(Component component, String name, String description, int points) {
+        this.component = component;
+        this.name = name;
         this.description = description;
         this.points = points;
-        this.status = status;
-        this.content = content;
-        this.assignment = assignment;
     }
 
-    //endregion
-
-    //region Getters/Setters
     public String getDescription() {
         return description;
     }
@@ -53,61 +52,18 @@ public class Activity extends NamedEntityModel {
         this.points = points;
     }
 
-    public BlockPartStatus getStatus() {
-        return status;
+    public Component getComponent() {
+        return component;
     }
 
-    public void setStatus(BlockPartStatus status) {
-        this.status = status;
+    public void setComponent(Component component) {
+        this.component = component;
     }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getAssignment() {
-        return assignment;
-    }
-
-    public void setAssignment(String assignment) {
-        this.assignment = assignment;
-    }
-    //endregion
-
-    //region Parcelable implementation
-    public Activity(Parcel in) {
-        super(in);
-        description = in.readString();
-        points = in.readInt();
-        status = (BlockPartStatus) in.readSerializable();
-        content = in.readString();
-        assignment = in.readString();
-    }
-
-    public static final Creator<Activity> CREATOR = new Creator<Activity>() {
-        @Override
-        public Activity createFromParcel(Parcel in) {
-            return new Activity(in);
-        }
-
-        @Override
-        public Activity[] newArray(int size) {
-            return new Activity[size];
-        }
-    };
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
         parcel.writeString(description);
         parcel.writeInt(points);
-        parcel.writeSerializable(status);
-        parcel.writeString(content);
-        parcel.writeString(assignment);
     }
-    //endregion
 }

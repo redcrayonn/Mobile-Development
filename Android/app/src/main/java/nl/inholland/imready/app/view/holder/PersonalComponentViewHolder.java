@@ -6,25 +6,24 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.Random;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
-import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.model.blocks.PersonalComponent;
 
-public class ComponentViewHolder implements FillableViewHolder<Component> {
+public class PersonalComponentViewHolder implements FillableViewHolder<PersonalComponent> {
     private final TextView titleView;
     private final TextView deadlineView;
 
-    public ComponentViewHolder(View v) {
+    public PersonalComponentViewHolder(View v) {
         titleView = v.findViewById(R.id.component_name);
         deadlineView = v.findViewById(R.id.component_deadline);
     }
 
     @Override
-    public void fill(@Nullable Context context, @NonNull Component data, @Nullable OnChangeListener<Component> changeListener) {
+    public void fill(@NonNull Context context, @NonNull PersonalComponent data, @Nullable OnChangeListener<PersonalComponent> changeListener) {
         // title
         titleView.setText(data.getName());
 

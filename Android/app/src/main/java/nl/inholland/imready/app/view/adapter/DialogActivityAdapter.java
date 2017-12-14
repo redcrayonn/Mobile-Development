@@ -12,15 +12,15 @@ import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.DialogActivityViewHolder;
-import nl.inholland.imready.model.blocks.Activity;
+import nl.inholland.imready.model.blocks.PersonalActivity;
 
 public class DialogActivityAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     private final Context context;
-    private final List<Activity> activities;
+    private final List<PersonalActivity> activities;
     private final LayoutInflater layoutInflater;
 
-    public DialogActivityAdapter(Context context, List<Activity> activities) {
+    public DialogActivityAdapter(Context context, List<PersonalActivity> activities) {
         this.context = context;
         this.activities = activities;
         layoutInflater = LayoutInflater.from(context);

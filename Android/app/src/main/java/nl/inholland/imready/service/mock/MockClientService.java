@@ -1,6 +1,8 @@
 package nl.inholland.imready.service.mock;
 
+import nl.inholland.imready.service.model.FutureplanResponse;
 import nl.inholland.imready.service.rest.ClientService;
+import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
 class MockClientService implements ClientService {
@@ -8,5 +10,10 @@ class MockClientService implements ClientService {
 
     public MockClientService(BehaviorDelegate<ClientService> delegate) {
         this.delegate = delegate;
+    }
+
+    @Override
+    public Call<FutureplanResponse> getFuturePlan(String clientId) {
+        return delegate.returningResponse(null).getFuturePlan(clientId);
     }
 }

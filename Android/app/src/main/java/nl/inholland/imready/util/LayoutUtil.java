@@ -9,7 +9,7 @@ public class LayoutUtil {
         View child;
         for (int i = 0; i < count; i++) {
             child = layout.getChildAt(i);
-            if(child instanceof ViewGroup)
+            if (child instanceof ViewGroup)
                 invalidateRecursive((ViewGroup) child);
             else
                 child.invalidate();

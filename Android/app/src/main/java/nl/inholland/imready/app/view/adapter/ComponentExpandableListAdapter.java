@@ -10,24 +10,23 @@ import android.widget.ImageView;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.view.holder.ActivityViewHolder;
-import nl.inholland.imready.app.view.holder.ComponentViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
+import nl.inholland.imready.app.view.holder.PersonalActivityViewHolder;
+import nl.inholland.imready.app.view.holder.PersonalComponentViewHolder;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
-import nl.inholland.imready.model.blocks.Activity;
-import nl.inholland.imready.model.blocks.BlockPartStatus;
-import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.util.ColorUtil;
 
-public class ComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<Activity> {
+public class ComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<nl.inholland.imready.model.blocks.PersonalActivity> {
 
     private Context context;
-    private List<Component> components;
+    private List<PersonalComponent> components;
     private LayoutInflater inflater;
 
     private List<Integer> blendedComponentColors;
 
-    public ComponentExpandableListAdapter(Context context, List<Component> components) {
+    public ComponentExpandableListAdapter(Context context, List<PersonalComponent> components) {
         this.context = context;
         this.components = components;
         inflater = LayoutInflater.from(context);
@@ -44,9 +43,15 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter im
         return components.size();
     }
 
+    /* Child */
     @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
+    public int getChildrenCount(int groupPosition) {
+        if (this.components.size() == 0) {
+            return 0;
+        }
+        PersonalComponent component = this.components.get(groupPosition);
+        List<nl.inholland.imready.model.blocks.PersonalActivity> activities = component.getActivities();
+        return activities.size();
     }
 
     @Override
@@ -55,15 +60,40 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter im
     }
 
     @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        if (this.components.size() == 0) {
+            return 0;
+        }
+        PersonalComponent component = this.components.get(groupPosition);
+        return component.getActivities().get(childPosition);
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    /* Other */
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Component component = this.components.get(groupPosition);
-        FillableViewHolder<Component> viewHolder = null;
+        PersonalComponent component = this.components.get(groupPosition);
+        FillableViewHolder<PersonalComponent> viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_component, parent, false);
-            viewHolder = new ComponentViewHolder(convertView);
+            viewHolder = new PersonalComponentViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (FillableViewHolder<Component>) convertView.getTag();
+            viewHolder = (FillableViewHolder<PersonalComponent>) convertView.getTag();
         }
 
         ImageView groupIndicator = convertView.findViewById(R.id.group_indicator);
@@ -76,52 +106,21 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter im
         return convertView;
     }
 
-    /* Child */
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        if (this.components.size() == 0) {
-            return 0;
-        }
-        Component component = this.components.get(groupPosition);
-        List<Activity> activities = component.getActivities();
-        return activities.size();
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        if (this.components.size() == 0) {
-            return 0;
-        }
-        Component component = this.components.get(groupPosition);
-        return component.getActivities().get(childPosition);
-    }
-
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Activity activity = (Activity) getChild(groupPosition, childPosition);
-        FillableViewHolder<Activity> viewHolder = null;
+        PersonalActivity activity = (PersonalActivity) getChild(groupPosition, childPosition);
+        FillableViewHolder<PersonalActivity> viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_activity, parent, false);
-            viewHolder = new ActivityViewHolder(convertView);
+            viewHolder = new PersonalActivityViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ActivityViewHolder) convertView.getTag();
+            viewHolder = (PersonalActivityViewHolder) convertView.getTag();
         }
 
         viewHolder.fill(context, activity, this);
 
         return convertView;
-    }
-
-    /* Other */
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override
@@ -130,7 +129,7 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter im
     }
 
     @Override
-    public void onChanged(Object sender, Activity activity) {
+    public void onChanged(Object sender, PersonalActivity activity) {
         notifyDataSetChanged();
     }
 }

@@ -1,7 +1,6 @@
 package nl.inholland.imready.app.view.fragment;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -18,10 +17,10 @@ import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.adapter.DialogActivityAdapter;
-import nl.inholland.imready.model.blocks.Activity;
-import nl.inholland.imready.model.blocks.Block;
-import nl.inholland.imready.model.blocks.BlockPartStatus;
-import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.blocks.PersonalComponent;
+import nl.inholland.imready.model.enums.BlockPartStatus;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -39,20 +38,15 @@ public class WelcomeDialogFragment extends DialogFragment {
         // get data from bundle
         Bundle bundle = getArguments();
         if (bundle != null) {
-            List<Block> blocks = bundle.getParcelableArrayList(ParcelableConstants.BLOCKS);
-            if (blocks != null || !blocks.isEmpty()) {
-                // filter data
-                Stream<Component> components = stream(blocks).selectMany(Block::getComponents);
-                Stream<Activity> activities = components.selectMany(Component::getActivities);
-                List<Activity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
-                todoCount = todoSoon.size();
+            List<PersonalActivity> activities = bundle.getParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES);
 
-                // fill dialog data
-                ListView tasks = dialogView.findViewById(R.id.dialog_tasks);
-                DialogActivityAdapter adapter = new DialogActivityAdapter(getActivity(), todoSoon);
-                tasks.setAdapter(adapter);
-                tasks.setOnItemClickListener(adapter);
-            }
+            todoCount = activities.size();
+
+            // fill dialog data
+            ListView tasks = dialogView.findViewById(R.id.dialog_tasks);
+            DialogActivityAdapter adapter = new DialogActivityAdapter(getActivity(), activities);
+            tasks.setAdapter(adapter);
+            tasks.setOnItemClickListener(adapter);
         }
 
         // fill dialog data

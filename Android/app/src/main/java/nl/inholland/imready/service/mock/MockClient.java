@@ -7,6 +7,7 @@ import nl.inholland.imready.service.rest.CaregiverService;
 import nl.inholland.imready.service.rest.ClientService;
 import nl.inholland.imready.service.rest.FamilyService;
 import nl.inholland.imready.service.rest.MessageBaseService;
+import nl.inholland.imready.service.rest.PersonalBlockService;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
@@ -60,5 +61,11 @@ public class MockClient extends BaseClient {
     public MessageBaseService getMessageService() {
         BehaviorDelegate<MessageBaseService> delegate = mockRetrofit.create(MessageBaseService.class);
         return new MockMessageService(delegate);
+    }
+
+    @Override
+    public PersonalBlockService getPersonalBlockService() {
+        BehaviorDelegate<PersonalBlockService> delegate = mockRetrofit.create(PersonalBlockService.class);
+        return new MockPersonalMessageService(delegate);
     }
 }

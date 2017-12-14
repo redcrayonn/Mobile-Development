@@ -2,17 +2,14 @@ package nl.inholland.imready.app.view.activity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
-import nl.inholland.imready.service.ApiClient;
-import nl.inholland.imready.service.mock.MockClient;
-import nl.inholland.imready.service.rest.AuthenticationService;
 
 public class SplashActivity extends AppCompatActivity {
 

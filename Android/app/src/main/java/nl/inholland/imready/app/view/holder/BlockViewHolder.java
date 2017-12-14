@@ -9,21 +9,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Random;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
-import nl.inholland.imready.model.blocks.Activity;
-import nl.inholland.imready.model.blocks.Block;
-import nl.inholland.imready.model.blocks.BlockPartStatus;
-import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.blocks.PersonalComponent;
+import nl.inholland.imready.model.enums.BlockPartStatus;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class BlockViewHolder extends RecyclerView.ViewHolder implements FillableViewHolder<Block> {
+public class BlockViewHolder extends RecyclerView.ViewHolder implements FillableViewHolder<PersonalBlock> {
     private ImageView blockImageView;
     private TextView blockTitleView;
     private TextView blockNotification;
+
     public BlockViewHolder(View view) {
         super(view);
         blockImageView = view.findViewById(R.id.block_image);
@@ -32,8 +32,8 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
     }
 
     @Override
-    public void fill(@Nullable Context context, @NonNull Block data, @Nullable OnChangeListener<Block> changeListener) {
-        if (data == null) {
+    public void fill(@NonNull Context context, @NonNull PersonalBlock data, @Nullable OnChangeListener<PersonalBlock> changeListener) {
+        if (data.getBlock() == null) {
             return;
         }
 
@@ -44,14 +44,13 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
         fillNotificationCounter(data);
     }
 
-    private void fillNotificationCounter(Block data) {
+    private void fillNotificationCounter(PersonalBlock data) {
         // activities in block components that have an ongoing or pending assignment
-        List<Activity> activities = stream(data.getComponents())
+        List<PersonalActivity> activities = stream(data.getComponents())
                 .where(c -> c != null)
-                .selectMany(Component::getActivities)
+                .selectMany(PersonalComponent::getActivities)
                 .where(a -> a != null)
-                .where(a -> a.getStatus() != BlockPartStatus.COMPLETE ||
-                        a.getStatus() != BlockPartStatus.IRRELEVANT )
+                .where(a -> a.getStatus() != BlockPartStatus.DONE)
                 .toList();
         // if there are any in above list, show/hide the counter
         int notificationCount = activities.size();

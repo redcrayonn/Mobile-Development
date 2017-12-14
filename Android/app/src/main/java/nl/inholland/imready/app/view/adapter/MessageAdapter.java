@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.MessageViewHolder;
 import nl.inholland.imready.model.user.Message;
 import nl.inholland.imready.service.rest.MessageBaseService;
@@ -58,15 +57,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> impl
     }
 
     @Override
-    public int getItemCount() {
-        return messages.size();
-    }
-
-    @Override
     public int getItemViewType(int position) {
         Message message = messages.get(position);
         // TODO: determine type based on message sender
         return position % 3;
+    }
+
+    @Override
+    public int getItemCount() {
+        return messages.size();
     }
 
     @Override

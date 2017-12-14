@@ -5,7 +5,6 @@ import java.util.List;
 
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.service.rest.BlockService;
-
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 

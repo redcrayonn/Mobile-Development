@@ -9,9 +9,9 @@ import retrofit2.http.Path;
 
 public interface BlockService {
 
-    @GET("blocks")
+    @GET("buildingblock")
     Call<List<Block>> getBlocks();
 
-    @GET("blocks/{blockId}")
+    @GET("buildingblock/{blockId}")
     Call<Block> getBlock(@Path("blockId") String blockId);
 }

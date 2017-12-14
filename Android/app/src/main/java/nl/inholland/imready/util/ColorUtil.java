@@ -3,7 +3,6 @@ package nl.inholland.imready.util;
 import android.support.v4.graphics.ColorUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ColorUtil {

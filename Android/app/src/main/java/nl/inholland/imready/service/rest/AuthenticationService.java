@@ -11,5 +11,6 @@ public interface AuthenticationService {
     @POST("login")
     @FormUrlEncoded
     Call<ApiKeyResponse> login(@Field("username") String username,
-                               @Field("password") String password);
+                               @Field("password") String password,
+                               @Field("grant_type") String grantType);
 }

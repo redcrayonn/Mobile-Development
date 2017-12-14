@@ -15,10 +15,11 @@ public class MockAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public Call<ApiKeyResponse> login(String username, String password) {
+    public Call<ApiKeyResponse> login(String username, String password, String grantType) {
         ApiKeyResponse response = new ApiKeyResponse();
-        response.setAuthtoken("a0b1c2d3e4f5g6");
-        response.setDatetime(new Date());
-        return delegate.returningResponse(response).login(username, password);
+        response.setAccess_token("a0b1c2d3e4f5g6");
+        response.setIssued(new Date());
+        grantType = password;
+        return delegate.returningResponse(response).login(username, password, grantType);
     }
 }

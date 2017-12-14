@@ -12,24 +12,22 @@ import android.widget.TextView;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
-import nl.inholland.imready.model.blocks.Activity;
-import nl.inholland.imready.model.blocks.BlockPartStatus;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.enums.BlockPartStatus;
 
-public class ActivityViewHolder implements FillableViewHolder<Activity> {
-
-    private Activity activity;
+public class PersonalActivityViewHolder implements FillableViewHolder<PersonalActivity> {
 
     private final TextView titleView;
     private final TextView descriptionView;
     private final EditText assignmentInput;
     private final TextView deadlineText;
     private final CheckBox completedView;
-
     private final Button handInButton;
     private final View actionContainer;
     private final View deadlineContainer;
+    private nl.inholland.imready.model.blocks.PersonalActivity activity;
 
-    public ActivityViewHolder(View view) {
+    public PersonalActivityViewHolder(View view) {
         completedView = view.findViewById(R.id.activity_checkbox);
         titleView = view.findViewById(R.id.activity_title);
         descriptionView = view.findViewById(R.id.activity_description);
@@ -43,10 +41,10 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
     }
 
     @Override
-    public void fill(@Nullable Context context, @NonNull Activity data, @Nullable OnChangeListener<Activity> changeListener) {
+    public void fill(@NonNull Context context, @NonNull nl.inholland.imready.model.blocks.PersonalActivity data, @Nullable OnChangeListener<nl.inholland.imready.model.blocks.PersonalActivity> changeListener) {
         activity = data;
 
-        boolean isComplete = data.getStatus() == BlockPartStatus.COMPLETE;
+        boolean isComplete = data.getStatus() == BlockPartStatus.DONE;
         boolean isPending = data.getStatus() == BlockPartStatus.PENDING;
         int visibility = isComplete ? View.GONE : View.VISIBLE;
 
@@ -54,7 +52,7 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
 
         titleView.setText(data.getName());
 
-        descriptionView.setText(data.getDescription());
+        descriptionView.setText(data.getActivity().getDescription());
         descriptionView.setEnabled(!isComplete);
         descriptionView.setVisibility(visibility);
 
@@ -70,7 +68,7 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
         handInButton.setVisibility(isComplete || isPending ? View.GONE : View.VISIBLE);
         handInButton.setOnClickListener(view -> {
             activity.setContent(assignmentInput.getText().toString());
-            activity.setStatus(BlockPartStatus.COMPLETE);
+            activity.setStatus(BlockPartStatus.DONE);
             if (changeListener != null) {
                 changeListener.onChanged(this, activity);
             }

@@ -22,16 +22,22 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
-import nl.inholland.imready.app.view.adapter.BlockAdapter;
+import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.app.view.listener.OnLoadedListener;
-import nl.inholland.imready.model.blocks.Block;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.blocks.PersonalComponent;
+import nl.inholland.imready.model.enums.BlockPartStatus;
 
-public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnLoadedListener<Block> {
+import static br.com.zbra.androidlinq.Linq.stream;
+
+public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnLoadedListener<PersonalBlock> {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
@@ -95,9 +101,9 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void initGridView() {
         GridView gridView = findViewById(R.id.blocks);
-        List<OnLoadedListener<Block>> listeners = new ArrayList<>();
+        List<OnLoadedListener<PersonalBlock>> listeners = new ArrayList<>();
         listeners.add(this);
-        gridAdapter = new BlockAdapter(this, listeners);
+        gridAdapter = new PersonalBlockAdapter(this, listeners);
         loadMoreListener = (LoadMoreListener) gridAdapter;
         gridView.setAdapter(gridAdapter);
         gridView.setOnItemClickListener(this);
@@ -157,17 +163,25 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
-        Block block = (Block) adapterView.getItemAtPosition(position);
+        PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
         intent.putExtra(ParcelableConstants.BLOCK, block);
         startActivity(intent);
     }
 
     @Override
-    public void onLoaded(List<Block> body) {
-        WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(ParcelableConstants.BLOCKS, (ArrayList<? extends Parcelable>) body);
-        dialogWelcome.setArguments(bundle);
-        dialogWelcome.show(getSupportFragmentManager(), "welcome");
+    public void onLoaded(List<PersonalBlock> body) {
+        if (body != null) {
+            Stream<PersonalComponent> components = stream(body).selectMany(PersonalBlock::getComponents);
+            Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
+            List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
+
+            if (!todoSoon.isEmpty()) {
+                WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
+                dialogWelcome.setArguments(bundle);
+                dialogWelcome.show(getSupportFragmentManager(), "welcome");
+            }
+        }
     }
 }

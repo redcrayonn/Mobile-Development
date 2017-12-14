@@ -6,7 +6,18 @@ import android.os.Parcelable;
 import java.util.UUID;
 
 public class EntityModel implements Parcelable {
-    private String id;
+    public static final Creator<EntityModel> CREATOR = new Creator<EntityModel>() {
+        @Override
+        public EntityModel createFromParcel(Parcel in) {
+            return new EntityModel(in);
+        }
+
+        @Override
+        public EntityModel[] newArray(int size) {
+            return new EntityModel[size];
+        }
+    };
+    protected String id;
 
     public EntityModel() {
         this.id = UUID.randomUUID().toString().replace("-", "");
@@ -25,26 +36,14 @@ public class EntityModel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-    }
-
-    @Override
     public int describeContents() {
         return 0;
     }
 
-    public static final Creator<EntityModel> CREATOR = new Creator<EntityModel>() {
-        @Override
-        public EntityModel createFromParcel(Parcel in) {
-            return new EntityModel(in);
-        }
-
-        @Override
-        public EntityModel[] newArray(int size) {
-            return new EntityModel[size];
-        }
-    };
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+    }
 
     public String getId() {
         return id;

@@ -1,4 +1,5 @@
 package nl.inholland.imready.service.mock;
+
 import nl.inholland.imready.service.rest.MessageBaseService;
 import retrofit2.mock.BehaviorDelegate;
 
