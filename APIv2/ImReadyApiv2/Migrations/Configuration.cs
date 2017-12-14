@@ -106,33 +106,44 @@ namespace ImReadyApiv2.Migrations
             #endregion
 
             #region LIVING BLOCK
-            var rent = new Component
-            {
-                Id = BlockType.LIVING.ToString() + "_rent",
-                Description = "Bij een huis huren komt heel wat kijken...",
-                Name = "Huis huren"
-            };
-
-            var insurance = new Component
-            {
-                Id = BlockType.LIVING.ToString() + "_insurance",
-                Description = "Heel wat spullen zijn wat waard in je huis. Handig om dit te verzekeren.",
-                Name = "Inboedelverzekering regelen"
-            };
-
-            var livingBlockComponents = new List<Component>()
-            {
-                rent,
-                insurance
-            };
-
             var livingBlock = new Buildingblock
             {
                 Name = "Wonen",
                 Description = "Alles om wonen te regelen",
                 Id = BlockType.LIVING.ToString(),
                 Type = BlockType.LIVING,
-                Components = livingBlockComponents
+                Components = new List<Component>()
+                {
+                    new Component
+                    {
+                        Id = BlockType.LIVING.ToString() + "_rent",
+                        Description = "Bij een huis huren komt heel wat kijken...",
+                        Name = "Huis huren",
+                        Activities = new List<Activity>()
+                        {
+                            new Activity
+                            {
+                                Id = $"{BlockType.LIVING.ToString()}_rent_enrollcity",
+                                Description = "Inschrijven bij de gemeente kan ervoor zorgen dat je een sociale huurwoning kan ontvangen. Al moet je daar nog wel meer voor doen.",
+                                Name = "Schrijf je in bij de gemeente",
+                                Points = 2
+                            },
+                            new Activity
+                            {
+                                Id = $"{BlockType.LIVING.ToString()}_rent_findappartments",
+                                Description = "Verspreid je kansen!",
+                                Name = "Reageer op 5 woningen",
+                                Points = 10
+                            }
+                        }
+                    },
+                    new Component
+                    {
+                        Id = BlockType.LIVING.ToString() + "_insurance",
+                        Description = "Heel wat spullen zijn wat waard in je huis. Handig om dit te verzekeren.",
+                        Name = "Inboedelverzekering regelen"
+                    }
+                }
             };
             #endregion
 
@@ -200,7 +211,7 @@ namespace ImReadyApiv2.Migrations
             var rightsBlock = new Buildingblock
             {
                 Name = "Rechten & Plichten",
-                Description = "Alles om verzekeringen te regelen",
+                Description = "Alles om je rechten & plichten te regelen",
                 Id = BlockType.RIGHTSANDOBLIGATIONS.ToString(),
                 Type = BlockType.RIGHTSANDOBLIGATIONS
             };

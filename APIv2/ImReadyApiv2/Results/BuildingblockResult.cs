@@ -24,12 +24,12 @@ namespace ImReadyApiv2.Results
                 }
             }
         }
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
 
-        public BlockType Type { get; set; }
+        public BlockType Type { get; }
 
-        public List<ComponentResult> Components { get; set; }
+        public List<ComponentResult> Components { get; }
     }
 }

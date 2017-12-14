@@ -39,7 +39,7 @@ namespace ImReady.Service.Services
             }
             var block = component.Block;
 
-            var clientBuildingBlock = _clientBuildingblockRepository.Entities.FirstOrDefault(b => b.Id == block.Id && b.ClientId == clientId);
+            var clientBuildingBlock = _clientBuildingblockRepository.Entities.FirstOrDefault(b => b.BuildingblockId == block.Id && b.ClientId == clientId);
             if (clientBuildingBlock == null)
             {
                 clientBuildingBlock = new ClientBuildingBlock

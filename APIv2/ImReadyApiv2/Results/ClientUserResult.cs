@@ -21,7 +21,6 @@ namespace ImReadyApiv2.Results
                 {
                     Caregiver = new CaregiverUserResult(client.Caregiver, false);
                 }
-                // futureplan here
             }
             
         }

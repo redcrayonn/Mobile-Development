@@ -101,6 +101,31 @@ namespace ImReadyApiv2.Controllers
             return BadRequest($"caregiver with id {caregiverId} or client with id {clientId} could not be found or has already been assigned");
         }
 
+        /// <summary>
+        /// Approves or decline a client's handed in activity/assignment/task
+        /// </summary>
+        /// <param name="caregiverId"></param>
+        /// <param name="clientId"></param>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        [Route("{caregiverId}/client/{clientId}/activity/{activityId}")]
+        public IHttpActionResult Put(string caregiverId, string clientId, string activityId, [FromBody]PutCaregiverActivityInputModel model)
+        {
+            bool succes;
+            if (model.Approved)
+            {
+                succes = _caregiverService.ApproveActivity(caregiverId, clientId, activityId, model.Feedback);
+            }
+            else
+            {
+                succes = _caregiverService.DeclineActivity(caregiverId, clientId, activityId, model.Feedback);
+            }
 
+            if (succes)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }

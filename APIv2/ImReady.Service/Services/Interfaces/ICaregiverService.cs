@@ -11,5 +11,7 @@ namespace ImReady.Service.Services.Interfaces
     {
         Caregiver GetCaregiver(string id);
         bool AssignToCaregiver(string caregiverId, string clientId);
+        bool ApproveActivity(string caregiverId, string clientId, string activityId, string caregiverFeedback);
+        bool DeclineActivity(string caregiverId, string clientId, string activityId, string caregiverFeedback);
     }
 }
