@@ -34,7 +34,12 @@ public class UserService : Service {
     }
     
     func getUsers() {
-//        apiClient.send
+        apiClient.send(toRelativePath: "user",
+                       withHttpMethod: .get,
+                       onSuccessParser: { (data) in
+                        print(data)
+        }) {
+        }
         
         
     }

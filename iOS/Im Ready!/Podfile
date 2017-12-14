@@ -8,9 +8,11 @@ target 'Im Ready!' do
   pod 'AlamofireImage', '~> 3.3'
   pod 'Alamofire-SwiftyJSON'
   pod 'SwiftyJSON'
-  # Keychain pod
-  pod 'KeychainAccess'
   
+  # Keychain pod
+#  pod 'KeychainAccess'
+  pod 'Locksmith'
+
   # Make a nice background for empty TableViews or CollectionViews
   pod 'DZNEmptyDataSet'
   

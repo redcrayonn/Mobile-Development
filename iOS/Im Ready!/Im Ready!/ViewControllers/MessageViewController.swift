@@ -8,10 +8,9 @@
 
 import UIKit
 
-class MessageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    @IBOutlet weak var collectionView: UICollectionView?
-    var recipient: User?
-    
+class MessageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
+    var recipient: User!
     
     var messages: [Message] = []
     
@@ -20,16 +19,27 @@ class MessageViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.title = recipient?.firstname
         messages = messageService.getMockMessages()
         
-        // Do any additional setup after loading the view.
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! SendingMessageTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell?
         
-        return cell
+        for message in messages {
+            if message.senderId != recipient.id {
+                cell = tableView.dequeueReusableCell(withIdentifier: "SendingMessageCell", for: indexPath)
+                    as! SendingMessageTableViewCell
+            } else {
+                cell = tableView.dequeueReusableCell(withIdentifier: "IncomingMessageCell", for: indexPath)
+                    as! IncomingMessageTableViewCell
+            }
+        }
+        
+        return cell!
     }
+    
 }

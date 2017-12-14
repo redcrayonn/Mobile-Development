@@ -11,6 +11,7 @@
 		55B7494C0208B9E357CA77AF /* Pods_Im_Ready_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */; };
 		E398416CB00FC82F09388693 /* Pods_Im_Ready_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */; };
 		FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */; };
+		FA36BE941FE170060044EEB6 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */; };
 		FA3CB3FF1FD56F3200142CCF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */; };
 		FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */; };
 		FA3CB4041FD5D22400142CCF /* ChatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4031FD5D22400142CCF /* ChatsService.swift */; };
@@ -71,6 +72,7 @@
 		FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCB1FE003A300EECB8B /* MessageService.swift */; };
 		FADB8FCE1FE006CE00EECB8B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCD1FE006CE00EECB8B /* UserService.swift */; };
 		FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */; };
+		FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FD11FE1514300EECB8B /* CurrentUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,7 @@
 		C218B82C4D603095F850F4D3 /* Pods-Im Ready!UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!UITests/Pods-Im Ready!UITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA22577E3139BDD4A7B335DE /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!Tests/Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStackViewCell.swift; sourceTree = "<group>"; };
+		FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA3CB4031FD5D22400142CCF /* ChatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsService.swift; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		FAB2359B1FB99A970099B29D /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		FAB2359D1FB99AA70099B29D /* Caregiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caregiver.swift; sourceTree = "<group>"; };
 		FAB235A11FB99B720099B29D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FABDBDAD1FE16D160023DDCE /* Im Ready!.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Im Ready!.entitlements"; sourceTree = "<group>"; };
 		FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Caregiver.storyboard; sourceTree = "<group>"; };
 		FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		FADAB4521FBDF0350069E290 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		FADB8FCB1FE003A300EECB8B /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		FADB8FCD1FE006CE00EECB8B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		FADB8FD11FE1514300EECB8B /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA36BE941FE170060044EEB6 /* LocalAuthentication.framework in Frameworks */,
 				FA7265DF1FC6ECF800E7FBC4 /* SwiftyJSON.framework in Frameworks */,
 				0B9EDB0E1E2C7325F25D6954 /* Pods_Im_Ready_.framework in Frameworks */,
 			);
@@ -200,6 +206,7 @@
 		CE0299059FED82A9A3A0FBB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */,
 				FA7265E01FC6ECF800E7FBC4 /* SwiftyJSON.framework */,
 				AF19877FEB36B0C64EB9B20D /* Pods_Im_Ready_.framework */,
 				0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */,
@@ -253,6 +260,7 @@
 				FAB2359B1FB99A970099B29D /* Client.swift */,
 				FAB2359D1FB99AA70099B29D /* Caregiver.swift */,
 				FA4DFE431FBC1C5E00945B2A /* Relative.swift */,
+				FADB8FD11FE1514300EECB8B /* CurrentUser.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -310,6 +318,7 @@
 		FAB235601FB990F60099B29D /* Im Ready! */ = {
 			isa = PBXGroup;
 			children = (
+				FABDBDAD1FE16D160023DDCE /* Im Ready!.entitlements */,
 				FADAB4511FBDF01A0069E290 /* Rest */,
 				FAA7B9631FBDA97C00134C5B /* Extensions */,
 				FAA7B9601FBD9CC700134C5B /* Helpers */,
@@ -501,6 +510,11 @@
 					FAB2355D1FB990F60099B29D = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					FAB235741FB990F60099B29D = {
 						CreatedOnToolsVersion = 9.1;
@@ -631,7 +645,7 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeIconFactory/FontAwesomeIconFactory.framework",
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
 				"${BUILT_PRODUCTS_DIR}/REFormattedNumberField/REFormattedNumberField.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
@@ -648,7 +662,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeIconFactory.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REFormattedNumberField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
@@ -784,6 +798,7 @@
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
 				FA8306BE1FDE930F00BC225F /* BlockType.swift in Sources */,
 				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
+				FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */,
 				FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */,
 				FA528D921FDB154100052647 /* ClientActivity.swift in Sources */,
 				FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */,
@@ -963,6 +978,7 @@
 			baseConfigurationReference = 74133F7968F33C1006A5B301 /* Pods-Im Ready!.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Im Ready!/Im Ready!.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TP4ZR66RV;
 				INFOPLIST_FILE = "Im Ready!/Info.plist";
@@ -979,6 +995,7 @@
 			baseConfigurationReference = 59707C614206F5C8B8CD852E /* Pods-Im Ready!.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Im Ready!/Im Ready!.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TP4ZR66RV;
 				INFOPLIST_FILE = "Im Ready!/Info.plist";

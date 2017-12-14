@@ -8,9 +8,9 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
     @IBOutlet weak var collectionView: UICollectionView!
     var buildingblocks: [Buildingblock] = []
     var components: [Component] = []
@@ -27,7 +27,24 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Get all buildingblocks, components and activites a client is working on
     func getClientDevelopmentPlan() {
-        buildingblocks = buildingblockService.getMockBuildingblocks()
+        userService.getUsers()
+        
+        // Get buildingblocks
+        buildingblockService.getBuildingblocks(onSuccess: { (results) in
+            print(results)
+            for buildingblock in results {
+                self.buildingblocks.append(buildingblock)
+                self.collectionView.reloadData()
+            }
+        }, onFailure: {
+            print("Something went wrong retrieving the buidlingblocks")
+            let alert = UIAlertController(title: "Oeps!", message: "Het ophalen van de data is mislukt", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            self.getClientDevelopmentPlan()
+        })
+        
         components = componentService.getMockComponents()
         activities = activityService.getMockActivities()
     }

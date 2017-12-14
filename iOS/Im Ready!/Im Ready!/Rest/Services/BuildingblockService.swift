@@ -7,34 +7,45 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class BuildingblockService : Service {
-    func getMockBuildingblocks() -> [Buildingblock] {
-        var buildingblocks: [Buildingblock] = []
-        
-        buildingblocks.append(Buildingblock(id: "Wonen", name: "Wonen", description: "lekker wonen", blockType: BlockType.LIVING))
-        buildingblocks.append(Buildingblock(id: "Werk", name: "Werk", description: "werken", blockType: BlockType.LIVING))
-        buildingblocks.append(Buildingblock(id: "Verzekering", name: "Verzekering", description: "verzekering", blockType: BlockType.LIVING))
-        buildingblocks.append(Buildingblock(id: "Gezondheid", name: "Gezondheid", description: "gezondheid", blockType: BlockType.LIVING))
-        buildingblocks.append(Buildingblock(id: "Financien", name: "Financien", description: "financien", blockType: BlockType.LIVING))
-        buildingblocks.append(Buildingblock(id: "Sociaal", name: "Sociaal", description: "sociaal", blockType: BlockType.LIVING))
-                        
-        return buildingblocks
-    }
-    
-    func getBuildingblocks(forClient clientId: Int,
-                           onSuccess: @escaping ([Buildingblock]) -> (),
-                           onFailure: @escaping () -> ()) -> () {
-        
-        apiClient.send(toRelativePath: "/clients/\(clientId)/blocks/",
+    func getBuildingblocks(onSuccess: @escaping ([Buildingblock]) -> (),
+                           onFailure: @escaping () -> ()){
+        apiClient.send(toRelativePath: "buildingblock",
             withHttpMethod: .get,
             onSuccessParser: { (response) in
-                var buildingblocks: [Buildingblock] = []
-                print(response)
-                onSuccess(buildingblocks)
+                print("Response: \(response)")
+                do {
+                    var buildingblocks: [Buildingblock] = []
+                    // Decode json from list to a list of buildingblocks
+                    let buildingblockResult = try JSONDecoder().decode([Buildingblock].self, from: response )
+                    
+                    // Add the buildingblocks to a list and return the list
+                    for buildingblock in buildingblockResult {
+                        buildingblocks.append(buildingblock)
+                    }
+                    onSuccess(buildingblocks)
+                    
+                } catch {
+                    onFailure()
+                }
         }) {
             print("failed")
-            onFailure()
+        }
+    }
+    
+    func getBuildingblock(withId id: String,
+                          onSuccess: @escaping () -> (),
+                          onFailure: @escaping () -> () -> ()) {
+        apiClient.send(
+            toRelativePath: "buildingblock/\(id)",
+            withHttpMethod: .get,
+            onSuccessParser: { (_ data) in
+            print(data)
+            onSuccess()
+        }) {
+//            onFailure()
         }
     }
 }

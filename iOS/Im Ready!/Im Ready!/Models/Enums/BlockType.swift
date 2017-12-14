@@ -8,15 +8,15 @@
 
 import Foundation
 
-enum BlockType : String, Codable {
-    case LIVING
-    case INSURANCE
-    case MONEY
-    case HEALTH
-    case SOCIAL
-    case WORK
-    case EDUCATION
-    case FAMILY
-    case RIGHTS_AND_OBLIGATIONS
-    case TREATMENT_PLAN
+enum BlockType : Int {
+    case LIVING = 0
+    case INSURANCE = 1
+    case MONEY = 2
+    case HEALTH = 3
+    case SOCIAL = 4
+    case WORK = 5
+    case EDUCATION = 6
+    case FAMILY = 7
+    case RIGHTS_AND_OBLIGATIONS = 8
+    case TREATMENT_PLAN = 9
 }

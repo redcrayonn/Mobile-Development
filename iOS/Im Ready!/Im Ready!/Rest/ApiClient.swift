@@ -26,7 +26,8 @@ public class ApiClient {
      */
     
 //    let baseUrl: String = "https://www.imready.ml/api/v1"
-    let baseUrl: String = "imreadyapiv2.azurewebsites.net/api/home"
+    
+    private let baseUrl: String = "https://imreadyapiv2.azurewebsites.net/api/"
     
     public func send(toRelativePath url: String,
                      withHttpMethod httpMethod: HTTPMethod,
@@ -34,22 +35,24 @@ public class ApiClient {
                      withHeaders headers: [String : String] = [:],
                      onSuccessParser onSuccess: @escaping (_ data: Data) -> (),
                      onFailure: @escaping () -> ()) -> () {
+        print(baseUrl + url)
         
         Alamofire.request(baseUrl + url,
                           method: httpMethod,
                           parameters: parameters,
-                          encoding: JSONEncoding.default,
+//                          encoding: JSONEncoding.default,
                           headers: headers).responseData { response in
                             if response.error != nil {
                                 print("Error: \(String(describing: response.error))")
                                 onFailure()
                             }
                             
-                            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {                                
                                 print("Response data: \(response.data)")
                                 print("Data: \(utf8Text)")
                                 onSuccess(data)
                             }
+                            print(response)
         }
     }
 }

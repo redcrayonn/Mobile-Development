@@ -8,6 +8,16 @@
 
 import Foundation
 
-class BuildingblockResult {
+class BuildingblockResult : Decodable {
     var buildingblocks: [Buildingblock]?
+    
+    enum CodingKeys: String, CodingKey {
+        case buildingblocks
+    }
+    
+//    required init (from decoder: Decoder) throws {
+//        let container =  try decoder.container (keyedBy: CodingKeys.self)
+//        buildingblocks = try container.decode ([Any].self, forKey: .buildingblocks)
+//    }
+
 }

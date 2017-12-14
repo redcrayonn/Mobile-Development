@@ -14,6 +14,8 @@ class Message : EntityModel {
     var sentDate : Date?
     var read : Bool?
     var userId : String?
+    var senderId: String?
+    var receivingId: String?
     
     enum CodingKeys: String, CodingKey {
         case chatId = "chatId"
