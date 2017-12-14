@@ -98,7 +98,7 @@ namespace ImReadyApiv2.Migrations
             #region STUDY BLOCK
             var studyBlock = new Buildingblock
             {
-                Name = "Verzekering",
+                Name = "Studie",
                 Description = "Alles om je studie te regelen",
                 Id = BlockType.EDUCATION.ToString(),
                 Type = BlockType.EDUCATION
