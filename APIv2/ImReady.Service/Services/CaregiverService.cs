@@ -118,7 +118,8 @@ namespace ImReady.Service.Services
             {
                 Caregiver = caregiver,
                 ClientActivity = activity,
-                Content = caregiverFeedback
+                Content = caregiverFeedback,
+                Sent = DateTime.Now
             };
             activity.Feedback.Add(feedback);
 

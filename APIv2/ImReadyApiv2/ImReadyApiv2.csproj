@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201712131539050_Added_Notifications.Designer.cs">
       <DependentUpon>201712131539050_Added_Notifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712141337448_Added_Feedback_Deadline.cs" />
+    <Compile Include="Migrations\201712141337448_Added_Feedback_Deadline.Designer.cs">
+      <DependentUpon>201712141337448_Added_Feedback_Deadline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
     <Compile Include="Models\Input\PostClientActivityInputModel.cs" />
@@ -322,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712131539050_Added_Notifications.resx">
       <DependentUpon>201712131539050_Added_Notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712141337448_Added_Feedback_Deadline.resx">
+      <DependentUpon>201712141337448_Added_Feedback_Deadline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
