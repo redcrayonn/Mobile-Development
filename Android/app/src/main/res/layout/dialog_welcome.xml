@@ -30,4 +30,15 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/sm"
         tools:listitem="@layout/list_item_activity_todo"/>
+    <Button
+        android:id="@+id/button_neutral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_tasks"
+        android:layout_alignParentEnd="true"
+        android:text="@string/close"
+        android:drawableEnd="@drawable/ic_close"
+        android:drawablePadding="@dimen/md"
+        android:foregroundTint="@android:color/white"
+        style="@style/App.Button"/>
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.BlockPartStatus;
 
@@ -40,7 +43,7 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
     }
 
     @Override
-    public void fill(Context context, Activity data) {
+    public void fill(@Nullable Context context, @NonNull Activity data, @Nullable OnChangeListener<Activity> changeListener) {
         activity = data;
 
         boolean isComplete = data.getStatus() == BlockPartStatus.COMPLETE;
@@ -68,6 +71,9 @@ public class ActivityViewHolder implements FillableViewHolder<Activity> {
         handInButton.setOnClickListener(view -> {
             activity.setContent(assignmentInput.getText().toString());
             activity.setStatus(BlockPartStatus.COMPLETE);
+            if (changeListener != null) {
+                changeListener.onChanged(this, activity);
+            }
         });
 
         actionContainer.setVisibility(visibility);

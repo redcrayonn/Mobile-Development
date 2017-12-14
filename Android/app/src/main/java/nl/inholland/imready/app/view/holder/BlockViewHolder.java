@@ -1,6 +1,8 @@
 package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.BlockPartStatus;
@@ -29,7 +32,7 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
     }
 
     @Override
-    public void fill(Context context, Block data) {
+    public void fill(@Nullable Context context, @NonNull Block data, @Nullable OnChangeListener<Block> changeListener) {
         if (data == null) {
             return;
         }

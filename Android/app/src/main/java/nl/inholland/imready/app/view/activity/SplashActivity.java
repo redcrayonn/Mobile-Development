@@ -32,7 +32,13 @@ public class SplashActivity extends AppCompatActivity {
                 new Pair<View, String>(logo, SceneTransitionConstants.VIEW_NAME_LOGO));
 
         // go to next view
-        startActivity(intent, activityOptions.toBundle());
-        finish();
+        findViewById(R.id.logo).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent, activityOptions.toBundle());
+                finish();
+            }
+        }, 1000);
+
     }
 }

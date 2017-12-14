@@ -13,11 +13,13 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.ActivityViewHolder;
 import nl.inholland.imready.app.view.holder.ComponentViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
+import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.Activity;
+import nl.inholland.imready.model.blocks.BlockPartStatus;
 import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.util.ColorUtil;
 
-public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
+public class ComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<Activity> {
 
     private Context context;
     private List<Component> components;
@@ -68,7 +70,7 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
         groupIndicator.setSelected(isExpanded);
 
         // fill view from data here
-        viewHolder.fill(context, component);
+        viewHolder.fill(context, component, null);
 
         convertView.setBackgroundColor(blendedComponentColors.get(groupPosition));
         return convertView;
@@ -111,7 +113,7 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
             viewHolder = (ActivityViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, activity);
+        viewHolder.fill(context, activity, this);
 
         return convertView;
     }
@@ -125,5 +127,10 @@ public class ComponentExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return false;
+    }
+
+    @Override
+    public void onChanged(Object sender, Activity activity) {
+        notifyDataSetChanged();
     }
 }

@@ -71,19 +71,19 @@ public class BlockAdapter extends BaseAdapter implements LoadMoreListener, Callb
                 case BUILDING_BLOCK_TYPE:
                     convertView = layoutInflater.inflate(R.layout.list_item_block, parent, false);
                     viewHolder = new BlockViewHolder(convertView);
-                    viewHolder.fill(context, blocks.get(position));
+                    viewHolder.fill(context, blocks.get(position), null);
                     convertView.setTag(viewHolder);
                     break;
                 case ADD_BLOCK_TYPE:
                     convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
                     viewHolder = new BlockViewHolder(convertView);
-                    viewHolder.fill(context, null);
+                    viewHolder.fill(context, null, null);
                     convertView.setTag(viewHolder);
                     break;
             }
         } else {
             viewHolder = (BlockViewHolder) convertView.getTag();
-            viewHolder.fill(context, blocks.get(position));
+            viewHolder.fill(context, blocks.get(position), null);
         }
         return convertView;
     }

@@ -52,7 +52,7 @@ public class DialogActivityAdapter extends BaseAdapter implements AdapterView.On
             viewHolder = (DialogActivityViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, activities.get(position));
+        viewHolder.fill(context, activities.get(position), null);
         return convertView;
     }
 

@@ -24,8 +24,8 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="App.Dialog" parent="Theme.AppCompat.Dialog">
-
+    <style name="App.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="App.Splash" parent="AppTheme">

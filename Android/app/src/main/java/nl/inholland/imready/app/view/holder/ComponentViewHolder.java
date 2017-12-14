@@ -1,6 +1,8 @@
 package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 import java.util.Random;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.Component;
 
 public class ComponentViewHolder implements FillableViewHolder<Component> {
@@ -21,7 +24,7 @@ public class ComponentViewHolder implements FillableViewHolder<Component> {
     }
 
     @Override
-    public void fill(Context context, Component data) {
+    public void fill(@Nullable Context context, @NonNull Component data, @Nullable OnChangeListener<Component> changeListener) {
         // title
         titleView.setText(data.getName());
 

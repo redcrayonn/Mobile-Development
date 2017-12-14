@@ -1,12 +1,14 @@
 package nl.inholland.imready.app.view.fragment;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +34,6 @@ public class WelcomeDialogFragment extends DialogFragment {
         // create view
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_welcome, null);
-
 
         int todoCount = 0;
         // get data from bundle
@@ -61,11 +62,11 @@ public class WelcomeDialogFragment extends DialogFragment {
         TextView subTextView = dialogView.findViewById(R.id.dialog_text);
         subTextView.setText(getString(R.string.welcome_subtext, String.valueOf(todoCount)));
 
-        // build the dialog
-        builder.setView(dialogView)
-                .setPositiveButton(R.string.close, (dialogInterface, i) -> {
+        Button closeBtn = dialogView.findViewById(R.id.button_neutral);
+        closeBtn.setOnClickListener(view -> dismiss());
 
-                });
+        // build the dialog
+        builder.setView(dialogView);
 
         return builder.create();
     }
