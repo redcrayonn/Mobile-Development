@@ -12,7 +12,8 @@ namespace ImReady.Data.Models
     public class ClientComponent : EntityModel
     {
         public string Description { get; set; }
-        public DateTime Deadline { get; set; }
+		
+		public DateTime Deadline { get; set; }
 
         public string ClientBuildingBlockId { get; set; }
 
@@ -32,5 +33,9 @@ namespace ImReady.Data.Models
         public virtual Task Task { get; set; }
 
         public virtual ICollection<ClientActivity> Activities { get; set; }
-    }
+
+		public string YoutubeUrl { get; set; }
+
+		public virtual ICollection<UsefulLink> UsefulLinks { get; set; }
+	}
 }
