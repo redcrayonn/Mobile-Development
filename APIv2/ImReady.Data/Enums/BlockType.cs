@@ -9,16 +9,16 @@ namespace ImReady.Data.Enums
     //TODO: AANVULLEN MET JUISTE DATA
     public enum BlockType
     {
-        LIVING,
-        INSURANCE,
-        MONEY,
-        HEALTH,
-        SOCIAL,
-        WORK,
-        EDUCATION,
-        FAMILY,
-        RIGHTSANDOBLIGATIONS,
-        TREATMENTPLAN        
+        LIVING = 0,
+        INSURANCE = 1,
+        MONEY = 2,
+        HEALTH = 3,
+        SOCIAL = 4,
+        WORK = 5,
+        EDUCATION = 6,
+        FAMILY = 7,
+        RIGHTSANDOBLIGATIONS = 8,
+        TREATMENTPLAN = 9        
     }
 }
 /*

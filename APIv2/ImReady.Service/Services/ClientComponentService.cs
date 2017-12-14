@@ -48,6 +48,12 @@ namespace ImReady.Service.Services
                     Client = client
                 };
             }
+
+            if (clientBuildingBlock.Components.Any(c => c.ComponentId == componentId))
+            {
+                // already exists
+                return false;
+            }
             
             var clientComponent = new ClientComponent
             {

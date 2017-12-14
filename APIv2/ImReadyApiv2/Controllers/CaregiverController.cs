@@ -1,13 +1,9 @@
 ﻿using ImReady.Data.Models;
 using ImReady.Data.Models.Users;
-using ImReady.Service.Services.Interfaces;
+using ImReady.Service.Services;
 using ImReadyApiv2.Models.Input;
 using ImReadyApiv2.Results;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -21,14 +17,17 @@ namespace ImReadyApiv2.Controllers
     public class CaregiverController : BaseApiController
     {
         private readonly ICaregiverService _caregiverService;
+        private readonly IClientService _clientService;
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="userService">Service class for caregiver business logic</param>
-        public CaregiverController(ICaregiverService userService)
+        /// <param name="caregiverService">Service class for caregiver business logic</param>
+        /// <param name="clientService">Service class for caregiver business logic</param>
+        public CaregiverController(ICaregiverService caregiverService, IClientService clientService)
         {
-            _caregiverService = userService;
+            _caregiverService = caregiverService;
+            _clientService = clientService;
         }
 
         /// <summary>
@@ -127,6 +126,31 @@ namespace ImReadyApiv2.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        /// <summary>
+        /// Gets the clients of the caregiver
+        /// </summary>
+        /// <param name="id">Id of the caregiver</param>
+        /// <remarks>Gets the information of a caregiver</remarks>
+        /// <response code="200">OK</response>
+        /// <response code="404">Not Found</response>
+        [HttpGet]
+        [Route("{id}/client")]
+        [ResponseType(typeof(CaregiverClientsResult))]
+        public async Task<IHttpActionResult> GetClients(string id)
+        {
+            var clients = _clientService.GetClients(id);
+            if (clients == null)
+            {
+                return NotFound();
+            }
+            List<CaregiverClientsResult> result = new List<CaregiverClientsResult>();
+            foreach (var client in clients)
+            {
+                result.Add(new CaregiverClientsResult(client));
+            }
+            return Ok(result);
         }
     }
 }

@@ -275,6 +275,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ActivityResult.cs" />
     <Compile Include="Results\CalendarResult.cs" />
+    <Compile Include="Results\CaregiverClientsResult.cs" />
     <Compile Include="Results\CaregiverUserResult.cs" />
     <Compile Include="Results\BuildingblockResult.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

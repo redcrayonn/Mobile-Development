@@ -8,10 +8,10 @@ namespace ImReady.Data.Enums
 {
     public enum TriggerLevel
     {
-        NONE,
-        LOW,
-        MEDIUM,
-        HIGH,
-        VERYHIGH
+        NONE = 0,
+        LOW = 1,
+        MEDIUM = 2,
+        HIGH = 3,
+        VERYHIGH = 4
     }
 }
