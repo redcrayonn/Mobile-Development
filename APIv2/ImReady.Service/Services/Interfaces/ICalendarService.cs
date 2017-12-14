@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImReady.Service.Services.Interfaces {
 	public interface ICalendarService {
-		List<Calendar> Get(string userId);
+		List<Calendar> GetCalendarItems(string userId);
+		Calendar getCalendarItem (string userId, string calendarId);
+		void CreateCalendarItem (Calendar calendar);
+		void DeleteCalendarItem (Calendar calendar);
 	}
 }

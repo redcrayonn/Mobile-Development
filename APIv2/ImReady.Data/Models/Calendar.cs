@@ -1,6 +1,7 @@
 ﻿using ImReady.Data.Models.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,11 @@ namespace ImReady.Data.Models
 		[ForeignKey("UserId")]
 		public virtual User User { get; set; } 
 
+		[Required]
         public string Title { get; set; }
 
-        public DateTime StartDate { get; set; }
+		[Required]
+		public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 

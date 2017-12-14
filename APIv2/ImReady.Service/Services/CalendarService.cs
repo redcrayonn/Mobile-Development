@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ImReady.Data.Models;
 using Patterns.Repository;
+using System;
 
 namespace ImReady.Service.Services {
 	public class CalendarService : ICalendarService {
@@ -14,15 +15,23 @@ namespace ImReady.Service.Services {
 
 			_calendarRepository = _unitOfWork.CalendarRepository;
 		}
+		
+		public List<Calendar> GetCalendarItems (string userId) {
+			return _calendarRepository.Entities.Where(c => c.UserId == userId).ToList();
+		}
 
-		public List<Calendar> Get (string userId) {
-			var calendarItems =_calendarRepository.Entities.Where(c => c.UserId == userId).ToList();
+		public Calendar getCalendarItem (string userId, string calendarId) {
+			return _calendarRepository.Entities.SingleOrDefault(c => c.UserId == userId && c.Id == calendarId);
+		}
 
-			//if (calendarItems == null) {
-			//	calendarItems = new List<Calendar>();
-			//}
+		public void CreateCalendarItem (Calendar calendar) {
+			_calendarRepository.Add(calendar);
+			_unitOfWork.Commit();
+		}
 
-			return calendarItems;
+		public void DeleteCalendarItem (Calendar calendar) {
+			_calendarRepository.Remove(calendar);
+			_unitOfWork.Commit();
 		}
 	}
 }

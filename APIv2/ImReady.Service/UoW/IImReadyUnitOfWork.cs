@@ -20,11 +20,8 @@ namespace ImReady.Service
         IRepository<Buildingblock> BuildingblockRepository { get; }
         IRepository<ClientComponent> ClientComponentRepository { get; }
         IRepository<Component> ComponentRepository { get; }
-<<<<<<< Updated upstream
         IRepository<Notification> NotificationRepository { get; }
-    }
-=======
 		IRepository<Calendar> CalendarRepository { get; }
 	}
->>>>>>> Stashed changes
+		
 }

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using ImReadyApiv2.DI;
 using System.Net.Http.Headers;
 using ImReadyApiv2.Filters;
+using Newtonsoft.Json.Converters;
 
 namespace ImReadyApiv2
 {
@@ -34,6 +35,9 @@ namespace ImReadyApiv2
 
             config.Formatters.JsonFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/html"));
+
+			config.Formatters.JsonFormatter.SerializerSettings.Converters
+				.Add(new IsoDateTimeConverter());
         }
     }
 }
