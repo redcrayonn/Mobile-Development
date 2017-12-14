@@ -104,10 +104,11 @@ namespace ImReadyApiv2.Controllers
         /// <summary>
         /// Approves or decline a client's handed in activity/assignment/task
         /// </summary>
-        /// <param name="caregiverId"></param>
-        /// <param name="clientId"></param>
-        /// <param name="activityId"></param>
-        /// <returns></returns>
+        /// <param name="caregiverId">The caregiver id</param>
+        /// <param name="clientId">The client id</param>
+        /// <param name="activityId">The activity id</param>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
         [Route("{caregiverId}/client/{clientId}/activity/{activityId}")]
         public IHttpActionResult Put(string caregiverId, string clientId, string activityId, [FromBody]PutCaregiverActivityInputModel model)
         {
