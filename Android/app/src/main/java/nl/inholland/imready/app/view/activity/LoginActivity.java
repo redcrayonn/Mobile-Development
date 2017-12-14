@@ -84,14 +84,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /* Button Handlers */
     // Login button
     private void onLoginBtnClicked() {
-        // for testing purpose only
-        usernameInput.setText("geoffreyarkenbout@gmail.com");
-        passwordInput.setText("password");
-
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
 
-        /*
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, getString(R.string.empty_username), Toast.LENGTH_SHORT).show();
             return;
@@ -99,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, getString(R.string.empty_password), Toast.LENGTH_SHORT).show();
             return;
         }
-        */
 
         authService.login(username, password, "password").enqueue(this);
 
