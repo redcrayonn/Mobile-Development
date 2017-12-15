@@ -1,65 +1,75 @@
 package nl.inholland.imready.service.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 import nl.inholland.imready.model.enums.UserRole;
 
 public class ApiKeyResponse {
-    private String access_token;
-    private String token_type;
-    private long expires_in;
-    private UserRole user_type;
-    private String user_id;
-    private String firstname;
+    @SerializedName("access_token")
+    private String accessToken;
+    @SerializedName("token_type")
+    private String tokenType;
+    @SerializedName("expires_in")
+    private long expiresIn;
+    @SerializedName("user_type")
+    private UserRole userType;
+    @SerializedName("user_id")
+    private String userId;
+    @SerializedName("firstname")
+    private String firstName;
+    @SerializedName("issued")
     private Date issued;
+    @SerializedName("expires")
     private Date expires;
 
-    public String getAccess_token() {
-        return access_token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getToken_type() {
-        return token_type;
+    public String getTokenType() {
+        return tokenType;
     }
 
-    public void setToken_type(String token_type) {
-        this.token_type = token_type;
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
     }
 
-    public long getExpires_in() {
-        return expires_in;
+    public long getExpiresIn() {
+        return expiresIn;
     }
 
-    public void setExpires_in(long expires_in) {
-        this.expires_in = expires_in;
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
     }
 
-    public UserRole getUser_type() {
-        return user_type;
+    public UserRole getUserType() {
+        return userType;
     }
 
-    public void setUser_type(UserRole user_type) {
-        this.user_type = user_type;
+    public void setUserType(UserRole userType) {
+        this.userType = userType;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public Date getIssued() {

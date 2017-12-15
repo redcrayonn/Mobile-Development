@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onResponse(Call<ApiKeyResponse> call, Response<ApiKeyResponse> response) {
         if (response.isSuccessful() && response.body() != null) {
             ApiKeyResponse keyResponse = response.body();
-            if (keyResponse.getUser_type() == null) {
+            if (keyResponse.getUserType() == null) {
                 onFailure(call, new Throwable("User type is null"));
             }
 
@@ -117,11 +117,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences settings = getSharedPreferences(PreferenceConstants.FILE, MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString(PreferenceConstants.LAST_USED_EMAIL, usernameInput.getText().toString());
-            editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstname());
+            editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstName());
             editor.apply();
 
             Intent intent = null;
-            switch (keyResponse.getUser_type()) {
+            switch (keyResponse.getUserType()) {
                 case CLIENT:
                     // setup to go to Client Home
                     intent = new Intent(this, ClientHomeActivity.class);

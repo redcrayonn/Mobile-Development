@@ -15,6 +15,7 @@ import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.app.view.listener.OnLoadedListener;
+import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.service.ApiClient;
@@ -64,7 +65,7 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BlockViewHolder viewHolder;
+        BlockViewHolder viewHolder = null;
         if (convertView == null) {
             int type = getItemViewType(position);
 
@@ -78,19 +79,21 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
                     break;
             }
             viewHolder = new BlockViewHolder(convertView);
-            viewHolder.fill(context, blocks.get(position), null);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (BlockViewHolder) convertView.getTag();
-            viewHolder.fill(context, blocks.get(position), null);
         }
+
+        viewHolder.fill(context, blocks.get(position), null);
+
         return convertView;
     }
 
     @Override
     public int getItemViewType(int position) {
-        PersonalBlock block = blocks.get(position);
-        if (block.getBlock().getType() == BlockType.ADD) {
+        PersonalBlock personalBlock = blocks.get(position);
+        Block block = personalBlock.getBlock();
+        if (block.getType() == BlockType.ADD) {
             return ADD_BLOCK_TYPE; // special ADD list_item_personal_block type
         } else {
             return BUILDING_BLOCK_TYPE; // default list_item_personal_block type
@@ -108,11 +111,10 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
         FutureplanResponse futureplanResponse = response.body();
         if (response.isSuccessful() && futureplanResponse != null) {
             this.blocks = futureplanResponse.getBlocks();
-            for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
-                listener.onLoaded(this.blocks);
-            }
             if (this.blocks == null) {
                 this.blocks = new ArrayList<>();
+            }for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
+                listener.onLoaded(this.blocks);
             }
             this.blocks.add(new PersonalBlock(BlockType.ADD));
             notifyDataSetChanged();

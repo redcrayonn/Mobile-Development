@@ -17,6 +17,7 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.util.BlockUtil;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -34,15 +35,16 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
 
     @Override
     public void fill(@NonNull Context context, @NonNull PersonalBlock data, @Nullable OnChangeListener<PersonalBlock> changeListener) {
-        if (data.getBlock().getType() == BlockType.ADD) {
-            return;
+        if (blockTitleView != null) {
+            blockTitleView.setText(data.getName());
         }
-
-        blockTitleView.setText(data.getName());
-        blockImageView.setImageDrawable(context.getDrawable(R.drawable.ic_home));
+        BlockType type = data.getBlock() != null ? data.getBlock().getType() : BlockType.ADD;
+        blockImageView.setImageDrawable(BlockUtil.getDrawableIcon(context, type));
 
         // NOTIFICATION LABEL
-        fillNotificationCounter(data);
+        if (blockNotification != null) {
+            fillNotificationCounter(data);
+        }
     }
 
     private void fillNotificationCounter(PersonalBlock data) {
@@ -55,7 +57,7 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
                 .toList();
         // if there are any in above list, show/hide the counter
         int notificationCount = activities.size();
-        boolean showCounter = notificationCount != 0;
+        boolean showCounter = notificationCount > 0;
 
         blockNotification.setText(String.valueOf(notificationCount));
         if (showCounter) {

@@ -7,10 +7,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.inholland.imready.model.EntityModel;
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 
-public class PersonalComponent extends NamedEntityModel {
+public class PersonalComponent extends EntityModel {
     public static final Creator<PersonalComponent> CREATOR = new Creator<PersonalComponent>() {
         @Override
         public PersonalComponent createFromParcel(Parcel in) {
@@ -61,7 +62,6 @@ public class PersonalComponent extends NamedEntityModel {
         this.component = component;
     }
 
-    @Override
     public String getName() {
         return component.getName();
     }

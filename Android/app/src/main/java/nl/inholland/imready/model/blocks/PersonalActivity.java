@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import nl.inholland.imready.model.EntityModel;
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 
-public class PersonalActivity extends NamedEntityModel {
+public class PersonalActivity extends EntityModel {
     public static final Creator<PersonalActivity> CREATOR = new Creator<PersonalActivity>() {
         @Override
         public PersonalActivity createFromParcel(Parcel in) {
@@ -95,7 +96,6 @@ public class PersonalActivity extends NamedEntityModel {
         this.component = component;
     }
 
-    @Override
     public String getName() {
         return activity.getName();
     }

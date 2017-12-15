@@ -39,6 +39,7 @@ public class Block extends NamedEntityModel {
     }
 
     public Block(BlockType type) {
+        this.name = "NAME";
         this.type = type;
     }
 

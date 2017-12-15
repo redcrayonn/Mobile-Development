@@ -7,12 +7,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.inholland.imready.model.EntityModel;
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.model.user.Client;
 import nl.inholland.imready.model.user.User;
 
-public class PersonalBlock extends NamedEntityModel {
+public class PersonalBlock extends EntityModel {
     public static final Creator<PersonalBlock> CREATOR = new Creator<PersonalBlock>() {
         @Override
         public PersonalBlock createFromParcel(Parcel in) {
@@ -41,12 +42,9 @@ public class PersonalBlock extends NamedEntityModel {
     }
 
     public PersonalBlock(BlockType type) {
-        if (this.block == null) {
-            this.block = new Block(type);
-        }
+        this.block = new Block(type);
     }
 
-    @Override
     public String getName() {
         return block.getName();
     }
