@@ -99,7 +99,13 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
         }
 
         ImageView groupIndicator = convertView.findViewById(R.id.group_indicator);
-        groupIndicator.setSelected(isExpanded);
+        if (block.getComponents() == null || block.getComponents().size() == 0) {
+            groupIndicator.setVisibility(View.INVISIBLE);
+            groupIndicator.setSelected(false);
+        } else {
+            groupIndicator.setVisibility(View.VISIBLE);
+            groupIndicator.setSelected(isExpanded);
+        }
 
         viewHolder.fill(context, block, null);
 

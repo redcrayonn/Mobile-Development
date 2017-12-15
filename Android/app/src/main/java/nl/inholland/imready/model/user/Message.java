@@ -1,15 +1,22 @@
 package nl.inholland.imready.model.user;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.UUID;
 
 import nl.inholland.imready.model.EntityModel;
 
 public class Message extends EntityModel {
+    @SerializedName("SenderId")
     private String senderId;
+    @SerializedName("ReceiverId")
     private String receiverId;
+    @SerializedName("Messages")
     private String message;
+    @SerializedName("Sent")
     private Date datetime;
+    @SerializedName("IsRead")
     private Boolean read;
 
     public Message() {

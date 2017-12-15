@@ -2,6 +2,8 @@ package nl.inholland.imready.model.blocks;
 
 import android.os.Parcel;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,11 @@ public class PersonalComponent extends NamedEntityModel {
             return new PersonalComponent[size];
         }
     };
+    @SerializedName("Activities")
     private List<PersonalActivity> activities;
+    @SerializedName("Status")
     private BlockPartStatus status;
+    @SerializedName("Component")
     private Component component;
 
     protected PersonalComponent(Parcel in) {

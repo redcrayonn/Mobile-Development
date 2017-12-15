@@ -27,7 +27,7 @@ public class BlockPlanViewHolder implements FillableViewHolder<Block> {
     public void fill(@NonNull Context context, @NonNull Block data, @Nullable OnChangeListener<Block> changeListener) {
         groupIconView.setImageDrawable(BlockUtil.getDrawableIcon(context, data.getType()));
         titleView.setText(data.getName());
-        int count = data.getComponents().size();
-        groupCountView.setText(count);
+        int count = data.getComponents() != null ? data.getComponents().size() : 0;
+        groupCountView.setText(context.getString(R.string.component_count, count));
     }
 }

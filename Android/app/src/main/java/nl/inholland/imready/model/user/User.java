@@ -1,13 +1,20 @@
 package nl.inholland.imready.model.user;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import nl.inholland.imready.model.EntityModel;
+import nl.inholland.imready.model.enums.UserRole;
 
 public abstract class User extends EntityModel {
+    @SerializedName(value = "FirstName", alternate = {"Firstname"})
     private String firstName;
+    @SerializedName(value = "LastName", alternate = {"Lastname"})
     private String lastName;
+    @SerializedName("Role")
     private UserRole role;
+    @SerializedName("Notifications")
     private List<Notification> notifications;
 
     public UserRole getRole() {

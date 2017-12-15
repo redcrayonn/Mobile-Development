@@ -3,6 +3,8 @@ package nl.inholland.imready.model.blocks;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 import nl.inholland.imready.model.EntityModel;
@@ -20,9 +22,13 @@ public class Feedback extends EntityModel implements Parcelable {
             return new Feedback[size];
         }
     };
+    @SerializedName("Caregiver")
     private User caregiver;
+    @SerializedName("Activity")
     private PersonalActivity activity;
+    @SerializedName("Sent")
     private Date sent;
+    @SerializedName("Content")
     private String content;
 
     public Feedback(Parcel in) {

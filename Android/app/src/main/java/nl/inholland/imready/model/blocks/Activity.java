@@ -2,6 +2,8 @@ package nl.inholland.imready.model.blocks;
 
 import android.os.Parcel;
 
+import com.google.gson.annotations.SerializedName;
+
 import nl.inholland.imready.model.NamedEntityModel;
 
 public class Activity extends NamedEntityModel {
@@ -16,12 +18,12 @@ public class Activity extends NamedEntityModel {
             return new Activity[size];
         }
     };
+    @SerializedName("Description")
     private String description;
+    @SerializedName("Points")
     private int points;
+    @SerializedName("Component")
     private Component component;
-
-    public Activity() {
-    }
 
     public Activity(Parcel in) {
         super(in);

@@ -1,13 +1,19 @@
 package nl.inholland.imready.model.user;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import nl.inholland.imready.model.blocks.PersonalBlock;
 
 public class Client extends User {
+    @SerializedName("Points")
     private long points;
-    private Caregiver caregivers;
+    @SerializedName("Caregiver")
+    private Caregiver caregiver;
+    @SerializedName("Blocks")
     private List<PersonalBlock> blocks;
+    @SerializedName("Relatives")
     private List<Relative> relatives;
 
     public long getPoints() {
@@ -18,12 +24,12 @@ public class Client extends User {
         this.points = points;
     }
 
-    public Caregiver getCaregivers() {
-        return caregivers;
+    public Caregiver getCaregiver() {
+        return caregiver;
     }
 
-    public void setCaregivers(Caregiver caregivers) {
-        this.caregivers = caregivers;
+    public void setCaregiver(Caregiver caregiver) {
+        this.caregiver = caregiver;
     }
 
     public List<PersonalBlock> getBlocks() {

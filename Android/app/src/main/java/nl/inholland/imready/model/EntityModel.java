@@ -3,6 +3,8 @@ package nl.inholland.imready.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.UUID;
 
 public class EntityModel implements Parcelable {
@@ -17,6 +19,8 @@ public class EntityModel implements Parcelable {
             return new EntityModel[size];
         }
     };
+
+    @SerializedName("Id")
     protected String id;
 
     public EntityModel() {

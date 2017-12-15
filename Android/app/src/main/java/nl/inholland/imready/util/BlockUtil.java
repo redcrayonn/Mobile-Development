@@ -9,6 +9,9 @@ import nl.inholland.imready.model.enums.BlockType;
 public class BlockUtil {
     public static Drawable getDrawableIcon(Context context, BlockType type) {
         int drawableResource = R.drawable.ic_home;
+        if (type == null) {
+            type = BlockType.LIVING;
+        }
         switch (type) {
             case LIVING:
                 drawableResource = R.drawable.ic_home;

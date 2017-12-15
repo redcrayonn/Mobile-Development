@@ -2,7 +2,7 @@ package nl.inholland.imready.service.model;
 
 import java.util.Date;
 
-import nl.inholland.imready.model.user.UserRole;
+import nl.inholland.imready.model.enums.UserRole;
 
 public class ApiKeyResponse {
     private String access_token;

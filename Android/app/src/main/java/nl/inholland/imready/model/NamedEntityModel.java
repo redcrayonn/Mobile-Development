@@ -2,6 +2,8 @@ package nl.inholland.imready.model;
 
 import android.os.Parcel;
 
+import com.google.gson.annotations.SerializedName;
+
 public class NamedEntityModel extends EntityModel {
     public static final Creator<NamedEntityModel> CREATOR = new Creator<NamedEntityModel>() {
         @Override
@@ -14,6 +16,8 @@ public class NamedEntityModel extends EntityModel {
             return new NamedEntityModel[size];
         }
     };
+
+    @SerializedName("Name")
     protected String name;
 
     public NamedEntityModel() {
