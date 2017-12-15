@@ -140,17 +140,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             // Go to user's home screen
             startActivity(intent);
+            finish();
         } else {
-            Toast.makeText(this, R.string.unknown_error, Toast.LENGTH_SHORT).show();
+            onFailure(call, new Throwable(getString(R.string.unknown_error)));
         }
     }
 
     @Override
     public void onFailure(Call<ApiKeyResponse> call, Throwable t) {
         Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
+        resetUi();
+    }
+
+    private void resetUi() {
         usernameInput.setEnabled(true);
         passwordInput.setEnabled(true);
         loginBtn.setEnabled(true);
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }
