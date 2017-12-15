@@ -36,6 +36,7 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
+import nl.inholland.imready.model.enums.BlockType;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -167,10 +168,16 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
         PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
-        intent.putExtra(ParcelableConstants.BLOCK, block);
-        startActivity(intent);
+        if (block.getBlock().getType() == BlockType.ADD) {
+            Intent intent = new Intent(this, ClientFutureplanEditActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
+            intent.putExtra(ParcelableConstants.BLOCK, block);
+            startActivity(intent);
+        }
+
     }
 
     @Override

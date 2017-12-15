@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String lastUsedEmail = settings.getString(PreferenceConstants.LAST_USED_EMAIL, null);
         if (!TextUtils.isEmpty(lastUsedEmail)) {
             usernameInput.setText(lastUsedEmail);
+            passwordInput.requestFocus();
         }
 
         setupHandlers();
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.apply();
 
             Intent intent = null;
-            switch(keyResponse.getUser_type()){
+            switch (keyResponse.getUser_type()) {
                 case CLIENT:
                     // setup to go to Client Home
                     intent = new Intent(this, ClientHomeActivity.class);

@@ -22,7 +22,7 @@ public class Block extends NamedEntityModel {
     };
 
     private String description;
-    private BlockType type;
+    private BlockType type = BlockType.LIVING;
     private List<Component> components = new ArrayList<>();
 
     public Block(Parcel in) {
@@ -33,12 +33,8 @@ public class Block extends NamedEntityModel {
         in.readTypedList(components, Component.CREATOR);
     }
 
-    public Block(String name) {
-        this.name = name;
-    }
-
-    public Block() {
-
+    public Block(BlockType type) {
+        this.type = type;
     }
 
     public Block(String name, String description, BlockType type, ArrayList<Component> components) {

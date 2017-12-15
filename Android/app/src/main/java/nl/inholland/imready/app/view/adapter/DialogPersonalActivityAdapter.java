@@ -45,7 +45,7 @@ public class DialogPersonalActivityAdapter extends BaseAdapter implements Adapte
     public View getView(int position, View convertView, ViewGroup parent) {
         DialogActivityViewHolder viewHolder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_activity_todo, parent, false);
+            convertView = layoutInflater.inflate(R.layout.list_item_persoanl_activity_todo, parent, false);
             viewHolder = new DialogActivityViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

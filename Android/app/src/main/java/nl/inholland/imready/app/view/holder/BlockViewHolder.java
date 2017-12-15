@@ -16,6 +16,7 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
+import nl.inholland.imready.model.enums.BlockType;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -33,7 +34,7 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
 
     @Override
     public void fill(@NonNull Context context, @NonNull PersonalBlock data, @Nullable OnChangeListener<PersonalBlock> changeListener) {
-        if (data.getBlock() == null) {
+        if (data.getBlock().getType() == BlockType.ADD) {
             return;
         }
 
