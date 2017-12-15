@@ -236,6 +236,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BuildingblockController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CaregiverController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FuturePlanController.cs" />
@@ -266,12 +267,14 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
+    <Compile Include="Models\Input\PostCalendarInputModel.cs" />
     <Compile Include="Models\Input\PostClientActivityInputModel.cs" />
     <Compile Include="Models\Input\PostUserInputModel.cs" />
     <Compile Include="Models\Input\PutCaregiverActivityInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ActivityResult.cs" />
+    <Compile Include="Results\CalendarResult.cs" />
     <Compile Include="Results\CaregiverClientsResult.cs" />
     <Compile Include="Results\CaregiverUserResult.cs" />
     <Compile Include="Results\BuildingblockResult.cs" />
