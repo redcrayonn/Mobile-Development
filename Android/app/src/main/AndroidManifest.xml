@@ -33,7 +33,8 @@
         <activity
             android:name=".app.view.activity.client.ClientBlockDetailsActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
-            android:theme="@style/AppTheme.Alt"/>
+            android:theme="@style/AppTheme.Alt" />
+        <activity android:name=".app.view.activity.caregiver.CaregiverHomeActivity"></activity>
     </application>
 
 </manifest>

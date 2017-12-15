@@ -16,6 +16,7 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
+import nl.inholland.imready.app.view.activity.caregiver.CaregiverHomeActivity;
 import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.ApiKeyResponse;
@@ -129,6 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     break;
                 case CAREGIVER:
                     // setup to go to Caregiver Home
+                    intent = new Intent(this, CaregiverHomeActivity.class);
                     break;
                 case FAMILY:
                     // setup to go to Family Home
