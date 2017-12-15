@@ -1,5 +1,6 @@
 ﻿using ImReady.Data.Models;
 using ImReady.Data.Models.Users;
+using ImReadyApiv2.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace ImReadyApiv2.Models.Input {
 		public DateTime StartDate { get; set; }
 
 		[DataType(DataType.DateTime)]
+		[CompareIfWithinADay("StartDate")]
 		public DateTime EndDate { get; set; }
 
 		public String Location { get; set; }

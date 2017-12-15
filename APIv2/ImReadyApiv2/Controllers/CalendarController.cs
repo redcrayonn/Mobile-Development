@@ -14,7 +14,7 @@ namespace ImReadyApiv2.Controllers {
 	/// <summary>
 	/// Api controller for Calendar calls
 	/// </summary>
-	[RoutePrefix("api/user/{userId}/calendar")]
+	[RoutePrefix("api/user")]
 	public class CalendarController : BaseApiController{
 
 		private readonly IUserService _userService;
@@ -37,7 +37,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <response code="200">OK</response>
 		/// <response code="404">Not Found</response>
 		[ResponseType(typeof(List<CalendarResult>))]
-		[Route("")]
+		[Route("{userId}/calendar")]
 		public IHttpActionResult Get(string userId) {
 			User user = _userService.GetUser(userId);
 
@@ -57,7 +57,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <remarks>Create new calendar item for the specified user</remarks>
 		/// <response code="204">No Content</response>
 		/// <response code="404">Not Found</response>
-		[Route("")]
+		[Route("{userId}/calendar")]
 		public IHttpActionResult Post (string userId, [FromBody]PostCalendarInputModel model) {
 			//get user object
 			User user =_userService.GetUser(userId);
@@ -85,7 +85,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <remarks>Delete a calendar item for the specified user</remarks>
 		/// <response code="204">No Content</response>
 		/// <response code="404">Not Found</response>
-		[Route("{calendarId}")]
+		[Route("{userId}/calendar/{calendarId}")]
 		public IHttpActionResult Delete(string userId, string calendarId) {
 			Calendar calendar = _calendarService.getCalendarItem(userId, calendarId);
 
