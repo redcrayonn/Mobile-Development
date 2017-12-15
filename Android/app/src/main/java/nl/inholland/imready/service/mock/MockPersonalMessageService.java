@@ -2,7 +2,6 @@ package nl.inholland.imready.service.mock;
 
 import java.util.List;
 
-import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.service.rest.PersonalBlockService;
 import retrofit2.Call;

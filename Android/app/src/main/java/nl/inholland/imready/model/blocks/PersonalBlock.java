@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
+import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.model.user.Client;
 import nl.inholland.imready.model.user.User;
 
@@ -33,8 +34,10 @@ public class PersonalBlock extends NamedEntityModel {
         client = in.readParcelable(User.class.getClassLoader());
     }
 
-    public PersonalBlock(String name) {
-        this.name = name;
+    public PersonalBlock(BlockType type) {
+        if (this.block == null) {
+            this.block = new Block(type);
+        }
     }
 
     @Override

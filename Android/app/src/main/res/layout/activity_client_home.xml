@@ -55,7 +55,7 @@
                         android:horizontalSpacing="8dp"
                         android:stretchMode="columnWidth"
                         android:gravity="top|center_horizontal"
-                        tools:listitem="@layout/list_item_block" />
+                        tools:listitem="@layout/list_item_personal_block" />
 
                 </LinearLayout>
             </ScrollView>

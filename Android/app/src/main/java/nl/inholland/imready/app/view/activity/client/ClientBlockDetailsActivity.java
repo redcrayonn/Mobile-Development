@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.ParcelableConstants;
-import nl.inholland.imready.app.view.adapter.ComponentExpandableListAdapter;
-import nl.inholland.imready.model.blocks.Block;
+import nl.inholland.imready.app.view.adapter.PersonalComponentExpandableListAdapter;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 
 public class ClientBlockDetailsActivity extends AppCompatActivity {
@@ -34,6 +33,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
 
         if (block == null) {
             Toast.makeText(this, "Something went wrong whilst loading the block data", Toast.LENGTH_SHORT).show();
+            finish();
             return;
         }
 
@@ -46,7 +46,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
         // Setup expandable list
         ExpandableListView expandableListView = findViewById(R.id.blockcomponents);
         expandableListView.setClickable(true);
-        expandableListView.setAdapter(new ComponentExpandableListAdapter(this, block.getComponents()));
+        expandableListView.setAdapter(new PersonalComponentExpandableListAdapter(this, block.getComponents()));
         expandableListView.expandGroup(0);
     }
 

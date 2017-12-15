@@ -10,5 +10,7 @@ public enum BlockType {
     EDUCATION,
     FAMILY,
     RIGHTSANDOBLIGATIONS,
-    TREATMENTPLAN
+    TREATMENTPLAN,
+
+    ADD
 }

@@ -18,8 +18,6 @@ import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.adapter.DialogPersonalActivityAdapter;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 
-import static br.com.zbra.androidlinq.Linq.stream;
-
 public class WelcomeDialogFragment extends DialogFragment {
     @NonNull
     @Override

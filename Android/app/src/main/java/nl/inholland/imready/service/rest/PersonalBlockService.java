@@ -2,12 +2,9 @@ package nl.inholland.imready.service.rest;
 
 import java.util.List;
 
-import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import retrofit2.Call;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface PersonalBlockService {

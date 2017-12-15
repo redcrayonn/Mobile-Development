@@ -71,10 +71,6 @@ public class MockData {
 
             add(block_living);
         }};
-        for (int i = 0; i < 6; i++) {
-            Block b = new Block("Block #" + i);
-            blocks.add(b);
-        }
         return blocks;
     }
 }

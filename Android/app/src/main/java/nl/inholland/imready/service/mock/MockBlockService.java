@@ -23,7 +23,7 @@ public class MockBlockService implements BlockService {
     @Override
     public Call<Block> getBlock(String blockId) {
         Iterator<Block> iterator = MockData.blocks.iterator();
-        Block block = new Block();
+        Block block = null;
         while (iterator.hasNext()) {
             Block b = iterator.next();
             if (b.getId().equals(blockId)) {

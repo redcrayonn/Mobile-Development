@@ -23,4 +23,7 @@
     <string name="deadline_days">Over %1$d dagen</string>
     <string name="unknown_error">Er is iets misgegaan. Probeer nog eens op een later moment.</string>
     <string name="default_username">Gebruiker</string>
+    <string name="personal_block_failed">Kon het bouwplan niet ophalen. Probeer het later opnieuw.</string>
+    <string name="plan">Toekomstplan</string>
+    <string name="block_failed">Het toekomstplan kon niet opgehaald worden. Probeer het later nog eens.</string>
 </resources>

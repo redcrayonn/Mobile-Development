@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.service.ApiClient;
-import nl.inholland.imready.service.mock.MockClient;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import nl.inholland.imready.service.rest.ClientService;
 import retrofit2.Call;
@@ -69,7 +70,7 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
 
             switch (type) {
                 case BUILDING_BLOCK_TYPE:
-                    convertView = layoutInflater.inflate(R.layout.list_item_block, parent, false);
+                    convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
                     break;
                 case ADD_BLOCK_TYPE:
                 default:
@@ -88,10 +89,12 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
 
     @Override
     public int getItemViewType(int position) {
-        if (position == blocks.size() - 1) {
-            return ADD_BLOCK_TYPE; // special ADD list_item_block type
+        PersonalBlock block = blocks.get(position);
+        if (block.getBlock().getType() == BlockType.ADD) {
+            return ADD_BLOCK_TYPE; // special ADD list_item_personal_block type
+        } else {
+            return BUILDING_BLOCK_TYPE; // default list_item_personal_block type
         }
-        return BUILDING_BLOCK_TYPE; // default list_item_block type
     }
 
     @Override
@@ -111,13 +114,13 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
             if (this.blocks == null) {
                 this.blocks = new ArrayList<>();
             }
-            this.blocks.add(new PersonalBlock("ADD"));
+            this.blocks.add(new PersonalBlock(BlockType.ADD));
             notifyDataSetChanged();
         }
     }
 
     @Override
     public void onFailure(Call<FutureplanResponse> call, Throwable t) {
-
+        Toast.makeText(context, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
     }
 }
