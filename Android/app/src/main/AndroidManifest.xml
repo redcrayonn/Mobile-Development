@@ -22,22 +22,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- SHARED -->
         <activity
             android:name=".app.view.activity.LoginActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity android:name=".app.view.activity.client.ClientHomeActivity" />
         <activity
             android:name=".app.view.activity.shared.MessagesActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt" />
+
+        <!-- CLIENT -->
+        <activity
+            android:name=".app.view.activity.client.ClientHomeActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".app.view.activity.client.ClientBlockDetailsActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt" />
-        <activity android:name=".app.view.activity.caregiver.CaregiverHomeActivity"/>
         <activity
             android:name=".app.view.activity.client.ClientFutureplanEditActivity"
-            android:theme="@style/AppTheme.Alt"/>
+            android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
+            android:theme="@style/AppTheme.Alt" />
+        <activity
+            android:name=".app.view.activity.client.ClientComponentEditActivity"
+            android:parentActivityName=".app.view.activity.client.ClientFutureplanEditActivity"
+            android:theme="@style/AppTheme.Alt" />
+
+        <!-- CAREGIVER -->
+        <activity
+            android:name=".app.view.activity.caregiver.CaregiverHomeActivity" />
     </application>
 
 </manifest>

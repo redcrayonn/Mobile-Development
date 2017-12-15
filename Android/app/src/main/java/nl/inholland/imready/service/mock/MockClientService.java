@@ -16,4 +16,9 @@ class MockClientService implements ClientService {
     public Call<FutureplanResponse> getFuturePlan(String clientId) {
         return delegate.returningResponse(null).getFuturePlan(clientId);
     }
+
+    @Override
+    public Call<Void> enrollComponent(String clientId, String componentId) {
+        return delegate.returningResponse(null).enrollComponent(clientId, componentId);
+    }
 }

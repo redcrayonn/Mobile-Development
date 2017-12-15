@@ -17,10 +17,10 @@ public class BlockUtil {
                 drawableResource = R.drawable.ic_home;
                 break;
             case INSURANCE:
-                drawableResource = R.drawable.ic_account;
+                drawableResource = R.drawable.ic_library_books;
                 break;
             case MONEY:
-                drawableResource = R.drawable.ic_coin;
+                drawableResource = R.drawable.ic_account;
                 break;
             case HEALTH:
                 drawableResource = R.drawable.ic_hospital;
@@ -41,7 +41,7 @@ public class BlockUtil {
                 drawableResource = R.drawable.ic_gavel;
                 break;
             case TREATMENTPLAN:
-                drawableResource = R.drawable.ic_event;
+                drawableResource = R.drawable.ic_content_paste;
                 break;
             case ADD:
                 drawableResource = R.drawable.ic_add;

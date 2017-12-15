@@ -15,8 +15,6 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 
 public class ClientBlockDetailsActivity extends AppCompatActivity {
 
-    private PersonalBlock block;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +27,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
 
         // Get data passed from previous view
         Intent intent = getIntent();
-        block = intent.getParcelableExtra(ParcelableConstants.BLOCK);
+        PersonalBlock block = intent.getParcelableExtra(ParcelableConstants.BLOCK);
 
         if (block == null) {
             Toast.makeText(this, "Something went wrong whilst loading the block data", Toast.LENGTH_SHORT).show();

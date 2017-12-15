@@ -27,4 +27,9 @@
     <string name="plan">Toekomstplan</string>
     <string name="block_failed">Het toekomstplan kon niet opgehaald worden. Probeer het later nog eens.</string>
     <string name="component_count">%1$d componenten</string>
+    <string name="add">toevoegen</string>
+    <string name="ready_coins">READY-coins</string>
+    <string name="assignments">Opdrachten</string>
+    <string name="purpose">Beschrijving</string>
+    <string name="enroll_component_failed">Er is iets misgegaan met het toevoegen van dit onderdeel aan je bouwplan. Probeer het later opnieuw.</string>
 </resources>
