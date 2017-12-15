@@ -14,9 +14,11 @@ import java.util.List;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.BlockPlanViewHolder;
+import nl.inholland.imready.app.view.holder.ComponentPlanViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.blocks.Block;
+import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.rest.BlockService;
 import retrofit2.Call;
@@ -65,9 +67,12 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         if (this.blocks.size() == 0) {
-            return 0;
+            return null;
         }
         Block block = blocks.get(groupPosition);
+        if (block.getComponents() == null || block.getComponents().size() == 0) {
+            return null;
+        }
         return block.getComponents().get(childPosition);
     }
 
@@ -88,8 +93,8 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Block block = this.blocks.get(groupPosition);
-        FillableViewHolder<Block> viewHolder = null;
+        Block block = (Block) getGroup(groupPosition);
+        FillableViewHolder<Block> viewHolder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_block_header, parent, false);
             viewHolder = new BlockPlanViewHolder(convertView);
@@ -116,7 +121,19 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+        Component component = (Component) getChild(groupPosition, childPosition);
+        FillableViewHolder<Component> viewHolder;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.list_item_component_edit, parent, false);
+            viewHolder = new ComponentPlanViewHolder(convertView, false);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (FillableViewHolder<Component>) convertView.getTag();
+        }
+
+        viewHolder.fill(context, component, null);
+
+        return convertView;
     }
 
     @Override

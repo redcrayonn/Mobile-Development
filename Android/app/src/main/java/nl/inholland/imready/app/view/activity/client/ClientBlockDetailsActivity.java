@@ -38,7 +38,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
         }
 
         // Set action bar title
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(block.getName());
         }

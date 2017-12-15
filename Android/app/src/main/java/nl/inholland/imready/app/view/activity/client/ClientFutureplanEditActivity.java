@@ -1,6 +1,5 @@
 package nl.inholland.imready.app.view.activity.client;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ExpandableListView;
@@ -17,7 +16,7 @@ public class ClientFutureplanEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client_futureplan_edit);
 
         // Set action bar title
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.plan);
         }
