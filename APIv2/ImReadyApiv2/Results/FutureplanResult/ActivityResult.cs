@@ -17,6 +17,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
             Status = activity.Status;
             Content = activity.Content;
             Deadline = activity.Deadline;
+            Activity = new Results.ActivityResult(activity.Activity);
 
             Feedback = new List<FeedbackResult>();
             foreach (var feedback in activity.Feedback)
@@ -37,5 +38,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
         public DateTime Deadline { get; set; }
 
         public List<FeedbackResult> Feedback { get; set; }
+
+        public Results.ActivityResult Activity { get; set; }
     }
 }

@@ -28,16 +28,16 @@ namespace ImReadyApiv2.Controllers
         /// </summary>
         /// <response code="200">OK</response>
         /// <response code="500">InternalServerError</response>
-        [ResponseType(typeof(List<BuildingblockResult>))]
+        [ResponseType(typeof(List<BuildingBlockResult>))]
         public IHttpActionResult Get()
         {
             //Get Id of logged in client
             var blocks = _blockService.getAll().ToList();
-            List<BuildingblockResult> blockresult= new List<BuildingblockResult>();
+            List<BuildingBlockResult> blockresult= new List<BuildingBlockResult>();
 
             foreach (var block in blocks)
             {
-                blockresult.Add(new BuildingblockResult(block));
+                blockresult.Add(new BuildingBlockResult(block, true));
             }
 
             if (blockresult != null)
@@ -56,11 +56,11 @@ namespace ImReadyApiv2.Controllers
         /// <param name="id"></param>
         /// <response code="200">OK</response>
         /// <response code="500">InternalServerError</response>
-        [ResponseType(typeof(BuildingblockResult))]
+        [ResponseType(typeof(BuildingBlockResult))]
         public IHttpActionResult Get(string id)
         {
             //Get Id of logged in client
-            BuildingblockResult blockresult = new BuildingblockResult(_blockService.getById(id));
+            BuildingBlockResult blockresult = new BuildingBlockResult(_blockService.getById(id), true);
 
             if (blockresult != null)
             {
