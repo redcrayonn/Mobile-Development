@@ -25,8 +25,13 @@ namespace ImReady.Data.Models
 
         public DateTime EndDate { get; set; }
 
-		public String Location { get; set; }
+		public string Location { get; set; }
 
-		public String Remark { get; set; }
+		public string Remark { get; set; }
+
+		public string RelatedCalendarId { get; set; }
+
+		[ForeignKey("RelatedCalendarId")]
+		public virtual Calendar RelatedCalendar { get; set; }
     }
 }

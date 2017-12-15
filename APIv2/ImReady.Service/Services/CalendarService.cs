@@ -33,5 +33,12 @@ namespace ImReady.Service.Services {
 			_calendarRepository.Remove(calendar);
 			_unitOfWork.Commit();
 		}
+
+		public void DeleteRelatedCalendarItem (string relatedCalendarId) {
+			Calendar relatedCalendarItem = _calendarRepository.Entities.SingleOrDefault(c => c.RelatedCalendarId == relatedCalendarId);
+
+			_calendarRepository.Remove(relatedCalendarItem);
+			_unitOfWork.Commit();
+		}
 	}
 }

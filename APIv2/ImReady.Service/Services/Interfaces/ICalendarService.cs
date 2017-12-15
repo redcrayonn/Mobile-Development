@@ -11,5 +11,6 @@ namespace ImReady.Service.Services.Interfaces {
 		Calendar getCalendarItem (string userId, string calendarId);
 		void CreateCalendarItem (Calendar calendar);
 		void DeleteCalendarItem (Calendar calendar);
+		void DeleteRelatedCalendarItem (string id);
 	}
 }

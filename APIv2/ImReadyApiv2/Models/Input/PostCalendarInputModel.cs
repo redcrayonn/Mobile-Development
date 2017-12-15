@@ -21,9 +21,12 @@ namespace ImReadyApiv2.Models.Input {
 		[CompareIfWithinADay("StartDate")]
 		public DateTime EndDate { get; set; }
 
-		public String Location { get; set; }
+		public string Location { get; set; }
 
-		public String Remark { get; set; }
+		public string Remark { get; set; }
+		
+		[Required]
+		public string ClientId { get; set; }
 
 		internal Calendar getModel (User user) {
 			Calendar calendar = new Calendar();

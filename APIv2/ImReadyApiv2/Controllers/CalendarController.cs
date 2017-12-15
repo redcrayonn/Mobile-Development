@@ -59,10 +59,10 @@ namespace ImReadyApiv2.Controllers {
 		/// <response code="404">Not Found</response>
 		[Route("{userId}/calendar")]
 		public IHttpActionResult Post (string userId, [FromBody]PostCalendarInputModel model) {
-			//get user object
 			User user =_userService.GetUser(userId);
+			User relatedUser = _userService.GetUser(model.ClientId);
 
-			if(user == null) {
+			if(user == null || relatedUser == null) {
 				return NotFound();
 			}
 
@@ -75,6 +75,12 @@ namespace ImReadyApiv2.Controllers {
 			}
 
 			_calendarService.CreateCalendarItem(calendar);
+
+			Calendar relatedCalendarItem = model.getModel(relatedUser);
+			relatedCalendarItem.RelatedCalendarId = calendar.Id;
+			relatedCalendarItem.RelatedCalendar = calendar;
+
+			_calendarService.CreateCalendarItem(relatedCalendarItem);
 
 			return StatusCode(System.Net.HttpStatusCode.NoContent);
 		}
@@ -92,6 +98,8 @@ namespace ImReadyApiv2.Controllers {
 			if (calendar == null) {
 				return NotFound();
 			}
+
+			_calendarService.DeleteRelatedCalendarItem(calendar.Id);
 
 			_calendarService.DeleteCalendarItem(calendar);
 
