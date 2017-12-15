@@ -113,7 +113,8 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
             this.blocks = futureplanResponse.getBlocks();
             if (this.blocks == null) {
                 this.blocks = new ArrayList<>();
-            }for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
+            }
+            for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
                 listener.onLoaded(this.blocks);
             }
             this.blocks.add(new PersonalBlock(BlockType.ADD));
