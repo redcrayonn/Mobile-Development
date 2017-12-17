@@ -15,6 +15,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
             Description = component.Component.Description;
             Status = component.Status;
             Deadline = component.Deadline;
+            Component = new Results.ComponentResult(component.Component);
 
             Activities = new List<ActivityResult>();
             foreach (var activity in component.Activities)
@@ -32,5 +33,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
         public List<ActivityResult> Activities { get; set; }
 
         public DateTime Deadline { get; set; }
+
+        public Results.ComponentResult Component { get; set; }
     }
 }

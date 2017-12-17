@@ -1,9 +1,11 @@
 ﻿using ImReady.Data.Models.Users;
+using ImReadyApiv2.Results;
 using ImReadyApiv2.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
@@ -13,7 +15,7 @@ namespace ImReadyApiv2.Controllers
     /// <summary>
     /// Api controller for User calls
     /// </summary>
-    public class UserController : ApiController
+    public class UserController : BaseApiController
     {
         private readonly IUserService _userService;
 
@@ -33,13 +35,18 @@ namespace ImReadyApiv2.Controllers
         /// <response code="200">OK</response>
         /// <response code="500">Internal Server Error</response>
         [ResponseType(typeof(List<User>))]
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> GetAsync()
         {
             List<User> users = _userService.GetUsers();
-
             if (users != null)
             {
-                return Ok(users);
+                var result = users.Select(u => new UserResult(u)).ToList();
+                foreach (var r in result)
+                {
+                    var roles = await _userManager.GetRolesAsync(r.Id);
+                    r.Roles = roles;
+                }
+                return Ok(result);
             }
             return InternalServerError();
         }

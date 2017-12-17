@@ -33,10 +33,17 @@ namespace ImReadyApiv2
                 defaults: new { controller = "home", id = RouteParameter.Optional }
             );
 
-            config.Formatters.JsonFormatter.SupportedMediaTypes
-                .Add(new MediaTypeHeaderValue("text/html"));
+            /*config.Formatters.JsonFormatter.SupportedMediaTypes
+                .Add(new MediaTypeHeaderValue("text/html"));*/
 
-			config.Formatters.JsonFormatter.SerializerSettings.Converters
+            config.Formatters.JsonFormatter.MediaTypeMappings.Add(new System.Net.Http.Formatting.RequestHeaderMapping(
+                "Accept",
+                "text/html",
+                StringComparison.InvariantCultureIgnoreCase,
+                true,
+                "application/json"));
+
+            config.Formatters.JsonFormatter.SerializerSettings.Converters
 				.Add(new IsoDateTimeConverter());
         }
     }

@@ -7,20 +7,23 @@ using System.Web;
 
 namespace ImReadyApiv2.Results
 {
-    public class BuildingblockResult : BaseResult
+    public class BuildingBlockResult : BaseResult
     {
-        public BuildingblockResult(Buildingblock block) :base(block)
+        public BuildingBlockResult(Buildingblock block, bool fullModel = false) :base(block)
         {
             Name = block.Name;
             Description = block.Description;
             Type = block.Type;
 
             Components = new List<ComponentResult>();
-            foreach (var component in block.Components)
+            if (fullModel)
             {
-                if (!component.Deleted)
+                foreach (var component in block.Components)
                 {
-                    Components.Add(new ComponentResult(component));
+                    if (!component.Deleted)
+                    {
+                        Components.Add(new ComponentResult(component));
+                    }
                 }
             }
         }

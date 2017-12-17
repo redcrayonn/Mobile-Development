@@ -14,6 +14,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
             Name = block.Block.Name;
             Description = block.Block.Description;
             Type = block.Block.Type;
+            Block = new Results.BuildingBlockResult(block.Block, true);
 
             Components = new List<ComponentResult>();
             foreach (var component in block.Components)
@@ -25,7 +26,7 @@ namespace ImReadyApiv2.Results.FutureplanResult
         public string Name { get; set; }
 
         public string Description { get; set; }
-
+        public Results.BuildingBlockResult Block { get; set; }
         public BlockType Type { get; set; }
 
         public List<ComponentResult> Components { get; set; }
