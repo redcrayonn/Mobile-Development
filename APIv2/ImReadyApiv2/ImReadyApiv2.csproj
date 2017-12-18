@@ -240,6 +240,7 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CaregiverController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ClientTaskController.cs" />
     <Compile Include="Controllers\FuturePlanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -270,6 +271,8 @@
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
     <Compile Include="Models\Input\PostCalendarInputModel.cs" />
     <Compile Include="Models\Input\PostClientActivityInputModel.cs" />
+    <Compile Include="Models\Input\PutClientTaskInputModel.cs" />
+    <Compile Include="Models\Input\PostClientTaskInputModel.cs" />
     <Compile Include="Models\Input\PostUserInputModel.cs" />
     <Compile Include="Models\Input\PutCaregiverActivityInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,6 +283,7 @@
     <Compile Include="Results\CaregiverClientsResult.cs" />
     <Compile Include="Results\CaregiverUserResult.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Results\ClientTaskResult.cs" />
     <Compile Include="Results\ComponentResult.cs" />
     <Compile Include="Results\ClientUserResult.cs" />
     <Compile Include="Results\FutureplanResult\ActivityResult.cs" />

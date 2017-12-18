@@ -22,6 +22,11 @@ namespace ImReadyApiv2.Results.FutureplanResult
             {
                 Activities.Add(new ActivityResult(activity));
             }
+
+			Tasks = new List<ClientTaskResult>();
+			foreach(var task in component.ClientTasks) {
+				Tasks.Add(new ClientTaskResult(task));
+			}
         }
 
         public string Name { get; set; }
@@ -32,7 +37,9 @@ namespace ImReadyApiv2.Results.FutureplanResult
 
         public List<ActivityResult> Activities { get; set; }
 
-        public DateTime Deadline { get; set; }
+		public List<ClientTaskResult> Tasks { get; set; }
+
+		public DateTime Deadline { get; set; }
 
         public Results.ComponentResult Component { get; set; }
     }

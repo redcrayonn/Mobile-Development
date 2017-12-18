@@ -30,7 +30,8 @@ namespace ImReady.Service
         public IRepository<ClientActivity> ClientActivityRepository => new EntityFrameworkGenericRepository<ClientActivity>(_context);
         public IRepository<ClientComponent> ClientComponentRepository => new EntityFrameworkGenericRepository<ClientComponent>(_context);
         public IRepository<Component> ComponentRepository => new EntityFrameworkGenericRepository<Component>(_context);
+		public IRepository<ClientTask> ClientTaskRepository => new EntityFrameworkGenericRepository<ClientTask>(_context);
 
-        public IRepository<Notification> NotificationRepository => new EntityFrameworkGenericRepository<Notification>(_context);
+		public IRepository<Notification> NotificationRepository => new EntityFrameworkGenericRepository<Notification>(_context);
 	}
 }

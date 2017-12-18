@@ -27,12 +27,9 @@ namespace ImReady.Data.Models
         [ForeignKey("ComponentId")]
         public virtual Component Component { get; set; }
 
-        public string TaskId { get; set; }
+		public virtual ICollection<ClientTask> ClientTasks { get; set; }
 
-        [ForeignKey("TaskId")]
-        public virtual Task Task { get; set; }
-
-        public virtual ICollection<ClientActivity> Activities { get; set; }
+		public virtual ICollection<ClientActivity> Activities { get; set; }
 
 		public string YoutubeUrl { get; set; }
 

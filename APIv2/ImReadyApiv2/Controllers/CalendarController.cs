@@ -24,7 +24,7 @@ namespace ImReadyApiv2.Controllers {
 		/// ctor
 		/// </summary>
 		/// <param name="userService">Service class for user business logic</param>
-		/// <param name="calendarService">Service class for user business logic</param>
+		/// <param name="calendarService">Service class for calendar business logic</param>
 		public CalendarController (IUserService userService, ICalendarService calendarService) {
 			_userService = userService;
 			_calendarService = calendarService;
@@ -55,8 +55,9 @@ namespace ImReadyApiv2.Controllers {
 		/// Create calendar item
 		/// </summary>
 		/// <remarks>Create new calendar item for the specified user</remarks>
-		/// <response code="204">No Content</response>
+		/// <response code="200">The newly created calendar item</response>
 		/// <response code="404">Not Found</response>
+		[ResponseType(typeof(CalendarResult))]
 		[Route("{userId}/calendar")]
 		public IHttpActionResult Post (string userId, [FromBody]PostCalendarInputModel model) {
 			User user =_userService.GetUser(userId);
@@ -82,7 +83,7 @@ namespace ImReadyApiv2.Controllers {
 
 			_calendarService.CreateCalendarItem(relatedCalendarItem);
 
-			return StatusCode(System.Net.HttpStatusCode.NoContent);
+			return Ok(calendar);
 		}
 
 		/// <summary>
@@ -93,7 +94,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <response code="404">Not Found</response>
 		[Route("{userId}/calendar/{calendarId}")]
 		public IHttpActionResult Delete(string userId, string calendarId) {
-			Calendar calendar = _calendarService.getCalendarItem(userId, calendarId);
+			Calendar calendar = _calendarService.GetCalendarItem(userId, calendarId);
 
 			if (calendar == null) {
 				return NotFound();

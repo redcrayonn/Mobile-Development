@@ -2,6 +2,7 @@
 using ImReady.Data.Models;
 using ImReady.Data.Models.Users;
 using ImReady.Service.Services;
+using ImReady.Service.Services.Interfaces;
 using ImReadyApiv2.Context;
 using ImReadyApiv2.Filters;
 using ImReadyApiv2.Models;
@@ -126,11 +127,10 @@ namespace ImReadyApiv2.Controllers
             }
             return BadRequest($"Could not enroll the client {id} at component {componentId}");
         }
-
-
-        //// DELETE: api/Client/5
-        //public void Delete(int id)
-        //{
-        //}
-    }
+		
+		//// DELETE: api/Client/5
+		//public void Delete(int id)
+		//{
+		//}
+	}
 }

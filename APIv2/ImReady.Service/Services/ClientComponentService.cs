@@ -73,5 +73,9 @@ namespace ImReady.Service.Services
             _unitOfWork.Commit();
             return true;
         }
-    }
+
+		public ClientComponent Get (string componentId) {
+			return _clientComponentRepository.Entities.SingleOrDefault(c => c.Id == componentId);
+		}
+	}
 }

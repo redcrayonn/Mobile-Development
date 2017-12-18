@@ -32,9 +32,10 @@ namespace ImReadyApiv2.Context
         public virtual DbSet<ClientBuildingBlock> ClientBuildingblocks { get; set; }
         public virtual DbSet<ClientComponent> ClientComponents { get; set; }
         public virtual DbSet<ClientActivity> ClientActivities { get; set; }
+		public virtual DbSet<ClientTask> ClientTasks { get; set; }
 
-        // Chats
-        public virtual DbSet<Chat> Chats { get; set; }
+		// Chats
+		public virtual DbSet<Chat> Chats { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
 
 		// Calendar

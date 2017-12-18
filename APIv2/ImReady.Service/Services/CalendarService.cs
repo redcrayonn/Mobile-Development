@@ -20,7 +20,7 @@ namespace ImReady.Service.Services {
 			return _calendarRepository.Entities.Where(c => c.UserId == userId).ToList();
 		}
 
-		public Calendar getCalendarItem (string userId, string calendarId) {
+		public Calendar GetCalendarItem (string userId, string calendarId) {
 			return _calendarRepository.Entities.SingleOrDefault(c => c.UserId == userId && c.Id == calendarId);
 		}
 
