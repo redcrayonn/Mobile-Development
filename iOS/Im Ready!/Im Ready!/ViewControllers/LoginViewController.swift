@@ -16,11 +16,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var loginButton: UIButton!    
     @IBOutlet var registerFamilyButton: UIButton!
     
+    let imReadyAccount = "ImReadyAccount"
     let textFieldMoveDistance: Int = -250
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateUser()
+        
+        self.authenticateUser()
+        
         self.hideKeyboardWhenTappedAround()
         //        usernameField.resignFirstResponder()
         //        passwordField.resignFirstResponder()
@@ -35,27 +38,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
             // If the device does not have TouchID, return nothing and let them login regularly
             return
-            
         }
-        // Check the fingerprint
-        authenticationContext.evaluatePolicy(
-            .deviceOwnerAuthenticationWithBiometrics,
-            localizedReason: "Log in met je vingerafdruk") {
-                (wasSuccessful, error) in
-                // If valid fingerprint, you may enter the app
-                if (wasSuccessful) {
-                    self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
-                }
-                    // Invalid fingerprint or cancelled
-                else {
-                    // Check if there is an error
-                    if let error = error {
-                        // Only show an error when something other happens then User cancelation
-                        if error.localizedDescription != "Canceled by user." {
-                            self.showAlertWithTitle(title: "TouchID cancelled", message: error.localizedDescription)
+        
+        if Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil {
+            // Check the fingerprint
+            authenticationContext.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: "Log in met je vingerafdruk") {
+                    (wasSuccessful, error) in
+                    // If valid fingerprint, you may enter the app
+                    if (wasSuccessful) {
+                        self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
+                    }
+                        // Invalid fingerprint or cancelled
+                    else {
+                        // Check if there is an error
+                        if let error = error {
+                            // Only show an error when something other happens then User cancelation
+                            //                            if error.localizedDescription != "Canceled by user." {
+                            self.showAlertWithTitle(title: "Er is iets fout gegaan.", message: self.checkTouchIDError(error: error))
+                            //                            }
                         }
                     }
-                }
+            }
         }
     }
     
@@ -68,37 +73,66 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func onLoginClick(_ sender: Any) {
-        let username = usernameField.text!
-        let password = passwordField.text!
-        //        if let username = usernameField.text, let password = passwordField.text {
-        authenticationService.login(withUsername: username,
-                                    andPassword: password,
-                                    onSuccess: {
-                                        
-                                        // Try to save credentials in keychain
-                                        do {
-                                            try Locksmith.saveData(data: ["password":password], forUserAccount: username)
-                                        } catch {
-                                            print("could not store credentials in the keychain")
-                                        }
-                                        
-                                        self.goToTabBarView(
-                                            inStoryboard: "Client",
-                                            withIdentifier: "ClientTabBarController")
-        }) {
-            print("failed to log in")
-            
-            // Remove for production
-            self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
-        }
-        //        }
+//        let username = usernameField.text!
+//        let password = passwordField.text!
+        let username = "woutervermeij@gmail.com"
+        let password = "wouter"
         
+        if username != "" && password != "" {
+            authenticationService.login(
+                withUsername: username,
+                andPassword: password,
+                onSuccess: {
+                    // Check if there is no Keychain data saved for this app
+                    if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
+                        // If no keychain data; try to save credentials in keychain
+                        do {
+                            try Locksmith.saveData(
+                                data: ["username": username,
+                                       "password": password],
+                                forUserAccount: self.imReadyAccount)
+                        } catch {
+                            print("could not store credentials in the keychain")
+                            self.showAlertWithTitle(
+                                title: "Er is iets fout gegaan.",
+                                message: "Kon inloggegevens niet opslaan in de Keychain.")
+                        }
+                    }
+                    
+                    // Check which role the logged in user has and redirect to the correct storyboard
+                    let user_role: Role = CurrentUser.instance.user_type!
+                    
+                    switch user_role {
+                    case .CLIENT:
+                        self.goToTabBarView(
+                            inStoryboard: "Client",
+                            withIdentifier: "TabBarController")
+                    case .CAREGIVER:
+                        self.goToTabBarView(
+                            inStoryboard: "Caregiver",
+                            withIdentifier: "TabBarController")
+                    case .RELATIVE:
+                        self.showAlertWithTitle(
+                            title: "Not implemented yet",
+                            message: "Relative is not yet implemented")
+                    case .ADMIN:
+                        self.showAlertWithTitle(
+                            title: "Not implemented yet",
+                            message: "Admin is not yet implemented")
+                    default:
+                        self.showAlertWithTitle(
+                            title: "Er is iets fout gegaan met inloggen",
+                            message: "Controleer uw gebruikersnaam en wachtwoord")
+                    }
+            }) {
+                print("failed to log in")
+                self.showAlertWithTitle(title: "Ongeldige inlogggegevens", message: "Gebruikersnaam of wachtwoord is fout.")
+            }
+        } else {
+            self.showAlertWithTitle(title: "Velden niet ingevuld",
+                                    message: "Vul alle velden in om in te loggen")
+        }
     }
     
     //Show or hide the passwordinput
@@ -110,37 +144,70 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onRegisterFamilyClick(_ sender: Any) {
         // Change for production
-        self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
+        //        self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
     }
     
-    // When keyboard shows, move textfields up
-    //    func textFieldDidBeginEditing(_ textField: UITextField) {
-    //        moveTextField(textField: textField,
-    //                      moveDistance: self.textFieldMoveDistance,
-    //                      up: true)
-    //    }
-    
-    //When keyboard hides, move textfields back down
-    //    func textFieldDidEndEditing(_ textField: UITextField) {
-    //        moveTextField(textField: textField,
-    //                      moveDistance: self.textFieldMoveDistance,
-    //                      up: false)
-    //    }
+    //    // When keyboard shows, move textfields up
+    //        func textFieldDidBeginEditing(_ textField: UITextField) {
+    //            moveTextField(textField: textField,
+    //                          moveDistance: self.textFieldMoveDistance,
+    //                          up: true)
+    //        }
     //
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        return true
+    //    //When keyboard hides, move textfields back down
+    //        func textFieldDidEndEditing(_ textField: UITextField) {
+    //            moveTextField(textField: textField,
+    //                          moveDistance: self.textFieldMoveDistance,
+    //                          up: false)
+    //        }
+    //
+    //        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //            textField.resignFirstResponder()
+    //            return true
+    //        }
+    //
+    //    //Function on how the textfields should move up
+    //    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
+    //        let moveDuration = 0.3
+    //        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+    //
+    //        UIView.beginAnimations("animateTextField", context: nil)
+    //        UIView.setAnimationBeginsFromCurrentState(true)
+    //        UIView.setAnimationDuration(moveDuration)
+    //        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+    //        UIView.commitAnimations()
     //    }
     
-    //Function on how the textfields should move up
-    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.3
-        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+    func checkTouchIDError(error: Error) -> String {
+        var message: String!
         
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
+        switch(error) {
+        case LAError.authenticationFailed:
+            message = "There was a problem verifying your identity."
+        case LAError.userCancel:
+            message = "Authentication was canceled by user."
+        case LAError.userFallback:
+            message = "The user tapped the fallback button"
+        case LAError.systemCancel:
+            message = "Authentication was canceled by system."
+        case LAError.passcodeNotSet:
+            message = "Passcode is not set on the device."
+        case LAError.biometryNotAvailable:
+            message = "TouchID is not available on the device."
+        case LAError.biometryNotEnrolled:
+            message = "TouchID has no enrolled fingers."
+        case LAError.biometryLockout:
+            message = "There were too many failed TouchID attempts and TouchID is now locked."
+        case LAError.appCancel:
+            message = "Authentication was canceled by application."
+        case LAError.invalidContext:
+            message = "LAContext passed to this call has been previously invalidated."
+        default:
+            message = "TouchID may not be configured"
+            break
+        }
+        
+        return message
     }
+    
 }

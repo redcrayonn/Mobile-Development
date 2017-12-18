@@ -8,14 +8,16 @@
 
 import Foundation
 
-class CurrentUser : User {
-//    static let instance = CurrentUser()
-//    
-//    var authToken: String?
-//    var username: String?
-//    var isLoggedIn: Bool {
-//        get{
-//            return authToken != nil
-//        }
-//    }
+class CurrentUser {
+    static let instance = CurrentUser()
+    
+    var id : String?
+    var access_token: String?
+    var username: String?
+    var user_type : Role?
+    var isLoggedIn: Bool {
+        get{
+            return access_token != nil
+        }
+    }
 }

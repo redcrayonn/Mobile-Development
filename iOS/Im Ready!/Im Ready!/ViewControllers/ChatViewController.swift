@@ -30,9 +30,9 @@ class ChatViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatCell", for: indexPath) as! ChatCollectionViewCell
         
-        let receiver: User = userService.getMockUser(withId: chats[indexPath.row].receiverId!)!
-        cell.recipient = receiver
-        cell.recipientName.text = receiver.firstname
+//        let receiver: User = userService.getMockUser(withId: chats[indexPath.row].receiverId!)!
+//        cell.recipient = receiver
+//        cell.recipientName.text = receiver.firstname
         
         cell.cellView.layer.borderColor = UIColor.black.cgColor
         cell.cellView.layer.borderWidth = 1

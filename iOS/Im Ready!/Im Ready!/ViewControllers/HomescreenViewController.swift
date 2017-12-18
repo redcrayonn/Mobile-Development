@@ -22,31 +22,19 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         self.collectionView.backgroundColor = UIColor.clear
         
         // Get the client's buildingblocks, components and activities
-        getClientDevelopmentPlan()
+        getClientFuturePlan()
     }
     
     // Get all buildingblocks, components and activites a client is working on
-    func getClientDevelopmentPlan() {
-        userService.getUsers()
-        
-        // Get buildingblocks
+    func getClientFuturePlan() {
         buildingblockService.getBuildingblocks(onSuccess: { (results) in
-            print(results)
-            for buildingblock in results {
-                self.buildingblocks.append(buildingblock)
-                self.collectionView.reloadData()
-            }
-        }, onFailure: {
-            print("Something went wrong retrieving the buidlingblocks")
-            let alert = UIAlertController(title: "Oeps!", message: "Het ophalen van de data is mislukt", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
-            self.getClientDevelopmentPlan()
-        })
+//            print(results)
+            self.buildingblocks = results
+        }) {
+            print("failed to fetch buildingblocks")
+        }
         
-        components = componentService.getMockComponents()
-        activities = activityService.getMockActivities()
+        clientService.getFutureplan(ofClient: CurrentUser.instance.id!)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -8,7 +8,15 @@
 
 import Foundation
 
-public class ClientService {
+public class ClientService : Service{
     
-    
+    func getFutureplan(ofClient id: String) {
+        apiClient.send(toRelativePath: "client/\(id)/futureplan",
+            withHttpMethod: .get,
+            onSuccessParser: { (_ data) in
+                print(data)
+        }) {
+            print("something failed")
+        }
+    }
 }

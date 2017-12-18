@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum Role {
-    case CLIENT
-    case CAREGIVER
-    case ADMIN
-    case RELATIVE
+enum Role: String {
+    case CLIENT = "CLIENT"
+    case CAREGIVER = "CAREGIVER"
+    case RELATIVE = "RELATIVE"
+    case ADMIN = "ADMIN"
 }

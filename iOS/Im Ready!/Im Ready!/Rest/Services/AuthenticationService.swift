@@ -7,21 +7,10 @@
 //
 
 import Foundation
+import Alamofire
 import SwiftyJSON
 
 public class AuthenticationService : Service {
-    
-    /**
-     Makes a http call to /login and parses the incoming data
-     
-     - parameters:
-     - username: The username used to login
-     - password: The password used to login
-     - onSuccess: Closure to call if the data was retrieved and parsed succesfully
-     - onFailure: Closure to call if the data could not be retrieved or parsed
-     
-     - returns: The URLSessionTask object that makes the request. By capturing this object, a request can be cancelled at any time by calling .cancel()
-     */
     public func login(withUsername username: String,
                       andPassword password: String,
                       onSuccess: @escaping () -> (),
@@ -30,20 +19,46 @@ public class AuthenticationService : Service {
         var params = [String : Any]()
         params["username"] = username
         params["password"] = password
+        params["grant_type"] = "password"
+        
+        var headers = [String: String]()
+        headers["Content-Type"] = "application/x-www-form-urlencoded"
+        headers["Accept"] = "application/json"
         
         apiClient.send(toRelativePath: "login",
                        withHttpMethod: .post,
                        withParameters: params,
+                       withHeaders: headers,
+                       withEncoding: URLEncoding.httpBody,
                        onSuccessParser: { (_ data) in
+                        
+                        
                         do {
-                            _ = try JSONDecoder().decode(
-                                LoginResult.self, from: data)
-                            onSuccess()
+                            // Make a dict of the JSON to check for errors
+                            let dictionary: NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject] as! NSDictionary
+                            if let error = dictionary["error"]{
+                                print(error)
+                                onFailure()
+                            } else {
+                                let results = try JSONDecoder().decode(
+                                    LoginResult.self, from: data)
+                                
+                                self.setCurrentUser(results: results)
+                                
+                                onSuccess()
+                            }
                         }catch {
                             onFailure()
                         }
                         
         }, onFailure: onFailure)
+    }
+    
+    func setCurrentUser(results: LoginResult) {
+        CurrentUser.instance.access_token = results.access_token
+        CurrentUser.instance.id = results.user_id
+        CurrentUser.instance.username = results.firstname
+        CurrentUser.instance.user_type = Role(rawValue: results.user_type!)
     }
     
     

@@ -32,6 +32,7 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
 //        cell.backgroundColor = UIColor(gradientStyle:UIGradientStyle, withFrame:CGRect, andColors:[UIColor])
         cell.name?.text = components[indexPath.row].name
         cell.component = components[indexPath.row]
+//        cell.activites = components[indexPath.row].activities
         
         return cell
     }
@@ -40,6 +41,7 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
         if let destinationViewController = segue.destination as? ActivityViewController {
             if let cell = sender as? ComponentCollectionViewCell {
                 destinationViewController.component = cell.component
+                destinationViewController.activities = cell.activites!
             }
         }
     }
