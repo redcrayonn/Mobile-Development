@@ -49,7 +49,7 @@ namespace ImReady.Service.Services
                 };
             }
 
-            if (clientBuildingBlock.Components.Any(c => c.ComponentId == componentId))
+            if (clientBuildingBlock.Components != null && clientBuildingBlock.Components.Any(c => c.ComponentId == componentId))
             {
                 // already exists
                 return false;
