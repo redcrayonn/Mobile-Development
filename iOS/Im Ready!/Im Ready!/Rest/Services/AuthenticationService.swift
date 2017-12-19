@@ -31,8 +31,6 @@ public class AuthenticationService : Service {
                        withHeaders: headers,
                        withEncoding: URLEncoding.httpBody,
                        onSuccessParser: { (_ data) in
-                        
-                        
                         do {
                             // Make a dict of the JSON to check for errors
                             let dictionary: NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject] as! NSDictionary

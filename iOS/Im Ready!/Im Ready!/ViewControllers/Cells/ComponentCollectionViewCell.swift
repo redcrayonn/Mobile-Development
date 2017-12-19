@@ -10,6 +10,6 @@ import UIKit
 
 class ComponentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
-    var component: Component?
+    var component: ClientComponent?
     var activites: [Activity]?
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Buildingblock :  EntityModel, Decodable {
+class Buildingblock : EntityModel, Decodable {
     var name : String?
     var description: String?
     var blockType: Int?
@@ -21,11 +21,11 @@ class Buildingblock :  EntityModel, Decodable {
         case components = "Components"
     }
     
-    init(id: String, name: String, description: String, blockType: Int) {
-        super.init()
-        self.id = id
-        self.name = name
-        self.description = description
-        self.blockType = blockType
-    }
+//    init(id: String, name: String, description: String, blockType: Int) {
+//        super.init()
+//        self.id = id
+//        self.name = name
+//        self.description = description
+//        self.blockType = blockType
+//    }
 }

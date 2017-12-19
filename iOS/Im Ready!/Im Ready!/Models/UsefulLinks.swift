@@ -8,7 +8,12 @@
 
 import Foundation
 
-class UsefulLinks : EntityModel, Codable {
+class UsefulLinks : EntityModel, Decodable {
     var componentId : String?
     var url : String?
+    
+    enum CodingKeys: String, CodingKey {
+        case componentId
+        case url
+    }
 }

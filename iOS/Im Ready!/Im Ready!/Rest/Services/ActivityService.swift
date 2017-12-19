@@ -28,7 +28,7 @@ public class ActivityService : Service {
         return activities
     }
     
-    public func getActivities(forClient clientId: Int,
+    func getActivities(forClient clientId: Int,
                               withBlock blockId: Int,
                               andComponent componentId: Int,
                               onSuccess: @escaping ([Activity]) -> (),

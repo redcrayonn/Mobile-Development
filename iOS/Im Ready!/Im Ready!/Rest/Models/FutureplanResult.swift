@@ -8,10 +8,10 @@
 
 import Foundation
 
-class FutureplanResult {
-    var buildingblocks: [Buildingblock]?
+class FutureplanResult : Decodable {
+    var buildingblocks: [ClientBuildingblock]?
     
     enum CodingKeys: String, CodingKey {
-        case buildingblocks
+        case buildingblocks = "Blocks"
     }
 }

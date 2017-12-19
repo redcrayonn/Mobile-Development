@@ -37,6 +37,10 @@ target 'Im Ready!' do
   # Awesome icons
   pod 'FontAwesomeIconFactory'
 
+    # For nice loading icons
+    pod 'SVProgressHUD'
+
+
   target 'Im Ready!Tests' do
     inherit! :search_paths
     # Pods for testing

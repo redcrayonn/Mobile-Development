@@ -133,6 +133,11 @@
                                     <action selector="onRegisterFamilyClick:" destination="MLC-6D-TI5" eventType="touchUpInside" id="bmj-92-w5i"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="activityIndicatorBG" translatesAutoresizingMaskIntoConstraints="NO" id="ha9-HX-31V" userLabel="activityIndicator BG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -167,6 +172,7 @@
                         <viewLayoutGuide key="safeArea" id="acq-DH-2tU"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorBG" destination="ha9-HX-31V" id="0er-xl-134"/>
                         <outlet property="loginButton" destination="ptx-wy-kEM" id="5Xu-st-l1k"/>
                         <outlet property="passwordField" destination="5qj-cI-9R8" id="iSR-yJ-qFf"/>
                         <outlet property="registerFamilyButton" destination="hPj-M5-Y94" id="qQ5-kM-ybH"/>

@@ -10,12 +10,24 @@ import Foundation
 
 public class ClientService : Service{
     
-    func getFutureplan(ofClient id: String) {
+    func getFutureplan(ofClient id: String,
+                       onSuccess: @escaping (_ : FutureplanResult) -> (),
+                       onFailure: @escaping () -> ()) {
         apiClient.send(toRelativePath: "client/\(id)/futureplan",
             withHttpMethod: .get,
             onSuccessParser: { (_ data) in
-                print(data)
+                do {
+                    let results = try JSONDecoder().decode(
+                        FutureplanResult.self, from: data)
+                    print(results)
+                    
+                    onSuccess(results)
+                } catch {
+                    onFailure()
+                }
+                
         }) {
+            onFailure()
             print("something failed")
         }
     }

@@ -11,8 +11,8 @@ import ChameleonFramework
 
 class ComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var collectionView: UICollectionView!
-    var buildingblock: Buildingblock!
-    var components: [Component]!
+    var buildingblock: ClientBuildingblock!
+    var components: [ClientComponent]!
     var buildingblockImage: UIImageView!
     
     let screenWidth = UIScreen.main.bounds.width
@@ -33,6 +33,7 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
         cell.name?.text = components[indexPath.row].name
         cell.component = components[indexPath.row]
 //        cell.activites = components[indexPath.row].activities
+        print(components[indexPath.row].activities)
         
         return cell
     }
@@ -41,7 +42,7 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
         if let destinationViewController = segue.destination as? ActivityViewController {
             if let cell = sender as? ComponentCollectionViewCell {
                 destinationViewController.component = cell.component
-                destinationViewController.activities = cell.activites!
+                destinationViewController.activities = (cell.component?.activities)!
             }
         }
     }

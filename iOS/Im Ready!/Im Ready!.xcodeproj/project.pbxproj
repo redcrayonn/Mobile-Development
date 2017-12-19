@@ -12,6 +12,9 @@
 		E398416CB00FC82F09388693 /* Pods_Im_Ready_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */; };
 		FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */; };
 		FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */; };
+		FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */; };
+		FA35EFBD1FE85E86000C9B76 /* ClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */; };
+		FA35EFBF1FE85F21000C9B76 /* ClientActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */; };
 		FA36BE941FE170060044EEB6 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */; };
 		FA3CB3FF1FD56F3200142CCF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */; };
 		FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */; };
@@ -32,9 +35,6 @@
 		FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D871FD9642000052647 /* ActivityViewController.swift */; };
 		FA528D8A1FD9693C00052647 /* ComponentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */; };
 		FA528D901FD98A9700052647 /* ActivityStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */; };
-		FA528D921FDB154100052647 /* ClientActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D911FDB154100052647 /* ClientActivity.swift */; };
-		FA528D941FDB160900052647 /* ClientBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D931FDB160900052647 /* ClientBuildingblock.swift */; };
-		FA528D961FDB16B200052647 /* ClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D951FDB16B200052647 /* ClientComponent.swift */; };
 		FA528D981FDB185C00052647 /* ClientTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D971FDB185C00052647 /* ClientTask.swift */; };
 		FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D991FDB1A2100052647 /* Feedback.swift */; };
 		FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */; };
@@ -74,6 +74,7 @@
 		FADB8FCE1FE006CE00EECB8B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCD1FE006CE00EECB8B /* UserService.swift */; };
 		FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */; };
 		FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FD11FE1514300EECB8B /* CurrentUser.swift */; };
+		FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */; };
 		FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,9 @@
 		EA22577E3139BDD4A7B335DE /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!Tests/Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA3383ED1FD05C6C00847C05 /* ActivityStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStackViewCell.swift; sourceTree = "<group>"; };
 		FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureplanResult.swift; sourceTree = "<group>"; };
+		FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildingblock.swift; sourceTree = "<group>"; };
+		FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientComponent.swift; sourceTree = "<group>"; };
+		FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivities.swift; sourceTree = "<group>"; };
 		FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -126,9 +130,6 @@
 		FA528D871FD9642000052647 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityStackViewCell.xib; sourceTree = "<group>"; };
-		FA528D911FDB154100052647 /* ClientActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivity.swift; sourceTree = "<group>"; };
-		FA528D931FDB160900052647 /* ClientBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildingblock.swift; sourceTree = "<group>"; };
-		FA528D951FDB16B200052647 /* ClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientComponent.swift; sourceTree = "<group>"; };
 		FA528D971FDB185C00052647 /* ClientTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTask.swift; sourceTree = "<group>"; };
 		FA528D991FDB1A2100052647 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulLinks.swift; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		FADB8FCD1FE006CE00EECB8B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FADB8FD11FE1514300EECB8B /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */,
+				FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -397,15 +400,15 @@
 				FA8306BC1FDE92FF00BC225F /* Enums */,
 				FA528D9F1FDC3B8300052647 /* Users */,
 				FA4DFE481FBC33E000945B2A /* EntityModel.swift */,
-				FA4DFE351FBADB7700945B2A /* Chat.swift */,
-				FA4DFE371FBADB8500945B2A /* Message.swift */,
 				FA4DFE3D1FBC19D900945B2A /* Buildingblock.swift */,
 				FA4DFE3F1FBC1AF500945B2A /* Component.swift */,
 				FA4DFE411FBC1B7C00945B2A /* Activity.swift */,
-				FA528D911FDB154100052647 /* ClientActivity.swift */,
-				FA528D931FDB160900052647 /* ClientBuildingblock.swift */,
-				FA528D951FDB16B200052647 /* ClientComponent.swift */,
+				FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */,
+				FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */,
+				FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */,
 				FA528D971FDB185C00052647 /* ClientTask.swift */,
+				FA4DFE351FBADB7700945B2A /* Chat.swift */,
+				FA4DFE371FBADB8500945B2A /* Message.swift */,
 				FA528D991FDB1A2100052647 /* Feedback.swift */,
 				FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */,
 			);
@@ -656,6 +659,7 @@
 				"${BUILT_PRODUCTS_DIR}/REFormattedNumberField/REFormattedNumberField.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 			);
@@ -673,6 +677,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REFormattedNumberField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 			);
@@ -768,11 +773,11 @@
 			files = (
 				FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */,
 				FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */,
-				FA528D961FDB16B200052647 /* ClientComponent.swift in Sources */,
 				FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */,
 				FA3CB3FF1FD56F3200142CCF /* ChatViewController.swift in Sources */,
 				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
 				FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */,
+				FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */,
 				FA4DFE421FBC1B7C00945B2A /* Activity.swift in Sources */,
 				FA528D981FDB185C00052647 /* ClientTask.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,
@@ -783,6 +788,8 @@
 				FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */,
 				FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */,
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
+				FA35EFBD1FE85E86000C9B76 /* ClientComponent.swift in Sources */,
+				FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
 				FA3CB4061FD5D2CB00142CCF /* MessageResult.swift in Sources */,
@@ -797,7 +804,6 @@
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
 				FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */,
-				FA528D941FDB160900052647 /* ClientBuildingblock.swift in Sources */,
 				FA8306C41FDE932F00BC225F /* Status.swift in Sources */,
 				FA8306C21FDE932500BC225F /* TriggerLevel.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
@@ -808,12 +814,12 @@
 				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
 				FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */,
 				FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */,
-				FA528D921FDB154100052647 /* ClientActivity.swift in Sources */,
 				FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */,
 				FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */,
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
 				FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */,
+				FA35EFBF1FE85F21000C9B76 /* ClientActivities.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
 				FA3CB4041FD5D22400142CCF /* ChatsService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,

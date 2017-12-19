@@ -14,6 +14,7 @@ class Component : EntityModel, Decodable {
     var description : String?
     var youtubeUrl : String?
     var usefulLinks : [UsefulLinks]?
+    var activities : [Activity]?
     
     private enum CodingKeys: String, CodingKey {
         case buildingblockId = "BuildingblockId"
@@ -21,15 +22,15 @@ class Component : EntityModel, Decodable {
         case description = "Description"
         case youtubeUrl = "YoutubeURL"
         case usefulLinks = "UsefulLink"
+        case activities
     }
     
-    init (id: String, buildingblockId: String, name: String, description: String, youtubeUrl : String) {
-        super.init()
-        self.id = id
-        self.buildingblockId = buildingblockId
-        self.name = name
-        self.description = description
-        self.youtubeUrl = youtubeUrl
-    }
+//    init (id: String, buildingblockId: String, name: String, description: String, youtubeUrl : String) {
+//        super.init()
+//        self.id = id
+//        self.buildingblockId = buildingblockId
+//        self.name = name
+//        self.description = description
+//        self.youtubeUrl = youtubeUrl
+//    }
 }
-

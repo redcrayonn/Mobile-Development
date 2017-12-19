@@ -5,6 +5,7 @@
 //  Created by Wouter Vermeij on 16/11/2017.
 //  Copyright © 2017 Wouter Vermeij. All rights reserved.
 //
+// https://guides.cocoapods.org/using/getting-started.html
 
 import Foundation
 import Alamofire

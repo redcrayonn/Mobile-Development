@@ -12,9 +12,8 @@ import SwiftyJSON
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
-    var buildingblocks: [Buildingblock] = []
-    var components: [Component] = []
-    var activities: [Activity] = []
+    var buildingblocks: [ClientBuildingblock] = []
+//    var components: [Component] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +26,16 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Get all buildingblocks, components and activites a client is working on
     func getClientFuturePlan() {
-        buildingblockService.getBuildingblocks(onSuccess: { (results) in
-//            print(results)
-            self.buildingblocks = results
+        startActivityIndicator(atVC: self, withView: view, andIndicatorBG: nil)
+        clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
+                                    onSuccess: { (results) in
+                                        self.buildingblocks = results.buildingblocks!
+                                        self.collectionView.reloadData()
+                                        stopActivityIndicator(withIndicatorBG: nil)
         }) {
-            print("failed to fetch buildingblocks")
+            print("failed to retrieve futureplan")
+            stopActivityIndicator(withIndicatorBG: nil)
         }
-        
-        clientService.getFutureplan(ofClient: CurrentUser.instance.id!)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,19 +46,10 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
         
-        cell.title.text = buildingblocks[indexPath.row].name!
+        cell.title.text = buildingblocks[indexPath.row].name
         cell.title.numberOfLines = 2;
         cell.title.adjustsFontSizeToFitWidth = true;
         cell.buildingblock = buildingblocks[indexPath.row]
-        
-        // Hide cell unless there is a component for it.
-        cell.isHidden = true
-        for component in components {
-            if cell.buildingblock?.name == component.buildingblockId {
-                cell.isHidden = false
-                break
-            }
-        }
         
         // Style the cell with cornerradius
         cell.mainBackground.layer.cornerRadius = 6
@@ -79,18 +71,9 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Prepare navigation segue to ComponentViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var buildingblockComponents: [Component] = []
-        
         if let destinationViewController = segue.destination as? ComponentViewController {
             if let cell = sender as? BuildingblockCell {
-                
-                // Only send the components for the clicked buildingblock
-                for component in components {
-                    if cell.buildingblock?.name == component.buildingblockId {
-                        buildingblockComponents.append(component)
-                    }
-                }
-                destinationViewController.components = buildingblockComponents
+                destinationViewController.components = cell.buildingblock?.components
                 destinationViewController.buildingblock = cell.buildingblock
                 destinationViewController.buildingblockImage = cell.buildingblockImage
             }

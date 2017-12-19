@@ -14,5 +14,5 @@ class BuildingblockCell : UICollectionViewCell {
     @IBOutlet weak var shadowLayer: UIView!
     @IBOutlet weak var mainBackground: UIView!
         
-    var buildingblock: Buildingblock?
+    var buildingblock: ClientBuildingblock?
 }

@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var loginButton: UIButton!    
     @IBOutlet var registerFamilyButton: UIButton!
     
+    @IBOutlet var activityIndicatorBG: UIView!
+    
     let imReadyAccount = "ImReadyAccount"
     let textFieldMoveDistance: Int = -250
     
@@ -74,8 +76,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
+        startActivityIndicator(atVC: self, withView: view, andIndicatorBG: activityIndicatorBG)
+        
 //        let username = usernameField.text!
 //        let password = passwordField.text!
+        
         let username = "woutervermeij@gmail.com"
         let password = "wouter"
         
@@ -86,11 +91,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 onSuccess: {
                     // Check if there is no Keychain data saved for this app
                     if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
-                        // If no keychain data; try to save credentials in keychain
+                        // If no keychain data; try to save username and access-token in keychain
                         do {
                             try Locksmith.saveData(
                                 data: ["username": username,
-                                       "password": password],
+                                       "access-token": CurrentUser.instance.access_token],
                                 forUserAccount: self.imReadyAccount)
                         } catch {
                             print("could not store credentials in the keychain")
@@ -108,28 +113,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.goToTabBarView(
                             inStoryboard: "Client",
                             withIdentifier: "TabBarController")
+                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
                     case .CAREGIVER:
                         self.goToTabBarView(
                             inStoryboard: "Caregiver",
                             withIdentifier: "TabBarController")
+                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
                     case .RELATIVE:
                         self.showAlertWithTitle(
                             title: "Not implemented yet",
                             message: "Relative is not yet implemented")
+                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
                     case .ADMIN:
                         self.showAlertWithTitle(
                             title: "Not implemented yet",
                             message: "Admin is not yet implemented")
+                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
                     default:
                         self.showAlertWithTitle(
                             title: "Er is iets fout gegaan met inloggen",
                             message: "Controleer uw gebruikersnaam en wachtwoord")
+                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
                     }
             }) {
                 print("failed to log in")
+                stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
+                
                 self.showAlertWithTitle(title: "Ongeldige inlogggegevens", message: "Gebruikersnaam of wachtwoord is fout.")
             }
         } else {
+            stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
+            
             self.showAlertWithTitle(title: "Velden niet ingevuld",
                                     message: "Vul alle velden in om in te loggen")
         }

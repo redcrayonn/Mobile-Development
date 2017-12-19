@@ -10,8 +10,8 @@ import UIKit
 
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
-    var activities: [Activity] = []
-    var component: Component!
+    var activities: [ClientActivities] = []
+    var component: ClientComponent!
         
     var t_count:Int = 0
     var lastCell: ActivityStackViewCell = ActivityStackViewCell()
