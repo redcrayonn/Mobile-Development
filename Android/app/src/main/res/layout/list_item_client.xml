@@ -3,9 +3,17 @@
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/colorNeutral"
     android:layout_height="wrap_content">
     <TextView
         android:id="@+id/clientName"
+        android:textColor="@color/colorDark"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/clientNotifications"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorNeutral"
+        android:background="@color/colorTertiary"
         android:layout_height="match_parent" />
 </RelativeLayout>
