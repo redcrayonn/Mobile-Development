@@ -32,7 +32,7 @@
     <string name="assignments">Opdrachten</string>
     <string name="purpose">Beschrijving</string>
     <string name="enroll_component_failed">Er is iets misgegaan met het toevoegen van dit onderdeel aan je bouwplan. Probeer het later opnieuw.</string>
-    <string name="months_left">Nog $1d% maanden</string>
-    <string name="weeks_left">Nog $1d% weken</string>
-    <string name="days_left">Nog $1d% dagen</string>
+    <string name="months_left">Nog %1$d maanden</string>
+    <string name="weeks_left">Nog %1$d weken</string>
+    <string name="days_left">Nog %1$d dagen</string>
 </resources>

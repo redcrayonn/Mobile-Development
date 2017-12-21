@@ -28,10 +28,10 @@ public class PersonalComponentViewHolder implements FillableViewHolder<PersonalC
 
         // deadline
         Date now = new Date();
-        Date deadline = data.getDeadline();
+        Date deadline = new Date();
         String deadlineText = null;
 
-        long daysInFuture = deadline.compareTo(now);
+        long daysInFuture = 15;
 
         // future date is at least 1 month away
         if (daysInFuture / 30 >= 1) {

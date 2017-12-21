@@ -11,13 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import nl.inholland.imready.service.rest.ClientService;
@@ -102,8 +105,12 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
 
     @Override
     public void loadMore() {
-        String clientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
-        clientService.getFuturePlan(clientId).enqueue(this);
+        ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        List<PersonalBlock> blocks = cache.getPersonalBlocks();
+        if (blocks == null || cache.isInvalidated()) {
+            String clientId = cache.getUserId();
+            clientService.getFuturePlan(clientId).enqueue(this);
+        }
     }
 
     @Override

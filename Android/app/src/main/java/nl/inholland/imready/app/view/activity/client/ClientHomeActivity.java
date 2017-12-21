@@ -25,7 +25,9 @@ import java.util.List;
 
 import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
+import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
@@ -37,6 +39,7 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.model.enums.UserRole;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -183,6 +186,9 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onLoaded(List<PersonalBlock> body) {
         if (body != null) {
+            ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+            cache.setPersonalBlocks(body);
+
             Stream<PersonalComponent> components = stream(body).selectMany(PersonalBlock::getComponents);
             Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
             List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();

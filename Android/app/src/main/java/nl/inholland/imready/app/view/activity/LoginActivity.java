@@ -13,11 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.PreferenceConstants;
+import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
 import nl.inholland.imready.app.view.activity.caregiver.CaregiverHomeActivity;
 import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
+import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.ApiKeyResponse;
 import nl.inholland.imready.service.rest.AuthenticationService;
@@ -119,6 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString(PreferenceConstants.LAST_USED_EMAIL, usernameInput.getText().toString());
             editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstName());
             editor.apply();
+
+            UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+            cache.setUserId(keyResponse.getUserId());
 
             Intent intent = null;
             switch (keyResponse.getUserType()) {
