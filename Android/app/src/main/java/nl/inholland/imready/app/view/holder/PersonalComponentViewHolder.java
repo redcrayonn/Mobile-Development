@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.Date;
-import java.util.Random;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
@@ -29,23 +28,22 @@ public class PersonalComponentViewHolder implements FillableViewHolder<PersonalC
 
         // deadline
         Date now = new Date();
+        Date deadline = data.getDeadline();
         String deadlineText = null;
 
-        Random rng = new Random();
-        long msDay = 1000 * 60 * 60 * 24;
-        long daysInFuture = (rng.nextInt(40) + 1); // between 1 and 10 (inclusive) days in the future
+        long daysInFuture = deadline.compareTo(now);
 
         // future date is at least 1 month away
         if (daysInFuture / 30 >= 1) {
-            deadlineText = "Nog " + daysInFuture / 30 + " maanden";
+            deadlineText = context.getString(R.string.months_left, daysInFuture / 30);
         }
         // future date is week(s) away
         else if (daysInFuture / 7 >= 1) {
-            deadlineText = "Nog " + daysInFuture / 7 + " weken";
+            deadlineText = context.getString(R.string.weeks_left, daysInFuture / 7);
         }
         // future date is day(s) away
         else {
-            deadlineText = "Nog " + daysInFuture + " dagen";
+            deadlineText = context.getString(R.string.days_left, daysInFuture);
         }
 
         deadlineView.setText(deadlineText);

@@ -5,10 +5,13 @@ import android.os.Parcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockPartStatus;
+
+import static br.com.zbra.androidlinq.Linq.stream;
 
 public class PersonalComponent extends NamedEntityModel {
     public static final Creator<PersonalComponent> CREATOR = new Creator<PersonalComponent>() {
@@ -72,5 +75,12 @@ public class PersonalComponent extends NamedEntityModel {
         parcel.writeTypedList(activities);
         parcel.writeString(status.name());
         parcel.writeParcelable(component, 0);
+    }
+
+    public Date getDeadline() {
+        return stream(activities)
+                .orderBy(PersonalActivity::getDeadline)
+                .firstOrDefault(null)
+                .getDeadline();
     }
 }

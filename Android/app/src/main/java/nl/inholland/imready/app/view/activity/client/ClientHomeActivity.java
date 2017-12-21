@@ -155,15 +155,15 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void gotoNotifications() {
-        Toast.makeText(this, "notifications", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
     }
 
     private void gotoFamily() {
-        Toast.makeText(this, "family", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
     }
 
     private void gotoInfo() {
-        Toast.makeText(this, "info", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
