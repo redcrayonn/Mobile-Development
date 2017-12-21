@@ -14,7 +14,6 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.CaregiverHomeViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
-import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.ClientsResponse;
 import nl.inholland.imready.service.rest.CaregiverService;
@@ -32,11 +31,9 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
     private final Context context;
     private final CaregiverService caregiverService;
     private final LayoutInflater layoutInflater;
-    private final List<OnLoadedListener<ClientsResponse>> onLoadedListeners;
 
-    public ClientsAdapter(Context context, List<OnLoadedListener<ClientsResponse>> onLoadedListeners) {
+    public ClientsAdapter(Context context) {
         this.context = context;
-        this.onLoadedListeners = onLoadedListeners;
         layoutInflater = LayoutInflater.from(context);
 
         ApiClient client = ApiManager.getClient();

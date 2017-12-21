@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:orientation="horizontal"
+<RelativeLayout android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/colorNeutral"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/sm"
+    xmlns:tools="http://schemas.android.com/tools">
     <TextView
         android:id="@+id/clientName"
         android:textColor="@color/colorDark"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/clientName"
+        android:layout_centerVertical="true"
+        android:drawableStart="@drawable/ic_people"
+        android:drawablePadding="@dimen/xl"
+        android:gravity="center"
+
+        tools:text="Peter"
+        />
     <TextView
         android:id="@+id/clientNotifications"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/xxl"
+        android:layout_height="@dimen/xxl"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/colorNeutral"
-        android:background="@color/colorTertiary"
-        android:layout_height="match_parent" />
+        android:gravity="center"
+        android:background="@drawable/bg_button_round"
+        android:backgroundTint="@color/colorAccent"
+        tools:text="0"/>
 </RelativeLayout>
