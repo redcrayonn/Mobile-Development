@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.DialogActivityViewHolder;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 
-public class DialogPersonalActivityAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class DialogPersonalActivityAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<PersonalActivity> activities;
@@ -54,10 +52,5 @@ public class DialogPersonalActivityAdapter extends BaseAdapter implements Adapte
 
         viewHolder.fill(context, activities.get(position), null);
         return convertView;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(context, "testing... " + position, Toast.LENGTH_SHORT).show();
     }
 }

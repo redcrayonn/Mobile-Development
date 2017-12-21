@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/xxml"
+    android:descendantFocusability="blocksDescendants"
     xmlns:tools="http://schemas.android.com/tools">
     <ImageView
         android:id="@+id/block_image"
@@ -41,7 +42,7 @@
                 style="@style/TextAppearance.AppCompat.Small.Inverse"
                 tools:text="Over 2 dagen" />
         </LinearLayout>
-        <ImageButton
+        <ImageView
             android:id="@+id/button_goto"
             android:layout_width="@dimen/xxl"
             android:layout_height="match_parent"
