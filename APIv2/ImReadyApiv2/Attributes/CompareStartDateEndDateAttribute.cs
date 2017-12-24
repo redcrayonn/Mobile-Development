@@ -10,7 +10,7 @@ namespace ImReadyApiv2.Attributes {
 	public class CompareIfWithinADayAttribute : CompareAttribute{
 
 		public CompareIfWithinADayAttribute (string otherProperty) : base(otherProperty) {
-			ErrorMessage = "'{0}' must be greater than '{1}' and today";
+			ErrorMessage = "'{0}' must be equal or greater than '{1}' and today";
 		}
 
 		protected override ValidationResult IsValid (object value, ValidationContext validationContext) {

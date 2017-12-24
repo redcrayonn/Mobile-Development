@@ -25,6 +25,7 @@ namespace ImReadyApiv2.Controllers {
 		private readonly IClientTaskService _clientTaskService;
 		private readonly IClientComponentService _clientComponentService;
 		private readonly IClientBuildingBlockService _clientBuildingBlockService;
+		private readonly ICalendarService _calendarService;
 
 		/// <summary>
 		/// ctor
@@ -33,14 +34,17 @@ namespace ImReadyApiv2.Controllers {
 		/// <param name="clientTaskService">Service class for clientTask business logic</param>
 		/// <param name="clientComponentService">Service class for client component business logic</param>
 		/// <param name="clientBuildingBlockService">Service class for client buildingblock business logic</param>
+		/// <param name="calendarService">Service class for calendar business logic</param>
 		public ClientTaskController (	IUserService userService, 
 										IClientTaskService clientTaskService, 
 										IClientComponentService clientComponentService, 
-										IClientBuildingBlockService clientBuildingBlockService) {
+										IClientBuildingBlockService clientBuildingBlockService,
+										ICalendarService calendarService) {
 			_userService = userService;
 			_clientTaskService = clientTaskService;
 			_clientComponentService = clientComponentService;
 			_clientBuildingBlockService = clientBuildingBlockService;
+			_calendarService = calendarService;
 		}
 
 		[Route("{clientId}/buildingblock/{buildingBlockId}")]
@@ -98,7 +102,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <summary>
 		/// Create a client task
 		/// </summary>
-		/// <remarks>Create a client task for the specified user</remarks>
+		/// <remarks>Create a client task for the specified user. Also creates a calendar item for the task</remarks>
 		/// <response code="200">OK</response>
 		/// <response code="404">Not Found</response>
 		[ResponseType(typeof(ClientTaskResult))]
@@ -125,16 +129,16 @@ namespace ImReadyApiv2.Controllers {
 			}
 
 			task.ClientComponent = component;
-
-			_clientTaskService.Create(task);
 			
+			_clientTaskService.Create(clientId, task);
+
 			return Ok(new ClientTaskResult(task));
 		}
 		
 		/// <summary>
 		/// Update a client task
 		/// </summary>
-		/// <remarks>Update specific client task for the specified user</remarks>
+		/// <remarks>Update specific client task for the specified user. Also updates the related calender item</remarks>
 		/// <response code="200">OK</response>
 		/// <response code="404">Not Found</response>
 		[ResponseType(typeof(ClientTaskResult))]
@@ -160,8 +164,8 @@ namespace ImReadyApiv2.Controllers {
 			}
 
 			task.Id = editTask.Id;
-
-			_clientTaskService.Update(task);
+			
+			_clientTaskService.Update(clientId, task);
 
 			return Ok(new ClientTaskResult(editTask));
 		}
@@ -169,7 +173,7 @@ namespace ImReadyApiv2.Controllers {
 		/// <summary>
 		/// Delete a client task
 		/// </summary>
-		/// <remarks>Delete specific client task for the specified user</remarks>
+		/// <remarks>Delete specific client task for the specified user. Also deletes the related calender item</remarks>
 		/// <response code="204">OK</response>
 		/// <response code="404">Not Found</response>
 		[Route("{clientId}/task/{taskId}")]
@@ -181,7 +185,7 @@ namespace ImReadyApiv2.Controllers {
 				return NotFound();
 			}
 
-			_clientTaskService.Delete(task);
+			_clientTaskService.Delete(clientId, task);
 
 			return StatusCode(HttpStatusCode.NoContent);
 		}

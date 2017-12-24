@@ -100,7 +100,9 @@ namespace ImReadyApiv2.Controllers {
 				return NotFound();
 			}
 
-			_calendarService.DeleteRelatedCalendarItem(calendar.Id);
+			if (calendar.RelatedCalendar != null) {
+				_calendarService.DeleteRelatedCalendarItem(calendar.RelatedCalendarId);
+			}
 
 			_calendarService.DeleteCalendarItem(calendar);
 

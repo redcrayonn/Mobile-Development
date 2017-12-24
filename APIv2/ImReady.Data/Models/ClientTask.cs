@@ -23,8 +23,13 @@ namespace ImReady.Data.Models
         public string Feedback { get; set; }
 
 		public string ClientComponentId { get; set; }
-
+		
 		[ForeignKey("ClientComponentId")]
 		public virtual ClientComponent ClientComponent { get; set; }
+
+		public string CalendarId { get; set; }
+
+		[ForeignKey("CalendarId")]
+		public virtual Calendar Calendar { get; set; }
 	}
 }
