@@ -32,8 +32,20 @@ class ComponentViewController: UIViewController, UICollectionViewDelegate, UICol
 //        cell.backgroundColor = UIColor(gradientStyle:UIGradientStyle, withFrame:CGRect, andColors:[UIColor])
         cell.name?.text = components[indexPath.row].name
         cell.component = components[indexPath.row]
-//        cell.activites = components[indexPath.row].activities
-        print(components[indexPath.row].activities)
+        
+        cell.layer.backgroundColor = UIColor.clear.cgColor
+//        cell.layer.shadowColor = UIColor.black.cgColor
+//        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+//        cell.layer.shadowRadius = 2.0
+//        cell.layer.shadowOpacity = 1.0
+//        cell.layer.masksToBounds = false
+        
+        cell.cellBG.layer.backgroundColor = UIColor.white.cgColor
+        cell.cellBG.layer.opacity = 0.3
+        cell.cellBG.layer.cornerRadius = 6
+        cell.cellBG.layer.borderWidth = 1.0
+        cell.cellBG.layer.borderColor = UIColor.clear.cgColor
+        cell.cellBG.layer.masksToBounds = true
         
         return cell
     }

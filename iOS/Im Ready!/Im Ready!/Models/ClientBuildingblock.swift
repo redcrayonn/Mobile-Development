@@ -9,12 +9,12 @@
 import Foundation
 
 class ClientBuildingblock : Decodable{
-    let name : String?
-    let description : String?
-    let block : Buildingblock?
-    let type : Int?
-    let components : [ClientComponent]?
-    let id : String?
+    var name : String? = nil
+    var description : String? = nil
+    var block : Buildingblock? = nil
+    var type : BlockType?
+    var components : [ClientComponent]? = nil
+    var id : String? = nil
     
     enum CodingKeys: String, CodingKey {
         case name = "Name"
@@ -23,5 +23,20 @@ class ClientBuildingblock : Decodable{
         case type = "Type"
         case components = "Components"
         case id = "Id"
+    }
+    
+    init(type: BlockType, name: String) {
+        self.name = name
+        self.type = type
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        description = try values.decodeIfPresent(String.self, forKey: .description)
+        block = try Buildingblock(from: decoder)
+        type = try values.decodeIfPresent(Int.self, forKey: .type).map { BlockType(rawValue: $0)! }
+        components = try values.decodeIfPresent([ClientComponent].self, forKey: .components)
+        id = try values.decodeIfPresent(String.self, forKey: .id)
     }
 }

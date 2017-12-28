@@ -33,7 +33,8 @@ public class AuthenticationService : Service {
                        onSuccessParser: { (_ data) in
                         do {
                             // Make a dict of the JSON to check for errors
-                            let dictionary: NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject] as! NSDictionary
+                            let dictionary: NSDictionary = try JSONSerialization.jsonObject(
+                                with: data, options: []) as? [String:AnyObject] as! NSDictionary
                             if let error = dictionary["error"]{
                                 print(error)
                                 onFailure()

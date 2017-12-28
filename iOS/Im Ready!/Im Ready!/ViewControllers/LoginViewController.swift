@@ -20,12 +20,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let imReadyAccount = "ImReadyAccount"
     let textFieldMoveDistance: Int = -250
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.authenticateUser()
-        
         self.hideKeyboardWhenTappedAround()
         //        usernameField.resignFirstResponder()
         //        passwordField.resignFirstResponder()
@@ -42,44 +42,44 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        // Check if there is keychain data on the device
         if Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil {
+            
             // Check the fingerprint
             authenticationContext.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
                 localizedReason: "Log in met je vingerafdruk") {
                     (wasSuccessful, error) in
+                    
                     // If valid fingerprint, you may enter the app
                     if (wasSuccessful) {
-                        self.goToTabBarView(inStoryboard: "Client", withIdentifier: "ClientTabBarController")
+                        
+                        // retrieve keychain data to check what kind of user we have, to redirect to the correct flow
+                        let keychainDict = Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount)
+                        CurrentUser.instance.user_type = Role(rawValue: keychainDict?["user-role"] as! String)
+                        CurrentUser.instance.id = keychainDict?["id"] as! String
+                        
+                        self.redirectUserToStoryboard()
                     }
                         // Invalid fingerprint or cancelled
                     else {
                         // Check if there is an error
                         if let error = error {
                             // Only show an error when something other happens then User cancelation
-                            //                            if error.localizedDescription != "Canceled by user." {
-                            self.showAlertWithTitle(title: "Er is iets fout gegaan.", message: self.checkTouchIDError(error: error))
-                            //                            }
+                            if error.localizedDescription != "Canceled by user." {
+                                self.showAlertWithTitle(title: "Er is iets fout gegaan.", message: self.checkTouchIDError(error: error))
+                            }
                         }
                     }
             }
         }
     }
     
-    func showAlertWithTitle(title: String, message: String ) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertVC.addAction(okAction)
-        DispatchQueue.main.async() { () -> Void in
-            self.present(alertVC, animated: true, completion: nil)
-        }
-    }
-    
     @IBAction func onLoginClick(_ sender: Any) {
-        startActivityIndicator(atVC: self, withView: view, andIndicatorBG: activityIndicatorBG)
+        startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
         
-//        let username = usernameField.text!
-//        let password = passwordField.text!
+        //        let username = usernameField.text!
+        //        let password = passwordField.text!
         
         let username = "woutervermeij@gmail.com"
         let password = "wouter"
@@ -89,13 +89,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 withUsername: username,
                 andPassword: password,
                 onSuccess: {
+//                    do {
+//                        try Locksmith.deleteDataForUserAccount(userAccount: self.imReadyAccount)
+//                    } catch {
+//                        print("Failed")
+//                    }
+                    
                     // Check if there is no Keychain data saved for this app
                     if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
                         // If no keychain data; try to save username and access-token in keychain
                         do {
                             try Locksmith.saveData(
                                 data: ["username": username,
-                                       "access-token": CurrentUser.instance.access_token],
+                                       "id": CurrentUser.instance.id as Any,
+                                       "access-token": CurrentUser.instance.access_token as Any,
+                                       "user-role": CurrentUser.instance.user_type?.rawValue as Any],
                                 forUserAccount: self.imReadyAccount)
                         } catch {
                             print("could not store credentials in the keychain")
@@ -105,44 +113,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                     
-                    // Check which role the logged in user has and redirect to the correct storyboard
-                    let user_role: Role = CurrentUser.instance.user_type!
+                    self.redirectUserToStoryboard()
                     
-                    switch user_role {
-                    case .CLIENT:
-                        self.goToTabBarView(
-                            inStoryboard: "Client",
-                            withIdentifier: "TabBarController")
-                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
-                    case .CAREGIVER:
-                        self.goToTabBarView(
-                            inStoryboard: "Caregiver",
-                            withIdentifier: "TabBarController")
-                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
-                    case .RELATIVE:
-                        self.showAlertWithTitle(
-                            title: "Not implemented yet",
-                            message: "Relative is not yet implemented")
-                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
-                    case .ADMIN:
-                        self.showAlertWithTitle(
-                            title: "Not implemented yet",
-                            message: "Admin is not yet implemented")
-                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
-                    default:
-                        self.showAlertWithTitle(
-                            title: "Er is iets fout gegaan met inloggen",
-                            message: "Controleer uw gebruikersnaam en wachtwoord")
-                        stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
-                    }
             }) {
                 print("failed to log in")
-                stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
+                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
                 
                 self.showAlertWithTitle(title: "Ongeldige inlogggegevens", message: "Gebruikersnaam of wachtwoord is fout.")
             }
         } else {
-            stopActivityIndicator(withIndicatorBG: self.activityIndicatorBG)
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
             
             self.showAlertWithTitle(title: "Velden niet ingevuld",
                                     message: "Vul alle velden in om in te loggen")
@@ -191,6 +171,48 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
     //        UIView.commitAnimations()
     //    }
+    
+    func showAlertWithTitle(title: String, message: String ) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertVC.addAction(okAction)
+        DispatchQueue.main.async() { () -> Void in
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    func redirectUserToStoryboard() {
+        // Check which role the logged in user has and redirect to the correct storyboard
+        let user_role: Role = CurrentUser.instance.user_type!
+        
+        switch user_role {
+        case .CLIENT:
+            self.goToTabBarView(
+                inStoryboard: "Client",
+                withIdentifier: "TabBarController")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+        case .CAREGIVER:
+            self.goToTabBarView(
+                inStoryboard: "Caregiver",
+                withIdentifier: "TabBarController")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+        case .RELATIVE:
+            self.showAlertWithTitle(
+                title: "Not implemented yet",
+                message: "Relative is not yet implemented")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+        case .ADMIN:
+            self.showAlertWithTitle(
+                title: "Not implemented yet",
+                message: "Admin is not yet implemented")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+        default:
+            self.showAlertWithTitle(
+                title: "Er is iets fout gegaan met inloggen",
+                message: "Controleer uw gebruikersnaam en wachtwoord")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+        }
+    }
     
     func checkTouchIDError(error: Error) -> String {
         var message: String!

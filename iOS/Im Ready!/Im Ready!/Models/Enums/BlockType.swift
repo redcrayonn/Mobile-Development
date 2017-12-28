@@ -19,4 +19,5 @@ enum BlockType : Int {
     case FAMILY = 7
     case RIGHTS_AND_OBLIGATIONS = 8
     case TREATMENT_PLAN = 9
+    case ADD = 10
 }

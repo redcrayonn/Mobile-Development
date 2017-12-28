@@ -10,16 +10,6 @@ import Foundation
 import Alamofire
 
 public class BuildingblockService : Service {
-    func getMockBuildingblocks() -> [Buildingblock] {
-        var buildingblocks: [Buildingblock] = []
-        
-//        buildingblocks.append(Buildingblock(id: "1", name: "Wonen", description: "Lekker wonen", blockType: 0))
-//        buildingblocks.append(Buildingblock(id: "2", name: "Werken", description: "Lekker werken", blockType: 5))
-//        buildingblocks.append(Buildingblock(id: "123", name: "Appelflap", description: "lekker appelflappen", blockType: 2))
-        
-        return buildingblocks
-    }
-    
     func getBuildingblocks(onSuccess: @escaping ([Buildingblock]) -> (),
                            onFailure: @escaping () -> ()){
         apiClient.send(toRelativePath: "buildingblock",

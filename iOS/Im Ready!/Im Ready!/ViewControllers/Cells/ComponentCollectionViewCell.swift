@@ -10,6 +10,9 @@ import UIKit
 
 class ComponentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var cellBG: UIView!
+    @IBOutlet weak var chevron: UIImageView!
+    
     var component: ClientComponent?
     var activites: [Activity]?
 }

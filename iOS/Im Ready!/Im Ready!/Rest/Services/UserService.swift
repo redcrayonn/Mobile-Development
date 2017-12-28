@@ -24,6 +24,12 @@ public class UserService : Service {
     }
     
     func getUser(withId Id: String) {
-        //            apiClient.send(toRelativePath: <#T##String#>, withHttpMethod: <#T##HTTPMethod#>, onSuccessParser: <#T##(Data) -> ()#>, onFailure: <#T##() -> ()#>)
+        apiClient.send(toRelativePath: "user\(Id)",
+            withHttpMethod: .get,
+            onSuccessParser: { (data) in
+                print(data)
+        }) {
+            print("Failed to retrieve user")
+        }
     }
 }

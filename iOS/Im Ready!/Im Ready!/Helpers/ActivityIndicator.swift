@@ -15,20 +15,20 @@ public let activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView
 // Function to start an ActivityIndicator with optional backgroundView
 public func startActivityIndicator(atVC viewController: UIViewController,
                                    withView view: UIView,
-                                   andIndicatorBG indicatorBG: UIView?) {
+                                   andIndicatorBGView indicatorBG: UIView?) {
     if indicatorBG != nil {
         indicatorBG?.isHidden = false
     }
     activityIndicator.center = viewController.view.center
     activityIndicator.hidesWhenStopped = true
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()
     UIApplication.shared.beginIgnoringInteractionEvents()
 }
 
 // Stop the activityIndicator with optional background
-public func stopActivityIndicator(withIndicatorBG indicatorBG: UIView?) {
+public func stopActivityIndicator(withIndicatorBGView indicatorBG: UIView?) {
     if indicatorBG != nil {
         indicatorBG?.isHidden = true
     }

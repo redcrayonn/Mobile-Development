@@ -20,4 +20,13 @@ struct ClientActivities : Decodable {
         case points = "Points"
         case id = "Id"
     }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        description = try values.decodeIfPresent(String.self, forKey: .description)
+        points = try values.decodeIfPresent(Int.self, forKey: .points)
+        id = try values.decodeIfPresent(String.self, forKey: .id)
+    }
+
 }

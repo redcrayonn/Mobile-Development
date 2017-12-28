@@ -20,6 +20,10 @@
 		FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */; };
 		FA3CB4041FD5D22400142CCF /* ChatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4031FD5D22400142CCF /* ChatsService.swift */; };
 		FA3CB4061FD5D2CB00142CCF /* MessageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */; };
+		FA4B72601FF4F7CE00949FF6 /* ChooseNewAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B725F1FF4F7CE00949FF6 /* ChooseNewAssignmentViewController.swift */; };
+		FA4B72621FF5015B00949FF6 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B72611FF5015B00949FF6 /* Alerts.swift */; };
+		FA4B72671FF53D7E00949FF6 /* BuildingblockStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B72651FF53D7E00949FF6 /* BuildingblockStackViewCell.swift */; };
+		FA4B72681FF53D7E00949FF6 /* BuildingblockStackViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4B72661FF53D7E00949FF6 /* BuildingblockStackViewCell.xib */; };
 		FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */; };
 		FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87471FC3091D008CB427 /* BuildingblockService.swift */; };
 		FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */; };
@@ -75,6 +79,9 @@
 		FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */; };
 		FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FD11FE1514300EECB8B /* CurrentUser.swift */; };
 		FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */; };
+		FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */; };
+		FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */; };
+		FAF4673D1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */; };
 		FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +122,10 @@
 		FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA3CB4031FD5D22400142CCF /* ChatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsService.swift; sourceTree = "<group>"; };
 		FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResult.swift; sourceTree = "<group>"; };
+		FA4B725F1FF4F7CE00949FF6 /* ChooseNewAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNewAssignmentViewController.swift; sourceTree = "<group>"; };
+		FA4B72611FF5015B00949FF6 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		FA4B72651FF53D7E00949FF6 /* BuildingblockStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockStackViewCell.swift; sourceTree = "<group>"; };
+		FA4B72661FF53D7E00949FF6 /* BuildingblockStackViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BuildingblockStackViewCell.xib; sourceTree = "<group>"; };
 		FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockResult.swift; sourceTree = "<group>"; };
 		FA4B87471FC3091D008CB427 /* BuildingblockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockService.swift; sourceTree = "<group>"; };
 		FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -176,6 +187,9 @@
 		FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FADB8FD11FE1514300EECB8B /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBuildingblock.swift; sourceTree = "<group>"; };
+		FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockCollectionViewCell.swift; sourceTree = "<group>"; };
+		FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockViewController.swift; sourceTree = "<group>"; };
 		FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,6 +257,8 @@
 				FA528D891FD9693C00052647 /* ComponentCollectionViewCell.swift */,
 				FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */,
 				FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */,
+				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
+				FA4B72651FF53D7E00949FF6 /* BuildingblockStackViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -288,6 +304,7 @@
 			children = (
 				FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */,
 				FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */,
+				FA4B72611FF5015B00949FF6 /* Alerts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -372,6 +389,7 @@
 		FAB235981FB999F40099B29D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA4B72661FF53D7E00949FF6 /* BuildingblockStackViewCell.xib */,
 				FA528D8F1FD98A9700052647 /* ActivityStackViewCell.xib */,
 				FAB235651FB990F60099B29D /* Client.storyboard */,
 				FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */,
@@ -389,6 +407,8 @@
 				FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */,
 				FA528D871FD9642000052647 /* ActivityViewController.swift */,
 				FA8306C71FDEC23B00BC225F /* MessageViewController.swift */,
+				FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */,
+				FA4B725F1FF4F7CE00949FF6 /* ChooseNewAssignmentViewController.swift */,
 			);
 			name = Controllers;
 			path = ViewControllers;
@@ -411,6 +431,7 @@
 				FA4DFE371FBADB8500945B2A /* Message.swift */,
 				FA528D991FDB1A2100052647 /* Feedback.swift */,
 				FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */,
+				FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -563,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */,
+				FA4B72681FF53D7E00949FF6 /* BuildingblockStackViewCell.xib in Resources */,
 				FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */,
 				FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */,
 				FAB235671FB990F60099B29D /* Client.storyboard in Resources */,
@@ -659,7 +681,6 @@
 				"${BUILT_PRODUCTS_DIR}/REFormattedNumberField/REFormattedNumberField.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 			);
@@ -677,7 +698,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REFormattedNumberField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 			);
@@ -787,7 +807,11 @@
 				FA8306C01FDE931900BC225F /* Role.swift in Sources */,
 				FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */,
 				FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */,
+				FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */,
+				FA4B72601FF4F7CE00949FF6 /* ChooseNewAssignmentViewController.swift in Sources */,
+				FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */,
 				FA4DFE3E1FBC19D900945B2A /* Buildingblock.swift in Sources */,
+				FA4B72671FF53D7E00949FF6 /* BuildingblockStackViewCell.swift in Sources */,
 				FA35EFBD1FE85E86000C9B76 /* ClientComponent.swift in Sources */,
 				FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
@@ -797,6 +821,7 @@
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
+				FAF4673D1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift in Sources */,
 				FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */,
 				FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
@@ -813,6 +838,7 @@
 				FA8306BE1FDE930F00BC225F /* BlockType.swift in Sources */,
 				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
 				FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */,
+				FA4B72621FF5015B00949FF6 /* Alerts.swift in Sources */,
 				FA528D881FD9642000052647 /* ActivityViewController.swift in Sources */,
 				FA528D9C1FDB1B0C00052647 /* UsefulLinks.swift in Sources */,
 				FA3383EF1FD05C6C00847C05 /* ActivityStackViewCell.swift in Sources */,
