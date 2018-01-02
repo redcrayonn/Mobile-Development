@@ -20,6 +20,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +31,13 @@ import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
+import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
-import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
@@ -43,7 +47,7 @@ import nl.inholland.imready.model.enums.UserRole;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnLoadedListener<PersonalBlock> {
+public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
@@ -58,6 +62,18 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         initGridView();
         initToolbarAndDrawer();
         loadMoreListener.loadMore();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -110,9 +126,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void initGridView() {
         GridView gridView = findViewById(R.id.blocks);
-        List<OnLoadedListener<PersonalBlock>> listeners = new ArrayList<>();
-        listeners.add(this);
-        gridAdapter = new PersonalBlockAdapter(this, listeners);
+        gridAdapter = new PersonalBlockAdapter(this);
         loadMoreListener = (LoadMoreListener) gridAdapter;
         gridView.setAdapter(gridAdapter);
         gridView.setOnItemClickListener(this);
@@ -180,26 +194,23 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             intent.putExtra(ParcelableConstants.BLOCK, block);
             startActivity(intent);
         }
-
     }
 
-    @Override
-    public void onLoaded(List<PersonalBlock> body) {
-        if (body != null) {
-            ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
-            cache.setPersonalBlocks(body);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPersonalBlockLoadedEvent(PersonalBlockLoadedEvent event) {
+        ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        cache.setPersonalBlocks(event.blocks);
 
-            Stream<PersonalComponent> components = stream(body).selectMany(PersonalBlock::getComponents);
-            Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
-            List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
+        Stream<PersonalComponent> components = stream(event.blocks).selectMany(PersonalBlock::getComponents);
+        Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
+        List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
 
-            if (!todoSoon.isEmpty()) {
-                WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
-                dialogWelcome.setArguments(bundle);
-                dialogWelcome.show(getSupportFragmentManager(), "welcome");
-            }
+        if (!todoSoon.isEmpty()) {
+            WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
+            dialogWelcome.setArguments(bundle);
+            dialogWelcome.show(getSupportFragmentManager(), "welcome");
         }
     }
 }

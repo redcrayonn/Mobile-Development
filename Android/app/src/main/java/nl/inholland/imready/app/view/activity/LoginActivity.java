@@ -3,6 +3,7 @@ package nl.inholland.imready.app.view.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +21,8 @@ import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.SceneTransitionConstants;
 import nl.inholland.imready.app.view.activity.caregiver.CaregiverHomeActivity;
 import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
+import nl.inholland.imready.app.view.fragment.LoginFailedDialogFragment;
+import nl.inholland.imready.app.view.listener.DialogListener;
 import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.ApiKeyResponse;
@@ -28,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Callback<ApiKeyResponse> {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Callback<ApiKeyResponse>, DialogListener {
 
     private AuthenticationService authService;
 
@@ -79,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login:
-                onLoginBtnClicked();
+                login();
                 break;
             default:
                 return;
@@ -88,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /* Button Handlers */
     // Login button
-    private void onLoginBtnClicked() {
+    private void login() {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
 
@@ -108,6 +111,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    private void resetUi() {
+        usernameInput.setEnabled(true);
+        passwordInput.setEnabled(true);
+        loginBtn.setEnabled(true);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public void onResponse(Call<ApiKeyResponse> call, Response<ApiKeyResponse> response) {
         if (response.isSuccessful() && response.body() != null) {
@@ -123,14 +133,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstName());
             editor.apply();
 
-            UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
-            cache.setUserId(keyResponse.getUserId());
+            UserCache cache = null;
 
             Intent intent = null;
             switch (keyResponse.getUserType()) {
                 case CLIENT:
                     // setup to go to Client Home
                     intent = new Intent(this, ClientHomeActivity.class);
+                    cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+                    cache.setUserId(keyResponse.getUserId());
                     break;
                 case ADMIN:
                     // setup to go to Admin Home
@@ -138,6 +149,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case CAREGIVER:
                     // setup to go to Caregiver Home
                     intent = new Intent(this, CaregiverHomeActivity.class);
+                    cache = ImReadyApplication.getInstance().getCache(UserRole.CAREGIVER);
+                    cache.setUserId(keyResponse.getUserId());
                     break;
                 case FAMILY:
                     // setup to go to Family Home
@@ -156,14 +169,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onFailure(Call<ApiKeyResponse> call, Throwable t) {
-        Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
+        DialogFragment fragment = new LoginFailedDialogFragment();
+        fragment.show(getSupportFragmentManager(), "login_failed");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // retry
+        login();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // cancel
         resetUi();
     }
 
-    private void resetUi() {
-        usernameInput.setEnabled(true);
-        passwordInput.setEnabled(true);
-        loginBtn.setEnabled(true);
-        progressBar.setVisibility(View.INVISIBLE);
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog) {
+        // work offline
     }
 }

@@ -35,4 +35,7 @@
     <string name="months_left">Nog %1$d maanden</string>
     <string name="weeks_left">Nog %1$d weken</string>
     <string name="days_left">Nog %1$d dagen</string>
+    <string name="login_failed">Er is iets misgegaan met inloggen. Je kunt het opnieuw proberen of offline werken</string>
+    <string name="work_offline">Werk offline</string>
+    <string name="retry">Try again</string>
 </resources>

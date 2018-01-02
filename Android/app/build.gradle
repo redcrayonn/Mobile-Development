@@ -37,5 +37,6 @@ dependencies {
     compile 'com.android.support:design:26.+'
     compile 'com.squareup.retrofit2:retrofit-mock:2.3.0'
     compile 'br.com.zbra:android-linq:1.1.0'
+    compile 'org.greenrobot:eventbus:3.1.1'
     testCompile 'junit:junit:4.12'
 }

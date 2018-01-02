@@ -7,16 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
-import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
@@ -36,12 +38,10 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
     private final Context context;
     private final ClientService clientService;
     private final LayoutInflater layoutInflater;
-    private final List<OnLoadedListener<PersonalBlock>> onLoadedListeners;
     private List<PersonalBlock> blocks;
 
-    public PersonalBlockAdapter(Context context, List<OnLoadedListener<PersonalBlock>> onLoadedListeners) {
+    public PersonalBlockAdapter(Context context) {
         this.context = context;
-        this.onLoadedListeners = onLoadedListeners;
 
         ApiClient client = ApiManager.getClient();
         clientService = client.getClientService();
@@ -121,9 +121,10 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
             if (this.blocks == null) {
                 this.blocks = new ArrayList<>();
             }
-            for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
-                listener.onLoaded(this.blocks);
-            }
+
+            // publish loaded data to the event bus
+            EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.blocks));
+
             this.blocks.add(new PersonalBlock(BlockType.ADD));
             notifyDataSetChanged();
         }
