@@ -31,7 +31,7 @@
             android:name=".app.view.activity.shared.MessagesActivity"
             android:theme="@style/AppTheme.Alt" />
         <activity
-            android:name=".app.view.NotificationsActivity"
+            android:name=".app.view.activity.NotificationsActivity"
             android:theme="@style/AppTheme.Alt"/>
 
         <!-- CLIENT -->

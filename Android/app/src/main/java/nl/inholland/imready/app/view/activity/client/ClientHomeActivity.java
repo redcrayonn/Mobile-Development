@@ -190,21 +190,21 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     private void initData() {
         ImReadyApplication instance = ImReadyApplication.getInstance();
         UserCache cache = instance.getCache(UserRole.CLIENT);
-        Store<FutureplanResponse, BarCode> futureplanStore = instance.getFutureplanStore();
+        Store<FutureplanResponse, BarCode> store = instance.getFutureplanStore();
 
         // cache request param, where type is the key for the cache and key the unique identifier
         BarCode request = new BarCode("future_plan", cache.getUserId());
 
         // request data from the futureplan store
-        futureplanStore
-                // if data is found on disk it stores it in-memory and calls onSucces,
-                // otherwise it does a network call to retrieve the data from online
-                .get(request)
-                // required to pass the data to views
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                // callback implementation (onSucces / onFailure)
-                .subscribe(this);
+        store
+            // if data is found on disk it stores it in-memory and calls onSucces,
+            // otherwise it does a network call to retrieve the data from online
+            .get(request)
+            // required to pass the data to views
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            // callback implementation (onSucces / onFailure)
+            .subscribe(this);
     }
 
     private void gotoMessages() {

@@ -12,13 +12,13 @@ import com.nytimes.android.external.store3.middleware.GsonParserFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Single;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.model.enums.UserRole;
-import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import okhttp3.ResponseBody;
@@ -30,9 +30,10 @@ public class ImReadyApplication extends Application {
     private static ImReadyApplication instance;
 
     private HashMap<UserRole, UserCache> userCaches;
-    private Store<FutureplanResponse, BarCode> futureplanStore;
     private Persister<BufferedSource, BarCode> persister;
     private BaseClient apiClient;
+    private Store<FutureplanResponse, BarCode> futureplanStore;
+    private Store<FutureplanResponse, BarCode> blocksStore;
 
     @Override
     public void onCreate() {
@@ -47,6 +48,7 @@ public class ImReadyApplication extends Application {
 
         initPersister();
         this.futureplanStore = providePersistedFutureplanStore();
+        this.blocksStore = providePersistedBlocksStore();
     }
 
     public UserCache getCache (UserRole usertype) {
@@ -60,6 +62,7 @@ public class ImReadyApplication extends Application {
     public static ImReadyApplication getInstance() {
         return instance;
     }
+
 
     private void initPersister() {
         try {
@@ -78,19 +81,42 @@ public class ImReadyApplication extends Application {
         return StoreBuilder.<BarCode, BufferedSource, FutureplanResponse>parsedWithKey()
                 .fetcher(this::futureplanFecther)
                 .persister(persister)
+                // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
                 .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), FutureplanResponse.class))
+                // create or open the store
                 .open();
     }
 
     private @NonNull Single<BufferedSource> futureplanFecther(BarCode barCode) {
-        ApiClient client = ApiManager.getClient();
-        return client
+        return apiClient
                 .getClientService()
-                .getFuturePlanForPersister(barCode.getKey())
+                .getFuturePlan(barCode.getKey())
                 .map(ResponseBody::source);
     }
 
     public Store<FutureplanResponse, BarCode> getFutureplanStore() {
         return futureplanStore;
+    }
+
+    @NonNull
+    private Store<FutureplanResponse, BarCode> providePersistedBlocksStore(){
+        return StoreBuilder.<BarCode, BufferedSource, FutureplanResponse>parsedWithKey()
+                .fetcher(this::blocksFecther)
+                .persister(persister)
+                // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
+                .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), List.class))
+                // create or open the store
+                .open();
+    }
+
+    private @NonNull Single<BufferedSource> blocksFecther(BarCode barCode) {
+        return apiClient
+                .getBlockService()
+                .getBlocks()
+                .map(ResponseBody::source);
+    }
+
+    public Store<FutureplanResponse, BarCode> getBlocksStore() {
+        return blocksStore;
     }
 }
