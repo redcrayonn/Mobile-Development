@@ -1,6 +1,8 @@
 package nl.inholland.imready.service.rest;
 
+import io.reactivex.Single;
 import nl.inholland.imready.service.model.FutureplanResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -8,9 +10,13 @@ import retrofit2.http.Path;
 
 public interface ClientService {
     @GET("client/{clientId}/futureplan")
-    Call<FutureplanResponse> getFuturePlan(@Path("clientId") String clientId);
+    Single<FutureplanResponse> getFuturePlan(@Path("clientId") String clientId);
+    @GET("client/{clientId}/futureplan")
+    Single<ResponseBody> getFuturePlanForPersister(@Path("clientId") String clientId);
 
     @POST("client/{clientId}/component/{componentId}")
     Call<Void> enrollComponent(@Path("clientId") String clientId,
                                @Path("componentId") String componentId);
+
+    ;
 }

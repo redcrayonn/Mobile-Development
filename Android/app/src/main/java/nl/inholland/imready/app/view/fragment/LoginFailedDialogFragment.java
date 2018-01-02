@@ -30,7 +30,7 @@ public class LoginFailedDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         DialogFragment fragment = this;
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogStyle);
         builder.setMessage(R.string.login_failed)
                 // retry
                 .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
@@ -54,5 +54,11 @@ public class LoginFailedDialogFragment extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        listener.onDismiss(dialog);
     }
 }

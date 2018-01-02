@@ -33,10 +33,17 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:design:26.+'
     compile 'com.squareup.retrofit2:retrofit-mock:2.3.0'
     compile 'br.com.zbra:android-linq:1.1.0'
     compile 'org.greenrobot:eventbus:3.1.1'
+
+    compile 'com.nytimes.android:cache3:3.0.0-beta'
+    compile 'com.nytimes.android:store3:3.0.0-beta'
+    compile 'com.nytimes.android:middleware3:3.0.0-beta'
+    compile 'com.nytimes.android:filesystem3:3.0.0-beta'
     testCompile 'junit:junit:4.12'
 }

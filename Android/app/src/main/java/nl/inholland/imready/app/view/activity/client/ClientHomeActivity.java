@@ -4,21 +4,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nytimes.android.external.store3.base.impl.BarCode;
+import com.nytimes.android.external.store3.base.impl.Store;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,31 +32,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.zbra.androidlinq.Stream;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
-import nl.inholland.imready.app.persistence.ClientCache;
+import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.ParcelableConstants;
+import nl.inholland.imready.app.view.activity.LoginActivity;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
-import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.model.enums.UserRole;
+import nl.inholland.imready.service.model.FutureplanResponse;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SingleObserver<FutureplanResponse> {
+
+    private static final String STATE_POPUP = "popup";
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
-    private BaseAdapter gridAdapter;
-    private LoadMoreListener loadMoreListener;
+    private PersonalBlockAdapter gridAdapter;
+
+    private boolean popupShown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +73,19 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
         initGridView();
         initToolbarAndDrawer();
-        loadMoreListener.loadMore();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+        drawerToggle.syncState();
     }
 
     @Override
@@ -79,8 +97,18 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putBoolean(STATE_POPUP, popupShown);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        popupShown = savedInstanceState.getBoolean(STATE_POPUP);
     }
 
     @Override
@@ -121,13 +149,15 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             case R.id.drawer_info:
                 gotoInfo();
                 break;
+            case R.id.logout:
+                logout();
+                break;
         }
     }
 
     private void initGridView() {
         GridView gridView = findViewById(R.id.blocks);
         gridAdapter = new PersonalBlockAdapter(this);
-        loadMoreListener = (LoadMoreListener) gridAdapter;
         gridView.setAdapter(gridAdapter);
         gridView.setOnItemClickListener(this);
     }
@@ -136,20 +166,11 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.futureplan);
 
         // Drawer
         drawer = findViewById(R.id.drawer);
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawerOpen, R.string.drawerClosed) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        };
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawerOpen, R.string.drawerClosed);
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
@@ -164,6 +185,26 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
         Button logoutButton = drawer.findViewById(R.id.logout);
         logoutButton.setOnClickListener(this);
+    }
+
+    private void initData() {
+        ImReadyApplication instance = ImReadyApplication.getInstance();
+        UserCache cache = instance.getCache(UserRole.CLIENT);
+        Store<FutureplanResponse, BarCode> futureplanStore = instance.getFutureplanStore();
+
+        // cache request param, where type is the key for the cache and key the unique identifier
+        BarCode request = new BarCode("future_plan", cache.getUserId());
+
+        // request data from the futureplan store
+        futureplanStore
+                // if data is found on disk it stores it in-memory and calls onSucces,
+                // otherwise it does a network call to retrieve the data from online
+                .get(request)
+                // required to pass the data to views
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                // callback implementation (onSucces / onFailure)
+                .subscribe(this);
     }
 
     private void gotoMessages() {
@@ -183,6 +224,12 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
     }
 
+    private void logout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
@@ -198,9 +245,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPersonalBlockLoadedEvent(PersonalBlockLoadedEvent event) {
-        ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
-        cache.setPersonalBlocks(event.blocks);
-
         Stream<PersonalComponent> components = stream(event.blocks).selectMany(PersonalBlock::getComponents);
         Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
         List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
@@ -212,5 +256,22 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             dialogWelcome.setArguments(bundle);
             dialogWelcome.show(getSupportFragmentManager(), "welcome");
         }
+        popupShown = true;
+    }
+
+    @Override
+    public void onSubscribe(Disposable request) {
+        // ignore
+    }
+
+    @Override
+    public void onSuccess(FutureplanResponse response) {
+        gridAdapter.setData(response.getBlocks());
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        Log.e(ClientHomeActivity.class.getSimpleName(), throwable.getMessage(), throwable);
+        Toast.makeText(this, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
     }
 }

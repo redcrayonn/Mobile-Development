@@ -1,5 +1,6 @@
 package nl.inholland.imready.app.view.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -188,5 +189,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onDialogNeutralClick(DialogFragment dialog) {
         // work offline
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        resetUi();
     }
 }

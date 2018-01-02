@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -13,41 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.ImReadyApplication;
-import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
-import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
-import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
-import nl.inholland.imready.model.enums.UserRole;
-import nl.inholland.imready.service.ApiClient;
-import nl.inholland.imready.service.model.FutureplanResponse;
-import nl.inholland.imready.service.rest.ClientService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListener, Callback<FutureplanResponse> {
+public class PersonalBlockAdapter extends BaseAdapter{
 
     private final int BUILDING_BLOCK_TYPE = 0;
     private final int ADD_BLOCK_TYPE = 1;
 
     private final Context context;
-    private final ClientService clientService;
     private final LayoutInflater layoutInflater;
     private List<PersonalBlock> blocks;
 
     public PersonalBlockAdapter(Context context) {
         this.context = context;
-
-        ApiClient client = ApiManager.getClient();
-        clientService = client.getClientService();
-
         blocks = new ArrayList<>();
-
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -103,35 +85,15 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
         }
     }
 
-    @Override
-    public void loadMore() {
-        ClientCache cache = (ClientCache) ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
-        List<PersonalBlock> blocks = cache.getPersonalBlocks();
-        if (blocks == null || cache.isInvalidated()) {
-            String clientId = cache.getUserId();
-            clientService.getFuturePlan(clientId).enqueue(this);
+    public void setData(List<PersonalBlock> data) {
+        this.blocks = data;
+        if (this.blocks == null) {
+            this.blocks = new ArrayList<>();
         }
-    }
+        // publish loaded data to the event bus
+        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.blocks));
 
-    @Override
-    public void onResponse(Call<FutureplanResponse> call, Response<FutureplanResponse> response) {
-        FutureplanResponse futureplanResponse = response.body();
-        if (response.isSuccessful() && futureplanResponse != null) {
-            this.blocks = futureplanResponse.getBlocks();
-            if (this.blocks == null) {
-                this.blocks = new ArrayList<>();
-            }
-
-            // publish loaded data to the event bus
-            EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.blocks));
-
-            this.blocks.add(new PersonalBlock(BlockType.ADD));
-            notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<FutureplanResponse> call, Throwable t) {
-        Toast.makeText(context, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
+        this.blocks.add(new PersonalBlock(BlockType.ADD));
+        notifyDataSetChanged();
     }
 }
