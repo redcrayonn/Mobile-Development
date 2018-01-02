@@ -28,14 +28,17 @@ namespace ImReady.Service.Services {
 
 			_calendarService.CreateCalendarItem(calendar);
 
-			task.Calendar = calendar;
+			task.Calendars = new List<Calendar>()
+			{
+			    calendar
+			};
 
 			_clientTaskRepository.Add(task);
 			_unitOfWork.Commit();
 		}
 
 		public void Delete (string clientId, ClientTask task) {
-			Calendar calendar = _calendarService.GetCalendarItem(clientId, task.CalendarId);
+			Calendar calendar = _calendarService.GetCalendarItem(clientId, task.Calendars.FirstOrDefault().Id);
 			_calendarService.DeleteCalendarItem(calendar);
 
 			_clientTaskRepository.Remove(task);
@@ -59,8 +62,8 @@ namespace ImReady.Service.Services {
 			editTask.Status = task.Status;
 			editTask.Feedback = (task.Feedback != null) ? task.Feedback : editTask.Feedback;
 
-			Calendar calendar = _calendarService.GetCalendarItem(clientId, editTask.CalendarId);
-			calendar.Title = task.Name;
+			Calendar calendar = _calendarService.GetCalendarItem(clientId, ""); //editTask.CalendarId
+            calendar.Title = task.Name;
 			calendar.StartDate = task.DeadlineDate;
 			calendar.EndDate = calendar.StartDate;
 

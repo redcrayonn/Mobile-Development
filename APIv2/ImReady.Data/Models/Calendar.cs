@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ImReady.Data.Models
 {
-	[Table("Calendar")]
+	[Table("Calendars")]
 	public class Calendar : EntityModel
     {
 		public string UserId { get; set; }

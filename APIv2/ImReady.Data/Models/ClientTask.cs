@@ -1,5 +1,6 @@
 ﻿using ImReady.Data.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,10 +27,7 @@ namespace ImReady.Data.Models
 		
 		[ForeignKey("ClientComponentId")]
 		public virtual ClientComponent ClientComponent { get; set; }
-
-		public string CalendarId { get; set; }
-
-		[ForeignKey("CalendarId")]
-		public virtual Calendar Calendar { get; set; }
+        
+		public virtual ICollection<Calendar> Calendars { get; set; }
 	}
 }

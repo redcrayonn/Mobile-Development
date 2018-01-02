@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 namespace ImReadyApiv2.Controllers {
 
 	/// <summary>
-	/// Api controller for Calendar calls
+	/// Api controller for Calendars calls
 	/// </summary>
 	[RoutePrefix("api/user")]
 	public class CalendarController : BaseApiController{

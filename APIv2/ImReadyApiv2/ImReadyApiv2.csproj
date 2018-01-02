@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201712141453284_Added_Chat_Relations.Designer.cs">
       <DependentUpon>201712141453284_Added_Chat_Relations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801022049032_Jeffrey_Migration.cs" />
+    <Compile Include="Migrations\201801022049032_Jeffrey_Migration.Designer.cs">
+      <DependentUpon>201801022049032_Jeffrey_Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
     <Compile Include="Models\Input\PostCalendarInputModel.cs" />
@@ -345,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712141453284_Added_Chat_Relations.resx">
       <DependentUpon>201712141453284_Added_Chat_Relations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801022049032_Jeffrey_Migration.resx">
+      <DependentUpon>201801022049032_Jeffrey_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
