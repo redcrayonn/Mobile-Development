@@ -42,7 +42,7 @@ public class BlockViewHolder extends RecyclerView.ViewHolder implements Fillable
         blockImageView.setImageDrawable(BlockUtil.getDrawableIcon(context, type));
 
         // NOTIFICATION LABEL
-        if (blockNotification != null) {
+        if (blockNotification != null && data.getComponents() != null) {
             fillNotificationCounter(data);
         }
     }

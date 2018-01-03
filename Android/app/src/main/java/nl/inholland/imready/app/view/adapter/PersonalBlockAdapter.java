@@ -95,8 +95,13 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
         if (data == null) {
             data = new ArrayList<>();
         }
+        // check to see if we already had data
+        if (this.personalBlocks.size() > 0) {
+            // remove the last block (the ADD block) to prevent it being added multiple times
+            data.remove(data.size() - 1);
+        }
         // publish loaded personalBlocks to the event bus
-        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
+        EventBus.getDefault().post(new PersonalBlockLoadedEvent(data));
         // add the "ADD" block
         data.add(new PersonalBlock(BlockType.ADD));
         this.personalBlocks = data;

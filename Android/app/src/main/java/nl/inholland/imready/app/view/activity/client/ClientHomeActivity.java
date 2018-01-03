@@ -81,12 +81,12 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        initData(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        initData(false);
         drawerToggle.syncState();
     }
 
