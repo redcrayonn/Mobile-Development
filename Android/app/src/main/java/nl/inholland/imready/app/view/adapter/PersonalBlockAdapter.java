@@ -18,29 +18,29 @@ import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
 
-public class PersonalBlockAdapter extends BaseAdapter{
+public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List<PersonalBlock>> {
 
     private final int BUILDING_BLOCK_TYPE = 0;
     private final int ADD_BLOCK_TYPE = 1;
 
     private final Context context;
     private final LayoutInflater layoutInflater;
-    private List<PersonalBlock> blocks;
+    private List<PersonalBlock> personalBlocks;
 
     public PersonalBlockAdapter(Context context) {
         this.context = context;
-        blocks = new ArrayList<>();
+        personalBlocks = new ArrayList<>();
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return blocks.size();
+        return personalBlocks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return blocks.get(position);
+        return personalBlocks.get(position);
     }
 
     @Override
@@ -69,14 +69,14 @@ public class PersonalBlockAdapter extends BaseAdapter{
             viewHolder = (BlockViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, blocks.get(position), null);
+        viewHolder.fill(context, personalBlocks.get(position), null);
 
         return convertView;
     }
 
     @Override
     public int getItemViewType(int position) {
-        PersonalBlock personalBlock = blocks.get(position);
+        PersonalBlock personalBlock = personalBlocks.get(position);
         Block block = personalBlock.getBlock();
         if (block.getType() == BlockType.ADD) {
             return ADD_BLOCK_TYPE; // special ADD list_item_personal_block type
@@ -85,15 +85,21 @@ public class PersonalBlockAdapter extends BaseAdapter{
         }
     }
 
-    public void setData(List<PersonalBlock> data) {
-        this.blocks = data;
-        if (this.blocks == null) {
-            this.blocks = new ArrayList<>();
-        }
-        // publish loaded data to the event bus
-        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.blocks));
+    @Override
+    public List<PersonalBlock> getData() {
+        return personalBlocks;
+    }
 
-        this.blocks.add(new PersonalBlock(BlockType.ADD));
+    @Override
+    public void setData(List<PersonalBlock> data) {
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        // publish loaded personalBlocks to the event bus
+        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
+        // add the "ADD" block
+        data.add(new PersonalBlock(BlockType.ADD));
+        this.personalBlocks = data;
         notifyDataSetChanged();
     }
 }

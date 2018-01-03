@@ -1,18 +1,21 @@
 package nl.inholland.imready.app.view.activity.client;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Component;
@@ -26,6 +29,8 @@ import static br.com.zbra.androidlinq.Linq.stream;
 
 public class ClientComponentEditActivity extends AppCompatActivity implements Callback<Void> {
 
+    private Component component;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,7 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
 
         // Get data passed from previous view
         Intent intent = getIntent();
-        Component component = intent.getParcelableExtra(ParcelableConstants.COMPONENT);
+        component = intent.getParcelableExtra(ParcelableConstants.COMPONENT);
 
         // Set action bar title
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -74,8 +79,9 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
     @Override
     public void onResponse(Call<Void> call, Response<Void> response) {
         if (response.isSuccessful()) {
-            Toast.makeText(this, "Succes!", Toast.LENGTH_SHORT).show();
-            //TODO: notify application of changed data
+            Toast.makeText(this, getString(R.string.personal_component_succes), Toast.LENGTH_SHORT).show();
+            //notify application of changed data
+            EventBus.getDefault().post(new FutureplanChangedEvent());
             finish();
         }
     }

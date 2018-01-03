@@ -39,4 +39,5 @@
     <string name="work_offline">Werk offline</string>
     <string name="retry">Try again</string>
     <string name="futureplan">Toekomstplan</string>
+    <string name="personal_component_succes">%1$s succesvol toegevoegd!</string>
 </resources>

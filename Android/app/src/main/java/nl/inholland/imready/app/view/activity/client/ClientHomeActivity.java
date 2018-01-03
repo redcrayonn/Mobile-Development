@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.zbra.androidlinq.Stream;
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -39,6 +39,7 @@ import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
+import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.ParcelableConstants;
@@ -46,6 +47,7 @@ import nl.inholland.imready.app.view.activity.LoginActivity;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
+import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
@@ -84,7 +86,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+        initData(false);
         drawerToggle.syncState();
     }
 
@@ -92,11 +94,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
     }
 
     @Override
@@ -187,7 +184,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         logoutButton.setOnClickListener(this);
     }
 
-    private void initData() {
+    private void initData(boolean fetchFromNetword) {
         ImReadyApplication instance = ImReadyApplication.getInstance();
         UserCache cache = instance.getCache(UserRole.CLIENT);
         Store<FutureplanResponse, BarCode> store = instance.getFutureplanStore();
@@ -196,11 +193,18 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         BarCode request = new BarCode("future_plan", cache.getUserId());
 
         // request data from the futureplan store
-        store
-            // if data is found on disk it stores it in-memory and calls onSucces,
-            // otherwise it does a network call to retrieve the data from online
-            .get(request)
-            // required to pass the data to views
+        Single<FutureplanResponse> dataRequest;
+        if (fetchFromNetword) {
+            // get data from network
+            dataRequest = store.fetch(request);
+        } else {
+            // get data from disk and store it in-memory
+            // if data is not present it does a network call to retrieve the data from online
+            dataRequest = store.get(request);
+        }
+
+        dataRequest
+            // required to pass the data to views (ui changes are required to be on the main thread)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             // callback implementation (onSucces / onFailure)
@@ -235,6 +239,14 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
         if (block.getBlock().getType() == BlockType.ADD) {
             Intent intent = new Intent(this, ClientFutureplanEditActivity.class);
+            List<PersonalBlock> personalBlocks = gridAdapter.getData();
+            List<String> componentIds = stream(personalBlocks)
+                    .selectMany(PersonalBlock::getComponents)
+                    .select(PersonalComponent::getComponent)
+                    .select(Component::getId)
+                    .toList();
+            // pass in a list of component id's which tells the next view what options to disable
+            intent.putStringArrayListExtra(ParcelableConstants.COMPONENT, (ArrayList<String>) componentIds);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
@@ -257,6 +269,11 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             dialogWelcome.show(getSupportFragmentManager(), "welcome");
         }
         popupShown = true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFutureplanChanged(FutureplanChangedEvent event) {
+        initData(true);
     }
 
     @Override

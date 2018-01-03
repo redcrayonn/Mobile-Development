@@ -18,6 +18,7 @@ import io.reactivex.Single;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.persistence.UserCache;
+import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.model.FutureplanResponse;
@@ -33,7 +34,7 @@ public class ImReadyApplication extends Application {
     private Persister<BufferedSource, BarCode> persister;
     private BaseClient apiClient;
     private Store<FutureplanResponse, BarCode> futureplanStore;
-    private Store<FutureplanResponse, BarCode> blocksStore;
+    private Store<List<Block>, BarCode> blocksStore;
 
     @Override
     public void onCreate() {
@@ -99,8 +100,8 @@ public class ImReadyApplication extends Application {
     }
 
     @NonNull
-    private Store<FutureplanResponse, BarCode> providePersistedBlocksStore(){
-        return StoreBuilder.<BarCode, BufferedSource, FutureplanResponse>parsedWithKey()
+    private Store<List<Block>, BarCode> providePersistedBlocksStore(){
+        return StoreBuilder.<BarCode, BufferedSource, List<Block>>parsedWithKey()
                 .fetcher(this::blocksFecther)
                 .persister(persister)
                 // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
@@ -116,7 +117,7 @@ public class ImReadyApplication extends Application {
                 .map(ResponseBody::source);
     }
 
-    public Store<FutureplanResponse, BarCode> getBlocksStore() {
+    public Store<List<Block>, BarCode> getBlocksStore() {
         return blocksStore;
     }
 }
