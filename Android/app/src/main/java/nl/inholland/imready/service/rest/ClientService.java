@@ -1,5 +1,6 @@
 package nl.inholland.imready.service.rest;
 
+import nl.inholland.imready.service.model.Client;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,4 +14,7 @@ public interface ClientService {
     @POST("client/{clientId}/component/{componentId}")
     Call<Void> enrollComponent(@Path("clientId") String clientId,
                                @Path("componentId") String componentId);
+
+    @GET("client/{clientId}")
+    Call<Client> getClient(@Path("clientId") String clientId);
 }

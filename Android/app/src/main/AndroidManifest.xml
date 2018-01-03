@@ -34,7 +34,7 @@
         <!-- CLIENT -->
         <activity
             android:name=".app.view.activity.client.ClientHomeActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".app.view.activity.client.ClientBlockDetailsActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
@@ -50,7 +50,11 @@
 
         <!-- CAREGIVER -->
         <activity
-            android:name=".app.view.activity.caregiver.CaregiverHomeActivity" />
+            android:name=".app.view.activity.caregiver.CaregiverHomeActivity"/>
+        <activity
+            android:name=".app.view.activity.caregiver.ClientDetailActivity"
+            android:parentActivityName=".app.view.activity.caregiver.CaregiverHomeActivity"
+            android:theme="@style/AppTheme.Alt" ></activity>
     </application>
 
 </manifest>

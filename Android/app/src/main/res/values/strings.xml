@@ -35,4 +35,10 @@
     <string name="months_left">Nog $1d% maanden</string>
     <string name="weeks_left">Nog $1d% weken</string>
     <string name="days_left">Nog $1d% dagen</string>
+    <string name="email">Email</string>
+    <string name="phone">Telefoon</string>
+    <string name="address">Adres</string>
+    <string name="birthdate">Geboortedatum</string>
+    <string name="notes">Notities</string>
+    <string name="appointments">Afspraken</string>
 </resources>
