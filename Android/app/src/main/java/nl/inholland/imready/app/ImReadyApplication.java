@@ -3,6 +3,7 @@ package nl.inholland.imready.app;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.google.gson.reflect.TypeToken;
 import com.nytimes.android.external.fs3.SourcePersisterFactory;
 import com.nytimes.android.external.store3.base.Persister;
 import com.nytimes.android.external.store3.base.impl.BarCode;
@@ -105,7 +106,7 @@ public class ImReadyApplication extends Application {
                 .fetcher(this::blocksFecther)
                 .persister(persister)
                 // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
-                .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), List.class))
+                .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), new TypeToken<List<Block>>() {}.getType()))
                 // create or open the store
                 .open();
     }

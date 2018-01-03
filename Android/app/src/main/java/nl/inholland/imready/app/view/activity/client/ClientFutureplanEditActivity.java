@@ -39,14 +39,17 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
             actionBar.setTitle(R.string.plan);
         }
 
-        initListView();
+        Intent intent = getIntent();
+        List<String> componentsAlreadyInFutureplan = intent.getStringArrayListExtra(ParcelableConstants.COMPONENT);
+
+        initListView(componentsAlreadyInFutureplan);
         initData(false);
     }
 
-    private void initListView() {
+    private void initListView(List<String> componentsAlreadyInFutureplan) {
         ExpandableListView expandableListView = findViewById(R.id.blocks);
         expandableListView.setClickable(true);
-        adapter = new BlockPlanExpandableListAdapter(this);
+        adapter = new BlockPlanExpandableListAdapter(this, componentsAlreadyInFutureplan);
         expandableListView.setAdapter(adapter);
         expandableListView.expandGroup(0);
         expandableListView.setOnChildClickListener(this);

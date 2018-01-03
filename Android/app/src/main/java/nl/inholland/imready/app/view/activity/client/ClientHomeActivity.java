@@ -85,6 +85,11 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         drawerToggle.syncState();
@@ -261,7 +266,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
         List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
 
-        if (!todoSoon.isEmpty()) {
+        if (!todoSoon.isEmpty() && !popupShown) {
             WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);

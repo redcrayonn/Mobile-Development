@@ -27,6 +27,8 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
     private final LayoutInflater layoutInflater;
     private List<PersonalBlock> personalBlocks;
 
+    private PersonalBlock addBlock = new PersonalBlock(BlockType.ADD);
+
     public PersonalBlockAdapter(Context context) {
         this.context = context;
         personalBlocks = new ArrayList<>();
@@ -35,11 +37,17 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
 
     @Override
     public int getCount() {
-        return personalBlocks.size();
+        return personalBlocks.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {
+        if (personalBlocks.size() == 0) {
+            return addBlock;
+        }
+        else if (position == personalBlocks.size()) {
+            return addBlock;
+        }
         return personalBlocks.get(position);
     }
 
@@ -55,13 +63,14 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
             int type = getItemViewType(position);
 
             switch (type) {
-                case BUILDING_BLOCK_TYPE:
-                    convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
-                    break;
                 case ADD_BLOCK_TYPE:
-                default:
                     convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
                     break;
+                case BUILDING_BLOCK_TYPE:
+                default:
+                    convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
+                    break;
+
             }
             viewHolder = new BlockViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -69,20 +78,19 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
             viewHolder = (BlockViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, personalBlocks.get(position), null);
+        viewHolder.fill(context, (PersonalBlock) getItem(position), null);
 
         return convertView;
     }
 
     @Override
     public int getItemViewType(int position) {
-        PersonalBlock personalBlock = personalBlocks.get(position);
+        PersonalBlock personalBlock = (PersonalBlock) getItem(position);
         Block block = personalBlock.getBlock();
-        if (block.getType() == BlockType.ADD) {
-            return ADD_BLOCK_TYPE; // special ADD list_item_personal_block type
-        } else {
-            return BUILDING_BLOCK_TYPE; // default list_item_personal_block type
-        }
+        if (block.getType() == BlockType.ADD)
+            return ADD_BLOCK_TYPE;
+        else
+            return BUILDING_BLOCK_TYPE;
     }
 
     @Override
@@ -95,16 +103,9 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
         if (data == null) {
             data = new ArrayList<>();
         }
-        // check to see if we already had data
-        if (this.personalBlocks.size() > 0) {
-            // remove the last block (the ADD block) to prevent it being added multiple times
-            data.remove(data.size() - 1);
-        }
-        // publish loaded personalBlocks to the event bus
-        EventBus.getDefault().post(new PersonalBlockLoadedEvent(data));
-        // add the "ADD" block
-        data.add(new PersonalBlock(BlockType.ADD));
         this.personalBlocks = data;
+        // publish loaded personalBlocks to the event bus
+        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
         notifyDataSetChanged();
     }
 }

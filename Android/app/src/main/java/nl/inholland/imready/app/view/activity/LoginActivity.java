@@ -104,12 +104,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        authService.login(username, password, "password").enqueue(this);
-
         usernameInput.setEnabled(false);
         passwordInput.setEnabled(false);
         loginBtn.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
+
+        authService.login(username, password, "password").enqueue(this);
     }
 
     private void resetUi() {
@@ -189,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onDialogNeutralClick(DialogFragment dialog) {
         // work offline
+        resetUi();
     }
 
     @Override
