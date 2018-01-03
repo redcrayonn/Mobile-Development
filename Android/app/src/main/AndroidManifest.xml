@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".app.ImReadyApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
@@ -29,6 +28,7 @@
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".app.view.activity.shared.MessagesActivity"
+            android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt" />
         <activity
             android:name=".app.view.activity.NotificationsActivity"
@@ -52,7 +52,12 @@
             android:theme="@style/AppTheme.Alt" />
 
         <!-- CAREGIVER -->
-        <activity android:name=".app.view.activity.caregiver.CaregiverHomeActivity" />
+        <activity
+            android:name=".app.view.activity.caregiver.CaregiverHomeActivity"/>
+        <activity
+            android:name=".app.view.activity.caregiver.ClientDetailActivity"
+            android:parentActivityName=".app.view.activity.caregiver.CaregiverHomeActivity"
+            android:theme="@style/AppTheme.Alt" ></activity>
     </application>
 
 </manifest>

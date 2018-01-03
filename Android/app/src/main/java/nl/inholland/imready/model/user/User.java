@@ -12,6 +12,8 @@ public abstract class User extends EntityModel {
     private String firstName;
     @SerializedName(value = "LastName", alternate = {"Lastname"})
     private String lastName;
+    @SerializedName(value = "Email")
+    private String email;
     @SerializedName("Role")
     private UserRole role;
     @SerializedName("Notifications")
@@ -47,6 +49,14 @@ public abstract class User extends EntityModel {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 
