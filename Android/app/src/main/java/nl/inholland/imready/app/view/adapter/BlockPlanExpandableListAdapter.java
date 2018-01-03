@@ -5,41 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.view.holder.BlockPlanViewHolder;
 import nl.inholland.imready.app.view.holder.ComponentPlanViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
-import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.Component;
-import nl.inholland.imready.service.ApiClient;
-import nl.inholland.imready.service.rest.BlockService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter implements LoadMoreListener, Callback<List<Block>> {
+public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter implements DataHolder<List<Block>> {
 
     private final Context context;
-    private final BlockService blockService;
     private final LayoutInflater inflater;
     private List<Block> blocks;
 
     public BlockPlanExpandableListAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-
-        ApiClient client = ApiManager.getClient();
-        blockService = client.getBlockService();
-
         blocks = new ArrayList<>();
     }
 
@@ -143,21 +129,13 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
     }
 
     @Override
-    public void loadMore() {
-        blockService.getBlocks().enqueue(this);
+    public List<Block> getData() {
+        return blocks;
     }
 
     @Override
-    public void onResponse(Call<List<Block>> call, Response<List<Block>> response) {
-        List<Block> blocks = response.body();
-        if (response.isSuccessful() && blocks != null) {
-            this.blocks = blocks;
-            notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<List<Block>> call, Throwable t) {
-        Toast.makeText(context, R.string.block_failed, Toast.LENGTH_SHORT).show();
+    public void setData(List<Block> data) {
+        this.blocks = data;
+        notifyDataSetChanged();
     }
 }

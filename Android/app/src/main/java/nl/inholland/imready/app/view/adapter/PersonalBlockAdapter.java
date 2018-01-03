@@ -5,57 +5,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
-import nl.inholland.imready.app.view.listener.LoadMoreListener;
-import nl.inholland.imready.app.view.listener.OnLoadedListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.enums.BlockType;
-import nl.inholland.imready.service.ApiClient;
-import nl.inholland.imready.service.model.FutureplanResponse;
-import nl.inholland.imready.service.rest.ClientService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListener, Callback<FutureplanResponse> {
+public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List<PersonalBlock>> {
 
     private final int BUILDING_BLOCK_TYPE = 0;
     private final int ADD_BLOCK_TYPE = 1;
 
     private final Context context;
-    private final ClientService clientService;
     private final LayoutInflater layoutInflater;
-    private final List<OnLoadedListener<PersonalBlock>> onLoadedListeners;
-    private List<PersonalBlock> blocks;
+    private List<PersonalBlock> personalBlocks;
 
-    public PersonalBlockAdapter(Context context, List<OnLoadedListener<PersonalBlock>> onLoadedListeners) {
+    public PersonalBlockAdapter(Context context) {
         this.context = context;
-        this.onLoadedListeners = onLoadedListeners;
-
-        ApiClient client = ApiManager.getClient();
-        clientService = client.getClientService();
-
-        blocks = new ArrayList<>();
-
+        personalBlocks = new ArrayList<>();
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return blocks.size();
+        return personalBlocks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return blocks.get(position);
+        return personalBlocks.get(position);
     }
 
     @Override
@@ -84,14 +69,14 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
             viewHolder = (BlockViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, blocks.get(position), null);
+        viewHolder.fill(context, personalBlocks.get(position), null);
 
         return convertView;
     }
 
     @Override
     public int getItemViewType(int position) {
-        PersonalBlock personalBlock = blocks.get(position);
+        PersonalBlock personalBlock = personalBlocks.get(position);
         Block block = personalBlock.getBlock();
         if (block.getType() == BlockType.ADD) {
             return ADD_BLOCK_TYPE; // special ADD list_item_personal_block type
@@ -101,29 +86,20 @@ public class PersonalBlockAdapter extends BaseAdapter implements LoadMoreListene
     }
 
     @Override
-    public void loadMore() {
-        String clientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
-        clientService.getFuturePlan(clientId).enqueue(this);
+    public List<PersonalBlock> getData() {
+        return personalBlocks;
     }
 
     @Override
-    public void onResponse(Call<FutureplanResponse> call, Response<FutureplanResponse> response) {
-        FutureplanResponse futureplanResponse = response.body();
-        if (response.isSuccessful() && futureplanResponse != null) {
-            this.blocks = futureplanResponse.getBlocks();
-            if (this.blocks == null) {
-                this.blocks = new ArrayList<>();
-            }
-            for (OnLoadedListener<PersonalBlock> listener : onLoadedListeners) {
-                listener.onLoaded(this.blocks);
-            }
-            this.blocks.add(new PersonalBlock(BlockType.ADD));
-            notifyDataSetChanged();
+    public void setData(List<PersonalBlock> data) {
+        if (data == null) {
+            data = new ArrayList<>();
         }
-    }
-
-    @Override
-    public void onFailure(Call<FutureplanResponse> call, Throwable t) {
-        Toast.makeText(context, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
+        // publish loaded personalBlocks to the event bus
+        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
+        // add the "ADD" block
+        data.add(new PersonalBlock(BlockType.ADD));
+        this.personalBlocks = data;
+        notifyDataSetChanged();
     }
 }

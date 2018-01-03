@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColor">@android:color/white</item>
@@ -18,6 +18,7 @@
 
     <style name="AppTheme.Alt" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="android:windowBackground">@color/colorNeutral</item>
+        <item name="colorControlNormal">@android:color/black</item>
     </style>
 
     <style name="AppTheme.Alt.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -94,6 +95,11 @@
         <item name="android:tint">@color/colorAccent</item>
     </style>
 
+    <style name="DialogStyle" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="android:buttonBarButtonStyle">@style/ButtonStyle</item>
+    </style>
 
-    <color name="colorDark">#363333</color>
+    <style name="ButtonStyle" parent="android:Widget.Holo.Button.Borderless">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 </resources>

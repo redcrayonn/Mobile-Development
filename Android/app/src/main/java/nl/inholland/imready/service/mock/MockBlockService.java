@@ -1,10 +1,11 @@
 package nl.inholland.imready.service.mock;
 
 import java.util.Iterator;
-import java.util.List;
 
+import io.reactivex.Single;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.service.rest.BlockService;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
@@ -16,7 +17,7 @@ public class MockBlockService implements BlockService {
     }
 
     @Override
-    public Call<List<Block>> getBlocks() {
+    public Single<ResponseBody> getBlocks() {
         return delegate.returningResponse(MockData.blocks).getBlocks();
     }
 

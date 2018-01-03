@@ -2,7 +2,9 @@ package nl.inholland.imready.service.mock;
 
 import nl.inholland.imready.service.model.Client;
 import nl.inholland.imready.service.model.FutureplanResponse;
+import io.reactivex.Single;
 import nl.inholland.imready.service.rest.ClientService;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
@@ -14,7 +16,7 @@ class MockClientService implements ClientService {
     }
 
     @Override
-    public Call<FutureplanResponse> getFuturePlan(String clientId) {
+    public Single<ResponseBody> getFuturePlan(String clientId) {
         return delegate.returningResponse(null).getFuturePlan(clientId);
     }
 

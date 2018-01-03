@@ -30,6 +30,9 @@
             android:name=".app.view.activity.shared.MessagesActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt" />
+        <activity
+            android:name=".app.view.activity.NotificationsActivity"
+            android:theme="@style/AppTheme.Alt"/>
 
         <!-- CLIENT -->
         <activity

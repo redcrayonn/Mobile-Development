@@ -41,4 +41,9 @@
     <string name="birthdate">Geboortedatum</string>
     <string name="notes">Notities</string>
     <string name="appointments">Afspraken</string>
+    <string name="login_failed">Er is iets misgegaan met inloggen. Je kunt het opnieuw proberen of offline werken</string>
+    <string name="work_offline">Werk offline</string>
+    <string name="retry">Try again</string>
+    <string name="futureplan">Toekomstplan</string>
+    <string name="personal_component_succes">%1$s succesvol toegevoegd!</string>
 </resources>

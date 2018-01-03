@@ -15,8 +15,6 @@ import nl.inholland.imready.app.view.adapter.PersonalComponentExpandableListAdap
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 
-import static br.com.zbra.androidlinq.Linq.stream;
-
 public class ClientBlockDetailsActivity extends AppCompatActivity {
 
     @Override
@@ -44,9 +42,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
         ExpandableListView expandableListView = findViewById(R.id.blockcomponents);
         expandableListView.setClickable(true);
         // order by the closest deadline
-        List<PersonalComponent> components = stream(block.getComponents())
-                .orderBy(c -> c.getDeadline())
-                .toList();
+        List<PersonalComponent> components = block.getComponents();
         BaseExpandableListAdapter adapter = new PersonalComponentExpandableListAdapter(this, components);
         expandableListView.setAdapter(adapter);
 
