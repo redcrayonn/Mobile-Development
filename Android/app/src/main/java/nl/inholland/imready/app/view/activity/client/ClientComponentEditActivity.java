@@ -3,6 +3,7 @@ package nl.inholland.imready.app.view.activity.client;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -74,6 +75,16 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
         button.setOnClickListener(view -> {
             clientService.enrollComponent(clientId, component.getId()).enqueue(this);
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // fix for a navigation bug in android; https://stackoverflow.com/a/29464116
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
