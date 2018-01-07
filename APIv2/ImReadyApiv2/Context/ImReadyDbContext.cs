@@ -40,5 +40,7 @@ namespace ImReadyApiv2.Context
 
 		// Calendars
 		public virtual DbSet<Calendar> Calendar { get; set; }
-	}
+
+        public virtual DbSet<UsefulLink> UsefulLinks { get; set; }
+    }
 }

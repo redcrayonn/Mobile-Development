@@ -279,8 +279,28 @@ namespace ImReadyApiv2.Migrations
 
 
             context.Buildingblocks.AddOrUpdate(workBlock);
+            foreach (var component in workBlock.Components ?? Enumerable.Empty<Component>())
+            {
+                context.Components.AddOrUpdate(component);
+                foreach (var activity in component.Activities ?? Enumerable.Empty<Activity>())
+                {
+                    context.Activities.AddOrUpdate(activity);
+                }
+                foreach (var usefulLink in component.UsefulLinks ?? Enumerable.Empty<UsefulLink>())
+                {
+                    context.UsefulLinks.AddOrUpdate(usefulLink);
+                }
+            }
             context.Buildingblocks.AddOrUpdate(studyBlock);
             context.Buildingblocks.AddOrUpdate(livingBlock);
+            foreach (var component in livingBlock.Components ?? Enumerable.Empty<Component>())
+            {
+                context.Components.AddOrUpdate(component);
+                foreach (var activity in component.Activities ?? Enumerable.Empty<Activity>())
+                {
+                    context.Activities.AddOrUpdate(activity);
+                }
+            }
             context.Buildingblocks.AddOrUpdate(financeBlock);
             context.Buildingblocks.AddOrUpdate(insuranceBlock);
             context.Buildingblocks.AddOrUpdate(treatmentBlock);
