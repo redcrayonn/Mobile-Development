@@ -37,7 +37,11 @@ namespace ImReadyApiv2.Migrations
             CreateIndex("dbo.UsefulLink", "ClientComponent_Id");
             AddForeignKey("dbo.UsefulLink", "ClientComponent_Id", "dbo.ClientComponent", "Id");
             DropColumn("dbo.ClientComponent", "TaskId");
-        }
+
+			AddColumn("dbo.ClientTask", "Description", c => c.String(maxLength: 128));
+			AddColumn("dbo.ClientTask", "ClientComponentId", c => c.String(maxLength: 128));
+			AddForeignKey("dbo.ClientTask", "ClientComponentId", "dbo.ClientComponent", "Id");
+		}
         
         public override void Down()
         {
