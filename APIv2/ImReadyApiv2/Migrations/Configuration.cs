@@ -86,12 +86,72 @@ namespace ImReadyApiv2.Migrations
         private async System.Threading.Tasks.Task SeedData(ImReadyDbContext context)
         {
             #region WORK BLOCK
-            var workBlock = new Buildingblock
+            var workBlock = new Buildingblock()
             {
                 Name = "Werk",
-                Description = "Alles om werk te regelen",
+                Description = "De bouwsteen 'Werk' helpt jou met het vinden van een baan. Een baan levert jou geld op, zodat je financieel onafhankelijk wordt. Het begint met jezelf leren kennen. Wat wil je? Waar ben je goed in? Daarna zoek je een bedrijf en ga je daar solliciteren.",
                 Id = BlockType.WORK.ToString(),
-                Type = BlockType.WORK
+                Components = new List<Component>
+                {
+                    new Component
+                    {
+                        Id = BlockType.WORK+"_orientation",
+                        Name = "Oriënteren",
+                        Description = "Voordat je een baan gaat zoeken moet je eerst weten wat bij jou past.",
+                        Activities = new List<Activity>
+                        {
+                            new Activity
+                            {
+                                Id = BlockType.WORK+"_orientation_strengths",
+                                Name = "Waar ben je goed in?",
+                                Points = 3
+                            },
+                            new Activity
+                            {
+                                Id = BlockType.WORK+"_orientation_interests",
+                                Name = "Wat vindt je leuk?",
+                                Points = 3
+                            },
+                            new Activity
+                            {
+                                Id = BlockType.WORK+"_orientation_search",
+                                Name = "Zoek een bedrijf uit",
+                                Points = 4
+                            }
+                        }
+                    },
+                    new Component
+                    {
+                        Id = BlockType.WORK+"_solicitate",
+                        Name = "Solliciteren",
+                        Description = "Solliciteren is het verkopen van jezelf aan het bedrijf. Laat je sterke punten zien die bij het onderdeel oriënteren naar voren kwamen. Je zal de contactpersoon jouw verwachtingen van de baan moeten uitleggen en je verdiepen in de situatie van het bedrijf. Je zal een CV opstellen en hiermee informeer je het bedrijf over jezelf. Ook ga je een sollicitatiebrief sturen, hiermee zorg je dat het bedrijf interrese krijgt. Daarna kun je uitgenodigd worden voor een gesprek."
+                        + "Zorg er voor dat je echt op tijd bent, zowel met het inleveren van stukken als het aanwezig zijn bij het bedrijf.",
+                        YoutubeURL = "https://youtu.be/Wj6MuHAbSjU",
+                        UsefulLinks = new List<UsefulLink>
+                        {
+                            new UsefulLink
+                            {
+                                Id = "CV opstellen? Drie onmisbare tips!",
+                                Url = "$YT_Wj6MuHAbSjU"
+                            },
+                            new UsefulLink
+                            {
+                                Id = "CV opstellen tips",
+                                Url = "http://www.carrieretijger.nl/carriere/solliciteren/sollicitatiebrief-en-cv/cv-opstellen"
+                            }
+                        },
+                        Activities = new List<Activity>
+                        {
+                            new Activity
+                            {
+                                Id = BlockType.WORK+"_solicitate_cv",
+                                Name = "CV opstellen",
+                                Description = "Het opstellen van een Curriculum Vitae (CV).\r\n\r\nWat moet er in mijn CV:\r\n    -Representatieve foto van jezelf\r\n    -NAW-gegevens\r\n    -Vaardigheden\r\n    -Werkervaring",
+                                Points = 5
+                            }
+                        }
+                    }
+                }
             };
             #endregion
 
