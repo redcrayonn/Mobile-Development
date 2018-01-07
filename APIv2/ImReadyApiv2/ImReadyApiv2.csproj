@@ -296,6 +296,7 @@
     <Compile Include="Results\FutureplanResult\ComponentResult.cs" />
     <Compile Include="Results\FutureplanResult\FeedbackResult.cs" />
     <Compile Include="Results\FutureplanResult\FutureplanResult.cs" />
+    <Compile Include="Results\UsefulLinkResult.cs" />
     <Compile Include="Results\UserResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Results\BaseResult.cs" />

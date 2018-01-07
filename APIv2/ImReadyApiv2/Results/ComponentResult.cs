@@ -10,6 +10,7 @@ namespace ImReadyApiv2.Results
             Name = component.Name;
             Description = component.Description;
             Activities = new List<ActivityResult>();
+            UsefulLinks = new List<UsefulLinkResult>();
             foreach (var activity in component.Activities)
             {
                 if (!activity.Deleted)
@@ -17,9 +18,14 @@ namespace ImReadyApiv2.Results
                     Activities.Add(new ActivityResult(activity));
                 }
             }
+            foreach (var link in component.UsefulLinks)
+            {
+                UsefulLinks.Add(new UsefulLinkResult(link));
+            }
         }
         public string Name { get; }
         public string Description { get; }
         public List<ActivityResult> Activities { get; }
+        public List<UsefulLinkResult> UsefulLinks { get; }
     }
 }
