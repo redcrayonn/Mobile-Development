@@ -8,30 +8,29 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClientActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
     var activities: [ClientActivities] = []
     var component: ClientComponent!
         
     var t_count:Int = 0
-    var lastCell: ActivityStackViewCell = ActivityStackViewCell()
+    var lastCell: ClientActivityStackViewCell = ClientActivityStackViewCell()
     var button_tag:Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = component.name
         
-        //        activities = activityService.getMockActivities()
-        
         tableView = UITableView(frame: view.frame)
-        tableView.separatorStyle = .none
+        tableView.separatorColor = UIColor.white
         tableView.allowsSelection = false
         tableView.layer.frame.size.height = view.frame.height * 1.5
-        tableView.frame.origin.y += 125
+        tableView.frame.origin.y += 100
         tableView.register(UINib(nibName: "ActivityStackViewCell", bundle: nil),
                            forCellReuseIdentifier: "ActivityStackViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        
         view.addSubview(tableView)
     }
     
@@ -48,7 +47,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityStackViewCell", for: indexPath) as! ActivityStackViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityStackViewCell", for: indexPath) as! ClientActivityStackViewCell
+        
+        cell.activityDescription.text = activities[indexPath.row].description
         
         // If the cell does not exist yet, create a new one
         if !cell.cellExists {
@@ -57,6 +58,17 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             cell.openDetailViewBtn.addTarget(self, action: #selector(cellOpened(sender:)), for: .touchUpInside)
             t_count += 1
             cell.cellExists = true
+            
+            cell.answerTextView.layer.borderColor = UIColor.black.cgColor
+            cell.answerTextView.layer.borderWidth = 1.0
+            
+            cell.answerTextView.layer.shadowColor = UIColor.black.cgColor
+            cell.answerTextView.layer.shadowOpacity = 1.0
+            cell.answerTextView.layer.shadowOffset = CGSize.zero
+            cell.answerTextView.layer.shadowRadius = 10
+            cell.answerTextView.layer.shouldRasterize = true
+
+            
         }
         
         UIView.animate(withDuration:  0) {
@@ -77,13 +89,13 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             
             if sender.tag == button_tag {
                 button_tag = -1
-                lastCell = ActivityStackViewCell()
+                lastCell = ClientActivityStackViewCell()
             }
         }
         if sender.tag != previousCellTag {
             button_tag = sender.tag
             
-            lastCell = tableView.cellForRow(at: IndexPath(row: button_tag, section: 0)) as! ActivityStackViewCell
+            lastCell = tableView.cellForRow(at: IndexPath(row: button_tag, section: 0)) as! ClientActivityStackViewCell
             self.lastCell.animate(duration: 0.2, whenDone: {
                 self.view.layoutIfNeeded()
             })

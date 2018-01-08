@@ -31,4 +31,12 @@ public class ClientService : Service{
             print("something failed")
         }
     }
+    
+    func sendAnswer(clientId: String, activityId: String, content: String) {
+        apiClient.send(toRelativePath: "client/\(clientId)/activity/\(activityId)", withHttpMethod: .put, onSuccessParser: { (data) in
+            print("success")
+        }) {
+            print("failure")
+        }
+    }
 }

@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
+import ChameleonFramework
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var buildingblocks: [ClientBuildingblock] = []
+    var clientBuildingblocks: [ClientBuildingblock] = []
     let addBuildingblockBlockName: String = "Toevoegen"
+    var buildingblocks: [Buildingblock] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,21 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Get the client's buildingblocks, components and activities
         getClientFuturePlan()
+        
+        // Already fetch all buildingblocks for adding to futureplan
+        getBuildingblocks()
+    }
+    
+    func getBuildingblocks() {
+        startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
+        buildingblockService.getBuildingblocks(onSuccess: { (results) in
+            self.buildingblocks = results
+            stopActivityIndicator(withIndicatorBGView: nil)
+        }) {
+            simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon de bouwblokken niet ophalen")
+            print("failed to retrieve buildingblocks")
+            stopActivityIndicator(withIndicatorBGView: nil)
+        }
     }
     
     // Get all buildingblocks, components and activites a client is working on
@@ -30,10 +45,10 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
-                                        self.buildingblocks = results.buildingblocks!
+                                        self.clientBuildingblocks = results.buildingblocks!
                                         
                                         // Add the last buildingblock where you can select new future goals
-                                        self.buildingblocks.append(ClientBuildingblock(
+                                        self.clientBuildingblocks.append(ClientBuildingblock(
                                             type: BlockType.ADD,
                                             name: self.addBuildingblockBlockName))
                                         
@@ -41,22 +56,25 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
                                         stopActivityIndicator(withIndicatorBGView: nil)
         }) {
             print("failed to retrieve futureplan")
+            simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon bouwblokken niet ophalen.")
             stopActivityIndicator(withIndicatorBGView: nil)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return buildingblocks.count
+        return clientBuildingblocks.count
     }
     
     // Load the buildingblocks in a collectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == (buildingblocks.count - 1) {
+        // If it's the last cell in the array, add the "ADD" block.
+        if indexPath.row == (clientBuildingblocks.count - 1) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addBuildingblockCell", for: indexPath) as! AddBuildingblockCollectionViewCell
-            cell.title.text = buildingblocks[indexPath.row].name
-            cell.buildingblockImage.image = UIImage(
-                named: "\(buildingblocks[indexPath.row].type!)")
             
+            // The images in the Assets folder have the same name as the Buildingblocks, keep that in mind
+            cell.buildingblockImage.image = UIImage(
+                named: "\(clientBuildingblocks[indexPath.row].type!)")
+            cell.title.text = clientBuildingblocks[indexPath.row].name
             cell.title.numberOfLines = 2
             cell.title.adjustsFontSizeToFitWidth = true
 
@@ -70,10 +88,11 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buildingblockCell", for: indexPath) as! BuildingblockCell
             
-            cell.title.text = buildingblocks[indexPath.row].name
+            // The images in the Assets folder have the same name as the Buildingblocks, keep that in mind
             cell.buildingblockImage.image = UIImage(
-                named: "\(buildingblocks[indexPath.row].type!)")
-            cell.buildingblock = buildingblocks[indexPath.row]
+                named: "\(clientBuildingblocks[indexPath.row].type!)")
+            cell.title.text = clientBuildingblocks[indexPath.row].name
+            cell.buildingblock = clientBuildingblocks[indexPath.row]
             cell.title.numberOfLines = 2
             cell.title.adjustsFontSizeToFitWidth = true
             
@@ -83,7 +102,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.shadowLayer.layer.backgroundColor = UIColor.clear.cgColor
             
             print(indexPath.row)
-            print(buildingblocks.count)
+            print(clientBuildingblocks.count)
                         
             return cell
         }
@@ -91,7 +110,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // Prepare navigation segue to ComponentViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? ComponentViewController {
+        if let destinationViewController = segue.destination as? ClientComponentViewController {
             if let cell = sender as? BuildingblockCell {
                 if cell.buildingblock != nil {
                     destinationViewController.components = cell.buildingblock?.components
@@ -99,14 +118,16 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
                     destinationViewController.buildingblockImage = cell.buildingblockImage
                 }
             }
+        } else if let destinationViewController = segue.destination as? ChooseNewBuildingblockViewController {
+            // Check if the array is not empty before departing to next view
+            if !self.buildingblocks.isEmpty {
+                destinationViewController.buildingblocks = self.buildingblocks
+            }
         }
     }
     
     @IBAction func logoutButton(_ sender: Any) {
-        CurrentUser.instance.access_token = nil
-        CurrentUser.instance.id = nil
-        CurrentUser.instance.username = nil
-        CurrentUser.instance.user_type = nil
+        CurrentUser.instance.logout()
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Client", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(

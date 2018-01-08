@@ -13,6 +13,9 @@ import UIKit
 public let activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
 
 // Function to start an ActivityIndicator with optional backgroundView
+// A ViewController is necessary
+// A view is needed to show the indicator
+// Optional background view to show
 public func startActivityIndicator(atVC viewController: UIViewController,
                                    withView view: UIView,
                                    andIndicatorBGView indicatorBG: UIView?) {
@@ -27,7 +30,7 @@ public func startActivityIndicator(atVC viewController: UIViewController,
     UIApplication.shared.beginIgnoringInteractionEvents()
 }
 
-// Stop the activityIndicator with optional background
+// Stop the activityIndicator with optional background to hide again
 public func stopActivityIndicator(withIndicatorBGView indicatorBG: UIView?) {
     if indicatorBG != nil {
         indicatorBG?.isHidden = true

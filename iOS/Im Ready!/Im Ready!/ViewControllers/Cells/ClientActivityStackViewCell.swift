@@ -18,6 +18,8 @@ class ClientActivityStackViewCell: UITableViewCell {
     }
     @IBOutlet weak var openDetailViewBtn: UIButton!
     @IBOutlet weak var activityDescription: UILabel!
+    @IBOutlet weak var answerTextView: UITextView!
+//    @IBOutlet weak var sendBtn: UIButton!
     
     var cellExists: Bool = false
     var activity: Activity?
@@ -30,6 +32,11 @@ class ClientActivityStackViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
+    @IBAction func sendAnswer(_ sender: Any) {
+        
+    }
+    
     
     // Animation for the dropdown of activities
     func animate(duration:Double, whenDone: @escaping () -> ()) {

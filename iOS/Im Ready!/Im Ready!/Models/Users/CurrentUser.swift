@@ -20,4 +20,11 @@ class CurrentUser {
             return access_token != nil
         }
     }
+    
+    func logout() {
+        CurrentUser.instance.id = nil
+        CurrentUser.instance.access_token = nil
+        CurrentUser.instance.user_type = nil
+        CurrentUser.instance.username = nil
+    }
 }
