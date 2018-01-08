@@ -94,8 +94,12 @@ namespace ImReady.Views.Login
             string username = LoginName.Text != null ? LoginName.Text : null;
             string password = LoginPassword.Password != null ? LoginPassword.Password : null;
 
-            if (username != null && password != null)
+            if (username != null && password != null && !Config.GlobalConfig.MockServices)
                 HandleLogin(username, password);
+            else if(Config.GlobalConfig.MockServices)
+            {
+                Frame.Navigate(typeof(Home.HomeMain));
+            }
         }
 
         //TODO: Make optional (checkbox)
