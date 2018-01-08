@@ -1,18 +1,18 @@
 package nl.inholland.imready.app.logic;
 
-import nl.inholland.imready.service.ApiClient;
+import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.mock.MockClient;
 import nl.inholland.imready.service.rest.RestClient;
 
 public class ApiManager {
-    private static ApiClient restClient = new RestClient();
-    private static ApiClient mockClient = new MockClient();
+    private static BaseClient restClient = new RestClient();
+    private static BaseClient mockClient = new MockClient();
 
-    public static ApiClient getClient() {
+    public static BaseClient getClient() {
         return restClient;
     }
 
-    public static ApiClient getClient(boolean mocked) {
+    public static BaseClient getClient(boolean mocked) {
         if (mocked) {
             return mockClient;
         }
