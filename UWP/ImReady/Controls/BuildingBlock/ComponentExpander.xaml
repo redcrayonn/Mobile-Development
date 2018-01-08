@@ -582,12 +582,12 @@
                                 </Grid.RowDefinitions>
                                 <CheckBox VerticalAlignment="Top" IsEnabled="False"></CheckBox>
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock Text="Reager op 5 woningen"></TextBlock>
-                                    <TextBlock Text="Dit is een beschrijving"></TextBlock>
+                                    <TextBlock Text="{x:Bind Name}"></TextBlock>
+                                    <TextBlock Text="{x:Bind Description}"></TextBlock>
                                     <TextBox 
                                         MinHeight="150" 
                                         AcceptsReturn="True" 
-                                        Text="Ik heb gereageerd op dingen. Veel dingen. Te veel dingen."
+                                        Text="{x:Bind Content}"
                                         ScrollViewer.HorizontalScrollMode="Disabled"
                                         ></TextBox>
                                     <StackPanel Orientation="Horizontal">
