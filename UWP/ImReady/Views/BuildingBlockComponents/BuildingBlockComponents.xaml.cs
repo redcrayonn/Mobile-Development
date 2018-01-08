@@ -25,7 +25,7 @@ namespace ImReady.Views.BlockComponents
     /// </summary>
     public sealed partial class BuildingBlockComponents : Page
     {
-        private BuildingBlockComponentsViewModel ViewModel = BuildingBlockComponentsViewModel.SingleInstance;
+        private ComponentsViewModel ViewModel = ComponentsViewModel.SingleInstance;
 
         public BuildingBlockComponents()
         {
@@ -39,7 +39,7 @@ namespace ImReady.Views.BlockComponents
             var article = e.Parameter as BuildingBlock;
             if (e.Parameter != null && e.Parameter is BuildingBlock)
             {
-                ViewModel = new BuildingBlockComponentsViewModel()
+                ViewModel = new ComponentsViewModel()
                 {
                     BuildingBlock = e.Parameter as BuildingBlock
                 };

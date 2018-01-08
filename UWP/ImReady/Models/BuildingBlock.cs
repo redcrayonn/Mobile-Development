@@ -9,11 +9,21 @@ namespace ImReady.Models
 {
     public class BuildingBlock
     {
+        //Custom
         public string Image { get; set; }
-        public string Name { get; set; }
-        public BuildingBlockType BuildingBlockType { get; set; }
 
-        public List<BuildingBlockComponent> Components { get; set; }
+        //JSON props below
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public BuildingBlock Block { get; set; }
+        public int Type { get; set; }
+        public List<Component> Components { get; set; }
+        public string Id { get; set; }
+
+        public BuildingBlockType GetBlockType()
+        {
+            return (BuildingBlockType)this.Type;
+        }
     }
 
     public enum BuildingBlockType

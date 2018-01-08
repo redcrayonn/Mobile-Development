@@ -111,7 +111,11 @@
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\BuildingBlock.cs" />
-    <Compile Include="Models\BuildingBlockComponent.cs" />
+    <Compile Include="Models\ClientTask.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\FuturePlan.cs" />
+    <Compile Include="Models\UsefulLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\BaseService.cs" />
@@ -124,7 +128,7 @@
     <Compile Include="Services\Mock\MockActivityService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockComponentService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
-    <Compile Include="ViewModels\BuildingBlockComponentsViewModel.cs" />
+    <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
     <Compile Include="ViewModels\MyItemViewModel.cs" />
     <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">

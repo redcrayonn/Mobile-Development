@@ -14,7 +14,7 @@ namespace ImReady.Services
     {
         private IBuildingBlockComponentService MockService => new MockBuildingBlockComponentService();
 
-        public BuildingBlockComponent GetComponent(int blockId)
+        public Component GetComponent(int blockId)
         {
             if (Mock)
             {

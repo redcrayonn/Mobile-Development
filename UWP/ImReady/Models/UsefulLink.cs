@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImReady.Models
 {
-    public class BuildingBlockComponent
+    public class UsefulLink
     {
-        public string ComponentName { get; set; }
-        public List<Activity> Activities { get; set; }
+        public string Id { get; set; }
+        public string Url { get; set; }
     }
 }

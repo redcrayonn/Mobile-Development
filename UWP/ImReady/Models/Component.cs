@@ -7,20 +7,20 @@ using Newtonsoft.Json;
 
 namespace ImReady.Models
 {
-    public class Activity
+    public class Component
     {
         //Custom props
 
         //Json props
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Points { get; set; }
         public int Status { get; set; }
-        public string Content { get; set; }
+        public Activity[] Activities { get; set; }
+        public ClientTask[] Tasks { get; set; }
         public string Deadline { get; set; }
-        public Feedback[] Feedback { get; set; }
-        [JsonProperty("Activity")]
-        public Activity SubActivity { get; set; }
+        [JsonProperty("Component")]
+        public Component SubComponent { get; set; }
         public int Id { get; set; }
+        public UsefulLink[] UsefulLinks { get; set; }
     }
 }

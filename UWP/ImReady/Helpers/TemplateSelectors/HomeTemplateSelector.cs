@@ -18,7 +18,7 @@ namespace ImReady.Helpers.TemplateSelectors
         {
             var dataItem = item as BuildingBlock;
 
-            if(dataItem.BuildingBlockType == BuildingBlockType.Add)
+            if(dataItem.GetBlockType() == BuildingBlockType.Add)
             {
                 return AddBlockTemplate;
             }

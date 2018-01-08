@@ -26,16 +26,16 @@ namespace ImReady.Controls
             this.InitializeComponent();
         }
 
-        public BuildingBlockComponent BuildingBlockComponent
+        public Component BuildingBlockComponent
         {
-            get { return (BuildingBlockComponent)GetValue(BuildingBlockComponentProperty); }
+            get { return (Component)GetValue(BuildingBlockComponentProperty); }
             set { SetValue(BuildingBlockComponentProperty, value); }
         }
 
         public static readonly DependencyProperty BuildingBlockComponentProperty =
             DependencyProperty.Register(
                 nameof(BuildingBlockComponent),
-                typeof(BuildingBlockComponent),
+                typeof(Component),
                 typeof(ComponentExpander),
                 new PropertyMetadata(null));
     }

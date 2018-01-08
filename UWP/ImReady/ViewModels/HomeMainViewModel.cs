@@ -24,7 +24,7 @@ namespace ImReady.ViewModels
         {
             Image = "ms-appx:///Assets/Material/ic_add_white_48dp.png",
             Name = "",
-            BuildingBlockType = BuildingBlockType.Add,
+            Type = (int)BuildingBlockType.Add,
         };
 
         public HomeMainViewModel()

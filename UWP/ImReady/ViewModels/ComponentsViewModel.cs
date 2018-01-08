@@ -11,13 +11,13 @@ using Windows.UI.Text;
 
 namespace ImReady.ViewModels
 {
-    public class BuildingBlockComponentsViewModel : BindableBase
+    public class ComponentsViewModel : BindableBase
     {
-        public static BuildingBlockComponentsViewModel SingleInstance => new BuildingBlockComponentsViewModel();
+        public static ComponentsViewModel SingleInstance => new ComponentsViewModel();
 
         public BuildingBlock BuildingBlock { get; set; }
 
-        public BuildingBlockComponentsViewModel()
+        public ComponentsViewModel()
         {
 
         }

@@ -18,10 +18,10 @@ namespace ImReady.Services.Mock
             {
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Geld,
                     Name = "Geld",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                         new BuildingBlockComponentService().GetComponent(-1),
                         new BuildingBlockComponentService().GetComponent(-1),
@@ -30,73 +30,73 @@ namespace ImReady.Services.Mock
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Huis,
                     Name = "Huis",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Werk,
+                    Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Geld,
                     Name = "Geld",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Huis,
                     Name = "Huis",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Werk,
+                    Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Geld,
                     Name = "Geld",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Huis,
                     Name = "Huis",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    BuildingBlockType = BuildingBlockType.Werk,
+                    Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
                     Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
-                    Components = new List<BuildingBlockComponent>(){
+                    Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },

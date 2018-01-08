@@ -29,7 +29,7 @@
         <ScrollViewer RelativePanel.Below="commandbar" Margin="0 48 0 0 ">
             <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="local1:BuildingBlockComponent">
+                    <DataTemplate x:DataType="local1:Component">
                         <StackPanel>
                             <controls1:ComponentExpander BuildingBlockComponent="{Binding}">
 

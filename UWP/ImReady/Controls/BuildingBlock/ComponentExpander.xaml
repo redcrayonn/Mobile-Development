@@ -550,7 +550,7 @@
                         x:Name="Expander2" 
                         VerticalAlignment="Top" 
                         Margin="0"
-                        Header="{x:Bind BuildingBlockComponent.ComponentName}"
+                        Header="{x:Bind BuildingBlockComponent.Name}"
                         HorizontalContentAlignment="Stretch"
                         Foreground="White"
                         Background="Black"
@@ -564,7 +564,7 @@
             <Grid Background="White">
                 <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
-                      Text="{x:Bind BuildingBlockComponent.ComponentName}"
+                      Text="{x:Bind BuildingBlockComponent.Name}"
                       VerticalAlignment="Top"
                            Foreground="Black"
                        />

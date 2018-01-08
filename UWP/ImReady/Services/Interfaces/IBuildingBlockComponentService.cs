@@ -9,6 +9,6 @@ namespace ImReady.Services.Interfaces
 {
     public interface IBuildingBlockComponentService : IBaseService
     {
-        BuildingBlockComponent GetComponent(int blockId);
+        Component GetComponent(int blockId);
     }
 }

@@ -12,12 +12,12 @@ namespace ImReady.Services.Mock
     {
         public bool Mock => true;
 
-        public BuildingBlockComponent GetComponent(int blockId)
+        public Component GetComponent(int blockId)
         {
-            return new BuildingBlockComponent()
+            return new Component()
             {
-                ComponentName = "Woonruimte zoeken",
-                Activities = new List<Activity>()
+                Name = "Woonruimte zoeken",
+                Activities = new Activity[]
                 {
                     new ActivityService().GetActivity(-1),
                     new ActivityService().GetActivity(-1),
