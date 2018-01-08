@@ -47,22 +47,23 @@ namespace ImReady.Views.Login
 
             LoadImages();
 
-            var loginCredential = GetCredentialFromLocker();
+            //var loginCredential = GetCredentialFromLocker();
 
-            if (loginCredential != null)
-            {
-                // There is a credential stored in the locker.
-                // Populate the Password property of the credential
-                // for automatic login.
-                loginCredential.RetrievePassword();
-                HandleLogin(loginCredential.UserName, loginCredential.Password);
-            }
-            else
-            {
-                // There is no credential stored in the locker.
-                // Display UI to get user credentials.
-                ShowLoginUI();
-            }
+            //if (loginCredential != null)
+            //{
+            //    // There is a credential stored in the locker.
+            //    // Populate the Password property of the credential
+            //    // for automatic login.
+            //    loginCredential.RetrievePassword();
+            //    HandleLogin(loginCredential.UserName, loginCredential.Password);
+            //}
+            //else
+            //{
+            //    // There is no credential stored in the locker.
+            //    // Display UI to get user credentials.
+            //    ShowLoginUI();
+            //}
+            ShowLoginUI();
         }
 
         private async void HandleLogin(string username, string password)
@@ -74,7 +75,7 @@ namespace ImReady.Views.Login
             if(loginResult.IsValid())
             {
                 //Set logged in user
-                CurrentUser.SingleInstance.AuthToken = loginResult.AuthToken;
+                CurrentUser.SingleInstance.AccessToken = loginResult.access_token;
                 CurrentUser.SingleInstance.Username = loginResult.UserName;
 
                 //Navigate to Home
@@ -91,31 +92,33 @@ namespace ImReady.Views.Login
         private void LoginSubmit_Click(object sender, RoutedEventArgs e)
         {
             string username = LoginName.Text != null ? LoginName.Text : null;
-            string password = LoginPassword.Password != null ? LoginName.Text : null;
+            string password = LoginPassword.Password != null ? LoginPassword.Password : null;
 
             if (username != null && password != null)
                 HandleLogin(username, password);
         }
 
         //TODO: Make optional (checkbox)
-        private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
-        {
-            Windows.Security.Credentials.PasswordCredential credential = null;
+        //private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
+        //{
+        //    Windows.Security.Credentials.PasswordCredential credential = null;
 
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            var credentialList = vault.FindAllByResource(resourceName);
-            if (credentialList.Count > 0)
-            {
-                if (credentialList.Count == 1)
-                {
-                    credential = credentialList[0];
-                }
-                else
-                    throw new NotImplementedException();
-            }
-
-            return credential;
-        }
+        //    var vault = new Windows.Security.Credentials.PasswordVault();
+        //    if (vault.RetrieveAll().Count > 0)
+        //    {
+        //        var credentialList = vault.FindAllByResource(resourceName);
+        //        if (credentialList.Count > 0)
+        //        {
+        //            if (credentialList.Count == 1)
+        //            {
+        //                credential = credentialList[0];
+        //            }
+        //            else
+        //                throw new NotImplementedException();
+        //        }
+        //    }
+        //    return credential;
+        //}
         private void HideLoginUI()
         {
             LoginUIGrid.Visibility = Visibility.Collapsed;

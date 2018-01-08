@@ -23,8 +23,9 @@ namespace ImReady.Services.Web
                 client.BaseAddress = new Uri("http://inhollandbackend.azurewebsites.net/");
                 if (EnableAuthentication && CurrentUser.SingleInstance.IsLoggedIn)
                 {
-                    var token = CurrentUser.SingleInstance.AuthToken;
+                    var token = CurrentUser.SingleInstance.AccessToken;
                     client.DefaultRequestHeaders.Add("x-authtoken", token);
+
                 }
                 try
                 {

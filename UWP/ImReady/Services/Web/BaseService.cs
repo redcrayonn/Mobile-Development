@@ -8,6 +8,6 @@ namespace ImReady.Services.Web
 {
     public class BaseService
     {
-        protected static string apiMainUrl = "http://inhollandbackend.azurewebsites.net/api/";
+        protected static string apiMainUrl = "http://imreadyapiv2.azurewebsites.net/api/";
     }
 }

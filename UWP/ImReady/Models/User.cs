@@ -28,9 +28,9 @@ namespace ImReady.Models
 
         }
 
-        public string AuthToken { get; set; }
+        public string AccessToken { get; set; }
         public string Username { get; set; }
 
-        public bool IsLoggedIn => !string.IsNullOrEmpty(AuthToken);
+        public bool IsLoggedIn => !string.IsNullOrEmpty(AccessToken);
     }
 }

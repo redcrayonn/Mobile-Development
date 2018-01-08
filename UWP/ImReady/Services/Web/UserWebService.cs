@@ -16,7 +16,7 @@ namespace ImReady.Services.Web
 
         public async Task<LoginResult> Login(string userName, string password)
         {
-            var loginUrl = "";
+            var loginUrl = "login";
 
             var user = CurrentUser.SingleInstance;
             var uri = apiMainUrl + loginUrl;
@@ -24,20 +24,24 @@ namespace ImReady.Services.Web
             var parameters = new Dictionary<string, string>()
                     {
                         { "UserName", userName },
-                        { "Password", password}
+                        { "Password", password },
+                        { "grant_type", "password" }
                     };
 
             var result = await BaseClient.HandleAsync<LoginResult>(uri, httpMethod, parameters);
 
-            if (result != null && !string.IsNullOrEmpty(result.AuthToken))
+            if (result != null && !string.IsNullOrEmpty(result.access_token))
             {
                 var vault = new Windows.Security.Credentials.PasswordVault();
                 if (!vault.RetrieveAll().Any())
                 {
-                    var credentials = new Windows.Security.Credentials.PasswordCredential(Package.Current.DisplayName, userName, password);
+                    //password moet authtoken worden!!!
+                    //Access token is tijdelijk geldig
+                    //Refresh token: om nieuwe access token op te halen
+                    var credentials = new Windows.Security.Credentials.PasswordCredential(Package.Current.DisplayName, userName, result.access_token);
                     vault.Add(credentials);
                 }
-                user.AuthToken = result.AuthToken;
+                user.AccessToken = result.access_token;
                 user.Username = userName;
                 return result;
             }
