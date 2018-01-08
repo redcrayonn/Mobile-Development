@@ -591,8 +591,8 @@
                                         ScrollViewer.HorizontalScrollMode="Disabled"
                                         ></TextBox>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
-                                        <Button Content="INLEVEREN" HorizontalAlignment="Right"></Button>
+                                        <TextBlock x:Name="TextContent" Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
+                                        <Button x:Name="SubmitTask" Content="INLEVEREN" HorizontalAlignment="Right" Click="SubmitTask_Click"></Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>

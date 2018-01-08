@@ -38,5 +38,10 @@ namespace ImReady.Controls
                 typeof(Component),
                 typeof(ComponentExpander),
                 new PropertyMetadata(null));
+
+        private void SubmitTask_Click(object sender, RoutedEventArgs e)
+        {
+            //var test = sender as Text
+        }
     }
 }
