@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -67,6 +68,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     private PersonalBlockAdapter gridAdapter;
 
     private boolean popupShown;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_client_home);
 
         initGridView();
+        initRefresh();
         initToolbarAndDrawer();
     }
 
@@ -134,9 +137,17 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             case R.id.notifications:
                 gotoNotifications();
                 return true;
+            case R.id.refresh:
+                refreshData();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void refreshData() {
+        initData(true);
+        refreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -189,7 +200,12 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         logoutButton.setOnClickListener(this);
     }
 
-    private void initData(boolean fetchFromNetword) {
+    private void initRefresh() {
+        refreshLayout = findViewById(R.id.pull_refresh);
+        refreshLayout.setOnRefreshListener(this::refreshData);
+    }
+
+    private void initData(boolean fetchFromNetwork) {
         ImReadyApplication instance = ImReadyApplication.getInstance();
         UserCache cache = instance.getCache(UserRole.CLIENT);
         Store<FutureplanResponse, BarCode> store = instance.getFutureplanStore();
@@ -199,7 +215,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
         // request data from the futureplan store
         Single<FutureplanResponse> dataRequest;
-        if (fetchFromNetword) {
+        if (fetchFromNetwork) {
             // get data from network
             dataRequest = store.fetch(request);
         } else {
@@ -289,11 +305,17 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onSuccess(FutureplanResponse response) {
         gridAdapter.setData(response.getBlocks());
+        resetUi();
     }
 
     @Override
     public void onError(Throwable throwable) {
         Log.e(ClientHomeActivity.class.getSimpleName(), throwable.getMessage(), throwable);
         Toast.makeText(this, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
+        resetUi();
+    }
+
+    private void resetUi() {
+        refreshLayout.setRefreshing(false);
     }
 }

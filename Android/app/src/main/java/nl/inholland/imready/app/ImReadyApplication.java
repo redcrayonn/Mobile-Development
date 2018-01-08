@@ -83,6 +83,7 @@ public class ImReadyApplication extends Application {
         return StoreBuilder.<BarCode, BufferedSource, FutureplanResponse>parsedWithKey()
                 .fetcher(this::futureplanFecther)
                 .persister(persister)
+                .networkBeforeStale()
                 // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
                 .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), FutureplanResponse.class))
                 // create or open the store
@@ -105,6 +106,7 @@ public class ImReadyApplication extends Application {
         return StoreBuilder.<BarCode, BufferedSource, List<Block>>parsedWithKey()
                 .fetcher(this::blocksFecther)
                 .persister(persister)
+                .networkBeforeStale()
                 // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
                 .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), new TypeToken<List<Block>>() {}.getType()))
                 // create or open the store

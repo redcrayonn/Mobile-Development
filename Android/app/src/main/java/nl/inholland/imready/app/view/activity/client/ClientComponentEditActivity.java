@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,11 +16,14 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
+import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Component;
+import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.rest.ClientService;
 import retrofit2.Call;
@@ -28,9 +32,11 @@ import retrofit2.Response;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class ClientComponentEditActivity extends AppCompatActivity implements Callback<Void> {
+public class ClientComponentEditActivity extends AppCompatActivity implements Callback<Void>, View.OnClickListener {
 
     private Component component;
+    private ClientService clientService;
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
         setContentView(R.layout.activity_client_component_edit);
 
         ApiClient apiClient = ApiManager.getClient();
-        ClientService clientService = apiClient.getClientService();
+        clientService = apiClient.getClientService();
 
         // Get data passed from previous view
         Intent intent = getIntent();
@@ -68,13 +74,31 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.simple_list_item, assignments);
         listView.setAdapter(adapter);
 
-        String clientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
-
         // Button
-        Button button = findViewById(R.id.button_positive);
-        button.setOnClickListener(view -> {
-            clientService.enrollComponent(clientId, component.getId()).enqueue(this);
-        });
+        addButton = findViewById(R.id.button_positive);
+        addButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button_positive:
+                addComponentToFutureplan();
+                return;
+            default:
+                return;
+        }
+    }
+
+    private void addComponentToFutureplan() {
+        addButton.setEnabled(false);
+        UserCache userCache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        String clientId = userCache.getUserId();
+        clientService.enrollComponent(clientId, component.getId()).enqueue(this);
+    }
+
+    private void resetUi() {
+        addButton.setEnabled(true);
     }
 
     @Override
@@ -90,15 +114,18 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
     @Override
     public void onResponse(Call<Void> call, Response<Void> response) {
         if (response.isSuccessful()) {
-            Toast.makeText(this, getString(R.string.personal_component_succes), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.personal_component_succes, component.getName()), Toast.LENGTH_SHORT).show();
             //notify application of changed data
-            EventBus.getDefault().post(new FutureplanChangedEvent());
+            EventBus.getDefault().post(new FutureplanChangedEvent(component.getId()));
             finish();
+        } else {
+            onFailure(call, new Throwable());
         }
     }
 
     @Override
     public void onFailure(Call<Void> call, Throwable t) {
         Toast.makeText(this, R.string.enroll_component_failed, Toast.LENGTH_SHORT).show();
+        resetUi();
     }
 }

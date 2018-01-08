@@ -11,6 +11,10 @@ import android.widget.Toast;
 import com.nytimes.android.external.store3.base.impl.BarCode;
 import com.nytimes.android.external.store3.base.impl.Store;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
+import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.adapter.BlockPlanExpandableListAdapter;
 import nl.inholland.imready.model.blocks.Block;
@@ -58,11 +63,31 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         Parcelable state = expandableListView.onSaveInstanceState();
         outState.putParcelable(ParcelableConstants.LIST_VIEW_STATE, state);
         outState.putStringArrayList(ParcelableConstants.COMPONENT, componentsAlreadyInFutureplan);
         super.onSaveInstanceState(outState);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnFutureplanChangedEvent(FutureplanChangedEvent event) {
+        if (componentsAlreadyInFutureplan != null) {
+            componentsAlreadyInFutureplan.remove(event.componentId);
+            initData(true);
+        }
     }
 
     private void initListView(List<String> componentsAlreadyInFutureplan) {

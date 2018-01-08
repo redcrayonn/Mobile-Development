@@ -58,26 +58,19 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BlockViewHolder viewHolder = null;
-        if (convertView == null) {
-            int type = getItemViewType(position);
+        int type = getItemViewType(position);
 
-            switch (type) {
-                case ADD_BLOCK_TYPE:
-                    convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
-                    break;
-                case BUILDING_BLOCK_TYPE:
-                default:
-                    convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
-                    break;
-
-            }
-            viewHolder = new BlockViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (BlockViewHolder) convertView.getTag();
+        switch (type) {
+            case ADD_BLOCK_TYPE:
+                convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
+                break;
+            case BUILDING_BLOCK_TYPE:
+            default:
+                convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
+                break;
         }
 
+        BlockViewHolder viewHolder = new BlockViewHolder(convertView);
         viewHolder.fill(context, (PersonalBlock) getItem(position), null);
 
         return convertView;
