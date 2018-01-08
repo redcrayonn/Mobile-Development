@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ImReady.Models;
+using ImReady.Models.Results;
+using ImReady.Services.Web;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,15 +26,107 @@ namespace ImReady.Views.Login
     /// </summary>
     public sealed partial class LoginMain : Page
     {
+        private string resourceName = "ImReady";
+        private string defaultUserName;
+
+        private UserWebService userService = UserWebService.SingleInstance;
+
         public LoginMain()
         {
             this.InitializeComponent();
+        }
+
+        private void LoadImages()
+        {
             LogoSvg.Source = new SvgImageSource(new Uri("ms-appx:///Assets/SharedResources/Logo.svg"));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            HideLoginUI();
+
+            LoadImages();
+
+            //var loginCredential = GetCredentialFromLocker();
+
+            //if (loginCredential != null)
+            //{
+            //    // There is a credential stored in the locker.
+            //    // Populate the Password property of the credential
+            //    // for automatic login.
+            //    loginCredential.RetrievePassword();
+            //    HandleLogin(loginCredential.UserName, loginCredential.Password);
+            //}
+            //else
+            //{
+            //    // There is no credential stored in the locker.
+            //    // Display UI to get user credentials.
+            //    ShowLoginUI();
+            //}
+            ShowLoginUI();
+        }
+
+        private async void HandleLogin(string username, string password)
+        {
+            //Show loading spinner
+            LoginResult loginResult = await userService.Login(username, password);
+            //Hide loading spinner
+
+            if(loginResult.IsValid())
+            {
+                //Set logged in user
+                CurrentUser.SingleInstance.AccessToken = loginResult.access_token;
+                CurrentUser.SingleInstance.Username = loginResult.UserName;
+
+                //Navigate to Home
+                Frame.Navigate(typeof(Home.HomeMain));
+            }
+            else
+            {
+                //Render errors.
+                //Make sure UI is visible.
+                ShowLoginUI();
+            }
         }
 
         private void LoginSubmit_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Home.HomeMain));
+            string username = LoginName.Text != null ? LoginName.Text : null;
+            string password = LoginPassword.Password != null ? LoginPassword.Password : null;
+
+            if (username != null && password != null)
+                HandleLogin(username, password);
+        }
+
+        //TODO: Make optional (checkbox)
+        //private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
+        //{
+        //    Windows.Security.Credentials.PasswordCredential credential = null;
+
+        //    var vault = new Windows.Security.Credentials.PasswordVault();
+        //    if (vault.RetrieveAll().Count > 0)
+        //    {
+        //        var credentialList = vault.FindAllByResource(resourceName);
+        //        if (credentialList.Count > 0)
+        //        {
+        //            if (credentialList.Count == 1)
+        //            {
+        //                credential = credentialList[0];
+        //            }
+        //            else
+        //                throw new NotImplementedException();
+        //        }
+        //    }
+        //    return credential;
+        //}
+        private void HideLoginUI()
+        {
+            LoginUIGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowLoginUI()
+        {
+            LoginUIGrid.Visibility = Visibility.Visible;
         }
     }
 }

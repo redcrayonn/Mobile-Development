@@ -12,7 +12,7 @@
                     Stretch="UniformToFill">
         </ImageBrush>
     </Page.Background>
-    <Grid>
+    <Grid x:Name="LoginUIGrid">
         <Image x:Name="LogoSvg"
                       Width="300"
                       VerticalAlignment="Top"

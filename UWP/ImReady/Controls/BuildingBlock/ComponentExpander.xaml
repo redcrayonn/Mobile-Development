@@ -580,14 +580,19 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <CheckBox VerticalAlignment="Top"></CheckBox>
+                                <CheckBox VerticalAlignment="Top" IsEnabled="False"></CheckBox>
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
                                     <TextBlock Text="Reager op 5 woningen"></TextBlock>
                                     <TextBlock Text="Dit is een beschrijving"></TextBlock>
-                                    <TextBox MinHeight="150" AcceptsReturn="True" Text="Ik heb gereageerd op dingen. Veel dingen. Te veel dingen."></TextBox>
+                                    <TextBox 
+                                        MinHeight="150" 
+                                        AcceptsReturn="True" 
+                                        Text="Ik heb gereageerd op dingen. Veel dingen. Te veel dingen."
+                                        ScrollViewer.HorizontalScrollMode="Disabled"
+                                        ></TextBox>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
-                                        <Button Content="INLEVEREN"></Button>
+                                        <Button Content="INLEVEREN" HorizontalAlignment="Right"></Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
