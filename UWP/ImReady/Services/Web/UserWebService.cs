@@ -14,6 +14,7 @@ namespace ImReady.Services.Web
     {
         public static UserWebService SingleInstance => new UserWebService();
 
+        //Todo create service in order to mock
         public async Task<LoginResult> Login(string userName, string password)
         {
             var loginUrl = "login";
@@ -32,17 +33,20 @@ namespace ImReady.Services.Web
 
             if (result != null && !string.IsNullOrEmpty(result.access_token))
             {
-                var vault = new Windows.Security.Credentials.PasswordVault();
-                if (!vault.RetrieveAll().Any())
-                {
-                    //password moet authtoken worden!!!
-                    //Access token is tijdelijk geldig
-                    //Refresh token: om nieuwe access token op te halen
-                    var credentials = new Windows.Security.Credentials.PasswordCredential(Package.Current.DisplayName, userName, result.access_token);
-                    vault.Add(credentials);
-                }
+                //var vault = new Windows.Security.Credentials.PasswordVault();
+                //if (!vault.RetrieveAll().Any())
+                //{
+                //    //password moet authtoken worden!!!
+                //    //Access token is tijdelijk geldig
+                //    //Refresh token: om nieuwe access token op te halen
+                //    var credentials = new Windows.Security.Credentials.PasswordCredential(Package.Current.DisplayName, userName, result.access_token);
+                //    vault.Add(credentials);
+                //}
                 user.AccessToken = result.access_token;
                 user.Username = userName;
+                result.UserName = userName;
+                user.Id = result.user_id;
+                //TODO: aanvullen, wss functie maken
                 return result;
             }
             return result;

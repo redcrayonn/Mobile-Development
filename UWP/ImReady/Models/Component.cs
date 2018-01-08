@@ -20,7 +20,7 @@ namespace ImReady.Models
         public string Deadline { get; set; }
         [JsonProperty("Component")]
         public Component SubComponent { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public UsefulLink[] UsefulLinks { get; set; }
     }
 }

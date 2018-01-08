@@ -123,6 +123,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\BuildingBlockComponentService.cs" />
     <Compile Include="Services\BuildingBlockService.cs" />
+    <Compile Include="Services\FuturePlanService.cs" />
     <Compile Include="Services\Interfaces\IBaseService.cs" />
     <Compile Include="Services\Interfaces\IActivityService.cs" />
     <Compile Include="Services\Interfaces\IBuildingBlockComponentService.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
     <Compile Include="Services\Web\BaseClient.cs" />
     <Compile Include="Services\Web\BaseService.cs" />
+    <Compile Include="Services\Web\FuturePlanWebService.cs" />
     <Compile Include="Services\Web\UserWebService.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />

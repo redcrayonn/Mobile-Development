@@ -10,7 +10,7 @@ namespace ImReady.Models
     public class BuildingBlock
     {
         //Custom
-        public string Image { get; set; }
+        public string Image { get; set; } = "ms-appx:///Assets/Material/ic_add_white_48dp.png";
 
         //JSON props below
         public string Name { get; set; }

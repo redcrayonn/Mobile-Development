@@ -21,6 +21,6 @@ namespace ImReady.Models
         public Feedback[] Feedback { get; set; }
         [JsonProperty("Activity")]
         public Activity SubActivity { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

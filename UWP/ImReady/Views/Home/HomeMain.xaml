@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:viewmodel="using:ImReady.Models"
+    xmlns:viewmodel2="using:ImReady.ViewModels"
     xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors">
+    <Page.DataContext>
+        <viewmodel2:HomeMainViewModel/>
+    </Page.DataContext>
     <Page.Background>
         <ImageBrush ImageSource="/Assets/SharedResources/homescreen.png"
                     Stretch="UniformToFill"
@@ -83,7 +87,7 @@
                     <AppBarButton Icon="Placeholder" Click="AppBarButton_Click" Foreground="White"/>
                 </CommandBar>
                 <GridView 
-                    ItemsSource="{x:Bind ViewModel.Blocks }" 
+                    ItemsSource="{x:Bind ViewModel.FuturePlan.Blocks, Mode=OneWay}" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     ItemTemplateSelector="{StaticResource MyTemplateSelector}"

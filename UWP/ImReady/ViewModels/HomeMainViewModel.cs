@@ -4,6 +4,7 @@ using ImReady.Services;
 using ImReady.Views.BlockComponents;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,28 @@ using Windows.UI.Xaml.Controls;
 
 namespace ImReady.ViewModels
 {
-    public class HomeMainViewModel
+    public class HomeMainViewModel : INotifyPropertyChanged
     {
         public static HomeMainViewModel SingleInstance => new HomeMainViewModel();
 
         public RelayCommand NavigateToBuildingBlockComponents => new RelayCommand(NavigateToComponents);
 
-        public List<BuildingBlock> Blocks { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private FuturePlan futurePlan;
+
+        public FuturePlan FuturePlan
+        {
+            get
+            {
+                return futurePlan;
+            }
+            set
+            {
+                futurePlan = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FuturePlan"));
+            }
+        }
 
         public BuildingBlock AddBlock = new BuildingBlock()
         {
@@ -29,8 +45,7 @@ namespace ImReady.ViewModels
 
         public HomeMainViewModel()
         {
-            Blocks = new BuildingBlockMockService().GetAllBlocks();
-            Blocks.Add(AddBlock);
+            LoadFuturePlan();
         }
 
         public static void NavigateToComponents(object obj)
@@ -40,6 +55,22 @@ namespace ImReady.ViewModels
                 var item = obj as BuildingBlock;
                 ((Frame)Window.Current.Content).Navigate(typeof(BuildingBlockComponents), item);
             }
+        }
+
+        public async void LoadFuturePlan()
+        {
+            var futurePlanConcept = await new FuturePlanService().GetFuturePlan();
+            if(futurePlanConcept == null)
+            {
+                futurePlanConcept = new FuturePlan()
+                {
+                    Blocks = new BuildingBlock[] { }
+                };
+            }
+            var blockList = futurePlanConcept.Blocks.ToList();
+            blockList.Add(AddBlock);
+            futurePlanConcept.Blocks = blockList.ToArray();
+            FuturePlan = futurePlanConcept;
         }
     }
 }
