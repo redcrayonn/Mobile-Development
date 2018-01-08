@@ -60,7 +60,7 @@ public class WelcomeDialogFragment extends DialogFragment implements AdapterView
             }
         }
 
-        // fill dialog data
+        // fill dialog views
         TextView titleView = dialogView.findViewById(R.id.dialog_title);
         titleView.setText(getString(R.string.welcome, "Geoffrey"));
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/sm"
@@ -16,29 +17,29 @@
         android:id="@+id/dialog_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_title"
         style="@style/Base.TextAppearance.AppCompat.Small"
         android:text="@string/welcome_subtext"/>
+
     <ListView
         android:id="@+id/dialog_tasks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_text"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/sm"
         android:layout_marginBottom="@dimen/sm"
         android:scrollbars="vertical"
         android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/sm"
-        tools:listitem="@layout/list_item_persoanl_activity_todo"/>
-    <Button
+        android:layout_weight="1"
+        tools:listitem="@layout/list_item_personal_activity_todo"/>
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_neutral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_tasks"
-        android:layout_alignParentEnd="true"
         android:text="@string/close"
         android:drawableEnd="@drawable/ic_close"
         android:drawablePadding="@dimen/md"
-        android:foregroundTint="@android:color/white"
-        style="@style/App.Button"/>
-</RelativeLayout>
+        android:textColor="@color/colorDark"
+        android:layout_gravity="end"
+        style="@android:style/Widget.Holo.Button.Borderless"/>
+</LinearLayout>

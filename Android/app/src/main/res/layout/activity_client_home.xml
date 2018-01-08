@@ -9,7 +9,7 @@
     tools:menu="app_bar_home">
 
     <!-- Background image -->
-    <include layout="@layout/background_image"/>
+    <include layout="@layout/background_image_blurred"/>
 
     <!-- Container for view and toolbar -->
     <LinearLayout
@@ -33,11 +33,12 @@
             android:layout_height="match_parent"
             android:paddingStart="@dimen/xxl"
             android:paddingEnd="@dimen/xxl"
-            android:paddingTop="@dimen/md">
+            android:paddingTop="@dimen/xxl">
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginBottom="@dimen/md"
                 android:fillViewport="true">
 
                 <!-- Content container -->

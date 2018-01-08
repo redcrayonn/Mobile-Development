@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="App.Button" parent="Base.Widget.AppCompat.Button">
+    <style name="App.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:paddingStart">@dimen/lg</item>
         <item name="android:paddingEnd">@dimen/lg</item>
     </style>
 
     <!-- Base Button Styles -->
+    <style name="App.Button.NoColor" parent="Widget.AppCompat.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:paddingStart">@dimen/lg</item>
+        <item name="android:paddingEnd">@dimen/lg</item>
+    </style>
+
     <style name="App.Button.Primary">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="App.Button.Accent">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:colorButtonNormal">@color/colorAccent</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
     </style>
 
     <style name="App.Button.Tertiary" parent="App.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:colorButtonNormal">@color/colorTertiary</item>
+        <item name="android:backgroundTint">@color/colorTertiary</item>
     </style>
 
     <style name="App.Button.Happy" parent="App.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:colorButtonNormal">@color/colorHappy</item>
+        <item name="android:backgroundTint">@color/colorHappy</item>
     </style>
 
     <style name="App.Button.Borderless" parent="App.Button">
@@ -54,6 +60,4 @@
         <item name="android:tint">@android:color/white</item>
         <item name="colorPrimary">@color/colorAccent</item>
     </style>
-
-    <color name="colorHappy">#1BC771</color>
 </resources>

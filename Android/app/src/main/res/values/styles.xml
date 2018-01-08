@@ -29,7 +29,7 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="App.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="App.Dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 
