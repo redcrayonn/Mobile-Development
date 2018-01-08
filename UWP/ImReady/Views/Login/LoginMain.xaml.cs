@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -72,7 +73,7 @@ namespace ImReady.Views.Login
             LoginResult loginResult = await userService.Login(username, password);
             //Hide loading spinner
 
-            if(loginResult.IsValid())
+            if(loginResult != null && loginResult.IsValid())
             {
                 //Set logged in user
                 CurrentUser.SingleInstance.AccessToken = loginResult.access_token;
@@ -86,6 +87,20 @@ namespace ImReady.Views.Login
                 //Render errors.
                 //Make sure UI is visible.
                 ShowLoginUI();
+                MessageDialog message;
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                {
+                    message = new MessageDialog("Er is iets fout gegaan tijdens het inloggen, zorg dat u een geldig gebruikersnaam en wachtwoord ingevuld hebt.");
+                }
+                else if(loginResult == null)
+                {
+                    message = new MessageDialog("Er is iets fout gegaan tijdens het inloggen, controleer uw internet connectie en probeer het nogmaals.");
+                }
+                else
+                {
+                    message = new MessageDialog("Er is iets fout gegaan tijdens het inloggen, probeer het later nogmaals of neem contact op met uw begeleider en/of administrator");
+                }
+                await message.ShowAsync();
             }
         }
 

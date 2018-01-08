@@ -52,13 +52,16 @@ namespace ImReady.Services.Web
                                 }
                                 else
                                 {
-                                    var errorNessage = response.StatusCode == System.Net.HttpStatusCode.Unauthorized ? "Uw account is niet gevonden met de gebruikte wachtwoord en gebruikersnaam. \n Probeer het nogmaals." : response.ReasonPhrase;
-                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                    () =>
+                                    if(Config.GlobalConfig.ShowDebug)
                                     {
-                                        MessageDialog msg = new MessageDialog($"Er is iets misgegaan: \n {errorNessage}");
-                                        msg.ShowAsync();
-                                    });
+                                        var errorNessage = response.StatusCode == System.Net.HttpStatusCode.Unauthorized ? "Failure" : response.ReasonPhrase;
+                                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                        () =>
+                                        {
+                                            MessageDialog msg = new MessageDialog($"Er is iets misgegaan: \n {errorNessage}");
+                                            msg.ShowAsync();
+                                        });
+                                    }
                                     return default(T);
                                 }
                             }
