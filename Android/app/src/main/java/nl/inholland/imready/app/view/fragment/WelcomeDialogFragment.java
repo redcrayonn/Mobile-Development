@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -79,5 +80,6 @@ public class WelcomeDialogFragment extends DialogFragment implements AdapterView
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         dismiss();
         PersonalActivity activity = (PersonalActivity) adapter.getItem(position);
+        Toast.makeText(getActivity(), "Soon!", Toast.LENGTH_SHORT).show();
     }
 }

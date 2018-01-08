@@ -25,7 +25,7 @@ import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
 import nl.inholland.imready.app.view.fragment.LoginFailedDialogFragment;
 import nl.inholland.imready.app.view.listener.DialogListener;
 import nl.inholland.imready.model.enums.UserRole;
-import nl.inholland.imready.service.ApiClient;
+import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.model.ApiKeyResponse;
 import nl.inholland.imready.service.rest.AuthenticationService;
 import retrofit2.Call;
@@ -40,14 +40,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText passwordInput;
     private Button loginBtn;
     private ProgressBar progressBar;
+    private BaseClient apiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ApiClient client = ApiManager.getClient();
-        authService = client.getAuthenticationService();
+        apiClient = ApiManager.getClient();
+        authService = apiClient.getAuthenticationService();
 
         initViews();
     }
@@ -121,8 +122,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onResponse(Call<ApiKeyResponse> call, Response<ApiKeyResponse> response) {
-        if (response.isSuccessful() && response.body() != null) {
-            ApiKeyResponse keyResponse = response.body();
+        ApiKeyResponse keyResponse = response.body();
+        if (response.isSuccessful() && keyResponse != null) {
             if (keyResponse.getUserType() == null) {
                 onFailure(call, new Throwable("User type is null"));
             }
@@ -134,7 +135,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString(PreferenceConstants.USER_NAME, keyResponse.getFirstName());
             editor.apply();
 
-            UserCache cache = null;
+            // Save the auth token for further requests
+            apiClient.setToken(keyResponse.getAccessToken());
+
+            UserCache cache;
 
             Intent intent = null;
             switch (keyResponse.getUserType()) {

@@ -287,7 +287,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
             dialogWelcome.setArguments(bundle);
-            dialogWelcome.show(getSupportFragmentManager(), "welcome");
+            dialogWelcome.show(getSupportFragmentManager(), WelcomeDialogFragment.TAG);
         }
         popupShown = true;
     }

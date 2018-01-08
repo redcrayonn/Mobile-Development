@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -46,11 +47,11 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
     /* Child */
     @Override
     public int getChildrenCount(int groupPosition) {
-        if (this.components.size() == 0) {
-            return 0;
-        }
         PersonalComponent component = this.components.get(groupPosition);
         List<PersonalActivity> activities = component.getActivities();
+        if (activities == null || activities.size() == 0) {
+            return 1;
+        }
         return activities.size();
     }
 
@@ -61,11 +62,12 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        if (this.components.size() == 0) {
-            return 0;
-        }
         PersonalComponent component = this.components.get(groupPosition);
-        return component.getActivities().get(childPosition);
+        List<PersonalActivity> activities = component.getActivities();
+        if (activities == null || activities.size() == 0) {
+            return null;
+        }
+        return activities.get(childPosition);
     }
 
     @Override
@@ -109,16 +111,21 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         PersonalActivity activity = (PersonalActivity) getChild(groupPosition, childPosition);
-        FillableViewHolder<PersonalActivity> viewHolder = null;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_personal_activity, parent, false);
-            viewHolder = new PersonalActivityViewHolder(convertView);
-            convertView.setTag(viewHolder);
+        if (activity == null) {
+            convertView = inflater.inflate(R.layout.simple_list_item2, parent, false);
+            ((TextView)convertView).setText(R.string.empty_component);
         } else {
-            viewHolder = (PersonalActivityViewHolder) convertView.getTag();
-        }
+            FillableViewHolder<PersonalActivity> viewHolder = null;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.list_item_personal_activity, parent, false);
+                viewHolder = new PersonalActivityViewHolder(convertView);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (PersonalActivityViewHolder) convertView.getTag();
+            }
 
-        viewHolder.fill(context, activity, this);
+            viewHolder.fill(context, activity, this);
+        }
 
         return convertView;
     }

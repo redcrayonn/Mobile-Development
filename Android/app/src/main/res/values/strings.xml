@@ -47,4 +47,5 @@
     <string name="futureplan">Toekomstplan</string>
     <string name="personal_component_succes">%1$s succesvol toegevoegd!</string>
     <string name="refresh">Refresh</string>
+    <string name="empty_component">Er zijn geen activiteiten gevonden.</string>
 </resources>
