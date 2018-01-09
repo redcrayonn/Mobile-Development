@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -25,9 +24,12 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 
+import static br.com.zbra.androidlinq.Linq.stream;
+
 public class ClientBlockDetailsActivity extends AppCompatActivity implements ClientBlockDetailsView, DialogListener {
 
     private ClientBlockDetailsPresenter presenter;
+    private PersonalComponentExpandableListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
         expandableListView.setClickable(true);
         // order by the closest deadline
         List<PersonalComponent> components = block.getComponents();
-        BaseExpandableListAdapter adapter = new PersonalComponentExpandableListAdapter(this, components, presenter);
+        adapter = new PersonalComponentExpandableListAdapter(this, components, presenter);
         expandableListView.setAdapter(adapter);
 
         PersonalComponent component = intent.getParcelableExtra(ParcelableConstants.COMPONENT);
@@ -66,6 +68,20 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
         } else {
             int index = block.getComponents().indexOf(component);
             expandableListView.expandGroup(index);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // save
+        List<PersonalComponent> adapterData = adapter.getData();
+        List<PersonalActivity> activities = stream(adapterData)
+                .selectMany(PersonalComponent::getActivities)
+                .where(value -> value.getStatus() == BlockPartStatus.ONGOING)
+                .toList();
+        for (PersonalActivity activity : activities) {
+            presenter.saveActivity(activity);
         }
     }
 

@@ -78,6 +78,6 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     @Override
     public void onClick(View v) {
         String content = assignmentInput.getText().toString();
-        presenter.handInActivity(activity, content);
+        presenter.putActivity(activity, content);
     }
 }

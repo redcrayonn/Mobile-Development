@@ -5,6 +5,7 @@ import nl.inholland.imready.service.model.Client;
 import nl.inholland.imready.service.model.PutClientActivityModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -23,5 +24,5 @@ public interface ClientService {
     Call<Client> getClient(@Path("clientId") String clientId);
 
     @PUT("client/{clientId}/activity/{activityId}")
-    Call<Void> putActivity(@Path("clientId") String clientId, @Path("activityId") String activityId, PutClientActivityModel model);
+    Call<Void> putActivity(@Path("clientId") String clientId, @Path("activityId") String activityId, @Body PutClientActivityModel model);
 }

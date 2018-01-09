@@ -21,7 +21,7 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
     }
 
     @Override
-    public void handInActivity(PersonalActivity activity, String content) {
+    public void putActivity(PersonalActivity activity, String content) {
         activity.setContent(content);
         view.showHandInDialog(activity);
 
@@ -34,6 +34,24 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
         ClientService clientService = ApiManager.getClient().getClientService();
         PutClientActivityModel model = new PutClientActivityModel(status, activity.getContent());
         clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(this);
+    }
+
+    @Override
+    public void saveActivity(PersonalActivity activity) {
+        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        ClientService clientService = ApiManager.getClient().getClientService();
+        PutClientActivityModel model = new PutClientActivityModel(activity.getStatus(), activity.getContent());
+        clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                //ignore
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                //ignore
+            }
+        });
     }
 
     @Override

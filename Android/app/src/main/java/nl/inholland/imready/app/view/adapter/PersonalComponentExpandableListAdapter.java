@@ -20,7 +20,7 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.util.ColorUtil;
 
-public class PersonalComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<PersonalActivity> {
+public class PersonalComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<PersonalActivity>, DataHolder<List<PersonalComponent>> {
 
     private Context context;
     private List<PersonalComponent> components;
@@ -140,6 +140,17 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
 
     @Override
     public void onChanged(Object sender, PersonalActivity activity) {
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public List<PersonalComponent> getData() {
+        return components;
+    }
+
+    @Override
+    public void setData(List<PersonalComponent> data) {
+        components = data;
         notifyDataSetChanged();
     }
 }

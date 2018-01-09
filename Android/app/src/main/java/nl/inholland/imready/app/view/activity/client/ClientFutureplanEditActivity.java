@@ -94,10 +94,7 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnFutureplanChangedEvent(FutureplanChangedEvent event) {
-        if (componentsAlreadyInFutureplan != null) {
-            componentsAlreadyInFutureplan.remove(event.componentId);
-            initData(true);
-        }
+        initData(true);
     }
 
     private void initListView(List<String> componentsAlreadyInFutureplan) {
