@@ -1,7 +1,7 @@
 package nl.inholland.imready.app.view.activity.client;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,9 +20,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nytimes.android.external.store3.base.impl.BarCode;
-import com.nytimes.android.external.store3.base.impl.Store;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,34 +28,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.zbra.androidlinq.Stream;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
-import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
-import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
-import nl.inholland.imready.app.persistence.UserCache;
+import nl.inholland.imready.app.presenter.client.ClientHomePresenter;
+import nl.inholland.imready.app.presenter.client.ClientHomePresenterImpl;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.activity.LoginActivity;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
+import nl.inholland.imready.app.view.view.ClientHomeView;
 import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
-import nl.inholland.imready.model.enums.UserRole;
-import nl.inholland.imready.service.model.FutureplanResponse;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SingleObserver<FutureplanResponse> {
+public class ClientHomeActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, ClientHomeView {
 
     private static final String STATE_POPUP = "popup";
 
@@ -69,6 +58,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     private boolean popupShown;
     private SwipeRefreshLayout refreshLayout;
+    private ClientHomePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +68,15 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         initGridView();
         initRefresh();
         initToolbarAndDrawer();
+
+        presenter = new ClientHomePresenterImpl(this, ImReadyApplication.getInstance().getFutureplanStore());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        initData(false);
+        presenter.init();
     }
 
     @Override
@@ -122,8 +114,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         inflater.inflate(R.menu.app_bar_home, menu);
         TextView userText = findViewById(R.id.username);
 
-        SharedPreferences settings = getSharedPreferences(PreferenceConstants.FILE, MODE_PRIVATE);
-        String username = settings.getString(PreferenceConstants.USER_NAME, getString(R.string.default_username));
+        String username = presenter.getUsername();
         userText.setText(username);
         return super.onCreateOptionsMenu(menu);
     }
@@ -132,10 +123,10 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.messages:
-                gotoMessages();
+                goToMessages();
                 return true;
             case R.id.notifications:
-                gotoNotifications();
+                goToNotifications();
                 return true;
             case R.id.refresh:
                 refreshData();
@@ -146,7 +137,8 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void refreshData() {
-        initData(true);
+        presenter.invalidateData();
+        presenter.init();
         refreshLayout.setRefreshing(true);
     }
 
@@ -154,16 +146,16 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.drawer_messages:
-                gotoMessages();
+                goToMessages();
                 break;
             case R.id.drawer_family:
-                gotoFamily();
+                goToFamily();
                 break;
             case R.id.drawer_info:
-                gotoInfo();
+                goToInfo();
                 break;
             case R.id.logout:
-                logout();
+                presenter.logout();
                 break;
         }
     }
@@ -205,51 +197,29 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         refreshLayout.setOnRefreshListener(this::refreshData);
     }
 
-    private void initData(boolean fetchFromNetwork) {
-        ImReadyApplication instance = ImReadyApplication.getInstance();
-        UserCache cache = instance.getCache(UserRole.CLIENT);
-        Store<FutureplanResponse, BarCode> store = instance.getFutureplanStore();
-
-        // cache request param, where type is the key for the cache and key the unique identifier
-        BarCode request = new BarCode("future_plan", cache.getUserId());
-
-        // request data from the futureplan store
-        Single<FutureplanResponse> dataRequest;
-        if (fetchFromNetwork) {
-            // get data from network
-            dataRequest = store.fetch(request);
-        } else {
-            // get data from disk and store it in-memory
-            // if data is not present it does a network call to retrieve the data from online
-            dataRequest = store.get(request);
-        }
-
-        dataRequest
-            // required to pass the data to views (ui changes are required to be on the main thread)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            // callback implementation (onSucces / onFailure)
-            .subscribe(this);
-    }
-
-    private void gotoMessages() {
+    @Override
+    public void goToMessages() {
         Intent intent = new Intent(this, MessagesActivity.class);
         startActivity(intent);
     }
 
-    private void gotoNotifications() {
-        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
+    @Override
+    public void goToNotifications() {
+        showMessage("Soon!");
     }
 
-    private void gotoFamily() {
-        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
+    @Override
+    public void goToFamily() {
+        showMessage("Soon!");
     }
 
-    private void gotoInfo() {
-        Toast.makeText(this, "Soon!", Toast.LENGTH_SHORT).show();
+    @Override
+    public void goToInfo() {
+        showMessage("Soon!");
     }
 
-    private void logout() {
+    @Override
+    public void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
@@ -277,45 +247,42 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onPersonalBlockLoadedEvent(PersonalBlockLoadedEvent event) {
-        Stream<PersonalComponent> components = stream(event.blocks).selectMany(PersonalBlock::getComponents);
-        Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
-        List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
-
-        if (!todoSoon.isEmpty() && !popupShown) {
-            WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
-            dialogWelcome.setArguments(bundle);
-            dialogWelcome.show(getSupportFragmentManager(), WelcomeDialogFragment.TAG);
-        }
-        popupShown = true;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFutureplanChanged(FutureplanChangedEvent event) {
-        initData(true);
-    }
-
-    @Override
-    public void onSubscribe(Disposable request) {
-        // ignore
-    }
-
-    @Override
-    public void onSuccess(FutureplanResponse response) {
-        gridAdapter.setData(response.getBlocks());
-        resetUi();
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        Log.e(ClientHomeActivity.class.getSimpleName(), throwable.getMessage(), throwable);
-        Toast.makeText(this, R.string.personal_block_failed, Toast.LENGTH_SHORT).show();
-        resetUi();
+        refreshData();
     }
 
     private void resetUi() {
         refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void setViewData(List<PersonalBlock> data) {
+        gridAdapter.setData(data);
+
+        resetUi();
+
+        if (!popupShown) {
+            Stream<PersonalComponent> components = stream(data).selectMany(PersonalBlock::getComponents);
+            Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
+            List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
+            if (!todoSoon.isEmpty()) {
+                WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
+                dialogWelcome.setArguments(bundle);
+                dialogWelcome.show(getSupportFragmentManager(), WelcomeDialogFragment.TAG);
+            }
+        }
+        popupShown = true;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

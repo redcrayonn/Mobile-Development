@@ -6,13 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
@@ -97,8 +94,6 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
             data = new ArrayList<>();
         }
         this.personalBlocks = data;
-        // publish loaded personalBlocks to the event bus
-        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
         notifyDataSetChanged();
     }
 }
