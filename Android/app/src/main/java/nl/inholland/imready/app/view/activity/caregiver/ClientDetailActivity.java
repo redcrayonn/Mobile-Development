@@ -82,10 +82,17 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
     }
 
     private void setProgressbarVisible(boolean state){
-        if (state)
+        RelativeLayout buttonFutureplan = findViewById(R.id.futureplan);
+
+        if (state){
+            buttonFutureplan.setEnabled(true);
             progressBar.setVisibility(View.VISIBLE);
-        else
+        }
+
+        else{
             progressBar.setVisibility(View.INVISIBLE);
+            buttonFutureplan.setEnabled(true);
+        }
     }
 
     @Override

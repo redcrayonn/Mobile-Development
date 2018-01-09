@@ -11,34 +11,30 @@ import java.util.List;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
-import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 
 /**
  * Created by Peter on 09/01/2018.
  */
 
-public class CaregiverPlanComponentViewHolder implements FillableViewHolder<PersonalComponent> {
-    private final TextView componentText;
+public class CaregiverPlanComponentViewHolder implements FillableViewHolder<PersonalActivity> {
+    private final TextView activityText;
     private final TextView notificationCountText;
 
     public CaregiverPlanComponentViewHolder(View view){
-        this.componentText = view.findViewById(R.id.component_name);
+        this.activityText = view.findViewById(R.id.component_name);
         this.notificationCountText = view.findViewById(R.id.notificationCount);
 
     }
 
     @Override
-    public void fill(@NonNull Context context, @NonNull PersonalComponent data, @Nullable OnChangeListener<PersonalComponent> changeListener) {
-        componentText.setText(data.getName());
+    public void fill(@NonNull Context context, @NonNull PersonalActivity data, @Nullable OnChangeListener<PersonalActivity> changeListener) {
+        activityText.setText(data.getName());
 
-        List<PersonalActivity> activities = data.getActivities();
-        Integer notifications =0;
+        Integer notifications = 0;
 
-        for (PersonalActivity activity : activities){
-            if (activity.getStatus() == BlockPartStatus.PENDING){
+            if (data.getStatus() == BlockPartStatus.PENDING){
                 notifications++;}
-        }
 
         if (notifications > 0){
             notificationCountText.setVisibility(View.VISIBLE);

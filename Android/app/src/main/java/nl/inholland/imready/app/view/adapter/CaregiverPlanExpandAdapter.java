@@ -16,6 +16,7 @@ import nl.inholland.imready.app.view.holder.CaregiverPlanComponentViewHolder;
 import nl.inholland.imready.app.view.holder.CaregiverPlanHeaderViewHolder;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.service.ApiClient;
@@ -25,6 +26,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static br.com.zbra.androidlinq.Linq.stream;
+
 /**
  * Created by Peter on 08/01/2018.
  */
@@ -32,7 +35,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
     private final Context context;
     private final LayoutInflater inflater;
     private final CaregiverService caregiverService;
-    private List<PersonalBlock> blocks;
+    private List<PersonalComponent> components;
     private final String clientId;
 
 
@@ -42,39 +45,39 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
 
         ApiClient client = ApiManager.getClient();
         caregiverService = client.getCaregiverService();
-        this.blocks = new ArrayList<>();
+        this.components = new ArrayList<>();
         this.clientId = clientId;
     }
 
     @Override
-    public int getGroupCount() {return blocks.size();}
+    public int getGroupCount() {return components.size();}
 
     @Override
     public int getChildrenCount(int position) {
-        if (this.blocks.size() == 0) {
+        if (this.components.size() == 0) {
             return 0;
         }
 
-        PersonalBlock block = blocks.get(position);
-        if (block.getComponents() == null) {
+        PersonalComponent component = components.get(position);
+        if (component.getActivities() == null) {
             return 0;
         }
-        return block.getComponents().size();
+        return component.getActivities().size();
     }
 
     @Override
-    public Object getGroup(int position) {return blocks.get(position);}
+    public Object getGroup(int position) {return components.get(position);}
 
     @Override
     public Object getChild(int group, int child) {
-        if (this.blocks.size() == 0) {
+        if (this.components.size() == 0) {
             return null;
         }
-        PersonalBlock block = blocks.get(group);
-        if (block.getComponents() == null || block.getComponents().size() == 0) {
+        PersonalComponent component = components.get(group);
+        if (component.getActivities() == null || component.getActivities().size() == 0) {
             return null;
         }
-        return block.getComponents().get(child);
+        return component.getActivities().get(child);
     }
 
     @Override
@@ -93,34 +96,34 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
     }
 
     @Override
-    public View getGroupView(int blockPosition, boolean componentPosition, View view, ViewGroup viewGroup) {
-        PersonalBlock block = (PersonalBlock) getGroup(blockPosition);
+    public View getGroupView(int componentPosition, boolean isExpanded, View view, ViewGroup viewGroup) {
+        PersonalComponent component = (PersonalComponent) getGroup(componentPosition);
 
-        FillableViewHolder<PersonalBlock> viewHolder;
+        FillableViewHolder<PersonalComponent> viewHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_caregiver_block_header, viewGroup, false);
             viewHolder = new CaregiverPlanHeaderViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (FillableViewHolder<PersonalBlock>) view.getTag();
+            viewHolder = (FillableViewHolder<PersonalComponent>) view.getTag();
         }
 
-        viewHolder.fill(context, block, null);
+        viewHolder.fill(context, component, null);
 
         return view;
     }
 
     @Override
     public View getChildView(int blockPosition, int componentPosition, boolean b, View view, ViewGroup viewGroup) {
-        PersonalComponent component = (PersonalComponent) getChild(blockPosition, componentPosition);
-        FillableViewHolder<PersonalComponent> viewHolder;
+        PersonalActivity component = (PersonalActivity) getChild(blockPosition, componentPosition);
+        FillableViewHolder<PersonalActivity> viewHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_component_notification, viewGroup, false);
 
             viewHolder = new CaregiverPlanComponentViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (FillableViewHolder<PersonalComponent>) view.getTag();
+            viewHolder = (FillableViewHolder<PersonalActivity>) view.getTag();
         }
 
         viewHolder.fill(context, component, null);
@@ -137,7 +140,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
     public void onResponse(Call<FutureplanResponse> call, Response<FutureplanResponse> response) {
         List<PersonalBlock> blocks = response.body().getBlocks();
         if (response.isSuccessful() && blocks != null) {
-            this.blocks = blocks;
+            this.components = stream(blocks).selectMany(PersonalBlock::getComponents).toList();
             notifyDataSetChanged();
         }
     }
