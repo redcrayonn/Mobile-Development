@@ -14,13 +14,13 @@ public class ClientsResponse {
     private String name;
 
     @SerializedName("NotificationCount")
-    private String notificationCount;
+    private int notificationCount;
 
     public String getId() {return id;}
 
     public String getName() {return name;}
 
-    public String getNotificationCount() {return notificationCount;}
+    public int getNotificationCount() {return notificationCount;}
 
     public void setId(String id) {
         this.id = id;
@@ -30,7 +30,7 @@ public class ClientsResponse {
         this.name = name;
     }
 
-    public void setNotificationCount(String notificationCount) {
+    public void setNotificationCount(int notificationCount) {
         this.notificationCount = notificationCount;
     }
 }

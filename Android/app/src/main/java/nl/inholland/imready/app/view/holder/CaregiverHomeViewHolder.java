@@ -29,6 +29,13 @@ public class CaregiverHomeViewHolder implements FillableViewHolder<ClientsRespon
     @Override
     public void fill(@NonNull Context context, @NonNull ClientsResponse data, @Nullable OnChangeListener<ClientsResponse> changeListener) {
         nameView.setText(data.getName());
-        notificationCountView.setText(data.getNotificationCount());
+
+        Integer notifications = data.getNotificationCount();
+        if (notifications > 0){
+            notificationCountView.setVisibility(View.VISIBLE);
+            notificationCountView.setText(notifications.toString());
+        }
+        else
+            notificationCountView.setVisibility(View.INVISIBLE);
     }
 }

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import nl.inholland.imready.app.persistence.BlockStore;
+import nl.inholland.imready.app.persistence.CaregiverCache;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.persistence.FutureplanStore;
 import nl.inholland.imready.app.persistence.UserCache;
@@ -38,6 +39,7 @@ public class ImReadyApplication extends Application {
         // init
         userCaches = new HashMap<UserRole, UserCache>() {{
             put(UserRole.CLIENT, new ClientCache());
+            put(UserRole.CAREGIVER, new CaregiverCache());
         }};
 
         initPersister();

@@ -3,6 +3,8 @@ package nl.inholland.imready.app.view.activity.caregiver;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ClientDetailActivity extends AppCompatActivity implements Callback<Client> {
-    private Client client;
+    String clientId;
     RelativeLayout futureplanActionView;
     ClientService clientService;
+    ProgressBar progressBar;
+    private String clientName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +31,27 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
         setContentView(R.layout.activity_client_detail);
 
         futureplanActionView = findViewById(R.id.futureplan);
+        futureplanActionView.setOnClickListener(v -> gotoFutureplan());
+
         //futureplanActionView.findViewById(R.id.action_image);
+        progressBar = findViewById(R.id.progressbar);
 
         Intent intent = getIntent();
-        String clientId = intent.getStringExtra("clientId");
+        clientId = intent.getStringExtra("clientId");
+
+        int notificationCount = intent.getIntExtra("notifications", 0);
+        TextView notifications = findViewById(R.id.clientNotifications);
+
+        if (notificationCount != 0){
+            notifications.setText(Integer.toString(notificationCount));
+        }
+        else
+            notifications.setVisibility(View.INVISIBLE);
 
         if (clientId != null){
             ApiClient client = ApiManager.getClient();
             clientService = client.getClientService();
+            setProgressbarVisible(true);
             clientService.getClient(clientId).enqueue(this);
         }
         else{
@@ -46,9 +63,13 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
     @Override
     public void onResponse(Call<Client> call, Response<Client> response) {
         if (response.isSuccessful()) {
-            Toast.makeText(this, "Succes!", Toast.LENGTH_SHORT).show();
-            client = response.body();
+            //Toast.makeText(this, "Succes!", Toast.LENGTH_SHORT).show();
+            Client client = response.body();
             fillData(client);
+
+            clientName = client.getFirstName();
+            setProgressbarVisible(false);
+
         }
     }
 
@@ -60,8 +81,30 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
         clientEmail.setText(client.getEmail());
     }
 
+    private void setProgressbarVisible(boolean state){
+        RelativeLayout buttonFutureplan = findViewById(R.id.futureplan);
+
+        if (state){
+            buttonFutureplan.setEnabled(true);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        else{
+            progressBar.setVisibility(View.INVISIBLE);
+            buttonFutureplan.setEnabled(true);
+        }
+    }
+
     @Override
     public void onFailure(Call<Client> call, Throwable t) {
         Toast.makeText(this, "Uh oh, er is iets fout gegaan...", Toast.LENGTH_SHORT).show();
+        setProgressbarVisible(false);
+    }
+
+    private void gotoFutureplan() {
+        Intent intent = new Intent(this, CaregiverFutureplanOverviewActivity.class);
+        intent.putExtra("clientId", clientId);
+        intent.putExtra("clientName", clientName);
+        startActivity(intent);
     }
 }
