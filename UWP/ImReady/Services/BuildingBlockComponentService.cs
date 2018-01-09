@@ -2,6 +2,7 @@
 using ImReady.Models;
 using ImReady.Services.Interfaces;
 using ImReady.Services.Mock;
+using ImReady.Services.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace ImReady.Services
             {
                 throw new NotImplementedException();
             }
+        }
+
+        public async Task<BuildingBlock[]> GetAllBuildingBlocks()
+        {
+            return await ComponentWebService.SingleInstance.GetAllBlocks();
         }
     }
 }

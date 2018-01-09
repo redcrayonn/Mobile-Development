@@ -33,7 +33,7 @@
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="AddBuildingBlock" x:DataType="viewmodel:BuildingBlock">
-            <RelativePanel HorizontalAlignment="Center" Background="#F16122" Padding="10" CornerRadius="5">
+            <RelativePanel HorizontalAlignment="Center" Background="#F16122" Padding="10" CornerRadius="5" Tapped="RelativePanel_Tapped">
                 <Image x:Name="addBlockImage" Source="{x:Bind Image}" Width="100" Height="100" HorizontalAlignment="Center" Stretch="Fill"></Image>
             </RelativePanel>
         </DataTemplate>

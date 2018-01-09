@@ -1,5 +1,6 @@
 ﻿using ImReady.Models;
 using ImReady.ViewModels;
+using ImReady.Views.BuildingBlockComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,7 +47,16 @@ namespace ImReady.Views.Home
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-             ViewModel.NavigateToBuildingBlockComponents.Execute((e.ClickedItem as BuildingBlock));
+            if(!((e.ClickedItem as BuildingBlock).GetBlockType() == BuildingBlockType.Add))
+            {
+                ViewModel.NavigateToBuildingBlockComponents.Execute((e.ClickedItem as BuildingBlock));
+            }
+        }
+
+        private void RelativePanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //ViewModel.NavigateToAddComponent.Execute((e.OriginalSource));
+            Frame.Navigate(typeof(AddBuildingBlockComponents));
         }
     }
 }

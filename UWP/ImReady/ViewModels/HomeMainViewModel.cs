@@ -2,6 +2,7 @@
 using ImReady.Models;
 using ImReady.Services;
 using ImReady.Views.BlockComponents;
+using ImReady.Views.BuildingBlockComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace ImReady.ViewModels
         public static HomeMainViewModel SingleInstance => new HomeMainViewModel();
 
         public RelayCommand NavigateToBuildingBlockComponents => new RelayCommand(NavigateToComponents);
+
+        public RelayCommand NavigateToAddComponent => new RelayCommand(NavigateToAddComponents);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,6 +58,11 @@ namespace ImReady.ViewModels
                 var item = obj as BuildingBlock;
                 ((Frame)Window.Current.Content).Navigate(typeof(BuildingBlockComponents), item);
             }
+        }
+
+        public static void NavigateToAddComponents(object obj)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(AddBuildingBlockComponents));
         }
 
         public async void LoadFuturePlan()

@@ -138,11 +138,20 @@
     <Compile Include="Services\Web\ActivityWebService.cs" />
     <Compile Include="Services\Web\BaseClient.cs" />
     <Compile Include="Services\Web\BaseService.cs" />
+    <Compile Include="Services\Web\ComponentWebService.cs" />
     <Compile Include="Services\Web\FuturePlanWebService.cs" />
     <Compile Include="Services\Web\UserWebService.cs" />
+    <Compile Include="ViewModels\AddComponentViewModel.cs" />
+    <Compile Include="ViewModels\AddLowerComponentViewModel.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
     <Compile Include="ViewModels\MyItemViewModel.cs" />
+    <Compile Include="Views\BuildingBlockComponents\AddBuildingBlockComponents.xaml.cs">
+      <DependentUpon>AddBuildingBlockComponents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuildingBlockComponents\AddComponent.xaml.cs">
+      <DependentUpon>AddComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">
       <DependentUpon>BuildingBlockComponents.xaml</DependentUpon>
     </Compile>
@@ -201,6 +210,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MyItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuildingBlockComponents\AddBuildingBlockComponents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuildingBlockComponents\AddComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

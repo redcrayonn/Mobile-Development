@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="ImReady.Views.BuildingBlockComponents.AddBuildingBlockComponents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImReady.Views.BuildingBlockComponents"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:ImReady.Models"
+    xmlns:viewmodels="using:ImReady.ViewModels"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <viewmodels:AddComponentViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <ListView ItemsSource="{x:Bind ViewModel.Blocks, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:BuildingBlock">
+                    <StackPanel Orientation="Horizontal" Height="44" Padding="12" Background="Orange">
+                        <TextBlock Text="{x:Bind Name}" Foreground="black" Height="20" Margin="2"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
