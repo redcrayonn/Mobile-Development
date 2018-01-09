@@ -6,16 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="nl.inholland.imready.app.view.activity.client.ClientFutureplanEditActivity">
-    <ExpandableListView
-        android:id="@+id/blocks"
-        android:background="@null"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/pull_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:groupIndicator="@null"
-        android:childDivider="@android:color/transparent"
-        tools:listheader="@layout/list_item_block_header"
-        tools:listitem="@layout/list_item_component_edit">
-
-    </ExpandableListView>
+        android:layout_height="wrap_content">
+        <ExpandableListView
+            android:id="@+id/blocks"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:groupIndicator="@null"
+            android:childDivider="@android:color/transparent"
+            tools:listheader="@layout/list_item_block_header"
+            tools:listitem="@layout/list_item_component_edit" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

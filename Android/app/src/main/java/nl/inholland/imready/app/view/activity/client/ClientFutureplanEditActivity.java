@@ -3,6 +3,7 @@ package nl.inholland.imready.app.view.activity.client;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -34,6 +35,7 @@ import nl.inholland.imready.model.blocks.Component;
 public class ClientFutureplanEditActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener, SingleObserver<List<Block>> {
 
     private BlockPlanExpandableListAdapter adapter;
+    private SwipeRefreshLayout refreshLayout;
     private ExpandableListView expandableListView;
     private ArrayList<String> componentsAlreadyInFutureplan;
 
@@ -58,8 +60,16 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
             componentsAlreadyInFutureplan = savedInstanceState.getStringArrayList(ParcelableConstants.COMPONENT);
         }
 
+
+        refreshLayout = findViewById(R.id.pull_refresh);
+        refreshLayout.setOnRefreshListener(this::refreshData);
+
         initListView(componentsAlreadyInFutureplan);
         initData(false);
+    }
+
+    private void refreshData() {
+        initData(true);
     }
 
     @Override
@@ -119,6 +129,8 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
                 .observeOn(AndroidSchedulers.mainThread())
                 // callback implementation (onSucces / onFailure)
                 .subscribe(this);
+
+        refreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -141,10 +153,12 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
     @Override
     public void onSuccess(List<Block> blocks) {
         adapter.setData(blocks);
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onError(Throwable throwable) {
         Toast.makeText(this, R.string.block_failed, Toast.LENGTH_SHORT).show();
+        refreshLayout.setRefreshing(false);
     }
 }
