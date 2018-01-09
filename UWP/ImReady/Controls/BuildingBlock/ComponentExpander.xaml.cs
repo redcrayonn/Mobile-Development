@@ -1,4 +1,5 @@
 ﻿using ImReady.Models;
+using ImReady.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,7 +43,28 @@ namespace ImReady.Controls
 
         private void SubmitTask_Click(object sender, RoutedEventArgs e)
         {
-            //var test = sender as Text
+            try
+            {
+                var button = sender as Button;
+                var activity = button.DataContext as Activity;
+                var parent = (button.Parent as StackPanel).Parent as StackPanel;
+                var input = (parent.FindName("TextContent") as TextBox).Text;
+                activity.Content = input;
+                new ActivityService().CompleteActivity(activity);
+            }
+            catch
+            {
+                if(Config.GlobalConfig.ShowDebug)
+                {
+                    MessageDialog msg = new MessageDialog($"Er is iets misgegaan: waarschijnlijk is de layout van de expander control gewijzigd.");
+                    msg.ShowAsync();
+                }
+                else
+                {
+                    MessageDialog msg = new MessageDialog($"Er is iets misgegaan bij het versturen van de input, probeer het later nogmaals.");
+                    msg.ShowAsync();
+                }
+            }
         }
     }
 }

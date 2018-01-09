@@ -585,13 +585,14 @@
                                     <TextBlock Text="{x:Bind Name}"></TextBlock>
                                     <TextBlock Text="{x:Bind Description}"></TextBlock>
                                     <TextBox 
+                                        x:Name="TextContent"
                                         MinHeight="150" 
                                         AcceptsReturn="True" 
                                         Text="{x:Bind Content}"
                                         ScrollViewer.HorizontalScrollMode="Disabled"
                                         ></TextBox>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="TextContent" Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
+                                        <TextBlock  Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
                                         <Button x:Name="SubmitTask" Content="INLEVEREN" HorizontalAlignment="Right" Click="SubmitTask_Click"></Button>
                                     </StackPanel>
                                 </StackPanel>

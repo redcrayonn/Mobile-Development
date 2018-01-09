@@ -115,6 +115,7 @@
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\FuturePlan.cs" />
+    <Compile Include="Models\InputModels\ActivityInputModel.cs" />
     <Compile Include="Models\Results\LoginResult.cs" />
     <Compile Include="Models\UsefulLink.cs" />
     <Compile Include="Models\User.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Services\Mock\MockActivityService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockComponentService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
+    <Compile Include="Services\Web\ActivityWebService.cs" />
     <Compile Include="Services\Web\BaseClient.cs" />
     <Compile Include="Services\Web\BaseService.cs" />
     <Compile Include="Services\Web\FuturePlanWebService.cs" />

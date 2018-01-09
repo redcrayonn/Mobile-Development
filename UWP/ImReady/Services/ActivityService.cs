@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImReady.Models;
 using ImReady.Services.Mock;
+using ImReady.Services.Web;
 
 namespace ImReady.Services
 {
@@ -21,6 +22,18 @@ namespace ImReady.Services
             else
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public async void CompleteActivity(Activity activity)
+        {
+            if(Mock)
+            {
+                
+            }
+            else
+            {
+                await ActivityWebService.SingleInstance.CompleteActivity(activity);
             }
         }
     }
