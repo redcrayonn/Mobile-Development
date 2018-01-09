@@ -16,10 +16,10 @@ namespace ImReadyApiv2.Results.FutureplanResult
             Type = block.Block.Type;
             Block = new Results.BuildingBlockResult(block.Block, true);
 
-            Components = new List<ComponentResult>();
+            Components = new List<ClientComponentResult>();
             foreach (var component in block.Components)
             {
-                Components.Add(new ComponentResult(component));
+                Components.Add(new ClientComponentResult(component));
             }
         }
 
@@ -29,6 +29,6 @@ namespace ImReadyApiv2.Results.FutureplanResult
         public Results.BuildingBlockResult Block { get; set; }
         public BlockType Type { get; set; }
 
-        public List<ComponentResult> Components { get; set; }
+        public List<ClientComponentResult> Components { get; set; }
     }
 }

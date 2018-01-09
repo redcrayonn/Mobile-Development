@@ -9,6 +9,7 @@ namespace ImReadyApiv2.Results
         {
             Name = component.Name;
             Description = component.Description;
+			YoutubeURL = component.YoutubeURL;
             Activities = new List<ActivityResult>();
             UsefulLinks = new List<UsefulLinkResult>();
             foreach (var activity in component.Activities)
@@ -25,7 +26,8 @@ namespace ImReadyApiv2.Results
         }
         public string Name { get; }
         public string Description { get; }
-        public List<ActivityResult> Activities { get; }
-        public List<UsefulLinkResult> UsefulLinks { get; }
+		public string YoutubeURL { get; }
+		public List<ActivityResult> Activities { get; }
+		public List<UsefulLinkResult> UsefulLinks { get; }
     }
 }

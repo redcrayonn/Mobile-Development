@@ -7,12 +7,13 @@ using System.Web;
 
 namespace ImReadyApiv2.Results.FutureplanResult
 {
-    public class ComponentResult : BaseResult
+    public class ClientComponentResult : BaseResult
     {
-        public ComponentResult(ClientComponent component) : base(component)
+        public ClientComponentResult(ClientComponent component) : base(component)
         {
             Name = component.Component.Name;
-            Description = component.Component.Description;
+            Description = component.Description;
+			YoutubeURL = component.YoutubeUrl;
             Status = component.Status;
             Deadline = component.Deadline;
             Component = new Results.ComponentResult(component.Component);
@@ -22,6 +23,11 @@ namespace ImReadyApiv2.Results.FutureplanResult
             {
                 Activities.Add(new ActivityResult(activity));
             }
+
+			UsefulLinks = new List<UsefulLinkResult>();
+			foreach (var link in component.UsefulLinks) {
+				UsefulLinks.Add(new UsefulLinkResult(link));
+			}
 
 			Tasks = new List<ClientTaskResult>();
 			foreach(var task in component.ClientTasks) {
@@ -33,9 +39,13 @@ namespace ImReadyApiv2.Results.FutureplanResult
 
         public string Description { get; set; }
 
-        public Status Status { get; set; }
+		public string YoutubeURL { get; }
+
+		public Status Status { get; set; }
 
         public List<ActivityResult> Activities { get; set; }
+
+		public List<UsefulLinkResult> UsefulLinks { get; }
 
 		public List<ClientTaskResult> Tasks { get; set; }
 

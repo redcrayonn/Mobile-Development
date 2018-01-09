@@ -47,17 +47,6 @@ namespace ImReadyApiv2.Controllers {
 			_calendarService = calendarService;
 		}
 
-		[Route("{clientId}/buildingblock/{buildingBlockId}")]
-		public IHttpActionResult Post (string clientId, string buildingBlockId) {
-			var result = _clientBuildingBlockService.Enroll(clientId, buildingBlockId);
-
-			if (!result) {
-				return BadRequest($"Could not enroll client: {clientId} for buildingBlock: {buildingBlockId}!");
-			}
-
-			return StatusCode(HttpStatusCode.NoContent);
-		}
-
 		/// <summary>
 		/// Returns all client task items
 		/// </summary>
