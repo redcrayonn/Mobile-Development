@@ -26,12 +26,11 @@ namespace ImReady.Services.Web
 
                 var parameters = new Dictionary<string, string>()
                     {
-                        { "id", user.Id },
-                        { "activityId", activity.Id },
-                        { "value", JsonConvert.SerializeObject(new ActivityInputModel() { Status = 1, Content = activity.Content })}
+                        { "Status", ((int)ActivityStatus.PENDING).ToString() },
+                        { "Content", activity.Content }
                     };
 
-                return await BaseClient.HandleAsync<Activity>(uri, httpMethod);
+                return await BaseClient.HandleAsync<Activity>(uri, httpMethod, parameters);
             }
             else
             {

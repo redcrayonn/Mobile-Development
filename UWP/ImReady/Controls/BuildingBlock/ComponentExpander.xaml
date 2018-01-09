@@ -9,11 +9,14 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:models="using:ImReady.Models"
+    xmlns:converters="using:ImReady.Helpers.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
     >
     <UserControl.Resources>
+        <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter"/>
+        <converters:StatusToCheckboxBooleanConverter x:Key="StatusToCheckboxBooleanConverter"/>
         <Style x:Key="HeaderToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
@@ -580,7 +583,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <CheckBox VerticalAlignment="Top" IsEnabled="False"></CheckBox>
+                                <CheckBox VerticalAlignment="Top" IsEnabled="False" IsChecked="{x:Bind Status, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
                                     <TextBlock Text="{x:Bind Name}"></TextBlock>
                                     <TextBlock Text="{x:Bind Description}"></TextBlock>
@@ -590,6 +593,7 @@
                                         AcceptsReturn="True" 
                                         Text="{x:Bind Content}"
                                         ScrollViewer.HorizontalScrollMode="Disabled"
+                                        IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"
                                         ></TextBox>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock  Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>

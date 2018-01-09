@@ -66,5 +66,10 @@ namespace ImReady.Controls
                 }
             }
         }
+
+        public void UpdateUI()
+        {
+            
+        }
     }
 }
