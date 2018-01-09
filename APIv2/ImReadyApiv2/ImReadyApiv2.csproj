@@ -293,7 +293,7 @@
     <Compile Include="Results\ClientUserResult.cs" />
     <Compile Include="Results\FutureplanResult\ActivityResult.cs" />
     <Compile Include="Results\FutureplanResult\BuildingBlockResult.cs" />
-    <Compile Include="Results\FutureplanResult\ComponentResult.cs" />
+    <Compile Include="Results\FutureplanResult\ClientComponentResult.cs" />
     <Compile Include="Results\FutureplanResult\FeedbackResult.cs" />
     <Compile Include="Results\FutureplanResult\FutureplanResult.cs" />
     <Compile Include="Results\UsefulLinkResult.cs" />

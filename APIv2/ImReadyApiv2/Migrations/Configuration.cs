@@ -321,6 +321,21 @@ namespace ImReadyApiv2.Migrations
                 }
             }
             context.Buildingblocks.AddOrUpdate(studyBlock);
+            foreach (var component in studyBlock.Components ?? Enumerable.Empty<Component>())
+            {
+                component.BuildingblockId = studyBlock.Id;
+                context.Components.AddOrUpdate(component);
+                foreach (var activity in component.Activities ?? Enumerable.Empty<Activity>())
+                {
+                    activity.ComponentId = component.Id;
+                    context.Activities.AddOrUpdate(activity);
+                }
+                foreach (var usefulLink in component.UsefulLinks ?? Enumerable.Empty<UsefulLink>())
+                {
+                    usefulLink.ComponentId = component.Id;
+                    context.UsefulLinks.AddOrUpdate(usefulLink);
+                }
+            }
             context.Buildingblocks.AddOrUpdate(livingBlock);
             foreach (var component in livingBlock.Components ?? Enumerable.Empty<Component>())
             {
