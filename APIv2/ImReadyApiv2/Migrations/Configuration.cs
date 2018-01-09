@@ -156,20 +156,7 @@ namespace ImReadyApiv2.Migrations
 						Id = BlockType.WORK+"_cv",
 						Name = "CV opstellen",
 						Description = "CV staat voor ‘Curriculum Vitae’, een Latijns woord dat ‘levensloop’ betekent. In een CV staat wie je bent en welke werk/school-ervaring je hebt. Een werkgever heeft deze CV nodig om te kijken of je ervaring past bij de functie waarop je solliciteert.",
-						YoutubeURL = "",
-						UsefulLinks = new List<UsefulLink>
-						{
-							new UsefulLink
-							{
-								Id = "CV opstellen? Drie onmisbare tips!",
-								Url = "https://www.werk.nl/werk_nl/werknemer/solliciteren/solliciteren-werk-zoeken/cv"
-							},
-							new UsefulLink
-							{
-								Id = "CV opstellen tips",
-								Url = "http://www.carrieretijger.nl/carriere/solliciteren/sollicitatiebrief-en-cv/cv-opstellen"
-							}
-						}
+						YoutubeURL = ""
 					}
                 }
             };
