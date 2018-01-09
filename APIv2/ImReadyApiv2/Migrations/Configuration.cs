@@ -90,6 +90,7 @@ namespace ImReadyApiv2.Migrations
             {
                 Name = "Werk",
                 Description = "De bouwsteen 'Werk' helpt jou met het vinden van een baan. Een baan levert jou geld op, zodat je financieel onafhankelijk wordt. Het begint met jezelf leren kennen. Wat wil je? Waar ben je goed in? Daarna zoek je een bedrijf en ga je daar solliciteren.",
+                Type = BlockType.WORK,
                 Id = BlockType.WORK.ToString(),
                 Components = new List<Component>
                 {
