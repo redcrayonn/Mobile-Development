@@ -1,4 +1,7 @@
-﻿using ImReady.ViewModels;
+﻿using ImReady.Models;
+using ImReady.Services.Web;
+using ImReady.ViewModels;
+using ImReady.Views.Home;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +32,22 @@ namespace ImReady.Views.BuildingBlockComponents
         {
             this.InitializeComponent();
             this.DataContext = ViewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var article = e.Parameter as BuildingBlock;
+            if (e.Parameter != null && e.Parameter is BuildingBlock)
+            {
+                ViewModel.Components = (e.Parameter as BuildingBlock).Components;
+            }
+        }
+
+        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var component = (e.OriginalSource as StackPanel).DataContext as Component;
+            ComponentWebService.SingleInstance.AddComponent(component);
+            Frame.Navigate(typeof(HomeMain));
         }
     }
 }

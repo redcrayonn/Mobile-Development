@@ -37,5 +37,29 @@ namespace ImReady.Services.Web
                 return null;
             }
         }
+
+        public async Task<Component> AddComponent(Component component)
+        {
+            if (CurrentUser.SingleInstance.IsLoggedIn)
+            {
+                var user = CurrentUser.SingleInstance;
+                var blockUrl = $"client/{user.Id}/component/{component.Id}";
+
+                var uri = apiMainUrl + blockUrl;
+                var httpMethod = HttpMethod.Post;
+
+                //var parameters = new Dictionary<string, string>()
+                //    {
+                //        { "id", user.Id },
+                //    };
+
+                return await BaseClient.HandleAsync<Component>(uri, httpMethod);
+            }
+            else
+            {
+                //TODO: throw need to login error/message & send to login page.
+                return null;
+            }
+        }
     }
 }

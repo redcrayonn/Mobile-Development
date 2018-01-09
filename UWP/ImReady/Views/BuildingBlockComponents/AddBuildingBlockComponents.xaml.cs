@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ImReady.ViewModels;
+using ImReady.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,11 @@ namespace ImReady.Views.BuildingBlockComponents
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ViewModel = AddComponentViewModel.SingleInstance;
+        }
+
+        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AddComponent), ((e.OriginalSource as TextBlock).DataContext as BuildingBlock));
         }
     }
 }

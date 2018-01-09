@@ -12,7 +12,7 @@
         <ListView ItemsSource="{x:Bind ViewModel.Components, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:Component">
-                    <StackPanel Orientation="Horizontal" Height="44" Padding="12" Background="Orange">
+                    <StackPanel Orientation="Horizontal" Height="44" Padding="12" Background="Orange" Tapped="StackPanel_Tapped">
                         <TextBlock Text="{x:Bind Name}" Foreground="black" Height="20" Margin="2"/>
                     </StackPanel>
                 </DataTemplate>
