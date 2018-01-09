@@ -1,4 +1,4 @@
-package nl.inholland.imready.app.view.view;
+package nl.inholland.imready.app.view;
 
 
 import android.content.Context;

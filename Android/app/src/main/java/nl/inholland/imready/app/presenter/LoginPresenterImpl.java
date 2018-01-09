@@ -10,7 +10,7 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.persistence.UserCache;
-import nl.inholland.imready.app.view.view.LoginView;
+import nl.inholland.imready.app.view.activity.LoginView;
 import nl.inholland.imready.service.BaseClient;
 import nl.inholland.imready.service.model.ApiKeyResponse;
 import nl.inholland.imready.service.rest.AuthenticationService;

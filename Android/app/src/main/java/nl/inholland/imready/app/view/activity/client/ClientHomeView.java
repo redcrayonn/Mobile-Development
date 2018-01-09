@@ -1,8 +1,9 @@
-package nl.inholland.imready.app.view.view;
+package nl.inholland.imready.app.view.activity.client;
 
 
 import java.util.List;
 
+import nl.inholland.imready.app.view.View;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 
 public interface ClientHomeView extends View {

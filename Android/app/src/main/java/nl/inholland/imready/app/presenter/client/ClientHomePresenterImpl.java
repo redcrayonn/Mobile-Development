@@ -16,7 +16,7 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.persistence.UserCache;
-import nl.inholland.imready.app.view.view.ClientHomeView;
+import nl.inholland.imready.app.view.activity.client.ClientHomeView;
 import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.model.FutureplanResponse;
 

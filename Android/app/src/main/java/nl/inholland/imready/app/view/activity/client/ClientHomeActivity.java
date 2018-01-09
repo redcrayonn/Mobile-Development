@@ -38,7 +38,6 @@ import nl.inholland.imready.app.view.activity.LoginActivity;
 import nl.inholland.imready.app.view.activity.shared.MessagesActivity;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
-import nl.inholland.imready.app.view.view.ClientHomeView;
 import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;

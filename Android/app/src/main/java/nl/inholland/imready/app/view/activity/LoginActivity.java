@@ -25,7 +25,6 @@ import nl.inholland.imready.app.view.activity.caregiver.CaregiverHomeActivity;
 import nl.inholland.imready.app.view.activity.client.ClientHomeActivity;
 import nl.inholland.imready.app.view.fragment.LoginFailedDialogFragment;
 import nl.inholland.imready.app.view.listener.DialogListener;
-import nl.inholland.imready.app.view.view.LoginView;
 import nl.inholland.imready.model.enums.UserRole;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, DialogListener, LoginView {
