@@ -41,8 +41,6 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
         return cell
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? ClientActivityViewController {
             if let cell = sender as? ClientComponentCollectionViewCell {

@@ -60,7 +60,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Antwoord" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bWq-XY-YZQ">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bWq-XY-YZQ">
                                         <rect key="frame" x="75" y="114" width="240" height="98"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
@@ -106,7 +106,7 @@
                 <outlet property="detailView" destination="av7-gp-M5r" id="tKp-eh-ioh"/>
                 <outlet property="openDetailViewBtn" destination="gsL-6s-y34" id="mNW-x3-bCU"/>
                 <outlet property="openView" destination="jog-I6-wyl" id="7Wv-bI-KcO"/>
-                <outlet property="sendBtn" destination="tkN-1B-qup" id="zKi-WU-iNK"/>
+                <outlet property="sendAnswerBtn" destination="tkN-1B-qup" id="7JR-bw-bUE"/>
             </connections>
         </tableViewCell>
     </objects>

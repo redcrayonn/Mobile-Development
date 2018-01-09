@@ -28,6 +28,7 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         cell.buildingblockImage.image = UIImage(named: "\(buildingblocks[indexPath.row].type!)")
         cell.buildingblockName.text = buildingblocks[indexPath.row].name
         cell.components = buildingblocks[indexPath.row].components!
+        cell.componentsLbl.text = "\(buildingblocks[indexPath.row].components!.count) componenten"
         
         return cell
     }

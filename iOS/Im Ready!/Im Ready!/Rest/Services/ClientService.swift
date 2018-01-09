@@ -25,18 +25,22 @@ public class ClientService : Service{
                 } catch {
                     onFailure()
                 }
-                
         }) {
             onFailure()
             print("something failed")
         }
     }
     
-    func sendAnswer(clientId: String, activityId: String, content: String) {
-        apiClient.send(toRelativePath: "client/\(clientId)/activity/\(activityId)", withHttpMethod: .put, onSuccessParser: { (data) in
-            print("success")
+    func sendAnswer(clientId: String, activityId: String, parameters: [String: Any],
+                    onSuccess: @escaping () -> (),
+                    onFailure: @escaping () -> ()) {
+        apiClient.send(toRelativePath: "client/\(clientId)/activity/\(activityId)",
+            withHttpMethod: .put,
+            withParameters: parameters,
+            onSuccessParser: { (data) in
+            onSuccess()
         }) {
-            print("failure")
+            onFailure()
         }
     }
 }

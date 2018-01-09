@@ -78,11 +78,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginClick(_ sender: Any) {
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
         
-        //        let username = usernameField.text!
-        //        let password = passwordField.text!
+        let username = usernameField.text!
+        let password = passwordField.text!
         
-        let username = "woutervermeij@gmail.com"
-        let password = "wouter"
+//        let username = "woutervermeij@gmail.com"
+//        let password = "wouter"
         
         if username != "" && password != "" {
             authenticationService.login(
@@ -107,9 +107,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 forUserAccount: self.imReadyAccount)
                         } catch {
                             print("could not store credentials in the keychain")
-                            self.showAlertWithTitle(
-                                title: "Er is iets fout gegaan.",
-                                message: "Kon inloggegevens niet opslaan in de Keychain.")
+                            simpleAlert(atVC: self,
+                                        withTitle: "Er is iets fout gegaan",
+                                        andMessage: "Kon inloggegevens niet opslaan in de keychain")
                         }
                     }
                     

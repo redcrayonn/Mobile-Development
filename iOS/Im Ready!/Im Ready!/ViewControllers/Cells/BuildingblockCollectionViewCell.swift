@@ -11,6 +11,7 @@ import UIKit
 class BuildingblockCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var buildingblockImage: UIImageView!
     @IBOutlet weak var buildingblockName: UILabel!
+    @IBOutlet weak var componentsLbl: UILabel!
     
     var components: [Component] = []
 }

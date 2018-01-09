@@ -18,8 +18,6 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = buildingblockTitle
-
-        // Do any additional setup after loading the view.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -35,14 +33,29 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Component toevoegen?", message:
+        let addComponentAlert = UIAlertController(title: "Component toevoegen?", message:
             "Wil je '\(components[indexPath.row].name!)' toevoegen?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
-            componentService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!)
+        addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
+            
+            startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: nil)
+            
+            componentService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
+                futureplanChanged = true
+                simpleAlert(atVC: self,
+                            withTitle: "Gelukt!",
+                            andMessage: "Component toegevoegd")
+                stopActivityIndicator(withIndicatorBGView: nil)
+            }, onFailure:  {
+                simpleAlert(atVC: self,
+                            withTitle: "Er is iets fout gegaan.",
+                            andMessage: "Het is niet gelukt het component toe te voegen.")
+                stopActivityIndicator(withIndicatorBGView: nil)
+            })
+            
         }))
         
-        alert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))
+        addComponentAlert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        self.present(addComponentAlert, animated: true, completion: nil)
     }
 }

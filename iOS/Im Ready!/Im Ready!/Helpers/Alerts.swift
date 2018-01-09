@@ -20,3 +20,12 @@ public func simpleAlert(atVC viewController: UIViewController,
     viewController.present(alertController, animated: true, completion: nil)
 
 }
+
+public func choiceAlert(atVC viewController: UIViewController,
+                        withTitle title: String,
+                        andMessage message: String,
+                        buttonOneName btn1: String,
+                        buttonTwoName btn2: String) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    
+}

@@ -14,7 +14,7 @@
 		FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */; };
 		FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */; };
 		FA35EFBD1FE85E86000C9B76 /* ClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */; };
-		FA35EFBF1FE85F21000C9B76 /* ClientActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */; };
+		FA35EFBF1FE85F21000C9B76 /* ClientActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBE1FE85F21000C9B76 /* ClientActivity.swift */; };
 		FA36BE941FE170060044EEB6 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */; };
 		FA3CB3FF1FD56F3200142CCF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */; };
 		FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */; };
@@ -117,7 +117,7 @@
 		FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureplanResult.swift; sourceTree = "<group>"; };
 		FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildingblock.swift; sourceTree = "<group>"; };
 		FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientComponent.swift; sourceTree = "<group>"; };
-		FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivities.swift; sourceTree = "<group>"; };
+		FA35EFBE1FE85F21000C9B76 /* ClientActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivity.swift; sourceTree = "<group>"; };
 		FA36BE931FE170060044EEB6 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -428,7 +428,7 @@
 				FA4DFE411FBC1B7C00945B2A /* Activity.swift */,
 				FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */,
 				FA35EFBC1FE85E86000C9B76 /* ClientComponent.swift */,
-				FA35EFBE1FE85F21000C9B76 /* ClientActivities.swift */,
+				FA35EFBE1FE85F21000C9B76 /* ClientActivity.swift */,
 				FA528D971FDB185C00052647 /* ClientTask.swift */,
 				FA4DFE351FBADB7700945B2A /* Chat.swift */,
 				FA4DFE371FBADB8500945B2A /* Message.swift */,
@@ -849,7 +849,7 @@
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
 				FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */,
-				FA35EFBF1FE85F21000C9B76 /* ClientActivities.swift in Sources */,
+				FA35EFBF1FE85F21000C9B76 /* ClientActivity.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,
 				FA3CB4041FD5D22400142CCF /* ChatsService.swift in Sources */,
 				FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */,

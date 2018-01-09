@@ -19,10 +19,12 @@ class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var openDetailViewBtn: UIButton!
     @IBOutlet weak var activityDescription: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
-//    @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var sendAnswerBtn: UIButton!
     
     var cellExists: Bool = false
-    var activity: Activity?
+    var activity: ClientActivity?
+    var view: ClientActivityViewController!
+//    var content: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +36,31 @@ class ClientActivityStackViewCell: UITableViewCell {
     }
     
     @IBAction func sendAnswer(_ sender: Any) {
+        let alert = UIAlertController(title: "Antwoord versturen?", message: "Weet je zeker dat je het in wilt leveren?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
+            
+            let parameters: [String: Any] = ["Status": 1,
+                                             "Content": self.answerTextView.text]
+            
+            clientService.sendAnswer(clientId: CurrentUser.instance.id!,
+                                     activityId: (self.activity?.id)!,
+                                     parameters: parameters,
+                                     onSuccess: {
+                                        simpleAlert(atVC: self.view,
+                                                    withTitle: "Gelukt!",
+                                                    andMessage: "Je antwoord is opgestuurd!")
+                                        
+                                        self.sendAnswerBtn.isHidden = true
+                                        self.answerTextView.isEditable = false
+            }, onFailure: {
+                print("something went wrong putting the answer")
+                simpleAlert(atVC: self.view, withTitle: "Er is iets fout gegaan", andMessage: "Er is iets fout gegaan met het opsturen van je antwoord, probeer het later nog eens.")
+            })
+        }))
         
+        alert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        view.present(alert, animated: true, completion: nil)
     }
     
     

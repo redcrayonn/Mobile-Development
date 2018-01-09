@@ -8,17 +8,19 @@
 
 import Foundation
 
-struct ClientActivities : Decodable {
+struct ClientActivity : Decodable {
     let name : String?
     let description : String?
     let points : Int?
     let id : String?
+    let content: String?
     
     enum CodingKeys: String, CodingKey {        
         case name = "Name"
         case description = "Description"
         case points = "Points"
         case id = "Id"
+        case content = "Content"
     }
     
     init(from decoder: Decoder) throws {
@@ -27,6 +29,7 @@ struct ClientActivities : Decodable {
         description = try values.decodeIfPresent(String.self, forKey: .description)
         points = try values.decodeIfPresent(Int.self, forKey: .points)
         id = try values.decodeIfPresent(String.self, forKey: .id)
+        content = try values.decodeIfPresent(String.self, forKey: .content)
     }
 
 }

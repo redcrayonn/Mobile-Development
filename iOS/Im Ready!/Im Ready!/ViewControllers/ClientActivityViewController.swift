@@ -10,7 +10,7 @@ import UIKit
 
 class ClientActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
-    var activities: [ClientActivities] = []
+    var activities: [ClientActivity] = []
     var component: ClientComponent!
         
     var t_count:Int = 0
@@ -67,8 +67,15 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             cell.answerTextView.layer.shadowOffset = CGSize.zero
             cell.answerTextView.layer.shadowRadius = 10
             cell.answerTextView.layer.shouldRasterize = true
-
             
+            cell.activity = activities[indexPath.row]
+            cell.view = self
+            
+            if let content = activities[indexPath.row].content {
+                cell.answerTextView.text = content
+                cell.answerTextView.isEditable = false
+                cell.sendAnswerBtn.isHidden = true
+            }
         }
         
         UIView.animate(withDuration:  0) {

@@ -9,8 +9,11 @@
 import UIKit
 import ChameleonFramework
 
+public var futureplanChanged: Bool = false
+
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
+
     
     var clientBuildingblocks: [ClientBuildingblock] = []
     let addBuildingblockBlockName: String = "Toevoegen"
@@ -28,8 +31,17 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         getBuildingblocks()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // If a client added new components, the futurplan has to be reloaded
+        if futureplanChanged{
+            getClientFuturePlan()
+            futureplanChanged = false
+        }
+    }
+    
     func getBuildingblocks() {
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
+        
         buildingblockService.getBuildingblocks(onSuccess: { (results) in
             self.buildingblocks = results
             stopActivityIndicator(withIndicatorBGView: nil)
@@ -100,9 +112,6 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.mainBackground.layer.cornerRadius = 6
             cell.mainBackground.layer.masksToBounds = true
             cell.shadowLayer.layer.backgroundColor = UIColor.clear.cgColor
-            
-            print(indexPath.row)
-            print(clientBuildingblocks.count)
                         
             return cell
         }

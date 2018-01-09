@@ -12,7 +12,7 @@ class ClientComponent : Decodable {
     var name : String? = nil
     var description : String? = nil
     var status : Int? = nil
-    var activities : [ClientActivities]? = nil
+    var activities : [ClientActivity]? = nil
     var deadline : String? = nil
     var component : Component? = nil
     var id : String? = nil
@@ -32,7 +32,7 @@ class ClientComponent : Decodable {
         name = try values.decodeIfPresent(String.self, forKey: .name)
         description = try values.decodeIfPresent(String.self, forKey: .description)
         status = try values.decodeIfPresent(Int.self, forKey: .status)
-        activities = try values.decodeIfPresent([ClientActivities].self, forKey: .activities)
+        activities = try values.decodeIfPresent([ClientActivity].self, forKey: .activities)
         deadline = try values.decodeIfPresent(String.self, forKey: .deadline)
         component = try Component(from: decoder)
         id = try values.decodeIfPresent(String.self, forKey: .id)
