@@ -3,6 +3,7 @@ package nl.inholland.imready.app.view.holder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.fragment.HandInActivityDialogFragment;
+import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.enums.BlockPartStatus;
@@ -25,7 +28,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     private final Button handInButton;
     private final View actionContainer;
     private final View deadlineContainer;
-    private nl.inholland.imready.model.blocks.PersonalActivity activity;
+    private PersonalActivity activity;
 
     public PersonalActivityViewHolder(View view) {
         completedView = view.findViewById(R.id.activity_checkbox);
@@ -41,7 +44,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     }
 
     @Override
-    public void fill(@NonNull Context context, @NonNull nl.inholland.imready.model.blocks.PersonalActivity data, @Nullable OnChangeListener<nl.inholland.imready.model.blocks.PersonalActivity> changeListener) {
+    public void fill(@NonNull Context context, @NonNull PersonalActivity data, @Nullable OnChangeListener<PersonalActivity> changeListener) {
         activity = data;
 
         boolean isComplete = data.getStatus() == BlockPartStatus.DONE;
@@ -68,7 +71,10 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
         handInButton.setVisibility(isComplete || isPending ? View.GONE : View.VISIBLE);
         handInButton.setOnClickListener(view -> {
             activity.setContent(assignmentInput.getText().toString());
-            activity.setStatus(BlockPartStatus.DONE);
+
+            HandInActivityDialogFragment dialog = new HandInActivityDialogFragment();
+            dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), WelcomeDialogFragment.TAG);
+
             if (changeListener != null) {
                 changeListener.onChanged(this, activity);
             }

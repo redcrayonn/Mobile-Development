@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/sm"
+    android:layout_margin="@dimen/xxl"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:text="@string/hand_in_question"/>
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        tools:text="@string/hand_in_text"/>
+</RelativeLayout>

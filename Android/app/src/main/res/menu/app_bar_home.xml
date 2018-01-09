@@ -2,13 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/refresh"
+        android:iconTint="@android:color/white"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/messages"
         android:icon="@drawable/ic_message"
         android:title="@string/messages"
+        android:iconTint="@android:color/white"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/notifications"
         android:icon="@drawable/ic_notifications"
         android:title="@string/messages"
+        android:iconTint="@android:color/white"
         app:showAsAction="ifRoom" />
 </menu>

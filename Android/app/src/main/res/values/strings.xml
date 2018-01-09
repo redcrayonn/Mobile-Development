@@ -46,4 +46,8 @@
     <string name="retry">Try again</string>
     <string name="futureplan">Toekomstplan</string>
     <string name="personal_component_succes">%1$s succesvol toegevoegd!</string>
+    <string name="refresh">Refresh</string>
+    <string name="empty_component">Er zijn geen activiteiten gevonden.</string>
+    <string name="hand_in_question">Inleveren?</string>
+    <string name="hand_in_text">Wil je de uitwerking van de opdracht inleveren?\n\nNa het inleveren moet jouw begeleider de opdracht nog goedkeuren voordat jouw <![CDATA[<font color=#1BC771>READY-coins</font>]]> worden toegekend.</string>
 </resources>

@@ -16,6 +16,7 @@
         <activity
             android:name=".app.view.activity.SplashActivity"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/App.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,8 @@
         <!-- SHARED -->
         <activity
             android:name=".app.view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".app.view.activity.shared.MessagesActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
@@ -50,6 +52,7 @@
         <activity
             android:name=".app.view.activity.client.ClientComponentEditActivity"
             android:parentActivityName=".app.view.activity.client.ClientFutureplanEditActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.Alt" />
 
         <!-- CAREGIVER -->

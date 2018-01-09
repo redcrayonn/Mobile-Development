@@ -6,13 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.logic.events.PersonalBlockLoadedEvent;
 import nl.inholland.imready.app.view.holder.BlockViewHolder;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.PersonalBlock;
@@ -58,26 +55,19 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BlockViewHolder viewHolder = null;
-        if (convertView == null) {
-            int type = getItemViewType(position);
+        int type = getItemViewType(position);
 
-            switch (type) {
-                case ADD_BLOCK_TYPE:
-                    convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
-                    break;
-                case BUILDING_BLOCK_TYPE:
-                default:
-                    convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
-                    break;
-
-            }
-            viewHolder = new BlockViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (BlockViewHolder) convertView.getTag();
+        switch (type) {
+            case ADD_BLOCK_TYPE:
+                convertView = layoutInflater.inflate(R.layout.list_item_block_add, parent, false);
+                break;
+            case BUILDING_BLOCK_TYPE:
+            default:
+                convertView = layoutInflater.inflate(R.layout.list_item_personal_block, parent, false);
+                break;
         }
 
+        BlockViewHolder viewHolder = new BlockViewHolder(convertView);
         viewHolder.fill(context, (PersonalBlock) getItem(position), null);
 
         return convertView;
@@ -104,8 +94,6 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
             data = new ArrayList<>();
         }
         this.personalBlocks = data;
-        // publish loaded personalBlocks to the event bus
-        EventBus.getDefault().post(new PersonalBlockLoadedEvent(this.personalBlocks));
         notifyDataSetChanged();
     }
 }

@@ -111,23 +111,17 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         Component component = (Component) getChild(groupPosition, childPosition);
-        FillableViewHolder<Component> viewHolder;
-        if (convertView == null) {
-            // check whether the component is in the list of already present components
-            if (!isComponentIsFutureplan(component)) {
-                // show the 'can be added view'
-                convertView = inflater.inflate(R.layout.list_item_component_edit, parent, false);
-            } else {
-                // disabled view
-                convertView = inflater.inflate(R.layout.list_item_component_edit_disabled, parent, false);
-            }
 
-            viewHolder = new ComponentPlanViewHolder(convertView);
-            convertView.setTag(viewHolder);
+        // check whether the component is in the list of already present components
+        if (!isComponentIsFutureplan(component)) {
+            // show the 'can be added view'
+            convertView = inflater.inflate(R.layout.list_item_component_edit, parent, false);
         } else {
-            viewHolder = (FillableViewHolder<Component>) convertView.getTag();
+            // disabled view
+            convertView = inflater.inflate(R.layout.list_item_component_edit_disabled, parent, false);
         }
 
+        FillableViewHolder<Component> viewHolder = new ComponentPlanViewHolder(convertView);
         viewHolder.fill(context, component, null);
 
         return convertView;

@@ -46,7 +46,6 @@ public class ClientBlockDetailsActivity extends AppCompatActivity {
         BaseExpandableListAdapter adapter = new PersonalComponentExpandableListAdapter(this, components);
         expandableListView.setAdapter(adapter);
 
-
         PersonalComponent component = intent.getParcelableExtra(ParcelableConstants.COMPONENT);
         if (component == null) {
             expandableListView.expandGroup(0);

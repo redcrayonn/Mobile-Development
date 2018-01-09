@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
-import android.view.View;
 import android.widget.ImageView;
 
 import nl.inholland.imready.R;
@@ -22,19 +21,16 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
 
         // setup view(s) for animation
-        ImageView logo = (ImageView) findViewById(R.id.logo);
+        ImageView logo = findViewById(R.id.logo);
 
         // setup animation options
         ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this,
-                new Pair<View, String>(logo, SceneTransitionConstants.VIEW_NAME_LOGO));
+                new Pair<>(logo, SceneTransitionConstants.VIEW_NAME_LOGO));
 
         // go to next view
-        findViewById(R.id.logo).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(intent, activityOptions.toBundle());
-                finish();
-            }
+        findViewById(R.id.logo).postDelayed(() -> {
+            startActivity(intent, activityOptions.toBundle());
+            finish();
         }, 1000);
 
     }

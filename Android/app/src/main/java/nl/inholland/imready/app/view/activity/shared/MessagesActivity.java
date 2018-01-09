@@ -2,7 +2,6 @@ package nl.inholland.imready.app.view.activity.shared;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
@@ -46,7 +45,6 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
 
     private void initRecyclerView() {
         RecyclerView view = findViewById(R.id.messages);
-        view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         adapter = new MessageAdapter(this, messageService);
         view.setAdapter(adapter);
     }
