@@ -33,7 +33,7 @@
             android:theme="@style/AppTheme.Alt" />
         <activity
             android:name=".app.view.activity.NotificationsActivity"
-            android:theme="@style/AppTheme.Alt"/>
+            android:theme="@style/AppTheme.Alt" />
 
         <!-- CLIENT -->
         <activity
@@ -53,12 +53,15 @@
             android:theme="@style/AppTheme.Alt" />
 
         <!-- CAREGIVER -->
-        <activity
-            android:name=".app.view.activity.caregiver.CaregiverHomeActivity"/>
+        <activity android:name=".app.view.activity.caregiver.CaregiverHomeActivity" />
         <activity
             android:name=".app.view.activity.caregiver.ClientDetailActivity"
             android:parentActivityName=".app.view.activity.caregiver.CaregiverHomeActivity"
             android:theme="@style/AppTheme.Alt" />
+        <activity
+            android:name=".app.view.activity.caregiver.CaregiverFutureplanOverviewActivity"
+            android:parentActivityName=".app.view.activity.caregiver.ClientDetailActivity"
+            android:theme="@style/AppTheme.Alt"/>
     </application>
 
 </manifest>

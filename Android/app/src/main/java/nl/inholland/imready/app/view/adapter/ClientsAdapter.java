@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.holder.CaregiverHomeViewHolder;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.ApiClient;
 import nl.inholland.imready.service.model.ClientsResponse;
 import nl.inholland.imready.service.rest.CaregiverService;
@@ -90,6 +93,9 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
 
     @Override
     public void loadMore() {
-        caregiverService.getClients("f8b1282e-ee65-45d2-ac13-676a8cbca8d3").enqueue(this);
+        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CAREGIVER);
+        String userId = cache.getUserId();
+
+        caregiverService.getClients(userId).enqueue(this);
     }
 }

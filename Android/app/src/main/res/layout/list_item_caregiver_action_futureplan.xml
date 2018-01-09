@@ -5,6 +5,9 @@
     android:background="@color/colorPrimary"
     android:layout_height="wrap_content"
     android:padding="@dimen/md"
+    android:focusable="true"
+    android:clickable="true"
+    android:onClick="gotoFutureplan"
     xmlns:tools="http://schemas.android.com/tools">
     <ImageView
         android:id="@+id/action_image"

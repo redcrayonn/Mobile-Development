@@ -9,8 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
+import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.adapter.ClientsAdapter;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.model.ClientsResponse;
 
 public class CaregiverHomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
@@ -22,6 +25,8 @@ public class CaregiverHomeActivity extends AppCompatActivity implements AdapterV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_home);
+
+
 
         // Toolbar
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,13 +47,15 @@ public class CaregiverHomeActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //Get clicked client
         ClientsResponse client = (ClientsResponse)adapterView.getItemAtPosition(i);
 
+        //Prepare necessary data
         Intent intent = new Intent(this, ClientDetailActivity.class);
         intent.putExtra("clientId", client.getId());
-        startActivity(intent);
+        intent.putExtra("notifications", client.getNotificationCount());
 
-//        String text = "Client " + client.getId() + " is aangeklikt";
-//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        //Next activity
+        startActivity(intent);
     }
 }

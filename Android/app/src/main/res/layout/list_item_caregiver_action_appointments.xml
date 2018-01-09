@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
     android:layout_height="wrap_content"
+    android:clickable="false"
     android:padding="@dimen/md"
     xmlns:tools="http://schemas.android.com/tools">
     <ImageView
@@ -23,7 +24,7 @@
         android:layout_toEndOf="@id/action_image"
         android:layout_centerVertical="true"
         android:gravity="center"
-        tools:text="@string/appointments"
+        android:text="@string/appointments"
         />
     <TextView
         android:id="@+id/clientNotifications"
@@ -34,5 +35,6 @@
         android:gravity="center"
         android:background="@drawable/bg_button_round"
         android:backgroundTint="@color/colorAccent"
+        android:visibility="invisible"
         tools:text="0"/>
 </RelativeLayout>

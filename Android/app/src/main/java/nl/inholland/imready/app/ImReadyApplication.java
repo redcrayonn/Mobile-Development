@@ -17,6 +17,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.persistence.CaregiverCache;
 import nl.inholland.imready.app.persistence.ClientCache;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.model.blocks.Block;
@@ -44,6 +45,7 @@ public class ImReadyApplication extends Application {
         // init
         userCaches = new HashMap<UserRole, UserCache>() {{
             put(UserRole.CLIENT, new ClientCache());
+            put(UserRole.CAREGIVER, new CaregiverCache());
         }};
 
         apiClient = (BaseClient) ApiManager.getClient();
@@ -106,7 +108,7 @@ public class ImReadyApplication extends Application {
                 .fetcher(this::blocksFecther)
                 .persister(persister)
                 // tell the datastore to parse data using the provided Gson configuration and turn it into CLASS
-                .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), new TypeToken<List<Block>>() {}.getType()))
+                .parser(GsonParserFactory.createSourceParser(apiClient.provideGson(), List.class))
                 // create or open the store
                 .open();
     }
