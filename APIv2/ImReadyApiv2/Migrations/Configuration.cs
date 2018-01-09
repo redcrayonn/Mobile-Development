@@ -132,8 +132,8 @@ namespace ImReadyApiv2.Migrations
                             new UsefulLink
                             {
                                 Id = "CV opstellen? Drie onmisbare tips!",
-                                Url = "$YT_Wj6MuHAbSjU"
-                            },
+                                Url = "https://www.intermediair.nl/carriere/cv-en-sollicitatie/cv-en-sollicitatiebrief/laat-je-cv-opvallen-3-onmisbare-tips?policy=accepted&utm_referrer=https%3A%2F%2Fwww.google.nl%2F"
+							},
                             new UsefulLink
                             {
                                 Id = "CV opstellen tips",
@@ -150,7 +150,27 @@ namespace ImReadyApiv2.Migrations
                                 Points = 5
                             }
                         }
-                    }
+                    },
+					new Component 
+					{
+						Id = BlockType.WORK+"_cv",
+						Name = "CV opstellen",
+						Description = "CV staat voor ‘Curriculum Vitae’, een Latijns woord dat ‘levensloop’ betekent. In een CV staat wie je bent en welke werk/school-ervaring je hebt. Een werkgever heeft deze CV nodig om te kijken of je ervaring past bij de functie waarop je solliciteert.",
+						YoutubeURL = "",
+						UsefulLinks = new List<UsefulLink>
+						{
+							new UsefulLink
+							{
+								Id = "CV opstellen? Drie onmisbare tips!",
+								Url = "https://www.werk.nl/werk_nl/werknemer/solliciteren/solliciteren-werk-zoeken/cv"
+							},
+							new UsefulLink
+							{
+								Id = "CV opstellen tips",
+								Url = "http://www.carrieretijger.nl/carriere/solliciteren/sollicitatiebrief-en-cv/cv-opstellen"
+							}
+						}
+					}
                 }
             };
             #endregion
@@ -161,8 +181,27 @@ namespace ImReadyApiv2.Migrations
                 Name = "Studie",
                 Description = "Alles om je studie te regelen",
                 Id = BlockType.EDUCATION.ToString(),
-                Type = BlockType.EDUCATION
-            };
+                Type = BlockType.EDUCATION,
+				Components = new List<Component>
+				{
+					new Component
+					{
+						Id = BlockType.WORK+"_student_grants",
+						Name = "Studiefinanciering",
+						Description = "Wanneer je 18 jaar of ouder bent en naar school gaat, heb je recht op een financiering vanuit de overheid (DUO). Je krijgt dan elke maand een vergoeding waarmee je bijvoorbeeld (een deel van je) kamer kunt betalen. DUO is de instantie van de overheid die de studiefinanciering en scholierenfinanciering regelt. Weten hoe het werkt lees je hier. Wil je weten of jij recht hebt op studiefinanciering? Kijk dan op deze pagina naar de voorwaarden."
+						+"Ben je 18 en zit je op het voortgezet onderwijs? Dan krijg je een tegemoetkoming voor scholieren. Kijk hier voor meer informatie. Let op: vraag het op tijd aan!",
+						YoutubeURL = "https://www.youtube.com/watch?v=pr0IjeC3HEg",
+						UsefulLinks = new List<UsefulLink>
+						{
+							new UsefulLink
+							{
+								Id = "Voor je 18e naar het HBO",
+								Url = "https://apps.duo.nl/SRVS/CGI-BIN/WEBCGI.EXE?New,Kb=Kennisbank,Company={DBD42CAE-B941-4CF4-960D-5F5C917B6281},Case=obj(19441),Question4332=obj(4332):obj(4335),Question4342=obj(4342):obj(4351)"
+							}
+						}
+					},
+				}
+			};
             #endregion
 
             #region LIVING BLOCK
