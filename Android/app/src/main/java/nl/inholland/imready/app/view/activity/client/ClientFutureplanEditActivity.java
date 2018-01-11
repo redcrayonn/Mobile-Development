@@ -26,6 +26,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
+import nl.inholland.imready.app.logic.events.ComponentDetailViewEvent;
 import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.adapter.BlockPlanExpandableListAdapter;
@@ -92,7 +93,7 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
         super.onSaveInstanceState(outState);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void OnFutureplanChangedEvent(FutureplanChangedEvent event) {
         initData(true);
     }
@@ -135,7 +136,7 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
         Component component = (Component) adapter.getChild(groupPosition, childPosition);
         if (component != null) {
             Intent intent = new Intent(this, ClientComponentEditActivity.class);
-            intent.putExtra(ParcelableConstants.COMPONENT, component);
+            EventBus.getDefault().postSticky(new ComponentDetailViewEvent(component));
             startActivity(intent);
             return true;
         }

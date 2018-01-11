@@ -6,6 +6,5 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 
 public interface ClientBlockDetailsView extends View {
     void showHandInDialog(PersonalActivity activity);
-
     void showSucces();
 }
