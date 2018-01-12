@@ -16,12 +16,18 @@ namespace ImReadyApiv2.Results {
 
 		public String Remark { get; }
 
+		public String ClientId { get; }
+
 		public CalendarResult (Calendar calendar) : base(calendar) {
 			Title = calendar.Title;
 			StartDate = calendar.StartDate;
 			EndDate = calendar.EndDate;
 			Location = calendar.Location;
 			Remark = calendar.Remark;
+
+			if(calendar.RelatedCalendar != null) {
+				ClientId = calendar.RelatedCalendar.UserId;
+			}
 		}
 	}
 }
