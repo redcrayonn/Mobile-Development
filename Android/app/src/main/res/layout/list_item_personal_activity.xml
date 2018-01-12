@@ -57,13 +57,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     style="@style/Tinted.Accent"
-                    android:src="@drawable/ic_event"/>
+                    android:src="@drawable/ic_clock"/>
                 <TextView
                     android:id="@+id/activity_deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:maxWidth="48dp"
+                    android:maxWidth="@dimen/xxml"
                     tools:text="over 2 dagen"/>
             </LinearLayout>
         </RelativeLayout>
@@ -86,15 +86,16 @@
                 android:id="@+id/activity_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_input_label"
                 android:inputType="textMultiLine"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/color_accent_states"
+                android:enabled="false"
                 android:minLines="1"
                 android:maxLines="12"
-                style="@style/TextAppearance.AppCompat.Small"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:scrollbars="vertical"/>
 
             <RelativeLayout
+                android:id="@+id/activity_button_container"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,9 +116,23 @@
                     android:theme="@style/App.Button.Accent"
                     android:text="@string/hand_in"/>
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/waiting_for_approval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_button_container"
+                android:layout_alignParentEnd="true"
+                android:text="@string/waiting_for_approval"
+                android:textSize="@dimen/sm"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_clock"
+                android:drawableTint="@color/colorAccent"
+                android:drawablePadding="@dimen/xxs"
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </RelativeLayout>
-
     </RelativeLayout>
-
 
 </RelativeLayout>

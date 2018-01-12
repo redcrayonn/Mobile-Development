@@ -7,6 +7,8 @@ import com.nytimes.android.external.store3.base.Persister;
 import com.nytimes.android.external.store3.base.impl.BarCode;
 import com.nytimes.android.external.store3.base.impl.Store;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,6 +47,13 @@ public class ImReadyApplication extends Application {
         initPersister();
         this.futureplanStore = FutureplanStore.create();
         this.blocksStore = BlockStore.create();
+    }
+
+    @Override
+    public void onTerminate() {
+        // memory cleanup
+        EventBus.getDefault().removeAllStickyEvents();
+        super.onTerminate();
     }
 
     private void initPersister() {

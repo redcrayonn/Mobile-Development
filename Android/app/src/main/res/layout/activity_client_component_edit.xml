@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/xxl"
             android:layout_marginBottom="@dimen/md"
+            style="@android:style/TextAppearance.DeviceDefault"
             tools:text="Hier staat beschreven wat het doel van dit onderdeel is en daarmee de toegevoegde waarde voor de client"/>
 
         <TextView
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/xxl"
             android:layout_marginBottom="@dimen/md"
+            style="@android:style/TextAppearance.DeviceDefault"
             tools:text="2"/>
 
         <TextView
@@ -67,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/container"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:text="@string/add"
         android:theme="@style/App.Button.Accent"/>
 

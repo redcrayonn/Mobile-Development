@@ -10,11 +10,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.presenter.client.ClientBlockDetailsPresenter;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
-import nl.inholland.imready.model.enums.BlockPartStatus;
+import nl.inholland.imready.util.DateUtil;
 
 public class PersonalActivityViewHolder implements FillableViewHolder<PersonalActivity>, View.OnClickListener {
 
@@ -27,6 +29,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     private final View actionContainer;
     private final ClientBlockDetailsPresenter presenter;
     private final View deadlineContainer;
+    private final TextView waitingForApproval;
     private PersonalActivity activity;
 
     public PersonalActivityViewHolder(View view, ClientBlockDetailsPresenter presenter) {
@@ -40,6 +43,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
 
         deadlineContainer = view.findViewById(R.id.activity_deadline_container);
         actionContainer = view.findViewById(R.id.activity_action_container);
+        waitingForApproval = view.findViewById(R.id.waiting_for_approval);
         this.presenter = presenter;
     }
 
@@ -47,32 +51,52 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     public void fill(@NonNull Context context, @NonNull PersonalActivity data, @Nullable OnChangeListener<PersonalActivity> changeListener) {
         activity = data;
 
-        boolean isComplete = data.getStatus() == BlockPartStatus.DONE;
-        boolean isPending = data.getStatus() == BlockPartStatus.PENDING;
-        int visibility = isComplete ? View.GONE : View.VISIBLE;
-
-        completedView.setChecked(isComplete);
+        long daysDiff = DateUtil.getTimeDifferenceDays(new Date(), data.getDeadline());
 
         titleView.setText(data.getName());
-
         descriptionView.setText(data.getActivity().getDescription());
-        descriptionView.setEnabled(!isComplete);
-        descriptionView.setVisibility(visibility);
-
         assignmentInput.setText(data.getContent());
-        assignmentInput.setEnabled(!isComplete || !isPending);
-        assignmentInput.setFocusable(!isComplete || !isPending);
-        int inputType = isComplete || isPending ? InputType.TYPE_NULL : InputType.TYPE_TEXT_FLAG_MULTI_LINE;
-        assignmentInput.setInputType(inputType);
-
-        deadlineText.setText("over 2 dagen");
-
-        handInButton.setEnabled(!isComplete || !isPending);
-        handInButton.setVisibility(isComplete || isPending ? View.GONE : View.VISIBLE);
+        deadlineText.setText(context.getString(R.string.deadline_days, daysDiff));
         handInButton.setOnClickListener(this);
 
-        actionContainer.setVisibility(visibility);
-        deadlineContainer.setVisibility(visibility);
+        //Ui changes based on status
+        switch (data.getStatus()) {
+            case ONGOING:
+                uiActivityOngoing();
+                break;
+            case PENDING:
+                uiActivityPending();
+                break;
+            case DONE:
+                uiActivityComplete();
+                break;
+        }
+    }
+
+    private void uiActivityOngoing() {
+        completedView.setChecked(false);
+        descriptionView.setVisibility(View.VISIBLE);
+        assignmentInput.setEnabled(false);
+        assignmentInput.setEnabled(false);
+        assignmentInput.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        handInButton.setEnabled(true);
+        actionContainer.setVisibility(View.VISIBLE);
+        deadlineContainer.setVisibility(View.VISIBLE);
+        waitingForApproval.setVisibility(View.GONE);
+    }
+
+    private void uiActivityPending() {
+        assignmentInput.setInputType(InputType.TYPE_NULL);
+        actionContainer.setVisibility(View.GONE);
+        deadlineContainer.setVisibility(View.VISIBLE);
+        waitingForApproval.setVisibility(View.VISIBLE);
+    }
+
+    private void uiActivityComplete() {
+        assignmentInput.setInputType(InputType.TYPE_NULL);
+        actionContainer.setVisibility(View.GONE);
+        deadlineContainer.setVisibility(View.GONE);
+        waitingForApproval.setVisibility(View.GONE);
     }
 
     @Override
