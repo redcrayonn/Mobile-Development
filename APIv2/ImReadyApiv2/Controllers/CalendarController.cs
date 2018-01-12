@@ -53,8 +53,9 @@ namespace ImReadyApiv2.Controllers {
 
 		/// <summary>
 		/// Create calendar item
+		/// Roles: CAREGIVER
 		/// </summary>
-		/// <remarks>Create new calendar item for the specified user</remarks>
+		/// <remarks>Create new calendar item for the specified caregiver, also creates a calendar item for the client</remarks>
 		/// <response code="200">The newly created calendar item</response>
 		/// <response code="404">Not Found</response>
 		[ResponseType(typeof(CalendarResult))]
@@ -88,8 +89,9 @@ namespace ImReadyApiv2.Controllers {
 
 		/// <summary>
 		/// Delete calendar item
+		/// Roles: CAREGIVER
 		/// </summary>
-		/// <remarks>Delete a calendar item for the specified user</remarks>
+		/// <remarks>Delete a calendar item for the specified user, also deletes a calendar item for the client</remarks>
 		/// <response code="204">No Content</response>
 		/// <response code="404">Not Found</response>
 		[Route("{userId}/calendar/{calendarId}")]

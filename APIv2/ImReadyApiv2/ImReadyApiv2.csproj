@@ -246,7 +246,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Filters\ValidateModelAttribute.cs" />
+    <Compile Include="Controllers\Filters\ValidateModelAttribute.cs" />
     <Compile Include="IoC\UnityResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -293,7 +293,7 @@
     <Compile Include="Results\ClientUserResult.cs" />
     <Compile Include="Results\FutureplanResult\ActivityResult.cs" />
     <Compile Include="Results\FutureplanResult\BuildingBlockResult.cs" />
-    <Compile Include="Results\FutureplanResult\ComponentResult.cs" />
+    <Compile Include="Results\FutureplanResult\ClientComponentResult.cs" />
     <Compile Include="Results\FutureplanResult\FeedbackResult.cs" />
     <Compile Include="Results\FutureplanResult\FutureplanResult.cs" />
     <Compile Include="Results\UsefulLinkResult.cs" />
@@ -374,11 +374,10 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49534</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49534/</IISUrl>
+          <IISUrl>http://192.168.1.2:49534/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://192.168.1.2:49534</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

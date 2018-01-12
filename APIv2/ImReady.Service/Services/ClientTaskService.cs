@@ -62,7 +62,7 @@ namespace ImReady.Service.Services {
 			editTask.Status = task.Status;
 			editTask.Feedback = (task.Feedback != null) ? task.Feedback : editTask.Feedback;
 
-			Calendar calendar = _calendarService.GetCalendarItem(clientId, ""); //editTask.CalendarId
+			Calendar calendar = _calendarService.GetCalendarItem(clientId, editTask.Calendars.ToList()[0].Id);
             calendar.Title = task.Name;
 			calendar.StartDate = task.DeadlineDate;
 			calendar.EndDate = calendar.StartDate;
