@@ -5,5 +5,7 @@ import android.content.Context;
 
 public interface View {
     void showMessage(String message);
-    Context getContext();
+    default Context getContext() {
+        return (Context) this;
+    }
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/md"
+    android:clipToPadding="false">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="20dp"
+        android:translationZ="10dp">
+        <ImageView
+            android:id="@+id/caretaker_photo"
+            android:layout_width="@dimen/xxml"
+            android:layout_height="@dimen/xxml"
+            android:layout_margin="@dimen/sm"
+            android:padding="@dimen/xs"
+            android:src="@drawable/ic_person"
+            android:tint="@android:color/white"
+            android:background="@drawable/circle"
+            android:backgroundTint="#ddd"
+            android:elevation="@dimen/xxs"
+            android:translationZ="@dimen/xxs" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/caretaker_photo"
+            android:layout_toStartOf="@id/remove_button"
+            android:layout_centerVertical="true">
+            <TextView
+                android:id="@+id/caretaker_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="Ben Hoef"/>
+            <TextView
+                android:id="@+id/caretaker_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:text="Zorgverlener" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/remove_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_close"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_centerVertical="true"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+    </RelativeLayout>
+</RelativeLayout>

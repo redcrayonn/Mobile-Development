@@ -33,6 +33,7 @@ public class ImReadyApplication extends Application {
     private Persister<BufferedSource, BarCode> persister;
     private Store<FutureplanResponse, BarCode> futureplanStore;
     private Store<List<Block>, BarCode> blocksStore;
+    private UserRole currentUserRole;
 
     @Override
     public void onCreate() {
@@ -90,4 +91,19 @@ public class ImReadyApplication extends Application {
     }
 
 
+    public UserRole getCurrentUserRole() {
+        if (currentUserRole == null) {
+            throw new NullPointerException("A userrole was not set for the application");
+        }
+        return currentUserRole;
+    }
+
+    public void setCurrentUserRole(UserRole currentUserRole) {
+        this.currentUserRole = currentUserRole;
+    }
+
+    public String getCurrentUserId() {
+        UserCache cache = this.getCache(getCurrentUserRole());
+        return cache.getUserId();
+    }
 }

@@ -1,6 +1,5 @@
 package nl.inholland.imready.app.view.activity.client;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -211,7 +210,8 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void goToFamily() {
-        showMessage("Soon!");
+        Intent intent = new Intent(this, ClientCaretakersActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -292,10 +292,5 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 }

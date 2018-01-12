@@ -78,8 +78,10 @@ public class LoginPresenterImpl implements LoginPresenter, Callback<ApiKeyRespon
             // Save the auth token for further requests
             apiClient.setToken(keyResponse.getAccessToken());
 
-            UserCache cache = ImReadyApplication.getInstance().getCache(keyResponse.getUserType());
+            ImReadyApplication application = ImReadyApplication.getInstance();
+            UserCache cache = application.getCache(keyResponse.getUserType());
             cache.setUserId(keyResponse.getUserId());
+            application.setCurrentUserRole(keyResponse.getUserType());
 
             loginView.navigateToHome(keyResponse.getUserType());
         } else {
