@@ -26,7 +26,7 @@
                         x:Name="Expander2" 
                         VerticalAlignment="Top" 
                         Margin="0"
-                        Header="{x:Bind BuildingBlockComponent.Name}"
+                        Header="{x:Bind Component.Name}"
                         HorizontalContentAlignment="Stretch"
                         Foreground="White"
                         Background="Black"
@@ -38,12 +38,12 @@
         <Grid Background="White">
                 <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
-                      Text="{x:Bind BuildingBlockComponent.Name}"
+                      Text="{x:Bind Component.Name}"
                       VerticalAlignment="Top"
                            Foreground="Black"
                        />
                 <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 " HorizontalAlignment="Stretch" Padding="40">
-                <ItemsControl ItemsSource="{x:Bind BuildingBlockComponent.Activities}" Foreground="Black">
+                <ItemsControl ItemsSource="{x:Bind Component.Activities}" Foreground="Black">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:Activity">
                             <Grid HorizontalAlignment="Stretch">

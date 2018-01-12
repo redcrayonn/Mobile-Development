@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="ImReady.Views.BlockComponents.BuildingBlockComponents"
+    x:Class="ImReady.Views.Futureplan.ComponentList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ImReady.Views.BlockComponents"
+    xmlns:local="using:ImReady.Views.BuildingBlock"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -31,7 +31,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local1:Component">
                         <StackPanel>
-                            <controls1:ComponentExpander BuildingBlockComponent="{Binding}">
+                            <controls1:ComponentExpander Component="{Binding}">
 
                             </controls1:ComponentExpander>
                         </StackPanel>

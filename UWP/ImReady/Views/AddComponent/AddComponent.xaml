@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ImReady.Views.BuildingBlockComponents.AddComponent"
+    x:Class="ImReady.Views.AddComponent.AddComponent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ImReady.Views.BuildingBlockComponents"

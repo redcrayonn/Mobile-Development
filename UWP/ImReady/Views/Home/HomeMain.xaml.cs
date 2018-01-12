@@ -1,6 +1,7 @@
 ﻿using ImReady.Models;
 using ImReady.ViewModels;
-using ImReady.Views.BuildingBlockComponents;
+using ImReady.Views.Futureplan;
+using ImReady.Views.AddComponent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -143,14 +143,14 @@
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
     <Compile Include="ViewModels\MyItemViewModel.cs" />
-    <Compile Include="Views\BuildingBlockComponents\AddBuildingBlockComponents.xaml.cs">
+    <Compile Include="Views\AddComponent\AddBuildingBlockComponents.xaml.cs">
       <DependentUpon>AddBuildingBlockComponents.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BuildingBlockComponents\AddComponent.xaml.cs">
+    <Compile Include="Views\AddComponent\AddComponent.xaml.cs">
       <DependentUpon>AddComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml.cs">
-      <DependentUpon>BuildingBlockComponents.xaml</DependentUpon>
+    <Compile Include="Views\Futureplan\ComponentList.xaml.cs">
+      <DependentUpon>ComponentList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
@@ -216,15 +216,15 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\BuildingBlockComponents\AddBuildingBlockComponents.xaml">
+    <Page Include="Views\AddComponent\AddBuildingBlockComponents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BuildingBlockComponents\AddComponent.xaml">
+    <Page Include="Views\AddComponent\AddComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BuildingBlockComponents\BuildingBlockComponents.xaml">
+    <Page Include="Views\Futureplan\ComponentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -28,7 +28,7 @@ namespace ImReady.Controls
             this.InitializeComponent();
         }
 
-        public Component BuildingBlockComponent
+        public Component Component
         {
             get { return (Component)GetValue(BuildingBlockComponentProperty); }
             set { SetValue(BuildingBlockComponentProperty, value); }
@@ -36,7 +36,7 @@ namespace ImReady.Controls
 
         public static readonly DependencyProperty BuildingBlockComponentProperty =
             DependencyProperty.Register(
-                nameof(BuildingBlockComponent),
+                nameof(Component),
                 typeof(Component),
                 typeof(ComponentExpander),
                 new PropertyMetadata(null));

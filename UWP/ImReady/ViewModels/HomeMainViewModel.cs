@@ -1,8 +1,8 @@
 ﻿using ImReady.Helpers.Commands;
 using ImReady.Models;
 using ImReady.Services;
-using ImReady.Views.BlockComponents;
-using ImReady.Views.BuildingBlockComponents;
+using ImReady.Views.Futureplan;
+using ImReady.Views.AddComponent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,7 +56,7 @@ namespace ImReady.ViewModels
             if(obj != null && obj is BuildingBlock)
             {
                 var item = obj as BuildingBlock;
-                ((Frame)Window.Current.Content).Navigate(typeof(BuildingBlockComponents), item);
+                ((Frame)Window.Current.Content).Navigate(typeof(ComponentList), item);
             }
         }
 

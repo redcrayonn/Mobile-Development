@@ -1,7 +1,7 @@
 ﻿using ImReady.Helpers.Commands;
 using ImReady.Models;
 using ImReady.Services;
-using ImReady.Views.BuildingBlockComponents;
+using ImReady.Views.AddComponent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
