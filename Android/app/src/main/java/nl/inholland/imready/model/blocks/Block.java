@@ -9,8 +9,9 @@ import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.service.deserializer.PostProcessingEnabler;
 
-public class Block extends NamedEntityModel {
+public class Block extends NamedEntityModel implements PostProcessingEnabler.PostProcessable {
     public static final Creator<Block> CREATOR = new Creator<Block>() {
         @Override
         public Block createFromParcel(Parcel in) {
@@ -74,10 +75,17 @@ public class Block extends NamedEntityModel {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        super.writeToParcel(parcel, i);
+    public void writeToParcel(Parcel parcel, int flag) {
+        super.writeToParcel(parcel, flag);
         parcel.writeString(description);
         parcel.writeString(type.name());
         parcel.writeTypedList(components);
+    }
+
+    @Override
+    public void gsonPostProcess() {
+        for (Component component : getComponents()) {
+            component.setBlock(this);
+        }
     }
 }

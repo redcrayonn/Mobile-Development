@@ -3,7 +3,6 @@ package nl.inholland.imready.app.view.holder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.view.fragment.HandInActivityDialogFragment;
-import nl.inholland.imready.app.view.fragment.WelcomeDialogFragment;
+import nl.inholland.imready.app.presenter.client.ClientBlockDetailsPresenter;
 import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 
-public class PersonalActivityViewHolder implements FillableViewHolder<PersonalActivity> {
+public class PersonalActivityViewHolder implements FillableViewHolder<PersonalActivity>, View.OnClickListener {
 
     private final TextView titleView;
     private final TextView descriptionView;
@@ -27,10 +25,11 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     private final CheckBox completedView;
     private final Button handInButton;
     private final View actionContainer;
+    private final ClientBlockDetailsPresenter presenter;
     private final View deadlineContainer;
     private PersonalActivity activity;
 
-    public PersonalActivityViewHolder(View view) {
+    public PersonalActivityViewHolder(View view, ClientBlockDetailsPresenter presenter) {
         completedView = view.findViewById(R.id.activity_checkbox);
         titleView = view.findViewById(R.id.activity_title);
         descriptionView = view.findViewById(R.id.activity_description);
@@ -41,6 +40,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
 
         deadlineContainer = view.findViewById(R.id.activity_deadline_container);
         actionContainer = view.findViewById(R.id.activity_action_container);
+        this.presenter = presenter;
     }
 
     @Override
@@ -69,18 +69,15 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
 
         handInButton.setEnabled(!isComplete || !isPending);
         handInButton.setVisibility(isComplete || isPending ? View.GONE : View.VISIBLE);
-        handInButton.setOnClickListener(view -> {
-            activity.setContent(assignmentInput.getText().toString());
-
-            HandInActivityDialogFragment dialog = new HandInActivityDialogFragment();
-            dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), WelcomeDialogFragment.TAG);
-
-            if (changeListener != null) {
-                changeListener.onChanged(this, activity);
-            }
-        });
+        handInButton.setOnClickListener(this);
 
         actionContainer.setVisibility(visibility);
         deadlineContainer.setVisibility(visibility);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String content = assignmentInput.getText().toString();
+        presenter.putActivity(activity, content);
     }
 }

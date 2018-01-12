@@ -1,6 +1,5 @@
 package nl.inholland.imready.app.view.activity.client;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -12,15 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.app.logic.events.ComponentDetailViewEvent;
 import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.persistence.UserCache;
-import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.model.blocks.Activity;
 import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.model.enums.UserRole;
@@ -46,14 +47,45 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
         ApiClient apiClient = ApiManager.getClient();
         clientService = apiClient.getClientService();
 
-        // Get data passed from previous view
-        Intent intent = getIntent();
-        component = intent.getParcelableExtra(ParcelableConstants.COMPONENT);
+        // Button
+        addButton = findViewById(R.id.button_positive);
+        addButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button_positive:
+                addComponentToFutureplan();
+                return;
+            default:
+                return;
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onComponentDetailViewEvent(ComponentDetailViewEvent event) {
+        // get data posted between views
+        component = event.getComponent();
+        EventBus.getDefault().removeStickyEvent(event);
 
         // Set action bar title
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(component.getName());
+            actionBar.setSubtitle(component.getBlock().getName());
         }
 
         // Description
@@ -73,21 +105,6 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
                 .toList();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.simple_list_item, assignments);
         listView.setAdapter(adapter);
-
-        // Button
-        addButton = findViewById(R.id.button_positive);
-        addButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.button_positive:
-                addComponentToFutureplan();
-                return;
-            default:
-                return;
-        }
     }
 
     private void addComponentToFutureplan() {
@@ -116,7 +133,7 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Ca
         if (response.isSuccessful()) {
             Toast.makeText(this, getString(R.string.personal_component_succes, component.getName()), Toast.LENGTH_SHORT).show();
             //notify application of changed data
-            EventBus.getDefault().post(new FutureplanChangedEvent(component.getId()));
+            EventBus.getDefault().postSticky(new FutureplanChangedEvent(component.getId()));
             finish();
         } else {
             onFailure(call, new Throwable());

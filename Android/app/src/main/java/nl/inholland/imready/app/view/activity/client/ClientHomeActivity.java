@@ -30,6 +30,7 @@ import java.util.List;
 import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
+import nl.inholland.imready.app.logic.events.BlockDetailViewEvent;
 import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.presenter.client.ClientHomePresenter;
 import nl.inholland.imready.app.presenter.client.ClientHomePresenterImpl;
@@ -111,10 +112,11 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_bar_home, menu);
-        TextView userText = findViewById(R.id.username);
 
+        TextView userText = findViewById(R.id.username);
         String username = presenter.getUsername();
         userText.setText(username);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -218,6 +220,27 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void goToBlockInfo(PersonalBlock block) {
+        Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
+        EventBus.getDefault().postSticky(new BlockDetailViewEvent(block, null));
+        startActivity(intent);
+    }
+
+    @Override
+    public void goToEditFutureplan() {
+        Intent intent = new Intent(this, ClientFutureplanEditActivity.class);
+        List<PersonalBlock> personalBlocks = gridAdapter.getData();
+        List<String> componentIds = stream(personalBlocks)
+                .selectMany(PersonalBlock::getComponents)
+                .select(PersonalComponent::getComponent)
+                .select(Component::getId)
+                .toList();
+        // pass in a list of component id's which tells the next view what options to disable
+        intent.putStringArrayListExtra(ParcelableConstants.COMPONENT, (ArrayList<String>) componentIds);
+        startActivity(intent);
+    }
+
+    @Override
     public void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
@@ -226,22 +249,13 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
-        if (block.getBlock().getType() == BlockType.ADD) {
-            Intent intent = new Intent(this, ClientFutureplanEditActivity.class);
-            List<PersonalBlock> personalBlocks = gridAdapter.getData();
-            List<String> componentIds = stream(personalBlocks)
-                    .selectMany(PersonalBlock::getComponents)
-                    .select(PersonalComponent::getComponent)
-                    .select(Component::getId)
-                    .toList();
-            // pass in a list of component id's which tells the next view what options to disable
-            intent.putStringArrayListExtra(ParcelableConstants.COMPONENT, (ArrayList<String>) componentIds);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, ClientBlockDetailsActivity.class);
-            intent.putExtra(ParcelableConstants.BLOCK, block);
-            startActivity(intent);
+        if (!refreshLayout.isRefreshing()) {
+            PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
+            if (block.getBlock().getType() == BlockType.ADD) {
+                goToEditFutureplan();
+            } else {
+                goToBlockInfo(block);
+            }
         }
     }
 

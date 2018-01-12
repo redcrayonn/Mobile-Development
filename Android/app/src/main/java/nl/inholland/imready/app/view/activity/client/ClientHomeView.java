@@ -13,4 +13,6 @@ public interface ClientHomeView extends View {
     void goToNotifications();
     void goToFamily();
     void goToInfo();
+    void goToBlockInfo(PersonalBlock block);
+    void goToEditFutureplan();
 }

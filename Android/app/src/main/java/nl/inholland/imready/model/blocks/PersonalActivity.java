@@ -10,8 +10,9 @@ import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockPartStatus;
+import nl.inholland.imready.service.deserializer.PostProcessingEnabler;
 
-public class PersonalActivity extends NamedEntityModel {
+public class PersonalActivity extends NamedEntityModel implements PostProcessingEnabler.PostProcessable {
     public static final Creator<PersonalActivity> CREATOR = new Creator<PersonalActivity>() {
         @Override
         public PersonalActivity createFromParcel(Parcel in) {
@@ -32,15 +33,16 @@ public class PersonalActivity extends NamedEntityModel {
     @SerializedName("Feedback")
     private List<Feedback> feedback;
     @SerializedName("Component")
-    private PersonalComponent component;
+    private transient PersonalComponent component;
     @SerializedName("Activity")
     private Activity activity;
 
     protected PersonalActivity(Parcel in) {
         super(in);
-        status = BlockPartStatus.valueOf(in.readString());
+        //String statusName = in.readString();
+        //status = BlockPartStatus.valueOf(statusName);
         content = in.readString();
-        // date
+        deadline = new Date(in.readLong());
         feedback = new ArrayList<>();
         in.readTypedList(feedback, Feedback.CREATOR);
         component = in.readParcelable(Component.class.getClassLoader());
@@ -101,13 +103,22 @@ public class PersonalActivity extends NamedEntityModel {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        super.writeToParcel(parcel, i);
-        parcel.writeString(status.name());
+    public void writeToParcel(Parcel parcel, int flag) {
+        super.writeToParcel(parcel, flag);
+        String statusName = status.name();
+        //parcel.writeString(statusName);
         parcel.writeString(content);
         // date
+        parcel.writeLong(deadline.getTime());
         parcel.writeTypedList(feedback);
-        parcel.writeParcelable(component, 0);
-        parcel.writeParcelable(activity, 0);
+        parcel.writeParcelable(component, flag);
+        parcel.writeParcelable(activity, flag);
+    }
+
+    @Override
+    public void gsonPostProcess() {
+        for (Feedback feedback : getFeedback()) {
+            feedback.setActivity(this);
+        }
     }
 }

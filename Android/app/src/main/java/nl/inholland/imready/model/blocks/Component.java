@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.model.NamedEntityModel;
+import nl.inholland.imready.service.deserializer.PostProcessingEnabler;
 
-public class Component extends NamedEntityModel {
+public class Component extends NamedEntityModel implements PostProcessingEnabler.PostProcessable {
     public static final Creator<Component> CREATOR = new Creator<Component>() {
         @Override
         public Component createFromParcel(Parcel in) {
@@ -71,7 +72,14 @@ public class Component extends NamedEntityModel {
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
         parcel.writeString(description);
-        parcel.writeParcelable(block, 0);
+        parcel.writeParcelable(block, i);
         parcel.writeTypedList(activities);
+    }
+
+    @Override
+    public void gsonPostProcess() {
+        for (Activity activity : getActivities()) {
+            activity.setComponent(this);
+        }
     }
 }

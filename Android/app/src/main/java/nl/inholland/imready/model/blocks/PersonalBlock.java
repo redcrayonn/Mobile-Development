@@ -11,8 +11,9 @@ import nl.inholland.imready.model.NamedEntityModel;
 import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.model.user.Client;
 import nl.inholland.imready.model.user.User;
+import nl.inholland.imready.service.deserializer.PostProcessingEnabler;
 
-public class PersonalBlock extends NamedEntityModel {
+public class PersonalBlock extends NamedEntityModel implements PostProcessingEnabler.PostProcessable {
     public static final Creator<PersonalBlock> CREATOR = new Creator<PersonalBlock>() {
         @Override
         public PersonalBlock createFromParcel(Parcel in) {
@@ -45,16 +46,11 @@ public class PersonalBlock extends NamedEntityModel {
     }
 
     @Override
-    public String getName() {
-        return block.getName();
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        super.writeToParcel(parcel, i);
+    public void writeToParcel(Parcel parcel, int flag) {
+        super.writeToParcel(parcel, flag);
         parcel.writeTypedList(components);
-        parcel.writeParcelable(block, 0);
-        parcel.writeParcelable(client, 0);
+        parcel.writeParcelable(block, flag);
+        parcel.writeParcelable(client, flag);
     }
 
     public List<PersonalComponent> getComponents() {
@@ -79,5 +75,12 @@ public class PersonalBlock extends NamedEntityModel {
 
     public void setBlock(Block block) {
         this.block = block;
+    }
+
+    @Override
+    public void gsonPostProcess() {
+        for (PersonalComponent component : getComponents()) {
+            component.setBlock(this);
+        }
     }
 }
