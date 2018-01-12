@@ -27,8 +27,8 @@
         <!-- SHARED -->
         <activity
             android:name=".app.view.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".app.view.activity.shared.MessagesActivity"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
@@ -51,8 +51,8 @@
             android:theme="@style/AppTheme.Alt" />
         <activity
             android:name=".app.view.activity.client.ClientComponentEditActivity"
-            android:parentActivityName=".app.view.activity.client.ClientFutureplanEditActivity"
             android:configChanges="orientation|screenSize"
+            android:parentActivityName=".app.view.activity.client.ClientFutureplanEditActivity"
             android:theme="@style/AppTheme.Alt" />
 
         <!-- CAREGIVER -->
@@ -64,6 +64,10 @@
         <activity
             android:name=".app.view.activity.caregiver.CaregiverFutureplanOverviewActivity"
             android:parentActivityName=".app.view.activity.caregiver.ClientDetailActivity"
+            android:theme="@style/AppTheme.Alt" />
+        <activity
+            android:name=".app.view.activity.caregiver.CaregiverFeedbackActivity"
+            android:parentActivityName=".app.view.activity.caregiver.CaregiverFutureplanOverviewActivity"
             android:theme="@style/AppTheme.Alt"/>
     </application>
 

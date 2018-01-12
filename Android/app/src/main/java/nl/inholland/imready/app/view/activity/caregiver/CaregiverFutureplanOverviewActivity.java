@@ -7,11 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.adapter.CaregiverPlanExpandAdapter;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
+import nl.inholland.imready.model.blocks.PersonalActivity;
 
 public class CaregiverFutureplanOverviewActivity extends AppCompatActivity implements  ExpandableListView.OnChildClickListener{
 
@@ -40,7 +42,7 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
 
     private void initExpandList() {
         ExpandableListView expandableListView = findViewById(R.id.blocks);
-        expandableListView.setClickable(true);
+        //expandableListView.setClickable(true);
         adapter = new CaregiverPlanExpandAdapter(this, clientId);
         loadMoreListener = (LoadMoreListener) adapter;
         expandableListView.setAdapter(adapter);
@@ -50,6 +52,10 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+        Toast.makeText(this, "Uh oh, er is iets fout gegaan...", Toast.LENGTH_SHORT).show();
+
+        PersonalActivity activity = (PersonalActivity) adapter.getChild(i,i1);
+        gotoFeedbackActivity(activity);
         return false;
     }
 
@@ -61,5 +67,11 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void gotoFeedbackActivity(PersonalActivity activity) {
+        Intent intent = new Intent(this, CaregiverFeedbackActivity.class);
+        intent.putExtra("activity", activity);
+        startActivity(intent);
     }
 }

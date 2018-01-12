@@ -133,7 +133,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 
     @Override
