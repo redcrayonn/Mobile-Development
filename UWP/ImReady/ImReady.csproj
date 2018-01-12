@@ -97,10 +97,7 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
-    <Compile Include="Controls\BuildingBlock\ComponentActivityExpander.xaml.cs">
-      <DependentUpon>ComponentActivityExpander.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BuildingBlock\ComponentExpander.xaml.cs">
+    <Compile Include="Controls\Expander\ComponentExpander.xaml.cs">
       <DependentUpon>ComponentExpander.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyItem.xaml.cs">
@@ -201,17 +198,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\BuildingBlock\ComponentActivityExpander.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="ComponentActivity.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Controls\BuildingBlock\ComponentExpander.xaml">
+    <Page Include="Controls\Expander\ComponentExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MyItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Expander\ComponentActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\BuildingBlockComponents\AddBuildingBlockComponents.xaml">
       <SubType>Designer</SubType>
