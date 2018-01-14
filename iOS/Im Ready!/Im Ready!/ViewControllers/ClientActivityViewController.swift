@@ -70,11 +70,13 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             
             cell.activity = activities[indexPath.row]
             cell.view = self
+            cell.deadlineLbl.text = "Deadline in 2 days"
             
             if let content = activities[indexPath.row].content {
                 cell.answerTextView.text = content
                 cell.answerTextView.isEditable = false
                 cell.sendAnswerBtn.isHidden = true
+                cell.deadlineLbl.isHidden = true
             }
         }
         

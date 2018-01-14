@@ -52,7 +52,7 @@
                                 <rect key="frame" x="0.0" y="50" width="390" height="270"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-n3-bBq">
-                                        <rect key="frame" x="75" y="0.0" width="240" height="106"/>
+                                        <rect key="frame" x="57" y="0.0" width="258" height="106"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="106" id="Q9L-fQ-jcI"/>
                                         </constraints>
@@ -61,29 +61,48 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bWq-XY-YZQ">
-                                        <rect key="frame" x="75" y="114" width="240" height="98"/>
+                                        <rect key="frame" x="57" y="114" width="277" height="98"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkN-1B-qup">
-                                        <rect key="frame" x="263" y="232" width="59" height="30"/>
+                                        <rect key="frame" x="275" y="232" width="59" height="30"/>
                                         <state key="normal" title="Verstuur"/>
                                         <connections>
                                             <action selector="sendAnswer:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8uy-8l-yUa"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT0-yp-t16">
+                                        <rect key="frame" x="315" y="8" width="67" height="77"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_crop_square_36pt" translatesAutoresizingMaskIntoConstraints="NO" id="0F4-1j-m1s">
+                                        <rect key="frame" x="8" y="8" width="38" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="xBq-Iz-XuL"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="leading" secondItem="av7-gp-M5r" secondAttribute="leading" constant="75" id="2DC-20-2CF"/>
-                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="trailing" secondItem="bWq-XY-YZQ" secondAttribute="trailing" id="4GL-KC-jOn"/>
+                                    <constraint firstItem="0F4-1j-m1s" firstAttribute="top" secondItem="aT0-yp-t16" secondAttribute="top" id="0hD-Yv-YtX"/>
+                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="leading" secondItem="av7-gp-M5r" secondAttribute="leading" constant="57" id="2DC-20-2CF"/>
+                                    <constraint firstItem="bWq-XY-YZQ" firstAttribute="top" secondItem="aT0-yp-t16" secondAttribute="bottom" constant="29" id="3cD-dZ-k5e"/>
+                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="trailing" secondItem="bWq-XY-YZQ" secondAttribute="trailing" constant="-19" id="4GL-KC-jOn"/>
                                     <constraint firstItem="fMk-n3-bBq" firstAttribute="leading" secondItem="bWq-XY-YZQ" secondAttribute="leading" id="Gec-5l-l3y"/>
+                                    <constraint firstItem="aT0-yp-t16" firstAttribute="trailing" secondItem="av7-gp-M5r" secondAttribute="trailingMargin" id="HmE-Pg-8vc"/>
                                     <constraint firstItem="fMk-n3-bBq" firstAttribute="top" secondItem="av7-gp-M5r" secondAttribute="top" id="Qdb-Lr-4Sp"/>
                                     <constraint firstItem="bWq-XY-YZQ" firstAttribute="top" secondItem="fMk-n3-bBq" secondAttribute="bottom" constant="8" symbolic="YES" id="UpZ-tq-PMQ"/>
+                                    <constraint firstItem="0F4-1j-m1s" firstAttribute="top" secondItem="av7-gp-M5r" secondAttribute="topMargin" id="XTg-Nb-OVc"/>
                                     <constraint firstItem="bWq-XY-YZQ" firstAttribute="bottom" secondItem="av7-gp-M5r" secondAttribute="bottomMargin" constant="-50" id="YOK-cY-6tS"/>
-                                    <constraint firstAttribute="trailing" secondItem="tkN-1B-qup" secondAttribute="trailing" constant="68" id="ene-hA-uRk"/>
+                                    <constraint firstItem="0F4-1j-m1s" firstAttribute="leading" secondItem="av7-gp-M5r" secondAttribute="leadingMargin" id="Zc7-s1-25G"/>
+                                    <constraint firstAttribute="trailing" secondItem="tkN-1B-qup" secondAttribute="trailing" constant="56" id="ene-hA-uRk"/>
+                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="leading" secondItem="0F4-1j-m1s" secondAttribute="trailing" constant="11" id="h3P-ah-Ypo"/>
                                     <constraint firstItem="tkN-1B-qup" firstAttribute="bottom" secondItem="av7-gp-M5r" secondAttribute="bottomMargin" id="s6a-dm-VHc"/>
-                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="centerX" secondItem="av7-gp-M5r" secondAttribute="centerX" id="v9L-GN-lBt"/>
+                                    <constraint firstItem="fMk-n3-bBq" firstAttribute="centerX" secondItem="av7-gp-M5r" secondAttribute="centerX" constant="-9" id="v9L-GN-lBt"/>
+                                    <constraint firstItem="aT0-yp-t16" firstAttribute="leading" secondItem="fMk-n3-bBq" secondAttribute="trailing" id="x4Q-0j-ryG"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -103,6 +122,7 @@
             <connections>
                 <outlet property="activityDescription" destination="fMk-n3-bBq" id="efT-Yd-7fK"/>
                 <outlet property="answerTextView" destination="bWq-XY-YZQ" id="Tfz-vG-CQu"/>
+                <outlet property="deadlineLbl" destination="aT0-yp-t16" id="2p5-iR-ffg"/>
                 <outlet property="detailView" destination="av7-gp-M5r" id="tKp-eh-ioh"/>
                 <outlet property="openDetailViewBtn" destination="gsL-6s-y34" id="mNW-x3-bCU"/>
                 <outlet property="openView" destination="jog-I6-wyl" id="7Wv-bI-KcO"/>
@@ -110,4 +130,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ic_crop_square_36pt" width="36" height="36"/>
+    </resources>
 </document>

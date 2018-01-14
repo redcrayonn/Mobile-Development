@@ -20,6 +20,7 @@ class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var activityDescription: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var sendAnswerBtn: UIButton!
+    @IBOutlet weak var deadlineLbl: UILabel!
     
     var cellExists: Bool = false
     var activity: ClientActivity?

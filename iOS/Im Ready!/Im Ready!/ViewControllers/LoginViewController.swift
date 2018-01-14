@@ -9,6 +9,7 @@
 import UIKit
 import LocalAuthentication
 import Locksmith
+import CryptoSwift
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var usernameField: UITextField!
@@ -20,7 +21,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let imReadyAccount = "ImReadyAccount"
     let textFieldMoveDistance: Int = -250
-    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         // retrieve keychain data to check what kind of user we have, to redirect to the correct flow
                         let keychainDict = Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount)
                         CurrentUser.instance.user_type = Role(rawValue: keychainDict?["user-role"] as! String)
-                        CurrentUser.instance.id = keychainDict?["id"] as! String
+                        CurrentUser.instance.id = (keychainDict?["id"] as! String)
                         
                         self.redirectUserToStoryboard()
                     }
@@ -67,7 +67,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         if let error = error {
                             // Only show an error when something other happens then User cancelation
                             if error.localizedDescription != "Canceled by user." {
-                                self.showAlertWithTitle(title: "Er is iets fout gegaan.", message: self.checkTouchIDError(error: error))
+                                simpleAlert(atVC: self,
+                                            withTitle: "Er is iets fout gegaan",
+                                            andMessage: self.checkTouchIDError(error: error))
                             }
                         }
                     }
@@ -78,22 +80,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginClick(_ sender: Any) {
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
         
-        let username = usernameField.text!
-        let password = passwordField.text!
+//                let username = usernameField.text!
+//                let password = passwordField.text!.sha256()
         
+//
 //        let username = "woutervermeij@gmail.com"
 //        let password = "wouter"
+        
+        let username = "woutertest4@gmail.com"
+        let password = "wouter"
         
         if username != "" && password != "" {
             authenticationService.login(
                 withUsername: username,
                 andPassword: password,
                 onSuccess: {
-//                    do {
-//                        try Locksmith.deleteDataForUserAccount(userAccount: self.imReadyAccount)
-//                    } catch {
-//                        print("Failed")
-//                    }
                     
                     // Check if there is no Keychain data saved for this app
                     if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
@@ -118,14 +119,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }) {
                 print("failed to log in")
                 stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
-                
-                self.showAlertWithTitle(title: "Ongeldige inlogggegevens", message: "Gebruikersnaam of wachtwoord is fout.")
+                simpleAlert(atVC: self,
+                            withTitle: "Ongeldige inloggegevens",
+                            andMessage: "Gebruikersnaam of wachtwoord is fout")
             }
         } else {
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
-            
-            self.showAlertWithTitle(title: "Velden niet ingevuld",
-                                    message: "Vul alle velden in om in te loggen")
+            simpleAlert(atVC: self,
+                        withTitle: "Velden niet ingevuld",
+                        andMessage: "Vul alle velden in om in te loggen")
         }
     }
     
@@ -142,7 +144,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //    // When keyboard shows, move textfields up
-    //        func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        func textFieldDidBeginEditing(_ textField: UITextField) {s
     //            moveTextField(textField: textField,
     //                          moveDistance: self.textFieldMoveDistance,
     //                          up: true)
@@ -172,15 +174,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //        UIView.commitAnimations()
     //    }
     
-    func showAlertWithTitle(title: String, message: String ) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertVC.addAction(okAction)
-        DispatchQueue.main.async() { () -> Void in
-            self.present(alertVC, animated: true, completion: nil)
-        }
-    }
-    
     func redirectUserToStoryboard() {
         // Check which role the logged in user has and redirect to the correct storyboard
         let user_role: Role = CurrentUser.instance.user_type!
@@ -197,19 +190,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 withIdentifier: "TabBarController")
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
         case .RELATIVE:
-            self.showAlertWithTitle(
-                title: "Not implemented yet",
-                message: "Relative is not yet implemented")
+            simpleAlert(atVC: self, withTitle: "Not implemented yet",
+                        andMessage: "Relative is not yet implemented")
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
         case .ADMIN:
-            self.showAlertWithTitle(
-                title: "Not implemented yet",
-                message: "Admin is not yet implemented")
+            simpleAlert(atVC: self, withTitle: "Not implemented yet",
+                        andMessage: "Admin is not yet implemented")
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
         default:
-            self.showAlertWithTitle(
-                title: "Er is iets fout gegaan met inloggen",
-                message: "Controleer uw gebruikersnaam en wachtwoord")
+            simpleAlert(atVC: self,
+                        withTitle: "Er is iets fout gegaan met inloggen",
+                        andMessage: "Controller gebruikersnaam en wachtwoord")
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
         }
     }
@@ -245,5 +236,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return message
     }
-    
 }

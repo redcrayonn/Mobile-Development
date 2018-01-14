@@ -35,7 +35,10 @@ target 'Im Ready!' do
     pod 'FontBlaster'
     
     # Awesome icons
-    pod 'FontAwesomeIconFactory'    
+    pod 'FontAwesomeIconFactory'
+    
+    # Cryptography pod
+    pod 'CryptoSwift'
     
     target 'Im Ready!Tests' do
         inherit! :search_paths

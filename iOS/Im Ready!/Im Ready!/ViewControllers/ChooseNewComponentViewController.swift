@@ -10,18 +10,28 @@ import UIKit
 
 class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicatorBG: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var components: [Component] = []
     var buildingblockTitle: String?
-
+    var itemCount: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = buildingblockTitle
+        
+        // We need to manually count the items
+        // When deleting an item from the collectionview, numberOfItemsInSection is called again and expects a new number
+        itemCount = components.count
+    }
+    
+    func collectionViewAllowsEditing(collectionView: UICollectionView) -> Bool {
+        return true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return components.count
+        return itemCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -37,19 +47,29 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
             "Wil je '\(components[indexPath.row].name!)' toevoegen?", preferredStyle: UIAlertControllerStyle.alert)
         addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
             
-            startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: nil)
+            startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: self.activityIndicatorBG)
             
             componentService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
+                
+                // Delete the item from the collectionView
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.deleteItems(at: [indexPath])
+                    // Manually substract 1 to satisfy the collectionView
+                    self.itemCount -= 1
+                }) { (finished) in
+                    self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+                }
+                
                 futureplanChanged = true
                 simpleAlert(atVC: self,
                             withTitle: "Gelukt!",
                             andMessage: "Component toegevoegd")
-                stopActivityIndicator(withIndicatorBGView: nil)
+                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
             }, onFailure:  {
                 simpleAlert(atVC: self,
                             withTitle: "Er is iets fout gegaan.",
                             andMessage: "Het is niet gelukt het component toe te voegen.")
-                stopActivityIndicator(withIndicatorBGView: nil)
+                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
             })
             
         }))

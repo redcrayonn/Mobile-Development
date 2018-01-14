@@ -13,7 +13,6 @@ public var futureplanChanged: Bool = false
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
-
     
     var clientBuildingblocks: [ClientBuildingblock] = []
     let addBuildingblockBlockName: String = "Toevoegen"
@@ -58,12 +57,12 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
                                         self.clientBuildingblocks = results.buildingblocks!
-                                        
+
                                         // Add the last buildingblock where you can select new future goals
                                         self.clientBuildingblocks.append(ClientBuildingblock(
                                             type: BlockType.ADD,
                                             name: self.addBuildingblockBlockName))
-                                        
+
                                         self.collectionView.reloadData()
                                         stopActivityIndicator(withIndicatorBGView: nil)
         }) {
@@ -89,7 +88,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.title.text = clientBuildingblocks[indexPath.row].name
             cell.title.numberOfLines = 2
             cell.title.adjustsFontSizeToFitWidth = true
-
+            
             // Set orange background and cornerradius
             cell.mainBackground.layer.backgroundColor = UIColor(hexString: "F16122").cgColor
             cell.mainBackground.layer.cornerRadius = 6
@@ -112,7 +111,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.mainBackground.layer.cornerRadius = 6
             cell.mainBackground.layer.masksToBounds = true
             cell.shadowLayer.layer.backgroundColor = UIColor.clear.cgColor
-                        
+            
             return cell
         }
     }
@@ -131,6 +130,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             // Check if the array is not empty before departing to next view
             if !self.buildingblocks.isEmpty {
                 destinationViewController.buildingblocks = self.buildingblocks
+                destinationViewController.clientBuildingblocks = self.clientBuildingblocks
             }
         }
     }

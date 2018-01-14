@@ -14,21 +14,61 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
     let cellIdentifier = "BuildingblockCell"
     var buildingblocks: [Buildingblock] = []
     
+    var clientBuildingblocks: [ClientBuildingblock] = []
+    var clientComponents: [String] = []
+    
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        
+        print(clientBuildingblocks)
+        
+        // Create a list of all the components the client is enrolled in
+        for buildingblock in clientBuildingblocks {
+            if buildingblock.type! != BlockType.ADD {
+                for component in buildingblock.components! {
+                    clientComponents.append(component.name!)
+                }
+            }
+        }
+    }
+    
+    // Check if a client is already working on a component
+    // If a client is already working on it, it should nog show in the list.
+    func compareComponents(clientComponents: [String], buildingblockComponents: [Component]) -> [Component] {
+        var remainingComponents: [Component] = []
+        
+        for bc in buildingblockComponents {
+            print(bc.name!)
+            if !clientComponents.contains(bc.name!){
+                remainingComponents.append(bc)
+            }
+        }
+        
+        return remainingComponents
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return buildingblocks.count
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath as IndexPath) as! BuildingblockCollectionViewCell
         
+        let remainingComponents: [Component] = self.compareComponents(clientComponents: clientComponents, buildingblockComponents: buildingblocks[indexPath.row].components!)
+        
         cell.buildingblockImage.image = UIImage(named: "\(buildingblocks[indexPath.row].type!)")
         cell.buildingblockName.text = buildingblocks[indexPath.row].name
-        cell.components = buildingblocks[indexPath.row].components!
-        cell.componentsLbl.text = "\(buildingblocks[indexPath.row].components!.count) componenten"
+        cell.components = remainingComponents
+        
+        let numberOfComponents = remainingComponents.count
+        var componentString: String
+        if numberOfComponents == 1 {
+            componentString = "component"   
+        } else {
+            componentString = "componenten"
+        }
+        
+        cell.componentsLbl.text = "\(numberOfComponents) \(componentString)"
         
         return cell
     }
