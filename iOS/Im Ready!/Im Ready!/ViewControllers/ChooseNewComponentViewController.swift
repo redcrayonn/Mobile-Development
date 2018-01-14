@@ -49,7 +49,7 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
             
             startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: self.activityIndicatorBG)
             
-            componentService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
+            clientService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
                 
                 // Delete the item from the collectionView
                 self.collectionView.performBatchUpdates({

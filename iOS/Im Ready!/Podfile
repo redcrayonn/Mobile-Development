@@ -37,8 +37,14 @@ target 'Im Ready!' do
     # Awesome icons
     pod 'FontAwesomeIconFactory'
     
-    # Cryptography pod
+    # Cryptography pod for all sorts of hashing and encryption
     pod 'CryptoSwift'
+    
+    # Beautiful calendar
+    pod 'FSCalendar'
+    
+    # Date handling
+    pod 'Timepiece'
     
     target 'Im Ready!Tests' do
         inherit! :search_paths

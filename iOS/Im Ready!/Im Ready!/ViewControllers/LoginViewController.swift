@@ -27,8 +27,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.authenticateUser()
         self.hideKeyboardWhenTappedAround()
-        //        usernameField.resignFirstResponder()
-        //        passwordField.resignFirstResponder()
     }
     
     func authenticateUser() {
@@ -80,54 +78,51 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginClick(_ sender: Any) {
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
         
-//                let username = usernameField.text!
-//                let password = passwordField.text!.sha256()
+//        let username = usernameField.text!
+//        let password = passwordField.text!.sha256()
         
-//
-//        let username = "woutervermeij@gmail.com"
-//        let password = "wouter"
-        
-        let username = "woutertest4@gmail.com"
+        let username = "woutertest5@gmail.com"
         let password = "wouter"
         
-        if username != "" && password != "" {
-            authenticationService.login(
-                withUsername: username,
-                andPassword: password,
-                onSuccess: {
-                    
-                    // Check if there is no Keychain data saved for this app
-                    if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
-                        // If no keychain data; try to save username and access-token in keychain
-                        do {
-                            try Locksmith.saveData(
-                                data: ["username": username,
-                                       "id": CurrentUser.instance.id as Any,
-                                       "access-token": CurrentUser.instance.access_token as Any,
-                                       "user-role": CurrentUser.instance.user_type?.rawValue as Any],
-                                forUserAccount: self.imReadyAccount)
-                        } catch {
-                            print("could not store credentials in the keychain")
-                            simpleAlert(atVC: self,
-                                        withTitle: "Er is iets fout gegaan",
-                                        andMessage: "Kon inloggegevens niet opslaan in de keychain")
-                        }
-                    }
-                    
-                    self.redirectUserToStoryboard()
-                    
-            }) {
-                print("failed to log in")
-                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
-                simpleAlert(atVC: self,
-                            withTitle: "Ongeldige inloggegevens",
-                            andMessage: "Gebruikersnaam of wachtwoord is fout")
-            }
-        } else {
+        guard username != "" && password != "" else {
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
             simpleAlert(atVC: self,
                         withTitle: "Velden niet ingevuld",
                         andMessage: "Vul alle velden in om in te loggen")
+            return
+        }
+        
+        authenticationService.login(
+            withUsername: username,
+            andPassword: password,
+            onSuccess: {
+                
+                // Check if there is no Keychain data saved for this app
+                if Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount) == nil {
+                    // If no keychain data; try to save username and access-token in keychain
+                    do {
+                        try Locksmith.saveData(
+                            data: ["username": username,
+                                   "id": CurrentUser.instance.id as Any,
+                                   "access-token": CurrentUser.instance.access_token as Any,
+                                   "user-role": CurrentUser.instance.user_type?.rawValue as Any],
+                            forUserAccount: self.imReadyAccount)
+                    } catch {
+                        print("could not store credentials in the keychain")
+                        simpleAlert(atVC: self,
+                                    withTitle: "Er is iets fout gegaan",
+                                    andMessage: "Kon inloggegevens niet opslaan in de keychain")
+                    }
+                }
+                
+                self.redirectUserToStoryboard()
+                
+        }) {
+            print("failed to log in")
+            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            simpleAlert(atVC: self,
+                        withTitle: "Ongeldige inloggegevens",
+                        andMessage: "Gebruikersnaam of wachtwoord is fout")
         }
     }
     

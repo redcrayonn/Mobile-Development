@@ -26,6 +26,8 @@
 		FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */; };
 		FA4B87481FC3091D008CB427 /* BuildingblockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87471FC3091D008CB427 /* BuildingblockService.swift */; };
 		FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */; };
+		FA4BC4FA200BB5D40011D158 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BC4F9200BB5D40011D158 /* CalendarViewController.swift */; };
+		FA4BC4FC200BB8B90011D158 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BC4FB200BB8B90011D158 /* CalendarTableViewCell.swift */; };
 		FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE351FBADB7700945B2A /* Chat.swift */; };
 		FA4DFE381FBADB8500945B2A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE371FBADB8500945B2A /* Message.swift */; };
 		FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFE3B1FBB198C00945B2A /* User.swift */; };
@@ -56,6 +58,9 @@
 		FA8306C41FDE932F00BC225F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C31FDE932F00BC225F /* Status.swift */; };
 		FA8306C81FDEC23B00BC225F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C71FDEC23B00BC225F /* MessageViewController.swift */; };
 		FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */; };
+		FA9CF8CB200BDB5200A983D7 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CA200BDB5200A983D7 /* Appointment.swift */; };
+		FA9CF8CD200BDFD600A983D7 /* AppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */; };
+		FA9CF8CF200BE16200A983D7 /* AppointmentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */; };
 		FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4BB8A1FBF0421006B845D /* Services.swift */; };
 		FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235611FB990F60099B29D /* AppDelegate.swift */; };
 		FAB235671FB990F60099B29D /* Client.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB235651FB990F60099B29D /* Client.storyboard */; };
@@ -103,6 +108,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FAEA7C60200BD66200337E3B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Im_Ready_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59707C614206F5C8B8CD852E /* Pods-Im Ready!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!.release.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!/Pods-Im Ready!.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +147,8 @@
 		FA4B87451FC307FD008CB427 /* BuildingblockResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockResult.swift; sourceTree = "<group>"; };
 		FA4B87471FC3091D008CB427 /* BuildingblockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingblockService.swift; sourceTree = "<group>"; };
 		FA4B87491FC31461008CB427 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FA4BC4F9200BB5D40011D158 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		FA4BC4FB200BB8B90011D158 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		FA4DFE351FBADB7700945B2A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FA4DFE371FBADB8500945B2A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA4DFE3B1FBB198C00945B2A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -159,6 +179,9 @@
 		FA8306C31FDE932F00BC225F /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		FA8306C71FDEC23B00BC225F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		FA9CF8CA200BDB5200A983D7 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentService.swift; sourceTree = "<group>"; };
+		FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentResult.swift; sourceTree = "<group>"; };
 		FAA4BB8A1FBF0421006B845D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FAB2355E1FB990F60099B29D /* Im Ready!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Im Ready!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB235611FB990F60099B29D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -255,13 +278,14 @@
 			children = (
 				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
+				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
 				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
 				FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */,
-				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
 				FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */,
 				FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */,
 				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
 				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
+				FA4BC4FB200BB8B90011D158 /* CalendarTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -275,6 +299,7 @@
 				FA7471FB1FC722E100D0D9D8 /* ActivityResult.swift */,
 				FA3CB4051FD5D2CB00142CCF /* MessageResult.swift */,
 				FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */,
+				FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -406,12 +431,13 @@
 				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
 				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
 				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
-				FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */,
 				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
+				FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */,
 				FA8306C71FDEC23B00BC225F /* MessageViewController.swift */,
 				FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */,
 				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
 				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
+				FA4BC4F9200BB5D40011D158 /* CalendarViewController.swift */,
 			);
 			name = Controllers;
 			path = ViewControllers;
@@ -435,6 +461,7 @@
 				FA528D991FDB1A2100052647 /* Feedback.swift */,
 				FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */,
 				FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */,
+				FA9CF8CA200BDB5200A983D7 /* Appointment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -451,6 +478,7 @@
 				FA3CB4031FD5D22400142CCF /* ChatsService.swift */,
 				FADB8FCB1FE003A300EECB8B /* MessageService.swift */,
 				FADB8FCD1FE006CE00EECB8B /* UserService.swift */,
+				FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -478,6 +506,7 @@
 				FAB2355C1FB990F60099B29D /* Resources */,
 				3E6C62A5C0C7321182156722 /* [CP] Embed Pods Frameworks */,
 				193CE2F4A216EAA8213BA0A0 /* [CP] Copy Pods Resources */,
+				FAEA7C60200BD66200337E3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -677,6 +706,7 @@
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeIconFactory/FontAwesomeIconFactory.framework",
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
@@ -686,6 +716,7 @@
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/Timepiece/Timepiece.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -695,6 +726,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeIconFactory.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
@@ -704,6 +736,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Timepiece.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -811,7 +844,9 @@
 				FA4DFE401FBC1AF500945B2A /* Component.swift in Sources */,
 				FA8306C01FDE931900BC225F /* Role.swift in Sources */,
 				FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */,
+				FA4BC4FA200BB5D40011D158 /* CalendarViewController.swift in Sources */,
 				FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */,
+				FA4BC4FC200BB8B90011D158 /* CalendarTableViewCell.swift in Sources */,
 				FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */,
 				FA4B72601FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift in Sources */,
 				FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */,
@@ -821,6 +856,7 @@
 				FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */,
 				FA4DFE381FBADB8500945B2A /* Message.swift in Sources */,
 				FAB2356A1FB990F60099B29D /* Im_Ready_.xcdatamodeld in Sources */,
+				FA9CF8CD200BDFD600A983D7 /* AppointmentService.swift in Sources */,
 				FA3CB4061FD5D2CB00142CCF /* MessageResult.swift in Sources */,
 				FA7472001FCC088300D0D9D8 /* ClientComponentViewController.swift in Sources */,
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
@@ -840,6 +876,7 @@
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
 				FA64A6F21FFE6876005E7BE5 /* ComponentCollectionViewCell.swift in Sources */,
 				FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */,
+				FA9CF8CF200BE16200A983D7 /* AppointmentResult.swift in Sources */,
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
 				FA8306BE1FDE930F00BC225F /* BlockType.swift in Sources */,
 				FA4DFE441FBC1C5E00945B2A /* Relative.swift in Sources */,
@@ -850,6 +887,7 @@
 				FA3383EF1FD05C6C00847C05 /* ClientActivityStackViewCell.swift in Sources */,
 				FA7471FC1FC722E100D0D9D8 /* ActivityResult.swift in Sources */,
 				FA7471FA1FC722A200D0D9D8 /* ComponentResult.swift in Sources */,
+				FA9CF8CB200BDB5200A983D7 /* Appointment.swift in Sources */,
 				FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */,
 				FA35EFBF1FE85F21000C9B76 /* ClientActivity.swift in Sources */,
 				FADAB4571FBDF2D60069E290 /* ClientService.swift in Sources */,

@@ -9,16 +9,5 @@
 import Foundation
 
 public class ComponentService : Service {
-    func enrollClientInComponent(clientId: String,
-                                 componentId: String,
-                                 onSuccess: @escaping () -> (),
-                                 onFailure: @escaping () -> ()) {
-        apiClient.send(toRelativePath: "client/\(clientId)/component/\(componentId)",
-            withHttpMethod: .post,
-            onSuccessParser: { (results) in
-                onSuccess()
-        }) {
-            onFailure()
-        }
-    }
+    // Not necessary as of yet.
 }

@@ -16,6 +16,7 @@ public let activityService: ActivityService = ActivityService()
 public let chatsService: ChatsService = ChatsService()
 public let messageService: MessageService = MessageService()
 public let userService: UserService = UserService()
+public let appointmentService: AppointmentService = AppointmentService()
 
 public class Service {
     let apiClient : ApiClient

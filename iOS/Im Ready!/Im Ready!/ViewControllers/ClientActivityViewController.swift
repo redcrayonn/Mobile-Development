@@ -12,10 +12,11 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     var tableView: UITableView!
     var activities: [ClientActivity] = []
     var component: ClientComponent!
-        
+    
     var t_count:Int = 0
     var lastCell: ClientActivityStackViewCell = ClientActivityStackViewCell()
     var button_tag:Int = -1
+    var height: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         tableView.separatorColor = UIColor.white
         tableView.allowsSelection = false
         tableView.layer.frame.size.height = view.frame.height * 1.5
-        tableView.frame.origin.y += 100
+//        tableView.frame.origin.y += 100
         tableView.register(UINib(nibName: "ActivityStackViewCell", bundle: nil),
                            forCellReuseIdentifier: "ActivityStackViewCell")
         tableView.delegate = self
@@ -49,7 +50,10 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityStackViewCell", for: indexPath) as! ClientActivityStackViewCell
         
-        cell.activityDescription.text = activities[indexPath.row].description
+        cell.activityDescriptionLbl.adjustsFontSizeToFitWidth = true
+        cell.activityDescriptionLbl.numberOfLines = 0
+        cell.activityDescriptionLbl.text = activities[indexPath.row].description
+        cell.activityDescriptionLbl.sizeToFit()
         
         // If the cell does not exist yet, create a new one
         if !cell.cellExists {
@@ -62,15 +66,17 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             cell.answerTextView.layer.borderColor = UIColor.black.cgColor
             cell.answerTextView.layer.borderWidth = 1.0
             
-            cell.answerTextView.layer.shadowColor = UIColor.black.cgColor
-            cell.answerTextView.layer.shadowOpacity = 1.0
-            cell.answerTextView.layer.shadowOffset = CGSize.zero
-            cell.answerTextView.layer.shadowRadius = 10
-            cell.answerTextView.layer.shouldRasterize = true
-            
             cell.activity = activities[indexPath.row]
             cell.view = self
-            cell.deadlineLbl.text = "Deadline in 2 days"
+            cell.deadlineLbl.text = "Deadline in 2 dagen"
+            
+            // Set bottom "border" for unfolded view
+            cell.detailView.layer.backgroundColor = UIColor.white.cgColor
+            cell.detailView.layer.masksToBounds = false
+            cell.detailView.layer.shadowColor = UIColor.gray.cgColor
+            cell.detailView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            cell.detailView.layer.shadowOpacity = 1.0
+            cell.detailView.layer.shadowRadius = 0.0
             
             if let content = activities[indexPath.row].content {
                 cell.answerTextView.text = content

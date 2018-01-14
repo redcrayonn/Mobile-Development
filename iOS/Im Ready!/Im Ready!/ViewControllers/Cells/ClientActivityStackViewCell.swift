@@ -17,7 +17,7 @@ class ClientActivityStackViewCell: UITableViewCell {
         }
     }
     @IBOutlet weak var openDetailViewBtn: UIButton!
-    @IBOutlet weak var activityDescription: UILabel!
+    @IBOutlet weak var activityDescriptionLbl: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var sendAnswerBtn: UIButton!
     @IBOutlet weak var deadlineLbl: UILabel!
@@ -25,7 +25,6 @@ class ClientActivityStackViewCell: UITableViewCell {
     var cellExists: Bool = false
     var activity: ClientActivity?
     var view: ClientActivityViewController!
-//    var content: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +36,12 @@ class ClientActivityStackViewCell: UITableViewCell {
     }
     
     @IBAction func sendAnswer(_ sender: Any) {
+        guard let answer = answerTextView.text, answer != "" else {
+            simpleAlert(atVC: view, withTitle: "Antwoord leeg", andMessage: "Het antwoord mag niet leeg zijn")
+            
+            return
+        }
+        
         let alert = UIAlertController(title: "Antwoord versturen?", message: "Weet je zeker dat je het in wilt leveren?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
             
