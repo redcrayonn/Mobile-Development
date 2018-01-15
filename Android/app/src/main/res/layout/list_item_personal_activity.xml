@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_button_container"
                 android:layout_alignParentEnd="true"
-                android:text="@string/waiting_for_approval"
+                android:text="@string/status_pending"
                 android:textSize="@dimen/sm"
                 android:textColor="@color/colorAccent"
                 android:gravity="center_vertical"
