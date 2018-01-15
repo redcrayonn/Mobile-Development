@@ -41,6 +41,8 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
         
+        // There is a fault in the API where posting a new Appointment results in two Appointments
+        // That's why there are duplicates, it's not the fault of this beautiful code
         appointmentService.getAppointments(forClient: CurrentUser.instance.id!,
                                            onSuccess: { (results) in
                                             self.appointments = results
@@ -51,16 +53,14 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
                         withTitle: "Er is iets fout gegaan",
                         andMessage: "Kon afspraken niet ophalen")
         }
-        
-        
     }
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
-        selectedDate = date
+        self.selectedDate = date
         getAppointmentsForDate(fromAppointments: self.appointments)
-
+        
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
@@ -73,19 +73,14 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
             counts[date, default: 0] += 1
         }
         
+        // Draw the number of dots per day (max is 3 dots per day)s
         let dateString = self.dateFormatter2.string(from: date)
         if self.datesWithEvents.contains(dateString) {
             return counts[dateString]!
         }
         
         return 0
-        
     }
-    
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("\(self.dateFormatter.string(from: calendar.currentPage))")
-    }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appointmentsForDate.count
@@ -93,12 +88,6 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
-        
-        print(self.appointmentsForDate)
-        print(indexPath.row)
-        
-        print(self.appointmentsForDate[indexPath.row].startDate!)
-        print(self.appointmentsForDate[indexPath.row].endDate!)
         
         let startTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].startDate!, convertTo: .time)
         let endTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].endDate!, convertTo: .time)
@@ -123,24 +112,9 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        self.appointmentsForDate = sortListByTime(forList: filteredAppointments)
+        // Sort the list before updating
+        self.appointmentsForDate = filteredAppointments.sorted {$0.startDate! < $1.startDate!}
         self.tableView.reloadData()
-    }
-    
-    /// Sort the list by time.
-    func sortListByTime(forList appointments: [Appointment]) -> [Appointment] {
-        let sortedList: [Appointment] = appointments.sorted { (a1, a2) -> Bool in
-            let a1Time = convertToTimeOrDateString(fromDateTime: a1.startDate!, convertTo: .time)
-            let a2Time = convertToTimeOrDateString(fromDateTime: a2.startDate!, convertTo: .time)
-            
-            if a1Time > a2Time {
-                return false
-            }
-            
-            return true
-        }
-        
-        return sortedList
     }
     
     /// Convert the DateTime from the API to a representable time
@@ -210,14 +184,9 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         return unit
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-     */
     
 }

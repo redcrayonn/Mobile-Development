@@ -10,6 +10,8 @@
 		0B9EDB0E1E2C7325F25D6954 /* Pods_Im_Ready_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF19877FEB36B0C64EB9B20D /* Pods_Im_Ready_.framework */; };
 		55B7494C0208B9E357CA77AF /* Pods_Im_Ready_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */; };
 		E398416CB00FC82F09388693 /* Pods_Im_Ready_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */; };
+		FA03F476200D03D700322435 /* CalendarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03F475200D03D700322435 /* CalendarDetailViewController.swift */; };
+		FA03F478200D28DF00322435 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FA03F477200D28DF00322435 /* Settings.bundle */; };
 		FA3383EF1FD05C6C00847C05 /* ClientActivityStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */; };
 		FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */; };
 		FA35EFBB1FE85E49000C9B76 /* ClientBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */; };
@@ -87,7 +89,6 @@
 		FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */; };
 		FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */; };
 		FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */; };
-		FAF4673D1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */; };
 		FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +132,8 @@
 		B5FDBBBA72EC5EA82C1D167F /* Pods_Im_Ready_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Im_Ready_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C218B82C4D603095F850F4D3 /* Pods-Im Ready!UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!UITests/Pods-Im Ready!UITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA22577E3139BDD4A7B335DE /* Pods-Im Ready!Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Im Ready!Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Im Ready!Tests/Pods-Im Ready!Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA03F475200D03D700322435 /* CalendarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailViewController.swift; sourceTree = "<group>"; };
+		FA03F477200D28DF00322435 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivityStackViewCell.swift; sourceTree = "<group>"; };
 		FA35EFB81FE802F1000C9B76 /* FutureplanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureplanResult.swift; sourceTree = "<group>"; };
 		FA35EFBA1FE85E49000C9B76 /* ClientBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildingblock.swift; sourceTree = "<group>"; };
@@ -214,7 +217,6 @@
 		FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBuildingblock.swift; sourceTree = "<group>"; };
 		FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockCollectionViewCell.swift; sourceTree = "<group>"; };
-		FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockViewController.swift; sourceTree = "<group>"; };
 		FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,23 +273,6 @@
 				C218B82C4D603095F850F4D3 /* Pods-Im Ready!UITests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		FA3CB4001FD57A5400142CCF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
-				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
-				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
-				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
-				FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */,
-				FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */,
-				FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */,
-				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
-				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
-				FA4BC4FB200BB8B90011D158 /* CalendarTableViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		FA4DFE451FBC204700945B2A /* Models */ = {
@@ -384,6 +369,7 @@
 				FAB2356B1FB990F60099B29D /* Assets.xcassets */,
 				FAB235701FB990F60099B29D /* Info.plist */,
 				FAB235681FB990F60099B29D /* Im_Ready_.xcdatamodeld */,
+				FA03F477200D28DF00322435 /* Settings.bundle */,
 			);
 			path = "Im Ready!";
 			sourceTree = "<group>";
@@ -427,17 +413,11 @@
 		FAB235991FB99A190099B29D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA3CB4001FD57A5400142CCF /* Cells */,
-				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
-				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
-				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
-				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
-				FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */,
-				FA8306C71FDEC23B00BC225F /* MessageViewController.swift */,
-				FAF4673C1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift */,
-				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
-				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
-				FA4BC4F9200BB5D40011D158 /* CalendarViewController.swift */,
+				FAC6D25A200D34F7009AB5E9 /* Login */,
+				FAC6D259200D34DB009AB5E9 /* Client flow */,
+				FAC6D257200D344C009AB5E9 /* Calendar */,
+				FAC6D256200D3429009AB5E9 /* Chats */,
+				FAC6D252200D3058009AB5E9 /* Add new Component */,
 			);
 			name = Controllers;
 			path = ViewControllers;
@@ -464,6 +444,61 @@
 				FA9CF8CA200BDB5200A983D7 /* Appointment.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FAC6D252200D3058009AB5E9 /* Add new Component */ = {
+			isa = PBXGroup;
+			children = (
+				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
+				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
+				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
+				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
+				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
+			);
+			name = "Add new Component";
+			sourceTree = "<group>";
+		};
+		FAC6D256200D3429009AB5E9 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				FA3CB3FE1FD56F3200142CCF /* ChatViewController.swift */,
+				FA8306C71FDEC23B00BC225F /* MessageViewController.swift */,
+				FA3CB4011FD57AD100142CCF /* ChatCollectionViewCell.swift */,
+				FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */,
+				FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */,
+			);
+			name = Chats;
+			sourceTree = "<group>";
+		};
+		FAC6D257200D344C009AB5E9 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FA4BC4F9200BB5D40011D158 /* CalendarViewController.swift */,
+				FA03F475200D03D700322435 /* CalendarDetailViewController.swift */,
+				FA4BC4FB200BB8B90011D158 /* CalendarTableViewCell.swift */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		FAC6D259200D34DB009AB5E9 /* Client flow */ = {
+			isa = PBXGroup;
+			children = (
+				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
+				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
+				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
+				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
+				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
+				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
+			);
+			name = "Client flow";
+			sourceTree = "<group>";
+		};
+		FAC6D25A200D34F7009AB5E9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FAB235A11FB99B720099B29D /* LoginViewController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		FADAB44C1FBDEF610069E290 /* Services */ = {
@@ -615,6 +650,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA03F478200D28DF00322435 /* Settings.bundle in Resources */,
 				FAB2356F1FB990F60099B29D /* LaunchScreen.storyboard in Resources */,
 				FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */,
 				FAB2356C1FB990F60099B29D /* Assets.xcassets in Resources */,
@@ -844,6 +880,7 @@
 				FA4DFE401FBC1AF500945B2A /* Component.swift in Sources */,
 				FA8306C01FDE931900BC225F /* Role.swift in Sources */,
 				FA35EFB91FE802F1000C9B76 /* FutureplanResult.swift in Sources */,
+				FA03F476200D03D700322435 /* CalendarDetailViewController.swift in Sources */,
 				FA4BC4FA200BB5D40011D158 /* CalendarViewController.swift in Sources */,
 				FADB8FCC1FE003A300EECB8B /* MessageService.swift in Sources */,
 				FA4BC4FC200BB8B90011D158 /* CalendarTableViewCell.swift in Sources */,
@@ -862,7 +899,6 @@
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
-				FAF4673D1FEBC5E300D8DB43 /* AddBuildingblockViewController.swift in Sources */,
 				FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */,
 				FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */,
 				FA4DFE491FBC33E000945B2A /* EntityModel.swift in Sources */,
