@@ -10,7 +10,6 @@ import UIKit
 
 class CalendarTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var remarkLbl: UILabel!
     @IBOutlet weak var timeFrameLbl: UILabel!
     
     override func awakeFromNib() {

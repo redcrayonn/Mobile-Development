@@ -29,7 +29,8 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     var appointments: [Appointment] = []
-    var selectedDate: Date = Date()
+    var appointmentsForDate: [Appointment] = []
+    var selectedDate: Date = Date.today()
     var datesWithEvents: [String] = []
     
     override func viewDidLoad() {
@@ -44,7 +45,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
                                            onSuccess: { (results) in
                                             self.appointments = results
                                             self.addEventsToCalendar(fromAppointments: self.appointments)
-                                            self.tableView.reloadData()                                            
+                                            self.getAppointmentsForDate(fromAppointments: self.appointments)
         }) {
             simpleAlert(atVC: self,
                         withTitle: "Er is iets fout gegaan",
@@ -56,18 +57,25 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print("did select date \(self.dateFormatter.string(from: date))")
         let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
-        print("selected dates is \(selectedDates)")
+        selectedDate = date
+        getAppointmentsForDate(fromAppointments: self.appointments)
+
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
+        // Count the number of appointments per day and put it in a dictionary
+        let counts = self.datesWithEvents.reduce(into: [:]) { counts, date in
+            counts[date, default: 0] += 1
+        }
+        
         let dateString = self.dateFormatter2.string(from: date)
         if self.datesWithEvents.contains(dateString) {
-            return 1
+            return counts[dateString]!
         }
         
         return 0
@@ -80,54 +88,95 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appointments.count
+        return appointmentsForDate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
         
-//        addEventToCalendar(fromAppointments: appointments[indexPath.row].startDate!)
+        print(self.appointmentsForDate)
+        print(indexPath.row)
         
-        print([indexPath.row])
-        print(appointments.count)
+        print(self.appointmentsForDate[indexPath.row].startDate!)
+        print(self.appointmentsForDate[indexPath.row].endDate!)
         
-        let startTime = convertToTime(fromDateTime: appointments[indexPath.row].startDate!)
-        let endTime = convertToTime(fromDateTime: appointments[indexPath.row].endDate!)
+        let startTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].startDate!, convertTo: .time)
+        let endTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].endDate!, convertTo: .time)
         
-        cell.titleLbl.text = appointments[indexPath.row].title
-        cell.remarkLbl.text = appointments[indexPath.row].remark
+        cell.titleLbl.text = appointmentsForDate[indexPath.row].title
         cell.timeFrameLbl.text = "\(startTime) - \(endTime)"
         
         return cell
+        
+    }
+    
+    /// Filter the list of appointmets by the selected date of the calendar.
+    func getAppointmentsForDate(fromAppointments appointments: [Appointment]) {
+        var filteredAppointments: [Appointment] = []
+        for appointment in appointments {
+            let dateOfAppointment = convertToTimeOrDateString(fromDateTime: appointment.startDate!,
+                                                              convertTo: .date).date(inFormat: "yyyy-MM-dd")
+            let selectedDate = "\(self.selectedDate.year)-\(self.selectedDate.month)-\(self.selectedDate.day)".date(inFormat: "yyyy-MM-dd")
+            
+            if dateOfAppointment == selectedDate {
+                filteredAppointments.append(appointment)
+            }
+        }
+        
+        self.appointmentsForDate = sortListByTime(forList: filteredAppointments)
+        self.tableView.reloadData()
+    }
+    
+    /// Sort the list by time.
+    func sortListByTime(forList appointments: [Appointment]) -> [Appointment] {
+        let sortedList: [Appointment] = appointments.sorted { (a1, a2) -> Bool in
+            let a1Time = convertToTimeOrDateString(fromDateTime: a1.startDate!, convertTo: .time)
+            let a2Time = convertToTimeOrDateString(fromDateTime: a2.startDate!, convertTo: .time)
+            
+            if a1Time > a2Time {
+                return false
+            }
+            
+            return true
+        }
+        
+        return sortedList
     }
     
     /// Convert the DateTime from the API to a representable time
-    func convertToTime(fromDateTime datetime: String) -> String {
+    func convertToTimeOrDateString(fromDateTime datetime: String, convertTo: DateOrTime) -> String {
         
         // Convert to a Date() object
         let datetimeObject = convertToDateObject(fromDateString: datetime)
         
-        let minutes: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.minute)
-        let hours: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.hour)
+        if convertTo == .time {
+            let minutes: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.minute)
+            let hours: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.hour)
+            
+            return "\(hours):\(minutes)"
+            
+        } else if convertTo == .date {
+            let year = datetimeObject.year
+            let month = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.month)
+            let day = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.day)
+            
+            return "\(year)-\(month)-\(day)"
+        }
         
-        print("\(hours):\(minutes)")
-        
-        return "\(hours):\(minutes)"
+        return "Could not convert to time or date"
     }
     
-    /// Convert the DateTime from the API to a representable date to add to the calendar
+    public enum DateOrTime : String {
+        case date
+        case time
+    }
+    
+    /// Convert the DateTime from the API to a representable date to add as event to the calendar
     func addEventsToCalendar(fromAppointments appointments: [Appointment]) {
         
         for appointment in appointments {
-            let datetime = appointment.startDate
-            
-            let dateTimeInIsoFormat = convertToDateObject(fromDateString: datetime!)
-            
-            let month = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.month)
-            let day = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.day)
-            
-            print("\(dateTimeInIsoFormat.year)-\(month)-\(day)")
-            let dateString = "\(dateTimeInIsoFormat.year)-\(month)-\(day)"
+            let datetime = appointment.startDate!
+            let dateString = convertToTimeOrDateString(fromDateTime: datetime, convertTo: .date)
             
             datesWithEvents.append(dateString)
         }
@@ -149,12 +198,12 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         return "\(correctedDateTime)+0100".dateInISO8601Format()!
     }
     
-    /// Prepend a zero, otherwise
+    /// Prepend a zero if needed
     func prependZeroIfNeeded(forDateOrTimeUnit: Int) -> String {
         let unit: String = String(forDateOrTimeUnit)
         
         // If the unit only has 1 digit, prepend a zero
-        if "\(unit)".count == 1 {
+        if unit.count == 1 {
             return "0\(forDateOrTimeUnit)"
         }
         
