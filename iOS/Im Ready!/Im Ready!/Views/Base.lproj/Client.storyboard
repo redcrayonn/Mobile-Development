@@ -950,6 +950,15 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="rowHeight">
                                         <real key="value" value="-10"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
+                                        <color key="value" red="1" green="0.68555252170000003" blue="0.079185989849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                        <color key="value" red="0.25098039215686274" green="0.094117647058823528" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
+                                        <color key="value" red="1" green="0.1357389531" blue="0.081616792430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="awr-Ek-dL8" id="UJM-0n-dU2"/>
@@ -968,7 +977,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TKM-GG-sqP">
-                                                    <rect key="frame" x="153.66666666666666" y="0.0" width="68" height="44"/>
+                                                    <rect key="frame" x="156.33333333333331" y="0.0" width="68" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="68" id="OcV-Hj-LWW"/>
                                                         <constraint firstAttribute="height" constant="44" id="zTE-FZ-wrp"/>
@@ -978,7 +987,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeframe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzA-03-iER">
-                                                    <rect key="frame" x="10" y="0.0" width="114" height="44"/>
+                                                    <rect key="frame" x="12.666666666666671" y="0.0" width="114" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="4ON-bt-SbL"/>
                                                         <constraint firstAttribute="width" constant="114" id="H6X-Kz-cIS"/>
@@ -1038,34 +1047,16 @@
                         <viewLayoutGuide key="safeArea" id="fom-eG-8ND"/>
                     </view>
                     <navigationItem key="navigationItem" title="Kalender" id="plH-02-cGk">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" image="ic_settings_36pt" id="Fbh-W1-DWO">
-                            <connections>
-                                <segue destination="8V5-8G-Hga" kind="show" id="Bm3-Ah-bLK"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="ic_settings_36pt" id="Fbh-W1-DWO"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="calendar" destination="IC4-Oa-3Ba" id="cu1-NH-ycz"/>
                         <outlet property="tableView" destination="RTt-3F-cMQ" id="6Es-aG-A0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBx-7B-Gcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1668" y="-939.16256157635473"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Mz9-1V-Sbo">
-            <objects>
-                <viewController id="8V5-8G-Hga" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="P7K-88-R8z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="fhn-5b-fas"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zd-mQ-fza" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2393" y="-939"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W0b-Xv-rv4">
