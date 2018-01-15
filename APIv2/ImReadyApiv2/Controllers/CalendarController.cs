@@ -76,8 +76,6 @@ namespace ImReadyApiv2.Controllers {
 				return BadRequest(ModelState);
 			}
 
-			
-
 			Calendar relatedCalendarItem = model.getModel(relatedUser);
 
 			_calendarService.CreateCalendarItem(relatedCalendarItem);

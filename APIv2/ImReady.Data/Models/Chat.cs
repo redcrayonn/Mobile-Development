@@ -20,6 +20,6 @@ namespace ImReady.Data.Models
         [ForeignKey("ReceiverId")]
         public virtual User Receiver { get; set; }
 
-        public virtual ICollection<Message> messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

@@ -240,6 +240,7 @@
     <Compile Include="Controllers\BuildingblockController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CaregiverController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientTaskController.cs" />
     <Compile Include="Controllers\FuturePlanController.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
     <Compile Include="Models\Input\PostCalendarInputModel.cs" />
     <Compile Include="Models\Input\PostClientActivityInputModel.cs" />
+    <Compile Include="Models\Input\PostMessageInputModel.cs" />
     <Compile Include="Models\Input\PutClientTaskInputModel.cs" />
     <Compile Include="Models\Input\PostClientTaskInputModel.cs" />
     <Compile Include="Models\Input\PostUserInputModel.cs" />
@@ -288,6 +290,7 @@
     <Compile Include="Results\CaregiverClientsResult.cs" />
     <Compile Include="Results\CaregiverUserResult.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Results\ChatResult.cs" />
     <Compile Include="Results\ClientTaskResult.cs" />
     <Compile Include="Results\ComponentResult.cs" />
     <Compile Include="Results\ClientUserResult.cs" />
@@ -296,6 +299,7 @@
     <Compile Include="Results\FutureplanResult\ClientComponentResult.cs" />
     <Compile Include="Results\FutureplanResult\FeedbackResult.cs" />
     <Compile Include="Results\FutureplanResult\FutureplanResult.cs" />
+    <Compile Include="Results\MessageResult.cs" />
     <Compile Include="Results\UsefulLinkResult.cs" />
     <Compile Include="Results\UserResult.cs" />
     <Compile Include="Startup.cs" />
@@ -320,6 +324,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
+    <Folder Include="Views\Chat\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

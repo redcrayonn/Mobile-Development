@@ -23,6 +23,7 @@ namespace ImReady.Service
         IRepository<Notification> NotificationRepository { get; }
 		IRepository<Calendar> CalendarRepository { get; }
 		IRepository<ClientTask> ClientTaskRepository { get; }
+		IRepository<Chat> ChatRepository { get; }
 	}
 		
 }

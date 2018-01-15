@@ -15,7 +15,7 @@ namespace ImReady.Data.Models
         [ForeignKey("ChatId")]
         public Chat Chat { get; set; }
 
-        public String Content { get; set; }
+        public string Content { get; set; }
         public DateTime SentDate { get; set; }
         public bool Read { get; set; }
 

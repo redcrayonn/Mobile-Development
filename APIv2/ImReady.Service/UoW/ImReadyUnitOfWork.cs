@@ -23,6 +23,7 @@ namespace ImReady.Service
         public IRepository<User> UserRepository => new EntityFrameworkGenericRepository<User>(_context);
         public IRepository<Caregiver> CaregiverRepository => new EntityFrameworkGenericRepository<Caregiver>(_context);
 		public IRepository<Calendar> CalendarRepository => new EntityFrameworkGenericRepository<Calendar>(_context);
+		public IRepository<Chat> ChatRepository => new EntityFrameworkGenericRepository<Chat>(_context);
 
 		//Futureplan
 		public IRepository<ClientBuildingBlock> ClientBuildingblockRepository => new EntityFrameworkGenericRepository<ClientBuildingBlock>(_context);
