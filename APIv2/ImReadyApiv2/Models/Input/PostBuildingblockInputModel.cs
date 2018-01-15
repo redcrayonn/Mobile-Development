@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ImReady.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ImReadyApiv2.Models.Input
 {
     public class PostBuildingblockInputModel
     {
+		[Required]
         public string Name { get; set; }
-        public string Description { get; set; }
-        public BlockType Type { get; set; }
+
+		[Required]
+		public string Description { get; set; }
+
+		[Required]
+		public BlockType Type { get; set; }
 
         internal Buildingblock GetBlock()
         {

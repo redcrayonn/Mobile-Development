@@ -92,6 +92,7 @@ namespace ImReadyApiv2.Controllers
 		/// </summary>
 		/// <param name="model"></param>
 		/// <response code="204">No content</response>
+		/// <response code="400">Bad request</response>
 		[Route("{buildingBlockId}")]
 		public IHttpActionResult Put (string buildingBlockId, [FromBody] PostBuildingblockInputModel model) {
 			Buildingblock block = _blockService.getById(buildingBlockId);
@@ -100,6 +101,14 @@ namespace ImReadyApiv2.Controllers
 				return NotFound();
 			}
 
+			Validate(model);
+
+			if (!ModelState.IsValid) {
+				return BadRequest();
+			}
+
+			block = model.GetBlock();
+			block.Id = buildingBlockId;
 			_blockService.EditBlock(block);
 			
 			return Ok();
