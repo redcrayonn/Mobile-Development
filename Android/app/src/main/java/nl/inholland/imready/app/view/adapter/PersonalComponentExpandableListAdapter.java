@@ -15,12 +15,11 @@ import nl.inholland.imready.app.presenter.client.ClientBlockDetailsPresenter;
 import nl.inholland.imready.app.view.holder.FillableViewHolder;
 import nl.inholland.imready.app.view.holder.PersonalActivityViewHolder;
 import nl.inholland.imready.app.view.holder.PersonalComponentViewHolder;
-import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.util.ColorUtil;
 
-public class PersonalComponentExpandableListAdapter extends BaseExpandableListAdapter implements OnChangeListener<PersonalActivity>, DataHolder<List<PersonalComponent>> {
+public class PersonalComponentExpandableListAdapter extends BaseExpandableListAdapter implements DataHolder<List<PersonalComponent>> {
 
     private Context context;
     private List<PersonalComponent> components;
@@ -105,7 +104,7 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
         groupIndicator.setSelected(isExpanded);
 
         // fill view from data here
-        viewHolder.fill(context, component, null);
+        viewHolder.fill(context, component);
 
         convertView.setBackgroundColor(blendedComponentColors.get(groupPosition));
         return convertView;
@@ -118,16 +117,9 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
             convertView = inflater.inflate(R.layout.simple_list_item2, parent, false);
             ((TextView)convertView).setText(R.string.empty_component);
         } else {
-            FillableViewHolder<PersonalActivity> viewHolder;
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.list_item_personal_activity, parent, false);
-                viewHolder = new PersonalActivityViewHolder(convertView, presenter);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (PersonalActivityViewHolder) convertView.getTag();
-            }
-
-            viewHolder.fill(context, activity, this);
+            convertView = inflater.inflate(R.layout.list_item_personal_activity, parent, false);
+            PersonalActivityViewHolder viewHolder = new PersonalActivityViewHolder(convertView, presenter);
+            viewHolder.fill(context, activity);
         }
 
         return convertView;
@@ -136,11 +128,6 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return false;
-    }
-
-    @Override
-    public void onChanged(Object sender, PersonalActivity activity) {
-        notifyDataSetChanged();
     }
 
     @Override

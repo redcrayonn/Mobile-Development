@@ -2,13 +2,11 @@ package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import nl.inholland.imready.R;
-import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.util.BlockUtil;
 
@@ -24,7 +22,7 @@ public class BlockPlanViewHolder implements FillableViewHolder<Block> {
     }
 
     @Override
-    public void fill(@NonNull Context context, @NonNull Block data, @Nullable OnChangeListener<Block> changeListener) {
+    public void fill(@NonNull Context context, @NonNull Block data) {
         groupIconView.setImageDrawable(BlockUtil.getDrawableIcon(context, data.getType()));
         titleView.setText(data.getName());
         int count = data.getComponents() != null ? data.getComponents().size() : 0;

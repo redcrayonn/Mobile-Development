@@ -2,7 +2,6 @@ package nl.inholland.imready.app.view.holder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import java.util.Date;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.presenter.client.ClientBlockDetailsPresenter;
-import nl.inholland.imready.app.view.listener.OnChangeListener;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.util.DateUtil;
 
@@ -48,7 +46,7 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     }
 
     @Override
-    public void fill(@NonNull Context context, @NonNull PersonalActivity data, @Nullable OnChangeListener<PersonalActivity> changeListener) {
+    public void fill(@NonNull Context context, @NonNull PersonalActivity data) {
         activity = data;
 
         long daysDiff = DateUtil.getTimeDifferenceDays(new Date(), data.getDeadline());

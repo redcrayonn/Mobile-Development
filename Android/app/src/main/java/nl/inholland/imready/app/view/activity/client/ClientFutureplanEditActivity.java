@@ -9,36 +9,29 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.nytimes.android.external.store3.base.impl.BarCode;
-import com.nytimes.android.external.store3.base.impl.Store;
-
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.events.ComponentDetailViewEvent;
-import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
+import nl.inholland.imready.app.presenter.client.ClientFutureplanEditPresenterImpl;
 import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.adapter.BlockPlanExpandableListAdapter;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.blocks.Component;
 
-public class ClientFutureplanEditActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener, SingleObserver<List<Block>> {
+public class ClientFutureplanEditActivity extends AppCompatActivity implements ClientFutureplanEditView, ExpandableListView.OnChildClickListener, SwipeRefreshLayout.OnRefreshListener {
+
+    static final int COMPONENT_ADD_REQUEST = 1;
 
     private BlockPlanExpandableListAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
     private ExpandableListView expandableListView;
     private ArrayList<String> componentsAlreadyInFutureplan;
+    private ClientFutureplanEditPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,28 +54,13 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
             componentsAlreadyInFutureplan = savedInstanceState.getStringArrayList(ParcelableConstants.COMPONENT);
         }
 
-
         refreshLayout = findViewById(R.id.pull_refresh);
-        refreshLayout.setOnRefreshListener(this::refreshData);
+        refreshLayout.setOnRefreshListener(this);
 
         initListView(componentsAlreadyInFutureplan);
-        initData(false);
-    }
 
-    private void refreshData() {
-        initData(true);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
+        presenter = new ClientFutureplanEditPresenterImpl(this, ImReadyApplication.getInstance().getBlocksStore());
+        presenter.init();
     }
 
     @Override
@@ -93,12 +71,8 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
         super.onSaveInstanceState(outState);
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void OnFutureplanChangedEvent(FutureplanChangedEvent event) {
-        initData(true);
-    }
-
     private void initListView(List<String> componentsAlreadyInFutureplan) {
+        showRefreshing();
         expandableListView = findViewById(R.id.blocks);
         expandableListView.setClickable(true);
         expandableListView.setSaveEnabled(true);
@@ -106,57 +80,61 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements E
         expandableListView.setAdapter(adapter);
         expandableListView.expandGroup(0);
         expandableListView.setOnChildClickListener(this);
-    }
-
-    private void initData(boolean fetchFromNetwork) {
-        ImReadyApplication instance = ImReadyApplication.getInstance();
-        Store<List<Block>, BarCode> store = instance.getBlocksStore();
-
-        BarCode request = BarCode.empty();
-
-        Single<List<Block>> dataRequest;
-        if (fetchFromNetwork) {
-            dataRequest = store.fetch(request);
-        } else {
-            dataRequest = store.get(request);
-        }
-
-        dataRequest
-                // required to pass the data to views (ui changes are required to be on the main thread)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                // callback implementation (onSucces / onFailure)
-                .subscribe(this);
-
-        refreshLayout.setRefreshing(true);
+        stopRefreshing();
     }
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
         Component component = (Component) adapter.getChild(groupPosition, childPosition);
+        goToComponentView(component);
+        return component != null;
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.refreshData();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setData(List<Block> blocks) {
+        adapter.setData(blocks);
+    }
+
+    @Override
+    public void showRefreshing() {
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void stopRefreshing() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void goToComponentView(Component component) {
         if (component != null) {
             Intent intent = new Intent(this, ClientComponentEditActivity.class);
             EventBus.getDefault().postSticky(new ComponentDetailViewEvent(component));
-            startActivity(intent);
-            return true;
+            startActivityForResult(intent, COMPONENT_ADD_REQUEST);
+        } else {
+            showMessage(getString(R.string.unknown_error));
         }
-        return false;
     }
 
     @Override
-    public void onSubscribe(Disposable d) {
-        //ignore
-    }
-
-    @Override
-    public void onSuccess(List<Block> blocks) {
-        adapter.setData(blocks);
-        refreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        Toast.makeText(this, R.string.block_failed, Toast.LENGTH_SHORT).show();
-        refreshLayout.setRefreshing(false);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == COMPONENT_ADD_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String componentAddedId = data.getStringExtra(ParcelableConstants.COMPONENT);
+                componentsAlreadyInFutureplan.remove(componentAddedId);
+                // update the visible list
+                initListView(componentsAlreadyInFutureplan);
+            }
+        }
     }
 }

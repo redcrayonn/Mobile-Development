@@ -103,7 +103,7 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
             groupIndicator.setSelected(isExpanded);
         }
 
-        viewHolder.fill(context, block, null);
+        viewHolder.fill(context, block);
 
         return convertView;
     }
@@ -122,7 +122,7 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
         }
 
         FillableViewHolder<Component> viewHolder = new ComponentPlanViewHolder(convertView);
-        viewHolder.fill(context, component, null);
+        viewHolder.fill(context, component);
 
         return convertView;
     }

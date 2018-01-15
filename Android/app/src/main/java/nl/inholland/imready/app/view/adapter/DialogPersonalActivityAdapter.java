@@ -50,7 +50,7 @@ public class DialogPersonalActivityAdapter extends BaseAdapter {
             viewHolder = (DialogActivityViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, activities.get(position), null);
+        viewHolder.fill(context, activities.get(position));
         return convertView;
     }
 }

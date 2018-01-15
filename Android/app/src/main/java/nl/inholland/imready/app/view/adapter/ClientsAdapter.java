@@ -72,7 +72,7 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
             viewHolder = (CaregiverHomeViewHolder) convertView.getTag();
         }
 
-        viewHolder.fill(context, clients.get(position), null);
+        viewHolder.fill(context, clients.get(position));
 
         return convertView;
     }

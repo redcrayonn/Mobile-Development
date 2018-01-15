@@ -68,7 +68,7 @@ public class PersonalBlockAdapter extends BaseAdapter implements DataHolder<List
         }
 
         BlockViewHolder viewHolder = new BlockViewHolder(convertView);
-        viewHolder.fill(context, (PersonalBlock) getItem(position), null);
+        viewHolder.fill(context, (PersonalBlock) getItem(position));
 
         return convertView;
     }

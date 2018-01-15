@@ -108,7 +108,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
             viewHolder = (FillableViewHolder<PersonalComponent>) view.getTag();
         }
 
-        viewHolder.fill(context, component, null);
+        viewHolder.fill(context, component);
 
         return view;
     }
@@ -126,7 +126,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
             viewHolder = (FillableViewHolder<PersonalActivity>) view.getTag();
         }
 
-        viewHolder.fill(context, component, null);
+        viewHolder.fill(context, component);
 
         return view;
     }

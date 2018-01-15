@@ -13,7 +13,9 @@
         android:orientation="vertical"
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/button_positive">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +69,6 @@
         android:id="@+id/button_positive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/container"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="@string/add"
