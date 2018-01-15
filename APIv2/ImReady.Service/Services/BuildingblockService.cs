@@ -12,21 +12,24 @@ namespace ImReady.Service.Services
     {
         private readonly IImReadyUnitOfWork _unitOfWork;
         private readonly IRepository<Buildingblock> _buildingBlockRepository;
+        private readonly IRepository<Component> _componentRepository;
 
-        public BuildingblockService(IImReadyUnitOfWork unitOfWork)
+		public BuildingblockService (IImReadyUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
             _buildingBlockRepository = _unitOfWork.BuildingblockRepository;
-        }
+			_componentRepository = _unitOfWork.ComponentRepository;
+
+		}
         public bool AddBlock(Buildingblock block)
         {
             _buildingBlockRepository.Add(block);
             _unitOfWork.Commit();
             return true;
         }
-
-        public bool EditBlock(Buildingblock block)
+		
+		public bool EditBlock(Buildingblock block)
         {
             Buildingblock buildingblock = _buildingBlockRepository.Entities.FirstOrDefault(s => s.Id == block.Id);
             buildingblock.Description = block.Description;
@@ -54,5 +57,5 @@ namespace ImReady.Service.Services
             _unitOfWork.Commit();
             return true;
         }
-    }
+	}
 }

@@ -34,5 +34,6 @@ namespace ImReady.Service
 		public IRepository<ClientTask> ClientTaskRepository => new EntityFrameworkGenericRepository<ClientTask>(_context);
 
 		public IRepository<Notification> NotificationRepository => new EntityFrameworkGenericRepository<Notification>(_context);
+		public IRepository<UsefulLink> UsefulLinkRepository => new EntityFrameworkGenericRepository<UsefulLink>(_context);
 	}
 }

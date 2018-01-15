@@ -35,6 +35,7 @@ namespace ImReadyApiv2.DI
 			container.RegisterType<IClientTaskService, ClientTaskService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IClientBuildingBlockService, ClientBuildingBlockService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IChatService, ChatService>(new HierarchicalLifetimeManager());
+			container.RegisterType<IComponentService, ComponentService>(new HierarchicalLifetimeManager());
 
 			// Set dependency resolver to the Unity resolver
 			var resolver = new UnityResolver(container);

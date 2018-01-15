@@ -277,6 +277,7 @@
     <Compile Include="Models\Input\PostBuildingblockInputModel.cs" />
     <Compile Include="Models\Input\PostCalendarInputModel.cs" />
     <Compile Include="Models\Input\PostClientActivityInputModel.cs" />
+    <Compile Include="Models\Input\PostComponentInputModel.cs" />
     <Compile Include="Models\Input\PostMessageInputModel.cs" />
     <Compile Include="Models\Input\PutClientTaskInputModel.cs" />
     <Compile Include="Models\Input\PostClientTaskInputModel.cs" />

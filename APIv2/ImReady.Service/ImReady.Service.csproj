@@ -74,6 +74,7 @@
     <Compile Include="Services\ClientBuildingBlockService.cs" />
     <Compile Include="Services\ClientComponentService.cs" />
     <Compile Include="Services\ClientTaskService.cs" />
+    <Compile Include="Services\ComponentService.cs" />
     <Compile Include="Services\FutureplanService.cs" />
     <Compile Include="Services\Interfaces\IBuildingblockService.cs" />
     <Compile Include="Services\Interfaces\ICalendarService.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Services\Interfaces\IClientBuildingBlockService.cs" />
     <Compile Include="Services\Interfaces\IClientComponentService.cs" />
     <Compile Include="Services\Interfaces\IClientTaskService.cs" />
+    <Compile Include="Services\Interfaces\IComponentService.cs" />
     <Compile Include="Services\Interfaces\IFutureplanService.cs" />
     <Compile Include="Services\Interfaces\INotificationService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />

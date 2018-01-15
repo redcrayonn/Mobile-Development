@@ -24,6 +24,7 @@ namespace ImReady.Service
 		IRepository<Calendar> CalendarRepository { get; }
 		IRepository<ClientTask> ClientTaskRepository { get; }
 		IRepository<Chat> ChatRepository { get; }
+		IRepository<UsefulLink> UsefulLinkRepository { get; }
 	}
 		
 }
