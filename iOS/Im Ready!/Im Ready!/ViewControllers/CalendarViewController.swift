@@ -26,7 +26,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-
+    
     
     var appointments: [Appointment] = []
     var selectedDate: Date = Date()
@@ -43,12 +43,15 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         appointmentService.getAppointments(forClient: CurrentUser.instance.id!,
                                            onSuccess: { (results) in
                                             self.appointments = results
-                                            self.tableView.reloadData()
+                                            self.addEventsToCalendar(fromAppointments: self.appointments)
+                                            self.tableView.reloadData()                                            
         }) {
             simpleAlert(atVC: self,
                         withTitle: "Er is iets fout gegaan",
                         andMessage: "Kon afspraken niet ophalen")
         }
+        
+        
     }
     
     
@@ -68,13 +71,13 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         return 0
-
+        
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         print("\(self.dateFormatter.string(from: calendar.currentPage))")
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appointments.count
@@ -83,7 +86,10 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
         
-        addEventToCalendar(fromDateTime: appointments[indexPath.row].startDate!)
+//        addEventToCalendar(fromAppointments: appointments[indexPath.row].startDate!)
+        
+        print([indexPath.row])
+        print(appointments.count)
         
         let startTime = convertToTime(fromDateTime: appointments[indexPath.row].startDate!)
         let endTime = convertToTime(fromDateTime: appointments[indexPath.row].endDate!)
@@ -91,7 +97,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         cell.titleLbl.text = appointments[indexPath.row].title
         cell.remarkLbl.text = appointments[indexPath.row].remark
         cell.timeFrameLbl.text = "\(startTime) - \(endTime)"
-
+        
         return cell
     }
     
@@ -110,16 +116,22 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     /// Convert the DateTime from the API to a representable date to add to the calendar
-    func addEventToCalendar(fromDateTime datetime: String) {
-        let dateTimeInIsoFormat = convertToDateObject(fromDateString: datetime)
+    func addEventsToCalendar(fromAppointments appointments: [Appointment]) {
         
-        let month = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.month)
-        let day = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.day)
+        for appointment in appointments {
+            let datetime = appointment.startDate
+            
+            let dateTimeInIsoFormat = convertToDateObject(fromDateString: datetime!)
+            
+            let month = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.month)
+            let day = prependZeroIfNeeded(forDateOrTimeUnit: dateTimeInIsoFormat.day)
+            
+            print("\(dateTimeInIsoFormat.year)-\(month)-\(day)")
+            let dateString = "\(dateTimeInIsoFormat.year)-\(month)-\(day)"
+            
+            datesWithEvents.append(dateString)
+        }
         
-        print("\(dateTimeInIsoFormat.year)-\(month)-\(day)")
-        let dateString = "\(dateTimeInIsoFormat.year)-\(month)-\(day)"
-        
-        datesWithEvents.append(dateString)
         self.calendar.reloadData()
     }
     
@@ -140,7 +152,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     /// Prepend a zero, otherwise
     func prependZeroIfNeeded(forDateOrTimeUnit: Int) -> String {
         let unit: String = String(forDateOrTimeUnit)
-
+        
         // If the unit only has 1 digit, prepend a zero
         if "\(unit)".count == 1 {
             return "0\(forDateOrTimeUnit)"
