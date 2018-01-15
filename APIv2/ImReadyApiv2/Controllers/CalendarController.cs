@@ -76,15 +76,17 @@ namespace ImReadyApiv2.Controllers {
 				return BadRequest(ModelState);
 			}
 
-			_calendarService.CreateCalendarItem(calendar);
+			
 
 			Calendar relatedCalendarItem = model.getModel(relatedUser);
-			relatedCalendarItem.RelatedCalendarId = calendar.Id;
-			relatedCalendarItem.RelatedCalendar = calendar;
 
 			_calendarService.CreateCalendarItem(relatedCalendarItem);
 
-			return Ok(calendar);
+			calendar.RelatedCalendar = relatedCalendarItem;
+			calendar.RelatedCalendarId = relatedCalendarItem.Id;
+			_calendarService.CreateCalendarItem(calendar);
+
+			return Ok(new CalendarResult(calendar));
 		}
 
 		/// <summary>
