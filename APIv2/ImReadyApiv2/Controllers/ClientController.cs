@@ -50,7 +50,7 @@ namespace ImReadyApiv2.Controllers
             {
                 return NotFound();
             }
-            var clientResult = new ClientUserResult(client);
+            var clientResult = new ClientUserResult(client, true);
             clientResult.Roles = await _userManager.GetRolesAsync(client.Id);
             return Ok(clientResult);
         }
