@@ -17,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,6 +43,7 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.util.ColorUtil;
 
 import static br.com.zbra.androidlinq.Linq.stream;
 
@@ -115,6 +115,14 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         TextView userText = findViewById(R.id.username);
         String username = presenter.getUsername();
         userText.setText(username);
+
+        // color menu items
+        MenuItem refreshItem = menu.findItem(R.id.refresh);
+        ColorUtil.tintMenuIcon(this, refreshItem, android.R.color.white);
+        MenuItem messagesItem = menu.findItem(R.id.messages);
+        ColorUtil.tintMenuIcon(this, messagesItem, android.R.color.white);
+        MenuItem notificationsItem = menu.findItem(R.id.notifications);
+        ColorUtil.tintMenuIcon(this, notificationsItem, android.R.color.white);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -287,10 +295,5 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
             }
         }
         popupShown = true;
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

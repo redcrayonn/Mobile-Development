@@ -1,6 +1,5 @@
 package nl.inholland.imready.app.view.activity.client;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -140,15 +139,5 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
     @Override
     public void onDismiss(DialogInterface dialog) {
         //ignore
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 }

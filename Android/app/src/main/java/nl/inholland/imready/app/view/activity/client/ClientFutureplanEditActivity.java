@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -93,11 +92,6 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements C
     @Override
     public void onRefresh() {
         presenter.refreshData();
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
