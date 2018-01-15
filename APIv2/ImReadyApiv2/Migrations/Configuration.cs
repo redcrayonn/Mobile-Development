@@ -90,6 +90,7 @@ namespace ImReadyApiv2.Migrations
             {
                 Name = "Werk",
                 Description = "De bouwsteen 'Werk' helpt jou met het vinden van een baan. Een baan levert jou geld op, zodat je financieel onafhankelijk wordt. Het begint met jezelf leren kennen. Wat wil je? Waar ben je goed in? Daarna zoek je een bedrijf en ga je daar solliciteren.",
+                Type = BlockType.WORK,
                 Id = BlockType.WORK.ToString(),
                 Components = new List<Component>
                 {
@@ -321,6 +322,21 @@ namespace ImReadyApiv2.Migrations
                 }
             }
             context.Buildingblocks.AddOrUpdate(studyBlock);
+            foreach (var component in studyBlock.Components ?? Enumerable.Empty<Component>())
+            {
+                component.BuildingblockId = studyBlock.Id;
+                context.Components.AddOrUpdate(component);
+                foreach (var activity in component.Activities ?? Enumerable.Empty<Activity>())
+                {
+                    activity.ComponentId = component.Id;
+                    context.Activities.AddOrUpdate(activity);
+                }
+                foreach (var usefulLink in component.UsefulLinks ?? Enumerable.Empty<UsefulLink>())
+                {
+                    usefulLink.ComponentId = component.Id;
+                    context.UsefulLinks.AddOrUpdate(usefulLink);
+                }
+            }
             context.Buildingblocks.AddOrUpdate(livingBlock);
             foreach (var component in livingBlock.Components ?? Enumerable.Empty<Component>())
             {
