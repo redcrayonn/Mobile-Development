@@ -50,4 +50,10 @@
     <string name="empty_component">Er zijn geen activiteiten gevonden.</string>
     <string name="hand_in_question">Inleveren?</string>
     <string name="hand_in_text">Wil je de uitwerking van de opdracht inleveren?\n\nNa het inleveren moet jouw begeleider de opdracht nog goedkeuren voordat jouw <![CDATA[<font color=#1BC771>READY-coins</font>]]> worden toegekend.</string>
+    <string name="solution">Uitwerking</string>
+    <string name="task">Taak</string>
+    <string name="status">Status</string>
+    <string name="status_done">Afgerond</string>
+    <string name="status_pending">Wacht op goedkeuring</string>
+    <string name="status_progress">Bezig</string>
 </resources>

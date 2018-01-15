@@ -9,7 +9,12 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.logic.events.FeedbackViewEvent;
 import nl.inholland.imready.app.view.adapter.CaregiverPlanExpandAdapter;
 import nl.inholland.imready.app.view.adapter.PersonalBlockAdapter;
 import nl.inholland.imready.app.view.listener.LoadMoreListener;
@@ -18,6 +23,7 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 public class CaregiverFutureplanOverviewActivity extends AppCompatActivity implements  ExpandableListView.OnChildClickListener{
 
     String clientId;
+    String clientName;
     private CaregiverPlanExpandAdapter adapter;
     private LoadMoreListener loadMoreListener;
 
@@ -29,7 +35,7 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
         //Get data from parent view
         Intent intent = getIntent();
         clientId = intent.getStringExtra("clientId");
-        String clientName = intent.getStringExtra("clientName");
+        clientName = intent.getStringExtra("clientName");
 
         //Use data for title
         TextView clientNameText = findViewById(R.id.clientName);
@@ -52,11 +58,9 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-        Toast.makeText(this, "Uh oh, er is iets fout gegaan...", Toast.LENGTH_SHORT).show();
-
         PersonalActivity activity = (PersonalActivity) adapter.getChild(i,i1);
         gotoFeedbackActivity(activity);
-        return false;
+        return true;
     }
 
     @Override
@@ -71,7 +75,9 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
 
     private void gotoFeedbackActivity(PersonalActivity activity) {
         Intent intent = new Intent(this, CaregiverFeedbackActivity.class);
-        intent.putExtra("activity", activity);
+        EventBus.getDefault().postSticky(new FeedbackViewEvent(activity));
         startActivity(intent);
     }
+
+
 }
