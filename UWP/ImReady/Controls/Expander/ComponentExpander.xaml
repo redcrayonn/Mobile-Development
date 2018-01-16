@@ -17,6 +17,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Expander/ComponentActivity.xaml"/>
+                <ResourceDictionary Source="/Styles/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter"/>
             <converters:StatusToCheckboxBooleanConverter x:Key="StatusToCheckboxBooleanConverter"/>
@@ -29,12 +30,16 @@
                         Header="{x:Bind Component.Name}"
                         HorizontalContentAlignment="Stretch"
                         Foreground="White"
-                        Background="#8E327E"
+                        Background="Transparent"
                         IsExpanded="False"
                         ExpandDirection="Down"
                         Style="{StaticResource ComponentActivityExpander}"
                         
                         >
+        <controls:Expander.Resources>
+            <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
+            <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ThemeOrangeDark}" />
+        </controls:Expander.Resources>
         <Grid Background="White">
                 <TextBlock HorizontalAlignment="Center"
                       TextWrapping="Wrap"
