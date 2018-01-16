@@ -17,7 +17,11 @@ namespace ImReady.Service.Services {
 		}
 		
 		public List<Calendar> GetCalendarItems (string userId) {
-			return _calendarRepository.Entities.Where(c => c.UserId == userId).ToList();
+			List<Calendar> calendars = _calendarRepository.Entities.Where(c => c.UserId == userId).ToList();
+
+			calendars = calendars.OrderBy(c => c.StartDate).ToList();
+
+			return calendars;
 		}
 
 		public Calendar GetCalendarItem (string userId, string calendarId) {
