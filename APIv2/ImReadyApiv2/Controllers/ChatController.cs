@@ -80,7 +80,7 @@ namespace ImReadyApiv2.Controllers {
 		/// Add message to chat
 		/// </summary>
 		/// <remarks>Add a message to a chat. The chat is determined via given sender/receiver which correspond with the userId/otherUserId</remarks>
-		/// <response code="204">No content</response>
+		/// <response code="200">OK</response>
 		/// <response code="404">Not found</response>
 		[ResponseType(typeof(ChatResult))]
 		[Route("{userId}/chat/{otherUserId}")]
@@ -100,7 +100,7 @@ namespace ImReadyApiv2.Controllers {
 			Message message = model.GetModel(chat, userId);
 			bool isSuccess = _chatService.addMessage(chat.Id, message);
 
-			return StatusCode(System.Net.HttpStatusCode.NoContent);
+			return Ok(new MessageResult(message));
 		}
 
 		//TODO An endpoint to tell if a chatMessage is read

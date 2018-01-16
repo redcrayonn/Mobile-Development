@@ -62,7 +62,8 @@ namespace ImReadyApiv2.Controllers
 		/// <param name="id">Id of the Client</param>
 		/// <param name="buildingBlockId">Id of the building block</param>
 		/// <response code="204">No content</response>
-		/// <response code="500">InternalServerError</response>
+		/// <response code="400">Bad request</response>
+		/// <response code="404">Not found</response>
 		[Route("api/client/{id}/futureplan/enroll/{buildingBlockId}")]
 		[ResponseType(typeof(FutureplanResult))]
 		public IHttpActionResult Post (string id, string buildingBlockId) {

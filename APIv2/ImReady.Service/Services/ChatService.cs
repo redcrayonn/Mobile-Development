@@ -44,11 +44,19 @@ namespace ImReady.Service.Services {
 		}
 
 		public Chat getChat (string userId, string otherUserId) {
-			return _chatRepository.Entities.SingleOrDefault(c => (c.SenderId == userId && c.ReceiverId == otherUserId) || (c.SenderId == otherUserId && c.ReceiverId == userId));
+			Chat chat = _chatRepository.Entities.SingleOrDefault(c => (c.SenderId == userId && c.ReceiverId == otherUserId) || (c.SenderId == otherUserId && c.ReceiverId == userId));
+
+			chat.Messages = chat.Messages.OrderBy(m => m.SentDate).ToList();
+
+			return chat;
 		}
 
 		public List<Chat> getChats (string userId) {
-			return _chatRepository.Entities.Where(c => c.SenderId == userId || c.ReceiverId == userId).ToList();
+			List<Chat> chats = _chatRepository.Entities.Where(c => c.SenderId == userId || c.ReceiverId == userId).ToList();
+
+			chats.ForEach(c => c.Messages = c.Messages.OrderBy(m => m.SentDate).ToList());
+
+			return chats;
 		}
 	}
 }
