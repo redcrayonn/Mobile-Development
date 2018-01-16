@@ -29,7 +29,7 @@
                         Header="{x:Bind Component.Name}"
                         HorizontalContentAlignment="Stretch"
                         Foreground="White"
-                        Background="Black"
+                        Background="#8E327E"
                         IsExpanded="False"
                         ExpandDirection="Down"
                         Style="{StaticResource ComponentActivityExpander}"

@@ -28,6 +28,7 @@ namespace ImReady.Views.Login
     public sealed partial class LoginMain : Page
     {
         private string resourceName = "ImReady";
+        private string emptyPassword = String.Empty;
         private string defaultUserName;
 
         private UserWebService userService = UserWebService.SingleInstance;
@@ -48,22 +49,18 @@ namespace ImReady.Views.Login
 
             LoadImages();
 
-            //var loginCredential = GetCredentialFromLocker();
+            var loginCredential = GetCredentialFromLocker();
 
-            //if (loginCredential != null)
-            //{
-            //    // There is a credential stored in the locker.
-            //    // Populate the Password property of the credential
-            //    // for automatic login.
-            //    loginCredential.RetrievePassword();
-            //    HandleLogin(loginCredential.UserName, loginCredential.Password);
-            //}
-            //else
-            //{
-            //    // There is no credential stored in the locker.
-            //    // Display UI to get user credentials.
-            //    ShowLoginUI();
-            //}
+            if (loginCredential != null)
+            {
+                // There is a credential stored in the locker.
+                // Populate the Password property of the credential
+                // for automatic login.
+                //loginCredential.RetrievePassword();
+                LoginName.Text = loginCredential.UserName;
+                //HandleLogin(loginCredential.UserName, loginCredential.Password);
+            }
+
             ShowLoginUI();
         }
 
@@ -78,6 +75,12 @@ namespace ImReady.Views.Login
                 //Set logged in user
                 CurrentUser.SingleInstance.AccessToken = loginResult.access_token;
                 CurrentUser.SingleInstance.Username = loginResult.UserName;
+
+                //TODO: add checkbox for saving credentials 
+                //Store username and password for future logins
+                var vault = new Windows.Security.Credentials.PasswordVault();
+                vault.Add(new Windows.Security.Credentials.PasswordCredential(
+                    resourceName, username, password));
 
                 //Navigate to Home
                 Frame.Navigate(typeof(Home.HomeMain));
@@ -117,27 +120,27 @@ namespace ImReady.Views.Login
             }
         }
 
-        //TODO: Make optional (checkbox)
-        //private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
-        //{
-        //    Windows.Security.Credentials.PasswordCredential credential = null;
+        //TODO: Make optional (checkbox) & sla alles op, nu alleen username / email
+        private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
+        {
+            Windows.Security.Credentials.PasswordCredential credential = null;
 
-        //    var vault = new Windows.Security.Credentials.PasswordVault();
-        //    if (vault.RetrieveAll().Count > 0)
-        //    {
-        //        var credentialList = vault.FindAllByResource(resourceName);
-        //        if (credentialList.Count > 0)
-        //        {
-        //            if (credentialList.Count == 1)
-        //            {
-        //                credential = credentialList[0];
-        //            }
-        //            else
-        //                throw new NotImplementedException();
-        //        }
-        //    }
-        //    return credential;
-        //}
+            var vault = new Windows.Security.Credentials.PasswordVault();
+            if (vault.RetrieveAll().Count > 0)
+            {
+                var credentialList = vault.FindAllByResource(resourceName);
+                if (credentialList.Count > 0)
+                {
+                    if (credentialList.Count == 1)
+                    {
+                        credential = credentialList[0];
+                    }
+                    else
+                        throw new NotImplementedException();
+                }
+            }
+            return credential;
+        }
         private void HideLoginUI()
         {
             LoginUIGrid.Visibility = Visibility.Collapsed;
