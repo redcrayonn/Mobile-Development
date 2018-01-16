@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
+    <Compile Include="Helpers\Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToCheckboxBooleanConverter.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />

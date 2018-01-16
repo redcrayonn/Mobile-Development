@@ -42,8 +42,8 @@
                 Foreground="White"
                 BorderThickness="0, 0, 0, 2"
                 BorderBrush="White"
-                Padding="0" Style="{StaticResource MinimalPasswordBox}"
-                ></PasswordBox>
+                Padding="0" Style="{StaticResource MinimalPasswordBox}" KeyDown="LoginPassword_KeyDown"
+                />
             <Button 
                 Name="LoginSubmit" 
                 MinWidth="300" 
@@ -54,6 +54,18 @@
                 FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
                 Foreground="White" Click="LoginSubmit_Click"
                 ></Button>
+            
         </RelativePanel>
+        <ProgressRing 
+            x:Name="progress1" 
+            RelativePanel.Below="LoginSubmit"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Margin="0 0 0 120" 
+            Foreground="White" 
+            Height="50"
+            Width="50"
+            Visibility="Visible"
+            />
     </Grid>
 </Page>

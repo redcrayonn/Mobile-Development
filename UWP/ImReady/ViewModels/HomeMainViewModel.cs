@@ -22,6 +22,8 @@ namespace ImReady.ViewModels
 
         public RelayCommand NavigateToAddComponent => new RelayCommand(NavigateToAddComponents);
 
+        public bool FuturePlanLoaded { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private FuturePlan futurePlan;
@@ -48,6 +50,7 @@ namespace ImReady.ViewModels
 
         public HomeMainViewModel()
         {
+            FuturePlanLoaded = false;
             LoadFuturePlan();
         }
 
@@ -79,6 +82,7 @@ namespace ImReady.ViewModels
             blockList.Add(AddBlock);
             futurePlanConcept.Blocks = blockList.ToArray();
             FuturePlan = futurePlanConcept;
+            FuturePlanLoaded = true;
         }
     }
 }

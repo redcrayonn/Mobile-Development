@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using System.Windows.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -62,6 +63,7 @@ namespace ImReady.Views.Login
             }
 
             ShowLoginUI();
+            LoginName.Focus(FocusState.Programmatic);
         }
 
         private async void HandleLogin(string username, string password)
@@ -109,15 +111,7 @@ namespace ImReady.Views.Login
 
         private void LoginSubmit_Click(object sender, RoutedEventArgs e)
         {
-            string username = LoginName.Text != null ? LoginName.Text : null;
-            string password = LoginPassword.Password != null ? LoginPassword.Password : null;
-
-            if (username != null && password != null && !Config.GlobalConfig.MockServices)
-                HandleLogin(username, password);
-            else if(Config.GlobalConfig.MockServices)
-            {
-                Frame.Navigate(typeof(Home.HomeMain));
-            }
+            Login();
         }
 
         //TODO: Make optional (checkbox) & sla alles op, nu alleen username / email
@@ -146,9 +140,40 @@ namespace ImReady.Views.Login
             LoginUIGrid.Visibility = Visibility.Collapsed;
         }
 
+        private void DisableLoginUI()
+        {
+            LoginName.IsReadOnly = true;
+            LoginPassword.IsHitTestVisible = false;
+            progress1.IsActive = true;
+        }
+
         private void ShowLoginUI()
         {
             LoginUIGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Login()
+        {
+            DisableLoginUI();
+
+            string username = LoginName.Text != null ? LoginName.Text : null;
+            string password = LoginPassword.Password != null ? LoginPassword.Password : null;
+
+            if (username != null && password != null && !Config.GlobalConfig.MockServices)
+            {
+                HandleLogin(username, password);
+            }
+
+            else if (Config.GlobalConfig.MockServices)
+            {
+                Frame.Navigate(typeof(Home.HomeMain));
+            }
+        }
+
+        private void LoginPassword_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+                Login();
         }
     }
 }

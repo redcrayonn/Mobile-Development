@@ -8,7 +8,9 @@
     mc:Ignorable="d"
     xmlns:viewmodel="using:ImReady.Models"
     xmlns:viewmodel2="using:ImReady.ViewModels"
-    xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors">
+    xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors"
+    xmlns:converters="using:ImReady.Helpers.Converters"
+    >
     <Page.DataContext>
         <viewmodel2:HomeMainViewModel/>
     </Page.DataContext>
@@ -41,6 +43,7 @@
                                      DefaultBlockTemplate ="{StaticResource BuildingBlocksDefault}"
                                      AddBlockTemplate="{StaticResource AddBuildingBlock}">
         </templateSelectors:HomeTemplateSelector>
+        <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
     </Page.Resources>
     <SplitView 
         Name="MySplitView"
@@ -97,6 +100,18 @@
                     IsItemClickEnabled="True"
                     >
                 </GridView>
+                <ProgressRing 
+                x:Name="progress1" 
+                RelativePanel.Below="LoginSubmit"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" 
+                Margin="0 0 0 120" 
+                Foreground="White" 
+                Height="50"
+                Width="50"
+                Visibility="Visible"
+                IsActive="{x:Bind ViewModel.FuturePlan, Mode=OneWay, Converter={StaticResource ObjectToBooleanConverter}, ConverterParameter=Invert}"
+                />
             </Grid>
         </SplitView.Content>
     </SplitView>
