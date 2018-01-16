@@ -10,10 +10,6 @@ namespace ImReadyApiv2.Models.Input {
 		[Required]
 		public string Content { get; set; }
 
-		[Required]
-		[DataType(DataType.DateTime)]
-		public DateTime SentDate { get; set; }
-
 		public bool Read { get; set; }
 
 		internal Message GetModel(Chat chat, string senderId) {
@@ -21,7 +17,7 @@ namespace ImReadyApiv2.Models.Input {
 			message.Chat = chat;
 			message.ChatId = chat.Id;
 			message.Content = Content;
-			message.SentDate = SentDate;
+			message.SentDate = DateTime.Now;
 			message.Read = Read;
 			message.UserId = senderId;
 

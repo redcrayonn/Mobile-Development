@@ -100,7 +100,7 @@ namespace ImReadyApiv2.Controllers {
 			Message message = model.GetModel(chat, userId);
 			bool isSuccess = _chatService.addMessage(chat.Id, message);
 
-			return Ok();
+			return StatusCode(System.Net.HttpStatusCode.NoContent);
 		}
 
 		//TODO An endpoint to tell if a chatMessage is read
