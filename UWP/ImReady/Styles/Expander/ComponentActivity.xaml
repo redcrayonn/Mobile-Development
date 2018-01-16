@@ -514,12 +514,15 @@
                                     <ToggleButton x:Name="PART_ExpanderToggleButton" 
                                               Height="80"
                                               TabIndex="0"
-                                              Padding="60 0 0 0"
+                                              Padding="15 7"
+                                              VerticalContentAlignment="Top"
                                               AutomationProperties.Name="Expand"
                                               Style="{StaticResource HeaderToggleButtonStyle}" 
-                                              VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                                              HorizontalAlignment="Stretch" 
                                               Foreground="{TemplateBinding Foreground}"
                                               ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}"
+                                              FontWeight="Medium"
+                                              FontSize="20"
                                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   >
                                     </ToggleButton>

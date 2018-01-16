@@ -21,12 +21,18 @@
                 x:Name="commandbar"
                     >
                 <CommandBar.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind ViewModel.BuildingBlock.Name}" Foreground="White" Margin="40 0" FontSize="25" FontWeight="Light"/>
+                    <StackPanel Orientation="Horizontal"
+                                >
+                        <TextBlock Text="{x:Bind ViewModel.BuildingBlock.Name}"
+                                   Foreground="White" 
+                                   Margin="60 20" 
+                                   FontSize="25" 
+                                   FontWeight="Normal"
+                                   VerticalAlignment="Center"/>
                     </StackPanel>
                 </CommandBar.Content>
             </CommandBar>
-        <ScrollViewer RelativePanel.Below="commandbar" Margin="0 48 0 0 ">
+        <ScrollViewer RelativePanel.Below="commandbar" Margin="0 74 0 0 ">
             <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local1:Component">

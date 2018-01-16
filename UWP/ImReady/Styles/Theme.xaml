@@ -12,4 +12,7 @@
     <Color x:Key="ThemeUXOverlay">#00A8FF</Color>
     <Color x:Key="ThemeGreenDefault">#1BC771</Color>
     <Color x:Key="ThemeGreenDark">#303030</Color>
+    <Style TargetType="Page">
+        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
+    </Style>
 </ResourceDictionary>

@@ -33,8 +33,7 @@
                         Background="Transparent"
                         IsExpanded="False"
                         ExpandDirection="Down"
-                        Style="{StaticResource ComponentActivityExpander}"
-                        
+                        Style="{StaticResource ComponentActivityExpander}"                   
                         >
         <controls:Expander.Resources>
             <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
