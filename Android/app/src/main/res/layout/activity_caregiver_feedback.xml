@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="nl.inholland.imready.app.view.activity.caregiver.CaregiverFeedbackActivity">
     <TextView
-        android:id="@+id/clientName"
+        android:id="@+id/client_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/md"
@@ -43,11 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/status"/>
-                <TextView
-                    android:layout_marginTop="@dimen/md"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/solution"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_toEndOf="@id/contentPanel"
@@ -75,26 +71,52 @@
             android:orientation="vertical"
             android:showDividers="middle"
             android:divider="@drawable/empty_divider_sm">
-            <EditText
+            <TextView
+                android:id="@+id/client_input_header"
+                android:layout_marginTop="@dimen/md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="@string/solution"/>
+            <TextView
                 android:id="@+id/client_input"
-                style="@style/App.Text.Input"
-                android:textColor="@color/colorDark"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
+                android:textStyle="italic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 tools:text="Ik heb 3 verschillende appartementen gevonden. Een in het centrum van Haarlem, een aan de rand van Amsterdam en de laatste is in Amsterdam Sloterdijk."/>
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
+        android:id="@+id/feedback_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ProgressBar
-            android:id="@+id/progressbar"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/lg"
+        android:visibility="invisible">
+        <EditText
+            android:id="@+id/feedback_input"
+            android:hint="Feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/button_deny"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@color/colorTertiary"
+            android:padding="@dimen/md"
+            android:text="Afkeuren"/>
+        <Button
+            android:id="@+id/button_approve"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorHappy"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/md"
+            android:text="Goedkeuren"/>
     </RelativeLayout>
 </LinearLayout>

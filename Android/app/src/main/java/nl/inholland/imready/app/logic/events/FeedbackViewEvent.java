@@ -8,8 +8,10 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 
 public class FeedbackViewEvent {
     public final PersonalActivity activity;
+    public final String clientName;
 
-    public FeedbackViewEvent(PersonalActivity activity){
+    public FeedbackViewEvent(PersonalActivity activity, String clientName){
         this.activity = activity;
+        this.clientName = clientName;
     }
 }
