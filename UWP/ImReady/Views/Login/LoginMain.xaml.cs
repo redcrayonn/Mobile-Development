@@ -106,6 +106,8 @@ namespace ImReady.Views.Login
                     message = new MessageDialog("Er is iets fout gegaan tijdens het inloggen, probeer het later nogmaals of neem contact op met uw begeleider en/of administrator");
                 }
                 await message.ShowAsync();
+
+                ActivateLoginUI();
             }
         }
 
@@ -145,6 +147,16 @@ namespace ImReady.Views.Login
             LoginName.IsReadOnly = true;
             LoginPassword.IsHitTestVisible = false;
             progress1.IsActive = true;
+            LoginSubmit.IsEnabled = false;
+        }
+
+        private void ActivateLoginUI()
+        {
+            LoginName.IsReadOnly = false;
+            LoginPassword.IsHitTestVisible = true;
+            progress1.IsActive = false;
+            LoginSubmit.IsEnabled = true;
+
         }
 
         private void ShowLoginUI()

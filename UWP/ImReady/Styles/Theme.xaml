@@ -15,4 +15,5 @@
     <Style TargetType="Page">
         <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
     </Style>
+    <x:Double x:Key="AppBarThemeCompactHeight">60</x:Double>
 </ResourceDictionary>

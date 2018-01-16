@@ -7,43 +7,42 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    
     xmlns:controls1="using:ImReady.Controls"
     xmlns:local1="using:ImReady.Models">
-    <Grid>
-        <Grid.Resources>
-
-        </Grid.Resources>
-        <CommandBar
-                    IsOpen="True"
+    <Grid Background="White">
+        <RelativePanel
+            HorizontalAlignment="Stretch">
+            <CommandBar
                     Background="#303030"
                     Foreground="White"
-                x:Name="commandbar"
+                    x:Name="commandbar"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalContentAlignment="Center"
                     >
                 <CommandBar.Content>
-                    <StackPanel Orientation="Horizontal"
-                                >
-                        <TextBlock Text="{x:Bind ViewModel.BuildingBlock.Name}"
-                                   Foreground="White" 
-                                   Margin="60 20" 
-                                   FontSize="25" 
-                                   FontWeight="Normal"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
+                    <TextBlock  Text="{x:Bind ViewModel.BuildingBlock.Name}"
+                                Foreground="White"  
+                                FontSize="25" 
+                                Padding="60 0 0 0 "
+                                FontWeight="Normal"
+                                   />
                 </CommandBar.Content>
             </CommandBar>
-        <ScrollViewer RelativePanel.Below="commandbar" Margin="0 74 0 0 ">
-            <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="local1:Component">
-                        <StackPanel>
-                            <controls1:ComponentExpander Component="{Binding}">
+            <ScrollViewer Name="scrollviewer" RelativePanel.Below="commandbar" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+                <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Component">
+                            <StackPanel>
+                                <controls1:ComponentExpander Component="{Binding}">
 
-                            </controls1:ComponentExpander>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                                </controls1:ComponentExpander>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </RelativePanel>
     </Grid>
 </Page>
