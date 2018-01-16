@@ -125,9 +125,10 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements C
         if (requestCode == COMPONENT_ADD_REQUEST) {
             if (resultCode == RESULT_OK) {
                 String componentAddedId = data.getStringExtra(ParcelableConstants.COMPONENT);
-                componentsAlreadyInFutureplan.remove(componentAddedId);
+                componentsAlreadyInFutureplan.add(componentAddedId);
                 // update the visible list
-                initListView(componentsAlreadyInFutureplan);
+                adapter.updateComponents(componentsAlreadyInFutureplan);
+                setResult(RESULT_OK);
             }
         }
     }

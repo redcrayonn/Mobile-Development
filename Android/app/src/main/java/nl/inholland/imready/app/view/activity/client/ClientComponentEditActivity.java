@@ -1,6 +1,7 @@
 package nl.inholland.imready.app.view.activity.client;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.events.ComponentDetailViewEvent;
 import nl.inholland.imready.app.presenter.client.ClientComponentEditPresenter;
 import nl.inholland.imready.app.presenter.client.ClientComponentEditPresenterImpl;
+import nl.inholland.imready.app.view.ParcelableConstants;
 import nl.inholland.imready.app.view.fragment.ComponentAddDialogFragment;
 import nl.inholland.imready.app.view.listener.DialogListener;
 import nl.inholland.imready.model.blocks.Component;
@@ -39,7 +41,7 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Cl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_component_edit);
 
-        ApiClient apiClient = ApiManager.getClient();
+        ApiClient apiClient = ApiManager.getClient(true);
         ClientService clientService = apiClient.getClientService();
 
         // Button
@@ -120,7 +122,9 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Cl
 
     @Override
     public void goToFutureplan() {
-        setResult(RESULT_OK);
+        Intent intent = new Intent();
+        intent.putExtra(ParcelableConstants.COMPONENT, component.getId());
+        setResult(RESULT_OK, intent);
         finish();
     }
 

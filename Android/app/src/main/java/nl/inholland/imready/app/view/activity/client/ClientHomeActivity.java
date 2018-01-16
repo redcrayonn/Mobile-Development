@@ -19,17 +19,13 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.zbra.androidlinq.Stream;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.events.BlockDetailViewEvent;
-import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.presenter.client.ClientHomePresenter;
 import nl.inholland.imready.app.presenter.client.ClientHomePresenterImpl;
 import nl.inholland.imready.app.view.ParcelableConstants;
@@ -41,7 +37,6 @@ import nl.inholland.imready.model.blocks.Component;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
-import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.BlockType;
 import nl.inholland.imready.util.ColorUtil;
 
@@ -74,25 +69,13 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
         presenter.init();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         drawerToggle.syncState();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -125,47 +108,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         ColorUtil.tintMenuIcon(this, notificationsItem, android.R.color.white);
 
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.messages:
-                goToMessages();
-                return true;
-            case R.id.notifications:
-                goToNotifications();
-                return true;
-            case R.id.refresh:
-                refreshData();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void refreshData() {
-        presenter.invalidateData();
-        presenter.init();
-        refreshLayout.setRefreshing(true);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.drawer_messages:
-                goToMessages();
-                break;
-            case R.id.drawer_family:
-                goToFamily();
-                break;
-            case R.id.drawer_info:
-                goToInfo();
-                break;
-            case R.id.logout:
-                presenter.logout();
-                break;
-        }
     }
 
     private void initGridView() {
@@ -203,6 +145,69 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     private void initRefresh() {
         refreshLayout = findViewById(R.id.pull_refresh);
         refreshLayout.setOnRefreshListener(this::refreshData);
+    }
+
+    private void refreshData() {
+        presenter.invalidateData();
+        presenter.init();
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.messages:
+                goToMessages();
+                return true;
+            case R.id.notifications:
+                goToNotifications();
+                return true;
+            case R.id.refresh:
+                refreshData();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.drawer_messages:
+                goToMessages();
+                break;
+            case R.id.drawer_family:
+                goToFamily();
+                break;
+            case R.id.drawer_info:
+                goToInfo();
+                break;
+            case R.id.logout:
+                presenter.logout();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        if (!refreshLayout.isRefreshing()) {
+            PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
+            if (block.getBlock().getType() == BlockType.ADD) {
+                goToEditFutureplan();
+            } else {
+                goToBlockInfo(block);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ClientFutureplanEditActivity.COMPONENT_ADD_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                // componennt was added in ClientFutureplanEditActivity and so data needs to be reloaded
+                refreshData();
+            }
+        }
     }
 
     @Override
@@ -245,7 +250,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
                 .toList();
         // pass in a list of component id's which tells the next view what options to disable
         intent.putStringArrayListExtra(ParcelableConstants.COMPONENT, (ArrayList<String>) componentIds);
-        startActivity(intent);
+        startActivityForResult(intent, ClientFutureplanEditActivity.COMPONENT_ADD_REQUEST);
     }
 
     @Override
@@ -256,40 +261,17 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        if (!refreshLayout.isRefreshing()) {
-            PersonalBlock block = (PersonalBlock) adapterView.getItemAtPosition(position);
-            if (block.getBlock().getType() == BlockType.ADD) {
-                goToEditFutureplan();
-            } else {
-                goToBlockInfo(block);
-            }
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onFutureplanChanged(FutureplanChangedEvent event) {
-        refreshData();
-    }
-
-    private void resetUi() {
-        refreshLayout.setRefreshing(false);
-    }
-
-    @Override
     public void setViewData(List<PersonalBlock> data) {
         gridAdapter.setData(data);
 
-        resetUi();
+        refreshLayout.setRefreshing(false);
 
         if (!popupShown) {
-            Stream<PersonalComponent> components = stream(data).selectMany(PersonalBlock::getComponents);
-            Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
-            List<PersonalActivity> todoSoon = activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
-            if (!todoSoon.isEmpty()) {
+            List<PersonalActivity> todo = presenter.getTodoActivities(data);
+            if (!todo.isEmpty()) {
                 WelcomeDialogFragment dialogWelcome = new WelcomeDialogFragment();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todoSoon);
+                bundle.putParcelableArrayList(ParcelableConstants.TODO_ACTIVITIES, (ArrayList<? extends Parcelable>) todo);
                 dialogWelcome.setArguments(bundle);
                 dialogWelcome.show(getSupportFragmentManager(), WelcomeDialogFragment.TAG);
             }

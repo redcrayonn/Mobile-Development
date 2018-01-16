@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import com.nytimes.android.external.store3.base.impl.BarCode;
 import com.nytimes.android.external.store3.base.impl.Store;
 
+import java.util.List;
+
+import br.com.zbra.androidlinq.Stream;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,10 +20,15 @@ import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.activity.client.ClientHomeView;
+import nl.inholland.imready.model.blocks.PersonalActivity;
+import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.blocks.PersonalComponent;
+import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.model.FutureplanResponse;
 
 import static android.content.Context.MODE_PRIVATE;
+import static br.com.zbra.androidlinq.Linq.stream;
 
 public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObserver<FutureplanResponse> {
     @NonNull
@@ -80,6 +88,13 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
         editor.remove(PreferenceConstants.USER_NAME);
         editor.apply();
         view.goToLogin();
+    }
+
+    @Override
+    public List<PersonalActivity> getTodoActivities(List<PersonalBlock> data) {
+        Stream<PersonalComponent> components = stream(data).selectMany(PersonalBlock::getComponents);
+        Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
+        return activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
     }
 
     @Override

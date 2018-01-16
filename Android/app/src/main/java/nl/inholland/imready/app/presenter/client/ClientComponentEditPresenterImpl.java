@@ -3,13 +3,10 @@ package nl.inholland.imready.app.presenter.client;
 
 import android.content.Context;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
-import nl.inholland.imready.app.logic.events.FutureplanChangedEvent;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.activity.client.ClientComponentEditView;
 import nl.inholland.imready.model.blocks.Activity;
@@ -59,8 +56,6 @@ public class ClientComponentEditPresenterImpl implements ClientComponentEditPres
             Context context = view.getContext();
             String succesMessage = context.getString(R.string.personal_component_succes, component.getName());
             view.showMessage(succesMessage);
-            //notify application of changed data
-            EventBus.getDefault().postSticky(new FutureplanChangedEvent(component.getId()));
             view.goToFutureplan();
         } else {
             onFailure(call, new Throwable());

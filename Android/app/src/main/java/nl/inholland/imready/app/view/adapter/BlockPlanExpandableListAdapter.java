@@ -23,7 +23,7 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
 
     private final Context context;
     private final LayoutInflater inflater;
-    private final List<String> componentsAlreadyInFutureplan;
+    private List<String> componentsAlreadyInFutureplan;
     private List<Block> blocks;
 
     public BlockPlanExpandableListAdapter(Context context, List<String> componentsAlreadyInFutureplan) {
@@ -145,6 +145,11 @@ public class BlockPlanExpandableListAdapter extends BaseExpandableListAdapter im
     @Override
     public void setData(List<Block> data) {
         this.blocks = data;
+        notifyDataSetChanged();
+    }
+
+    public void updateComponents(ArrayList<String> componentsAlreadyInFutureplan) {
+        this.componentsAlreadyInFutureplan = componentsAlreadyInFutureplan;
         notifyDataSetChanged();
     }
 }
