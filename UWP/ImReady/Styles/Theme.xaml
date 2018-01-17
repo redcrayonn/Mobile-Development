@@ -12,8 +12,12 @@
     <Color x:Key="ThemeUXOverlay">#00A8FF</Color>
     <Color x:Key="ThemeGreenDefault">#1BC771</Color>
     <Color x:Key="ThemeGreenDark">#303030</Color>
+    
+    <!--Zet global font-->
     <Style TargetType="Page">
         <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
     </Style>
+    
+    <!--Make sure the appbar does not jump up or down when clicking anywhere but the appbar.-->
     <x:Double x:Key="AppBarThemeCompactHeight">60</x:Double>
 </ResourceDictionary>

@@ -43,8 +43,13 @@
                         Tag="{x:Bind Component.DeadlineInDays}"
                         >
         <controls:Expander.Resources>
-            <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
-            <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ThemeOrangeDark}" />
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary.MergedDictionaries>
+                <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
+                <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ThemeOrangeDark}" />
+            </ResourceDictionary>
+            
         </controls:Expander.Resources>
         <Grid Background="White">
             <ScrollViewer 
@@ -74,7 +79,9 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Column="0" Grid.RowSpan="5">
                                     <CheckBox  
+                                        
                                         IsEnabled="False" 
+                                        Background="Gray"
                                         IsChecked="{x:Bind Status, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
                                 </StackPanel>
                                 <!--Titel, beschrijving en deadline grid-->
@@ -154,10 +161,15 @@
                                     Content="INLEVEREN" 
                                     HorizontalAlignment="Right" 
                                     Click="SubmitTask_Click" 
-                                    Margin="20 0 0 0"
+                                    Margin="20 10 0 0"
                                     Foreground="White"
-                                    
-                                    ></Button>
+                                    Width="125"
+                                    Height="36"
+                                    >
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                    </Button.Background>
+                                </Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
