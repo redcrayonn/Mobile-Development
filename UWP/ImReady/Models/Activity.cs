@@ -11,7 +11,7 @@ namespace ImReady.Models
     public class Activity
     {
         //Custom props
-        public Feedback LatestFeedback => Feedback.OrderByDescending(c => c.Sent).First();
+        public Feedback LatestFeedback => Feedback?.OrderByDescending(c => c.Sent)?.First();
         public string DeadlineInDays => DeadlineToDaysRemaining(Deadline);
 
         //Json props
