@@ -2,6 +2,7 @@ package nl.inholland.imready.app.view.activity.caregiver;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,30 +17,35 @@ import nl.inholland.imready.app.view.listener.LoadMoreListener;
 import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.model.ClientsResponse;
 
-public class CaregiverHomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class CaregiverHomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     ListView listView;
     BaseAdapter listAdapter;
     private LoadMoreListener loadMoreListener;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_home);
 
-
-
         // Toolbar
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setTitle("Cliënten");
         //setSupportActionBar(toolbar);
+        initRefresh();
         initListView();
 
         loadMoreListener.loadMore();
     }
 
+    private void initRefresh() {
+        refreshLayout = findViewById(R.id.pull_refresh);
+        refreshLayout.setOnRefreshListener(this);
+    }
+
     private void initListView() {
         listView = findViewById(R.id.listview);
-        listAdapter = new ClientsAdapter(this);
+        listAdapter = new ClientsAdapter(this, refreshLayout);
         loadMoreListener = (LoadMoreListener) listAdapter;
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(this);
@@ -57,5 +63,10 @@ public class CaregiverHomeActivity extends AppCompatActivity implements AdapterV
 
         //Next activity
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        loadMoreListener.loadMore();
     }
 }

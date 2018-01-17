@@ -14,7 +14,6 @@
         android:background="@color/colorAccent"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
         android:textStyle="bold"
-        android:drawableEnd="@drawable/ic_settings"
         android:gravity="center"
         tools:text="Joep Bakker"/>
 
@@ -100,7 +99,8 @@
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/md">
         <ProgressBar
             android:id="@+id/progressbar"
             android:layout_width="wrap_content"

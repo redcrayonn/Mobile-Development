@@ -1,6 +1,7 @@
 package nl.inholland.imready.app.view.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,12 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
     private final Context context;
     private final CaregiverService caregiverService;
     private final LayoutInflater layoutInflater;
+    private final SwipeRefreshLayout refreshLayout;
 
-    public ClientsAdapter(Context context) {
+    public ClientsAdapter(Context context, SwipeRefreshLayout refreshLayout) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+        this.refreshLayout = refreshLayout;
 
         ApiClient client = ApiManager.getClient();
         caregiverService = client.getCaregiverService();
@@ -64,13 +67,9 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
     public View getView(int position, View convertView, ViewGroup parent) {
         CaregiverHomeViewHolder viewHolder = null;
 
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_client, parent, false);
-            viewHolder = new CaregiverHomeViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (CaregiverHomeViewHolder) convertView.getTag();
-        }
+        convertView = layoutInflater.inflate(R.layout.list_item_client, parent, false);
+        viewHolder = new CaregiverHomeViewHolder(convertView);
+        convertView.setTag(viewHolder);
 
         viewHolder.fill(context, clients.get(position));
 
@@ -83,6 +82,7 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
         if (response.isSuccessful() && clients != null) {
             this.clients = clients;
             notifyDataSetChanged();
+            refreshLayout.setRefreshing(false);
         }
     }
 
@@ -93,6 +93,7 @@ public class ClientsAdapter extends BaseAdapter implements LoadMoreListener, Cal
 
     @Override
     public void loadMore() {
+        refreshLayout.setRefreshing(true);
         UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CAREGIVER);
         String userId = cache.getUserId();
 
