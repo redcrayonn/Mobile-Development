@@ -42,41 +42,56 @@
             <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
         </controls:Expander.Resources>
         <Grid Background="White">
-                <TextBlock HorizontalAlignment="Center"
-                      TextWrapping="Wrap"
-                      Text="{x:Bind Component.Name}"
-                      VerticalAlignment="Top"
-                           Foreground="Black"
-                       />
-                <ScrollViewer RelativePanel.Below="commandbar" Margin="0 50 0 0 " HorizontalAlignment="Stretch" Padding="40">
+            <ScrollViewer RelativePanel.Below="commandbar"  HorizontalAlignment="Stretch" Padding="20">
                 <ItemsControl ItemsSource="{x:Bind Component.Activities}" Foreground="Black">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:Activity">
-                            <Grid HorizontalAlignment="Stretch">
+                            <!-- Buitenste grid -->
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <CheckBox VerticalAlignment="Top" IsEnabled="False" IsChecked="{x:Bind Status, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
-                                <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Name}"></TextBlock>
-                                    <TextBlock Text="{x:Bind Description}"></TextBlock>
-                                    <TextBox 
-                                                x:Name="TextContent"
-                                                MinHeight="150" 
-                                                AcceptsReturn="True" 
-                                                Text="{x:Bind Content}"
-                                                ScrollViewer.HorizontalScrollMode="Disabled"
-                                                IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"
-                                                ></TextBox>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock  Text="Uitwerkingen worden tussentijds automatisch opgeslagen"></TextBlock>
-                                        <Button x:Name="SubmitTask" Content="INLEVEREN" HorizontalAlignment="Right" Click="SubmitTask_Click"></Button>
-                                    </StackPanel>
+                                <StackPanel Grid.Column="0" Grid.RowSpan="5">
+                                    <CheckBox></CheckBox>
                                 </StackPanel>
+                                <!--Titel, beschrijving en deadline grid-->
+                                <Grid Grid.Column="1" Background="Red" Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Column="0" Background="Blue">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Titeltje"></TextBlock>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Descriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textje" TextWrapping="WrapWholeWords"></TextBlock>
+                                    </Grid>
+                                    <StackPanel Grid.Column="1" Background="Yellow">
+                                        <SymbolIcon ></SymbolIcon>
+                                        <TextBlock Text="Over 5 dagen" TextWrapping="WrapWholeWords" TextAlignment="Center"></TextBlock>
+                                        <TextBlock Text="Aangepast door je moeder" TextWrapping="WrapWholeWords" TextAlignment="Center" FontSize="10"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Commentaar beschrijving"></TextBlock>
+                                <TextBox Grid.Column="1" Grid.Row="2" Text="Mooie uitwerking maar helaas nog niet goed man."></TextBox>
+                                <TextBox Grid.Column="1" Grid.Row="3" Text="Mooie uitwerking"></TextBox>
+                                <Button Grid.Column="1" Grid.Row="4" Content="INLEVEREN" HorizontalAlignment="Right"></Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
