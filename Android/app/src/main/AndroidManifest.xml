@@ -63,7 +63,9 @@
             android:theme="@style/AppTheme.Alt"/>
 
         <!-- CAREGIVER -->
-        <activity android:name=".app.view.activity.caregiver.CaregiverHomeActivity" />
+        <activity
+            android:name=".app.view.activity.caregiver.CaregiverHomeActivity"
+            android:theme="@style/AppTheme.Alt"/>
         <activity
             android:name=".app.view.activity.caregiver.ClientDetailActivity"
             android:parentActivityName=".app.view.activity.caregiver.CaregiverHomeActivity"

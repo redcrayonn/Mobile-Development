@@ -36,6 +36,8 @@ public class Feedback extends EntityModel implements Parcelable {
         content = in.readString();
     }
 
+    public Feedback(String content){this.content = content;}
+
     public Date getSent() {
         return sent;
     }

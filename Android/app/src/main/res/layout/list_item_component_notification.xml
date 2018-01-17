@@ -26,4 +26,11 @@
         android:background="@drawable/bg_button_round"
         android:backgroundTint="@color/colorAccent"
         tools:text="0"/>
+    <ImageView
+        android:id="@+id/check_icon"
+        android:layout_width="@dimen/xl"
+        android:layout_height="@dimen/xl"
+        android:src="@drawable/ic_check"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
 </RelativeLayout>
