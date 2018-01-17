@@ -15,7 +15,7 @@ namespace ImReady.Services.Mock
             return new Activity()
             {
                 Name = "Reageer op 5 woningen",
-                Deadline = "test value",
+                Deadline = DateTime.MaxValue,
                 Description = "Zoek een huisje onder de zon.",
             };
         }

@@ -17,7 +17,7 @@ namespace ImReady.Models
         public int Points { get; set; }
         public int Status { get; set; }
         public string Content { get; set; }
-        public string Deadline { get; set; }
+        public DateTime Deadline { get; set; }
         public Feedback[] Feedback { get; set; }
         [JsonProperty("Activity")]
         public Activity SubActivity { get; set; }

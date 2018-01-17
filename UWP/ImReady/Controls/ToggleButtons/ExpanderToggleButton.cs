@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml;
@@ -14,11 +15,12 @@ using Windows.UI.Xaml.Media;
 
 namespace ImReady.Controls.ToggleButtons
 {
-    public sealed class ExpanderToggleButton : ToggleButton
+    public sealed class ExpanderToggleButton : ToggleButton, INotifyPropertyChanged
     {
         public ExpanderToggleButton()
         {
             this.DefaultStyleKey = typeof(ExpanderToggleButton);
+            DataContext = this;
         }
 
         public static DependencyProperty DeadlineProperty =
@@ -26,6 +28,9 @@ namespace ImReady.Controls.ToggleButtons
                                             typeof(string),
                                             typeof(ExpanderToggleButton),
                                             new PropertyMetadata(null));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static string GetDeadline(DependencyObject target)
         {
             return (string)target.GetValue(DeadlineProperty);

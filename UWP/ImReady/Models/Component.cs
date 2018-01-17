@@ -17,7 +17,7 @@ namespace ImReady.Models
         public int Status { get; set; }
         public Activity[] Activities { get; set; }
         public ClientTask[] Tasks { get; set; }
-        public string Deadline { get; set; }
+        public DateTime Deadline { get; set; }
         [JsonProperty("Component")]
         public Component SubComponent { get; set; }
         public string Id { get; set; }

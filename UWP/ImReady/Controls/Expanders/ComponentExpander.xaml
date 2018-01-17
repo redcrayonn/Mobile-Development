@@ -34,7 +34,7 @@
                         IsExpanded="False"
                         ExpandDirection="Down"
                         Style="{StaticResource ComponentActivityExpander}"             
-                        Tag="bla"
+                        Tag="{x:Bind Component.Deadline}"
                         >
         <controls:Expander.Resources>
             <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
