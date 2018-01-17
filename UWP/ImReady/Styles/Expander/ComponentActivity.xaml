@@ -249,8 +249,17 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="Left"
                                           RenderTransformOrigin="0.5,0.5" 
-                                            />
-                            <TextBlock Text="{Binding Mode=OneWay, Path=(local2:ExpanderToggleButton.Deadline)}"></TextBlock>
+                                          />
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                Padding="18 0 0 0 ">
+                                <Image Source="ms-appx:///Assets/Material/ic_query_builder_white_18dp.png" Height="20" Width="20" Margin="10 0"></Image>
+                                <TextBlock 
+                                        Text="{Binding Mode=OneWay, Path=(local2:ExpanderToggleButton.Deadline)}" 
+                                        FontWeight="Light"
+                                        FontSize="20"></TextBlock>
+                            </StackPanel>
+                            
                         </StackPanel>
                         
                         

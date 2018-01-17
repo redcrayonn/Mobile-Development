@@ -11,5 +11,6 @@ namespace ImReady.Models
         public string Content { get; set; }
         public string CaregiverName { get; set; }
         public string Id { get; set; }
+        public DateTime Sent { get; set; }
     }
 }

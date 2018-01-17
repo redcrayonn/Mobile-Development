@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using static ImReady.Helpers.StaticHelpers;
 
 namespace ImReady.Models
 {
     public class Component
     {
         //Custom props
-        public string DeadlineInDays => $"Over {(Deadline - DateTime.Now).TotalDays} dagen";
-
+        public string DeadlineInDays => DeadlineToDaysRemaining(Deadline);
         //Json props
         public string Name { get; set; }
         public string Description { get; set; }

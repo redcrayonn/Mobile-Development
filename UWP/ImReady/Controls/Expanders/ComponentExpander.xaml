@@ -39,7 +39,6 @@
         <controls:Expander.Resources>
             <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
             <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ThemeOrangeDark}" />
-            <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
         </controls:Expander.Resources>
         <Grid Background="White">
             <ScrollViewer RelativePanel.Below="commandbar"  HorizontalAlignment="Stretch" Padding="20">
@@ -60,10 +59,10 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Column="0" Grid.RowSpan="5">
-                                    <CheckBox></CheckBox>
+                                    <CheckBox  IsEnabled="False" IsChecked="{x:Bind Status, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
                                 </StackPanel>
                                 <!--Titel, beschrijving en deadline grid-->
-                                <Grid Grid.Column="1" Background="Red" Grid.Row="0">
+                                <Grid Grid.Column="1" Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="80" />
@@ -79,19 +78,25 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Titeltje"></TextBlock>
-                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Descriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textjeDescriptioneel textje" TextWrapping="WrapWholeWords"></TextBlock>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Bind Name}"></TextBlock>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Bind Description}" TextWrapping="WrapWholeWords"></TextBlock>
                                     </Grid>
                                     <StackPanel Grid.Column="1" Background="Yellow">
                                         <SymbolIcon ></SymbolIcon>
-                                        <TextBlock Text="Over 5 dagen" TextWrapping="WrapWholeWords" TextAlignment="Center"></TextBlock>
-                                        <TextBlock Text="Aangepast door je moeder" TextWrapping="WrapWholeWords" TextAlignment="Center" FontSize="10"></TextBlock>
+                                        <TextBlock Text="{x:Bind DeadlineInDays}" TextWrapping="WrapWholeWords" TextAlignment="Center"></TextBlock>
+                                        <TextBlock Text="Is aangepast" TextWrapping="WrapWholeWords" TextAlignment="Center" FontSize="10"></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Commentaar beschrijving"></TextBlock>
-                                <TextBox Grid.Column="1" Grid.Row="2" Text="Mooie uitwerking maar helaas nog niet goed man."></TextBox>
-                                <TextBox Grid.Column="1" Grid.Row="3" Text="Mooie uitwerking"></TextBox>
-                                <Button Grid.Column="1" Grid.Row="4" Content="INLEVEREN" HorizontalAlignment="Right"></Button>
+                                <!--Andere regels met informatie-->
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text=""></TextBlock>
+                                <TextBox Grid.Column="1" Grid.Row="2" Text="{x:Bind LatestFeedback.Content}"></TextBox>
+                                <TextBox Grid.Column="1" Grid.Row="3" x:Name="TextContent"
+                                                MinHeight="150" 
+                                                AcceptsReturn="True" 
+                                                Text="{x:Bind Content}"
+                                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                                IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"></TextBox>
+                                <Button Grid.Column="1" Grid.Row="4" x:Name="SubmitTask" Content="INLEVEREN" HorizontalAlignment="Right" Click="SubmitTask_Click"></Button>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
