@@ -36,8 +36,6 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
     private final Store<FutureplanResponse, BarCode> store;
     private final Context context;
 
-    private boolean stale;
-
     public ClientHomePresenterImpl(@NonNull ClientHomeView view, Store<FutureplanResponse, BarCode> store) {
         this.view = view;
         this.context = view.getContext();
@@ -46,6 +44,15 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
 
     @Override
     public void init() {
+        fetch(false);
+    }
+
+    @Override
+    public void refresh() {
+        fetch(true);
+    }
+
+    private void fetch(boolean fromNetwork) {
         UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
 
         // cache request param, where type is the key for the cache and key the unique identifier
@@ -53,12 +60,9 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
 
         // request data from the futureplan store
         Single<FutureplanResponse> dataRequest;
-        if (stale) {
-            // get data from network
+        if (fromNetwork) {
             dataRequest = store.fetch(request);
         } else {
-            // get data from disk and store it in-memory
-            // if data is not present it does a network call to retrieve the data from online
             dataRequest = store.get(request);
         }
 
@@ -68,11 +72,6 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
                 .observeOn(AndroidSchedulers.mainThread())
                 // callback implementation (onSucces / onFailure)
                 .subscribe(this);
-    }
-
-    @Override
-    public void invalidateData() {
-        stale = true;
     }
 
     @Override

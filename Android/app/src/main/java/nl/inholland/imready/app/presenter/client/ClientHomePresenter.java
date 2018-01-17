@@ -8,7 +8,7 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 
 public interface ClientHomePresenter {
     void init();
-    void invalidateData();
+    void refresh();
     String getUsername();
     void logout();
 

@@ -10,28 +10,41 @@
     android:background="@color/colorAccent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/component_name"
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/xs"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/group_indicator"
-        style="@style/TextAppearance.AppCompat.Title.Inverse"
-        tools:text="Component name"/>
+        android:layout_toStartOf="@id/group_indicator">
+        <TextView
+            android:id="@+id/component_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/xs"
+            style="@style/TextAppearance.AppCompat.Title.Inverse"
+            tools:text="Component name"/>
 
-    <TextView
-        android:id="@+id/component_deadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/component_name"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/group_indicator"
-        android:drawableStart="@drawable/ic_event"
-        android:drawablePadding="@dimen/xs"
-        android:drawableTint="@android:color/white"
-        style="@style/TextAppearance.AppCompat.Small.Inverse"
-        tools:text="over 2 dagen" />
+        <TextView
+            android:id="@+id/component_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/component_name"
+            android:drawableStart="@drawable/ic_event"
+            android:drawablePadding="@dimen/xs"
+            android:drawableTint="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Small.Inverse"
+            tools:text="over 2 dagen" />
+
+        <!--
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/xs"
+            tools:text="1/7"/>
+            -->
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/group_indicator"

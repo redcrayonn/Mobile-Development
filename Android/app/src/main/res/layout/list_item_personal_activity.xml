@@ -21,6 +21,7 @@
         android:layout_marginTop="6dp"
         android:layout_alignParentEnd="true">
         <RelativeLayout
+            android:paddingHorizontal="@dimen/sm"
             android:id="@+id/activity_info_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,33 +47,48 @@
                     tools:text="Activity description" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:orientation="vertical"
                 android:id="@+id/activity_deadline_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true">
                 <ImageView
+                    android:id="@+id/activity_deadline_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
                     style="@style/Tinted.Accent"
                     android:src="@drawable/ic_clock"/>
                 <TextView
                     android:id="@+id/activity_deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_deadline_icon"
                     android:gravity="center_horizontal"
                     android:maxWidth="@dimen/xxml"
                     tools:text="over 2 dagen"/>
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/waiting_for_approval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_deadline_icon"
+                    android:text="@string/status_pending"
+                    android:textSize="@dimen/sm"
+                    android:maxWidth="@dimen/xxml"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/activity_action_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_info_container">
+            android:layout_below="@id/activity_info_container"
+            android:padding="@dimen/sm">
 
             <TextView
                 android:id="@+id/activity_input_label"
@@ -82,13 +98,15 @@
                 style="@style/TextAppearance.AppCompat.Small"
                 android:text="@string/activity_input"/>
 
+
+
             <EditText
                 android:id="@+id/activity_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/activity_input_label"
                 android:inputType="textMultiLine"
                 android:backgroundTint="@color/color_accent_states"
-                android:enabled="false"
                 android:minLines="1"
                 android:maxLines="12"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -116,23 +134,9 @@
                     android:theme="@style/App.Button.Accent"
                     android:text="@string/hand_in"/>
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/waiting_for_approval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_button_container"
-                android:layout_alignParentEnd="true"
-                android:text="@string/status_pending"
-                android:textSize="@dimen/sm"
-                android:textColor="@color/colorAccent"
-                android:gravity="center_vertical"
-                android:drawableStart="@drawable/ic_clock"
-                android:drawableTint="@color/colorAccent"
-                android:drawablePadding="@dimen/xxs"
-                android:visibility="gone"
-                tools:visibility="visible"/>
         </RelativeLayout>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

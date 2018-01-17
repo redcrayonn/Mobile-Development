@@ -4,6 +4,9 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/sm"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:paddingStart="@dimen/md"
+    android:paddingEnd="@dimen/md"
+    android:paddingTop="@dimen/sm"
+    android:paddingBottom="@dimen/sm"
+    style="@style/TextAppearance.AppCompat.Small"
     tools:text="list item 1" />

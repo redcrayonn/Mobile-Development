@@ -58,4 +58,5 @@
     <string name="status_progress">Bezig</string>
     <string name="component_add_question">Toevoegen aan bouwplan?</string>
     <string name="component_add_text">Wil je dit component en de bijbehorende opdracht(en) toevoegen aan je bouwplan?<![CDATA[<br/><br/><font color=#F16122><b>Let-op! </b>Je kan de opdracht(en) niet zelf verwijderen zodra deze is toegevoegd</font>]]></string>
+    <string name="activity_handed_in">Opdracht ingeleverd!</string>
 </resources>
