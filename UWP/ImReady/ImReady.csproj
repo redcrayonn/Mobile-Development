@@ -97,12 +97,13 @@
     </Compile>
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Config\GlobalConfig.cs" />
-    <Compile Include="Controls\Expander\ComponentExpander.xaml.cs">
+    <Compile Include="Controls\Expanders\ComponentExpander.xaml.cs">
       <DependentUpon>ComponentExpander.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyItem.xaml.cs">
       <DependentUpon>MyItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToggleButtons\ExpanderToggleButton.cs" />
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\Converters\ObjectToBooleanConverter.cs" />
@@ -206,7 +207,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Controls\Expander\ComponentExpander.xaml">
+    <Page Include="Controls\Expanders\ComponentExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddComponent\AddBuildingBlockComponents.xaml">
       <SubType>Designer</SubType>

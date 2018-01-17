@@ -33,11 +33,13 @@
                         Background="Transparent"
                         IsExpanded="False"
                         ExpandDirection="Down"
-                        Style="{StaticResource ComponentActivityExpander}"                   
+                        Style="{StaticResource ComponentActivityExpander}"             
+                        Tag="bla"
                         >
         <controls:Expander.Resources>
             <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource ThemeOrangeDefault}" />
             <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ThemeOrangeDark}" />
+            <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
         </controls:Expander.Resources>
         <Grid Background="White">
                 <TextBlock HorizontalAlignment="Center"

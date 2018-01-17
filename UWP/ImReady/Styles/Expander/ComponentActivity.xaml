@@ -3,9 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:togglebuttons="using:ImReady.Controls.ToggleButtons"
+    xmlns:local2 ="using:ImReady.Controls.ToggleButtons">
 
-    <Style x:Key="HeaderToggleButtonStyle" TargetType="ToggleButton">
+    <Style x:Key="HeaderToggleButtonStyle" TargetType="local2:ExpanderToggleButton">
         <Setter Property="Background" Value="#F16122" />
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
@@ -19,7 +21,7 @@
         <Setter Property="UseSystemFocusVisuals" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
+                <ControlTemplate TargetType="local2:ExpanderToggleButton">
                     <Grid x:Name="RootGrid" Background="#F16122">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -234,7 +236,8 @@
                         </Grid.ColumnDefinitions>
 
                         <Slider x:Name="ArrowRotation" Visibility="Collapsed" Value="90" Minimum="-180" Maximum="180" />
-                        <ContentPresenter 
+                        <StackPanel>
+                            <ContentPresenter 
                                           x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
                                           BorderBrush="{TemplateBinding BorderBrush}"
                                           BorderThickness="{TemplateBinding BorderThickness}"
@@ -245,7 +248,12 @@
                                           Padding="{TemplateBinding Padding}"
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="Left"
-                                          RenderTransformOrigin="0.5,0.5" />
+                                          RenderTransformOrigin="0.5,0.5" 
+                                            />
+                            <TextBlock Text="{Binding Mode=OneWay, Path=(local2:ExpanderToggleButton.Deadline)}"></TextBlock>
+                        </StackPanel>
+                        
+                        
                         <SymbolIcon 
                                     x:Name="Arrow" 
                                      Grid.Column="1"
@@ -511,7 +519,7 @@
                                     OffsetY="2"
                                     Color="Black"
                                     >
-                                    <ToggleButton x:Name="PART_ExpanderToggleButton" 
+                                    <local2:ExpanderToggleButton x:Name="PART_ExpanderToggleButton" 
                                               Height="80"
                                               TabIndex="0"
                                               Padding="15 7"
@@ -524,8 +532,12 @@
                                               FontWeight="Medium"
                                               FontSize="20"
                                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Deadline="{Binding Tag, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   >
-                                    </ToggleButton>
+                                        <ToggleButton.Resources>
+                                            <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
+                                        </ToggleButton.Resources>
+                                    </local2:ExpanderToggleButton>
                                 </controls:DropShadowPanel>
 
                                 <animations:Implicit.Animations>
