@@ -12,9 +12,12 @@ namespace ImReadyApiv2.Results.FutureplanResult
         {
             Content = feedback.Content;
             CaregiverName = feedback.Caregiver.FirstName;
+            Sent = feedback.Sent;
         }
         public string Content { get; set; }
 
         public string CaregiverName { get; set; }
+
+        public DateTime Sent { get; set; }
     }
 }
