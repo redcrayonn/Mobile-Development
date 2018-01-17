@@ -21,6 +21,12 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter"/>
             <converters:StatusToCheckboxBooleanConverter x:Key="StatusToCheckboxBooleanConverter"/>
+            <Style x:Key="ControlTextblockWrapping" TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="WrapWholeWords"></Setter>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="TextWrapping" Value="WrapWholeWords"></Setter>
+            </Style>
         </ResourceDictionary>        
     </UserControl.Resources>
     <controls:Expander 
@@ -54,7 +60,7 @@
                             <!-- Buitenste grid -->
                             <Grid 
                                 Margin="0 0 0 20"
-                                MaxWidth="800">
+                                MaxWidth="600">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30" />
                                     <ColumnDefinition Width="*" />
@@ -113,15 +119,20 @@
                                 </Grid>
                                 <!--Andere regels met informatie-->
                                 <TextBlock 
+                                    x:Name="FeedbackTitle"
                                     Grid.Column="1" 
                                     Grid.Row="1" 
                                     Text="" 
-                                    Margin="20 0 0 0"></TextBlock>
+                                    Margin="20 0 0 0"
+                                    Visibility="Collapsed"
+                                    ></TextBlock>
                                 <TextBlock 
+                                    x:Name="FeedbackContent"
                                     Grid.Column="1" 
                                     Grid.Row="2" 
                                     Text="{x:Bind LatestFeedback.Content}" 
                                     Margin="20 0 0 0"
+                                    Visibility="Collapsed"
                                     ></TextBlock>
                                 <TextBox          
                                         Grid.Column="1" 
