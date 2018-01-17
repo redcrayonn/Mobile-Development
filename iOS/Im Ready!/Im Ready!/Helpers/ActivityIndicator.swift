@@ -12,10 +12,8 @@ import UIKit
 // A public activityIndicator that can be called from everywhere
 public let activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
 
-// Function to start an ActivityIndicator with optional backgroundView
-// A ViewController is necessary
-// A view is needed to show the indicator
-// Optional background view to show
+/// Function to start an ActivityIndicator with optional backgroundView
+/// User interactions will be ignored
 public func startActivityIndicator(atVC viewController: UIViewController,
                                    withView view: UIView,
                                    andIndicatorBGView indicatorBG: UIView?) {
@@ -30,7 +28,8 @@ public func startActivityIndicator(atVC viewController: UIViewController,
     UIApplication.shared.beginIgnoringInteractionEvents()
 }
 
-// Stop the activityIndicator with optional background to hide again
+/// Stop the activityIndicator and hide the optional background again
+/// User interactions allowed again
 public func stopActivityIndicator(withIndicatorBGView indicatorBG: UIView?) {
     if indicatorBG != nil {
         indicatorBG?.isHidden = true

@@ -76,6 +76,8 @@
 		FAB2359C1FB99A970099B29D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359B1FB99A970099B29D /* Client.swift */; };
 		FAB2359E1FB99AA70099B29D /* Caregiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2359D1FB99AA70099B29D /* Caregiver.swift */; };
 		FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB235A11FB99B720099B29D /* LoginViewController.swift */; };
+		FAC6D260200E2722009AB5E9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D25F200E2722009AB5E9 /* Task.swift */; };
+		FAC6D262200E2FC6009AB5E9 /* ColorGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */; };
 		FADAB4491FBDE0C00069E290 /* Caregiver.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */; };
 		FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */; };
 		FADAB4531FBDF0350069E290 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB4521FBDF0350069E290 /* AuthenticationService.swift */; };
@@ -108,19 +110,6 @@
 			remoteInfo = "Im Ready!";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FAEA7C60200BD66200337E3B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0BD69AA0C458F2E755C56A2A /* Pods_Im_Ready_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Im_Ready_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +193,8 @@
 		FAB2359D1FB99AA70099B29D /* Caregiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caregiver.swift; sourceTree = "<group>"; };
 		FAB235A11FB99B720099B29D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FABDBDAD1FE16D160023DDCE /* Im Ready!.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Im Ready!.entitlements"; sourceTree = "<group>"; };
+		FAC6D25F200E2722009AB5E9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradient.swift; sourceTree = "<group>"; };
 		FADAB4481FBDE0C00069E290 /* Caregiver.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Caregiver.storyboard; sourceTree = "<group>"; };
 		FADAB44F1FBDEFAF0069E290 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		FADAB4521FBDF0350069E290 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -318,6 +309,7 @@
 				FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */,
 				FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */,
 				FA4B72611FF5015B00949FF6 /* Alerts.swift */,
+				FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -442,6 +434,7 @@
 				FA528D9B1FDB1B0C00052647 /* UsefulLinks.swift */,
 				FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */,
 				FA9CF8CA200BDB5200A983D7 /* Appointment.swift */,
+				FAC6D25F200E2722009AB5E9 /* Task.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -449,10 +442,9 @@
 		FAC6D252200D3058009AB5E9 /* Add new Component */ = {
 			isa = PBXGroup;
 			children = (
-				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
 				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
-				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
 				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
+				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
 			);
 			name = "Add new Component";
@@ -486,7 +478,8 @@
 				FA73CDEE1FBF2D110077F563 /* HomescreenViewController.swift */,
 				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
 				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
-				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
+				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
+				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
 				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
 				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
 			);
@@ -541,7 +534,6 @@
 				FAB2355C1FB990F60099B29D /* Resources */,
 				3E6C62A5C0C7321182156722 /* [CP] Embed Pods Frameworks */,
 				193CE2F4A216EAA8213BA0A0 /* [CP] Copy Pods Resources */,
-				FAEA7C60200BD66200337E3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -739,6 +731,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
@@ -759,6 +752,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityIndicator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
@@ -868,6 +862,7 @@
 				FA4B87461FC307FD008CB427 /* BuildingblockResult.swift in Sources */,
 				FADAB4591FBECEAC0069E290 /* Extensions.swift in Sources */,
 				FA3CB3FF1FD56F3200142CCF /* ChatViewController.swift in Sources */,
+				FAC6D260200E2722009AB5E9 /* Task.swift in Sources */,
 				FA64A6F81FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift in Sources */,
 				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
 				FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */,
@@ -898,6 +893,7 @@
 				FA7472001FCC088300D0D9D8 /* ClientComponentViewController.swift in Sources */,
 				FAA4BB8B1FBF0421006B845D /* Services.swift in Sources */,
 				FAB2359C1FB99A970099B29D /* Client.swift in Sources */,
+				FAC6D262200E2FC6009AB5E9 /* ColorGradient.swift in Sources */,
 				FADAB4501FBDEFAF0069E290 /* ApiClient.swift in Sources */,
 				FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */,
 				FA3CB4021FD57AD100142CCF /* ChatCollectionViewCell.swift in Sources */,

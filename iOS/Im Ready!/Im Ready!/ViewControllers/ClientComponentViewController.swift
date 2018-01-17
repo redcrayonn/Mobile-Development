@@ -38,6 +38,14 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
         cell.cellBG.layer.borderWidth = 1.0
         cell.cellBG.layer.borderColor = UIColor.clear.cgColor
         
+        cell.layer.cornerRadius = 6.0
+        
+        cell.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOpacity = 0.6
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowRadius = 3
+        
         return cell
     }
     

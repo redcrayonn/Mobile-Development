@@ -27,7 +27,6 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         return formatter
     }()
     
-    
     var appointments: [Appointment] = []
     var appointmentsForDate: [Appointment] = []
     var selectedDate: Date = Date.today()

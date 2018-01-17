@@ -8,13 +8,19 @@
 
 import UIKit
 
+protocol ComponentDelegate: class {
+    func passAddedComponent(component: Component)
+}
+
 class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var activityIndicatorBG: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var delegate: ComponentDelegate?
     
     var components: [Component] = []
     var buildingblockTitle: String?
+    var backgroundColor: UIColor?
     var itemCount: Int = 0
     
     override func viewDidLoad() {
@@ -38,6 +44,9 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComponentCell", for: indexPath) as! ComponentCollectionViewCell
         
         cell.componentName.text = components[indexPath.row].name
+        cell.backgroundColor = self.backgroundColor
+        
+        cell.styleCell()
         
         return cell
     }
@@ -50,6 +59,10 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
             startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: self.activityIndicatorBG)
             
             clientService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
+                
+                // Pass to previous VC which component is added
+                self.delegate?.passAddedComponent(component: self.components[indexPath.row])
+                componentsChanged = true
                 
                 // Delete the item from the collectionView
                 self.collectionView.performBatchUpdates({
@@ -71,7 +84,6 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
                             andMessage: "Het is niet gelukt het component toe te voegen.")
                 stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
             })
-            
         }))
         
         addComponentAlert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))

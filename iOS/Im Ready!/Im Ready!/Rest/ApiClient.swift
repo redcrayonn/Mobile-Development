@@ -33,9 +33,9 @@ public class ApiClient {
                                 onFailure()
                             }
                             
-                            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {                                
-                                print("Response data: \(response.data)")
-                                print("Data: \(utf8Text)")
+                            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                                print("Response data: \(response.data)")
+//                                print("Data: \(utf8Text)")
                                 onSuccess(data)
                             }
         }

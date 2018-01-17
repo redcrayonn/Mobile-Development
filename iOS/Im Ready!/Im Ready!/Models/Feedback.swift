@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Feedback : EntityModel {
+class Feedback : EntityModel, Decodable {
     var caregiverId : String?
     var clientActivityId : String?
     var content : String?
@@ -17,5 +17,14 @@ class Feedback : EntityModel {
         case caregiverId = "caregiverId"
         case clientActivityId = "clientActivityId"
         case content = "content"
-    }    
+    }
+    
+    required init(from decoder: Decoder) throws {
+        super.init()
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        content = try values.decodeIfPresent(String.self, forKey: .content)
+        caregiverId = try values.decodeIfPresent(String.self, forKey: .caregiverId)
+        clientActivityId = try values.decodeIfPresent(String.self, forKey: .clientActivityId)
+    }
+
 }

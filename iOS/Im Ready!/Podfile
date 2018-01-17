@@ -9,6 +9,10 @@ target 'Im Ready!' do
     pod 'Alamofire-SwiftyJSON'
     pod 'SwiftyJSON'
     
+    # A network activity indicator for alamofire
+    # If alamofire does a request, a little indicator in the statusbar shows
+    pod 'AlamofireNetworkActivityIndicator'
+    
     # Keychain pod
     #  pod 'KeychainAccess'
     pod 'Locksmith'

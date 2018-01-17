@@ -10,6 +10,7 @@ import UIKit
 import ChameleonFramework
 
 public var futureplanChanged: Bool = false
+//public var buildingblocks: [Buildingblock] = []
 
 class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,7 +31,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         getBuildingblocks()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // If a client added new components, the futurplan has to be reloaded
         if futureplanChanged{
             getClientFuturePlan()
@@ -58,11 +59,10 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
                                     onSuccess: { (results) in
                                         self.clientBuildingblocks = results.buildingblocks!
 
-                                        // Add the last buildingblock where you can select new future goals
+                                        // Add the last buildingblock where client can add new future goals
                                         self.clientBuildingblocks.append(ClientBuildingblock(
                                             type: BlockType.ADD,
                                             name: self.addBuildingblockBlockName))
-
                                         self.collectionView.reloadData()
                                         stopActivityIndicator(withIndicatorBGView: nil)
         }) {
@@ -76,7 +76,6 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         return clientBuildingblocks.count
     }
     
-    // Load the buildingblocks in a collectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // If it's the last cell in the array, add the "ADD" block.
         if indexPath.row == (clientBuildingblocks.count - 1) {

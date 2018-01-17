@@ -21,6 +21,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = component.name
+        self.hideKeyboardWhenTappedAround()
         
         tableView = UITableView(frame: view.frame)
         tableView.separatorColor = UIColor.white
@@ -37,7 +38,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == button_tag {
-            return 320
+            return 450
         } else {
             return 60
         }
@@ -50,23 +51,28 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityStackViewCell", for: indexPath) as! ClientActivityStackViewCell
         
-        cell.activityDescriptionLbl.adjustsFontSizeToFitWidth = true
-        cell.activityDescriptionLbl.numberOfLines = 0
-        cell.activityDescriptionLbl.text = activities[indexPath.row].description
-        cell.activityDescriptionLbl.sizeToFit()
+        let activity = activities[indexPath.row]
+        
+        cell.remarksTextView.isHidden = true
+        cell.remarksLbl.isHidden = true
         
         // If the cell does not exist yet, create a new one
         if !cell.cellExists {
-            cell.openDetailViewBtn.setTitle(activities[indexPath.row].name, for: .normal)
+            cell.activityDescriptionLbl.adjustsFontSizeToFitWidth = true
+            cell.activityDescriptionLbl.numberOfLines = 0
+            cell.activityDescriptionLbl.text = activity.description
+            cell.activityDescriptionLbl.sizeToFit()
+            
+            cell.openDetailViewBtn.setTitle(activity.name, for: .normal)
             cell.openDetailViewBtn.tag = t_count
             cell.openDetailViewBtn.addTarget(self, action: #selector(cellOpened(sender:)), for: .touchUpInside)
-            t_count += 1
-            cell.cellExists = true
             
-            cell.answerTextView.layer.borderColor = UIColor.black.cgColor
+            cell.answerTextView.layer.borderColor = UIColor.gray.cgColor
             cell.answerTextView.layer.borderWidth = 1.0
+            cell.answerTextView.layer.shadowColor = UIColor.black.cgColor
+            cell.answerTextView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
             
-            cell.activity = activities[indexPath.row]
+            cell.activity = activity
             cell.view = self
             cell.deadlineLbl.text = "Deadline in 2 dagen"
             
@@ -78,12 +84,26 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             cell.detailView.layer.shadowOpacity = 1.0
             cell.detailView.layer.shadowRadius = 0.0
             
-            if let content = activities[indexPath.row].content {
+            if let content = activity.content {
                 cell.answerTextView.text = content
                 cell.answerTextView.isEditable = false
                 cell.sendAnswerBtn.isHidden = true
                 cell.deadlineLbl.isHidden = true
             }
+            
+            if activity.feedback != nil {
+                cell.remarksTextView.isHidden = false
+                cell.remarksTextView.layer.borderColor = UIColor.orange.cgColor
+                cell.remarksTextView.layer.borderWidth = 1.0
+                cell.remarksTextView.layer.backgroundColor = UIColor.orange.cgColor
+                cell.remarksTextView.alpha = 0.5
+                cell.remarksLbl.isHidden = false
+                
+                cell.remarksTextView.text = activity.feedback?.content
+            }
+            
+            cell.cellExists = true
+            t_count += 1
         }
         
         UIView.animate(withDuration:  0) {
@@ -92,7 +112,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         
         return cell
     }
-    
+
     // If a ActivityStackViewCell is openend, do the animation
     @objc func cellOpened(sender: UIButton) {
         self.tableView.beginUpdates()

@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var activityIndicatorBG: UIView!
     
     let imReadyAccount = "ImReadyAccount"
-    let textFieldMoveDistance: Int = -250
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,38 +40,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Check if there is keychain data on the device
-        if Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil {
+        guard Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil else {
             
-            // Check the fingerprint
-            authenticationContext.evaluatePolicy(
-                .deviceOwnerAuthenticationWithBiometrics,
-                localizedReason: "Log in met je vingerafdruk") {
-                    (wasSuccessful, error) in
+            return
+        }
+        
+//        if Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil {
+        
+        // Check the fingerprints
+        authenticationContext.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: "Log in met je vingerafdruk") {
+                (wasSuccessful, error) in
+                
+                // If valid fingerprint, you may enter the app
+                if (wasSuccessful) {
+                    // retrieve keychain data to check what kind of user we have, to redirect to the correct flow
+                    let keychainDict = Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount)
+                    CurrentUser.instance.user_type = Role(rawValue: keychainDict!["user-role"] as! String)
+                    CurrentUser.instance.id = keychainDict!["id"] as! String
                     
-                    // If valid fingerprint, you may enter the app
-                    if (wasSuccessful) {
-                        
-                        // retrieve keychain data to check what kind of user we have, to redirect to the correct flow
-                        let keychainDict = Locksmith.loadDataForUserAccount(userAccount: self.imReadyAccount)
-                        CurrentUser.instance.user_type = Role(rawValue: keychainDict?["user-role"] as! String)
-                        CurrentUser.instance.id = (keychainDict?["id"] as! String)
-                        
-                        self.redirectUserToStoryboard()
-                    }
-                        // Invalid fingerprint or cancelled
-                    else {
-                        // Check if there is an error
-                        if let error = error {
-                            // Only show an error when something other happens then User cancelation
-                            if error.localizedDescription != "Canceled by user." {
-                                simpleAlert(atVC: self,
-                                            withTitle: "Er is iets fout gegaan",
-                                            andMessage: self.checkTouchIDError(error: error))
-                            }
+                    self.redirectUserToStoryboard()
+                }
+                    // Invalid fingerprint or cancelled
+                else {
+                    // Check if there is an error
+                    if let error = error {
+                        // Only show an error when something other happens then User cancelation
+                        if error.localizedDescription != "Canceled by user." {
+                            simpleAlert(atVC: self,
+                                        withTitle: "Er is iets fout gegaan",
+                                        andMessage: self.checkTouchIDError(error: error))
                         }
                     }
-            }
+                }
         }
+//        }
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
@@ -81,7 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //        let username = usernameField.text!
 //        let password = passwordField.text!.sha256()
         
-        let username = "woutertest5@gmail.com"
+        let username = "woutertest9@gmail.com"
         let password = "wouter"
         
         guard username != "" && password != "" else {
@@ -137,37 +140,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Change for production
         //        self.goToTabBarView(inStoryboard: "Caregiver", withIdentifier: "CaregiverTabBarController")
     }
-    
-    //    // When keyboard shows, move textfields up
-    //        func textFieldDidBeginEditing(_ textField: UITextField) {s
-    //            moveTextField(textField: textField,
-    //                          moveDistance: self.textFieldMoveDistance,
-    //                          up: true)
-    //        }
-    //
-    //    //When keyboard hides, move textfields back down
-    //        func textFieldDidEndEditing(_ textField: UITextField) {
-    //            moveTextField(textField: textField,
-    //                          moveDistance: self.textFieldMoveDistance,
-    //                          up: false)
-    //        }
-    //
-    //        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //            textField.resignFirstResponder()
-    //            return true
-    //        }
-    //
-    //    //Function on how the textfields should move up
-    //    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
-    //        let moveDuration = 0.3
-    //        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-    //
-    //        UIView.beginAnimations("animateTextField", context: nil)
-    //        UIView.setAnimationBeginsFromCurrentState(true)
-    //        UIView.setAnimationDuration(moveDuration)
-    //        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-    //        UIView.commitAnimations()
-    //    }
     
     func redirectUserToStoryboard() {
         // Check which role the logged in user has and redirect to the correct storyboard

@@ -19,6 +19,8 @@ class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var openDetailViewBtn: UIButton!
     @IBOutlet weak var activityDescriptionLbl: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
+    @IBOutlet weak var remarksTextView: UITextView!
+    @IBOutlet weak var remarksLbl: UILabel!
     @IBOutlet weak var sendAnswerBtn: UIButton!
     @IBOutlet weak var deadlineLbl: UILabel!
     

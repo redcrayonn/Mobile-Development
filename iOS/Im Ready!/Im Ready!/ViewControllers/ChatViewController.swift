@@ -34,11 +34,11 @@ class ChatViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     // Prepare navigation segue to MessageViewController
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
-        if let destinationViewController = segue.destination as? MessageViewController {
-            if let cell = sender as? ChatCollectionViewCell {
-                destinationViewController.recipient = cell.recipient
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destinationViewController = segue.destination as? MessageViewController {
+//            if let cell = sender as? ChatCollectionViewCell {
+//                destinationViewController.recipient = cell.recipient
+//            }
+//        }
+//    }
 }

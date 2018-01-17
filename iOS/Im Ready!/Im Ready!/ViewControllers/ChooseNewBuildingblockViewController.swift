@@ -7,20 +7,24 @@
 //
 
 import UIKit
+import ChameleonFramework
 
-class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+public var componentsChanged: Bool = false
+
+class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, ComponentDelegate {
     
-    var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     let cellIdentifier = "BuildingblockCell"
     var buildingblocks: [Buildingblock] = []
     
     var clientBuildingblocks: [ClientBuildingblock] = []
     var clientComponents: [String] = []
+    //    var remainingComponents: [Component] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(clientBuildingblocks)
+        self.title = "Bouwblokken"
         
         // Create a list of all the components the client is enrolled in
         for buildingblock in clientBuildingblocks {
@@ -32,8 +36,8 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         }
     }
     
-    // Check if a client is already working on a component
-    // If a client is already working on it, it should nog show in the list.
+    /// Check if a client is already working on a component
+    /// If a client is already working on it, it should not show in the list.
     func compareComponents(clientComponents: [String], buildingblockComponents: [Component]) -> [Component] {
         var remainingComponents: [Component] = []
         
@@ -59,6 +63,9 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         cell.buildingblockImage.image = UIImage(named: "\(buildingblocks[indexPath.row].type!)")
         cell.buildingblockName.text = buildingblocks[indexPath.row].name
         cell.components = remainingComponents
+        cell.backgroundColor = UIColor(hexString: setColor(forIndex: indexPath))
+        
+        cell.styleCell()
         
         let numberOfComponents = remainingComponents.count
         var componentString: String
@@ -73,13 +80,21 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         return cell
     }
     
+    func passAddedComponent(component: Component) {
+        clientComponents.append(component.name!)
+        collectionView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? ChooseNewComponentViewController {
+            destinationViewController.delegate = self
+            
             if let cell = sender as? BuildingblockCollectionViewCell {
                 destinationViewController.components = cell.components
                 destinationViewController.buildingblockTitle = cell.buildingblockName.text
+                destinationViewController.backgroundColor = cell.backgroundColor
             }
         }
-    }
+    }    
 }
 
