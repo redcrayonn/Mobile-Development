@@ -12,6 +12,9 @@ class ComponentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var componentName: UILabel!
     @IBOutlet weak var componentAddBtn: UIButton!
     
+    var component: Component?
+    var index: IndexPath?
+    
     func styleCell() {
         self.layer.cornerRadius = 6.0
         self.layer.masksToBounds = false

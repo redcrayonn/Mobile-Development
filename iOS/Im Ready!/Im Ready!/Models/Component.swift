@@ -23,7 +23,7 @@ class Component : EntityModel, Decodable {
         case description = "Description"
         case youtubeUrl = "YoutubeURL"
         case usefulLinks = "UsefulLink"
-        case activities        
+        case activities = "Activities"
     }
 
     required init(from decoder: Decoder) throws {

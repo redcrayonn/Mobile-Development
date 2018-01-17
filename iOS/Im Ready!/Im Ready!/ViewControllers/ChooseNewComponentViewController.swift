@@ -8,25 +8,26 @@
 
 import UIKit
 
-protocol ComponentDelegate: class {
-    func passAddedComponent(component: Component)
-}
+//protocol ComponentDelegate: class {
+//    func passAddedComponent(component: Component)
+//}
 
-class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ComponentDelegate {
     
-    @IBOutlet weak var activityIndicatorBG: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    weak var delegate: ComponentDelegate?
+//    weak var delegate: ComponentDelegate?
     
     var components: [Component] = []
     var buildingblockTitle: String?
     var backgroundColor: UIColor?
     var itemCount: Int = 0
+    weak var delegate: ComponentDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = buildingblockTitle
-        
+        collectionView.frame.origin.y += 200
+
         // We need to manually count the items
         // When deleting an item from the collectionview, numberOfItemsInSection is called again and expects a new number
         itemCount = components.count
@@ -45,49 +46,39 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
         
         cell.componentName.text = components[indexPath.row].name
         cell.backgroundColor = self.backgroundColor
+        cell.component = components[indexPath.row]
+        cell.index = indexPath
         
         cell.styleCell()
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let addComponentAlert = UIAlertController(title: "Component toevoegen?", message:
-            "Wil je '\(components[indexPath.row].name!)' toevoegen?", preferredStyle: UIAlertControllerStyle.alert)
-        addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
-            
-            startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: self.activityIndicatorBG)
-            
-            clientService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.components[indexPath.row].id!, onSuccess: {
-                
-                // Pass to previous VC which component is added
-                self.delegate?.passAddedComponent(component: self.components[indexPath.row])
-                componentsChanged = true
-                
-                // Delete the item from the collectionView
-                self.collectionView.performBatchUpdates({
-                    self.collectionView.deleteItems(at: [indexPath])
-                    // Manually substract 1 to satisfy the collectionView
-                    self.itemCount -= 1
-                }) { (finished) in
-                    self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
-                }
-                
-                futureplanChanged = true
-                simpleAlert(atVC: self,
-                            withTitle: "Gelukt!",
-                            andMessage: "Component toegevoegd")
-                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
-            }, onFailure:  {
-                simpleAlert(atVC: self,
-                            withTitle: "Er is iets fout gegaan.",
-                            andMessage: "Het is niet gelukt het component toe te voegen.")
-                stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
-            })
-        }))
+    func passAddedComponent(component: Component, index: IndexPath) {
+        // Delete the item from the collectionView
+        self.collectionView.performBatchUpdates({
+            self.collectionView.deleteItems(at: [index])
+            // Manually substract 1 to satisfy the collectionView
+            self.itemCount -= 1
+        }) { (finished) in
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+        }
         
-        addComponentAlert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))
+        self.delegate?.passAddedComponent(component: component, index: index)
         
-        self.present(addComponentAlert, animated: true, completion: nil)
+        if itemCount == 0 {
+            self.performSegueToReturnBack()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? ChooseNewComponentDetailViewController {
+            destinationViewController.delegate = self
+            
+            if let cell = sender as? ComponentCollectionViewCell {
+                destinationViewController.component = cell.component
+                destinationViewController.componentIndex = cell.index
+            }
+        }
     }
 }

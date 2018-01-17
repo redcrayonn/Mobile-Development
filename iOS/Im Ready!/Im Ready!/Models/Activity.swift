@@ -8,11 +8,10 @@
 
 import Foundation
 
-class Activity : Decodable {
-    let name : String? = nil
-    let description : String? = nil
-    let points : Int? = nil
-    let id : String? = nil
+class Activity : EntityModel, Decodable {
+    var name : String?
+    var description : String?
+    var points : Int?
     
     enum CodingKeys: String, CodingKey {
         case name = "Name"
@@ -21,6 +20,14 @@ class Activity : Decodable {
         case id = "Id"
     }
     
-    init () {}
+    required init(from decoder: Decoder) throws {
+        super.init()
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        description = try values.decodeIfPresent(String.self, forKey: .description)
+        points = try values.decodeIfPresent(Int.self, forKey: .points)
+//        self.id = try values.decodeIfPresent(String.self, forKey: .id)
+    }
+
 }
 

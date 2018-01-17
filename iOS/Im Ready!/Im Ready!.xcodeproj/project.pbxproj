@@ -60,6 +60,7 @@
 		FA8306C41FDE932F00BC225F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C31FDE932F00BC225F /* Status.swift */; };
 		FA8306C81FDEC23B00BC225F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C71FDEC23B00BC225F /* MessageViewController.swift */; };
 		FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */; };
+		FA85ED7D200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */; };
 		FA9CF8CB200BDB5200A983D7 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CA200BDB5200A983D7 /* Appointment.swift */; };
 		FA9CF8CD200BDFD600A983D7 /* AppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */; };
 		FA9CF8CF200BE16200A983D7 /* AppointmentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */; };
@@ -171,6 +172,7 @@
 		FA8306C31FDE932F00BC225F /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		FA8306C71FDEC23B00BC225F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNewComponentDetailViewController.swift; sourceTree = "<group>"; };
 		FA9CF8CA200BDB5200A983D7 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentService.swift; sourceTree = "<group>"; };
 		FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentResult.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 			children = (
 				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
 				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
+				FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */,
 				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
 			);
@@ -902,6 +905,7 @@
 				FA4DFE361FBADB7700945B2A /* Chat.swift in Sources */,
 				FAB235621FB990F60099B29D /* AppDelegate.swift in Sources */,
 				FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */,
+				FA85ED7D200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift in Sources */,
 				FA8306C41FDE932F00BC225F /* Status.swift in Sources */,
 				FA8306C21FDE932500BC225F /* TriggerLevel.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,

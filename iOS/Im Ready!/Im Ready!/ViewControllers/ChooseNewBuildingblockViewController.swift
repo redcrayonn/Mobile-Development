@@ -15,40 +15,50 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
     
     @IBOutlet weak var collectionView: UICollectionView!
     let cellIdentifier = "BuildingblockCell"
-    var buildingblocks: [Buildingblock] = []
     
+    var buildingblocks: [Buildingblock] = []
     var clientBuildingblocks: [ClientBuildingblock] = []
     var clientComponents: [String] = []
-    //    var remainingComponents: [Component] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Bouwblokken"
         
-        // Create a list of all the components the client is enrolled in
-        for buildingblock in clientBuildingblocks {
-            if buildingblock.type! != BlockType.ADD {
-                for component in buildingblock.components! {
-                    clientComponents.append(component.name!)
-                }
-            }
-        }
+        //        collectionView.frame.origin.y += 200
+        
+        sortBuildingblocksByNumberOfComponents()
     }
     
-    /// Check if a client is already working on a component
-    /// If a client is already working on it, it should not show in the list.
-    func compareComponents(clientComponents: [String], buildingblockComponents: [Component]) -> [Component] {
-        var remainingComponents: [Component] = []
+    /// Compare the system components with the components of the client
+    /// Only return components the client is not enrolled in
+    /// Sort them by number of components available
+    func sortBuildingblocksByNumberOfComponents() {
         
-        for bc in buildingblockComponents {
-            print(bc.name!)
-            if !clientComponents.contains(bc.name!){
-                remainingComponents.append(bc)
+        // Create new list of component names to compare to original components
+        // Cannot compare ClientComponent Object to Component bject
+        for b in self.clientBuildingblocks {
+            guard b.components != nil else {continue}
+            for component in b.components! {
+                clientComponents.append(component.name!)
             }
         }
         
-        return remainingComponents
+        // Compare the client component to the original component
+        for b in self.buildingblocks {
+            var newComponentList: [Component] = []
+            
+            for component in b.components! {
+                if !clientComponents.contains(component.name!){
+                    newComponentList.append(component)
+                }
+            }
+            
+            b.components = newComponentList
+        }
+        
+        // Sort descending
+        self.buildingblocks = buildingblocks.sorted(by: {($0.components?.count)! > ($1.components?.count)!})
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,16 +68,16 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath as IndexPath) as! BuildingblockCollectionViewCell
         
-        let remainingComponents: [Component] = self.compareComponents(clientComponents: clientComponents, buildingblockComponents: buildingblocks[indexPath.row].components!)
+        let components = buildingblocks[indexPath.row].components!
         
         cell.buildingblockImage.image = UIImage(named: "\(buildingblocks[indexPath.row].type!)")
         cell.buildingblockName.text = buildingblocks[indexPath.row].name
-        cell.components = remainingComponents
+        cell.components = components
         cell.backgroundColor = UIColor(hexString: setColor(forIndex: indexPath))
         
         cell.styleCell()
         
-        let numberOfComponents = remainingComponents.count
+        let numberOfComponents = components.count
         var componentString: String
         if numberOfComponents == 1 {
             componentString = "component"   
@@ -80,8 +90,10 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         return cell
     }
     
-    func passAddedComponent(component: Component) {
+    /// If the client adds a new component to his futureplan, the delegate updates the buildingblockView
+    func passAddedComponent(component: Component, index: IndexPath) {
         clientComponents.append(component.name!)
+        sortBuildingblocksByNumberOfComponents()
         collectionView.reloadData()
     }
     

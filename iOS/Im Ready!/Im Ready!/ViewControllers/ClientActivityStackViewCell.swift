@@ -32,6 +32,15 @@ class ClientActivityStackViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    func styleCell() {
+        self.detailView.layer.backgroundColor = UIColor.white.cgColor
+        self.detailView.layer.masksToBounds = false
+        self.detailView.layer.shadowColor = UIColor.gray.cgColor
+        self.detailView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.detailView.layer.shadowOpacity = 1.0
+        self.detailView.layer.shadowRadius = 0.0
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state

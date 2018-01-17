@@ -74,15 +74,10 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             
             cell.activity = activity
             cell.view = self
-            cell.deadlineLbl.text = "Deadline in 2 dagen"
+            cell.deadlineLbl.text = activity.deadline
             
             // Set bottom "border" for unfolded view
-            cell.detailView.layer.backgroundColor = UIColor.white.cgColor
-            cell.detailView.layer.masksToBounds = false
-            cell.detailView.layer.shadowColor = UIColor.gray.cgColor
-            cell.detailView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-            cell.detailView.layer.shadowOpacity = 1.0
-            cell.detailView.layer.shadowRadius = 0.0
+            cell.styleCell()            
             
             if let content = activity.content {
                 cell.answerTextView.text = content

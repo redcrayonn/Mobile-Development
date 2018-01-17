@@ -84,7 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //        let username = usernameField.text!
 //        let password = passwordField.text!.sha256()
         
-        let username = "woutertest9@gmail.com"
+        let username = "woutertest13@gmail.com"
         let password = "wouter"
         
         guard username != "" && password != "" else {
