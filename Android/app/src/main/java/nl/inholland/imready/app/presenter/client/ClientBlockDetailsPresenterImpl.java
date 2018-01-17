@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresenter, Callback<Void> {
+public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresenter {
     private final ClientBlockDetailsView view;
 
     public ClientBlockDetailsPresenterImpl(ClientBlockDetailsView view) {
@@ -24,7 +24,6 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
     public void putActivity(PersonalActivity activity, String content) {
         activity.setContent(content);
         view.showHandInDialog(activity);
-
     }
 
     @Override
@@ -33,13 +32,25 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
         UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
         ClientService clientService = ApiManager.getClient().getClientService();
         PutClientActivityModel model = new PutClientActivityModel(status, activity.getContent());
-        clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(this);
+        clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    view.showSucces();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                //ignore
+            }
+        });
     }
 
     @Override
     public void saveActivity(PersonalActivity activity) {
         UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
-        ClientService clientService = ApiManager.getClient().getClientService();
+        ClientService clientService = ApiManager.getClient(true).getClientService();
         PutClientActivityModel model = new PutClientActivityModel(activity.getStatus(), activity.getContent());
         clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(new Callback<Void>() {
             @Override
@@ -52,17 +63,5 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
                 //ignore
             }
         });
-    }
-
-    @Override
-    public void onResponse(Call<Void> call, Response<Void> response) {
-        if (response.isSuccessful()) {
-            view.showSucces();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<Void> call, Throwable t) {
-
     }
 }

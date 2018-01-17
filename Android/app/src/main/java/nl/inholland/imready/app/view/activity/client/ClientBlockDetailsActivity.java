@@ -32,6 +32,7 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
 
     private ClientBlockDetailsPresenter presenter;
     private PersonalComponentExpandableListAdapter adapter;
+    private PersonalBlock block;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,15 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        EventBus.getDefault().postSticky(new BlockDetailViewEvent(block, null));
+    }
+
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onBlockDetailViewEvent(BlockDetailViewEvent event) {
-        PersonalBlock block = event.getBlock();
+        block = event.getBlock();
         if (block == null) {
             Toast.makeText(this, "Something went wrong whilst loading the block data", Toast.LENGTH_SHORT).show();
             finish();
@@ -114,16 +121,16 @@ public class ClientBlockDetailsActivity extends AppCompatActivity implements Cli
 
     @Override
     public void showSucces() {
-        // show other activity
-        showMessage("Succes");
+        showMessage(getString(R.string.activity_handed_in));
     }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        HandInActivityDialogFragment dialogFragment = (HandInActivityDialogFragment) dialog;
-        Bundle arguments = dialogFragment.getArguments();
-        PersonalActivity activity = arguments.getParcelable(ParcelableConstants.ACTIVITY);
-        presenter.putActivity(activity, BlockPartStatus.PENDING);
+        Bundle arguments = dialog.getArguments();
+        if (arguments != null) {
+            PersonalActivity activity = arguments.getParcelable(ParcelableConstants.ACTIVITY);
+            presenter.putActivity(activity, BlockPartStatus.PENDING);
+        }
     }
 
     @Override

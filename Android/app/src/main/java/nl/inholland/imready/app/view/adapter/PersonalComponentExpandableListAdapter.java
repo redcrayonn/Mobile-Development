@@ -34,8 +34,8 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
         this.inflater = LayoutInflater.from(context);
         this.presenter = presenter;
 
-        int accentColor = context.getResources().getColor(R.color.colorAccent);
-        int mainColor = context.getResources().getColor(R.color.colorPrimary);
+        int accentColor = context.getColor(R.color.colorAccent);
+        int mainColor = context.getColor(R.color.colorPrimary);
 
         blendedComponentColors = ColorUtil.between(accentColor, mainColor, components.size());
     }
@@ -91,14 +91,8 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         PersonalComponent component = this.components.get(groupPosition);
-        FillableViewHolder<PersonalComponent> viewHolder = null;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_personal_component, parent, false);
-            viewHolder = new PersonalComponentViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (FillableViewHolder<PersonalComponent>) convertView.getTag();
-        }
+        convertView = inflater.inflate(R.layout.list_item_personal_component, parent, false);
+        FillableViewHolder<PersonalComponent> viewHolder = new PersonalComponentViewHolder(convertView);
 
         ImageView groupIndicator = convertView.findViewById(R.id.group_indicator);
         groupIndicator.setSelected(isExpanded);
@@ -118,7 +112,7 @@ public class PersonalComponentExpandableListAdapter extends BaseExpandableListAd
             ((TextView)convertView).setText(R.string.empty_component);
         } else {
             convertView = inflater.inflate(R.layout.list_item_personal_activity, parent, false);
-            PersonalActivityViewHolder viewHolder = new PersonalActivityViewHolder(convertView, presenter);
+            FillableViewHolder<PersonalActivity> viewHolder = new PersonalActivityViewHolder(convertView, presenter);
             viewHolder.fill(context, activity);
         }
 

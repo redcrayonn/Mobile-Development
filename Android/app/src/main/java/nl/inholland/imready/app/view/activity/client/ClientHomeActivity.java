@@ -64,6 +64,10 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
         initToolbarAndDrawer();
 
         presenter = new ClientHomePresenterImpl(this, ImReadyApplication.getInstance().getFutureplanStore());
+
+        if (savedInstanceState != null) {
+            popupShown = savedInstanceState.getBoolean(STATE_POPUP);
+        }
     }
 
     @Override
@@ -82,12 +86,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putBoolean(STATE_POPUP, popupShown);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        popupShown = savedInstanceState.getBoolean(STATE_POPUP);
     }
 
     @Override
@@ -120,8 +118,8 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     private void initToolbarAndDrawer() {
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.futureplan);
+        setSupportActionBar(toolbar);
 
         // Drawer
         drawer = findViewById(R.id.drawer);
@@ -148,8 +146,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void refreshData() {
-        presenter.invalidateData();
-        presenter.init();
+        presenter.refresh();
         refreshLayout.setRefreshing(true);
     }
 

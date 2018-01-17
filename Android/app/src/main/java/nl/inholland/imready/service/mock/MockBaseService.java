@@ -1,6 +1,6 @@
 package nl.inholland.imready.service.mock;
 
-public class MockBaseService {
+public abstract class MockBaseService {
     protected void requireResult(Object obj) throws Exception {
         if (obj == null)
             throw new Exception("obj was null");

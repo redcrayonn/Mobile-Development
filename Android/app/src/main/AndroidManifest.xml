@@ -40,9 +40,11 @@
         <!-- CLIENT -->
         <activity
             android:name=".app.view.activity.client.ClientHomeActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".app.view.activity.client.ClientBlockDetailsActivity"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".app.view.activity.client.ClientHomeActivity"
             android:theme="@style/AppTheme.Alt" />
         <activity

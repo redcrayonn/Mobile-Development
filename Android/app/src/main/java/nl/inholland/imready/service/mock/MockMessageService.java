@@ -17,7 +17,7 @@ import retrofit2.mock.BehaviorDelegate;
 
 public class MockMessageService extends MockMessageBaseService implements MessageBaseService {
 
-    private static final String ClientId = "a1b2c3d4";
+    private static final String ClientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
     private static final String CaregiverId = "z9y8x7w6";
 
     private static final List<Message> MOCK_MESSAGES = new ArrayList<Message>() {{
@@ -54,7 +54,7 @@ public class MockMessageService extends MockMessageBaseService implements Messag
             e.printStackTrace();
         }
 
-        List<Message> response = count != null
+        List<Message> response = (count != null && count != 0)
                 ? MOCK_MESSAGES.subList(0, count)
                 : MOCK_MESSAGES;
         Collections.reverse(response);

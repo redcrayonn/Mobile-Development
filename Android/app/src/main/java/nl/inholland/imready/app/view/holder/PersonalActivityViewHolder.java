@@ -26,8 +26,9 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
     private final Button handInButton;
     private final View actionContainer;
     private final ClientBlockDetailsPresenter presenter;
-    private final View deadlineContainer;
+    private final View activityDeadlineContainer;
     private final TextView waitingForApproval;
+    private final View activityButtonContainer;
     private PersonalActivity activity;
 
     public PersonalActivityViewHolder(View view, ClientBlockDetailsPresenter presenter) {
@@ -39,8 +40,9 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
 
         handInButton = view.findViewById(R.id.activity_button);
 
-        deadlineContainer = view.findViewById(R.id.activity_deadline_container);
+        activityDeadlineContainer = view.findViewById(R.id.activity_deadline_container);
         actionContainer = view.findViewById(R.id.activity_action_container);
+        activityButtonContainer = view.findViewById(R.id.activity_button_container);
         waitingForApproval = view.findViewById(R.id.waiting_for_approval);
         this.presenter = presenter;
     }
@@ -60,40 +62,53 @@ public class PersonalActivityViewHolder implements FillableViewHolder<PersonalAc
         //Ui changes based on status
         switch (data.getStatus()) {
             case ONGOING:
-                uiActivityOngoing();
+                uiActivityOngoing(context);
                 break;
             case PENDING:
-                uiActivityPending();
+                uiActivityPending(context);
                 break;
             case DONE:
-                uiActivityComplete();
+                uiActivityComplete(context);
                 break;
         }
     }
 
-    private void uiActivityOngoing() {
+    private void uiActivityOngoing(Context context) {
         completedView.setChecked(false);
         descriptionView.setVisibility(View.VISIBLE);
-        assignmentInput.setEnabled(false);
-        assignmentInput.setEnabled(false);
+        assignmentInput.setEnabled(true);
         assignmentInput.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         handInButton.setEnabled(true);
         actionContainer.setVisibility(View.VISIBLE);
-        deadlineContainer.setVisibility(View.VISIBLE);
+        activityButtonContainer.setVisibility(View.VISIBLE);
+        activityDeadlineContainer.setVisibility(View.VISIBLE);
+        deadlineText.setVisibility(View.VISIBLE);
         waitingForApproval.setVisibility(View.GONE);
     }
 
-    private void uiActivityPending() {
+    private void uiActivityPending(Context context) {
+        completedView.setChecked(false);
+        descriptionView.setVisibility(View.VISIBLE);
+        assignmentInput.setEnabled(false);
         assignmentInput.setInputType(InputType.TYPE_NULL);
-        actionContainer.setVisibility(View.GONE);
-        deadlineContainer.setVisibility(View.VISIBLE);
+        handInButton.setEnabled(false);
+        actionContainer.setVisibility(View.VISIBLE);
+        activityButtonContainer.setVisibility(View.GONE);
+        activityDeadlineContainer.setVisibility(View.VISIBLE);
+        deadlineText.setVisibility(View.GONE);
         waitingForApproval.setVisibility(View.VISIBLE);
     }
 
-    private void uiActivityComplete() {
+    private void uiActivityComplete(Context context) {
+        completedView.setChecked(true);
+        descriptionView.setVisibility(View.GONE);
+        assignmentInput.setEnabled(false);
         assignmentInput.setInputType(InputType.TYPE_NULL);
+        handInButton.setEnabled(false);
         actionContainer.setVisibility(View.GONE);
-        deadlineContainer.setVisibility(View.GONE);
+        activityButtonContainer.setVisibility(View.GONE);
+        activityDeadlineContainer.setVisibility(View.GONE);
+        deadlineText.setVisibility(View.GONE);
         waitingForApproval.setVisibility(View.GONE);
     }
 

@@ -1,8 +1,7 @@
 package nl.inholland.imready.app.presenter.shared;
 
 
-import nl.inholland.imready.model.user.Message;
-
 public interface MessagesPresenter {
-    void sendMessage(Message message);
+    void sendMessage(String message);
+    void init();
 }

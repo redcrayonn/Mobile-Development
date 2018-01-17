@@ -2,23 +2,31 @@ package nl.inholland.imready.app.view.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.view.listener.DialogListener;
 
 public class HandInActivityDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
+    DialogListener listener;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (DialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement NoticeDialogListener");
+        }
     }
 
     @NonNull
@@ -42,24 +50,15 @@ public class HandInActivityDialogFragment extends DialogFragment implements Dial
         return builder.create();
     }
 
-    private void onPositiveClick() {
-        // network call
-        Toast.makeText(getContext(), "Yay", Toast.LENGTH_SHORT).show();
-    }
-
-    private void onNegativeClick() {
-        dismiss();
-    }
-
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                onPositiveClick();
+                listener.onDialogPositiveClick(this);
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
             default:
-                onNegativeClick();
+                listener.onDialogNegativeClick(this);
                 break;
         }
     }

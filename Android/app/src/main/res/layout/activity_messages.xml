@@ -11,19 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/messages"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/pull_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/message_input_container"
-            android:paddingStart="@dimen/md"
-            android:paddingEnd="@dimen/md"
-            android:paddingTop="@dimen/sm"
-            android:paddingBottom="@dimen/sm"
-            app:reverseLayout="true"
-            tools:listitem="@layout/list_item_message_right">
+            android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/messages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/message_input_container"
+                android:paddingStart="@dimen/md"
+                android:paddingEnd="@dimen/md"
+                android:paddingTop="@dimen/sm"
+                android:paddingBottom="@dimen/sm"
+                app:reverseLayout="true"
+                tools:listitem="@layout/list_item_message_right">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <RelativeLayout
             android:id="@+id/message_input_container"
