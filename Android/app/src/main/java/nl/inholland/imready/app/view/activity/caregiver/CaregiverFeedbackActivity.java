@@ -1,5 +1,6 @@
 package nl.inholland.imready.app.view.activity.caregiver;
 
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,13 +15,32 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.inholland.imready.R;
+import nl.inholland.imready.app.ImReadyApplication;
+import nl.inholland.imready.app.logic.ApiManager;
 import nl.inholland.imready.app.logic.events.FeedbackViewEvent;
+import nl.inholland.imready.app.persistence.UserCache;
+import nl.inholland.imready.model.blocks.Feedback;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.enums.BlockPartStatus;
+import nl.inholland.imready.model.enums.UserRole;
+import nl.inholland.imready.service.ApiClient;
+import nl.inholland.imready.service.model.PutFeedbackModel;
+import nl.inholland.imready.service.rest.CaregiverService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class CaregiverFeedbackActivity extends AppCompatActivity {
+public class CaregiverFeedbackActivity extends AppCompatActivity implements Callback<Void> {
+    private PersonalActivity activity;
+    private String clientId;
+    private String clientName;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_feedback);
@@ -29,17 +49,49 @@ public class CaregiverFeedbackActivity extends AppCompatActivity {
         FeedbackViewEvent stickyEvent = EventBus.getDefault().getStickyEvent(FeedbackViewEvent.class);
         if(stickyEvent != null) {
             EventBus.getDefault().removeStickyEvent(stickyEvent);
-            PersonalActivity activity = stickyEvent.activity;
-            setupLayout(activity, stickyEvent.clientName);
+            activity = stickyEvent.activity;
+            clientId = stickyEvent.clientId;
+            clientName = stickyEvent.clientName;
+
+            setupLayout();
         }
     }
 
-    private void openFeedback(boolean isApproved) {
-        String text = "Uitwerking goedkeuring:" + isApproved;
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    private void sendFeedback(boolean isApproved) {
+        //setProgressbarVisible(true);
+
+        EditText feedback = findViewById(R.id.feedback_input);
+
+        ApiClient client = ApiManager.getClient();
+        CaregiverService caregiverService = client.getCaregiverService();
+
+        caregiverService.giveFeedback(getUser(), clientId, activity.getId(), new PutFeedbackModel(isApproved, feedback.getText().toString())).enqueue(this);
+        updateData(isApproved);
+        setupLayout();
     }
 
-    private void setupLayout(PersonalActivity activity, String clientName) {
+    private void updateData(Boolean isApproved) {
+        activity.setFeedback(getFeedbackModel());
+
+        if (isApproved)
+            activity.setStatus(BlockPartStatus.DONE);
+        else
+            activity.setStatus(BlockPartStatus.ONGOING);
+    }
+
+    private List<Feedback> getFeedbackModel() {
+        EditText feedback = findViewById(R.id.feedback_input);
+        List<Feedback> list = new ArrayList<>();
+        list.add(new Feedback(feedback.getText().toString()));
+        return list;
+    }
+
+    private String getUser(){
+        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CAREGIVER);
+        return cache.getUserId();
+    }
+
+    private void setupLayout() {
         //Fill textfields
         TextView nameText = findViewById(R.id.client_name);
         nameText.setText(clientName);
@@ -61,22 +113,37 @@ public class CaregiverFeedbackActivity extends AppCompatActivity {
         }
 
         //Following to differentiate pending task from others
-        if (activity.getStatus() == BlockPartStatus.PENDING){
-            TextView taskClientInput = findViewById(R.id.client_input);
-            TextView taskClientInputHeader = findViewById(R.id.client_input_header);
+        TextView taskClientInput = findViewById(R.id.client_input);
+        TextView taskClientInputHeader = findViewById(R.id.client_input_header);
+        RelativeLayout feedbackPart = findViewById(R.id.feedback_layout);
 
+        if (activity.getStatus() == BlockPartStatus.PENDING){
             taskClientInput.setText(activity.getContent());
             taskClientInput.setVisibility(View.VISIBLE);
             taskClientInputHeader.setVisibility(View.VISIBLE);
 
-            RelativeLayout feedbackPart = findViewById(R.id.feedback_layout);
             feedbackPart.setVisibility(View.VISIBLE);
+
             //Setup the actions for the approve/deny buttons
             final Button approveButton = findViewById(R.id.button_approve);
             final Button denyButton = findViewById(R.id.button_deny);
 
-            approveButton.setOnClickListener(v -> openFeedback(true));
-            denyButton.setOnClickListener(v -> openFeedback(false));
+            approveButton.setOnClickListener(v -> sendFeedback(true));
+            denyButton.setOnClickListener(v -> sendFeedback(false));
+
+
+        }
+        else if (activity.getStatus() == BlockPartStatus.DONE){
+            taskClientInput.setText(activity.getContent());
+            taskClientInput.setVisibility(View.VISIBLE);
+            taskClientInputHeader.setVisibility(View.VISIBLE);
+
+            feedbackPart.setVisibility(View.INVISIBLE);
+        }
+        else{
+            taskClientInput.setVisibility(View.INVISIBLE);
+            taskClientInputHeader.setVisibility(View.INVISIBLE);
+            feedbackPart.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -105,5 +172,16 @@ public class CaregiverFeedbackActivity extends AppCompatActivity {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(FeedbackViewEvent event) {
 
+    }
+
+    @Override
+    public void onResponse(Call<Void> call, Response<Void> response) {
+        Toast.makeText(this, "Hey, er is iets terug!", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+    }
+
+    @Override
+    public void onFailure(Call<Void> call, Throwable t) {
+        Toast.makeText(this, "Hey, er is iets terug! En dat is een error...", Toast.LENGTH_SHORT).show();
     }
 }

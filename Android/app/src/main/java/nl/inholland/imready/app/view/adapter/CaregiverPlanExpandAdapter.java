@@ -102,7 +102,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
         FillableViewHolder<PersonalComponent> viewHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.list_item_caregiver_block_header, viewGroup, false);
-            viewHolder = new CaregiverPlanHeaderViewHolder(view);
+            viewHolder = new CaregiverPlanHeaderViewHolder(view, isExpanded);
             view.setTag(viewHolder);
         } else {
             viewHolder = (FillableViewHolder<PersonalComponent>) view.getTag();
@@ -116,15 +116,8 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
     @Override
     public View getChildView(int blockPosition, int componentPosition, boolean b, View view, ViewGroup viewGroup) {
         PersonalActivity component = (PersonalActivity) getChild(blockPosition, componentPosition);
-        FillableViewHolder<PersonalActivity> viewHolder;
-        if (view == null) {
-            view = inflater.inflate(R.layout.list_item_component_notification, viewGroup, false);
-
-            viewHolder = new CaregiverPlanComponentViewHolder(view);
-            view.setTag(viewHolder);
-        } else {
-            viewHolder = (FillableViewHolder<PersonalActivity>) view.getTag();
-        }
+        view = inflater.inflate(R.layout.list_item_component_notification, viewGroup, false);
+        FillableViewHolder<PersonalActivity> viewHolder = new CaregiverPlanComponentViewHolder(view);
 
         viewHolder.fill(context, component);
 
@@ -138,8 +131,9 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
 
     @Override
     public void onResponse(Call<FutureplanResponse> call, Response<FutureplanResponse> response) {
-        List<PersonalBlock> blocks = response.body().getBlocks();
-        if (response.isSuccessful() && blocks != null) {
+        FutureplanResponse blockresponse = response.body();
+        if (response.isSuccessful() && blockresponse != null) {
+            List<PersonalBlock> blocks = blockresponse.getBlocks();
             this.components = stream(blocks).selectMany(PersonalBlock::getComponents).toList();
             notifyDataSetChanged();
         }

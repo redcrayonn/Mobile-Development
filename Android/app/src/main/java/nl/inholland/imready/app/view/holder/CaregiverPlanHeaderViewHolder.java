@@ -21,16 +21,19 @@ public class CaregiverPlanHeaderViewHolder implements FillableViewHolder<Persona
     private final TextView componentText;
     private final TextView notificationCountText;
     private final ImageView blockIcon;
+    private Boolean isExpanded;
 
-    public CaregiverPlanHeaderViewHolder(View view){
+    public CaregiverPlanHeaderViewHolder(View view, Boolean isExpanded){
         this.componentText = view.findViewById(R.id.block_name);
         this.notificationCountText = view.findViewById(R.id.notificationCount);
         this.blockIcon = view.findViewById(R.id.block_icon);
+        this.isExpanded = isExpanded;
     }
 
     @Override
     public void fill(@NonNull Context context, @NonNull PersonalComponent data) {
         componentText.setText(data.getName());
+        blockIcon.setVisibility(View.INVISIBLE);
 
         if (data.getActivities() != null && data.getActivities().size() != 0) {
             List<PersonalActivity> activities = data.getActivities();
@@ -54,6 +57,7 @@ public class CaregiverPlanHeaderViewHolder implements FillableViewHolder<Persona
         else {
             notificationCountText.setVisibility(View.INVISIBLE);
         }
+
         //blockIcon.setImageDrawable(BlockUtil.getDrawableIcon(context, data.getComponent().getBlock().getType()));
     }
 }

@@ -75,9 +75,16 @@ public class CaregiverFutureplanOverviewActivity extends AppCompatActivity imple
 
     private void gotoFeedbackActivity(PersonalActivity activity) {
         Intent intent = new Intent(this, CaregiverFeedbackActivity.class);
-        EventBus.getDefault().postSticky(new FeedbackViewEvent(activity, clientName));
-        startActivity(intent);
+        EventBus.getDefault().postSticky(new FeedbackViewEvent(activity, clientName, clientId));
+        startActivityForResult(intent, 0);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                loadMoreListener.loadMore();
+            }
+        }
+    }
 }
