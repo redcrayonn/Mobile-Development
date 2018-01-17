@@ -103,7 +103,7 @@
     <Compile Include="Controls\MyItem.xaml.cs">
       <DependentUpon>MyItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToggleButtons\ExpanderToggleButton.cs" />
+    <Compile Include="Controls\ControlTemplates\ExpanderToggleButton.cs" />
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\Converters\ObjectToBooleanConverter.cs" />
@@ -293,7 +293,9 @@
       <Version>2.4.17005.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\ToggleButtons\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

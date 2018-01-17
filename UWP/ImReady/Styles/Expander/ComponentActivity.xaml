@@ -4,8 +4,8 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:togglebuttons="using:ImReady.Controls.ToggleButtons"
-    xmlns:local2 ="using:ImReady.Controls.ToggleButtons">
+    xmlns:togglebuttons="using:ImReady.Controls.ControlTemplates"
+    xmlns:local2 ="using:ImReady.Controls.ControlTemplates">
 
     <Style x:Key="HeaderToggleButtonStyle" TargetType="local2:ExpanderToggleButton">
         <Setter Property="Background" Value="#F16122" />

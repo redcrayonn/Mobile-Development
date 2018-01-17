@@ -10,6 +10,7 @@ namespace ImReady.Models
     public class Component
     {
         //Custom props
+        public string DeadlineInDays => $"Over {(Deadline - DateTime.Now).TotalDays} dagen";
 
         //Json props
         public string Name { get; set; }
@@ -22,5 +23,8 @@ namespace ImReady.Models
         public Component SubComponent { get; set; }
         public string Id { get; set; }
         public UsefulLink[] UsefulLinks { get; set; }
+
+
+
     }
 }
