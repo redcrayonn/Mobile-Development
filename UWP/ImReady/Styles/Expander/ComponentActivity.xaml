@@ -252,7 +252,7 @@
                                           />
                             <StackPanel 
                                 Orientation="Horizontal"
-                                Padding="18 0 0 0 ">
+                                Padding="55 0 0 0 ">
                                 <Image Source="ms-appx:///Assets/Material/ic_query_builder_white_18dp.png" Height="20" Width="20" Margin="10 0"></Image>
                                 <TextBlock 
                                         Text="{Binding Mode=OneWay, Path=(local2:ExpanderToggleButton.Deadline)}" 
@@ -531,7 +531,7 @@
                                     <local2:ExpanderToggleButton x:Name="PART_ExpanderToggleButton" 
                                               Height="80"
                                               TabIndex="0"
-                                              Padding="15 7"
+                                              Padding="65 7"
                                               VerticalContentAlignment="Top"
                                               AutomationProperties.Name="Expand"
                                               Style="{StaticResource HeaderToggleButtonStyle}" 
@@ -543,9 +543,9 @@
                                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                               Deadline="{Binding Tag, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   >
-                                        <ToggleButton.Resources>
+                                        <!--<ToggleButton.Resources>
                                             <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
-                                        </ToggleButton.Resources>
+                                        </ToggleButton.Resources>-->
                                     </local2:ExpanderToggleButton>
                                 </controls:DropShadowPanel>
 

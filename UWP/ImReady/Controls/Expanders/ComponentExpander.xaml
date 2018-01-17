@@ -53,7 +53,8 @@
                             x:DataType="models:Activity">
                             <!-- Buitenste grid -->
                             <Grid 
-                                Margin="0 0 0 20">
+                                Margin="0 0 0 20"
+                                MaxWidth="800">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30" />
                                     <ColumnDefinition Width="*" />
@@ -122,18 +123,20 @@
                                     Text="{x:Bind LatestFeedback.Content}" 
                                     Margin="20 0 0 0"
                                     ></TextBlock>
-                                    <TextBox          
-                                    Grid.Column="1" Margin="20 0 0 0"
-                                    Grid.Row="3"
-                                    x:Name="TextContent"
-                                    MinHeight="150" 
-                                    AcceptsReturn="True" 
-                                    Text="{x:Bind Content}"
-                                    ScrollViewer.HorizontalScrollMode="Disabled"
-                                    IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"
-                                    BorderBrush="Transparent"
-                                         ></TextBox>
-                                    <Button 
+                                <TextBox          
+                                        Grid.Column="1" 
+                                        Margin="20 0 0 0"
+                                        Grid.Row="3"
+                                        x:Name="TextContent"
+                                        MinHeight="150" 
+                                        AcceptsReturn="True" 
+                                        Text="{x:Bind Content}"
+                                        ScrollViewer.HorizontalScrollMode="Disabled"
+                                        IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"
+                                        BorderBrush="Gray"
+                                         >
+                                </TextBox>
+                                <Button 
                                     Grid.Column="1" 
                                     Grid.Row="4" 
                                     x:Name="SubmitTask" 

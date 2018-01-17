@@ -25,7 +25,7 @@
                     <TextBlock  Text="{x:Bind ViewModel.BuildingBlock.Name}"
                                 Foreground="White"  
                                 FontSize="25" 
-                                Padding="60 0 0 0 "
+                                Padding="65 0 0 0 "
                                 FontWeight="Normal"
                                    />
                 </CommandBar.Content>
