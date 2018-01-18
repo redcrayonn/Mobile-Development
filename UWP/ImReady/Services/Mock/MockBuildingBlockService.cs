@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImReady.Models;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace ImReady.Services.Mock
 {
@@ -18,9 +19,9 @@ namespace ImReady.Services.Mock
             {
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Financien,
                     Name = "Geld",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                         new BuildingBlockComponentService().GetComponent(-1),
@@ -30,9 +31,9 @@ namespace ImReady.Services.Mock
                 },
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Wonen,
                     Name = "Huis",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
@@ -41,25 +42,25 @@ namespace ImReady.Services.Mock
                 {
                     Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Financien,
                     Name = "Geld",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Wonen,
                     Name = "Huis",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
@@ -68,25 +69,25 @@ namespace ImReady.Services.Mock
                 {
                     Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Geld,
+                    Type = (int)BuildingBlockType.Financien,
                     Name = "Geld",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
                 },
                 new BuildingBlock()
                 {
-                    Type = (int)BuildingBlockType.Huis,
+                    Type = (int)BuildingBlockType.Wonen,
                     Name = "Huis",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
@@ -95,7 +96,7 @@ namespace ImReady.Services.Mock
                 {
                     Type = (int)BuildingBlockType.Werk,
                     Name = "Werk",
-                    Image = "ms-appx:///Assets/Material/ic_home_white_48dp.png",
+                    Image =  new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_home_white_48dp.png") },
                     Components = new List<Component>(){
                         new BuildingBlockComponentService().GetComponent(-1),
                     },
