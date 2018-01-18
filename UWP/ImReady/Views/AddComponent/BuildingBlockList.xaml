@@ -9,7 +9,11 @@
     xmlns:viewmodels="using:ImReady.ViewModels"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:converters="using:ImReady.Helpers.Converters"
     mc:Ignorable="d">
+    <Page.Resources>
+        <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
+    </Page.Resources>
     <Page.DataContext>
         <viewmodels:BuildingBlockListViewModel/>
     </Page.DataContext>
@@ -96,6 +100,18 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
+            <ProgressRing 
+                x:Name="progress1" 
+                RelativePanel.Below="LoginSubmit"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" 
+                Margin="0 0 0 120" 
+                Foreground="White" 
+                Height="50"
+                Width="50"
+                Visibility="Visible"
+                IsActive="{x:Bind ViewModel.Blocks, Mode=OneWay, Converter={StaticResource ObjectToBooleanConverter}, ConverterParameter=Invert}"
+                />
         </Grid>
     </ScrollViewer>
 </Page>

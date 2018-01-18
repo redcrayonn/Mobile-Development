@@ -32,7 +32,7 @@
                 </CommandBar.Content>
             </CommandBar>
             <ScrollViewer Name="scrollviewer" RelativePanel.Below="commandbar" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
-                <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}" Width="450">
+                <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="local1:Component">
                             <StackPanel>
