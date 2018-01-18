@@ -17,16 +17,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Expander/ComponentActivity.xaml"/>
-                <ResourceDictionary Source="/Styles/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter"/>
             <converters:StatusToCheckboxBooleanConverter x:Key="StatusToCheckboxBooleanConverter"/>
-            <Style x:Key="ControlTextblockWrapping" TargetType="TextBlock">
-                <Setter Property="TextWrapping" Value="WrapWholeWords"></Setter>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="TextWrapping" Value="WrapWholeWords"></Setter>
-            </Style>
+            <converters:ActivityStatusToImageConverter x:Key="ActivityStatusToImageConverter"/>
         </ResourceDictionary>        
     </UserControl.Resources>
     <controls:Expander 
@@ -112,7 +106,10 @@
                                             TextWrapping="WrapWholeWords"></TextBlock>
                                     </Grid>
                                     <StackPanel Grid.Column="1">
-                                        <SymbolIcon ></SymbolIcon>
+                                        <Image 
+                                            Source="{x:Bind Status, Converter={StaticResource ActivityStatusToImageConverter}}"
+                                            Height="20"
+                                            Width="20"></Image>
                                         <TextBlock 
                                             Text="{x:Bind DeadlineInDays}" 
                                             TextWrapping="WrapWholeWords" 
