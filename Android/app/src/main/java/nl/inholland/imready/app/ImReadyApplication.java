@@ -17,10 +17,12 @@ import java.util.List;
 import nl.inholland.imready.app.persistence.BlockStore;
 import nl.inholland.imready.app.persistence.CaregiverCache;
 import nl.inholland.imready.app.persistence.ClientCache;
+import nl.inholland.imready.app.persistence.ClientsStore;
 import nl.inholland.imready.app.persistence.FutureplanStore;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.enums.UserRole;
+import nl.inholland.imready.service.model.ClientsResponse;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import okio.BufferedSource;
 
@@ -33,6 +35,7 @@ public class ImReadyApplication extends Application {
     private Persister<BufferedSource, BarCode> persister;
     private Store<FutureplanResponse, BarCode> futureplanStore;
     private Store<List<Block>, BarCode> blocksStore;
+    private Store<List<ClientsResponse>, BarCode> clientsStore;
     private UserRole currentUserRole;
 
     @Override
@@ -48,6 +51,7 @@ public class ImReadyApplication extends Application {
         initPersister();
         this.futureplanStore = FutureplanStore.create();
         this.blocksStore = BlockStore.create();
+        this.clientsStore = ClientsStore.create();
     }
 
     @Override
@@ -90,6 +94,9 @@ public class ImReadyApplication extends Application {
         return blocksStore;
     }
 
+    public Store<List<ClientsResponse>, BarCode> getClientsStore() {
+        return clientsStore;
+    }
 
     public UserRole getCurrentUserRole() {
         if (currentUserRole == null) {

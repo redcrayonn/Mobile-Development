@@ -107,4 +107,8 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
         intent.putExtra("clientName", clientName);
         startActivity(intent);
     }
+
+    private void gotoNotes(){
+        
+    }
 }

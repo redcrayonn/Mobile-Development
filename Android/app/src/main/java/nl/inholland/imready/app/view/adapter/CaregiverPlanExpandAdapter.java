@@ -1,10 +1,12 @@
 package nl.inholland.imready.app.view.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,14 +36,16 @@ import static br.com.zbra.androidlinq.Linq.stream;
 public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implements LoadMoreListener, Callback<FutureplanResponse> {
     private final Context context;
     private final LayoutInflater inflater;
+    private SwipeRefreshLayout refreshLayout;
     private final CaregiverService caregiverService;
     private List<PersonalComponent> components;
     private final String clientId;
 
 
-    public CaregiverPlanExpandAdapter(Context context, String clientId){
+    public CaregiverPlanExpandAdapter(Context context, String clientId, SwipeRefreshLayout refreshLayout){
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.refreshLayout = refreshLayout;
 
         ApiClient client = ApiManager.getClient();
         caregiverService = client.getCaregiverService();
@@ -100,12 +104,17 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
         PersonalComponent component = (PersonalComponent) getGroup(componentPosition);
 
         FillableViewHolder<PersonalComponent> viewHolder;
-        if (view == null) {
-            view = inflater.inflate(R.layout.list_item_caregiver_block_header, viewGroup, false);
-            viewHolder = new CaregiverPlanHeaderViewHolder(view, isExpanded);
-            view.setTag(viewHolder);
-        } else {
-            viewHolder = (FillableViewHolder<PersonalComponent>) view.getTag();
+        view = inflater.inflate(R.layout.list_item_caregiver_block_header, viewGroup, false);
+        viewHolder = new CaregiverPlanHeaderViewHolder(view, isExpanded);
+        view.setTag(viewHolder);
+
+        //Sets group indicating icon
+        ImageView groupIndicator = view.findViewById(R.id.group_indicator);
+        if(getChildrenCount(componentPosition) > 0){
+            groupIndicator.setSelected(isExpanded);
+        }
+        else{
+            groupIndicator.setVisibility(View.INVISIBLE);
         }
 
         viewHolder.fill(context, component);
@@ -136,6 +145,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
             List<PersonalBlock> blocks = blockresponse.getBlocks();
             this.components = stream(blocks).selectMany(PersonalBlock::getComponents).toList();
             notifyDataSetChanged();
+            refreshLayout.setRefreshing(false);
         }
     }
 
@@ -146,6 +156,7 @@ public class CaregiverPlanExpandAdapter extends BaseExpandableListAdapter implem
 
     @Override
     public void loadMore() {
+        refreshLayout.setRefreshing(true);
         caregiverService.getClientPlan(clientId).enqueue(this);
     }
 }

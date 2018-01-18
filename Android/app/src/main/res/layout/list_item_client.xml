@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_toStartOf="@id/clientName"
         android:layout_centerVertical="true"
-        android:drawableStart="@drawable/ic_people"
+        android:drawableStart="@drawable/ic_person"
         android:drawablePadding="@dimen/xl"
         android:gravity="center"
         tools:text="Peter"
