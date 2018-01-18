@@ -13,6 +13,8 @@ public class ClientService : Service{
     func getFutureplan(ofClient id: String,
                        onSuccess: @escaping (_ : FutureplanResult) -> (),
                        onFailure: @escaping () -> ()) {
+        
+        
         apiClient.send(toRelativePath: "client/\(id)/futureplan",
             withHttpMethod: .get,
             onSuccessParser: { (_ data) in

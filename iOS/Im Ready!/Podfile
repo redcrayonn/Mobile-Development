@@ -50,6 +50,9 @@ target 'Im Ready!' do
     # Date handling
     pod 'Timepiece'
     
+    # Empty tableview/collectionview pod
+    pod 'DZNEmptyDataSet'
+    
     target 'Im Ready!Tests' do
         inherit! :search_paths
         # Pods for testing

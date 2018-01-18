@@ -84,7 +84,7 @@ class ClientActivityStackViewCell: UITableViewCell {
             
             let parameters: [String: Any] = ["Status": 1,
                                              "Content": self.answerTextView.text]
-            
+
             clientService.sendAnswer(clientId: CurrentUser.instance.id!,
                                      activityId: (self.activity?.id)!,
                                      parameters: parameters,

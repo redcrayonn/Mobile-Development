@@ -159,6 +159,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="TDA-hh-1nI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="B3z-ib-TfB"/>
                     <constraint firstItem="TDA-hh-1nI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="M20-Si-3Tu"/>
@@ -166,6 +167,7 @@
                     <constraint firstItem="TDA-hh-1nI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UrD-ch-a4t"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="activityDescriptionLbl" destination="fMk-n3-bBq" id="efT-Yd-7fK"/>

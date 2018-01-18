@@ -8,8 +8,9 @@
 
 import UIKit
 import Timepiece
+import DZNEmptyDataSet
 
-class ClientActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClientActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var tableView: UITableView!
     
@@ -37,8 +38,33 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        self.tableView.emptyDataSetSource = self;
+        self.tableView.emptyDataSetDelegate = self;
+        
         view.addSubview(tableView)
     }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let string = "Geen activiteiten"
+        let attribute = [ NSAttributedStringKey.foregroundColor: self.view.tintColor ]
+        let attributedString = NSAttributedString(string: string, attributes: attribute)
+
+        return attributedString
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let string = "Er zijn geen activiteiten om te maken!"
+        let attribute = [ NSAttributedStringKey.foregroundColor: self.view.tintColor ]
+        let attributedString = NSAttributedString(string: string, attributes: attribute)
+        
+        return attributedString
+
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.clear
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == button_tag {
@@ -117,8 +143,6 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         cell.remarksLbl.frame.height +
         cell.answerTextView.frame.height +
         cell.statusLbl.frame.height + 450
-        
-        print(height)
         
         return height
     }

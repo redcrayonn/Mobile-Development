@@ -58,16 +58,7 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
                                         
-                                        self.createFutureplan(forResults: results)
-                                        
-//                                        self.clientBuildingblocks = results.buildingblocks!
-//
-//                                        // Add the last buildingblock where client can add new future goals
-//                                        self.clientBuildingblocks.append(ClientBuildingblock(
-//                                            type: BlockType.ADD,
-//                                            name: self.addBuildingblockBlockName))
-//                                        self.collectionView.reloadData()
-//                                        stopActivityIndicator(withIndicatorBGView: nil)
+                                        self.createFutureplan(forResults: results)                                        
         }) {
             print("failed to retrieve futureplan")
             simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon bouwblokken niet ophalen.")

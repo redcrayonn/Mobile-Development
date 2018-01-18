@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+import ChameleonFramework
 
-class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ComponentDelegate {
+class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ComponentDelegate,  DZNEmptyDataSetDelegate, DZNEmptyDataSetSource{
     
     @IBOutlet weak var collectionView: UICollectionView!
 //    weak var delegate: ComponentDelegate?
@@ -24,14 +26,35 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
         self.title = buildingblockTitle
         collectionView.frame.origin.y += 200
 
+        self.collectionView.emptyDataSetSource = self
+        self.collectionView.emptyDataSetDelegate = self
+        
         // We need to manually count the items
         // When deleting an item from the collectionview, numberOfItemsInSection is called again and expects a new number
         itemCount = components.count
     }
     
-    func collectionViewAllowsEditing(collectionView: UICollectionView) -> Bool {
-        return true
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let string = "Geen componenten"
+        let attribute = [ NSAttributedStringKey.foregroundColor:  UIColor.white]
+        let attributedString = NSAttributedString(string: string, attributes: attribute)
+        
+        return attributedString
     }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let string = "Je hebt alle componenten van dit bouwblok al toegevoegd!"
+        let attribute = [ NSAttributedStringKey.foregroundColor: UIColor.white ]
+        let attributedString = NSAttributedString(string: string, attributes: attribute)
+        
+        return attributedString        
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.clear
+    }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemCount
