@@ -64,7 +64,7 @@ namespace ImReady.ViewModels
 
         public static void NavigateToAddComponents(object obj)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(AddBuildingBlockComponents));
+            ((Frame)Window.Current.Content).Navigate(typeof(BuildingBlockList));
         }
 
         public async void LoadFuturePlan()

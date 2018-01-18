@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImReady.ViewModels
 {
-    public class AddLowerComponentViewModel
+    public class AddableComponentsListViewModel
     {
-        public static AddLowerComponentViewModel SingleInstance => new AddLowerComponentViewModel();
+        public static AddableComponentsListViewModel SingleInstance => new AddableComponentsListViewModel();
 
         public List<Component> Components { get; set; }
 

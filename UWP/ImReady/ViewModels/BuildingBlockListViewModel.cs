@@ -14,18 +14,18 @@ using Windows.UI.Xaml.Documents;
 
 namespace ImReady.ViewModels
 {
-    public class AddComponentViewModel : INotifyPropertyChanged
+    public class BuildingBlockListViewModel : INotifyPropertyChanged
     {
-        public static AddComponentViewModel SingleInstance => new AddComponentViewModel();
+        public static BuildingBlockListViewModel SingleInstance => new BuildingBlockListViewModel();
 
         public RelayCommand NavigateToAddComponent => new RelayCommand(NavToAddComponent);
 
         public static void NavToAddComponent(object obj)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(AddBuildingBlockComponents));
+            ((Frame)Window.Current.Content).Navigate(typeof(BuildingBlockList));
         }
 
-        public AddComponentViewModel()
+        public BuildingBlockListViewModel()
         {
             this.LoadBlocks();
             //this.Blocks = new List<BuildingBlock>()

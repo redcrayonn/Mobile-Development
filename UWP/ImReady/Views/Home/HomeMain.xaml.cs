@@ -57,7 +57,7 @@ namespace ImReady.Views.Home
         private void RelativePanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
             //ViewModel.NavigateToAddComponent.Execute((e.OriginalSource));
-            Frame.Navigate(typeof(AddBuildingBlockComponents));
+            Frame.Navigate(typeof(BuildingBlockList));
         }
     }
 }
