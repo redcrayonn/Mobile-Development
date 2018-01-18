@@ -9,23 +9,42 @@
     Background="White"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     >
-    <ScrollViewer>
-        <StackPanel>
-        <Grid Background="White" MaxWidth="700" Padding="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Image 
+    <RelativePanel HorizontalAlignment="Stretch">
+        <CommandBar
+                    Background="#303030"
+                    Foreground="White"
+                    x:Name="commandbar"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalContentAlignment="Center"
+                    >
+            <CommandBar.Content>
+                <TextBlock  Text="Bouwstenen"
+                                Foreground="White"  
+                                FontSize="25" 
+                                Padding="65 0 0 0 "
+                                FontWeight="Normal"
+                                   />
+            </CommandBar.Content>
+        </CommandBar>
+        <ScrollViewer RelativePanel.Below="commandbar" HorizontalAlignment="Center" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+            
+                <Grid Background="White" MaxWidth="700" Padding="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                        <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image 
                 Source="ms-appx:///Assets/Material/ic_info_outline_deep_orange_400_48dp.png" 
                 Width="30" 
                 Height="30"
@@ -33,21 +52,21 @@
                 Grid.Row="0"
                 VerticalAlignment="Top"
                 ></Image>
-            <TextBlock 
+                    <TextBlock 
                     Name="ComponentGoal"
                     Text="Doel/resultaat"
                     Grid.Column="1"
                     Grid.Row="0"
                     FontWeight="SemiBold"
                     ></TextBlock>
-            <TextBlock
+                    <TextBlock
                     Name="ComponentDescription"
                     Text="{x:Bind ViewModel.Component.Description}"
                     Grid.Column="1"
                     Grid.Row="1"
                     TextWrapping="Wrap"
                     ></TextBlock>
-            <Image 
+                    <Image 
                 Source="ms-appx:///Assets/Material/readyIcon_Orange.png" 
                 Width="30" 
                 Height="30"
@@ -55,7 +74,7 @@
                 Grid.Row="2"
                 VerticalAlignment="Top"
                 ></Image>
-            <TextBlock 
+                    <TextBlock 
                     Name="ComponentCoinsTitle"
                     Text="READY-coins"
                     Grid.Column="1"
@@ -63,14 +82,14 @@
                     TextWrapping="Wrap"
                     FontWeight="SemiBold"
                     ></TextBlock>
-            <TextBlock
+                    <TextBlock
                     Name="ComponentCoins"
                     Text="{x:Bind ViewModel.Component.TotalPointsAvailable}"
                     Grid.Column="1"
                     Grid.Row="3"
                     TextWrapping="Wrap"
                     ></TextBlock>
-            <Image 
+                    <Image 
                 Source="ms-appx:///Assets/Material/ic_assignment_deep_orange_400_48dp.png" 
                 Width="30" 
                 Height="30"
@@ -78,21 +97,21 @@
                 Grid.Row="4"
                 VerticalAlignment="Top"
                 ></Image>
-            <TextBlock 
+                    <TextBlock 
                 Name="ComponentActivitiesTitle"
                 Text="Opdrachten"
                 Grid.Column="1"
                 Grid.Row="4"
                 FontWeight="SemiBold"
                 ></TextBlock>
-            <TextBlock
+                    <TextBlock
                 Name="ComponentActivities"
                 Text="{x:Bind ViewModel.Component.ActivitiesInText}"
                 Grid.Column="1"
                 Grid.Row="5"
                 TextWrapping="Wrap"
                 ></TextBlock>
-            <Button 
+                    <Button 
                 Name="ComponentAdd"
                 Grid.Column="1" 
                 Grid.Row="6" 
@@ -103,7 +122,8 @@
                 Height="36"
                 extensions:Mouse.Cursor="Hand"
                 ></Button>
-        </Grid>
-        </StackPanel>
-    </ScrollViewer>
+                </Grid>
+            
+        </ScrollViewer>
+    </RelativePanel>
 </Page>

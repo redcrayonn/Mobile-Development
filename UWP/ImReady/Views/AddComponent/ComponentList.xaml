@@ -18,21 +18,40 @@
     </Page.Background>
     <ScrollViewer>
         <Grid>
-            <ListView ItemsSource="{x:Bind ViewModel.FilteredComponents, Mode=OneWay}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:Component">
-                        <Grid 
+            <CommandBar
+                    Background="#303030"
+                    Foreground="White"
+                    x:Name="commandbar"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalContentAlignment="Center"
+                    >
+                <CommandBar.Content>
+                    <TextBlock  Text="Bouwstenen"
+                                Foreground="White"  
+                                FontSize="25" 
+                                Padding="65 0 0 0 "
+                                FontWeight="Normal"
+                                   />
+                </CommandBar.Content>
+            </CommandBar>
+            <Grid Margin="0 80 0 0">
+                <ListView ItemsSource="{x:Bind ViewModel.FilteredComponents, Mode=OneWay}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:Component">
+                            <Grid 
                             Width="450" 
                             Margin="0 30" 
                             CornerRadius="5" 
                             Tapped="Grid_Tapped" 
                             extensions:Mouse.Cursor="Hand"
                               >
-                            <Grid.Background>
-                                <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
-                            </Grid.Background>
-                            <RelativePanel>
-                                <TextBlock
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                </Grid.Background>
+                                <RelativePanel>
+                                    <TextBlock
                                     Name="BlockName"
                                     Text="{x:Bind Name}"
                                     VerticalAlignment="Center"
@@ -40,8 +59,8 @@
                                     Margin="30 25"
                                     FontSize="20"
                                     >
-                                </TextBlock>
-                                <TextBlock
+                                    </TextBlock>
+                                    <TextBlock
                                     Name="BlockComponentsCount"
                                     RelativePanel.LeftOf="BlockChevron"
                                     Text="{x:Bind ActivityCount}"
@@ -49,7 +68,7 @@
                                     Margin="0 25"
                                     FontSize="20"
                                     ></TextBlock>
-                                <Image
+                                    <Image
                                         RelativePanel.AlignRightWithPanel="True"
                                         Margin="0 8 40 0"
                                         Name="BlockChevron"
@@ -58,11 +77,12 @@
                                         VerticalAlignment="Center"
                                         Source="ms-appx:///Assets/Material/ic_chevron_right_white_48dp.png"
                                         ></Image>
-                            </RelativePanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                </RelativePanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Page>

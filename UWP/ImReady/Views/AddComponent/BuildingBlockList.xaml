@@ -22,21 +22,40 @@
     </Page.Background>
     <ScrollViewer>
         <Grid>
-            <ListView ItemsSource="{x:Bind ViewModel.Blocks, Mode=OneWay}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:BuildingBlock">
-                        <Grid 
+            <CommandBar
+                    Background="#303030"
+                    Foreground="White"
+                    x:Name="commandbar"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalContentAlignment="Center"
+                    >
+                <CommandBar.Content>
+                    <TextBlock  Text="Bouwstenen"
+                                Foreground="White"  
+                                FontSize="25" 
+                                Padding="65 0 0 0 "
+                                FontWeight="Normal"
+                                   />
+                </CommandBar.Content>
+            </CommandBar>
+            <Grid Margin="0 80 0 0">
+                <ListView ItemsSource="{x:Bind ViewModel.Blocks, Mode=OneWay}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:BuildingBlock">
+                            <Grid 
                             Width="450" 
                             Margin="0 20" 
                             CornerRadius="5" 
                             Tapped="Grid_Tapped" 
                             extensions:Mouse.Cursor="Hand"
                               >
-                            <Grid.Background>
-                                <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
-                            </Grid.Background>
-                            <RelativePanel>
-                                <Image 
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                </Grid.Background>
+                                <RelativePanel>
+                                    <Image 
                                         Name="BlockIcon"
                                         Margin="10 8 0 0"
                                         Source="{x:Bind Image}" 
@@ -44,7 +63,7 @@
                                         Height="60"
                                         VerticalAlignment="Center"
                                         ></Image>
-                                <TextBlock
+                                    <TextBlock
                                     Name="BlockName"
                                     Text="{x:Bind Name}"
                                     RelativePanel.RightOf="BlockIcon"
@@ -53,8 +72,8 @@
                                     Margin="30 25"
                                     FontSize="20"
                                     >
-                                </TextBlock>
-                                <TextBlock
+                                    </TextBlock>
+                                    <TextBlock
                                     Name="BlockComponentCount"
                                     Text="{x:Bind ComponentCount}"
                                     RelativePanel.LeftOf="BlockChevron"
@@ -62,7 +81,7 @@
                                     Margin="0 25"
                                     FontSize="20"
                                     ></TextBlock>
-                                <Image
+                                    <Image
                                         RelativePanel.AlignRightWithPanel="True"
                                         Margin="0 8 40 0"
                                         Name="BlockChevron"
@@ -71,11 +90,12 @@
                                         VerticalAlignment="Center"
                                         Source="ms-appx:///Assets/Material/ic_chevron_right_white_48dp.png"
                                         ></Image>
-                            </RelativePanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                </RelativePanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Page>
