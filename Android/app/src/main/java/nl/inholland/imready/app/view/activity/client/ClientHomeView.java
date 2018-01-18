@@ -5,6 +5,7 @@ import java.util.List;
 
 import nl.inholland.imready.app.view.View;
 import nl.inholland.imready.model.blocks.PersonalBlock;
+import nl.inholland.imready.model.user.User;
 
 public interface ClientHomeView extends View {
     void setViewData(List<PersonalBlock> data);
@@ -15,4 +16,9 @@ public interface ClientHomeView extends View {
     void goToInfo();
     void goToBlockInfo(PersonalBlock block);
     void goToEditFutureplan();
+
+    void updateUserInfo(User user);
+
+    void showRefreshing();
+    void stopRefreshing();
 }

@@ -11,6 +11,7 @@ public interface ClientHomePresenter {
     void refresh();
     String getUsername();
     void logout();
+    void getUserInformation();
 
     List<PersonalActivity> getTodoActivities(List<PersonalBlock> data);
 }

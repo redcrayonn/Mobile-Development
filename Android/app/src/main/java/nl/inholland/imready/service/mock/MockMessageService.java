@@ -1,21 +1,27 @@
 package nl.inholland.imready.service.mock;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.Single;
+import nl.inholland.imready.app.logic.ApiManager;
+import nl.inholland.imready.model.user.Chat;
 import nl.inholland.imready.model.user.Message;
 import nl.inholland.imready.service.model.EmptyResponse;
 import nl.inholland.imready.service.rest.MessageBaseService;
+import okhttp3.MediaType;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
 public class MockMessageService extends MockMessageBaseService implements MessageBaseService {
 
     private static final String ClientId = "222c352b-fafa-46c5-b375-39dcdc99dec8";
-    private static final String CaregiverId = "z9y8x7w6";
+    private static final String CaregiverId = "f8b1282e-ee65-45d2-ac13-676a8cbca8d3";
 
     private static final List<Message> MOCK_MESSAGES = new ArrayList<Message>() {{
         Random rng = new Random();
@@ -24,13 +30,11 @@ public class MockMessageService extends MockMessageBaseService implements Messag
             String messageId = String.valueOf(rng.nextInt());
             boolean sentByCaregiver = rng.nextBoolean();
             String senderId = sentByCaregiver ? CaregiverId : ClientId;
-            String receiverId = sentByCaregiver ? ClientId : CaregiverId;
 
             Date timeSent = new Date();
 
             Message message = new Message(messageId,
                     senderId,
-                    receiverId,
                     "this is message #" + i,
                     timeSent,
                     false);
@@ -43,36 +47,22 @@ public class MockMessageService extends MockMessageBaseService implements Messag
     }
 
     @Override
-    public Call<List<Message>> getMessages(String id, Integer count) {
-        try {
-            requireResult(id, "id can not be null");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Single<ResponseBody> getChat(String userId, String receiverId) {
+        Chat chat = new Chat();
+        chat.setId(userId);
+        chat.setMessages(MOCK_MESSAGES);
 
-        List<Message> response = (count != null && count != 0)
-                ? MOCK_MESSAGES.subList(0, count)
-                : MOCK_MESSAGES;
-        Collections.reverse(response);
-        return delegate.returningResponse(response).getMessages(id, count);
+        Gson gson = ApiManager.provideGson();
+        String json = gson.toJson(chat);
+        ResponseBody responseBody = ResponseBody.create(MediaType.parse("json"), json);
+
+        return delegate.returningResponse(responseBody).getChat(userId, receiverId);
     }
 
     @Override
-    public Call<Message> getMessage(String id, String messageId) {
+    public Call<EmptyResponse> postMessage(String userId, String receiverId, Message body) {
         try {
-            requireResult(id, "id can not be null");
-            requireResult(messageId, "messageId can not be null");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    @Override
-    public Call<EmptyResponse> postMessage(String id, Message body) {
-        try {
-            requireResult(id, "id can not be null");
+            requireResult(userId, "id can not be null");
             requireResult(body, "body can not be null");
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,18 +70,6 @@ public class MockMessageService extends MockMessageBaseService implements Messag
 
         MOCK_MESSAGES.add(body);
 
-        return delegate.returningResponse(new EmptyResponse()).postMessage(id, body);
-    }
-
-    @Override
-    public Call<EmptyResponse> deleteMessage(String id, String messageId) {
-        try {
-            requireResult(id, "id can not be null");
-            requireResult(messageId, "messageId can not be null");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return delegate.returningResponse(new EmptyResponse()).deleteMessage(id, messageId);
+        return delegate.returningResponse(new EmptyResponse()).postMessage(userId, receiverId, body);
     }
 }

@@ -38,6 +38,8 @@ import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockType;
+import nl.inholland.imready.model.user.Client;
+import nl.inholland.imready.model.user.User;
 import nl.inholland.imready.util.ColorUtil;
 
 import static br.com.zbra.androidlinq.Linq.stream;
@@ -53,17 +55,21 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     private boolean popupShown;
     private SwipeRefreshLayout refreshLayout;
     private ClientHomePresenter presenter;
+    private TextView pointsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home);
 
+        pointsView = findViewById(R.id.points_text);
+
         initGridView();
         initRefresh();
         initToolbarAndDrawer();
 
-        presenter = new ClientHomePresenterImpl(this, ImReadyApplication.getInstance().getFutureplanStore());
+        ImReadyApplication instance = ImReadyApplication.getInstance();
+        presenter = new ClientHomePresenterImpl(this, instance.getFutureplanStore(), instance.getClientStore());
 
         if (savedInstanceState != null) {
             popupShown = savedInstanceState.getBoolean(STATE_POPUP);
@@ -74,6 +80,7 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     protected void onStart() {
         super.onStart();
         presenter.init();
+        presenter.getUserInformation();
     }
 
     @Override
@@ -147,7 +154,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void refreshData() {
         presenter.refresh();
-        refreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -251,6 +257,22 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void updateUserInfo(User user) {
+        Client client = (Client) user;
+        pointsView.setText(String.valueOf(client.getPoints()));
+    }
+
+    @Override
+    public void showRefreshing() {
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void stopRefreshing() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
     public void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
@@ -260,8 +282,6 @@ public class ClientHomeActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void setViewData(List<PersonalBlock> data) {
         gridAdapter.setData(data);
-
-        refreshLayout.setRefreshing(false);
 
         if (!popupShown) {
             List<PersonalActivity> todo = presenter.getTodoActivities(data);
