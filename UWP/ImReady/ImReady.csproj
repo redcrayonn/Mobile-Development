@@ -107,6 +107,7 @@
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Helpers\Commands\RelayCommand.cs" />
     <Compile Include="Helpers\Converters\ActivityStatusToImageConverter.cs" />
+    <Compile Include="Helpers\Converters\ActivityStatusToVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToCheckboxBooleanConverter.cs" />

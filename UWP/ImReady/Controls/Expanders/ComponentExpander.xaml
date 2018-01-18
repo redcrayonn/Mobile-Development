@@ -21,6 +21,7 @@
             <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter"/>
             <converters:StatusToCheckboxBooleanConverter x:Key="StatusToCheckboxBooleanConverter"/>
             <converters:ActivityStatusToImageConverter x:Key="ActivityStatusToImageConverter"/>
+            <converters:ActivityStatusDoneToVisibilityConverter x:Key="ActivityStatusDoneToVisibilityConverter"/>
         </ResourceDictionary>        
     </UserControl.Resources>
     <controls:Expander 
@@ -98,7 +99,8 @@
                                         <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="0" 
-                                            Text="{x:Bind Name}"></TextBlock>
+                                            Text="{x:Bind Name}"
+                                            FontWeight="SemiBold"></TextBlock>
                                         <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="1" 
@@ -109,16 +111,19 @@
                                         <Image 
                                             Source="{x:Bind Status, Converter={StaticResource ActivityStatusToImageConverter}}"
                                             Height="30"
-                                            Width="30"></Image>
+                                            Width="30"
+                                           ></Image>
                                         <TextBlock 
                                             Text="{x:Bind DeadlineInDays}" 
                                             TextWrapping="WrapWholeWords" 
-                                            TextAlignment="Center"></TextBlock>
-                                        <TextBlock 
+                                            TextAlignment="Center"
+                                            Visibility="{x:Bind Status, Converter={StaticResource ActivityStatusDoneToVisibilityConverter}}"></TextBlock>
+                                        <!--<TextBlock 
                                             Text="Is aangepast" 
                                             TextWrapping="WrapWholeWords" 
                                             TextAlignment="Center" 
-                                            FontSize="10"></TextBlock>
+                                            FontSize="10"
+                                            Visibility="{x:Bind}"></TextBlock>-->
                                     </StackPanel>
                                 </Grid>
                                 <!--Andere regels met informatie-->
