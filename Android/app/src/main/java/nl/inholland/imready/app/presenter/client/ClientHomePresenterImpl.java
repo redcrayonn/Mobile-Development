@@ -18,13 +18,11 @@ import io.reactivex.schedulers.Schedulers;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.ImReadyApplication;
 import nl.inholland.imready.app.logic.PreferenceConstants;
-import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.app.view.activity.client.ClientHomeView;
 import nl.inholland.imready.model.blocks.PersonalActivity;
 import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
-import nl.inholland.imready.model.enums.UserRole;
 import nl.inholland.imready.service.model.FutureplanResponse;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -53,10 +51,10 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
     }
 
     private void fetch(boolean fromNetwork) {
-        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        String currentUserId = ImReadyApplication.getInstance().getCurrentUserId();
 
         // cache request param, where type is the key for the cache and key the unique identifier
-        BarCode request = new BarCode("future_plan", cache.getUserId());
+        BarCode request = new BarCode("future_plan", currentUserId);
 
         // request data from the futureplan store
         Single<FutureplanResponse> dataRequest;

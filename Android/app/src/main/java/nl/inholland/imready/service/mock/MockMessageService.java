@@ -1,12 +1,9 @@
 package nl.inholland.imready.service.mock;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import nl.inholland.imready.model.user.Message;
@@ -29,13 +26,12 @@ public class MockMessageService extends MockMessageBaseService implements Messag
             String senderId = sentByCaregiver ? CaregiverId : ClientId;
             String receiverId = sentByCaregiver ? ClientId : CaregiverId;
 
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
             Date timeSent = new Date();
 
             Message message = new Message(messageId,
                     senderId,
                     receiverId,
-                    "this is message #" + i + " - " + dateFormat.format(timeSent),
+                    "this is message #" + i,
                     timeSent,
                     false);
             add(message);

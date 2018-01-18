@@ -14,7 +14,8 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/pull_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@id/message_input_container">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/messages"

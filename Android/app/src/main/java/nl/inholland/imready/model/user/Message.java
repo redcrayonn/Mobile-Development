@@ -15,7 +15,7 @@ public class Message extends EntityModel {
     @SerializedName("Messages")
     private String message;
     @SerializedName("Sent")
-    private Date datetime;
+    private Date sent;
     @SerializedName("IsRead")
     private Boolean read;
 
@@ -23,16 +23,12 @@ public class Message extends EntityModel {
         this(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), "DEFAULT MESSAGE", new Date(), false);
     }
 
-    public Message(String senderId, String receiverId, String message, Date datetime, Boolean read) {
-        this(UUID.randomUUID().toString(), senderId, receiverId, message, datetime, read);
-    }
-
-    public Message(String id, String senderId, String receiverId, String message, Date datetime, Boolean read) {
+    public Message(String id, String senderId, String receiverId, String message, Date sent, Boolean read) {
         super(id);
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.message = message;
-        this.datetime = datetime;
+        this.sent = sent;
         this.read = read;
     }
 
@@ -60,12 +56,12 @@ public class Message extends EntityModel {
         this.message = message;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public Date getSent() {
+        return sent;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setSent(Date sent) {
+        this.sent = sent;
     }
 
     public Boolean isRead() {
