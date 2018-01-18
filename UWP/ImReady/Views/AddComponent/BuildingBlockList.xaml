@@ -7,19 +7,75 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:ImReady.Models"
     xmlns:viewmodels="using:ImReady.ViewModels"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d">
     <Page.DataContext>
         <viewmodels:BuildingBlockListViewModel/>
     </Page.DataContext>
-    <Grid>
-        <ListView ItemsSource="{x:Bind ViewModel.Blocks, Mode=OneWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:BuildingBlock">
-                    <StackPanel Orientation="Horizontal" Height="44" Padding="12" Background="Orange" Tapped="StackPanel_Tapped">
-                        <TextBlock Text="{x:Bind Name}" Foreground="black" Height="20" Margin="2"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+    <Page.Background>
+        <ImageBrush ImageSource="/Assets/SharedResources/homescreen.png"
+                    Stretch="UniformToFill"
+                    AlignmentX="Center"
+                    AlignmentY="Center">
+        </ImageBrush>
+    </Page.Background>
+    <ScrollViewer>
+        <Grid>
+            <ListView ItemsSource="{x:Bind ViewModel.Blocks, Mode=OneWay}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="SingleLineDataTemplate" x:DataType="models:BuildingBlock">
+                        <Grid 
+                            Width="450" 
+                            Margin="0 20" 
+                            CornerRadius="5" 
+                            Tapped="Grid_Tapped" 
+                            extensions:Mouse.Cursor="Hand"
+                              >
+                            <Grid.Background>
+                                <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                            </Grid.Background>
+                            <RelativePanel>
+                                <Image 
+                                        Name="BlockIcon"
+                                        Margin="10 8 0 0"
+                                        Source="{x:Bind Image}" 
+                                        Width="60"
+                                        Height="60"
+                                        VerticalAlignment="Center"
+                                        ></Image>
+                                <TextBlock
+                                    Name="BlockName"
+                                    Text="{x:Bind Name}"
+                                    RelativePanel.RightOf="BlockIcon"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Margin="30 25"
+                                    FontSize="20"
+                                    >
+                                </TextBlock>
+                                <TextBlock
+                                    Name="BlockComponentCount"
+                                    Text="{x:Bind ComponentCount}"
+                                    RelativePanel.LeftOf="BlockChevron"
+                                    Foreground="White"
+                                    Margin="0 25"
+                                    FontSize="20"
+                                    ></TextBlock>
+                                <Image
+                                        RelativePanel.AlignRightWithPanel="True"
+                                        Margin="0 8 40 0"
+                                        Name="BlockChevron"
+                                        Width="60"
+                                        Height="60"
+                                        VerticalAlignment="Center"
+                                        Source="ms-appx:///Assets/Material/ic_chevron_right_white_48dp.png"
+                                        ></Image>
+                            </RelativePanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
 </Page>

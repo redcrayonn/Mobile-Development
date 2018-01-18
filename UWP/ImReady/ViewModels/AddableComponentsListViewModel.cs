@@ -13,5 +13,12 @@ namespace ImReady.ViewModels
 
         public List<Component> Components { get; set; }
 
+        public List<Component> FilteredComponents
+        {
+            get
+            {
+                return Components.Where(c => c.Activities.Any()).ToList();
+            }
+        }
     }
 }

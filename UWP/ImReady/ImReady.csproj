@@ -148,11 +148,15 @@
     <Compile Include="Services\Web\UserWebService.cs" />
     <Compile Include="ViewModels\BuildingBlockListViewModel.cs" />
     <Compile Include="ViewModels\AddableComponentsListViewModel.cs" />
+    <Compile Include="ViewModels\ComponentDetailViewModel.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
     <Compile Include="ViewModels\MyItemViewModel.cs" />
     <Compile Include="Views\AddComponent\BuildingBlockList.xaml.cs">
       <DependentUpon>BuildingBlockList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddComponent\ComponentDetail.xaml.cs">
+      <DependentUpon>ComponentDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddComponent\ComponentList.xaml.cs">
       <DependentUpon>ComponentList.xaml</DependentUpon>
@@ -254,6 +258,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Material\ic_chevron_right_white_48dp.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -300,6 +305,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddComponent\BuildingBlockList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddComponent\ComponentDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -67,11 +67,12 @@ namespace ImReady.ViewModels
                 {
                     if (!futurePlanBlocks.Exists(c => c.Components.Exists(d => d.Id == oriComponent.Id)))
                     {
-                        finalBlocks.Add(oriBlock);
+                        if(oriComponent.Activities.Any())
+                            finalBlocks.Add(oriBlock);
                     }
                 }
             }
-            Blocks = finalBlocks;
+            Blocks = finalBlocks.Distinct().ToList();
         }
     }
 }

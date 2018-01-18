@@ -11,6 +11,7 @@ namespace ImReady.Models
     public class Component
     {
         //Custom props
+        public string ActivityCount => $"{Activities.Count()} activiteiten";
         public string DeadlineInDays => DeadlineToDaysRemaining(Deadline);
         //Json props
         public string Name { get; set; }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,13 +42,18 @@ namespace ImReady.Views.AddComponent
             {
                 ViewModel.Components = (e.Parameter as BuildingBlock).Components;
             }
+
+            //Om een of andere reden zorgt de logica die in App.cs gebruikt wordt tot een back button in deze view. TODO: uitzoeken waarom 
+            var frame = Window.Current.Content as Frame;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = frame.CanGoBack ?
+                          AppViewBackButtonVisibility.Visible :
+                          AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var component = (e.OriginalSource as StackPanel).DataContext as Component;
-            ComponentWebService.SingleInstance.AddComponent(component);
-            Frame.Navigate(typeof(HomeMain));
+            var component = (e.OriginalSource as FrameworkElement).DataContext as Component;
+            Frame.Navigate(typeof(ComponentDetail));
         }
     }
 }

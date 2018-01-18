@@ -10,6 +10,8 @@ namespace ImReady.Models
     public class BuildingBlock
     {
         //Custom
+        public string ComponentCount => $"{Components.Count} onderdelen";
+
         private BitmapImage image { get; set; }
         public BitmapImage Image
         {
