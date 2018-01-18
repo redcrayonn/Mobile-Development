@@ -65,12 +65,8 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComponentCell", for: indexPath) as! ClientComponentCollectionViewCell
         
         cell.nameLbl?.text = components[indexPath.row].name
-        cell.component = components[indexPath.row]
-        
-        var count: Int = 0
-        for _ in components[indexPath.row].activities! {
-            count += 1
-        }
+        cell.component = components[indexPath.row]        
+        cell.buildingblockImageView.image = UIImage(named: "\(self.buildingblock.type!)")
         
         let numberOfActivities = components[indexPath.row].activities!.count
         var activityString: String
@@ -82,13 +78,7 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
 
         cell.activitiesLbl.text = "\(numberOfActivities) \(activityString)"
         
-        cell.layer.backgroundColor = UIColor.white.cgColor
-        cell.layer.cornerRadius = 2.0
-        cell.layer.masksToBounds = false
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOpacity = 0.6
-        cell.layer.shadowOffset = CGSize(width: 1, height: 1)
-        cell.layer.shadowRadius = 4
+        cell.styleCell()        
         
         return cell
     }

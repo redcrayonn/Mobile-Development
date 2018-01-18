@@ -35,9 +35,9 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         tableView.layer.frame.size.height = view.frame.height * 1.5
         tableView.register(UINib(nibName: "ActivityStackViewCell", bundle: nil),
                            forCellReuseIdentifier: "ActivityStackViewCell")
-        tableView.delegate = self
-        tableView.dataSource = self
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.tableView.emptyDataSetSource = self;
         self.tableView.emptyDataSetDelegate = self;
         
@@ -46,19 +46,19 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let string = "Geen activiteiten"
-        let attribute = [ NSAttributedStringKey.foregroundColor: self.view.tintColor ]
+        let attribute = [ NSAttributedStringKey.foregroundColor: UIColor.gray ]
         let attributedString = NSAttributedString(string: string, attributes: attribute)
-
+        
         return attributedString
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let string = "Er zijn geen activiteiten om te maken!"
-        let attribute = [ NSAttributedStringKey.foregroundColor: self.view.tintColor ]
+        let attribute = [ NSAttributedStringKey.foregroundColor: UIColor.gray ]
         let attributedString = NSAttributedString(string: string, attributes: attribute)
         
         return attributedString
-
+        
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
@@ -68,7 +68,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == button_tag {
-//            return detailViewHeight
+            //            return detailViewHeight
             return 450
         } else {
             return 60
@@ -89,47 +89,48 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         cell.remarksLbl.isHidden = true
         cell.statusLbl.isHidden = true
         
+        
         // If the cell does not exist yet, create a new one
-        if !cell.cellExists {
-            cell.activityDescriptionLbl.text = activity.description
-            cell.openDetailViewBtn.setTitle(activity.name, for: .normal)
-            cell.openDetailViewBtn.tag = t_count
-            cell.openDetailViewBtn.addTarget(self, action: #selector(cellOpened(sender:)), for: .touchUpInside)
-
-            cell.activity = activity
-            cell.view = self
-            
-            let deadline = convertDatetime.toTimeOrDateString(fromDateTime: activity.deadline!, convertTo: .date)
-            cell.deadlineLbl.text = "Deadline\n \(deadline)"
-            
-            // Set bottom "border" for unfolded view
-            cell.styleCell()
-            
-            if let content = activity.answer {
-                cell.answerTextView.text = content
-                cell.answerTextView.isEditable = false
-                cell.sendAnswerBtn.isHidden = true
-                cell.deadlineLbl.isHidden = true
-                cell.statusLbl.text = status
-            }
-            
-            if (activity.feedback?.count)! > 0 {
-                cell.remarksTextView.isHidden = false
-                cell.remarksTextView.alpha = 0.5
-                cell.remarksLbl.isHidden = false
-
-                var remarks: String = ""
-                for f in activity.feedback! {
-                    remarks.append(f.content!)
-                }
-                cell.remarksTextView.text = remarks
-            }
-            
-//            detailViewHeight = calculateHeight(forCell: cell)
-            
-            cell.cellExists = true
-            t_count += 1
+        //        if !cell.cellExists {
+        cell.activityDescriptionLbl.text = activity.description
+        cell.openDetailViewBtn.setTitle(activity.name, for: .normal)
+        cell.openDetailViewBtn.tag = t_count
+        cell.openDetailViewBtn.addTarget(self, action: #selector(cellOpened(sender:)), for: .touchUpInside)
+        
+        cell.activity = activity
+        cell.view = self
+        
+        let deadline = convertDatetime.toTimeOrDateString(fromDateTime: activity.deadline!, convertTo: .date)
+        cell.deadlineLbl.text = "Deadline\n \(deadline)"
+        
+        // Set bottom "border" for unfolded view
+        cell.styleCell()
+        
+        if let content = activity.answer {
+            cell.answerTextView.text = content
+            cell.answerTextView.isEditable = false
+            cell.sendAnswerBtn.isHidden = true
+            cell.deadlineLbl.isHidden = true
+            cell.statusLbl.text = status
         }
+        
+        if (activity.feedback?.count)! > 0 {
+            cell.remarksTextView.isHidden = false
+            cell.remarksTextView.alpha = 0.5
+            cell.remarksLbl.isHidden = false
+            
+            var remarks: String = ""
+            for f in activity.feedback! {
+                remarks.append(f.content!)
+            }
+            cell.remarksTextView.text = remarks
+        }
+        
+        //            detailViewHeight = calculateHeight(forCell: cell)
+        
+        cell.cellExists = true
+        t_count += 1
+        //        }
         
         UIView.animate(withDuration:  0) {
             cell.contentView.layoutIfNeeded()
@@ -140,13 +141,13 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     
     func calculateHeight(forCell cell: ClientActivityStackViewCell) -> CGFloat{
         let height: CGFloat = cell.activityDescriptionLbl.frame.height +
-        cell.remarksLbl.frame.height +
-        cell.answerTextView.frame.height +
-        cell.statusLbl.frame.height + 450
+            cell.remarksLbl.frame.height +
+            cell.answerTextView.frame.height +
+            cell.statusLbl.frame.height + 450
         
         return height
     }
-
+    
     // If a ActivityStackViewCell is openend, do the animation
     @objc func cellOpened(sender: UIButton) {
         self.tableView.beginUpdates()

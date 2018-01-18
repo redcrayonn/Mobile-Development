@@ -58,7 +58,8 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
                                         
-                                        self.createFutureplan(forResults: results)                                        
+                                        self.createFutureplan(forResults: results)
+                                        stopActivityIndicator(withIndicatorBGView: nil)
         }) {
             print("failed to retrieve futureplan")
             simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon bouwblokken niet ophalen.")
@@ -74,8 +75,6 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
             type: BlockType.ADD,
             name: self.addBuildingblockBlockName))
         self.collectionView.reloadData()
-        stopActivityIndicator(withIndicatorBGView: nil)
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

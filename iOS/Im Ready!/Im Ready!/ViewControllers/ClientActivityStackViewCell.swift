@@ -25,6 +25,7 @@ class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var sendAnswerBtn: UIButton!
     @IBOutlet weak var deadlineLbl: UILabel!
     @IBOutlet weak var statusLbl: UILabel!
+    @IBOutlet weak var statusImageView: UIImageView!
     
     var cellExists: Bool = false
     var activity: ClientActivity?
@@ -65,6 +66,20 @@ class ClientActivityStackViewCell: UITableViewCell {
         self.remarksTextView.layer.shadowOpacity = 0.6
         self.remarksTextView.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.remarksTextView.layer.shadowRadius = 4
+        
+        // Set image for each status
+        let status = self.activity?.status
+        
+        switch status! {
+        case 0:
+            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
+        case 1:
+            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
+        case 2:
+            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
+        default:
+            self.statusImageView.image = UIImage(named: "STATUS_PENDING)")
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -93,7 +108,7 @@ class ClientActivityStackViewCell: UITableViewCell {
                                                     withTitle: "Gelukt!",
                                                     andMessage: "Je antwoord is opgestuurd!")
                                         activityAnswered = true
-                                        self.activity?.answer = self.remarksTextView.text
+                                        self.activity?.answer = answer
                                         self.sendAnswerBtn.isHidden = true
                                         self.answerTextView.isEditable = false
             }, onFailure: {

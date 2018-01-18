@@ -9,8 +9,10 @@
 import UIKit
 import Timepiece
 import FSCalendar
+import DZNEmptyDataSet
+import ChameleonFramework
 
-class CalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate {
+class CalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDataSource, FSCalendarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
@@ -35,24 +37,16 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.calendar.select(Date())
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
         
-        // There is a fault in the API where posting a new Appointment results in two Appointments
-        // That's why there are duplicates, it's not the fault of this beautiful code
-        appointmentService.getAppointments(forClient: CurrentUser.instance.id!,
-                                           onSuccess: { (results) in
-                                            self.appointments = results
-                                            self.addEventsToCalendar(fromAppointments: self.appointments)
-                                            self.getAppointmentsForDate(fromAppointments: self.appointments)
-        }) {
-            simpleAlert(atVC: self,
-                        withTitle: "Er is iets fout gegaan",
-                        andMessage: "Kon afspraken niet ophalen")
-        }
+        getAppointments()
+        
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -72,13 +66,21 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
             counts[date, default: 0] += 1
         }
         
-        // Draw the number of dots per day (max is 3 dots per day)s
+        // Draw the number of dots per day (max is 3 dots per day)
         let dateString = self.dateFormatter2.string(from: date)
         if self.datesWithEvents.contains(dateString) {
             return counts[dateString]!
         }
         
         return 0
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let string = "Geen afspraken op deze dag"
+        let attribute = [ NSAttributedStringKey.foregroundColor: UIColor.gray ]
+        let attributedString = NSAttributedString(string: string, attributes: attribute)
+        
+        return attributedString
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,6 +97,21 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         cell.timeFrameLbl.text = "\(startTime) - \(endTime)"
         
         return cell
+    }
+    
+    func getAppointments() {
+        // There is a fault in the API where posting a new Appointment results in two Appointments
+        // That's why there are duplicates, it's not the fault of this beautiful code
+        appointmentService.getAppointments(forClient: CurrentUser.instance.id!,
+                                           onSuccess: { (results) in
+                                            self.appointments = results
+                                            self.addEventsToCalendar(fromAppointments: self.appointments)
+                                            self.getAppointmentsForDate(fromAppointments: self.appointments)
+        }) {
+            simpleAlert(atVC: self,
+                        withTitle: "Er is iets fout gegaan",
+                        andMessage: "Kon afspraken niet ophalen")
+        }
     }
     
     /// Filter the list of appointmets by the selected date of the calendar.

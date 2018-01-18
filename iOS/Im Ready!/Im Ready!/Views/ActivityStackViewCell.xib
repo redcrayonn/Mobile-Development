@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,13 +40,22 @@
                                             <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="STATUS_ONGOING" translatesAutoresizingMaskIntoConstraints="NO" id="3bE-GO-c8G">
+                                        <rect key="frame" x="331" y="8" width="34" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3bE-GO-c8G" secondAttribute="height" multiplier="1:1" id="d1g-ma-Nol"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.3803921569" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="gsL-6s-y34" secondAttribute="trailing" id="5nK-S6-bbF"/>
                                     <constraint firstItem="gsL-6s-y34" firstAttribute="top" secondItem="jog-I6-wyl" secondAttribute="top" constant="1" id="8Nj-Fc-Riv"/>
                                     <constraint firstItem="gsL-6s-y34" firstAttribute="leading" secondItem="jog-I6-wyl" secondAttribute="leading" id="ez8-Jb-diR"/>
+                                    <constraint firstAttribute="bottom" secondItem="3bE-GO-c8G" secondAttribute="bottom" constant="8" id="inE-W5-Oec"/>
                                     <constraint firstAttribute="bottom" secondItem="gsL-6s-y34" secondAttribute="bottom" id="ni9-oG-SPT"/>
+                                    <constraint firstAttribute="trailing" secondItem="3bE-GO-c8G" secondAttribute="trailing" constant="25" id="sCy-WZ-eVG"/>
+                                    <constraint firstItem="3bE-GO-c8G" firstAttribute="top" secondItem="jog-I6-wyl" secondAttribute="top" constant="8" id="xd6-Xu-2Zd"/>
                                 </constraints>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="av7-gp-M5r">
@@ -179,9 +189,13 @@
                 <outlet property="remarksLbl" destination="rAR-Gl-wox" id="J09-ho-59O"/>
                 <outlet property="remarksTextView" destination="owM-vS-nny" id="xV0-Et-tec"/>
                 <outlet property="sendAnswerBtn" destination="tkN-1B-qup" id="7JR-bw-bUE"/>
+                <outlet property="statusImageView" destination="3bE-GO-c8G" id="L7P-tO-Hme"/>
                 <outlet property="statusLbl" destination="ERY-7d-gYQ" id="6qJ-UY-RrN"/>
             </connections>
             <point key="canvasLocation" x="25" y="125.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="STATUS_ONGOING" width="36" height="36"/>
+    </resources>
 </document>

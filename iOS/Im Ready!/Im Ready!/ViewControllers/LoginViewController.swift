@@ -81,12 +81,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginClick(_ sender: Any) {
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
         
-//        let username = usernameField.text!
+        let username = usernameField.text!
+        let password = passwordField.text!
 //        let password = passwordField.text!.sha256()
         
-        let username = "woutertest10@gmail.com"
+//        let username = "woutertest10@gmail.com"
 //        let username = "woutervermeij@gmail.com"
-        let password = "wouter"
+//        let password = "wouter"
         
         guard username != "" && password != "" else {
             stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
