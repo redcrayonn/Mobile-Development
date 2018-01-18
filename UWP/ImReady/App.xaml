@@ -49,7 +49,7 @@
                                                                 </VisualState>
                                                             </VisualStateGroup>
                                                         </VisualStateManager.VisualStateGroups>
-                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="{ThemeResource TextControlButtonForeground}" FontStyle="Normal" FontSize="12" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE10A;" VerticalAlignment="Center"/>
+                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="White" FontStyle="Normal" FontSize="12" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE10A;" VerticalAlignment="Center"/>
                                                     </Grid>
                                                 </ControlTemplate>
                                             </Setter.Value>
@@ -116,10 +116,10 @@
             <Style x:Key="MinimalPasswordBox" TargetType="PasswordBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
-                <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
+                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
                 <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource TextControlBorderBrush}"/>
+                <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
                 <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
                 <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
@@ -137,7 +137,7 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ToggleButton">
-                                                    <Grid x:Name="ButtonLayoutGrid" BorderBrush="{ThemeResource TextControlButtonBorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{ThemeResource TextControlButtonBackground}">
+                                                    <Grid x:Name="ButtonLayoutGrid" BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Background="{ThemeResource TextControlButtonBackground}">
                                                         <VisualStateManager.VisualStateGroups>
                                                             <VisualStateGroup x:Name="CommonStates">
                                                                 <VisualState x:Name="Normal"/>
@@ -157,7 +157,7 @@
                                                                 </VisualState>
                                                             </VisualStateGroup>
                                                         </VisualStateManager.VisualStateGroups>
-                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="{ThemeResource TextControlButtonForeground}" FontStyle="Normal" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE052;" VerticalAlignment="Center"/>
+                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="White" FontStyle="Normal" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE052;" VerticalAlignment="Center"/>
                                                     </Grid>
                                                 </ControlTemplate>
                                             </Setter.Value>

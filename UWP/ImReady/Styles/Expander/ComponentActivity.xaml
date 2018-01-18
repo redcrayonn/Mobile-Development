@@ -8,7 +8,7 @@
     xmlns:local2 ="using:ImReady.Controls.ControlTemplates">
 
     <Style x:Key="HeaderToggleButtonStyle" TargetType="local2:ExpanderToggleButton">
-        <Setter Property="Background" Value="#F16122" />
+        <Setter Property="Background" Value="{StaticResource ThemeOrangeDefault}" />
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
         <Setter Property="BorderThickness" Value="{ThemeResource ToggleButtonBorderThemeThickness}" />
@@ -52,7 +52,7 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                        Storyboard.TargetName="RootGrid">
                                             <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource ToggleButtonBackgroundPressed}" />
+                                                                    Value="{StaticResource ThemeOrangeDark}" />
                                         </ObjectAnimationUsingKeyFrames>
 
                                         <DoubleAnimation BeginTime="0:0:0" Duration="0:0:0.1" To="0.0"
@@ -79,7 +79,7 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                        Storyboard.TargetName="RootGrid">
                                             <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                                                    Value="{StaticResource ThemeOrangeDark}" />
                                         </ObjectAnimationUsingKeyFrames>
 
                                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
@@ -93,7 +93,7 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                        Storyboard.TargetName="RootGrid">
                                             <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                                                    Value="{StaticResource ThemeOrangeDefault}" />
                                         </ObjectAnimationUsingKeyFrames>
 
                                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />

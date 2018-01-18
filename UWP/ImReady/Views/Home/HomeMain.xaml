@@ -89,7 +89,8 @@
                     <AppBarButton Icon="Message" Click="AppBarButton_Click" Foreground="White"/>
                     <AppBarButton Icon="Placeholder" Click="AppBarButton_Click" Foreground="White"/>
                 </CommandBar>
-                <GridView 
+                <ScrollViewer>
+                    <GridView 
                     ItemsSource="{x:Bind ViewModel.FuturePlan.Blocks, Mode=OneWay}" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
@@ -99,7 +100,8 @@
                     ItemClick="GridView_ItemClick"
                     IsItemClickEnabled="True"
                     >
-                </GridView>
+                    </GridView>
+                </ScrollViewer>
                 <ProgressRing 
                 x:Name="progress1" 
                 RelativePanel.Below="LoginSubmit"
