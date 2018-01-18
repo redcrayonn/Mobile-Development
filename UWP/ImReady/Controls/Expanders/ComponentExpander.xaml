@@ -108,8 +108,8 @@
                                     <StackPanel Grid.Column="1">
                                         <Image 
                                             Source="{x:Bind Status, Converter={StaticResource ActivityStatusToImageConverter}}"
-                                            Height="20"
-                                            Width="20"></Image>
+                                            Height="30"
+                                            Width="30"></Image>
                                         <TextBlock 
                                             Text="{x:Bind DeadlineInDays}" 
                                             TextWrapping="WrapWholeWords" 
@@ -128,7 +128,7 @@
                                     Grid.Row="1" 
                                     Text="" 
                                     Margin="20 0 0 0"
-                                    Visibility="Collapsed"
+                                    Visibility="Visible"
                                     ></TextBlock>
                                 <TextBlock 
                                     x:Name="FeedbackContent"
@@ -136,7 +136,7 @@
                                     Grid.Row="2" 
                                     Text="{x:Bind LatestFeedback.Content}" 
                                     Margin="20 0 0 0"
-                                    Visibility="Collapsed"
+                                    Visibility="Visible"
                                     ></TextBlock>
                                 <TextBox          
                                         Grid.Column="1" 

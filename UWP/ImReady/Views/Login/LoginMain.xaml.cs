@@ -81,6 +81,11 @@ namespace ImReady.Views.Login
                 //TODO: add checkbox for saving credentials 
                 //Store username and password for future logins
                 var vault = new Windows.Security.Credentials.PasswordVault();
+                //Even om alleen de laatste credential te bewaren ---------------------------------------!
+                foreach(var credential in vault.RetrieveAll())
+                {
+                    vault.Remove(credential);
+                }
                 vault.Add(new Windows.Security.Credentials.PasswordCredential(
                     resourceName, username, password));
 
@@ -127,12 +132,7 @@ namespace ImReady.Views.Login
                 var credentialList = vault.FindAllByResource(resourceName);
                 if (credentialList.Count > 0)
                 {
-                    if (credentialList.Count == 1)
-                    {
-                        credential = credentialList[0];
-                    }
-                    else
-                        throw new NotImplementedException();
+                    credential = credentialList[0];
                 }
             }
             return credential;

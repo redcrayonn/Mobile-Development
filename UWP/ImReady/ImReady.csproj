@@ -110,6 +110,7 @@
     <Compile Include="Helpers\Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\StatusToCheckboxBooleanConverter.cs" />
+    <Compile Include="Helpers\Converters\StringContentToVisibilityConverter.cs" />
     <Compile Include="Helpers\DependencyPropertyListener.cs" />
     <Compile Include="Helpers\StaticHelpers.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
@@ -192,6 +193,8 @@
     <Content Include="Assets\Material\ic_accessible_white_18dp.png" />
     <Content Include="Assets\Material\ic_query_builder_deep_orange_400_18dp.png" />
     <Content Include="Assets\Material\ic_query_builder_white_18dp.png" />
+    <Content Include="Assets\Material\ic_done_green_600_18dp.png" />
+    <Content Include="Assets\Material\ic_hourglass_empty_deep_orange_400_18dp.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

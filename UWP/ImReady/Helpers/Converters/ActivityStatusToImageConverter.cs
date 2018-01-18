@@ -15,7 +15,7 @@ namespace ImReady.Helpers.Converters
         public object Convert(object value, Type targetType, object parameter, string culture)
         {
             BitmapImage deadlineImage = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_query_builder_deep_orange_400_18dp.png")};
-            BitmapImage awaitingReviewImage = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_hourglass_empty_orange_400_18dp.png") };
+            BitmapImage awaitingReviewImage = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_hourglass_empty_deep_orange_400_18dp.png") };
             BitmapImage doneImage = new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/ic_done_green_600_18dp.png") };
 
             int statusInt = value != null && value is int ? (int)value : 0;
