@@ -104,7 +104,10 @@
                                         <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="0" 
-                                            Text="{x:Bind Name}"></TextBlock>
+                                            Text="{x:Bind Name}"
+                                            FontWeight="Bold"
+                                            FontFamily="Gray"
+                                            ></TextBlock>
                                         <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="1" 
@@ -132,6 +135,7 @@
                                     Text="" 
                                     Margin="20 0 0 0"
                                     Visibility="Collapsed"
+                                    TextWrapping="WrapWholeWords"
                                     ></TextBlock>
                                 <TextBlock 
                                     x:Name="FeedbackContent"
@@ -140,6 +144,7 @@
                                     Text="{x:Bind LatestFeedback.Content}" 
                                     Margin="20 0 0 0"
                                     Visibility="Collapsed"
+                                    TextWrapping="WrapWholeWords"
                                     ></TextBlock>
                                 <TextBox          
                                         Grid.Column="1" 
@@ -152,6 +157,7 @@
                                         ScrollViewer.HorizontalScrollMode="Disabled"
                                         IsReadOnly="{x:Bind Status, Converter={StaticResource StatusToBooleanConverter}}"
                                         BorderBrush="Gray"
+                                        TextWrapping="WrapWholeWords"
                                          >
                                 </TextBox>
                                 <Button 
