@@ -188,6 +188,7 @@
                                     Foreground="White"
                                     Width="125"
                                     Height="36"
+                                    Visibility="{x:Bind Status, Converter={StaticResource ActivityStatusDoneToVisibilityConverter}}"
                                     >
                                         <Button.Background>
                                             <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
