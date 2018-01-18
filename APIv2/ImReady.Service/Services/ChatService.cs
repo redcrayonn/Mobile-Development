@@ -46,7 +46,9 @@ namespace ImReady.Service.Services {
 		public Chat getChat (string userId, string otherUserId) {
 			Chat chat = _chatRepository.Entities.SingleOrDefault(c => (c.SenderId == userId && c.ReceiverId == otherUserId) || (c.SenderId == otherUserId && c.ReceiverId == userId));
 
-			chat.Messages = chat.Messages.OrderBy(m => m.SentDate).ToList();
+			if (chat != null && chat.Messages != null) {
+				chat.Messages = chat.Messages.OrderBy(m => m.SentDate).ToList();
+			}
 
 			return chat;
 		}
