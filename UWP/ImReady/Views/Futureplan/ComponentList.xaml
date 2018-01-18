@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls1="using:ImReady.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:local1="using:ImReady.Models">
     <Grid Background="White">
         <RelativePanel
@@ -31,11 +32,11 @@
                 </CommandBar.Content>
             </CommandBar>
             <ScrollViewer Name="scrollviewer" RelativePanel.Below="commandbar" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
-                <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}">
+                <ItemsControl ItemsSource="{x:Bind ViewModel.BuildingBlock.Components}" Width="450">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="local1:Component">
                             <StackPanel>
-                                <controls1:ComponentExpander Component="{Binding}">
+                                <controls1:ComponentExpander Component="{Binding}" Margin="0 0 0 10" extensions:Mouse.Cursor="Hand">
 
                                 </controls1:ComponentExpander>
                             </StackPanel>
