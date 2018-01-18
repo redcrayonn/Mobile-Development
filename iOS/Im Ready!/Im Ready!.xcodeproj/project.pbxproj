@@ -90,7 +90,6 @@
 		FADB8FCE1FE006CE00EECB8B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCD1FE006CE00EECB8B /* UserService.swift */; };
 		FADB8FD01FE02AC600EECB8B /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */; };
 		FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FD11FE1514300EECB8B /* CurrentUser.swift */; };
-		FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */; };
 		FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */; };
 		FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */; };
 		FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */; };
@@ -209,7 +208,6 @@
 		FADB8FCD1FE006CE00EECB8B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FADB8FCF1FE02AC600EECB8B /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FADB8FD11FE1514300EECB8B /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
-		FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBuildingblock.swift; sourceTree = "<group>"; };
 		FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */,
-				FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */,
 				FA4B72611FF5015B00949FF6 /* Alerts.swift */,
 				FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */,
 				FA85ED7E200FE83000AEB7BD /* ConvertDatetime.swift */,
@@ -746,6 +743,7 @@
 				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/REFormattedNumberField/REFormattedNumberField.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
@@ -767,6 +765,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REFormattedNumberField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
@@ -872,7 +871,6 @@
 				FA64A6F81FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift in Sources */,
 				FA73CDEF1FBF2D110077F563 /* HomescreenViewController.swift in Sources */,
 				FADAB45B1FBECF710069E290 /* BuildingblockCell.swift in Sources */,
-				FAF1561F1FE9319400C6B9C2 /* ActivityIndicator.swift in Sources */,
 				FA4DFE421FBC1B7C00945B2A /* Activity.swift in Sources */,
 				FA528D981FDB185C00052647 /* ClientTask.swift in Sources */,
 				FAB235A21FB99B720099B29D /* LoginViewController.swift in Sources */,

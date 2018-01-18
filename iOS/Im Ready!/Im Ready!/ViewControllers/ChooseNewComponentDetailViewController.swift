@@ -7,18 +7,18 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 protocol ComponentDelegate: class {
     func passAddedComponent(component: Component, index: IndexPath)
 }
 
-class ChooseNewComponentDetailViewController: UIViewController {
+class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var activitiesLbl: UILabel!
     @IBOutlet weak var pointsLbl: UILabel!
     @IBOutlet weak var addBtn: UIButton!
-    @IBOutlet weak var activityBG: UIView!
     
     var component: Component?
     var componentIndex: IndexPath?
@@ -103,7 +103,7 @@ class ChooseNewComponentDetailViewController: UIViewController {
         let addComponentAlert = UIAlertController(title: "Component toevoegen?", message:
             "Wil je '\(component!.name!)' toevoegen?", preferredStyle: UIAlertControllerStyle.alert)
         addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
-            startActivityIndicator(atVC: self, withView: self.view, andIndicatorBGView: self.activityBG)
+            self.startAnimating(type: .lineSpinFadeLoader)
             
             clientService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.component!.id!, onSuccess: {
                 
@@ -112,12 +112,12 @@ class ChooseNewComponentDetailViewController: UIViewController {
                 futureplanChanged = true
                 
                 self.present(successAlert, animated: true)
-                stopActivityIndicator(withIndicatorBGView: self.activityBG)
+                self.stopAnimating()
             }, onFailure:  {
                 simpleAlert(atVC: self,
                             withTitle: "Er is iets fout gegaan.",
                             andMessage: "Het is niet gelukt het component toe te voegen.")
-                stopActivityIndicator(withIndicatorBGView: self.activityBG)
+                self.stopAnimating()
             })
         }))
         

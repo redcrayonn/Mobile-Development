@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import NVActivityIndicatorView
 
 class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var openView: UIView!
@@ -69,7 +70,7 @@ class ClientActivityStackViewCell: UITableViewCell {
         
         // Set image for each status
         let status = self.activity?.status
-        
+
         switch status! {
         case 0:
             self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")

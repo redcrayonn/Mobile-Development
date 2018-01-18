@@ -10,20 +10,19 @@ import UIKit
 import LocalAuthentication
 import Locksmith
 import CryptoSwift
+import NVActivityIndicatorView
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
+    
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var loginButton: UIButton!    
     @IBOutlet var registerFamilyButton: UIButton!
     
-    @IBOutlet var activityIndicatorBG: UIView!
-    
     let imReadyAccount = "ImReadyAccount"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.authenticateUser()
         self.hideKeyboardWhenTappedAround()
     }
@@ -79,18 +78,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
-        startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: activityIndicatorBG)
+        startAnimating(type: .lineSpinFadeLoader)
         
-        let username = usernameField.text!
-        let password = passwordField.text!
+//        let username = usernameField.text!
+//        let password = passwordField.text!
 //        let password = passwordField.text!.sha256()
         
-//        let username = "woutertest10@gmail.com"
+        let username = "woutertest5@gmail.com"
 //        let username = "woutervermeij@gmail.com"
-//        let password = "wouter"
+        let password = "wouter"
         
         guard username != "" && password != "" else {
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
             simpleAlert(atVC: self,
                         withTitle: "Velden niet ingevuld",
                         andMessage: "Vul alle velden in om in te loggen")
@@ -121,10 +120,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.redirectUserToStoryboard()
-                
+                self.stopAnimating()
         }) {
             print("failed to log in")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            self.stopAnimating()
             simpleAlert(atVC: self,
                         withTitle: "Ongeldige inloggegevens",
                         andMessage: "Gebruikersnaam of wachtwoord is fout")
@@ -152,25 +151,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.goToTabBarView(
                 inStoryboard: "Client",
                 withIdentifier: "TabBarController")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
         case .CAREGIVER:
             self.goToTabBarView(
                 inStoryboard: "Caregiver",
                 withIdentifier: "TabBarController")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
         case .RELATIVE:
             simpleAlert(atVC: self, withTitle: "Not implemented yet",
                         andMessage: "Relative is not yet implemented")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
         case .ADMIN:
             simpleAlert(atVC: self, withTitle: "Not implemented yet",
                         andMessage: "Admin is not yet implemented")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
         default:
             simpleAlert(atVC: self,
                         withTitle: "Er is iets fout gegaan met inloggen",
                         andMessage: "Controller gebruikersnaam en wachtwoord")
-            stopActivityIndicator(withIndicatorBGView: self.activityIndicatorBG)
+            stopAnimating()
         }
     }
     

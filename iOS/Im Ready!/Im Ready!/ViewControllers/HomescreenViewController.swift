@@ -8,10 +8,11 @@
 
 import UIKit
 import ChameleonFramework
+import NVActivityIndicatorView
 
 public var futureplanChanged: Bool = false
 
-class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UpdateFutureplanDelegate {
+class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UpdateFutureplanDelegate, NVActivityIndicatorViewable {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -40,30 +41,30 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func getBuildingblocks() {
-        startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
+        startAnimating(message: "Toekomstplan wordt opgehaald", type: .lineSpinFadeLoader)
         
         buildingblockService.getBuildingblocks(onSuccess: { (results) in
             self.buildingblocks = results
-            stopActivityIndicator(withIndicatorBGView: nil)
+            self.stopAnimating()
         }) {
             simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon de bouwblokken niet ophalen")
             print("failed to retrieve buildingblocks")
-            stopActivityIndicator(withIndicatorBGView: nil)
+            self.stopAnimating()
         }
     }
     
     // Get all buildingblocks, components and activites a client is working on
     func getClientFuturePlan() {
-        startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
+        startAnimating(message: "Toekomstplan wordt opgehaald", type: .lineSpinFadeLoader)
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
                                         
                                         self.createFutureplan(forResults: results)
-                                        stopActivityIndicator(withIndicatorBGView: nil)
+                                        self.stopAnimating()
         }) {
             print("failed to retrieve futureplan")
             simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon bouwblokken niet ophalen.")
-            stopActivityIndicator(withIndicatorBGView: nil)
+            self.stopAnimating()
         }
     }
     
