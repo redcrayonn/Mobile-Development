@@ -4,6 +4,7 @@ package nl.inholland.imready.app.presenter.shared;
 import com.nytimes.android.external.store3.base.impl.BarCode;
 import com.nytimes.android.external.store3.base.impl.Store;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -71,12 +72,14 @@ public class MessagesPresenterImpl implements MessagesPresenter, SingleObserver<
         view.showRefreshing();
         // create the message
         Message message = new Message();
+        message.setSent(new Date());
         message.setSenderId(userId);
         message.setMessage(text);
         // update view
         view.addMessage(message);
         // send to server
         retryCount = 0;
+        view.showRefreshing();
         service.postMessage(userId, receiverId, message).enqueue(new Callback<EmptyResponse>() {
             @Override
             public void onResponse(Call<EmptyResponse> call, Response<EmptyResponse> response) {
@@ -96,7 +99,6 @@ public class MessagesPresenterImpl implements MessagesPresenter, SingleObserver<
                 }
             }
         });
-        view.showRefreshing();
     }
 
     @Override

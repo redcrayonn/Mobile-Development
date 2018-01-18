@@ -10,11 +10,11 @@ import nl.inholland.imready.model.EntityModel;
 public class Message extends EntityModel {
     @SerializedName("SenderId")
     private String senderId;
-    @SerializedName("Messages")
+    @SerializedName("Content")
     private String message;
-    @SerializedName("Sent")
+    @SerializedName("SentDate")
     private Date sent;
-    @SerializedName("IsRead")
+    @SerializedName("Read")
     private Boolean read;
 
     public Message() {

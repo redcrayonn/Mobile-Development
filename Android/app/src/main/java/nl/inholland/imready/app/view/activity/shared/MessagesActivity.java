@@ -43,7 +43,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        MessageBaseService messageService = ApiManager.getClient(true).getMessageService();
+        MessageBaseService messageService = ApiManager.getClient().getMessageService();
         ImReadyApplication instance = ImReadyApplication.getInstance();
         Store<Chat, BarCode> messagesStore = instance.getMessagesStore();
         this.presenter = new MessagesPresenterImpl(this, messageService, messagesStore, instance.getCurrentUserId(), "f8b1282e-ee65-45d2-ac13-676a8cbca8d3");
@@ -51,6 +51,12 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         initRefreshView();
         initRecyclerView();
         initUserInput();
+
+        // Set action bar title
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Berichten");
+        }
 
         presenter.init();
     }
@@ -129,7 +135,8 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void setViewData(List<Message> messages) {
         adapter.setData(messages);
-        recyclerView.smoothScrollToPosition(messages.size() - 1);
+        if (messages != null && messages.size() > 0)
+            recyclerView.smoothScrollToPosition(messages.size() - 1);
     }
 
     @Override

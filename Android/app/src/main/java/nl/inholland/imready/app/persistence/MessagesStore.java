@@ -38,7 +38,7 @@ public class MessagesStore extends RealStore<Chat, BarCode> {
     }
 
     private static Single<BufferedSource> getFetcher(BarCode barCode) {
-        BaseClient client = ApiManager.getClient(true);
+        BaseClient client = ApiManager.getClient();
         return client
                 .getMessageService()
                 .getChat(barCode.getKey(), barCode.getType())
