@@ -17,16 +17,6 @@
     <Style TargetType="Page">
         <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
     </Style>
-    <Style TargetType="TextBlock">
-        <Setter Property="FontSize" Value="32" />
-        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
-    </Style>
-    <Style TargetType="Control" x:Key="fontStyling">
-        <Setter Property="FontSize" Value="32" />
-        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto" />
-    </Style>
-    <Style TargetType="TextBox" BasedOn="{StaticResource fontStyling}" />
-    <Style TargetType="ListView" BasedOn="{StaticResource fontStyling}" />
     
     <!--Make sure the appbar does not jump up or down when clicking anywhere but the appbar.-->
     <x:Double x:Key="AppBarThemeCompactHeight">60</x:Double>
