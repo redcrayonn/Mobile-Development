@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 import nl.inholland.imready.R;
 import nl.inholland.imready.app.presenter.client.ClientCaretakersPresenter;
 import nl.inholland.imready.app.presenter.client.ClientCaretakersPresenterImpl;
+import nl.inholland.imready.app.view.adapter.ClientCaretakerAdapter;
 import nl.inholland.imready.model.user.User;
 
 public class ClientCaretakersActivity extends AppCompatActivity implements ClientCaretakersView, View.OnClickListener {
@@ -19,7 +19,7 @@ public class ClientCaretakersActivity extends AppCompatActivity implements Clien
     private ClientCaretakersPresenter presenter;
     private ListView listview;
     private FloatingActionButton inviteButton;
-    private ArrayAdapter<User> adapter;
+    private ClientCaretakerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,12 @@ public class ClientCaretakersActivity extends AppCompatActivity implements Clien
         this.presenter = new ClientCaretakersPresenterImpl(this);
 
         listview = findViewById(R.id.listview);
-        adapter = new ArrayAdapter<>(this, R.layout.list_item_caretaker, R.id.caretaker_title);
-        adapter.setNotifyOnChange(true);
+        adapter = new ClientCaretakerAdapter(this);
         listview.setAdapter(adapter);
         inviteButton = findViewById(R.id.button_positive);
         inviteButton.setOnClickListener(this);
 
-        showMessage("Soon!");
+        presenter.init();
     }
 
     @Override
@@ -46,6 +45,6 @@ public class ClientCaretakersActivity extends AppCompatActivity implements Clien
 
     @Override
     public void setCaretakers(List<User> caretakers) {
-        adapter.addAll(caretakers);
+        adapter.setData(caretakers);
     }
 }

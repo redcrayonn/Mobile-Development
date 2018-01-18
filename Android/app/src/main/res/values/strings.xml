@@ -63,4 +63,5 @@
     <string name="your_caregiver">je zorgverlener</string>
     <string name="empty_description">Geen beschrijving beschikbaar</string>
     <string name="user_info_failed">Kon de gebruikersgegevens niet ophalen</string>
+    <string name="caretakers">Zorgverleners</string>
 </resources>
