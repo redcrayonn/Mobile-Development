@@ -18,7 +18,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Center"
                       Height="300"  
-                      Margin="0 50 0 0"
+                      Margin="40 50 0 0"
                       />
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox 
@@ -50,10 +50,14 @@
                 RelativePanel.Below="LoginPassword" 
                 HorizontalAlignment="Stretch" 
                 Content="LOGIN"
-                Background="#F16122"
+                
                 FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
                 Foreground="White" Click="LoginSubmit_Click"
-                ></Button>
+                >
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                </Button.Background>
+            </Button>
             
         </RelativePanel>
         <ProgressRing 
