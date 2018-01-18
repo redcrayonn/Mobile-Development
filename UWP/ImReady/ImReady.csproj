@@ -189,6 +189,8 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Material\ic_comment_24px.svg" />
     <Content Include="Assets\Material\ic_notifications_24px.svg" />
+    <Content Include="Assets\Material\readyIcon_Orange.png" />
+    <Content Include="Assets\Material\readyIcon_White.png" />
     <Content Include="Assets\SharedResources\620splash.png" />
     <Content Include="Assets\pexels-photo-547116-edited.png" />
     <Content Include="Assets\pexels-photo-547116.jpeg" />
@@ -259,6 +261,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\Material\ic_chevron_right_white_48dp.png" />
+    <Content Include="Assets\Material\ic_assignment_deep_orange_400_48dp.png" />
+    <Content Include="Assets\Material\ic_info_outline_deep_orange_400_48dp.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

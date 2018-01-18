@@ -35,7 +35,6 @@ namespace ImReady.Views.AddComponent
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var article = e.Parameter as Component;
             if (e.Parameter != null && e.Parameter is Component)
             {
                 ViewModel.Component = (e.Parameter as Component);

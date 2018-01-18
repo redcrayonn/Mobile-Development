@@ -13,6 +13,29 @@ namespace ImReady.Models
         //Custom props
         public string ActivityCount => $"{Activities.Count()} activiteiten";
         public string DeadlineInDays => DeadlineToDaysRemaining(Deadline);
+        public string TotalPointsAvailable
+        {
+            get
+            {
+                int points = 0;
+                foreach(var activity in Activities)
+                {
+                    points = +activity.Points;
+                }
+                return points.ToString();
+            }
+        }
+        public string ActivitiesInText {
+            get
+            {
+                string result = "";
+                foreach(var activity in Activities)
+                {
+                    result += $"- {activity.Name}\n";
+                }
+                return result;
+            }
+        }
         //Json props
         public string Name { get; set; }
         public string Description { get; set; }

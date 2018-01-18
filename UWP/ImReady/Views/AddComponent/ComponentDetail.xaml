@@ -6,18 +6,104 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="White">
-    <Grid Background="White" MaxWidth="700">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        
-    </Grid>
+    Background="White"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    >
+    <ScrollViewer>
+        <StackPanel>
+        <Grid Background="White" MaxWidth="700" Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="*" MinHeight="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image 
+                Source="ms-appx:///Assets/Material/ic_info_outline_deep_orange_400_48dp.png" 
+                Width="30" 
+                Height="30"
+                Grid.Column="0"
+                Grid.Row="0"
+                VerticalAlignment="Top"
+                ></Image>
+            <TextBlock 
+                    Name="ComponentGoal"
+                    Text="Doel/resultaat"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    FontWeight="SemiBold"
+                    ></TextBlock>
+            <TextBlock
+                    Name="ComponentDescription"
+                    Text="{x:Bind ViewModel.Component.Description}"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    TextWrapping="Wrap"
+                    ></TextBlock>
+            <Image 
+                Source="ms-appx:///Assets/Material/readyIcon_Orange.png" 
+                Width="30" 
+                Height="30"
+                Grid.Column="0"
+                Grid.Row="2"
+                VerticalAlignment="Top"
+                ></Image>
+            <TextBlock 
+                    Name="ComponentCoinsTitle"
+                    Text="READY-coins"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    TextWrapping="Wrap"
+                    FontWeight="SemiBold"
+                    ></TextBlock>
+            <TextBlock
+                    Name="ComponentCoins"
+                    Text="{x:Bind ViewModel.Component.TotalPointsAvailable}"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    TextWrapping="Wrap"
+                    ></TextBlock>
+            <Image 
+                Source="ms-appx:///Assets/Material/ic_assignment_deep_orange_400_48dp.png" 
+                Width="30" 
+                Height="30"
+                Grid.Column="0"
+                Grid.Row="4"
+                VerticalAlignment="Top"
+                ></Image>
+            <TextBlock 
+                Name="ComponentActivitiesTitle"
+                Text="Opdrachten"
+                Grid.Column="1"
+                Grid.Row="4"
+                FontWeight="SemiBold"
+                ></TextBlock>
+            <TextBlock
+                Name="ComponentActivities"
+                Text="{x:Bind ViewModel.Component.ActivitiesInText}"
+                Grid.Column="1"
+                Grid.Row="5"
+                TextWrapping="Wrap"
+                ></TextBlock>
+            <Button 
+                Name="ComponentAdd"
+                Grid.Column="1" 
+                Grid.Row="6" 
+                HorizontalAlignment="Right"
+                Content="TOEVOEGEN"
+                Foreground="White"
+                Width="125"
+                Height="36"
+                extensions:Mouse.Cursor="Hand"
+                ></Button>
+        </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

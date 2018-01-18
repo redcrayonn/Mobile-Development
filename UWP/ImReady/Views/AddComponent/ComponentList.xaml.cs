@@ -53,7 +53,7 @@ namespace ImReady.Views.AddComponent
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var component = (e.OriginalSource as FrameworkElement).DataContext as Component;
-            Frame.Navigate(typeof(ComponentDetail));
+            Frame.Navigate(typeof(ComponentDetail), component);
         }
     }
 }
