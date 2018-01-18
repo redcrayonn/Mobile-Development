@@ -235,7 +235,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider x:Name="ArrowRotation" Visibility="Collapsed" Value="90" Minimum="-180" Maximum="180" />
+                        <Slider x:Name="ArrowRotation" Visibility="Collapsed" Value="180" Minimum="-180" Maximum="180" />
                         <StackPanel>
                             <ContentPresenter 
                                           x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
@@ -263,18 +263,19 @@
                         </StackPanel>
                         
                         
-                        <SymbolIcon 
+                        <Image 
                                     x:Name="Arrow" 
+                            Margin="0 0 30 0"
                                      Grid.Column="1"
                                             Width="40"
                                             RenderTransformOrigin="0.5,0.5"
-                                            Symbol="Forward"
+                                            Source="ms-appx:///Assets/Material/ic_chevron_right_white_48dp.png"
                                             HorizontalAlignment="Right"
                                             >
-                            <SymbolIcon.RenderTransform>
+                            <Image.RenderTransform>
                                 <RotateTransform />
-                            </SymbolIcon.RenderTransform>
-                        </SymbolIcon>
+                            </Image.RenderTransform>
+                        </Image>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
