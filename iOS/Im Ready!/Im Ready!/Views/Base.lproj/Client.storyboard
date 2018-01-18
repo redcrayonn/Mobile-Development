@@ -1133,6 +1133,7 @@
                                                     <rect key="frame" x="10" y="0.0" width="116" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="116" id="ey6-jr-gxB"/>
+                                                        <constraint firstAttribute="height" constant="44" id="l0Y-OB-FFb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1140,6 +1141,9 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="TKM-GG-sqP">
                                                     <rect key="frame" x="150" y="-1" width="205" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="EE5-JS-KXt"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1148,6 +1152,7 @@
                                             <constraints>
                                                 <constraint firstItem="TKM-GG-sqP" firstAttribute="centerY" secondItem="37p-eD-mba" secondAttribute="centerY" id="CZ9-dZ-lp6"/>
                                                 <constraint firstItem="TKM-GG-sqP" firstAttribute="leading" secondItem="vzA-03-iER" secondAttribute="trailing" constant="24" id="EEb-sq-J4S"/>
+                                                <constraint firstItem="TKM-GG-sqP" firstAttribute="height" secondItem="vzA-03-iER" secondAttribute="height" id="IGK-Og-uQq"/>
                                                 <constraint firstItem="vzA-03-iER" firstAttribute="centerY" secondItem="37p-eD-mba" secondAttribute="centerY" id="S4u-gz-byD"/>
                                                 <constraint firstItem="TKM-GG-sqP" firstAttribute="top" secondItem="37p-eD-mba" secondAttribute="topMargin" constant="-12" id="aLb-xm-nEe"/>
                                                 <constraint firstItem="vzA-03-iER" firstAttribute="top" secondItem="37p-eD-mba" secondAttribute="top" id="pwu-39-AvE"/>
