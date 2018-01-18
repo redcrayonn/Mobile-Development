@@ -10,9 +10,9 @@ import UIKit
 import ChameleonFramework
 
 public var futureplanChanged: Bool = false
-//public var buildingblocks: [Buildingblock] = []
 
-class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UpdateFutureplanDelegate {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     var clientBuildingblocks: [ClientBuildingblock] = []
@@ -57,19 +57,34 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         startActivityIndicator(atVC: self, withView: view, andIndicatorBGView: nil)
         clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
                                     onSuccess: { (results) in
-                                        self.clientBuildingblocks = results.buildingblocks!
-
-                                        // Add the last buildingblock where client can add new future goals
-                                        self.clientBuildingblocks.append(ClientBuildingblock(
-                                            type: BlockType.ADD,
-                                            name: self.addBuildingblockBlockName))
-                                        self.collectionView.reloadData()
-                                        stopActivityIndicator(withIndicatorBGView: nil)
+                                        
+                                        self.createFutureplan(forResults: results)
+                                        
+//                                        self.clientBuildingblocks = results.buildingblocks!
+//
+//                                        // Add the last buildingblock where client can add new future goals
+//                                        self.clientBuildingblocks.append(ClientBuildingblock(
+//                                            type: BlockType.ADD,
+//                                            name: self.addBuildingblockBlockName))
+//                                        self.collectionView.reloadData()
+//                                        stopActivityIndicator(withIndicatorBGView: nil)
         }) {
             print("failed to retrieve futureplan")
             simpleAlert(atVC: self, withTitle: "Er is iets fout gegaan", andMessage: "Kon bouwblokken niet ophalen.")
             stopActivityIndicator(withIndicatorBGView: nil)
         }
+    }
+    
+    func createFutureplan(forResults results: FutureplanResult) {
+        self.clientBuildingblocks = results.buildingblocks!
+        
+        // Add the last buildingblock where client can add new future goals
+        self.clientBuildingblocks.append(ClientBuildingblock(
+            type: BlockType.ADD,
+            name: self.addBuildingblockBlockName))
+        self.collectionView.reloadData()
+        stopActivityIndicator(withIndicatorBGView: nil)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,9 +130,15 @@ class HomescreenViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    func updateFutureplan(withResults results: FutureplanResult) {
+        createFutureplan(forResults: results)
+    }
+    
     // Prepare navigation segue to ComponentViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? ClientComponentViewController {
+            destinationViewController.delegate = self
+            
             if let cell = sender as? BuildingblockCell {
                 if cell.buildingblock != nil {
                     destinationViewController.components = cell.buildingblock?.components

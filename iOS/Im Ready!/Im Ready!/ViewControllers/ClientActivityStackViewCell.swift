@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var openView: UIView!
@@ -23,9 +24,11 @@ class ClientActivityStackViewCell: UITableViewCell {
     @IBOutlet weak var remarksLbl: UILabel!
     @IBOutlet weak var sendAnswerBtn: UIButton!
     @IBOutlet weak var deadlineLbl: UILabel!
+    @IBOutlet weak var statusLbl: UILabel!
     
     var cellExists: Bool = false
     var activity: ClientActivity?
+    var component: ClientComponent?
     var view: ClientActivityViewController!
     
     override func awakeFromNib() {
@@ -36,9 +39,32 @@ class ClientActivityStackViewCell: UITableViewCell {
         self.detailView.layer.backgroundColor = UIColor.white.cgColor
         self.detailView.layer.masksToBounds = false
         self.detailView.layer.shadowColor = UIColor.gray.cgColor
-        self.detailView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.detailView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
         self.detailView.layer.shadowOpacity = 1.0
         self.detailView.layer.shadowRadius = 0.0
+        
+        self.activityDescriptionLbl.adjustsFontSizeToFitWidth = true
+        self.activityDescriptionLbl.numberOfLines = 0
+        self.activityDescriptionLbl.sizeToFit()
+
+        self.answerTextView.layer.masksToBounds = false
+        self.answerTextView.layer.shadowColor = UIColor.black.cgColor
+        self.answerTextView.layer.shadowOpacity = 0.6
+        self.answerTextView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.answerTextView.layer.shadowRadius = 4
+        
+        self.sendAnswerBtn.backgroundColor = UIColor(hexString: "F16122")
+        self.sendAnswerBtn.layer.masksToBounds = false
+        self.sendAnswerBtn.layer.shadowColor = UIColor.black.cgColor
+        self.sendAnswerBtn.layer.shadowOpacity = 0.6
+        self.sendAnswerBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.sendAnswerBtn.layer.shadowRadius = 4
+        
+        self.remarksTextView.layer.masksToBounds = false
+        self.remarksTextView.layer.shadowColor = UIColor.black.cgColor
+        self.remarksTextView.layer.shadowOpacity = 0.6
+        self.remarksTextView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.remarksTextView.layer.shadowRadius = 4
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -66,7 +92,8 @@ class ClientActivityStackViewCell: UITableViewCell {
                                         simpleAlert(atVC: self.view,
                                                     withTitle: "Gelukt!",
                                                     andMessage: "Je antwoord is opgestuurd!")
-                                        
+                                        activityAnswered = true
+                                        self.activity?.answer = self.remarksTextView.text
                                         self.sendAnswerBtn.isHidden = true
                                         self.answerTextView.isEditable = false
             }, onFailure: {

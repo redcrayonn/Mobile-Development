@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum Status {
-    case ONGOING
-    case PENDING
-    case DONE
+enum Status : Int{
+    case ONGOING = 0
+    case PENDING = 1
+    case DONE = 2
 }

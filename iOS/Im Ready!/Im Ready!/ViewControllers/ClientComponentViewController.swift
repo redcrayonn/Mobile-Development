@@ -8,17 +8,42 @@
 
 import UIKit
 
+public var activityAnswered: Bool = false
+protocol UpdateFutureplanDelegate: class {
+    func updateFutureplan(withResults: FutureplanResult)
+}
+
 class ClientComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     var collectionView: UICollectionView!
     var buildingblock: ClientBuildingblock!
     var components: [ClientComponent]!
     var buildingblockImage: UIImageView!
     
+    weak var delegate: UpdateFutureplanDelegate?
+    
     let screenWidth = UIScreen.main.bounds.width
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = buildingblock?.name
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if activityAnswered == true {
+            
+            // Fetch the new futureplan async
+            DispatchQueue.main.async {
+                clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
+                                            onSuccess: { (result) -> Void in
+                                                self.delegate?.updateFutureplan(withResults: result)
+                }, onFailure: {
+                    print("something went wrong")
+                })
+            }
+            
+            activityAnswered = false
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -51,6 +76,7 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? ClientActivityViewController {
+            
             if let cell = sender as? ClientComponentCollectionViewCell {
                 destinationViewController.component = cell.component
                 destinationViewController.activities = (cell.component?.activities)!

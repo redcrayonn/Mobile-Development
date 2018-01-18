@@ -14,8 +14,8 @@ protocol ComponentDelegate: class {
 
 class ChooseNewComponentDetailViewController: UIViewController {
     
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var activitiesTextView: UITextView!
+    @IBOutlet weak var descriptionLbl: UILabel!
+    @IBOutlet weak var activitiesLbl: UILabel!
     @IBOutlet weak var pointsLbl: UILabel!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var activityBG: UIView!
@@ -28,15 +28,14 @@ class ChooseNewComponentDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = component!.name
-        descriptionTextView.text = component?.description
+        descriptionLbl.text = component?.description
         pointsLbl.text = countTotalPoints(component: component!)
         
-        addBtn.layer.cornerRadius = 2.0
         addBtn.layer.masksToBounds = false
         addBtn.layer.shadowColor = UIColor.black.cgColor
         addBtn.layer.shadowOpacity = 0.6
-        addBtn.layer.shadowOffset = CGSize(width: 1, height: 1)
-        addBtn.layer.shadowRadius = 1
+        addBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
+        addBtn.layer.shadowRadius = 4
 
         makeBulletListOfActivities(component: component!)
     }
@@ -45,14 +44,14 @@ class ChooseNewComponentDetailViewController: UIViewController {
         var activities: [String] = []
         
         guard component.activities != nil else {
-            activitiesTextView.text = "Nog geen activiteiten"
+            activitiesLbl.text = "Nog geen activiteiten"
             return
         }
         for a in component.activities! {
             activities.append(a.name!)
         }
         
-        let attributesDictionary = [NSAttributedStringKey.font : activitiesTextView.font]
+        let attributesDictionary = [NSAttributedStringKey.font : activitiesLbl.font]
         let fullAttributedString = NSMutableAttributedString(string: "", attributes: attributesDictionary)
         
         for string: String in activities
@@ -67,7 +66,7 @@ class ChooseNewComponentDetailViewController: UIViewController {
             fullAttributedString.append(attributedString)
         }
         
-        activitiesTextView.attributedText = fullAttributedString
+        activitiesLbl.attributedText = fullAttributedString
     }
     
     func createParagraphAttribute() ->NSParagraphStyle

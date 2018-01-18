@@ -9,22 +9,25 @@
 import Foundation
 
 class Feedback : EntityModel, Decodable {
-    var caregiverId : String?
+    var caregiverName : String?
     var clientActivityId : String?
     var content : String?
+    var sent: String?
     
     enum CodingKeys: String, CodingKey {
-        case caregiverId = "caregiverId"
+        case caregiverName = "CaregiverName"
+        case sent = "Sent"
         case clientActivityId = "clientActivityId"
-        case content = "content"
+        case content = "Content"
     }
     
     required init(from decoder: Decoder) throws {
         super.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
         content = try values.decodeIfPresent(String.self, forKey: .content)
-        caregiverId = try values.decodeIfPresent(String.self, forKey: .caregiverId)
+        caregiverName = try values.decodeIfPresent(String.self, forKey: .caregiverName)
         clientActivityId = try values.decodeIfPresent(String.self, forKey: .clientActivityId)
+        sent = try values.decodeIfPresent(String.self, forKey: .sent)
     }
 
 }

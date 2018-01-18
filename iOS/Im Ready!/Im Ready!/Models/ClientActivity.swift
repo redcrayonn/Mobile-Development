@@ -12,10 +12,10 @@ class ClientActivity : Decodable {
     let name : String?
     let description : String?
     let points : Int?
-    let status: Int?
-    let content: String?
+    var status: Int?
+    var answer: String?
     let deadline: String?
-    let feedback: Feedback?
+    let feedback: [Feedback]?
     let id : String?
     
     enum CodingKeys: String, CodingKey {        
@@ -23,7 +23,7 @@ class ClientActivity : Decodable {
         case description = "Description"
         case points = "Points"
         case id = "Id"
-        case content = "Content"
+        case answer = "Content"
         case feedback = "Feedback"
         case status = "Status"
         case deadline = "Deadline"
@@ -35,8 +35,9 @@ class ClientActivity : Decodable {
         description = try values.decodeIfPresent(String.self, forKey: .description)
         points = try values.decodeIfPresent(Int.self, forKey: .points)
         id = try values.decodeIfPresent(String.self, forKey: .id)
-        content = try values.decodeIfPresent(String.self, forKey: .content)
-        feedback = try Feedback(from: decoder)
+        answer = try values.decodeIfPresent(String.self, forKey: .answer)
+        feedback = try values.decodeIfPresent([Feedback].self, forKey: .feedback)
+//        feedback = try [Feedback](from: decoder)
         status = try values.decodeIfPresent(Int.self, forKey: .status)
         deadline = try values.decodeIfPresent(String.self, forKey: .deadline)
     }

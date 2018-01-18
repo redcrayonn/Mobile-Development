@@ -61,6 +61,7 @@
 		FA8306C81FDEC23B00BC225F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C71FDEC23B00BC225F /* MessageViewController.swift */; };
 		FA8306CA1FDEC34200BC225F /* SendingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */; };
 		FA85ED7D200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */; };
+		FA85ED7F200FE83000AEB7BD /* ConvertDatetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85ED7E200FE83000AEB7BD /* ConvertDatetime.swift */; };
 		FA9CF8CB200BDB5200A983D7 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CA200BDB5200A983D7 /* Appointment.swift */; };
 		FA9CF8CD200BDFD600A983D7 /* AppointmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */; };
 		FA9CF8CF200BE16200A983D7 /* AppointmentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */; };
@@ -173,6 +174,7 @@
 		FA8306C71FDEC23B00BC225F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FA8306C91FDEC34200BC225F /* SendingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNewComponentDetailViewController.swift; sourceTree = "<group>"; };
+		FA85ED7E200FE83000AEB7BD /* ConvertDatetime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertDatetime.swift; sourceTree = "<group>"; };
 		FA9CF8CA200BDB5200A983D7 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		FA9CF8CC200BDFD600A983D7 /* AppointmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentService.swift; sourceTree = "<group>"; };
 		FA9CF8CE200BE16200A983D7 /* AppointmentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentResult.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				FAF1561E1FE9319400C6B9C2 /* ActivityIndicator.swift */,
 				FA4B72611FF5015B00949FF6 /* Alerts.swift */,
 				FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */,
+				FA85ED7E200FE83000AEB7BD /* ConvertDatetime.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
 				FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */,
 				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
+				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
 				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
 			);
 			name = "Add new Component";
@@ -482,7 +486,6 @@
 				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
 				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
 				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
-				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
 				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
 				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
 			);
@@ -907,6 +910,7 @@
 				FA528D9A1FDB1A2100052647 /* Feedback.swift in Sources */,
 				FA85ED7D200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift in Sources */,
 				FA8306C41FDE932F00BC225F /* Status.swift in Sources */,
+				FA85ED7F200FE83000AEB7BD /* ConvertDatetime.swift in Sources */,
 				FA8306C21FDE932500BC225F /* TriggerLevel.swift in Sources */,
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,

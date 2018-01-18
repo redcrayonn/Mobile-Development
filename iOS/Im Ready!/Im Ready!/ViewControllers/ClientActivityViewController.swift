@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import Timepiece
 
 class ClientActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     var tableView: UITableView!
+    
     var activities: [ClientActivity] = []
     var component: ClientComponent!
+    let convertDatetime: ConvertDatetime = ConvertDatetime()
+    var lastCell: ClientActivityStackViewCell = ClientActivityStackViewCell()
     
     var t_count:Int = 0
-    var lastCell: ClientActivityStackViewCell = ClientActivityStackViewCell()
     var button_tag:Int = -1
     var height: Int = 0
+    var cellDetailViewHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +32,6 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         tableView.separatorColor = UIColor.white
         tableView.allowsSelection = false
         tableView.layer.frame.size.height = view.frame.height * 1.5
-//        tableView.frame.origin.y += 100
         tableView.register(UINib(nibName: "ActivityStackViewCell", bundle: nil),
                            forCellReuseIdentifier: "ActivityStackViewCell")
         tableView.delegate = self
@@ -38,6 +42,7 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == button_tag {
+//            return detailViewHeight
             return 450
         } else {
             return 60
@@ -52,50 +57,49 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityStackViewCell", for: indexPath) as! ClientActivityStackViewCell
         
         let activity = activities[indexPath.row]
+        let status = String(describing: Status(rawValue: activity.status!)!)
         
         cell.remarksTextView.isHidden = true
         cell.remarksLbl.isHidden = true
+        cell.statusLbl.isHidden = true
         
         // If the cell does not exist yet, create a new one
         if !cell.cellExists {
-            cell.activityDescriptionLbl.adjustsFontSizeToFitWidth = true
-            cell.activityDescriptionLbl.numberOfLines = 0
             cell.activityDescriptionLbl.text = activity.description
-            cell.activityDescriptionLbl.sizeToFit()
-            
             cell.openDetailViewBtn.setTitle(activity.name, for: .normal)
             cell.openDetailViewBtn.tag = t_count
             cell.openDetailViewBtn.addTarget(self, action: #selector(cellOpened(sender:)), for: .touchUpInside)
-            
-            cell.answerTextView.layer.borderColor = UIColor.gray.cgColor
-            cell.answerTextView.layer.borderWidth = 1.0
-            cell.answerTextView.layer.shadowColor = UIColor.black.cgColor
-            cell.answerTextView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-            
+
             cell.activity = activity
             cell.view = self
-            cell.deadlineLbl.text = activity.deadline
+            
+            let deadline = convertDatetime.toTimeOrDateString(fromDateTime: activity.deadline!, convertTo: .date)
+            cell.deadlineLbl.text = "Deadline\n \(deadline)"
             
             // Set bottom "border" for unfolded view
-            cell.styleCell()            
+            cell.styleCell()
             
-            if let content = activity.content {
+            if let content = activity.answer {
                 cell.answerTextView.text = content
                 cell.answerTextView.isEditable = false
                 cell.sendAnswerBtn.isHidden = true
                 cell.deadlineLbl.isHidden = true
+                cell.statusLbl.text = status
             }
             
-            if activity.feedback != nil {
+            if (activity.feedback?.count)! > 0 {
                 cell.remarksTextView.isHidden = false
-                cell.remarksTextView.layer.borderColor = UIColor.orange.cgColor
-                cell.remarksTextView.layer.borderWidth = 1.0
-                cell.remarksTextView.layer.backgroundColor = UIColor.orange.cgColor
                 cell.remarksTextView.alpha = 0.5
                 cell.remarksLbl.isHidden = false
-                
-                cell.remarksTextView.text = activity.feedback?.content
+
+                var remarks: String = ""
+                for f in activity.feedback! {
+                    remarks.append(f.content!)
+                }
+                cell.remarksTextView.text = remarks
             }
+            
+//            detailViewHeight = calculateHeight(forCell: cell)
             
             cell.cellExists = true
             t_count += 1
@@ -106,6 +110,17 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         return cell
+    }
+    
+    func calculateHeight(forCell cell: ClientActivityStackViewCell) -> CGFloat{
+        let height: CGFloat = cell.activityDescriptionLbl.frame.height +
+        cell.remarksLbl.frame.height +
+        cell.answerTextView.frame.height +
+        cell.statusLbl.frame.height + 450
+        
+        print(height)
+        
+        return height
     }
 
     // If a ActivityStackViewCell is openend, do the animation

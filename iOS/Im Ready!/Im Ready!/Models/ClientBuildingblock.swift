@@ -9,12 +9,12 @@
 import Foundation
 
 class ClientBuildingblock : Decodable{
-    var name : String? = nil
-    var description : String? = nil
-    var block : Buildingblock? = nil
+    var name : String?
+    var description : String?
+    var block : Buildingblock?
     var type : BlockType?
-    var components : [ClientComponent]? = nil
-    var id : String? = nil
+    var components : [ClientComponent]?
+    var id : String?
     
     enum CodingKeys: String, CodingKey {
         case name = "Name"

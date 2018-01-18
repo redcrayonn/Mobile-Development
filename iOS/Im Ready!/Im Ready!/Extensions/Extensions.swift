@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {    
     /// Percent escapes values to be added to a URL query as specified in RFC 3986
@@ -26,31 +27,34 @@ extension String {
         
         return addingPercentEncoding(withAllowedCharacters: allowed)
     }
-}
-
-extension Dictionary {
-    /// Build string representation of HTTP parameter dictionary of keys and objects
-    ///
-    /// This percent escapes in compliance with RFC 3986
-    ///
-    /// http://www.ietf.org/rfc/rfc3986.txt
-    ///
-    /// - returns: String representation in the form of key1=value1&key2=value2 where the keys and values are percent escaped
     
-    func stringFromHttpParameters() -> String {
-        let parameterArray = map { key, value -> String in
-            let percentEscapedKey = (key as! String).addingPercentEncodingForURLQueryValue()!
-            var percentEscapedValue: String
-            if let val = (value as? String) {
-                percentEscapedValue = val.addingPercentEncodingForURLQueryValue()!
-            } else {
-                // in case the type could not be casted (Swift primitive types can not be cast to/from each other) -> create a new string containing the contents
-                percentEscapedValue = String(describing: value).addingPercentEncodingForURLQueryValue()!
-            }
-            return "\(percentEscapedKey)=\(percentEscapedValue)"
-        }
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
         
-        return parameterArray.joined(separator: "&")
+        return ceil(boundingBox.height)
+    }
+    
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+        
+        return ceil(boundingBox.width)
     }
 }
 
+extension NSAttributedString {
+    func height(withConstrainedWidth width: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+        
+        return ceil(boundingBox.height)
+    }
+    
+    func width(withConstrainedHeight height: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+        
+        return ceil(boundingBox.width)
+    }
+}

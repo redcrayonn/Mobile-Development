@@ -1,5 +1,5 @@
 //
-//  ComponentDelegate.swift
+//  Delegates.swift
 //  Im Ready!
 //
 //  Created by Wouter Vermeij on 18/01/2018.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ComponentDelegate: class {
-    func passAddedComponent(component: Component, index: IndexPath)
+protocol AnsweredDelegate: class {
+    func activityAnswered()
 }

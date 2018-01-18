@@ -27,6 +27,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         return formatter
     }()
     
+    let convertDatetime: ConvertDatetime = ConvertDatetime()
     var appointments: [Appointment] = []
     var appointmentsForDate: [Appointment] = []
     var selectedDate: Date = Date.today()
@@ -34,7 +35,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.calendar.select(Date())
         
         // For UITest
@@ -54,9 +55,8 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
+        _ = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
         self.selectedDate = date
         getAppointmentsForDate(fromAppointments: self.appointments)
         
@@ -88,25 +88,24 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
         
-        let startTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].startDate!, convertTo: .time)
-        let endTime = convertToTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].endDate!, convertTo: .time)
+        let startTime = convertDatetime.toTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].startDate!, convertTo: .time)
+        let endTime = convertDatetime.toTimeOrDateString(fromDateTime: appointmentsForDate[indexPath.row].endDate!, convertTo: .time)
         
         cell.titleLbl.text = appointmentsForDate[indexPath.row].title
         cell.timeFrameLbl.text = "\(startTime) - \(endTime)"
         
         return cell
-        
     }
     
     /// Filter the list of appointmets by the selected date of the calendar.
     func getAppointmentsForDate(fromAppointments appointments: [Appointment]) {
         var filteredAppointments: [Appointment] = []
         for appointment in appointments {
-            let dateOfAppointment = convertToTimeOrDateString(fromDateTime: appointment.startDate!,
-                                                              convertTo: .date).date(inFormat: "yyyy-MM-dd")
-            let selectedDate = "\(self.selectedDate.year)-\(self.selectedDate.month)-\(self.selectedDate.day)".date(inFormat: "yyyy-MM-dd")
+            let dateOfAppointment = convertDatetime.toTimeOrDateString(fromDateTime: appointment.startDate!,
+                                                                       convertTo: .date).date(inFormat: "yyyy-MM-dd")
+            let userSelectedDate = "\(self.selectedDate.year)-\(self.selectedDate.month)-\(self.selectedDate.day)".date(inFormat: "yyyy-MM-dd")
             
-            if dateOfAppointment == selectedDate {
+            if dateOfAppointment == userSelectedDate {
                 filteredAppointments.append(appointment)
             }
         }
@@ -116,40 +115,12 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.reloadData()
     }
     
-    /// Convert the DateTime from the API to a representable time
-    func convertToTimeOrDateString(fromDateTime datetime: String, convertTo: DateOrTime) -> String {
-        
-        // Convert to a Date() object
-        let datetimeObject = convertToDateObject(fromDateString: datetime)
-        
-        if convertTo == .time {
-            let minutes: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.minute)
-            let hours: String = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.hour)
-            
-            return "\(hours):\(minutes)"
-            
-        } else if convertTo == .date {
-            let year = datetimeObject.year
-            let month = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.month)
-            let day = prependZeroIfNeeded(forDateOrTimeUnit: datetimeObject.day)
-            
-            return "\(year)-\(month)-\(day)"
-        }
-        
-        return "Could not convert to time or date"
-    }
-    
-    public enum DateOrTime : String {
-        case date
-        case time
-    }
-    
     /// Convert the DateTime from the API to a representable date to add as event to the calendar
     func addEventsToCalendar(fromAppointments appointments: [Appointment]) {
         
         for appointment in appointments {
             let datetime = appointment.startDate!
-            let dateString = convertToTimeOrDateString(fromDateTime: datetime, convertTo: .date)
+            let dateString = convertDatetime.toTimeOrDateString(fromDateTime: datetime, convertTo: .date)
             
             datesWithEvents.append(dateString)
         }
@@ -157,35 +128,9 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         self.calendar.reloadData()
     }
     
-    /// Convert the datetime string to a Date object
-    func convertToDateObject(fromDateString dateString: String) -> Date {
-        // Remove the milliseconds from the string
-        let pattern = "\\.[0-9]*"
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        let correctedDateTime = regex.stringByReplacingMatches(
-            in: dateString,
-            options: [],
-            range: NSMakeRange(0, dateString.count),
-            withTemplate: "")
-        
-        return "\(correctedDateTime)+0100".dateInISO8601Format()!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
-    /// Prepend a zero if needed
-    func prependZeroIfNeeded(forDateOrTimeUnit: Int) -> String {
-        let unit: String = String(forDateOrTimeUnit)
-        
-        // If the unit only has 1 digit, prepend a zero
-        if unit.count == 1 {
-            return "0\(forDateOrTimeUnit)"
-        }
-        
-        return unit
-    }
-    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
     
 }

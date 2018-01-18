@@ -9,16 +9,16 @@
 import Foundation
 
 class ClientComponent : Decodable {
-    var name : String? = nil
-    var description : String? = nil
-    var youtubeUrl: String? = nil
-    var status : Int? = nil
-    var activities : [ClientActivity]? = nil
-    var usefulLinks: UsefulLinks
+    let name : String?
+    let description : String?
+    let youtubeUrl: String?
+    var status : Int?
+    let activities : [ClientActivity]?
+    let usefulLinks: UsefulLinks
 //    var tasks
-    var deadline : String? = nil
-    var component : Component? = nil
-    var id : String? = nil
+    let deadline : String?
+    let component : Component?
+    let id : String?
     
     enum CodingKeys: String, CodingKey {
         case name = "Name"

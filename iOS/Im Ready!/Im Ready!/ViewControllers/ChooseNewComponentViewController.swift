@@ -8,10 +8,6 @@
 
 import UIKit
 
-//protocol ComponentDelegate: class {
-//    func passAddedComponent(component: Component)
-//}
-
 class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ComponentDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
