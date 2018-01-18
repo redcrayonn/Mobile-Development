@@ -41,28 +41,43 @@ namespace ImReady.Controls
                 typeof(ComponentExpander),
                 new PropertyMetadata(null));
 
-        private void SubmitTask_Click(object sender, RoutedEventArgs e)
+        private async void SubmitTask_Click(object sender, RoutedEventArgs e)
         {
-            try
+            ContentDialog confirmDialog = new ContentDialog
             {
-                var button = sender as Button;
-                var activity = button.DataContext as Activity;
-                var parent = (button.Parent as StackPanel).Parent as StackPanel;
-                var input = (parent.FindName("TextContent") as TextBox).Text;
-                activity.Content = input;
-                new ActivityService().CompleteActivity(activity);
-            }
-            catch
+                Title = "Uitwerking inleveren",
+                Content = "Weet u zeker dat u de uitwerking wilt inleveren?",
+                CloseButtonText = "Annuleren",
+                PrimaryButtonText = "Inleveren"
+            };
+
+            ContentDialogResult result = await confirmDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
             {
-                if(Config.GlobalConfig.ShowDebug)
+
+                try
                 {
-                    MessageDialog msg = new MessageDialog($"Er is iets misgegaan: waarschijnlijk is de layout van de expander control gewijzigd.");
-                    msg.ShowAsync();
+                    var button = sender as Button;
+                    var activity = button.DataContext as Activity;
+                    var parent = (button.Parent as FrameworkElement) as FrameworkElement;
+                    var input = (parent.FindName("TextContent") as TextBox).Text;
+                    activity.Content = input;
+                    new ActivityService().CompleteActivity(activity);
+
                 }
-                else
+                catch
                 {
-                    MessageDialog msg = new MessageDialog($"Er is iets misgegaan bij het versturen van de input, probeer het later nogmaals.");
-                    msg.ShowAsync();
+                    if (Config.GlobalConfig.ShowDebug)
+                    {
+                        MessageDialog msg = new MessageDialog($"Er is iets misgegaan: waarschijnlijk is de layout van de expander control gewijzigd.");
+                        msg.ShowAsync();
+                    }
+                    else
+                    {
+                        MessageDialog msg = new MessageDialog($"Er is iets misgegaan bij het versturen van de input, probeer het later nogmaals.");
+                        msg.ShowAsync();
+                    }
                 }
             }
         }

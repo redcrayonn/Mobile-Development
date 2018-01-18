@@ -214,12 +214,14 @@
                             <VisualStateGroup x:Name="ExpandDirectionStates">
                                 <VisualState x:Name="RightDirection" />
 
-                                <VisualState x:Name="DownDirection" />
-
-                                <VisualState x:Name="LeftDirection">
+                                <VisualState x:Name="DownDirection">
                                     <VisualState.Setters>
                                         <Setter Target="ArrowRotation.Value" Value="-90" />
                                     </VisualState.Setters>
+                                </VisualState>
+                                
+                                <VisualState x:Name="LeftDirection">
+                                    
                                 </VisualState>
 
                                 <VisualState x:Name="UpDirection">
@@ -235,7 +237,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider x:Name="ArrowRotation" Visibility="Collapsed" Value="180" Minimum="-180" Maximum="180" />
+                        <Slider x:Name="ArrowRotation" Visibility="Collapsed" Value="90" Minimum="-180" Maximum="180" />
                         <StackPanel>
                             <ContentPresenter 
                                           x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
@@ -543,6 +545,7 @@
                                               FontSize="20"
                                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                               Deadline="{Binding Tag, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                              extensions:Mouse.Cursor="Hand"
                                                   >
                                         <!--<ToggleButton.Resources>
                                             <x:String x:Key="ExpanderSecondaryText">TestHeader</x:String>
