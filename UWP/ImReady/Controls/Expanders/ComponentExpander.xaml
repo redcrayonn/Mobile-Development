@@ -23,6 +23,7 @@
             <converters:ActivityStatusToImageConverter x:Key="ActivityStatusToImageConverter"/>
             <converters:ActivityStatusDoneToVisibilityConverter x:Key="ActivityStatusDoneToVisibilityConverter"/>
             <converters:StringContentToVisibilityConverter x:Key="StringContentToVisibilityConverter"/>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         </ResourceDictionary>        
     </UserControl.Resources>
     <controls:Expander 
@@ -52,88 +53,89 @@
                 RelativePanel.Below="commandbar"  
                 HorizontalAlignment="Stretch" 
                 Padding="20">
-                <ItemsControl 
+                <Grid>
+                    <ItemsControl 
                     ItemsSource="{x:Bind Component.Activities, Mode=OneWay}" 
                     Foreground="Black">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate 
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate 
                             x:DataType="models:Activity">
-                            <!-- Buitenste grid -->
-                            <Grid 
+                                <!-- Buitenste grid -->
+                                <Grid 
                                 Margin="0 0 0 20"
                                 MaxWidth="600">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Column="0" Grid.RowSpan="5">
-                                    <CheckBox  
-                                        IsEnabled="False" 
-                                        Background="Gray"
-                                        IsChecked="{x:Bind Status, Mode=OneWay, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
-                                </StackPanel>
-                                <!--Titel, beschrijving en deadline grid-->
-                                <Grid Grid.Column="1" Grid.Row="0" Margin="20 0 0 0">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="80" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Column="0">
+                                    <StackPanel Grid.Column="0" Grid.RowSpan="5">
+                                        <CheckBox  
+                                        IsEnabled="False" 
+                                        Background="Gray"
+                                        IsChecked="{x:Bind Status, Mode=OneWay, Converter={StaticResource StatusToCheckboxBooleanConverter}}"></CheckBox>
+                                    </StackPanel>
+                                    <!--Titel, beschrijving en deadline grid-->
+                                    <Grid Grid.Column="1" Grid.Row="0" Margin="20 0 0 0">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="80" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
-                                            <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <TextBlock 
+                                        <Grid Grid.Column="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="0" 
                                             Text="{x:Bind Name}"
                                             FontWeight="SemiBold"></TextBlock>
-                                        <TextBlock 
+                                            <TextBlock 
                                             Grid.Column="0" 
                                             Grid.Row="1" 
                                             Text="{x:Bind Description}" 
                                             TextWrapping="WrapWholeWords"
                                             Visibility="{x:Bind Description, Mode=OneWay, FallbackValue=Collapsed, Converter={StaticResource StringContentToVisibilityConverter}}"></TextBlock>
-                                    </Grid>
-                                    <StackPanel Grid.Column="1">
-                                        <Image 
+                                        </Grid>
+                                        <StackPanel Grid.Column="1">
+                                            <Image 
                                             Source="{x:Bind Status, Mode=OneWay, Converter={StaticResource ActivityStatusToImageConverter}}"
                                             Height="30"
                                             Width="30"
                                            ></Image>
-                                        <TextBlock 
+                                            <TextBlock 
                                             Text="{x:Bind DeadlineInDays}" 
                                             TextWrapping="WrapWholeWords" 
                                             TextAlignment="Center"
                                             Visibility="{x:Bind Status, Mode=OneWay,FallbackValue=Collapsed, Converter={StaticResource ActivityStatusDoneToVisibilityConverter}}"
                                             FontWeight="SemiBold">
-                                            <TextBlock.Foreground>
-                                                <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
-                                            </TextBlock.Foreground>
-                                        </TextBlock>
-                                        <!--<TextBlock 
+                                                <TextBlock.Foreground>
+                                                    <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                            <!--<TextBlock 
                                             Text="Is aangepast" 
                                             TextWrapping="WrapWholeWords" 
                                             TextAlignment="Center" 
                                             FontSize="10"
                                             Visibility="{x:Bind}"></TextBlock>-->
-                                    </StackPanel>
-                                </Grid>
-                                <!--Andere regels met informatie-->
-                                <TextBlock 
+                                        </StackPanel>
+                                    </Grid>
+                                    <!--Andere regels met informatie-->
+                                    <TextBlock 
                                     x:Name="FeedbackTitle"
                                     Grid.Column="1" 
                                     Grid.Row="1" 
@@ -143,24 +145,24 @@
                                     Visibility="{x:Bind LatestFeedback.Content, Mode=OneWay,FallbackValue=Collapsed , Converter={StaticResource StringContentToVisibilityConverter}}"
                                     FontSize="14"
                                     ></TextBlock>
-                                <Grid
+                                    <Grid
                                     Grid.Column="1" 
                                     Grid.Row="2"
                                     Margin="20 15 0 15"
                                     Background="#50EF8C61">
-                                    <TextBlock 
+                                        <TextBlock 
                                     x:Name="FeedbackContent"
                                     Text="{x:Bind LatestFeedback.Content, Mode=OneWay}" 
                                     Visibility="{x:Bind LatestFeedback.Content, Mode=OneWay,FallbackValue=Collapsed, Converter={StaticResource StringContentToVisibilityConverter}}"
                                     Padding="20"
                                     FontStyle="Italic"
                                     >
-                                        <TextBlock.Foreground>
-                                            <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                </Grid>
-                                <TextBox          
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBox          
                                         Grid.Column="1" 
                                         Margin="20 0 0 0"
                                         Grid.Row="3"
@@ -174,8 +176,8 @@
                                         TextWrapping="Wrap"
                                         ScrollViewer.VerticalScrollBarVisibility="Visible"
                                          >
-                                </TextBox>
-                                <Button 
+                                    </TextBox>
+                                    <Button 
                                     Grid.Column="1" 
                                     Grid.Row="4" 
                                     x:Name="SubmitTask" 
@@ -187,15 +189,21 @@
                                     Width="125"
                                     Height="36"
                                     >
-                                    <Button.Background>
-                                        <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
-                                    </Button.Background>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                </ScrollViewer>
+                                        <Button.Background>
+                                            <SolidColorBrush Color="{StaticResource ThemeOrangeDefault}"></SolidColorBrush>
+                                        </Button.Background>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock 
+                        HorizontalAlignment="Center"
+                        Text="Er zijn geen activiteiten gevonden." 
+                        Foreground="Black"
+                        Visibility="{x:Bind Component.Activities, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
+                </Grid>
+            </ScrollViewer>
             </Grid>
         </controls:Expander>
 </UserControl>
