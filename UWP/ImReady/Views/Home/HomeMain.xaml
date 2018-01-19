@@ -53,55 +53,44 @@
         CompactPaneLength="50"
         OpenPaneLength="150">
         <SplitView.Pane>
-            <StackPanel Background="Gray">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
-                    Width="50" Height="50" Background="Transparent"/>
-                    <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                        Width="50" Height="50" Background="Transparent"/>
-                    <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
-                        Width="50" Height="50" Background="Transparent"/>
-                    <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
-            </StackPanel>
+            <Grid Background="White" Width="600">
+                
+            </Grid>
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
-                <CommandBar
-                    IsOpen="True"
-                    Background="Transparent"
-                    Foreground="White"
-                    >
-                    <CommandBar.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <AppBarButton x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                            Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"
-                            Margin="20 0" Visibility="Collapsed"
-                            />
-                            <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
-                        </StackPanel>
-                    </CommandBar.Content>
-                    <AppBarButton Icon="Message" Foreground="White"/>
-                    <AppBarButton Icon="Refresh" Click="AppBarButton_Click" Foreground="White"/>
-                </CommandBar>
                 <ScrollViewer>
-                    <GridView 
-                    ItemsSource="{x:Bind ViewModel.FuturePlan.Blocks, Mode=OneWay}" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    ItemTemplateSelector="{StaticResource MyTemplateSelector}"
-                    Margin="50"
-                    MaxWidth="1024" 
-                    ItemClick="GridView_ItemClick"
-                    IsItemClickEnabled="True"
-                    >
-                    </GridView>
+                    <Grid>
+                        <CommandBar
+                            IsOpen="False"
+                            Background="Transparent"
+                            Foreground="White"
+                            >
+                            <CommandBar.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <AppBarButton x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                            Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"
+                            Margin="20 0" 
+                            />
+                                    <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
+                                </StackPanel>
+                            </CommandBar.Content>
+                            <AppBarButton Icon="Message" Foreground="White"/>
+                            <AppBarButton Icon="Refresh" Click="AppBarButton_Click" Foreground="White"/>
+                        </CommandBar>
+                        <GridView 
+                            ItemsSource="{x:Bind ViewModel.FuturePlan.Blocks, Mode=OneWay}" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            ItemTemplateSelector="{StaticResource MyTemplateSelector}"
+                            Margin="50"
+                            MaxWidth="1024" 
+                            ItemClick="GridView_ItemClick"
+                            IsItemClickEnabled="True"
+                            >   
+                        </GridView>
+                    </Grid>
+                    
                 </ScrollViewer>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 30" Visibility="{x:Bind ViewModel.FuturePlan, Mode=OneWay, Converter={StaticResource NotNullToVisibilityConverter}}">
                     <Image Source="ms-appx:///Assets/Material/readyIcon_White.png" Width="40" Height="40"></Image>
