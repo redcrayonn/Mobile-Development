@@ -44,6 +44,7 @@
                                      AddBlockTemplate="{StaticResource AddBuildingBlock}">
         </templateSelectors:HomeTemplateSelector>
         <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
+        <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter"/>
     </Page.Resources>
     <SplitView 
         Name="MySplitView"
@@ -102,6 +103,13 @@
                     >
                     </GridView>
                 </ScrollViewer>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 30" Visibility="{x:Bind ViewModel.FuturePlan, Mode=OneWay, Converter={StaticResource NotNullToVisibilityConverter}}">
+                    <Image Source="ms-appx:///Assets/Material/readyIcon_White.png" Width="40" Height="40"></Image>
+                    <StackPanel Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="{x:Bind ViewModel.FuturePlan.EarnedPoints, Mode=OneWay}" Foreground="White"></TextBlock>
+                        <TextBlock Text="punten" Foreground="White"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
                 <ProgressRing 
                 x:Name="progress1" 
                 RelativePanel.Below="LoginSubmit"
