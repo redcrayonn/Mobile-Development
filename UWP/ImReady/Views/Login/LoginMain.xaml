@@ -5,6 +5,7 @@
     xmlns:local="using:ImReady.Views.Login"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d">
 
     <Page.Background>
@@ -50,7 +51,7 @@
                 RelativePanel.Below="LoginPassword" 
                 HorizontalAlignment="Stretch" 
                 Content="LOGIN"
-                
+                extensions:Mouse.Cursor="Hand"
                 FontFamily="ms-appx:/Assets/Fonts/Roboto-Regular.ttf#Roboto"
                 Foreground="White" Click="LoginSubmit_Click"
                 >

@@ -10,6 +10,7 @@
     xmlns:viewmodel2="using:ImReady.ViewModels"
     xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors"
     xmlns:converters="using:ImReady.Helpers.Converters"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     >
     <Page.DataContext>
         <viewmodel2:HomeMainViewModel/>
@@ -101,6 +102,7 @@
                     Content="UITLOGGEN"
                     Foreground="White"
                     Width="280" Click="SplitLogout_Click"
+                    extensions:Mouse.Cursor="Hand"
                     ></Button>
             </RelativePanel>
         </SplitView.Pane>

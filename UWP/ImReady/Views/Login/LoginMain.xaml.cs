@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using System.Windows.Input;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,6 +47,12 @@ namespace ImReady.Views.Login
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Soms werkt de backbutton logica in App.cs niet, zorg er altijd voor dat je niet in een 
+            //rare situatie terecht komt door back button op login scherm. Het was mogelijk om bv terug
+            //naar home te gaan als je op de uitlog knop drukte.
+            var frame = Window.Current.Content as Frame;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
             HideLoginUI();
 
             LoadImages();
