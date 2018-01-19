@@ -51,5 +51,22 @@ namespace ImReady.Services.Web
             }
             return result;
         }
+
+        public async Task<Client> GetClient(string id)
+        {
+            var clientUrl = "client";
+
+            var uri = apiMainUrl + clientUrl + $"/{id}";
+            var httpMethod = HttpMethod.Get;
+            //var parameters = new Dictionary<string, string>()
+            //        {
+            //            { "UserName", userName },
+            //            { "Password", password },
+            //            { "grant_type", "password" }
+            //        };
+
+            var result = await BaseClient.HandleAsync<Client>(uri, httpMethod);
+            return result;
+        }
     }
 }

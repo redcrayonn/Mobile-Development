@@ -71,5 +71,15 @@ namespace ImReady.Views.Home
             FuturePlanRepo.CachedFuturePlan = null;
             Frame.Navigate(typeof(Login.LoginMain));
         }
+
+        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Messages.Messages));
+        }
+
+        private void SplitMessages_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Messages.Messages));
+        }
     }
 }

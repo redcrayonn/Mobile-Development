@@ -84,7 +84,7 @@
                         <SolidColorBrush Color="{StaticResource ThemePurpleDark}"></SolidColorBrush>
                     </Line.Stroke>
                 </Line>
-                <StackPanel RelativePanel.Below="SplitDivider" Name="SplitMessages" Orientation="Horizontal" Margin="10 40 0 0">
+                <StackPanel RelativePanel.Below="SplitDivider" Name="SplitMessages" Orientation="Horizontal" Margin="10 40 0 0" KeyDown="SplitMessages_KeyDown">
                     <Image Source="ms-appx:///Assets/Material/ic_email_deep_orange_400_48dp.png" Width="30" Height="30"></Image>
                     <TextBlock Text="Berichten" FontSize="23" FontWeight="Light" Margin="20 0 0 0"></TextBlock>
                 </StackPanel>
@@ -124,7 +124,7 @@
                                     <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
                                 </StackPanel>
                             </CommandBar.Content>
-                            <AppBarButton Icon="Message" Foreground="White"/>
+                            <AppBarButton Icon="Message" Foreground="White" Click="AppBarButton_Click_1"/>
                             <AppBarButton Icon="Refresh" Click="AppBarButton_Click" Foreground="White"/>
                         </CommandBar>
                         <GridView 

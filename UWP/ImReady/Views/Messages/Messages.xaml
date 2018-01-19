@@ -1,0 +1,67 @@
+﻿<Page
+    x:Class="ImReady.Views.Messages.Messages"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImReady.Views.Messages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extension="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:models="using:ImReady.Models"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <Grid>
+                <CommandBar
+                    Background="#303030"
+                    Foreground="White"
+                    x:Name="commandbar"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    VerticalContentAlignment="Center"
+                    >
+                    <CommandBar.Content>
+                        <TextBlock  Text="Zorgverlener naam"
+                                Foreground="White"  
+                                FontSize="25" 
+                                Padding="65 0 0 0 "
+                                FontWeight="Normal"
+                                   />
+                    </CommandBar.Content>
+                </CommandBar>
+                <ListView
+                    Margin="0 60"
+                    ItemsSource="{x:Bind ViewModel.Messages, Mode=OneWay}"
+                    >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Message">
+                            <TextBlock Text="{x:Bind Content}" Foreground="Black"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>           
+        </ScrollViewer>
+        <Grid MaxWidth="800" VerticalAlignment="Bottom">
+            <TextBox
+            Name="MessageInput"
+            PlaceholderText="Type uw bericht..."
+            
+            Height="100"
+            TextWrapping="Wrap"
+            Margin="0 0 100 0"
+            ></TextBox>
+            <Button
+                Name="MessageSubmit"
+                Width="100"
+                Height="100"
+                Content="Verstuur"
+                Foreground="White"
+                extension:Mouse.Cursor="Hand"
+                HorizontalAlignment="Right"
+                BorderBrush="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}"
+                >
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -120,11 +120,15 @@
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityStatus.cs" />
     <Compile Include="Models\BuildingBlock.cs" />
+    <Compile Include="Models\Caregiver.cs" />
+    <Compile Include="Models\Chat.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientTask.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\FuturePlan.cs" />
     <Compile Include="Models\InputModels\ActivityInputModel.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Results\LoginResult.cs" />
     <Compile Include="Models\UsefulLink.cs" />
     <Compile Include="Models\User.cs" />
@@ -134,11 +138,13 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\BuildingBlockComponentService.cs" />
     <Compile Include="Services\BuildingBlockService.cs" />
+    <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\FuturePlanService.cs" />
     <Compile Include="Services\Interfaces\IBaseService.cs" />
     <Compile Include="Services\Interfaces\IActivityService.cs" />
     <Compile Include="Services\Interfaces\IBuildingBlockComponentService.cs" />
     <Compile Include="Services\Interfaces\IBuildingBlockService.cs" />
+    <Compile Include="Services\MessagingService.cs" />
     <Compile Include="Services\Mock\MockActivityService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockComponentService.cs" />
     <Compile Include="Services\Mock\MockBuildingBlockService.cs" />
@@ -147,12 +153,14 @@
     <Compile Include="Services\Web\BaseService.cs" />
     <Compile Include="Services\Web\ComponentWebService.cs" />
     <Compile Include="Services\Web\FuturePlanWebService.cs" />
+    <Compile Include="Services\Web\MessagingWebService.cs" />
     <Compile Include="Services\Web\UserWebService.cs" />
     <Compile Include="ViewModels\BuildingBlockListViewModel.cs" />
     <Compile Include="ViewModels\AddableComponentsListViewModel.cs" />
     <Compile Include="ViewModels\ComponentDetailViewModel.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\HomeMainViewModel.cs" />
+    <Compile Include="ViewModels\MessagesViewModel.cs" />
     <Compile Include="ViewModels\MyItemViewModel.cs" />
     <Compile Include="Views\AddComponent\BuildingBlockList.xaml.cs">
       <DependentUpon>BuildingBlockList.xaml</DependentUpon>
@@ -174,6 +182,9 @@
     </Compile>
     <Compile Include="Views\Login\LoginMain.xaml.cs">
       <DependentUpon>LoginMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messages\Messages.xaml.cs">
+      <DependentUpon>Messages.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login\LoginMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messages\Messages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

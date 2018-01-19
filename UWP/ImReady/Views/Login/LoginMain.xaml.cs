@@ -85,6 +85,7 @@ namespace ImReady.Views.Login
                 CurrentUser.SingleInstance.AccessToken = loginResult.access_token;
                 CurrentUser.SingleInstance.Username = loginResult.UserName;
                 CurrentUser.SingleInstance.FirstName = loginResult.firstname;
+                CurrentUser.SingleInstance.UserType = loginResult.user_type;
 
                 //TODO: add checkbox for saving credentials 
                 //Store username and password for future logins
