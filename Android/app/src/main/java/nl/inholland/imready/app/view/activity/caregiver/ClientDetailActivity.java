@@ -20,7 +20,6 @@ import retrofit2.Response;
 
 public class ClientDetailActivity extends AppCompatActivity implements Callback<Client> {
     String clientId;
-    RelativeLayout futureplanActionView;
     ClientService clientService;
     ProgressBar progressBar;
     private String clientName;
@@ -30,16 +29,26 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_detail);
 
-        futureplanActionView = findViewById(R.id.futureplan);
-        futureplanActionView.setOnClickListener(v -> gotoFutureplan());
-
-        //futureplanActionView.findViewById(R.id.action_image);
         progressBar = findViewById(R.id.progressbar);
 
+        setupScreen();
+        setButtonListeners();
+    }
+
+    private void setButtonListeners() {
+        View futureplanActionView = findViewById(R.id.futureplan);
+        futureplanActionView.setOnClickListener(v -> gotoFutureplan());
+
+        View notesActionView = findViewById(R.id.notes_button);
+        notesActionView.setOnClickListener(v -> gotoNotes());
+    }
+
+    private void setupScreen() {
         Intent intent = getIntent();
         clientId = intent.getStringExtra("clientId");
-
         int notificationCount = intent.getIntExtra("notifications", 0);
+
+
         TextView notifications = findViewById(R.id.clientNotifications);
 
         if (notificationCount != 0){
@@ -49,27 +58,31 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
             notifications.setVisibility(View.INVISIBLE);
 
         if (clientId != null){
-            ApiClient client = ApiManager.getClient();
-            clientService = client.getClientService();
-            setProgressbarVisible(true);
-            clientService.getClient(clientId).enqueue(this);
+            getClientDetails(clientId);
         }
         else{
-            String errorText = "Oops, something went wrong. Try again please";
-            Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Oops, something went wrong. Try again please", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void getClientDetails(String clientId) {
+        //Activate spinner
+        setProgressbarVisible(true);
+
+        //Api call
+        ApiClient client = ApiManager.getClient();
+        clientService = client.getClientService();
+        clientService.getClient(clientId).enqueue(this);
     }
 
     @Override
     public void onResponse(Call<Client> call, Response<Client> response) {
         if (response.isSuccessful()) {
-            //Toast.makeText(this, "Succes!", Toast.LENGTH_SHORT).show();
             Client client = response.body();
             fillData(client);
 
             clientName = client.getFirstName();
             setProgressbarVisible(false);
-
         }
     }
 
@@ -109,6 +122,8 @@ public class ClientDetailActivity extends AppCompatActivity implements Callback<
     }
 
     private void gotoNotes(){
-        
+        Intent intent = new Intent(this, NoteListActivity.class);
+        intent.putExtra("clientName", clientName);
+        startActivity(intent);
     }
 }

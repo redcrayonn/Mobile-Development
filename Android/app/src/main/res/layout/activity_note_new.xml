@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nl.inholland.imready.app.view.activity.caregiver.NoteNewActivity">
+    <TextView
+        android:id="@+id/no_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/md"
+        android:layout_marginTop="@dimen/sm"
+        android:gravity="center"
+        android:text="@string/function_not_available" />
+</LinearLayout>

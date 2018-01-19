@@ -37,10 +37,6 @@ public class CaregiverHomeActivity extends AppCompatActivity implements AdapterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_home);
 
-        // Toolbar
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitle("Cliënten");
-        //setSupportActionBar(toolbar);
         initRefresh();
         initListView();
 

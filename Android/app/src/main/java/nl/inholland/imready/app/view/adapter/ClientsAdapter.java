@@ -14,10 +14,6 @@ import nl.inholland.imready.R;
 import nl.inholland.imready.app.view.holder.CaregiverHomeViewHolder;
 import nl.inholland.imready.service.model.ClientsResponse;
 
-/**
- * Created by Peter on 17/12/2017.
- */
-
 public class ClientsAdapter extends BaseAdapter implements DataHolder<List<ClientsResponse>> {
     private List<ClientsResponse> clients;
 

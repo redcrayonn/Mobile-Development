@@ -1,6 +1,5 @@
 package nl.inholland.imready.app.view.activity.caregiver;
 
-import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -40,7 +39,6 @@ public class CaregiverFeedbackActivity extends AppCompatActivity implements Call
     private String clientName;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_feedback);
@@ -58,8 +56,6 @@ public class CaregiverFeedbackActivity extends AppCompatActivity implements Call
     }
 
     private void sendFeedback(boolean isApproved) {
-        //setProgressbarVisible(true);
-
         EditText feedback = findViewById(R.id.feedback_input);
 
         ApiClient client = ApiManager.getClient();
@@ -171,17 +167,16 @@ public class CaregiverFeedbackActivity extends AppCompatActivity implements Call
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(FeedbackViewEvent event) {
-
+        //Necessary to work, no need for code in here though
     }
 
     @Override
     public void onResponse(Call<Void> call, Response<Void> response) {
-        Toast.makeText(this, "Hey, er is iets terug!", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
     }
 
     @Override
     public void onFailure(Call<Void> call, Throwable t) {
-        Toast.makeText(this, "Hey, er is iets terug! En dat is een error...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Er is iets mis gegaan, probeer het opnieuw.", Toast.LENGTH_LONG).show();
     }
 }

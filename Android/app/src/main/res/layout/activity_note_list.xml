@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="nl.inholland.imready.app.view.activity.caregiver.NoteListActivity">
+    <TextView
+        android:id="@+id/clientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/md"
+        android:layout_marginTop="@dimen/sm"
+        android:background="@color/colorAccent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+        android:textStyle="bold"
+        android:gravity="center"
+        tools:text="Notities | Joep Bakker"/>
+    <TextView
+        android:id="@+id/no_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/md"
+        android:layout_marginTop="@dimen/sm"
+        android:gravity="center"
+        android:text="@string/no_notes_available" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/xl">
+        <Button
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_round"
+            android:backgroundTint="@color/colorAccent"
+            android:text="+"
+            android:textColor="@color/colorNeutral"
+            android:textSize="24sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="addNote"/>
+    </RelativeLayout>
+</LinearLayout>
+

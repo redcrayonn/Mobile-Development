@@ -69,18 +69,17 @@
                     android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xx-xxxxxxxx"
-                    tools:text="06-39274983"/>
+                    android:text="@string/function_not_available"/>
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="joepznhuis 13a"/>
+                    android:text="@string/function_not_available"/>
                 <TextView
                     android:id="@+id/birthdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="34-13-2000"/>
+                    android:text="@string/function_not_available"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -92,8 +91,8 @@
 
             android:divider="@drawable/empty_divider_sm">
             <include layout="@layout/list_item_caregiver_action_futureplan" android:id="@+id/futureplan"/>
-            <include layout="@layout/list_item_caregiver_action_notes"/>
-            <include layout="@layout/list_item_caregiver_action_appointments"/>
+            <include layout="@layout/list_item_caregiver_action_notes" android:id="@+id/notes_button"/>
+            <include layout="@layout/list_item_caregiver_action_appointments" android:id="@+id/calendar_button"/>
         </LinearLayout>
 
     </LinearLayout>
