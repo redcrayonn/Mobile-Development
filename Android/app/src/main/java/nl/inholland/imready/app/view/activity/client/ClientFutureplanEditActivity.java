@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -87,6 +88,16 @@ public class ClientFutureplanEditActivity extends AppCompatActivity implements C
         Component component = (Component) adapter.getChild(groupPosition, childPosition);
         goToComponentView(component);
         return component != null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // fix for a navigation bug in android; https://stackoverflow.com/a/29464116
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

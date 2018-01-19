@@ -35,7 +35,7 @@ public class RestClient extends BaseClient {
 
     @Override
     public MessageBaseService getMessageService() {
-        return retrofit.create(MessageClientService.class);
+        return retrofit.create(MessageBaseService.class);
     }
 
     @Override

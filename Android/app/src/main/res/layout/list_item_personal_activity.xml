@@ -19,9 +19,10 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/activity_checkbox"
         android:layout_marginTop="6dp"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:paddingStart="@dimen/sm"
+        android:paddingEnd="@dimen/sm">
         <RelativeLayout
-            android:paddingHorizontal="@dimen/sm"
             android:id="@+id/activity_info_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_deadline_icon"
                     android:text="@string/status_pending"
-                    android:textSize="@dimen/sm"
+                    android:textSize="@dimen/text_sm"
                     android:maxWidth="@dimen/xxml"
                     android:gravity="center_horizontal"
                     android:textColor="@color/colorAccent"
@@ -82,23 +83,49 @@
                     tools:visibility="visible"/>
             </RelativeLayout>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/activity_feedback_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_info_container"
+            android:layout_marginBottom="@dimen/sm"
+            android:visibility="gone"
+            tools:visibility="visible">
 
+            <TextView
+                android:id="@+id/activity_feedback_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/activity_feedback_by"/>
+
+            <TextView
+                android:id="@+id/activity_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_feedback_label"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="italic"
+                android:textColor="@color/colorAccent"
+                android:padding="@dimen/sm"
+                android:layout_marginTop="@dimen/xs"
+                android:background="@drawable/bg_feedback"
+                tools:text="Je bent er bijna, maar ik mis nog wat diversiteit in je zoekwerk. Kijk ook eens op andere sites zoals .... \n\n-John"/>
+
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/activity_action_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_info_container"
-            android:padding="@dimen/sm">
+            android:layout_below="@id/activity_feedback_container">
 
             <TextView
                 android:id="@+id/activity_input_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:labelFor="@id/activity_input"
-                style="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
                 android:text="@string/activity_input"/>
-
-
 
             <EditText
                 android:id="@+id/activity_input"

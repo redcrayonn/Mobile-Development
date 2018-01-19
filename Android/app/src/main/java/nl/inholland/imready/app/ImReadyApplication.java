@@ -17,11 +17,15 @@ import java.util.List;
 import nl.inholland.imready.app.persistence.BlockStore;
 import nl.inholland.imready.app.persistence.CaregiverCache;
 import nl.inholland.imready.app.persistence.ClientCache;
+import nl.inholland.imready.app.persistence.ClientStore;
 import nl.inholland.imready.app.persistence.ClientsStore;
 import nl.inholland.imready.app.persistence.FutureplanStore;
+import nl.inholland.imready.app.persistence.MessagesStore;
 import nl.inholland.imready.app.persistence.UserCache;
 import nl.inholland.imready.model.blocks.Block;
 import nl.inholland.imready.model.enums.UserRole;
+import nl.inholland.imready.model.user.Chat;
+import nl.inholland.imready.model.user.Client;
 import nl.inholland.imready.service.model.ClientsResponse;
 import nl.inholland.imready.service.model.FutureplanResponse;
 import okio.BufferedSource;
@@ -36,7 +40,9 @@ public class ImReadyApplication extends Application {
     private Store<FutureplanResponse, BarCode> futureplanStore;
     private Store<List<Block>, BarCode> blocksStore;
     private Store<List<ClientsResponse>, BarCode> clientsStore;
+    private Store<Chat, BarCode> messagesStore;
     private UserRole currentUserRole;
+    private Store<Client, BarCode> clientStore;
 
     @Override
     public void onCreate() {
@@ -52,6 +58,8 @@ public class ImReadyApplication extends Application {
         this.futureplanStore = FutureplanStore.create();
         this.blocksStore = BlockStore.create();
         this.clientsStore = ClientsStore.create();
+        this.messagesStore = MessagesStore.create();
+        this.clientStore = ClientStore.create();
     }
 
     @Override
@@ -98,6 +106,10 @@ public class ImReadyApplication extends Application {
         return clientsStore;
     }
 
+    public Store<Chat, BarCode> getMessagesStore() {
+        return messagesStore;
+    }
+
     public UserRole getCurrentUserRole() {
         if (currentUserRole == null) {
             throw new NullPointerException("A userrole was not set for the application");
@@ -112,5 +124,9 @@ public class ImReadyApplication extends Application {
     public String getCurrentUserId() {
         UserCache cache = this.getCache(getCurrentUserRole());
         return cache.getUserId();
+    }
+
+    public Store<Client, BarCode> getClientStore() {
+        return clientStore;
     }
 }

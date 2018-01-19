@@ -2,6 +2,7 @@ package nl.inholland.imready.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.model.blocks.PersonalBlock;
@@ -12,9 +13,9 @@ public class Client extends User {
     @SerializedName("Caregiver")
     private Caregiver caregiver;
     @SerializedName("Blocks")
-    private List<PersonalBlock> blocks;
+    private List<PersonalBlock> blocks = new ArrayList<>();
     @SerializedName("Relatives")
-    private List<Relative> relatives;
+    private List<Relative> relatives = new ArrayList<>();
 
     public long getPoints() {
         return points;

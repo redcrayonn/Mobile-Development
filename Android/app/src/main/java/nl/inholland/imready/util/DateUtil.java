@@ -11,7 +11,7 @@ public class DateUtil {
         fromCalendar.setTime(from);
         Calendar toCalendar = Calendar.getInstance();
         toCalendar.setTime(to);
-        long msDiff = fromCalendar.getTimeInMillis() - toCalendar.getTimeInMillis();
+        long msDiff = toCalendar.getTimeInMillis() - fromCalendar.getTimeInMillis();
         return TimeUnit.MILLISECONDS.toDays(msDiff);
     }
 }

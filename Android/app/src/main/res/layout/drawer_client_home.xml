@@ -93,7 +93,7 @@
                 android:drawableStart="@drawable/ic_group"
                 style="?android:attr/borderlessButtonStyle"
                 android:theme="@style/App.Button.Borderless.Primary"
-                android:text="@string/family"
+                android:text="@string/caretakers"
                 android:textAlignment="textStart"
                 android:drawablePadding="20dp"/>
 

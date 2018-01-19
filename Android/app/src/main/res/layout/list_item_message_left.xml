@@ -18,12 +18,11 @@
         android:paddingEnd="0dp"
         android:paddingStart="@dimen/md">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingBottom="@dimen/sm"
-            android:paddingEnd="@dimen/md"
+            android:paddingEnd="@dimen/sm"
             android:paddingStart="@dimen/md"
             android:paddingTop="@dimen/sm">
 
@@ -33,6 +32,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="incoming content" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/message_sent_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/content"
+                android:layout_alignBottom="@id/content"
+                android:layout_marginStart="@dimen/sm"
+                android:textSize="@dimen/text_sm"
+                android:textColor="@android:color/darker_gray"
+                tools:text="13:37"/>
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

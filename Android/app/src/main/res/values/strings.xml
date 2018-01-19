@@ -61,4 +61,9 @@
     <string name="activity_handed_in">Opdracht ingeleverd!</string>
     <string name="no_notes_available">Er zijn nog geen notities beschikbaar</string>
     <string name="function_not_available">Deze functie is nog niet beschikbaar</string>
+    <string name="activity_feedback_by">Commentaar van %1$s</string>
+    <string name="your_caregiver">je zorgverlener</string>
+    <string name="empty_description">Geen beschrijving beschikbaar</string>
+    <string name="user_info_failed">Kon de gebruikersgegevens niet ophalen</string>
+    <string name="caretakers">Zorgverleners</string>
 </resources>

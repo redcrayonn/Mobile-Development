@@ -21,6 +21,9 @@ public interface ClientService {
                                @Path("componentId") String componentId);
 
     @GET("client/{clientId}")
+    Single<ResponseBody> getClientInfo(@Path("clientId") String clientId);
+
+    @GET("client/{clientId}")
     Call<Client> getClient(@Path("clientId") String clientId);
 
     @PUT("client/{clientId}/activity/{activityId}")

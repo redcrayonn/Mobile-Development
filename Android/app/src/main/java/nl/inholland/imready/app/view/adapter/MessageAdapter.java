@@ -34,11 +34,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> impl
         View view;
         switch (viewType) {
             case MESSAGE_RIGHT:
-                view = layoutInflater.inflate(R.layout.list_item_message_right, parent, true);
+                view = layoutInflater.inflate(R.layout.list_item_message_right, parent, false);
                 return new MessageViewHolder(view);
             default:
             case MESSAGE_LEFT:
-                view = layoutInflater.inflate(R.layout.list_item_message_left, parent, true);
+                view = layoutInflater.inflate(R.layout.list_item_message_left, parent, false);
                 return new MessageViewHolder(view);
         }
     }

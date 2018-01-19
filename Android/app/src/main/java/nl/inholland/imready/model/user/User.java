@@ -2,6 +2,7 @@ package nl.inholland.imready.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.inholland.imready.model.EntityModel;
@@ -17,7 +18,7 @@ public abstract class User extends EntityModel {
     @SerializedName("Role")
     private UserRole role;
     @SerializedName("Notifications")
-    private List<Notification> notifications;
+    private List<Notification> notifications  = new ArrayList<>();
 
     public UserRole getRole() {
         return role;

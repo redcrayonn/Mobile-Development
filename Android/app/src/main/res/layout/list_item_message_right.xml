@@ -18,21 +18,34 @@
         android:paddingEnd="@dimen/md"
         android:paddingStart="0dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingBottom="@dimen/sm"
             android:paddingEnd="@dimen/md"
-            android:paddingStart="@dimen/md"
+            android:paddingStart="@dimen/sm"
             android:paddingTop="@dimen/sm">
 
             <TextView
-                android:id="@+id/content"
-                style="@style/TextAppearance.AppCompat.Inverse"
+                android:id="@+id/message_sent_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="outgoing content" />
-        </LinearLayout>
+                android:layout_alignBottom="@id/content"
+                android:layout_marginEnd="@dimen/sm"
+                android:textSize="@dimen/text_sm"
+                android:textColor="@android:color/white"
+                tools:text="13:37"/>
+
+            <TextView
+                android:id="@+id/content"
+                style="@style/TextAppearance.AppCompat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/message_sent_time"
+                android:textColor="@android:color/white"
+                tools:text="incoming content" />
+
+
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

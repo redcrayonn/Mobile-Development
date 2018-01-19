@@ -49,7 +49,7 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
 
     @Override
     public void saveActivity(PersonalActivity activity) {
-        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        /*UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
         ClientService clientService = ApiManager.getClient(true).getClientService();
         PutClientActivityModel model = new PutClientActivityModel(activity.getStatus(), activity.getContent());
         clientService.putActivity(cache.getUserId(), activity.getId(), model).enqueue(new Callback<Void>() {
@@ -62,6 +62,6 @@ public class ClientBlockDetailsPresenterImpl implements ClientBlockDetailsPresen
             public void onFailure(Call<Void> call, Throwable t) {
                 //ignore
             }
-        });
+        });*/
     }
 }

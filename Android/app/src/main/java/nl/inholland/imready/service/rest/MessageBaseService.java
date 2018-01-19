@@ -1,24 +1,20 @@
 package nl.inholland.imready.service.rest;
 
-import java.util.List;
-
+import io.reactivex.Single;
 import nl.inholland.imready.model.user.Message;
 import nl.inholland.imready.service.model.EmptyResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.DELETE;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface MessageBaseService {
-    @GET
-    Call<List<Message>> getMessages(String id, Integer count);
 
-    @GET
-    Call<Message> getMessage(String id, String messageId);
+    @GET("user/{userId}/chat/{receiverId}")
+    Single<ResponseBody> getChat(@Path("userId") String userId, @Path("receiverId") String receiverId);
 
-    @FormUrlEncoded
-    Call<EmptyResponse> postMessage(String id, Message body);
-
-    @DELETE
-    Call<EmptyResponse> deleteMessage(String id, String messageId);
+    @POST("user/{userId}/chat/{receiverId}")
+    Call<EmptyResponse> postMessage(@Path("userId") String userId, @Path("receiverId") String receiverId, @Body Message body);
 }

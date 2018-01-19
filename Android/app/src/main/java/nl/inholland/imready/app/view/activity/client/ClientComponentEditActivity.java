@@ -41,7 +41,7 @@ public class ClientComponentEditActivity extends AppCompatActivity implements Cl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_component_edit);
 
-        ApiClient apiClient = ApiManager.getClient(true);
+        ApiClient apiClient = ApiManager.getClient();
         ClientService clientService = apiClient.getClientService();
 
         // Button

@@ -25,21 +25,24 @@ import nl.inholland.imready.model.blocks.PersonalBlock;
 import nl.inholland.imready.model.blocks.PersonalComponent;
 import nl.inholland.imready.model.enums.BlockPartStatus;
 import nl.inholland.imready.model.enums.UserRole;
+import nl.inholland.imready.model.user.Client;
 import nl.inholland.imready.service.model.FutureplanResponse;
 
 import static android.content.Context.MODE_PRIVATE;
 import static br.com.zbra.androidlinq.Linq.stream;
 
-public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObserver<FutureplanResponse> {
+public class ClientHomePresenterImpl implements ClientHomePresenter {
     @NonNull
     private final ClientHomeView view;
     private final Store<FutureplanResponse, BarCode> store;
+    private final Store<Client, BarCode> clientStore;
     private final Context context;
 
-    public ClientHomePresenterImpl(@NonNull ClientHomeView view, Store<FutureplanResponse, BarCode> store) {
+    public ClientHomePresenterImpl(@NonNull ClientHomeView view, Store<FutureplanResponse, BarCode> store, Store<Client, BarCode> clientStore) {
         this.view = view;
         this.context = view.getContext();
         this.store = store;
+        this.clientStore = clientStore;
     }
 
     @Override
@@ -53,10 +56,11 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
     }
 
     private void fetch(boolean fromNetwork) {
-        UserCache cache = ImReadyApplication.getInstance().getCache(UserRole.CLIENT);
+        view.showRefreshing();
+        String currentUserId = ImReadyApplication.getInstance().getCurrentUserId();
 
         // cache request param, where type is the key for the cache and key the unique identifier
-        BarCode request = new BarCode("future_plan", cache.getUserId());
+        BarCode request = new BarCode("future_plan", currentUserId);
 
         // request data from the futureplan store
         Single<FutureplanResponse> dataRequest;
@@ -71,7 +75,24 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 // callback implementation (onSucces / onFailure)
-                .subscribe(this);
+                .subscribe(new SingleObserver<FutureplanResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        // ignored
+                    }
+
+                    @Override
+                    public void onSuccess(FutureplanResponse response) {
+                        view.setViewData(response.getBlocks());
+                        view.stopRefreshing();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showMessage(context.getString(R.string.personal_block_failed));
+                        view.stopRefreshing();
+                    }
+                });
     }
 
     @Override
@@ -90,24 +111,42 @@ public class ClientHomePresenterImpl implements ClientHomePresenter, SingleObser
     }
 
     @Override
+    public void getUserInformation() {
+        view.showRefreshing();
+        String currentUserId = ImReadyApplication.getInstance().getCurrentUserId();
+        BarCode barCode = new BarCode("Client", currentUserId);
+        // required to pass the data to views (ui changes are required to be on the main thread)
+        clientStore.get(barCode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                // callback implementation (onSucces / onFailure)
+                .subscribe(new SingleObserver<Client>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //ignore
+                    }
+
+                    @Override
+                    public void onSuccess(Client user) {
+                        ImReadyApplication instance = ImReadyApplication.getInstance();
+                        UserCache cache = instance.getCache(UserRole.CLIENT);
+                        cache.putUserInfo(user);
+                        view.updateUserInfo(user);
+                        view.stopRefreshing();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showMessage(context.getString(R.string.user_info_failed));
+                        view.stopRefreshing();
+                    }
+                });
+    }
+
+    @Override
     public List<PersonalActivity> getTodoActivities(List<PersonalBlock> data) {
         Stream<PersonalComponent> components = stream(data).selectMany(PersonalBlock::getComponents);
         Stream<PersonalActivity> activities = components.selectMany(PersonalComponent::getActivities);
         return activities.where(activity -> activity.getStatus() == BlockPartStatus.ONGOING).toList();
-    }
-
-    @Override
-    public void onSubscribe(Disposable d) {
-        //ignore
-    }
-
-    @Override
-    public void onSuccess(FutureplanResponse response) {
-        view.setViewData(response.getBlocks());
-    }
-
-    @Override
-    public void onError(Throwable e) {
-        view.showMessage(context.getString(R.string.personal_block_failed));
     }
 }
