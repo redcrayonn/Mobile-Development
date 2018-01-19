@@ -59,7 +59,7 @@
                 Foreground="White"
                 extension:Mouse.Cursor="Hand"
                 HorizontalAlignment="Right"
-                BorderBrush="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}"
+                BorderBrush="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" Click="MessageSubmit_Click"
                 >
             </Button>
         </Grid>

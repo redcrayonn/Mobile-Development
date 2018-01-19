@@ -14,5 +14,10 @@ namespace ImReady.Services
         {
             return await new MessagingWebService().GetChat(senderId, receiverId);
         }
+
+        public async Task<Message> SendMessage(string senderId, string receiverId, string content)
+        {
+            return await new MessagingWebService().SendMessage(senderId, receiverId, content);
+        }
     }
 }

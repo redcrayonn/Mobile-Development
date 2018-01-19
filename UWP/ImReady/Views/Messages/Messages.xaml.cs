@@ -42,5 +42,17 @@ namespace ImReady.Views.Messages
                           AppViewBackButtonVisibility.Visible :
                           AppViewBackButtonVisibility.Collapsed;
         }
+
+        private async void MessageSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var parent = (button.Parent as FrameworkElement) as FrameworkElement;
+            var input = (parent.FindName("MessageInput") as TextBox).Text;
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                await new MessagingService().SendMessage(CurrentUser.SingleInstance.Id, ViewModel.ClientProperty.Caregiver.Id, input);
+                ViewModel.LoadChat();
+            }
+        }
     }
 }

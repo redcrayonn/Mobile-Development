@@ -27,5 +27,20 @@ namespace ImReady.Services.Web
 
             return await BaseClient.HandleAsync<Chat>(uri, httpMethod);
         }
+
+        public async Task<Message> SendMessage(string senderId, string receiverId, string content)
+        {
+            var chatUrl = $"user/{senderId}/chat/{receiverId}";
+
+            var uri = apiMainUrl + chatUrl;
+            var httpMethod = HttpMethod.Post;
+
+            var parameters = new Dictionary<string, string>()
+                {
+                    { "Content", content},
+                };
+
+            return await BaseClient.HandleAsync<Message>(uri, httpMethod, parameters);
+        }
     }
 }
