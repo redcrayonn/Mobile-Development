@@ -70,7 +70,7 @@ namespace ImReady.ViewModels
             {
                 foreach(var oriComponent in oriBlock.Components)
                 {
-                    if (!futurePlanBlocks.Exists(c => c.Components.Exists(d => d.Id == oriComponent.Id)))
+                    if (!futurePlanBlocks.Where(e => e.Components != null && e.Components.Any()).ToList().Exists(c => c.Components.Exists(d => d.Id == oriComponent.Id)))
                     {
                         if(oriComponent.Activities.Any())
                             finalBlocks.Add(oriBlock);

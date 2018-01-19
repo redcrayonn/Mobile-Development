@@ -46,5 +46,10 @@ namespace ImReady.Views.AddComponent
                           AppViewBackButtonVisibility.Visible :
                           AppViewBackButtonVisibility.Collapsed;
         }
+
+        private void ComponentAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
