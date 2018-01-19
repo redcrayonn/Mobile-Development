@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImReady.Models;
+using ImReady.Repositories;
 using ImReady.Services.Web;
 
 namespace ImReady.Services
@@ -21,6 +22,7 @@ namespace ImReady.Services
             else
             {
                 FuturePlan FuturePlan = await FuturePlanWebService.SingleInstance.GetFuturePlan();
+                FuturePlanRepo.CachedFuturePlan = FuturePlan;
                 return FuturePlan;
             }
         }

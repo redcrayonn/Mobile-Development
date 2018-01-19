@@ -1,5 +1,6 @@
 ﻿using ImReady.Helpers.Commands;
 using ImReady.Models;
+using ImReady.Repositories;
 using ImReady.Services;
 using ImReady.Views.AddComponent;
 using System;
@@ -58,7 +59,11 @@ namespace ImReady.ViewModels
         {
             BuildingBlock[] unfilteredBlocks = await new BuildingBlockComponentService().GetAllBuildingBlocks();
             var tempBlocks = unfilteredBlocks.ToList();
-            FuturePlan futurePlan = await new FuturePlanService().GetFuturePlan();
+            FuturePlan futurePlan;
+            if (FuturePlanRepo.CachedFuturePlan != null)
+                futurePlan = FuturePlanRepo.CachedFuturePlan;
+            else
+                futurePlan = await new FuturePlanService().GetFuturePlan();
             var futurePlanBlocks = futurePlan.Blocks.ToList();
             List<BuildingBlock> finalBlocks = new List<BuildingBlock>();
             foreach (var oriBlock in unfilteredBlocks)

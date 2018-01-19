@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using ImReady.Repositories;
 
 namespace ImReady.ViewModels
 {
@@ -69,8 +70,13 @@ namespace ImReady.ViewModels
 
         public async void LoadFuturePlan()
         {
-            var futurePlanConcept = await new FuturePlanService().GetFuturePlan();
-            if(futurePlanConcept == null)
+            FuturePlan futurePlanConcept;
+            if (FuturePlanRepo.CachedFuturePlan != null)
+                futurePlanConcept = FuturePlanRepo.CachedFuturePlan;
+            else
+                futurePlanConcept = await new FuturePlanService().GetFuturePlan();
+
+            if (futurePlanConcept == null)
             {
                 futurePlanConcept = new FuturePlan()
                 {
@@ -78,7 +84,8 @@ namespace ImReady.ViewModels
                 };
             }
             var blockList = futurePlanConcept.Blocks.ToList();
-            blockList.Add(AddBlock);
+            if(!blockList.Any(c => (BuildingBlockType)c.Type == BuildingBlockType.Add))
+                blockList.Add(AddBlock);
             futurePlanConcept.Blocks = blockList.ToArray();
             FuturePlan = futurePlanConcept;
             FuturePlanLoaded = true;
