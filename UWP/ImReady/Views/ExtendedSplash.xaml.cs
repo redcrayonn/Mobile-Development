@@ -90,7 +90,7 @@ namespace ImReady.Views
 
         async void DismissExtendedSplash()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1)); // set your desired delay  
+            await Task.Delay(TimeSpan.FromSeconds(2)); // set your desired delay  
             rootFrame = new Frame();
             LoginMain mainPage = new LoginMain();
             rootFrame.Content = mainPage;

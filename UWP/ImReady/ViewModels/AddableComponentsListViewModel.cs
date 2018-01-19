@@ -1,4 +1,5 @@
 ﻿using ImReady.Models;
+using ImReady.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,15 @@ namespace ImReady.ViewModels
         {
             get
             {
-                //return Components.Where(c => c.Activities.Any()).ToList();
-                return Components;
+                //Filter de lijst met componenten zodat alleen de nog niet gekoppelde componenten overblijven
+                List<Component> addAbleComponents = new List<Component>();
+                var existingComponents = FuturePlanRepo.GetAllCachedComponents();
+                foreach (var component in Components)
+                {
+                    if (!existingComponents.Any(c => c.SubComponent.Id == component.Id))
+                        addAbleComponents.Add(component);
+                }
+                return addAbleComponents;
             }
         }
     }
