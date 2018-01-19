@@ -58,6 +58,8 @@
                                     Foreground="White"
                                     Margin="30 25"
                                     FontSize="20"
+                                    TextWrapping="Wrap"
+                                    MaxWidth="160"
                                     >
                                     </TextBlock>
                                     <TextBlock
