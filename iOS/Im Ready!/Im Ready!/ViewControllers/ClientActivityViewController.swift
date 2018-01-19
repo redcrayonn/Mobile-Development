@@ -61,11 +61,6 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.clear
-    }
-    
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == button_tag {
             //            return detailViewHeight
@@ -89,9 +84,6 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
         cell.remarksLbl.isHidden = true
         cell.statusLbl.isHidden = true
         
-        
-        // If the cell does not exist yet, create a new one
-        //        if !cell.cellExists {
         cell.activityDescriptionLbl.text = activity.description
         cell.openDetailViewBtn.setTitle(activity.name, for: .normal)
         cell.openDetailViewBtn.tag = t_count
@@ -125,12 +117,9 @@ class ClientActivityViewController: UIViewController, UITableViewDelegate, UITab
             }
             cell.remarksTextView.text = remarks
         }
-        
-        //            detailViewHeight = calculateHeight(forCell: cell)
-        
+                
         cell.cellExists = true
         t_count += 1
-        //        }
         
         UIView.animate(withDuration:  0) {
             cell.contentView.layoutIfNeeded()

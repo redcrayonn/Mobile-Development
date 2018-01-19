@@ -9,6 +9,7 @@
 import UIKit
 import Timepiece
 import FSCalendar
+import Reachability
 import DZNEmptyDataSet
 import ChameleonFramework
 
@@ -34,6 +35,7 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     var appointmentsForDate: [Appointment] = []
     var selectedDate: Date = Date.today()
     var datesWithEvents: [String] = []
+    let reachability = Reachability()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,16 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -100,14 +112,24 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getAppointments() {
-        // There is a fault in the API where posting a new Appointment results in two Appointments
+        guard reachability.connection != .none else {
+            simpleAlert(atVC: self, withTitle: "Geen internetverbinding", andMessage: "Kan geen afspraken ophalen zonder internetverbinding")
+            
+            return
+        }
+        
+        // There is a bug/feature in the API where posting a new Appointment results in two Appointments
         // That's why there are duplicates, it's not the fault of this beautiful code
         appointmentService.getAppointments(forClient: CurrentUser.instance.id!,
                                            onSuccess: { (results) in
                                             self.appointments = results
                                             self.addEventsToCalendar(fromAppointments: self.appointments)
                                             self.getAppointmentsForDate(fromAppointments: self.appointments)
+                                            
+                                            self.tableView.reloadData()
         }) {
+            print("Failed to fetch appointments")
+            
             simpleAlert(atVC: self,
                         withTitle: "Er is iets fout gegaan",
                         andMessage: "Kon afspraken niet ophalen")
@@ -116,28 +138,30 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     /// Filter the list of appointmets by the selected date of the calendar.
     func getAppointmentsForDate(fromAppointments appointments: [Appointment]) {
-        var filteredAppointments: [Appointment] = []
+        
+        var appointmentsOfSelectedDate: [Appointment] = []
+        
         for appointment in appointments {
-            let dateOfAppointment = convertDatetime.toTimeOrDateString(fromDateTime: appointment.startDate!,
-                                                                       convertTo: .date).date(inFormat: "yyyy-MM-dd")
+            let dateOfAppointment = convertDatetime.toTimeOrDateString(
+                fromDateTime: appointment.startDate!,
+                convertTo: .date).date(inFormat: "yyyy-MM-dd")
+            
             let userSelectedDate = "\(self.selectedDate.year)-\(self.selectedDate.month)-\(self.selectedDate.day)".date(inFormat: "yyyy-MM-dd")
             
             if dateOfAppointment == userSelectedDate {
-                filteredAppointments.append(appointment)
+                appointmentsOfSelectedDate.append(appointment)
             }
         }
         
         // Sort the list before updating
-        self.appointmentsForDate = filteredAppointments.sorted {$0.startDate! < $1.startDate!}
-        self.tableView.reloadData()
+        self.appointmentsForDate = appointmentsOfSelectedDate.sorted {$0.startDate! < $1.startDate!}
     }
     
     /// Convert the DateTime from the API to a representable date to add as event to the calendar
     func addEventsToCalendar(fromAppointments appointments: [Appointment]) {
         
         for appointment in appointments {
-            let datetime = appointment.startDate!
-            let dateString = convertDatetime.toTimeOrDateString(fromDateTime: datetime, convertTo: .date)
+            let dateString = convertDatetime.toTimeOrDateString(fromDateTime: appointment.startDate!, convertTo: .date)
             
             datesWithEvents.append(dateString)
         }
@@ -150,4 +174,11 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         // Pass the selected object to the new view controller.
     }
     
+    // When the user switches on internet, automatically fetch the appointments again
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        reachability.whenReachable = { _ in
+            self.getAppointments()
+        }
+    }
 }

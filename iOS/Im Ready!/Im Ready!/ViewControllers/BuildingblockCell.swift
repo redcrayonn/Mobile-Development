@@ -10,9 +10,8 @@ import UIKit
 
 class BuildingblockCell : UICollectionViewCell {
     @IBOutlet weak var buildingblockImage: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var shadowLayer: UIView!
-    @IBOutlet weak var mainBackground: UIView!
+    @IBOutlet weak var title: UILabel!        
+    @IBOutlet weak var activitiesLbl: UILabel!
         
     var buildingblock: ClientBuildingblock?
 }

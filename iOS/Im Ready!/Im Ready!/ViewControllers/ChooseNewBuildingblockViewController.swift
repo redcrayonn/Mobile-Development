@@ -25,8 +25,6 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
         
         self.title = "Bouwblokken"
         
-        //        collectionView.frame.origin.y += 200
-        
         sortBuildingblocksByNumberOfComponents()
     }
     
@@ -36,7 +34,6 @@ class ChooseNewBuildingblockViewController: UIViewController, UICollectionViewDa
     func sortBuildingblocksByNumberOfComponents() {
         
         // Create new list of component names to compare to original components
-        // Cannot compare ClientComponent Object to Component bject
         for b in self.clientBuildingblocks {
             guard b.components != nil else {continue}
             for component in b.components! {

@@ -56,6 +56,9 @@ target 'Im Ready!' do
     # Cool Activity indicators
     pod 'NVActivityIndicatorView'
     
+    # Check connectivity with network
+    pod 'ReachabilitySwift'
+    
     target 'Im Ready!Tests' do
         inherit! :search_paths
         # Pods for testing

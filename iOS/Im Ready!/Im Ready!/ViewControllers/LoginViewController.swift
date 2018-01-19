@@ -11,6 +11,7 @@ import LocalAuthentication
 import Locksmith
 import CryptoSwift
 import NVActivityIndicatorView
+import Reachability
 
 class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndicatorViewable {
     
@@ -20,6 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
     @IBOutlet var registerFamilyButton: UIButton!
     
     let imReadyAccount = "ImReadyAccount"
+    let reachability = Reachability()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +45,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
             
             return
         }
-        
-//        if Locksmith.loadDataForUserAccount(userAccount: imReadyAccount) != nil {
         
         // Check the fingerprints
         authenticationContext.evaluatePolicy(
@@ -74,19 +74,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NVActivityIndi
                     }
                 }
         }
-//        }
     }
     
     @IBAction func onLoginClick(_ sender: Any) {
-        startAnimating(type: .lineSpinFadeLoader)
+        guard reachability.connection != .none else {
+            simpleAlert(atVC: self, withTitle: "Geen internetverbinding", andMessage: "Je kan niet inloggen zonder internetverbinding")
+            
+            return
+        }
         
-//        let username = usernameField.text!
-//        let password = passwordField.text!
-//        let password = passwordField.text!.sha256()
+        startAnimating(CGSize(width: 30.0, height: 30.0), type: .lineSpinFadeLoader)
         
-        let username = "woutertest5@gmail.com"
-//        let username = "woutervermeij@gmail.com"
-        let password = "wouter"
+        let username = usernameField.text!
+        let password = passwordField.text!
         
         guard username != "" && password != "" else {
             stopAnimating()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reachability
 import NVActivityIndicatorView
 
 protocol ComponentDelegate: class {
@@ -23,6 +24,7 @@ class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndica
     var component: Component?
     var componentIndex: IndexPath?
     weak var delegate: ComponentDelegate?
+    let reachability = Reachability()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +42,23 @@ class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndica
         makeBulletListOfActivities(component: component!)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+    }
+    
     func makeBulletListOfActivities(component: Component) {
         var activities: [String] = []
         
-        guard component.activities != nil else {
+        guard !(component.activities?.isEmpty)! else {
             activitiesLbl.text = "Nog geen activiteiten"
             return
         }
+        
         for a in component.activities! {
             activities.append(a.name!)
         }
@@ -84,9 +96,10 @@ class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndica
     func countTotalPoints(component: Component) -> String{
         var points: Int = 0
         
-        guard component.activities != nil else {
+        guard (component.activities?.isEmpty)! else {
             return "Nog geen activiteiten"
         }
+        
         for a in component.activities! {
             points += a.points!
         }
@@ -95,15 +108,18 @@ class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndica
     }
     
     @IBAction func addComponent(_ sender: Any) {
-        let successAlert = UIAlertController(title: "Gelukt", message: "Component toegevoegd!", preferredStyle: .alert)
-        successAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert) in
-            self.performSegueToReturnBack()
-        }))
+        guard reachability.connection != .none else {
+            simpleAlert(atVC: self, withTitle: "Geen internetverbinding", andMessage: "Kan component niet toevoegen zonder internetverbiding")
+            
+            return
+        }
+        
+        let successAlert = createSuccessAlert()
         
         let addComponentAlert = UIAlertController(title: "Component toevoegen?", message:
             "Wil je '\(component!.name!)' toevoegen?", preferredStyle: UIAlertControllerStyle.alert)
-        addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { (action) in
-            self.startAnimating(type: .lineSpinFadeLoader)
+        addComponentAlert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { _ in
+            self.startAnimating(CGSize(width: 30.0, height: 30.0), type: .lineSpinFadeLoader)
             
             clientService.enrollClientInComponent(clientId: CurrentUser.instance.id!, componentId: self.component!.id!, onSuccess: {
                 
@@ -124,5 +140,27 @@ class ChooseNewComponentDetailViewController: UIViewController, NVActivityIndica
         addComponentAlert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: nil))
         
         self.present(addComponentAlert, animated: true, completion: nil)
+    }
+    
+    func createSuccessAlert() -> UIAlertController {
+        let successAlert = UIAlertController(title: "Gelukt", message: "Component toegevoegd!", preferredStyle: .alert)
+        successAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (alert) in
+            self.performSegueToReturnBack()
+        }))
+        
+        return successAlert
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        
+        reachability.whenUnreachable = { _ in
+            self.stopAnimating()
+            simpleAlert(atVC: self, withTitle: "Geen internetverbinding", andMessage: "")
+        }
+        
+        reachability.whenReachable = { _ in
+
+        }
     }
 }

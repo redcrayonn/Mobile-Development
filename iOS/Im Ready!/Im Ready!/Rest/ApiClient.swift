@@ -21,7 +21,8 @@ public class ApiClient {
                      withEncoding encoding: ParameterEncoding = URLEncoding.default,
                      onSuccessParser onSuccess: @escaping (_ data: Data) -> (),
                      onFailure: @escaping () -> ()) -> () {
-        print(baseUrl + url)
+                
+//        print(baseUrl + url)
         
         Alamofire.request(baseUrl + url,
                           method: httpMethod,
@@ -34,6 +35,7 @@ public class ApiClient {
                             }
                             
                             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                                // Uncomment the next two lines if you want to see the response data
 //                                print("Response data: \(response.data)")
 //                                print("Data: \(utf8Text)")
                                 onSuccess(data)

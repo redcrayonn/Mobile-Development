@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reachability
 
 public var activityAnswered: Bool = false
 
@@ -17,13 +18,12 @@ protocol UpdateFutureplanDelegate: class {
 class ClientComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
     var buildingblock: ClientBuildingblock!
     var components: [ClientComponent]!
     var buildingblockImage: UIImageView!
-    
     weak var delegate: UpdateFutureplanDelegate?
-    
-    let screenWidth = UIScreen.main.bounds.width
+    let reachability = Reachability()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,26 +34,27 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
     // We cannot get the seperate activities for a client.
     override func viewWillAppear(_ animated: Bool) {
         if activityAnswered == true {
-            
-            // Fetch the new futureplan async
-            DispatchQueue.main.async {
-                clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
-                                            onSuccess: { (result) -> Void in
-                                                self.components = []
-                                                self.delegate?.updateFutureplan(withResults: result)
-                                                for b in (result.buildingblocks)! {
-                                                    for c in b.components! {
-                                                        self.components.append(c)
+            reachability.whenReachable = { _ in
+                // Fetch the new futureplan async
+                DispatchQueue.main.async {
+                    clientService.getFutureplan(ofClient: CurrentUser.instance.id!,
+                                                onSuccess: { (result) -> Void in
+                                                    self.components = []
+                                                    self.delegate?.updateFutureplan(withResults: result)
+                                                    for b in (result.buildingblocks)! {
+                                                        for c in b.components! {
+                                                            self.components.append(c)
+                                                        }
                                                     }
-                                                }
-                                                
-                                                self.collectionView.reloadData()
-                }, onFailure: {
-                    print("something went wrong")
-                })
+                                                    
+                                                    self.collectionView.reloadData()
+                    }, onFailure: {
+                        print("something went wrong")
+                    })
+                }
+                
+                activityAnswered = false                
             }
-            
-            activityAnswered = false
         }
     }
     
@@ -75,7 +76,7 @@ class ClientComponentViewController: UIViewController, UICollectionViewDelegate,
         } else {
             activityString = "activiteiten"
         }
-
+        
         cell.activitiesLbl.text = "\(numberOfActivities) \(activityString)"
         
         cell.styleCell()        

@@ -92,7 +92,6 @@
 		FADB8FD21FE1514300EECB8B /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB8FD11FE1514300EECB8B /* CurrentUser.swift */; };
 		FAF467391FEAC18500D8DB43 /* AddNewBuildingblock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */; };
 		FAF4673B1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */; };
-		FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,7 +209,6 @@
 		FADB8FD11FE1514300EECB8B /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		FAF467381FEAC18500D8DB43 /* AddNewBuildingblock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBuildingblock.swift; sourceTree = "<group>"; };
 		FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingblockCollectionViewCell.swift; sourceTree = "<group>"; };
-		FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,7 +306,6 @@
 		FAA7B9601FBD9CC700134C5B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FAF4A1AF1FE416FE001C0D86 /* InternetConnection.swift */,
 				FA4B72611FF5015B00949FF6 /* Alerts.swift */,
 				FAC6D261200E2FC6009AB5E9 /* ColorGradient.swift */,
 				FA85ED7E200FE83000AEB7BD /* ConvertDatetime.swift */,
@@ -447,7 +444,6 @@
 				FA4B725F1FF4F7CE00949FF6 /* ChooseNewBuildingblockViewController.swift */,
 				FA64A6F71FFFCD45005E7BE5 /* ChooseNewComponentViewController.swift */,
 				FA85ED7C200F85BA00AEB7BD /* ChooseNewComponentDetailViewController.swift */,
-				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA4B72651FF53D7E00949FF6 /* BuildingblockCollectionViewCell.swift */,
 				FA64A6F11FFE6876005E7BE5 /* ComponentCollectionViewCell.swift */,
 			);
@@ -483,6 +479,7 @@
 				FA7471FF1FCC088300D0D9D8 /* ClientComponentViewController.swift */,
 				FA528D871FD9642000052647 /* ClientActivityViewController.swift */,
 				FAF4673A1FEAF41900D8DB43 /* AddBuildingblockCollectionViewCell.swift */,
+				FADAB45A1FBECF710069E290 /* BuildingblockCell.swift */,
 				FA528D891FD9693C00052647 /* ClientComponentCollectionViewCell.swift */,
 				FA3383ED1FD05C6C00847C05 /* ClientActivityStackViewCell.swift */,
 			);
@@ -747,6 +744,7 @@
 				"${BUILT_PRODUCTS_DIR}/REFormattedNumberField/REFormattedNumberField.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${BUILT_PRODUCTS_DIR}/Timepiece/Timepiece.framework",
@@ -769,6 +767,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REFormattedNumberField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Timepiece.framework",
@@ -913,7 +912,6 @@
 				FA4DFE471FBC205100945B2A /* LoginResult.swift in Sources */,
 				FA4DFE3C1FBB198C00945B2A /* User.swift in Sources */,
 				FA64A6F21FFE6876005E7BE5 /* ComponentCollectionViewCell.swift in Sources */,
-				FAF4A1B01FE416FE001C0D86 /* InternetConnection.swift in Sources */,
 				FA9CF8CF200BE16200A983D7 /* AppointmentResult.swift in Sources */,
 				FA4B874A1FC31461008CB427 /* UIViewControllerExtension.swift in Sources */,
 				FA8306BE1FDE930F00BC225F /* BlockType.swift in Sources */,

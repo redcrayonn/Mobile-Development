@@ -13,7 +13,6 @@ import ChameleonFramework
 class ChooseNewComponentViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ComponentDelegate,  DZNEmptyDataSetDelegate, DZNEmptyDataSetSource{
     
     @IBOutlet weak var collectionView: UICollectionView!
-//    weak var delegate: ComponentDelegate?
     
     var components: [Component] = []
     var buildingblockTitle: String?
@@ -50,12 +49,6 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
         return attributedString        
     }
     
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.clear
-    }
-    
-
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemCount
     }
@@ -73,16 +66,19 @@ class ChooseNewComponentViewController: UIViewController, UICollectionViewDelega
         return cell
     }
     
+    /// When a component is added from the detailView, update this view too
     func passAddedComponent(component: Component, index: IndexPath) {
+    
         // Delete the item from the collectionView
         self.collectionView.performBatchUpdates({
             self.collectionView.deleteItems(at: [index])
-            // Manually substract 1 to satisfy the collectionView
             self.itemCount -= 1
-        }) { (finished) in
+            
+        }) { _ in
             self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         }
         
+        // Also pass the component to the previous view, so everything is up to date
         self.delegate?.passAddedComponent(component: component, index: index)
         
         if itemCount == 0 {

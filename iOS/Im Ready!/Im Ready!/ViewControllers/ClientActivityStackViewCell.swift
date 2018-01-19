@@ -67,21 +67,10 @@ class ClientActivityStackViewCell: UITableViewCell {
         self.remarksTextView.layer.shadowOpacity = 0.6
         self.remarksTextView.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.remarksTextView.layer.shadowRadius = 4
-        
-        // Set image for each status
-        let status = self.activity?.status
 
-        switch status! {
-        case 0:
-            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
-        case 1:
-            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
-        case 2:
-            self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
-        default:
-            self.statusImageView.image = UIImage(named: "STATUS_PENDING)")
-        }
-    }
+        let status = self.activity?.status
+        self.statusImageView.image = UIImage(named: "STATUS_\(Status(rawValue: status!)!)")
+}
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -122,7 +111,6 @@ class ClientActivityStackViewCell: UITableViewCell {
         
         view.present(alert, animated: true, completion: nil)
     }
-    
     
     // Animation for the dropdown of activities
     func animate(duration:Double, whenDone: @escaping () -> ()) {

@@ -51,7 +51,7 @@ class ConvertDatetime {
         return "\(correctedDateTime)+0100".dateInISO8601Format()!
     }
     
-    /// Prepend a zero if needed
+    /// Some converted values have only 1 digit, when I want them to have 2
     private func prependZeroIfNeeded(forDateOrTimeUnit: Int) -> String {
         let unit: String = String(forDateOrTimeUnit)
         
