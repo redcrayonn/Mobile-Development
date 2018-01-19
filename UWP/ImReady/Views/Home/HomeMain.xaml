@@ -78,11 +78,30 @@
                         Text="{x:Bind ViewModel.LoggedInAsText, Mode=OneWay}"
                         ></TextBlock>
                 </StackPanel>
-                <Line RelativePanel.Below="TitleTopSection" X1="0" Y1="10" X2="250" Y2="10" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                <Line Name="SplitDivider" RelativePanel.Below="TitleTopSection" X1="0" Y1="10" X2="250" Y2="10" RelativePanel.AlignHorizontalCenterWithPanel="True">
                     <Line.Stroke>
                         <SolidColorBrush Color="{StaticResource ThemePurpleDark}"></SolidColorBrush>
                     </Line.Stroke>
                 </Line>
+                <StackPanel RelativePanel.Below="SplitDivider" Name="SplitMessages" Orientation="Horizontal" Margin="10 40 0 0">
+                    <Image Source="ms-appx:///Assets/Material/ic_email_deep_orange_400_48dp.png" Width="30" Height="30"></Image>
+                    <TextBlock Text="Berichten" FontSize="23" FontWeight="Light" Margin="20 0 0 0"></TextBlock>
+                </StackPanel>
+                <StackPanel RelativePanel.Below="SplitMessages" Name="SplitCaregivers" Orientation="Horizontal" Margin="10 15 0 0">
+                    <Image Source="ms-appx:///Assets/Material/ic_people_deep_orange_400_48dp.png" Width="30" Height="30"></Image>
+                    <TextBlock Text="Zorgverleners" FontSize="23" FontWeight="Light" Margin="20 0 0 0"></TextBlock>
+                </StackPanel>
+                <StackPanel RelativePanel.Below="SplitCaregivers" Name="SplitInfo" Orientation="Horizontal" Margin="10 15 0 0">
+                    <Image Source="ms-appx:///Assets/Material/ic_help_outline_deep_orange_400_48dp.png" Width="30" Height="30"></Image>
+                    <TextBlock Text="Informatie" FontSize="23" FontWeight="Light" Margin="20 0 0 0"></TextBlock>
+                </StackPanel>
+                <Button
+                    Name="SplitLogout"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Content="UITLOGGEN"
+                    Foreground="White"
+                    Width="280" Click="SplitLogout_Click"
+                    ></Button>
             </RelativePanel>
         </SplitView.Pane>
         <SplitView.Content>

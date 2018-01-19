@@ -64,5 +64,12 @@ namespace ImReady.Views.Home
             //ViewModel.NavigateToAddComponent.Execute((e.OriginalSource));
             Frame.Navigate(typeof(BuildingBlockList));
         }
+
+        private void SplitLogout_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentUser.SingleInstance = null;
+            FuturePlanRepo.CachedFuturePlan = null;
+            Frame.Navigate(typeof(Login.LoginMain));
+        }
     }
 }
