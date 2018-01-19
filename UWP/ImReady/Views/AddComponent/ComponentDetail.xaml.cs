@@ -63,10 +63,17 @@ namespace ImReady.Views.AddComponent
 
             if (result == ContentDialogResult.Primary)
             {
+                ShowSpinner();
                 await ComponentWebService.SingleInstance.AddComponent(ViewModel.Component);
                 FuturePlanRepo.CachedFuturePlan = await FuturePlanWebService.SingleInstance.GetFuturePlan();
                 Frame.Navigate(typeof(Home.HomeMain));
             }
+        }
+
+        public void ShowSpinner()
+        {
+            ComponentAdd.IsEnabled = false;
+            progress1.IsActive = true;
         }
     }
 }

@@ -28,7 +28,7 @@
                                    />
             </CommandBar.Content>
         </CommandBar>
-        <ScrollViewer RelativePanel.Below="commandbar" HorizontalAlignment="Center" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+        <ScrollViewer Name="Scrollviewer" RelativePanel.Below="commandbar" HorizontalAlignment="Center" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
             
                 <Grid Background="White" MaxWidth="700" Padding="20">
                     <Grid.ColumnDefinitions>
@@ -122,8 +122,20 @@
                 Height="36"
                 extensions:Mouse.Cursor="Hand" Click="ComponentAdd_Click"
                 ></Button>
-                </Grid>
-            
+                
+            </Grid>
+           
         </ScrollViewer>
+        <ProgressRing 
+                x:Name="progress1" 
+                Foreground="Black" 
+                Height="50"
+                Width="50"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                Margin="0 0 0 120"
+                Visibility="Visible"
+                IsActive="False"
+                />
     </RelativePanel>
 </Page>
