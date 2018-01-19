@@ -45,17 +45,45 @@
         </templateSelectors:HomeTemplateSelector>
         <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
         <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource ThemePurpleDark}"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <SplitView 
         Name="MySplitView"
         DisplayMode="Overlay"
         IsPaneOpen="False"
-        CompactPaneLength="50"
-        OpenPaneLength="150">
+        CompactPaneLength="200"
+        OpenPaneLength="300">
         <SplitView.Pane>
-            <Grid Background="White" Width="600">
-                
-            </Grid>
+            <RelativePanel Background="White" Padding="10">
+                <StackPanel 
+                    Name="TitleTopSection"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Margin="0 30 0 0">
+                    <TextBlock
+                    Name="SplitTitle"
+                    Text="I'm Ready"
+                    FontSize="22"
+                    FontWeight="Light"
+                    TextAlignment="Center"
+                    ></TextBlock>
+                    <TextBlock
+                        Name="SplitLoggedInAs"
+                        Margin="0 10 0 0"
+                        Text="{x:Bind ViewModel.LoggedInAsText, Mode=OneWay}"
+                        ></TextBlock>
+                </StackPanel>
+                <Line RelativePanel.Below="TitleTopSection" X1="0" Y1="10" X2="250" Y2="10" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                    <Line.Stroke>
+                        <SolidColorBrush Color="{StaticResource ThemePurpleDark}"></SolidColorBrush>
+                    </Line.Stroke>
+                </Line>
+            </RelativePanel>
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>

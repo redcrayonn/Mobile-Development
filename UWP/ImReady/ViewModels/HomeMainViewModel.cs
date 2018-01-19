@@ -23,6 +23,14 @@ namespace ImReady.ViewModels
 
         public RelayCommand NavigateToAddComponent => new RelayCommand(NavigateToAddComponents);
 
+        public string LoggedInAsText
+        {
+            get
+            {
+                return $"Ingelogd als: {CurrentUser.SingleInstance.FirstName}";
+            }
+        }
+
         public bool FuturePlanLoaded { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
