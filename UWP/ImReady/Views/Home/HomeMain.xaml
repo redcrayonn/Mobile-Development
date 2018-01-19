@@ -82,13 +82,13 @@
                         <StackPanel Orientation="Horizontal">
                             <AppBarButton x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                             Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"
-                            Margin="20 0"
+                            Margin="20 0" Visibility="Collapsed"
                             />
                             <TextBlock Text="Bouwstenen" Foreground="White" Margin="20 0" FontSize="25" FontWeight="Light"/>
                         </StackPanel>
                     </CommandBar.Content>
-                    <AppBarButton Icon="Message" Click="AppBarButton_Click" Foreground="White"/>
-                    <AppBarButton Icon="Placeholder" Click="AppBarButton_Click" Foreground="White"/>
+                    <AppBarButton Icon="Message" Foreground="White"/>
+                    <AppBarButton Icon="Refresh" Click="AppBarButton_Click" Foreground="White"/>
                 </CommandBar>
                 <ScrollViewer>
                     <GridView 

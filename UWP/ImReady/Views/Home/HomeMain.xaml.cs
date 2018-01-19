@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using ImReady.Repositories;
+using ImReady.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,9 +38,12 @@ namespace ImReady.Views.Home
             DataContext = ViewModel;
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            progress1.IsActive = true;
+            FuturePlanRepo.CachedFuturePlan = await new FuturePlanService().GetFuturePlan();
+            ViewModel.FuturePlan = FuturePlanRepo.CachedFuturePlan;
+            Frame.Navigate(typeof(Home.HomeMain));
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
