@@ -7,7 +7,60 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:extension="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:models="using:ImReady.Models"
+    xmlns:templateSelectors="using:ImReady.Helpers.TemplateSelectors"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary.MergedDictionaries>
+            <templateSelectors:MessageTemplateSelector x:Name="MessageTemplateSelector"
+                                     MessageReceivedTemplate ="{StaticResource MessageReceivedTemplate}"
+                                     MessageSentTemplate="{StaticResource MessageSentTemplate}">
+            </templateSelectors:MessageTemplateSelector>
+            <DataTemplate x:Key="MessageReceivedTemplate" x:DataType="models:Message">
+                <Grid HorizontalAlignment="Left" Margin="0 0 0 50"
+                    Padding="6"
+                    >
+                        <Border Background="LightGray"
+                    BorderBrush="Black"
+                    BorderThickness="0.5"
+                    CornerRadius="3"
+                    Padding="6"
+                    Margin="14,0,0,0"
+                    VerticalAlignment="Top"
+                    >
+                            <TextBlock Text="{x:Bind Content}"
+                    TextWrapping="WrapWholeWords"
+                    Width="100"
+                    Height="50"
+                    />
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            <DataTemplate x:Key="MessageSentTemplate" x:DataType="models:Message">
+                <Grid HorizontalAlignment="Left" Margin="200 0 0 50"
+                    Padding="6"
+                    >
+                    <Border Background="LightGray"
+                    BorderBrush="Black"
+                    BorderThickness="0.5"
+                    CornerRadius="3"
+                    Padding="6"
+                    Margin="14,0,0,0"
+                    VerticalAlignment="Top"
+                    >
+                    <TextBlock Text="{x:Bind Content}"
+                    TextWrapping="WrapWholeWords"
+                    Width="100"
+                    Height="50"
+                    />
+                    </Border>
+                </Grid>
+
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer>
@@ -22,7 +75,7 @@
                     VerticalContentAlignment="Center"
                     >
                     <CommandBar.Content>
-                        <TextBlock  Text="Zorgverlener naam"
+                        <TextBlock  Text="{x:Bind ViewModel.CaregiverName, Mode=OneWay}"
                                 Foreground="White"  
                                 FontSize="25" 
                                 Padding="65 0 0 0 "
@@ -33,12 +86,9 @@
                 <ListView
                     Margin="0 60"
                     ItemsSource="{x:Bind ViewModel.Messages, Mode=OneWay}"
+                    ItemTemplateSelector="{StaticResource MessageTemplateSelector}"
+                    HorizontalAlignment="Center"
                     >
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Message">
-                            <TextBlock Text="{x:Bind Content}" Foreground="Black"></TextBlock>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
                 </ListView>
             </Grid>           
         </ScrollViewer>

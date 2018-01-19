@@ -24,7 +24,7 @@
                       VerticalAlignment="Top"
                       HorizontalAlignment="Center"
                       Height="300"  
-                      Margin="0 50 0 0"
+                      Margin="40 50 0 0"
                       />
         <ProgressRing 
             x:Name="progress1" 

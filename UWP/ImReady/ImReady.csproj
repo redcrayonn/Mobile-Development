@@ -117,6 +117,7 @@
     <Compile Include="Helpers\DependencyPropertyListener.cs" />
     <Compile Include="Helpers\StaticHelpers.cs" />
     <Compile Include="Helpers\TemplateSelectors\HomeTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\MessageTemplateSelector.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityStatus.cs" />
     <Compile Include="Models\BuildingBlock.cs" />

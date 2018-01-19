@@ -41,6 +41,20 @@ namespace ImReady.ViewModels
 
         public Chat ChatProperty { get; set; }
 
+        private string _caregiverName;
+        public string CaregiverName
+        {
+            get
+            {
+                return _caregiverName;
+            }
+            set
+            {
+                _caregiverName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CaregiverName"));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public async void LoadClient()
@@ -48,6 +62,7 @@ namespace ImReady.ViewModels
             var teststring = CurrentUser.SingleInstance.Id;
             Client client = await new ClientService().GetClient(teststring);
             ClientProperty = client;
+            CaregiverName = $"{client.Caregiver.FirstName} {client.Caregiver.LastName}";
             LoadChat();
         }
 
