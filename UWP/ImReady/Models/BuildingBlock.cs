@@ -49,6 +49,8 @@ namespace ImReady.Models
             {
                 case BuildingBlockType.Wonen:
                     return new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/Blocks/ic_home_white_48dp.png") };
+                case BuildingBlockType.Verzekering:
+                    return new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/Blocks/ic_verified_user_white_48dp.png") };
                 case BuildingBlockType.Financien:
                     return new BitmapImage() { UriSource = new Uri("ms-appx:///Assets/Material/Blocks/ic_euro_symbol_white_48dp.png") };
                 case BuildingBlockType.Gezondheid:
@@ -76,6 +78,7 @@ namespace ImReady.Models
     public enum BuildingBlockType
     {
         Wonen,
+        Verzekering,
         Financien,
         Gezondheid,
         Sociaal,

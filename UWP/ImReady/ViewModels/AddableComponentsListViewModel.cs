@@ -17,7 +17,8 @@ namespace ImReady.ViewModels
         {
             get
             {
-                return Components.Where(c => c.Activities.Any()).ToList();
+                //return Components.Where(c => c.Activities.Any()).ToList();
+                return Components;
             }
         }
     }

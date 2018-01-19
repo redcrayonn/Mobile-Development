@@ -38,7 +38,7 @@ namespace ImReady.Services.Web
             }
         }
 
-        public async Task<Component> AddComponent(Component component)
+        public async Task<bool> AddComponent(Component component)
         {
             if (CurrentUser.SingleInstance.IsLoggedIn)
             {
@@ -53,12 +53,12 @@ namespace ImReady.Services.Web
                 //        { "id", user.Id },
                 //    };
 
-                return await BaseClient.HandleAsync<Component>(uri, httpMethod);
+                return await BaseClient.HandleAsync<bool>(uri, httpMethod);
             }
             else
             {
                 //TODO: throw need to login error/message & send to login page.
-                return null;
+                return false;
             }
         }
     }

@@ -59,21 +59,35 @@ namespace ImReady.ViewModels
         {
             BuildingBlock[] unfilteredBlocks = await new BuildingBlockComponentService().GetAllBuildingBlocks();
             var tempBlocks = unfilteredBlocks.ToList();
+
             FuturePlan futurePlan;
             if (FuturePlanRepo.CachedFuturePlan != null)
                 futurePlan = FuturePlanRepo.CachedFuturePlan;
             else
                 futurePlan = await new FuturePlanService().GetFuturePlan();
+
+
             var futurePlanBlocks = futurePlan.Blocks.ToList();
-            List<BuildingBlock> finalBlocks = new List<BuildingBlock>();
-            foreach (var oriBlock in unfilteredBlocks)
+            List<Component> existingComponents = new List<Component>();
+            foreach(var assignedBlock in futurePlanBlocks)
             {
-                foreach(var oriComponent in oriBlock.Components)
+                if(assignedBlock.Components != null && assignedBlock.Components.Any())
                 {
-                    if (!futurePlanBlocks.Where(e => e.Components != null && e.Components.Any()).ToList().Exists(c => c.Components.Exists(d => d.Id == oriComponent.Id)))
+                    existingComponents = existingComponents.Concat(assignedBlock.Components).ToList();
+                }
+            }
+            List<BuildingBlock> finalBlocks = new List<BuildingBlock>();
+
+            //Create new list with blocks where unassigned components are available.
+            foreach(var possibleBlock in unfilteredBlocks)
+            {
+                if (possibleBlock.Components != null && possibleBlock.Components.Any())
+                {
+                    foreach (var possibleComponent in possibleBlock.Components)
                     {
-                        if(oriComponent.Activities.Any())
-                            finalBlocks.Add(oriBlock);
+                        if (!existingComponents.Exists(c => c.SubComponent.Id == possibleComponent.Id))
+                            if (!finalBlocks.Any(c => c.Id == possibleBlock.Id))
+                                finalBlocks.Add(possibleBlock);
                     }
                 }
             }

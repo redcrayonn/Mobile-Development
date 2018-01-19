@@ -1,4 +1,6 @@
 ﻿using ImReady.Models;
+using ImReady.Repositories;
+using ImReady.Services.Web;
 using ImReady.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -47,9 +49,24 @@ namespace ImReady.Views.AddComponent
                           AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void ComponentAdd_Click(object sender, RoutedEventArgs e)
+        private async void ComponentAdd_Click(object sender, RoutedEventArgs e)
         {
+            ContentDialog confirmDialog = new ContentDialog
+            {
+                Title = "Component toevoegen aan uw toekomstplan",
+                Content = "Weet u zeker dat u dit component wilt toevoegen?",
+                CloseButtonText = "Annuleren",
+                PrimaryButtonText = "Toevoegen"
+            };
 
+            ContentDialogResult result = await confirmDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                await ComponentWebService.SingleInstance.AddComponent(ViewModel.Component);
+                FuturePlanRepo.CachedFuturePlan = await FuturePlanWebService.SingleInstance.GetFuturePlan();
+                Frame.Navigate(typeof(Home.HomeMain));
+            }
         }
     }
 }
